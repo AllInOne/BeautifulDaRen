@@ -7,6 +7,7 @@
 //
 
 #import "AdsPageView.h"
+#import "ViewConstants.h"
 
 #define ADS_EXCHANGE_TIME_OUT_SECONDS   (3.0)
 #define MAX_ADS_PAGES                   (4)
@@ -36,6 +37,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, ADS_CELL_HEIGHT);
         // TODO: get it from server
         _adsImageNames = [[NSMutableArray alloc] initWithObjects:@"logo.png",
                                                                  @"bg.png",
@@ -46,12 +48,12 @@
         _firstImageView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
         [self.view insertSubview:_firstImageView belowSubview:self.adsPageController];
         
-        _secondImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
+        _secondImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg.png"]];
         _secondImageView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
         [self.view insertSubview:_secondImageView belowSubview:self.adsPageController];
         [_secondImageView setHidden:YES];
         
-        
+        self.adsPageController.frame = CGRectMake(self.adsPageController.frame.origin.x, ADS_CELL_HEIGHT - 30, self.adsPageController.frame.size.width, self.adsPageController.frame.size.height);
     }
     return self;  
 }
@@ -87,13 +89,9 @@
 
 -(void)loadView{
     [super loadView];
-    
-    CGRect viewBounds = self.view.frame;
-    viewBounds.origin.y = 0.0;
-    viewBounds.size.height = 460.0;
     //控件区域
     self.adsPageController.backgroundColor=[UIColor blackColor];
-    self.adsPageController.numberOfPages = 3;
+    self.adsPageController.numberOfPages = MAX_ADS_PAGES;
     self.adsPageController.currentPage = 0;
     // 设定翻页事件的处理方法
     [self.adsPageController addTarget:self action:@selector(pageTurn:)
@@ -118,20 +116,13 @@
 }
 
 -(void)transitionPage:(int)from toPage:(int)to{
-    NSLog(@"previouspage:%d",from);
-    NSLog(@"currentpage:%d",to);
     if (from!=to) {
-        if (self.firstImageView.hidden) {
-            [self.firstImageView setImage:[UIImage imageNamed:[self.adsImageNames objectAtIndex:to]]];
+
+            [self.firstImageView setImage:[UIImage imageNamed:[self.adsImageNames objectAtIndex:from]]];
+            [self.secondImageView setImage:[UIImage imageNamed:[self.adsImageNames objectAtIndex:to]]];
+        
             [self.firstImageView setHidden:NO];
             [self.secondImageView setHidden:YES];
-        }
-        else
-        {
-            [self.secondImageView setImage:[UIImage imageNamed:[self.adsImageNames objectAtIndex:to]]];
-            [self.secondImageView setHidden:NO];
-            [self.firstImageView setHidden:YES];
-        }
 
         [[self.firstImageView layer] addAnimation:[self getAnimation:kCATransitionFromLeft] forKey:@"pageTurnAnimation"];
     }

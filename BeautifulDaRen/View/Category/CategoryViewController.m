@@ -7,6 +7,7 @@
 //
 
 #import "CategoryViewController.h"
+#import "ViewConstants.h"
 
 @implementation CategoryViewController
 
@@ -40,7 +41,7 @@
     if (self.adsPageView == nil) {
         _adsPageView = [[AdsPageView alloc] initWithNibName:@"AdsPageView" bundle:nil];
         [self.view addSubview:_adsPageView.view];
-//        _adsPageView.view.frame = CGRectMake(0, 30, self.view.frame.size.width, self.view.frame.size.height);
+        _adsPageView.view.frame = CGRectMake(0, 30, self.view.frame.size.width, ADS_CELL_HEIGHT);
     }
 }
 

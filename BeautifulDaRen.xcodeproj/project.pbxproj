@@ -191,6 +191,7 @@
 		CE745453153F1F8900CB751A /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
 		CE745454153F1F8900CB751A /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
 		CE745459153F22F700CB751A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		CE7C9D1715400ED000F3812F /* ViewConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewConstants.h; sourceTree = "<group>"; };
 		CEC0B580153EFBE000F20DC0 /* CameraShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraShareViewController.h; sourceTree = "<group>"; };
 		CEC0B581153EFBE000F20DC0 /* CameraShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraShareViewController.m; sourceTree = "<group>"; };
 		CEC0B582153EFBE000F20DC0 /* CameraShareViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraShareViewController.xib; sourceTree = "<group>"; };
@@ -542,6 +543,7 @@
 				CEDC918D153FDC5700BA6C35 /* AdsPageView.xib */,
 				CEDC918F153FDC7700BA6C35 /* AdsPageView.h */,
 				CEDC9190153FDC7700BA6C35 /* AdsPageView.m */,
+				CE7C9D1715400ED000F3812F /* ViewConstants.h */,
 			);
 			path = Common;
 			sourceTree = "<group>";
