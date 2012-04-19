@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AdsPageView.h"
 
 @interface CategoryViewController : UIViewController
 
+@property (nonatomic, retain) AdsPageView * adsPageView;
 @end

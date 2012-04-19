@@ -8,37 +8,81 @@
 
 #import "AdsPageView.h"
 
+#define ADS_EXCHANGE_TIME_OUT_SECONDS   (3.0)
+#define MAX_ADS_PAGES                   (4)
+
+@interface AdsPageView ()
+@property (nonatomic, assign) int currentPage;
+@property (nonatomic, assign) NSMutableArray * adsImageNames;
+@property (nonatomic, assign) UIImageView * firstImageView;
+@property (nonatomic, assign) UIImageView * secondImageView;
+
+@property (nonatomic, retain) NSTimer * adsExchangeTimer;
+-(void)transitionPage:(int)from toPage:(int)to;
+-(CATransition *) getAnimation:(NSString *) direction;
+- (void)handleTimeOut:(NSTimer*)theTimer;
+@end
+
 @implementation AdsPageView
 
-@synthesize firstAdsImageView = _firstAdsImageView;
-@synthesize secondsAdsImageView = _secondsAdsImageView;
 @synthesize adsPageController = _adsPageController;
+@synthesize adsImageNames = _adsImageNames;
+@synthesize currentPage;
+@synthesize adsExchangeTimer = _adsExchangeTimer;
+@synthesize firstImageView = _firstImageView;
+@synthesize secondImageView = _secondImageView;
 
-@synthesize pageView = _pageView;
-@synthesize pages = _pages;
-@synthesize previousPage;
-
--(id)init {
-    if (self = [super init]) {
-        _pages=[[NSMutableArray alloc ]initWithObjects:@"logo.png",
-                @"logo@2x.png",
-                @"bg_land.png",
-                nil];
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // TODO: get it from server
+        _adsImageNames = [[NSMutableArray alloc] initWithObjects:@"logo.png",
+                                                                 @"bg.png",
+                                                                 @"btn.png",
+                                                                 @"bg_land.png",
+                                                                 nil];
+        _firstImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
+        _firstImageView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+        [self.view insertSubview:_firstImageView belowSubview:self.adsPageController];
+        
+        _secondImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
+        _secondImageView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+        [self.view insertSubview:_secondImageView belowSubview:self.adsPageController];
+        [_secondImageView setHidden:YES];
+        
+        
     }
-    return self;
+    return self;  
 }
 
 - (void)dealloc {
-    [_firstAdsImageView release];
-    [_secondsAdsImageView release];
     [_adsPageController release];
+    [super dealloc];
 }
 
 #pragma mark - View lifecycle
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    [_adsExchangeTimer invalidate];
+    [_adsExchangeTimer release];
+}
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.adsExchangeTimer = [NSTimer timerWithTimeInterval:ADS_EXCHANGE_TIME_OUT_SECONDS
+                                                       target:self
+                                                     selector:@selector(handleTimeOut:)
+                                                     userInfo:nil
+                                                      repeats:YES];
+    [[NSRunLoop currentRunLoop] addTimer:self.adsExchangeTimer forMode:NSDefaultRunLoopMode];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
 }
 
 -(void)loadView{
@@ -48,58 +92,48 @@
     viewBounds.origin.y = 0.0;
     viewBounds.size.height = 460.0;
     //控件区域
-    //    self.adsPageControl=[[UIPageControl alloc]initWithFrame:CGRectMake(viewBounds.origin.x,
-    //                                                           viewBounds.origin.y,
-    //                                                           viewBounds.size.width,
-    //                                                           60)];
     self.adsPageController.backgroundColor=[UIColor blackColor];
     self.adsPageController.numberOfPages = 3;
     self.adsPageController.currentPage = 0;
     // 设定翻页事件的处理方法
     [self.adsPageController addTarget:self action:@selector(pageTurn:)
                   forControlEvents:UIControlEventValueChanged];
-    // 页面区域
-    CGRect contentFrame=CGRectMake(viewBounds.origin.x,
-                                   viewBounds.origin.y+60,
-                                   viewBounds.size.width,
-                                   viewBounds.size.height-60);
-    self.pageView=[[UIView alloc]initWithFrame:contentFrame];
-    [self.pageView setBackgroundColor:[UIColor brownColor]];
-    // 添加两个imageview，动画切换时用
-    for (int i=0; i<2; i++) {
-        [self.pageView addSubview:[[UIImageView alloc] initWithFrame:CGRectMake(0,
-                                                                                0,
-                                                                                contentFrame.size.width,
-                                                                                contentFrame.size.height)]];
+}
+
+- (void)handleTimeOut:(NSTimer*)theTimer
+{
+    int destPage = 0;
+    if (currentPage != (MAX_ADS_PAGES - 1)) {
+        destPage = currentPage + 1;
     }
+    
+    [self transitionPage:currentPage toPage: destPage];
+    
+    [self.adsPageController setCurrentPage:destPage];
+    currentPage = destPage;
 }
 
 -(void)pageTurn:(UIPageControl*)pageControl{
-    [self transitionPage:previousPage toPage:pageControl.currentPage];
-    previousPage=pageControl.currentPage;
+    [self transitionPage:currentPage toPage: pageControl.currentPage];
 }
 
 -(void)transitionPage:(int)from toPage:(int)to{
     NSLog(@"previouspage:%d",from);
     NSLog(@"currentpage:%d",to);
-    CATransition *transition;
     if (from!=to) {
-        if(from<to){
-            transition=[self getAnimation:kCATransitionFromLeft];
-        }else{
-            transition=[self getAnimation:kCATransitionFromRight];
+        if (self.firstImageView.hidden) {
+            [self.firstImageView setImage:[UIImage imageNamed:[self.adsImageNames objectAtIndex:to]]];
+            [self.firstImageView setHidden:NO];
+            [self.secondImageView setHidden:YES];
         }
-        // 取出pageView的下面的图片作为准备显示的图片
-        UIImageView *newImage=(UIImageView *)[[self.pageView subviews] objectAtIndex:0];
-        // 将视图修改为要显示的图片
-        [newImage setImage:[UIImage imageNamed:[self.pages objectAtIndex:to]]];
-        // 将pageView的上下图片交换
-        [self.pageView exchangeSubviewAtIndex:0 withSubviewAtIndex:1];
-        // 显示上面的图片，隐藏下面的图片
-        [[self.pageView.subviews objectAtIndex:0] setHidden:YES];
-        [[self.pageView.subviews objectAtIndex:1] setHidden:NO];
-        // 设置转换动画
-        [[self.pageView layer] addAnimation:transition forKey:@"pageTurnAnimation"];
+        else
+        {
+            [self.secondImageView setImage:[UIImage imageNamed:[self.adsImageNames objectAtIndex:to]]];
+            [self.secondImageView setHidden:NO];
+            [self.firstImageView setHidden:YES];
+        }
+
+        [[self.firstImageView layer] addAnimation:[self getAnimation:kCATransitionFromLeft] forKey:@"pageTurnAnimation"];
     }
 }
 

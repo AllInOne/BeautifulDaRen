@@ -10,12 +10,17 @@
 
 @implementation CategoryViewController
 
+@synthesize adsPageView = _adsPageView;
+
+- (void)dealloc {
+    [_adsPageView release];
+    [super dealloc];
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = NSLocalizedString(@"First", @"First");
-        self.tabBarItem.image = [UIImage imageNamed:@"first"];
     }
     return self;
 }
@@ -32,6 +37,11 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    if (self.adsPageView == nil) {
+        _adsPageView = [[AdsPageView alloc] initWithNibName:@"AdsPageView" bundle:nil];
+        [self.view addSubview:_adsPageView.view];
+//        _adsPageView.view.frame = CGRectMake(0, 30, self.view.frame.size.width, self.view.frame.size.height);
+    }
 }
 
 - (void)viewDidUnload
