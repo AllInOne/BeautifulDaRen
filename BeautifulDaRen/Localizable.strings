@@ -1,0 +1,20 @@
+/* 
+  Localizable.strings
+  BeautifulDaRen
+
+  Created by jerry.li on 4/18/12.
+  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+*/
+
+"tab_home" = "首页";
+"tab_mine" = "我的";
+"tab_camerashare" = "拍照/分享";
+"tab_category" = "分类";
+"tab_more" = "更多";
+
+
+"title_home" = "首页";
+"title_mine" = "我的";
+"title_camerashare" = "拍照/分享";
+"title_category" = "分类";
+"title_more" = "更多";
