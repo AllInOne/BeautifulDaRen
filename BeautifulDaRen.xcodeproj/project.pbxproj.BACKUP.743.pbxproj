@@ -701,12 +701,15 @@
 				CE745457153F1F8900CB751A /* second.png in Resources */,
 				CE745458153F1F8900CB751A /* second@2x.png in Resources */,
 				CEDC918E153FDC5700BA6C35 /* AdsPageView.xib in Resources */,
-				C24776441540645600D2A487 /* UnRegisterTopView.xib in Resources */,
+<<<<<<< HEAD
 				CE7C9D1C154013B200F3812F /* UserInforCellViewController.xib in Resources */,
 				CEC0F10A154033C600DC23B0 /* avatar_icon.png in Resources */,
 				CEC0F11C1540377B00DC23B0 /* CategoryContentViewController.xib in Resources */,
 				CE93EFB915404A810038FE9D /* CommonScrollView.xib in Resources */,
 				CEBCF39F1540F77600B3CCE1 /* CategoryItemCell.xib in Resources */,
+=======
+				C24776441540645600D2A487 /* UnRegisterTopView.xib in Resources */,
+>>>>>>> 65480b7094eb325adf9c043385694251b02d55ba
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -749,11 +752,14 @@
 				CEC0B595153EFBFE00F20DC0 /* MineViewController.m in Sources */,
 				CEC0B59B153EFC0500F20DC0 /* MoreViewController.m in Sources */,
 				CEDC9191153FDC7700BA6C35 /* AdsPageView.m in Sources */,
-				C2477647154065CD00D2A487 /* UnRegisterTopView.m in Sources */,
+<<<<<<< HEAD
 				CE7C9D1B154013B200F3812F /* UserInforCellViewController.m in Sources */,
 				CEC0F11B1540377B00DC23B0 /* CategoryContentViewController.m in Sources */,
 				CE93EFB815404A810038FE9D /* CommonScrollView.m in Sources */,
 				CEBCF39E1540F77600B3CCE1 /* CategoryItemCell.m in Sources */,
+=======
+				C2477647154065CD00D2A487 /* UnRegisterTopView.m in Sources */,
+>>>>>>> 65480b7094eb325adf9c043385694251b02d55ba
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

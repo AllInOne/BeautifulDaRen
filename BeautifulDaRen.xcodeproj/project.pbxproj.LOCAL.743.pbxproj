@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C24776441540645600D2A487 /* UnRegisterTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C24776431540645600D2A487 /* UnRegisterTopView.xib */; };
-		C2477647154065CD00D2A487 /* UnRegisterTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2477646154065CD00D2A487 /* UnRegisterTopView.m */; };
 		CE029ABF153E682100886227 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE029ABE153E682100886227 /* UIKit.framework */; };
 		CE029AC1153E682100886227 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE029AC0153E682100886227 /* Foundation.framework */; };
 		CE029AC3153E682100886227 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE029AC2153E682100886227 /* CoreGraphics.framework */; };
@@ -106,9 +104,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		C24776431540645600D2A487 /* UnRegisterTopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnRegisterTopView.xib; sourceTree = "<group>"; };
-		C2477645154065CD00D2A487 /* UnRegisterTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnRegisterTopView.h; sourceTree = "<group>"; };
-		C2477646154065CD00D2A487 /* UnRegisterTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnRegisterTopView.m; sourceTree = "<group>"; };
 		CE029ABA153E682100886227 /* BeautifulDaRen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeautifulDaRen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE029ABE153E682100886227 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CE029AC0153E682100886227 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -547,9 +542,6 @@
 				CEC0B58C153EFBF600F20DC0 /* HomeViewController.h */,
 				CEC0B58D153EFBF600F20DC0 /* HomeViewController.m */,
 				CEC0B58E153EFBF600F20DC0 /* HomeViewController.xib */,
-				C24776431540645600D2A487 /* UnRegisterTopView.xib */,
-				C2477645154065CD00D2A487 /* UnRegisterTopView.h */,
-				C2477646154065CD00D2A487 /* UnRegisterTopView.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -701,7 +693,6 @@
 				CE745457153F1F8900CB751A /* second.png in Resources */,
 				CE745458153F1F8900CB751A /* second@2x.png in Resources */,
 				CEDC918E153FDC5700BA6C35 /* AdsPageView.xib in Resources */,
-				C24776441540645600D2A487 /* UnRegisterTopView.xib in Resources */,
 				CE7C9D1C154013B200F3812F /* UserInforCellViewController.xib in Resources */,
 				CEC0F10A154033C600DC23B0 /* avatar_icon.png in Resources */,
 				CEC0F11C1540377B00DC23B0 /* CategoryContentViewController.xib in Resources */,
@@ -749,7 +740,6 @@
 				CEC0B595153EFBFE00F20DC0 /* MineViewController.m in Sources */,
 				CEC0B59B153EFC0500F20DC0 /* MoreViewController.m in Sources */,
 				CEDC9191153FDC7700BA6C35 /* AdsPageView.m in Sources */,
-				C2477647154065CD00D2A487 /* UnRegisterTopView.m in Sources */,
 				CE7C9D1B154013B200F3812F /* UserInforCellViewController.m in Sources */,
 				CEC0F11B1540377B00DC23B0 /* CategoryContentViewController.m in Sources */,
 				CE93EFB815404A810038FE9D /* CommonScrollView.m in Sources */,
