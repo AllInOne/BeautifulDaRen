@@ -76,14 +76,15 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 44;
+    return 80;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier: @"CategoryItemCell"];
     if (!cell) {
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"CategoryItemCell" owner:self options:nil] objectAtIndex:0];
+        cell = [[[CategoryItemCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CategoryItemCell"] autorelease];
     }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     [cell setFrame:CGRectMake(0, 0, 320, 240)];
     return cell;
 }

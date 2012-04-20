@@ -60,23 +60,6 @@
         _categoryContentView.view.frame = CGRectMake(0, USER_INFOR_CELL_HEIGHT + ADS_CELL_HEIGHT, self.view.frame.size.width, 160);
         [self.view addSubview:_categoryContentView.view];
     }
-//    
-//    CommonScrollView * commonScrollView = [[CommonScrollView alloc] init];
-//    commonScrollView.view.frame = CGRectMake(0, 0, self.view.frame.size.width, 80);
-//    [self.categoryContentView.categoryScrollView addSubview:commonScrollView.view];
-//
-//    CommonScrollView * commonScrollView2 = [[CommonScrollView alloc] init];
-//    commonScrollView2.view.frame = CGRectMake(0, 80, self.view.frame.size.width, 80);
-//    [self.categoryContentView.categoryScrollView addSubview:commonScrollView2.view];
-//    
-//    CommonScrollView * commonScrollView3 = [[CommonScrollView alloc] init];
-//    commonScrollView3.view.frame = CGRectMake(0,160, self.view.frame.size.width, 80);
-//    [self.categoryContentView.categoryScrollView addSubview:commonScrollView3.view];
-//    
-//    CommonScrollView * commonScrollView4 = [[CommonScrollView alloc] init];
-//    commonScrollView4.view.frame = CGRectMake(0, 240, self.view.frame.size.width, 80);
-//    [self.categoryContentView.categoryScrollView addSubview:commonScrollView4.view];
-
 }
 
 - (void)viewDidUnload

@@ -17,22 +17,24 @@
     [super dealloc];
 }
 
-- (id)init {
-    self = [super init];
-    if (self) {
-        // Initialization code
-        _categoryScrollItem = [[CommonScrollView alloc] initWithNibName:@"CommonScrollView" bundle:nil];
-        [self addSubview:_categoryScrollItem.view];
-    }
-    return self;
-}
-
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        _categoryScrollItem = [[CommonScrollView alloc] initWithNibName:@"CommonScrollView" bundle:nil];
+        // TODO: test code
+        NSArray * images = [NSArray arrayWithObjects:
+                            @"1",                    
+                            @"2",                        
+                            @"3",                      
+                            @"2",
+                            @"3",
+                            @"2",
+                            @"3",
+                            @"2",
+                            @"3",
+                            nil];
+        _categoryScrollItem = [[CommonScrollView alloc] initWithNibName:@"CommonScrollView" bundle:nil data:images andDelegate:self];
         [self addSubview:_categoryScrollItem.view];
     }
     return self;
@@ -42,6 +44,11 @@
 {
     [super setSelected:selected animated:animated];
     // Configure the view for the selected state
+}
+
+- (void)onItemSelected:(int)index
+{
+    NSLog(@"Category %d selected", index);
 }
 
 @end

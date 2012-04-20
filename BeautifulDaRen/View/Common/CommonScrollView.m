@@ -7,30 +7,46 @@
 //
 
 #import "CommonScrollView.h"
+#import "CommonScrollViewItem.h"
+#import "ViewConstants.h"
+
+@interface CommonScrollView ()
+@property (nonatomic, retain) NSMutableArray * scrollItems;
+@end
 
 @implementation CommonScrollView
 
 @synthesize scrollTitle = _scrollTitle;
 @synthesize scrollView = _scrollView;
+@synthesize scrollItems = _scrollItems;
 
 - (void)dealloc
 {
     [_scrollView release];
     [_scrollTitle release];
+    [_scrollItems release];
     [super release];
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil data: (NSArray *)data andDelegate:(id<CommonScrollViewProtocol>) delegate
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
-        UIImageView * imageView1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"avatar_icon.png"]];
-        imageView1.frame = CGRectMake(0, self.view.frame.origin.y, 38,38);
-//        [imageView1 setCenter:center];
-        [self.scrollView setContentSize:CGSizeMake(320, 38)];
-        [self.scrollView setShowsVerticalScrollIndicator:NO];
-        [self.scrollView addSubview:imageView1];
+        int index = 0;
+        self.scrollItems = [[NSMutableArray alloc] initWithCapacity:[data count]];
+        while (index < data.count) {
+            CommonScrollViewItem * item = [[[NSBundle mainBundle] loadNibNamed:@"CommonScrollViewItem" owner:self options:nil] objectAtIndex:0];
+            item.frame = CGRectMake(index * (SCROLL_ITEM_WIDTH + SCROLL_ITEM_MARGIN), 0, SCROLL_ITEM_WIDTH, SCROLL_ITEM_HEIGHT);
+            item.button.tag = index;
+            // TODO: set image with real data
+            [item.image setImage:[UIImage imageNamed:@"avatar_icon.png"]];
+//            [item.button setHidden:YES];
+            [self.view addSubview:item];
+            [self.scrollItems insertObject:item atIndex:index++];
+            [self.scrollView addSubview:item];
+        }
+        [self.scrollView setContentSize:CGSizeMake(index * (SCROLL_ITEM_WIDTH + SCROLL_ITEM_MARGIN), SCROLL_ITEM_HEIGHT)];
+//        self.scrollView.frame = CGRectMake(0, 0, 320, SCROLL_ITEM_HEIGHT);
     }
     return self;
 }
@@ -62,6 +78,12 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+-(IBAction)onScrollItemClicked:(id)sender
+{
+    UIButton * button = (UIButton*)sender;
+    NSLog(@"Scroll item %d clicked", [button tag]);
 }
 
 @end

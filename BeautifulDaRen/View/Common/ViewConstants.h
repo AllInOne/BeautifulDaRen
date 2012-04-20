@@ -12,4 +12,8 @@
 #define ADS_CELL_HEIGHT             (80)
 #define USER_INFOR_CELL_HEIGHT      (80)
 
+#define SCROLL_ITEM_MARGIN      (10.0)
+#define SCROLL_ITEM_WIDTH       (60.0)
+#define SCROLL_ITEM_HEIGHT      (60.0)
+
 #endif

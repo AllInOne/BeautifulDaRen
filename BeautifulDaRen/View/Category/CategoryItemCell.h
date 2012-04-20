@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CommonScrollView.h"
 
-@interface CategoryItemCell : UITableViewCell
+@interface CategoryItemCell : UITableViewCell <CommonScrollViewProtocol>
 
 @property (nonatomic, retain) CommonScrollView * categoryScrollItem;
 
