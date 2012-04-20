@@ -10,5 +10,6 @@
 #define BeautifulDaRen_ViewConstants_Header_h
 
 #define ADS_CELL_HEIGHT             (80)
+#define USER_INFOR_CELL_HEIGHT      (80)
 
 #endif

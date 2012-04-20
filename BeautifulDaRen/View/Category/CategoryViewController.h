@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "AdsPageView.h"
+#import "UserInforCellViewController.h"
+#import "CategoryContentViewController.h"
 
 @interface CategoryViewController : UIViewController
 
 @property (nonatomic, retain) AdsPageView * adsPageView;
+@property (nonatomic, retain) UserInforCellViewController * userInforCellView;
+@property (nonatomic, retain) CategoryContentViewController * categoryContentView;
 @end
