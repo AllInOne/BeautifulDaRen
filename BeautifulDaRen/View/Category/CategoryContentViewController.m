@@ -9,6 +9,7 @@
 #import "CategoryContentViewController.h"
 #import "CommonScrollView.h"
 #import "CategoryItemCell.h"
+#import "ViewConstants.h"
 
 @interface CategoryContentViewController ()
 
@@ -76,13 +77,13 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 80;
+    return CATEGORY_ITEM_HEIGHT;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier: @"CategoryItemCell"];
     if (!cell) {
-        cell = [[[CategoryItemCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CategoryItemCell"] autorelease];
+        cell = [[[CategoryItemCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CategoryItemCell" andData:nil] autorelease];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     [cell setFrame:CGRectMake(0, 0, 320, 240)];

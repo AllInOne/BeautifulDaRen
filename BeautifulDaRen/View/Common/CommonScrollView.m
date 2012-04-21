@@ -40,7 +40,8 @@
             item.button.tag = index;
             // TODO: set image with real data
             [item.image setImage:[UIImage imageNamed:@"avatar_icon.png"]];
-//            [item.button setHidden:YES];
+            [item.image setFrame:CGRectMake(0, 0, SCROLL_ITEM_WIDTH, SCROLL_ITEM_HEIGHT)];
+            
             [self.view addSubview:item];
             [self.scrollItems insertObject:item atIndex:index++];
             [self.scrollView addSubview:item];

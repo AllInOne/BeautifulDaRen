@@ -7,22 +7,30 @@
 //
 
 #import "CategoryItemCell.h"
+#import "ViewConstants.h"
 
 @implementation CategoryItemCell
 
 @synthesize categoryScrollItem = _categoryScrollItem;
+@synthesize categoryTitle = _categoryTitle;
 
 - (void)dealloc {
     [_categoryScrollItem release];
+    [_categoryTitle release];
     [super dealloc];
 }
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier andData: (NSDictionary *)dataDict
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
         // TODO: test code
+        _categoryTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 30)];
+        _categoryTitle.text = @"Test category title";
+        [_categoryTitle setFont:[UIFont systemFontOfSize:CATEGORY_TITLE_FONT_HEIGHT]];
+        [self addSubview:_categoryTitle];
+        
         NSArray * images = [NSArray arrayWithObjects:
                             @"1",                    
                             @"2",                        
@@ -35,6 +43,7 @@
                             @"3",
                             nil];
         _categoryScrollItem = [[CommonScrollView alloc] initWithNibName:@"CommonScrollView" bundle:nil data:images andDelegate:self];
+        [_categoryScrollItem.view setFrame:CGRectMake(0, CATEGORY_TITLE_FONT_HEIGHT *2, self.frame.size.width, CATEGORY_ITEM_HEIGHT)];
         [self addSubview:_categoryScrollItem.view];
     }
     return self;

@@ -57,7 +57,7 @@
     
     if (self.categoryContentView == nil) {
         _categoryContentView = [[CategoryContentViewController  alloc] initWithNibName:@"CategoryContentViewController" bundle:nil];
-        _categoryContentView.view.frame = CGRectMake(0, USER_INFOR_CELL_HEIGHT + ADS_CELL_HEIGHT, self.view.frame.size.width, 160);
+        _categoryContentView.view.frame = CGRectMake(0, USER_INFOR_CELL_HEIGHT + ADS_CELL_HEIGHT, self.view.frame.size.width, 220);
         [self.view addSubview:_categoryContentView.view];
     }
 }
