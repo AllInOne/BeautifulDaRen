@@ -8,13 +8,18 @@
 
 #import "CategoryViewController.h"
 #import "ViewConstants.h"
+#import "CommonScrollView.h"
 
 @implementation CategoryViewController
 
 @synthesize adsPageView = _adsPageView;
+@synthesize userInforCellView = _userInforCellView;
+@synthesize categoryContentView = _categoryContentView;
 
 - (void)dealloc {
     [_adsPageView release];
+    [_userInforCellView release];
+    [_categoryContentView release];
     [super dealloc];
 }
 
@@ -37,11 +42,23 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+	// Do any additional setup after loading the view, typically from a nib.    
+    if (self.userInforCellView == nil) {
+        _userInforCellView = [[UserInforCellViewController alloc] initWithNibName:@"UserInforCellViewController" bundle:nil];
+        _userInforCellView.view.frame = CGRectMake(0, 0, self.view.frame.size.width, USER_INFOR_CELL_HEIGHT);
+        [self.view addSubview:_userInforCellView.view];
+    }
+
     if (self.adsPageView == nil) {
         _adsPageView = [[AdsPageView alloc] initWithNibName:@"AdsPageView" bundle:nil];
+        _adsPageView.view.frame = CGRectMake(0, USER_INFOR_CELL_HEIGHT, self.view.frame.size.width, self.view.frame.size.height);
         [self.view addSubview:_adsPageView.view];
-        _adsPageView.view.frame = CGRectMake(0, 30, self.view.frame.size.width, ADS_CELL_HEIGHT);
+    }
+    
+    if (self.categoryContentView == nil) {
+        _categoryContentView = [[CategoryContentViewController  alloc] initWithNibName:@"CategoryContentViewController" bundle:nil];
+        _categoryContentView.view.frame = CGRectMake(0, USER_INFOR_CELL_HEIGHT + ADS_CELL_HEIGHT, self.view.frame.size.width, 160);
+        [self.view addSubview:_categoryContentView.view];
     }
 }
 
