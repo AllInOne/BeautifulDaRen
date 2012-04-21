@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		C24776441540645600D2A487 /* UnRegisterTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C24776431540645600D2A487 /* UnRegisterTopView.xib */; };
 		C2477647154065CD00D2A487 /* UnRegisterTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2477646154065CD00D2A487 /* UnRegisterTopView.m */; };
+		C28A4B8D15413AE2008A806D /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C28A4B8B15413AE2008A806D /* RegisterViewController.m */; };
+		C28A4B8E15413AE2008A806D /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C28A4B8C15413AE2008A806D /* RegisterViewController.xib */; };
+		C28A4B9215413D32008A806D /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C28A4B9015413D32008A806D /* LoginViewController.m */; };
+		C28A4B9315413D32008A806D /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C28A4B9115413D32008A806D /* LoginViewController.xib */; };
 		CE029ABF153E682100886227 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE029ABE153E682100886227 /* UIKit.framework */; };
 		CE029AC1153E682100886227 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE029AC0153E682100886227 /* Foundation.framework */; };
 		CE029AC3153E682100886227 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE029AC2153E682100886227 /* CoreGraphics.framework */; };
@@ -100,6 +104,12 @@
 		C24776431540645600D2A487 /* UnRegisterTopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnRegisterTopView.xib; sourceTree = "<group>"; };
 		C2477645154065CD00D2A487 /* UnRegisterTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnRegisterTopView.h; sourceTree = "<group>"; };
 		C2477646154065CD00D2A487 /* UnRegisterTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnRegisterTopView.m; sourceTree = "<group>"; };
+		C28A4B8A15413AE2008A806D /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
+		C28A4B8B15413AE2008A806D /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
+		C28A4B8C15413AE2008A806D /* RegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterViewController.xib; sourceTree = "<group>"; };
+		C28A4B8F15413D32008A806D /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		C28A4B9015413D32008A806D /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		C28A4B9115413D32008A806D /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		CE029ABA153E682100886227 /* BeautifulDaRen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeautifulDaRen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE029ABE153E682100886227 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CE029AC0153E682100886227 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -233,6 +243,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C28A4B8915413AB2008A806D /* SubView */ = {
+			isa = PBXGroup;
+			children = (
+				C24776431540645600D2A487 /* UnRegisterTopView.xib */,
+				C2477645154065CD00D2A487 /* UnRegisterTopView.h */,
+				C2477646154065CD00D2A487 /* UnRegisterTopView.m */,
+			);
+			name = SubView;
+			sourceTree = "<group>";
+		};
 		CE029AAF153E682100886227 = {
 			isa = PBXGroup;
 			children = (
@@ -515,12 +535,16 @@
 		CEC0B58B153EFBF600F20DC0 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				C28A4B8915413AB2008A806D /* SubView */,
 				CEC0B58C153EFBF600F20DC0 /* HomeViewController.h */,
 				CEC0B58D153EFBF600F20DC0 /* HomeViewController.m */,
 				CEC0B58E153EFBF600F20DC0 /* HomeViewController.xib */,
-				C24776431540645600D2A487 /* UnRegisterTopView.xib */,
-				C2477645154065CD00D2A487 /* UnRegisterTopView.h */,
-				C2477646154065CD00D2A487 /* UnRegisterTopView.m */,
+				C28A4B8A15413AE2008A806D /* RegisterViewController.h */,
+				C28A4B8B15413AE2008A806D /* RegisterViewController.m */,
+				C28A4B8C15413AE2008A806D /* RegisterViewController.xib */,
+				C28A4B8F15413D32008A806D /* LoginViewController.h */,
+				C28A4B9015413D32008A806D /* LoginViewController.m */,
+				C28A4B9115413D32008A806D /* LoginViewController.xib */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -667,6 +691,8 @@
 				CE745458153F1F8900CB751A /* second@2x.png in Resources */,
 				CEDC918E153FDC5700BA6C35 /* AdsPageView.xib in Resources */,
 				C24776441540645600D2A487 /* UnRegisterTopView.xib in Resources */,
+				C28A4B8E15413AE2008A806D /* RegisterViewController.xib in Resources */,
+				C28A4B9315413D32008A806D /* LoginViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -710,6 +736,8 @@
 				CEC0B59B153EFC0500F20DC0 /* MoreViewController.m in Sources */,
 				CEDC9191153FDC7700BA6C35 /* AdsPageView.m in Sources */,
 				C2477647154065CD00D2A487 /* UnRegisterTopView.m in Sources */,
+				C28A4B8D15413AE2008A806D /* RegisterViewController.m in Sources */,
+				C28A4B9215413D32008A806D /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -39,7 +39,7 @@
 					<object class="IBUIImageView" id="203646401">
 						<reference key="NSNextResponder" ref="827894785"/>
 						<int key="NSvFlags">274</int>
-						<string key="NSFrame">{{9, 0}, {144, 67}}</string>
+						<string key="NSFrame">{{9, -11}, {144, 58}}</string>
 						<reference key="NSSuperview" ref="827894785"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="1010484399"/>
@@ -58,7 +58,6 @@
 						<string key="NSFrame">{{271, 0}, {49, 27}}</string>
 						<reference key="NSSuperview" ref="827894785"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:225</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -112,7 +111,7 @@
 						<reference key="IBUIFont" ref="603632029"/>
 					</object>
 				</array>
-				<string key="NSFrameSize">{329, 67}</string>
+				<string key="NSFrameSize">{329, 47}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="203646401"/>
@@ -138,30 +137,22 @@
 					<int key="connectionID">9</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">loginBtn</string>
-						<reference key="source" ref="827894785"/>
-						<reference key="destination" ref="1010484399"/>
-					</object>
-					<int key="connectionID">10</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">loginBtnSelected:</string>
+						<string key="label">onLoginBtnSelected:</string>
 						<reference key="source" ref="1010484399"/>
-						<reference key="destination" ref="827894785"/>
+						<reference key="destination" ref="975951072"/>
 						<int key="IBEventType">7</int>
 					</object>
-					<int key="connectionID">12</int>
+					<int key="connectionID">13</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">registerBtnSelected:</string>
+						<string key="label">onRegisterBtnSelected:</string>
 						<reference key="source" ref="674687437"/>
-						<reference key="destination" ref="827894785"/>
+						<reference key="destination" ref="975951072"/>
 						<int key="IBEventType">7</int>
 					</object>
-					<int key="connectionID">11</int>
+					<int key="connectionID">14</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -224,27 +215,35 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">12</int>
+			<int key="maxID">14</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<object class="IBPartialClassDescription">
-					<string key="className">UnRegisterTopView</string>
-					<string key="superclassName">UIView</string>
+					<string key="className">HomeViewController</string>
+					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="loginBtnSelected:">UIButton</string>
-						<string key="registerBtnSelected:">UIButton</string>
+						<string key="onLoginBtnSelected:">UIButton</string>
+						<string key="onRegisterBtnSelected:">UIButton</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="loginBtnSelected:">
-							<string key="name">loginBtnSelected:</string>
+						<object class="IBActionInfo" key="onLoginBtnSelected:">
+							<string key="name">onLoginBtnSelected:</string>
 							<string key="candidateClassName">UIButton</string>
 						</object>
-						<object class="IBActionInfo" key="registerBtnSelected:">
-							<string key="name">registerBtnSelected:</string>
+						<object class="IBActionInfo" key="onRegisterBtnSelected:">
+							<string key="name">onRegisterBtnSelected:</string>
 							<string key="candidateClassName">UIButton</string>
 						</object>
 					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/HomeViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">UnRegisterTopView</string>
+					<string key="superclassName">UIView</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="loginBtn">UIButton</string>
 						<string key="registerBtn">UIButton</string>

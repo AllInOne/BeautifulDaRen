@@ -11,4 +11,7 @@
 
 @interface HomeViewController : UIViewController
 
+- (IBAction)onLoginBtnSelected:(UIButton*)sender;
+- (IBAction)onRegisterBtnSelected:(UIButton*)sender;
+
 @end

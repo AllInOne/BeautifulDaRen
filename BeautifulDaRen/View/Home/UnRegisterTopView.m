@@ -7,12 +7,8 @@
 //
 
 #import "UnRegisterTopView.h"
-@interface UnRegisterTopView()
-
-- (IBAction)loginBtnSelected:(UIButton*)sender;
-- (IBAction)registerBtnSelected:(UIButton*)sender;
-
-@end
+#import "LoginViewController.h"
+#import "RegisterViewController.h"
 
 @implementation UnRegisterTopView
 
@@ -27,17 +23,6 @@
     }
     return self;
 }
-
-#pragma mark Action
-- (IBAction)loginBtnSelected:(UIButton*)sender
-{
-    NSLog(@"loginBtnSelected");
-}
-- (IBAction)registerBtnSelected:(UIButton*)sender
-{
-    NSLog(@"registerBtnSelected");
-}
-
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

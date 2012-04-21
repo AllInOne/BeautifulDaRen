@@ -7,6 +7,10 @@
 //
 
 #import "HomeViewController.h"
+#import "AdsPageView.h"
+#import "ViewConstants.h"
+#import "LoginViewController.h"
+#import "RegisterViewController.h"
 
 @implementation HomeViewController
 
@@ -29,6 +33,9 @@
     
     UIView * topView = [[[NSBundle mainBundle] loadNibNamed:@"UnRegisterTopView" owner:self options:nil] objectAtIndex:0];
     [self.view addSubview:topView];
+    AdsPageView * adsPageView = [[[AdsPageView alloc] initWithNibName:@"AdsPageView" bundle:nil] autorelease];
+    adsPageView.view.frame = CGRectMake(0, 30, self.view.frame.size.width, ADS_CELL_HEIGHT);
+    [self.view insertSubview:adsPageView.view belowSubview:topView];
 
 }
 
@@ -62,5 +69,17 @@
     // Return YES for supported orientations
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
+#pragma mark Action
+- (IBAction)onLoginBtnSelected:(UIButton*)sender
+{
+    LoginViewController * loginContorller = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+    [self.navigationController pushViewController:loginContorller animated:YES];
+}
+- (IBAction)onRegisterBtnSelected:(UIButton*)sender
+{
+    RegisterViewController * registerController = [[RegisterViewController alloc] initWithNibName:@"RegisterViewController" bundle:nil];
+    [self.navigationController pushViewController:registerController animated:YES];
+}
+
 
 @end
