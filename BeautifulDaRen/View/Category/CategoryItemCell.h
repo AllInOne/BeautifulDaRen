@@ -8,11 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "CommonScrollView.h"
+#import "CategoryContentViewController.h"
 
 @interface CategoryItemCell : UITableViewCell <CommonScrollViewProtocol>
 
 @property (nonatomic, retain) CommonScrollView * categoryScrollItem;
 @property (nonatomic, retain) UILabel * categoryTitle;
+
+@property (nonatomic, retain) CategoryContentViewController * parentViewController;
 
 /**
  @brief Init the Category item with data.

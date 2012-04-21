@@ -84,7 +84,10 @@
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier: @"CategoryItemCell"];
     if (!cell) {
         cell = [[[CategoryItemCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CategoryItemCell" andData:nil] autorelease];
+
     }
+    CategoryItemCell * categoryCell = (CategoryItemCell*)cell;
+    categoryCell.parentViewController = self;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     [cell setFrame:CGRectMake(0, 0, 320, 240)];
     return cell;

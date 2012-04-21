@@ -89,6 +89,9 @@
 		CEC0B596153EFBFE00F20DC0 /* MineViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC0B594153EFBFE00F20DC0 /* MineViewController.xib */; };
 		CEC0B59B153EFC0500F20DC0 /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC0B599153EFC0500F20DC0 /* MoreViewController.m */; };
 		CEC0B59C153EFC0500F20DC0 /* MoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC0B59A153EFC0500F20DC0 /* MoreViewController.xib */; };
+		CEC2D1341542F215001FA8D0 /* WeiboDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC2D1321542F214001FA8D0 /* WeiboDetailViewController.m */; };
+		CEC2D1351542F215001FA8D0 /* WeiboDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC2D1331542F215001FA8D0 /* WeiboDetailViewController.xib */; };
+		CEC2D158154304E6001FA8D0 /* avatar_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CEC2D157154304E6001FA8D0 /* avatar_icon.png */; };
 		CEDC918E153FDC5700BA6C35 /* AdsPageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEDC918D153FDC5700BA6C35 /* AdsPageView.xib */; };
 		CEDC9191153FDC7700BA6C35 /* AdsPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDC9190153FDC7700BA6C35 /* AdsPageView.m */; };
 /* End PBXBuildFile section */
@@ -247,6 +250,10 @@
 		CEC0B598153EFC0500F20DC0 /* MoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreViewController.h; sourceTree = "<group>"; };
 		CEC0B599153EFC0500F20DC0 /* MoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreViewController.m; sourceTree = "<group>"; };
 		CEC0B59A153EFC0500F20DC0 /* MoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoreViewController.xib; sourceTree = "<group>"; };
+		CEC2D1311542F214001FA8D0 /* WeiboDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboDetailViewController.h; sourceTree = "<group>"; };
+		CEC2D1321542F214001FA8D0 /* WeiboDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboDetailViewController.m; sourceTree = "<group>"; };
+		CEC2D1331542F215001FA8D0 /* WeiboDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeiboDetailViewController.xib; sourceTree = "<group>"; };
+		CEC2D157154304E6001FA8D0 /* avatar_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = avatar_icon.png; sourceTree = "<group>"; };
 		CEDC918D153FDC5700BA6C35 /* AdsPageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdsPageView.xib; sourceTree = "<group>"; };
 		CEDC918F153FDC7700BA6C35 /* AdsPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdsPageView.h; sourceTree = "<group>"; };
 		CEDC9190153FDC7700BA6C35 /* AdsPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdsPageView.m; sourceTree = "<group>"; };
@@ -283,8 +290,8 @@
 			children = (
 				CE745459153F22F700CB751A /* QuartzCore.framework */,
 				CE029AC4153E682100886227 /* BeautifulDaRen */,
-				CE029ABD153E682100886227 /* Frameworks */,
 				CE029ABB153E682100886227 /* Products */,
+				CE029ABD153E682100886227 /* Frameworks */,
 				CE029AFB153E68FA00886227 /* SDWebImage */,
 				CE029B24153E690300886227 /* SinaWeiBoSDK */,
 			);
@@ -529,6 +536,7 @@
 		CE745450153F1F8900CB751A /* Asserts */ = {
 			isa = PBXGroup;
 			children = (
+				CEC2D157154304E6001FA8D0 /* avatar_icon.png */,
 				CE745451153F1F8900CB751A /* first.png */,
 				CE745452153F1F8900CB751A /* first@2x.png */,
 				CE745453153F1F8900CB751A /* second.png */,
@@ -603,6 +611,9 @@
 		CEDC918C153FDBCA00BA6C35 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				CEC2D1311542F214001FA8D0 /* WeiboDetailViewController.h */,
+				CEC2D1321542F214001FA8D0 /* WeiboDetailViewController.m */,
+				CEC2D1331542F215001FA8D0 /* WeiboDetailViewController.xib */,
 				C26717A51542BF0000DC40D8 /* CommonScrollView.h */,
 				C26717A61542BF0000DC40D8 /* CommonScrollView.m */,
 				C26717A71542BF0000DC40D8 /* CommonScrollView.xib */,
@@ -738,6 +749,8 @@
 				C26717B31542BF0000DC40D8 /* UserInforCellViewController.xib in Resources */,
 				C26717BB1542BF2200DC40D8 /* CategoryContentViewController.xib in Resources */,
 				C26717BD1542BF2200DC40D8 /* CategoryItemCell.xib in Resources */,
+				CEC2D1351542F215001FA8D0 /* WeiboDetailViewController.xib in Resources */,
+				CEC2D158154304E6001FA8D0 /* avatar_icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -788,6 +801,7 @@
 				C26717B21542BF0000DC40D8 /* UserInforCellViewController.m in Sources */,
 				C26717BA1542BF2200DC40D8 /* CategoryContentViewController.m in Sources */,
 				C26717BC1542BF2200DC40D8 /* CategoryItemCell.m in Sources */,
+				CEC2D1341542F215001FA8D0 /* WeiboDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
