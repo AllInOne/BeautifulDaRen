@@ -11,6 +11,7 @@
 #import "ViewConstants.h"
 #import "LoginViewController.h"
 #import "RegisterViewController.h"
+#import "ForgetPasswordViewController.h"
 
 @implementation HomeViewController
 
@@ -77,8 +78,10 @@
 }
 - (IBAction)onRegisterBtnSelected:(UIButton*)sender
 {
-    RegisterViewController * registerController = [[RegisterViewController alloc] initWithNibName:@"RegisterViewController" bundle:nil];
-    [self.navigationController pushViewController:registerController animated:YES];
+//    RegisterViewController * registerController = [[RegisterViewController alloc] initWithNibName:@"RegisterViewController" bundle:nil];
+//    [self.navigationController pushViewController:registerController animated:YES];
+    ForgetPasswordViewController * loginContorller = [[ForgetPasswordViewController alloc] initWithNibName:@"ForgetPasswordViewController" bundle:nil];
+    [self.navigationController pushViewController:loginContorller animated:YES];
 }
 
 
