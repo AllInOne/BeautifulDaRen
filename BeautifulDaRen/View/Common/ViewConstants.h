@@ -23,4 +23,6 @@
 #define KEY_CATEGORY_TITLE      @"CATEGORY_TITLE"
 #define KEY_CATEGORY_ITEMS      @"CATEGORY_ITEMS"
 
+#define APPDELEGATE_ROOTVIEW_CONTROLLER ((AppDelegate*)([UIApplication sharedApplication].delegate)).rootViewController
+
 #endif

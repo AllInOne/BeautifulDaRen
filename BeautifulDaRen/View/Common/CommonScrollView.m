@@ -19,6 +19,7 @@
 @synthesize scrollTitle = _scrollTitle;
 @synthesize scrollView = _scrollView;
 @synthesize scrollItems = _scrollItems;
+@synthesize delegate = _delegate;
 
 - (void)dealloc
 {
@@ -47,7 +48,7 @@
             [self.scrollView addSubview:item];
         }
         [self.scrollView setContentSize:CGSizeMake(index * (SCROLL_ITEM_WIDTH + SCROLL_ITEM_MARGIN), SCROLL_ITEM_HEIGHT)];
-//        self.scrollView.frame = CGRectMake(0, 0, 320, SCROLL_ITEM_HEIGHT);
+        self.delegate = delegate;
     }
     return self;
 }
@@ -85,6 +86,10 @@
 {
     UIButton * button = (UIButton*)sender;
     NSLog(@"Scroll item %d clicked", [button tag]);
+    if ([self.delegate conformsToProtocol:@protocol(CommonScrollViewProtocol)])
+    {
+        [self.delegate onItemSelected: [button tag]];
+    }
 }
 
 @end

@@ -9,10 +9,24 @@
 /* Begin PBXBuildFile section */
 		C24776441540645600D2A487 /* UnRegisterTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C24776431540645600D2A487 /* UnRegisterTopView.xib */; };
 		C2477647154065CD00D2A487 /* UnRegisterTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2477646154065CD00D2A487 /* UnRegisterTopView.m */; };
+		C26717AE1542BF0000DC40D8 /* CommonScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = C26717A61542BF0000DC40D8 /* CommonScrollView.m */; };
+		C26717AF1542BF0000DC40D8 /* CommonScrollView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C26717A71542BF0000DC40D8 /* CommonScrollView.xib */; };
+		C26717B01542BF0000DC40D8 /* CommonScrollViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C26717A91542BF0000DC40D8 /* CommonScrollViewItem.m */; };
+		C26717B11542BF0000DC40D8 /* CommonScrollViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = C26717AA1542BF0000DC40D8 /* CommonScrollViewItem.xib */; };
+		C26717B21542BF0000DC40D8 /* UserInforCellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C26717AC1542BF0000DC40D8 /* UserInforCellViewController.m */; };
+		C26717B31542BF0000DC40D8 /* UserInforCellViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C26717AD1542BF0000DC40D8 /* UserInforCellViewController.xib */; };
+		C26717BA1542BF2200DC40D8 /* CategoryContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C26717B51542BF2200DC40D8 /* CategoryContentViewController.m */; };
+		C26717BB1542BF2200DC40D8 /* CategoryContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C26717B61542BF2200DC40D8 /* CategoryContentViewController.xib */; };
+		C26717BC1542BF2200DC40D8 /* CategoryItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C26717B81542BF2200DC40D8 /* CategoryItemCell.m */; };
+		C26717BD1542BF2200DC40D8 /* CategoryItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C26717B91542BF2200DC40D8 /* CategoryItemCell.xib */; };
 		C28A4B8D15413AE2008A806D /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C28A4B8B15413AE2008A806D /* RegisterViewController.m */; };
 		C28A4B8E15413AE2008A806D /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C28A4B8C15413AE2008A806D /* RegisterViewController.xib */; };
 		C28A4B9215413D32008A806D /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C28A4B9015413D32008A806D /* LoginViewController.m */; };
 		C28A4B9315413D32008A806D /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C28A4B9115413D32008A806D /* LoginViewController.xib */; };
+		C297D814154423280080294C /* AccountInfoInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C297D813154423280080294C /* AccountInfoInputCell.m */; };
+		C297D8161544233E0080294C /* AccountInfoInputCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C297D8151544233E0080294C /* AccountInfoInputCell.xib */; };
+		C29F6663154310B300292031 /* ForgetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C29F6661154310B300292031 /* ForgetPasswordViewController.m */; };
+		C29F6664154310B300292031 /* ForgetPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C29F6662154310B300292031 /* ForgetPasswordViewController.xib */; };
 		CE029ABF153E682100886227 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE029ABE153E682100886227 /* UIKit.framework */; };
 		CE029AC1153E682100886227 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE029AC0153E682100886227 /* Foundation.framework */; };
 		CE029AC3153E682100886227 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE029AC2153E682100886227 /* CoreGraphics.framework */; };
@@ -69,16 +83,6 @@
 		CE745457153F1F8900CB751A /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = CE745453153F1F8900CB751A /* second.png */; };
 		CE745458153F1F8900CB751A /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE745454153F1F8900CB751A /* second@2x.png */; };
 		CE74545A153F22F700CB751A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE745459153F22F700CB751A /* QuartzCore.framework */; };
-		CE7C9D1B154013B200F3812F /* UserInforCellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7C9D19154013B100F3812F /* UserInforCellViewController.m */; };
-		CE7C9D1C154013B200F3812F /* UserInforCellViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7C9D1A154013B200F3812F /* UserInforCellViewController.xib */; };
-		CE93EFB815404A810038FE9D /* CommonScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE93EFB615404A810038FE9D /* CommonScrollView.m */; };
-		CE93EFB915404A810038FE9D /* CommonScrollView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE93EFB715404A810038FE9D /* CommonScrollView.xib */; };
-		CEB8293F1541AAED00275EC6 /* CommonScrollViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB8293D1541AAEC00275EC6 /* CommonScrollViewItem.m */; };
-		CEB829401541AAED00275EC6 /* CommonScrollViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEB8293E1541AAED00275EC6 /* CommonScrollViewItem.xib */; };
-		CEB8294B1541BF2B00275EC6 /* pre_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB8294A1541BF2B00275EC6 /* pre_icon.png */; };
-		CEB8294D1541BF3500275EC6 /* next_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB8294C1541BF3500275EC6 /* next_icon.png */; };
-		CEBCF39E1540F77600B3CCE1 /* CategoryItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBCF39C1540F77600B3CCE1 /* CategoryItemCell.m */; };
-		CEBCF39F1540F77600B3CCE1 /* CategoryItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEBCF39D1540F77600B3CCE1 /* CategoryItemCell.xib */; };
 		CEC0B583153EFBE000F20DC0 /* CameraShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC0B581153EFBE000F20DC0 /* CameraShareViewController.m */; };
 		CEC0B584153EFBE000F20DC0 /* CameraShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC0B582153EFBE000F20DC0 /* CameraShareViewController.xib */; };
 		CEC0B589153EFBE800F20DC0 /* CategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC0B587153EFBE800F20DC0 /* CategoryViewController.m */; };
@@ -89,9 +93,9 @@
 		CEC0B596153EFBFE00F20DC0 /* MineViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC0B594153EFBFE00F20DC0 /* MineViewController.xib */; };
 		CEC0B59B153EFC0500F20DC0 /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC0B599153EFC0500F20DC0 /* MoreViewController.m */; };
 		CEC0B59C153EFC0500F20DC0 /* MoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC0B59A153EFC0500F20DC0 /* MoreViewController.xib */; };
-		CEC0F10A154033C600DC23B0 /* avatar_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CEC0F109154033C600DC23B0 /* avatar_icon.png */; };
-		CEC0F11B1540377B00DC23B0 /* CategoryContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC0F1191540377A00DC23B0 /* CategoryContentViewController.m */; };
-		CEC0F11C1540377B00DC23B0 /* CategoryContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC0F11A1540377A00DC23B0 /* CategoryContentViewController.xib */; };
+		CEC2D1341542F215001FA8D0 /* WeiboDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC2D1321542F214001FA8D0 /* WeiboDetailViewController.m */; };
+		CEC2D1351542F215001FA8D0 /* WeiboDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC2D1331542F215001FA8D0 /* WeiboDetailViewController.xib */; };
+		CEC2D158154304E6001FA8D0 /* avatar_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CEC2D157154304E6001FA8D0 /* avatar_icon.png */; };
 		CEDC918E153FDC5700BA6C35 /* AdsPageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEDC918D153FDC5700BA6C35 /* AdsPageView.xib */; };
 		CEDC9191153FDC7700BA6C35 /* AdsPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDC9190153FDC7700BA6C35 /* AdsPageView.m */; };
 /* End PBXBuildFile section */
@@ -117,12 +121,33 @@
 		C24776431540645600D2A487 /* UnRegisterTopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnRegisterTopView.xib; sourceTree = "<group>"; };
 		C2477645154065CD00D2A487 /* UnRegisterTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnRegisterTopView.h; sourceTree = "<group>"; };
 		C2477646154065CD00D2A487 /* UnRegisterTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnRegisterTopView.m; sourceTree = "<group>"; };
+		C26717A51542BF0000DC40D8 /* CommonScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonScrollView.h; sourceTree = "<group>"; };
+		C26717A61542BF0000DC40D8 /* CommonScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonScrollView.m; sourceTree = "<group>"; };
+		C26717A71542BF0000DC40D8 /* CommonScrollView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommonScrollView.xib; sourceTree = "<group>"; };
+		C26717A81542BF0000DC40D8 /* CommonScrollViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonScrollViewItem.h; sourceTree = "<group>"; };
+		C26717A91542BF0000DC40D8 /* CommonScrollViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonScrollViewItem.m; sourceTree = "<group>"; };
+		C26717AA1542BF0000DC40D8 /* CommonScrollViewItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommonScrollViewItem.xib; sourceTree = "<group>"; };
+		C26717AB1542BF0000DC40D8 /* UserInforCellViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInforCellViewController.h; sourceTree = "<group>"; };
+		C26717AC1542BF0000DC40D8 /* UserInforCellViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInforCellViewController.m; sourceTree = "<group>"; };
+		C26717AD1542BF0000DC40D8 /* UserInforCellViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserInforCellViewController.xib; sourceTree = "<group>"; };
+		C26717B41542BF2200DC40D8 /* CategoryContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryContentViewController.h; sourceTree = "<group>"; };
+		C26717B51542BF2200DC40D8 /* CategoryContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryContentViewController.m; sourceTree = "<group>"; };
+		C26717B61542BF2200DC40D8 /* CategoryContentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CategoryContentViewController.xib; sourceTree = "<group>"; };
+		C26717B71542BF2200DC40D8 /* CategoryItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryItemCell.h; sourceTree = "<group>"; };
+		C26717B81542BF2200DC40D8 /* CategoryItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryItemCell.m; sourceTree = "<group>"; };
+		C26717B91542BF2200DC40D8 /* CategoryItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CategoryItemCell.xib; sourceTree = "<group>"; };
 		C28A4B8A15413AE2008A806D /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		C28A4B8B15413AE2008A806D /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
 		C28A4B8C15413AE2008A806D /* RegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterViewController.xib; sourceTree = "<group>"; };
 		C28A4B8F15413D32008A806D /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		C28A4B9015413D32008A806D /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		C28A4B9115413D32008A806D /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		C297D812154423280080294C /* AccountInfoInputCell.h */ = {isa = PBXFileReference; fileEncoding = 4; path = AccountInfoInputCell.h; sourceTree = "<group>"; };
+		C297D813154423280080294C /* AccountInfoInputCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountInfoInputCell.m; sourceTree = "<group>"; };
+		C297D8151544233E0080294C /* AccountInfoInputCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountInfoInputCell.xib; sourceTree = "<group>"; };
+		C29F6660154310B300292031 /* ForgetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetPasswordViewController.h; sourceTree = "<group>"; };
+		C29F6661154310B300292031 /* ForgetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPasswordViewController.m; sourceTree = "<group>"; };
+		C29F6662154310B300292031 /* ForgetPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForgetPasswordViewController.xib; sourceTree = "<group>"; };
 		CE029ABA153E682100886227 /* BeautifulDaRen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeautifulDaRen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE029ABE153E682100886227 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CE029AC0153E682100886227 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -220,20 +245,6 @@
 		CE745454153F1F8900CB751A /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
 		CE745459153F22F700CB751A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CE7C9D1715400ED000F3812F /* ViewConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewConstants.h; sourceTree = "<group>"; };
-		CE7C9D18154013B100F3812F /* UserInforCellViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInforCellViewController.h; sourceTree = "<group>"; };
-		CE7C9D19154013B100F3812F /* UserInforCellViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInforCellViewController.m; sourceTree = "<group>"; };
-		CE7C9D1A154013B200F3812F /* UserInforCellViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserInforCellViewController.xib; sourceTree = "<group>"; };
-		CE93EFB515404A810038FE9D /* CommonScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonScrollView.h; sourceTree = "<group>"; };
-		CE93EFB615404A810038FE9D /* CommonScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonScrollView.m; sourceTree = "<group>"; };
-		CE93EFB715404A810038FE9D /* CommonScrollView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommonScrollView.xib; sourceTree = "<group>"; };
-		CEB8293C1541AAEC00275EC6 /* CommonScrollViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonScrollViewItem.h; sourceTree = "<group>"; };
-		CEB8293D1541AAEC00275EC6 /* CommonScrollViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonScrollViewItem.m; sourceTree = "<group>"; };
-		CEB8293E1541AAED00275EC6 /* CommonScrollViewItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommonScrollViewItem.xib; sourceTree = "<group>"; };
-		CEB8294A1541BF2B00275EC6 /* pre_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pre_icon.png; sourceTree = "<group>"; };
-		CEB8294C1541BF3500275EC6 /* next_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = next_icon.png; sourceTree = "<group>"; };
-		CEBCF39B1540F77600B3CCE1 /* CategoryItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryItemCell.h; sourceTree = "<group>"; };
-		CEBCF39C1540F77600B3CCE1 /* CategoryItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryItemCell.m; sourceTree = "<group>"; };
-		CEBCF39D1540F77600B3CCE1 /* CategoryItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CategoryItemCell.xib; sourceTree = "<group>"; };
 		CEC0B580153EFBE000F20DC0 /* CameraShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraShareViewController.h; sourceTree = "<group>"; };
 		CEC0B581153EFBE000F20DC0 /* CameraShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraShareViewController.m; sourceTree = "<group>"; };
 		CEC0B582153EFBE000F20DC0 /* CameraShareViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraShareViewController.xib; sourceTree = "<group>"; };
@@ -249,10 +260,10 @@
 		CEC0B598153EFC0500F20DC0 /* MoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreViewController.h; sourceTree = "<group>"; };
 		CEC0B599153EFC0500F20DC0 /* MoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreViewController.m; sourceTree = "<group>"; };
 		CEC0B59A153EFC0500F20DC0 /* MoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoreViewController.xib; sourceTree = "<group>"; };
-		CEC0F109154033C600DC23B0 /* avatar_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = avatar_icon.png; sourceTree = "<group>"; };
-		CEC0F1181540377A00DC23B0 /* CategoryContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryContentViewController.h; sourceTree = "<group>"; };
-		CEC0F1191540377A00DC23B0 /* CategoryContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryContentViewController.m; sourceTree = "<group>"; };
-		CEC0F11A1540377A00DC23B0 /* CategoryContentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CategoryContentViewController.xib; sourceTree = "<group>"; };
+		CEC2D1311542F214001FA8D0 /* WeiboDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboDetailViewController.h; sourceTree = "<group>"; };
+		CEC2D1321542F214001FA8D0 /* WeiboDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboDetailViewController.m; sourceTree = "<group>"; };
+		CEC2D1331542F215001FA8D0 /* WeiboDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeiboDetailViewController.xib; sourceTree = "<group>"; };
+		CEC2D157154304E6001FA8D0 /* avatar_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = avatar_icon.png; sourceTree = "<group>"; };
 		CEDC918D153FDC5700BA6C35 /* AdsPageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdsPageView.xib; sourceTree = "<group>"; };
 		CEDC918F153FDC7700BA6C35 /* AdsPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdsPageView.h; sourceTree = "<group>"; };
 		CEDC9190153FDC7700BA6C35 /* AdsPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdsPageView.m; sourceTree = "<group>"; };
@@ -280,6 +291,9 @@
 				C24776431540645600D2A487 /* UnRegisterTopView.xib */,
 				C2477645154065CD00D2A487 /* UnRegisterTopView.h */,
 				C2477646154065CD00D2A487 /* UnRegisterTopView.m */,
+				C297D812154423280080294C /* AccountInfoInputCell.h */,
+				C297D813154423280080294C /* AccountInfoInputCell.m */,
+				C297D8151544233E0080294C /* AccountInfoInputCell.xib */,
 			);
 			name = SubView;
 			sourceTree = "<group>";
@@ -289,8 +303,8 @@
 			children = (
 				CE745459153F22F700CB751A /* QuartzCore.framework */,
 				CE029AC4153E682100886227 /* BeautifulDaRen */,
-				CE029ABD153E682100886227 /* Frameworks */,
 				CE029ABB153E682100886227 /* Products */,
+				CE029ABD153E682100886227 /* Frameworks */,
 				CE029AFB153E68FA00886227 /* SDWebImage */,
 				CE029B24153E690300886227 /* SinaWeiBoSDK */,
 			);
@@ -535,9 +549,7 @@
 		CE745450153F1F8900CB751A /* Asserts */ = {
 			isa = PBXGroup;
 			children = (
-				CEB8294C1541BF3500275EC6 /* next_icon.png */,
-				CEB8294A1541BF2B00275EC6 /* pre_icon.png */,
-				CEC0F109154033C600DC23B0 /* avatar_icon.png */,
+				CEC2D157154304E6001FA8D0 /* avatar_icon.png */,
 				CE745451153F1F8900CB751A /* first.png */,
 				CE745452153F1F8900CB751A /* first@2x.png */,
 				CE745453153F1F8900CB751A /* second.png */,
@@ -559,15 +571,15 @@
 		CEC0B585153EFBE800F20DC0 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				C26717B41542BF2200DC40D8 /* CategoryContentViewController.h */,
+				C26717B51542BF2200DC40D8 /* CategoryContentViewController.m */,
+				C26717B61542BF2200DC40D8 /* CategoryContentViewController.xib */,
+				C26717B71542BF2200DC40D8 /* CategoryItemCell.h */,
+				C26717B81542BF2200DC40D8 /* CategoryItemCell.m */,
+				C26717B91542BF2200DC40D8 /* CategoryItemCell.xib */,
 				CEC0B586153EFBE800F20DC0 /* CategoryViewController.h */,
 				CEC0B587153EFBE800F20DC0 /* CategoryViewController.m */,
 				CEC0B588153EFBE800F20DC0 /* CategoryViewController.xib */,
-				CEC0F1181540377A00DC23B0 /* CategoryContentViewController.h */,
-				CEC0F1191540377A00DC23B0 /* CategoryContentViewController.m */,
-				CEC0F11A1540377A00DC23B0 /* CategoryContentViewController.xib */,
-				CEBCF39B1540F77600B3CCE1 /* CategoryItemCell.h */,
-				CEBCF39C1540F77600B3CCE1 /* CategoryItemCell.m */,
-				CEBCF39D1540F77600B3CCE1 /* CategoryItemCell.xib */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -585,6 +597,9 @@
 				C28A4B8F15413D32008A806D /* LoginViewController.h */,
 				C28A4B9015413D32008A806D /* LoginViewController.m */,
 				C28A4B9115413D32008A806D /* LoginViewController.xib */,
+				C29F6660154310B300292031 /* ForgetPasswordViewController.h */,
+				C29F6661154310B300292031 /* ForgetPasswordViewController.m */,
+				C29F6662154310B300292031 /* ForgetPasswordViewController.xib */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -612,19 +627,22 @@
 		CEDC918C153FDBCA00BA6C35 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				CEC2D1311542F214001FA8D0 /* WeiboDetailViewController.h */,
+				CEC2D1321542F214001FA8D0 /* WeiboDetailViewController.m */,
+				CEC2D1331542F215001FA8D0 /* WeiboDetailViewController.xib */,
+				C26717A51542BF0000DC40D8 /* CommonScrollView.h */,
+				C26717A61542BF0000DC40D8 /* CommonScrollView.m */,
+				C26717A71542BF0000DC40D8 /* CommonScrollView.xib */,
+				C26717A81542BF0000DC40D8 /* CommonScrollViewItem.h */,
+				C26717A91542BF0000DC40D8 /* CommonScrollViewItem.m */,
+				C26717AA1542BF0000DC40D8 /* CommonScrollViewItem.xib */,
+				C26717AB1542BF0000DC40D8 /* UserInforCellViewController.h */,
+				C26717AC1542BF0000DC40D8 /* UserInforCellViewController.m */,
+				C26717AD1542BF0000DC40D8 /* UserInforCellViewController.xib */,
 				CEDC918D153FDC5700BA6C35 /* AdsPageView.xib */,
 				CEDC918F153FDC7700BA6C35 /* AdsPageView.h */,
 				CEDC9190153FDC7700BA6C35 /* AdsPageView.m */,
 				CE7C9D1715400ED000F3812F /* ViewConstants.h */,
-				CE7C9D18154013B100F3812F /* UserInforCellViewController.h */,
-				CE7C9D19154013B100F3812F /* UserInforCellViewController.m */,
-				CE7C9D1A154013B200F3812F /* UserInforCellViewController.xib */,
-				CE93EFB515404A810038FE9D /* CommonScrollView.h */,
-				CE93EFB615404A810038FE9D /* CommonScrollView.m */,
-				CE93EFB715404A810038FE9D /* CommonScrollView.xib */,
-				CEB8293C1541AAEC00275EC6 /* CommonScrollViewItem.h */,
-				CEB8293D1541AAEC00275EC6 /* CommonScrollViewItem.m */,
-				CEB8293E1541AAED00275EC6 /* CommonScrollViewItem.xib */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -740,19 +758,20 @@
 				CE745458153F1F8900CB751A /* second@2x.png in Resources */,
 				CEDC918E153FDC5700BA6C35 /* AdsPageView.xib in Resources */,
 				C24776441540645600D2A487 /* UnRegisterTopView.xib in Resources */,
-<<<<<<< HEAD
 				C28A4B8E15413AE2008A806D /* RegisterViewController.xib in Resources */,
 				C28A4B9315413D32008A806D /* LoginViewController.xib in Resources */,
+				C26717AF1542BF0000DC40D8 /* CommonScrollView.xib in Resources */,
+				C26717B11542BF0000DC40D8 /* CommonScrollViewItem.xib in Resources */,
+				C26717B31542BF0000DC40D8 /* UserInforCellViewController.xib in Resources */,
+				C26717BB1542BF2200DC40D8 /* CategoryContentViewController.xib in Resources */,
+				C26717BD1542BF2200DC40D8 /* CategoryItemCell.xib in Resources */,
+<<<<<<< HEAD
+				C29F6664154310B300292031 /* ForgetPasswordViewController.xib in Resources */,
+				C297D8161544233E0080294C /* AccountInfoInputCell.xib in Resources */,
 =======
-				CE7C9D1C154013B200F3812F /* UserInforCellViewController.xib in Resources */,
-				CEC0F10A154033C600DC23B0 /* avatar_icon.png in Resources */,
-				CEC0F11C1540377B00DC23B0 /* CategoryContentViewController.xib in Resources */,
-				CE93EFB915404A810038FE9D /* CommonScrollView.xib in Resources */,
-				CEBCF39F1540F77600B3CCE1 /* CategoryItemCell.xib in Resources */,
-				CEB829401541AAED00275EC6 /* CommonScrollViewItem.xib in Resources */,
-				CEB8294B1541BF2B00275EC6 /* pre_icon.png in Resources */,
-				CEB8294D1541BF3500275EC6 /* next_icon.png in Resources */,
->>>>>>> 081660ac465477a56423a443e23e0f16448c58ec
+				CEC2D1351542F215001FA8D0 /* WeiboDetailViewController.xib in Resources */,
+				CEC2D158154304E6001FA8D0 /* avatar_icon.png in Resources */,
+>>>>>>> c3f5552aa405c96bc88d433c5725abb5e3c4db57
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -796,16 +815,19 @@
 				CEC0B59B153EFC0500F20DC0 /* MoreViewController.m in Sources */,
 				CEDC9191153FDC7700BA6C35 /* AdsPageView.m in Sources */,
 				C2477647154065CD00D2A487 /* UnRegisterTopView.m in Sources */,
-<<<<<<< HEAD
 				C28A4B8D15413AE2008A806D /* RegisterViewController.m in Sources */,
 				C28A4B9215413D32008A806D /* LoginViewController.m in Sources */,
+				C26717AE1542BF0000DC40D8 /* CommonScrollView.m in Sources */,
+				C26717B01542BF0000DC40D8 /* CommonScrollViewItem.m in Sources */,
+				C26717B21542BF0000DC40D8 /* UserInforCellViewController.m in Sources */,
+				C26717BA1542BF2200DC40D8 /* CategoryContentViewController.m in Sources */,
+				C26717BC1542BF2200DC40D8 /* CategoryItemCell.m in Sources */,
+<<<<<<< HEAD
+				C29F6663154310B300292031 /* ForgetPasswordViewController.m in Sources */,
+				C297D814154423280080294C /* AccountInfoInputCell.m in Sources */,
 =======
-				CE7C9D1B154013B200F3812F /* UserInforCellViewController.m in Sources */,
-				CEC0F11B1540377B00DC23B0 /* CategoryContentViewController.m in Sources */,
-				CE93EFB815404A810038FE9D /* CommonScrollView.m in Sources */,
-				CEBCF39E1540F77600B3CCE1 /* CategoryItemCell.m in Sources */,
-				CEB8293F1541AAED00275EC6 /* CommonScrollViewItem.m in Sources */,
->>>>>>> 081660ac465477a56423a443e23e0f16448c58ec
+				CEC2D1341542F215001FA8D0 /* WeiboDetailViewController.m in Sources */,
+>>>>>>> c3f5552aa405c96bc88d433c5725abb5e3c4db57
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

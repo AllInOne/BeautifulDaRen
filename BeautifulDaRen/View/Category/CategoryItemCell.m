@@ -8,15 +8,19 @@
 
 #import "CategoryItemCell.h"
 #import "ViewConstants.h"
+#import "WeiboDetailViewController.h"
+#import "AppDelegate.h"
 
 @implementation CategoryItemCell
 
 @synthesize categoryScrollItem = _categoryScrollItem;
 @synthesize categoryTitle = _categoryTitle;
+@synthesize parentViewController = _parentViewController;
 
 - (void)dealloc {
     [_categoryScrollItem release];
     [_categoryTitle release];
+    [_parentViewController release];
     [super dealloc];
 }
 
@@ -58,6 +62,12 @@
 - (void)onItemSelected:(int)index
 {
     NSLog(@"Category %d selected", index);
+    WeiboDetailViewController *weiboDetailController = 
+    [[[WeiboDetailViewController alloc] init] autorelease];
+    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: weiboDetailController];
+    
+    [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
+    
+    [navController release];
 }
-
 @end
