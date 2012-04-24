@@ -12,4 +12,7 @@
 
 @property (nonatomic, retain) IBOutlet UIScrollView * scrollView;
 
+
+-(IBAction)onSinaLoginButtonPressed:(id)sender;
+-(IBAction)onTencentLoginButtonPressed:(id)sender;
 @end

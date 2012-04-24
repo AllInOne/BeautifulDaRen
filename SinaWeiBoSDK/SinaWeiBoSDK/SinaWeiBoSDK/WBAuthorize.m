@@ -14,10 +14,11 @@
 //
 //  Copyright 2011 Sina. All rights reserved.
 //
-
+#import "WBAuthorizeWebView.h"
 #import "WBAuthorize.h"
 #import "WBRequest.h"
 #import "WBSDKGlobal.h"
+
 
 #define kWBAuthorizeURL     @"https://api.weibo.com/oauth2/authorize"
 #define kWBAccessTokenURL   @"https://api.weibo.com/oauth2/access_token"
@@ -128,11 +129,15 @@
                                            params:params
                                        httpMethod:@"GET"];
     
-    WBAuthorizeWebView *webView = [[WBAuthorizeWebView alloc] init];
+    WBAuthorizeWebView *webView = [[[WBAuthorizeWebView alloc] initWithNibName:@"WBAuthorizeWebView" bundle:nil] autorelease];
     [webView setDelegate:self];
     [webView loadRequestWithURL:[NSURL URLWithString:urlString]];
-    [webView show:YES];
-    [webView release];
+    
+    UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:webView];
+    
+    [self.rootViewController presentModalViewController:nav animated:YES];
+
+    [nav release];
 }
 
 - (void)startAuthorizeUsingUserID:(NSString *)userID password:(NSString *)password
@@ -144,8 +149,6 @@
 
 - (void)authorizeWebView:(WBAuthorizeWebView *)webView didReceiveAuthorizeCode:(NSString *)code
 {
-    [webView hide:YES];
-    
     // if not canceled
     if (![code isEqualToString:@"21330"])
     {
