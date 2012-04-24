@@ -13,6 +13,9 @@
 #import "RegisterViewController.h"
 #import "ForgetPasswordViewController.h"
 
+// TODO delete this
+#import "MapViewController.h"
+
 @implementation HomeViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -73,15 +76,15 @@
 #pragma mark Action
 - (IBAction)onLoginBtnSelected:(UIButton*)sender
 {
-    LoginViewController * loginContorller = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+    LoginViewController * loginContorller = [[[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil] autorelease];
     [self.navigationController pushViewController:loginContorller animated:YES];
 }
 - (IBAction)onRegisterBtnSelected:(UIButton*)sender
 {
 //    RegisterViewController * registerController = [[RegisterViewController alloc] initWithNibName:@"RegisterViewController" bundle:nil];
 //    [self.navigationController pushViewController:registerController animated:YES];
-    ForgetPasswordViewController * loginContorller = [[ForgetPasswordViewController alloc] initWithNibName:@"ForgetPasswordViewController" bundle:nil];
-    [self.navigationController pushViewController:loginContorller animated:YES];
+    MapViewController * mapController = [[MapViewController alloc] initWithName:@"AAA" description:@"BBB" latitude:12.32f longitude:77.12f];
+    [self.navigationController pushViewController:mapController animated:YES];
 }
 
 

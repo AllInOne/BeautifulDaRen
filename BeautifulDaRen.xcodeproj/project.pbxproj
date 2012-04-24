@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C20B53D8154701320014812B /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C20B53D6154701320014812B /* MapViewController.m */; };
+		C20B53D9154701320014812B /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C20B53D7154701320014812B /* MapViewController.xib */; };
+		C20B53EC154706340014812B /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C20B53EB154706340014812B /* MapKit.framework */; };
 		C24776441540645600D2A487 /* UnRegisterTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C24776431540645600D2A487 /* UnRegisterTopView.xib */; };
 		C2477647154065CD00D2A487 /* UnRegisterTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2477646154065CD00D2A487 /* UnRegisterTopView.m */; };
 		C26717AE1542BF0000DC40D8 /* CommonScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = C26717A61542BF0000DC40D8 /* CommonScrollView.m */; };
@@ -151,6 +154,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C20B53D5154701320014812B /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		C20B53D6154701320014812B /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		C20B53D7154701320014812B /* MapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
+		C20B53EB154706340014812B /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		C24776431540645600D2A487 /* UnRegisterTopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnRegisterTopView.xib; sourceTree = "<group>"; };
 		C2477645154065CD00D2A487 /* UnRegisterTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnRegisterTopView.h; sourceTree = "<group>"; };
 		C2477646154065CD00D2A487 /* UnRegisterTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnRegisterTopView.m; sourceTree = "<group>"; };
@@ -344,6 +351,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C20B53EC154706340014812B /* MapKit.framework in Frameworks */,
 				CE74545A153F22F700CB751A /* QuartzCore.framework in Frameworks */,
 				CE029B8B153E695D00886227 /* Security.framework in Frameworks */,
 				CE029ABF153E682100886227 /* UIKit.framework in Frameworks */,
@@ -374,7 +382,6 @@
 				CE029AC4153E682100886227 /* BeautifulDaRen */,
 				CE029ABD153E682100886227 /* Frameworks */,
 				CE029ABB153E682100886227 /* Products */,
-				CE745459153F22F700CB751A /* QuartzCore.framework */,
 				CE029AFB153E68FA00886227 /* SDWebImage */,
 				CE029B24153E690300886227 /* SinaWeiBoSDK */,
 				CE0338271545925300775217 /* TencentOAuthDemo */,
@@ -392,6 +399,8 @@
 		CE029ABD153E682100886227 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CE745459153F22F700CB751A /* QuartzCore.framework */,
+				C20B53EB154706340014812B /* MapKit.framework */,
 				CE029B8A153E695D00886227 /* Security.framework */,
 				CE029ABE153E682100886227 /* UIKit.framework */,
 				CE029AC0153E682100886227 /* Foundation.framework */,
@@ -457,6 +466,9 @@
 				CE029B95153E6A4000886227 /* RootTabViewController.h */,
 				CE029B96153E6A4000886227 /* RootTabViewController.m */,
 				CE029B97153E6A4000886227 /* RootTabViewController.xib */,
+				C20B53D5154701320014812B /* MapViewController.h */,
+				C20B53D6154701320014812B /* MapViewController.m */,
+				C20B53D7154701320014812B /* MapViewController.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -955,6 +967,7 @@
 				CE0338751545925300775217 /* tencentOAuthDemo-Info.plist in Resources */,
 				CE0338761545925300775217 /* tencentOAuthDemoViewController.xib in Resources */,
 				CE03389D1545A84900775217 /* WBAuthorizeWebView.xib in Resources */,
+				C20B53D9154701320014812B /* MapViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1022,6 +1035,7 @@
 				CE03389315459DF500775217 /* SinaRequest.m in Sources */,
 				CE03389415459DF500775217 /* SinaSDKManager.m in Sources */,
 				CE03389B1545A22D00775217 /* BaseManager.m in Sources */,
+				C20B53D8154701320014812B /* MapViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
