@@ -2,13 +2,15 @@
 //  LoginViewController.m
 //  BeautifulDaRen
 //
-//  Created by gang liu on 4/23/12.
+//  Created by gang liu on 4/20/12.
 //  Copyright (c) 2012 myriad. All rights reserved.
 //
 
 #import "LoginViewController.h"
 
 @implementation LoginViewController
+
+@synthesize scrollView = _scrollView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -32,6 +34,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.scrollView setContentSize:CGSizeMake(320, 480)];
     // Do any additional setup after loading the view from its nib.
 }
 
