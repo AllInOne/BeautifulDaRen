@@ -25,24 +25,17 @@
 
 @end
 
-@interface WBAuthorizeWebView : UIView <UIWebViewDelegate> 
+@interface WBAuthorizeWebView : UIViewController <UIWebViewDelegate> 
 {
-    UIView *panelView;
-    UIView *containerView;
     UIActivityIndicatorView *indicatorView;
-	UIWebView *webView;
-    
-    UIInterfaceOrientation previousOrientation;
     
     id<WBAuthorizeWebViewDelegate> delegate;
 }
 
 @property (nonatomic, assign) id<WBAuthorizeWebViewDelegate> delegate;
 
+@property (nonatomic, assign) UIWebView *webView;
+
 - (void)loadRequestWithURL:(NSURL *)url;
-
-- (void)show:(BOOL)animated;
-
-- (void)hide:(BOOL)animated;
 
 @end

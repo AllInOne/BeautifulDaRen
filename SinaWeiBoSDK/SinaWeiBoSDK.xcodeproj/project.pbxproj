@@ -45,6 +45,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CEB0BD921546DC68001B2F37 /* WBAuthorizeWebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WBAuthorizeWebView.xib; sourceTree = "<group>"; };
 		E649E245149990BC00AC6590 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E649E247149990CC00AC6590 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		E649E248149990CE00AC6590 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -267,6 +268,7 @@
 		E6ABCC7F149885B9008E0A37 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				CEB0BD921546DC68001B2F37 /* WBAuthorizeWebView.xib */,
 				E6ABCC50149885B0008E0A37 /* WBAuthorizeWebView.h */,
 				E6ABCC51149885B0008E0A37 /* WBAuthorizeWebView.m */,
 				E6ABCC54149885B0008E0A37 /* WBLogInAlertView.h */,

@@ -13,10 +13,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CE029AB9153E682100886227"
-               BuildableName = "BeautifulDaRen.app"
-               BlueprintName = "BeautifulDaRen"
-               ReferencedContainer = "container:BeautifulDaRen.xcodeproj">
+               BlueprintIdentifier = "1D6058900D05DD3D006BFB54"
+               BuildableName = "tencentOAuthDemo.app"
+               BlueprintName = "tencentOAuthDemo"
+               ReferencedContainer = "container:tencentOAuthDemo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -31,10 +31,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CE029AB9153E682100886227"
-            BuildableName = "BeautifulDaRen.app"
-            BlueprintName = "BeautifulDaRen"
-            ReferencedContainer = "container:BeautifulDaRen.xcodeproj">
+            BlueprintIdentifier = "1D6058900D05DD3D006BFB54"
+            BuildableName = "tencentOAuthDemo.app"
+            BlueprintName = "tencentOAuthDemo"
+            ReferencedContainer = "container:tencentOAuthDemo.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -49,18 +49,13 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CE029AB9153E682100886227"
-            BuildableName = "BeautifulDaRen.app"
-            BlueprintName = "BeautifulDaRen"
-            ReferencedContainer = "container:BeautifulDaRen.xcodeproj">
+            BlueprintIdentifier = "1D6058900D05DD3D006BFB54"
+            BuildableName = "tencentOAuthDemo.app"
+            BlueprintName = "tencentOAuthDemo"
+            ReferencedContainer = "container:tencentOAuthDemo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
-         <AdditionalOption
-            key = "NSZombieEnabled"
-            value = "YES"
-            isEnabled = "YES">
-         </AdditionalOption>
       </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
@@ -72,10 +67,10 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CE029AB9153E682100886227"
-            BuildableName = "BeautifulDaRen.app"
-            BlueprintName = "BeautifulDaRen"
-            ReferencedContainer = "container:BeautifulDaRen.xcodeproj">
+            BlueprintIdentifier = "1D6058900D05DD3D006BFB54"
+            BuildableName = "tencentOAuthDemo.app"
+            BlueprintName = "tencentOAuthDemo"
+            ReferencedContainer = "container:tencentOAuthDemo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
