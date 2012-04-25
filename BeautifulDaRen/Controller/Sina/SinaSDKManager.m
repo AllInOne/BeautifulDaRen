@@ -77,6 +77,35 @@ static SinaSDKManager *sharedInstance;
                                              doneCallback:callback]];
 }
 
+- (void)sendWeiBoWithText:(NSString *)text image:(UIImage *)image doneCallback:(processDoneWithDictBlock)callback
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:2];
+    
+	[params setObject:(text ? text : @"") forKey:@"status"];
+	
+    if (image)
+    {
+		[params setObject:image forKey:@"pic"];
+        
+        [self sendRequestWithMethodName:@"statuses/upload.json" 
+                             httpMethod:@"POST" 
+                                 params:params 
+                           postDataType:kWBRequestPostDataTypeMultipart
+                       httpHeaderFields:nil
+                           doneCallback:callback];
+    }
+    else
+    {
+        [self sendRequestWithMethodName:@"statuses/update.json" 
+                             httpMethod:@"POST" 
+                                 params:params 
+                           postDataType:kWBRequestPostDataTypeNormal
+                       httpHeaderFields:nil
+                           doneCallback:callback];
+    }
+
+}
+
 #pragma mark SINA engine delegates
 
 - (void)engineAlreadyLoggedIn:(WBEngine *)engine

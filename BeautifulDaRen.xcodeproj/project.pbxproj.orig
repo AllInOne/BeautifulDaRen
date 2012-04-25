@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C20B53D8154701320014812B /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C20B53D6154701320014812B /* MapViewController.m */; };
+		C20B53D9154701320014812B /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C20B53D7154701320014812B /* MapViewController.xib */; };
+		C20B53EC154706340014812B /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C20B53EB154706340014812B /* MapKit.framework */; };
 		C24776441540645600D2A487 /* UnRegisterTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C24776431540645600D2A487 /* UnRegisterTopView.xib */; };
 		C2477647154065CD00D2A487 /* UnRegisterTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2477646154065CD00D2A487 /* UnRegisterTopView.m */; };
 		C26717AE1542BF0000DC40D8 /* CommonScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = C26717A61542BF0000DC40D8 /* CommonScrollView.m */; };
@@ -21,12 +24,18 @@
 		C26717BD1542BF2200DC40D8 /* CategoryItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C26717B91542BF2200DC40D8 /* CategoryItemCell.xib */; };
 		C28A4B8D15413AE2008A806D /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C28A4B8B15413AE2008A806D /* RegisterViewController.m */; };
 		C28A4B8E15413AE2008A806D /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C28A4B8C15413AE2008A806D /* RegisterViewController.xib */; };
-		C28A4B9215413D32008A806D /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C28A4B9015413D32008A806D /* LoginViewController.m */; };
-		C28A4B9315413D32008A806D /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C28A4B9115413D32008A806D /* LoginViewController.xib */; };
-		C297D814154423280080294C /* AccountInfoInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C297D813154423280080294C /* AccountInfoInputCell.m */; };
-		C297D8161544233E0080294C /* AccountInfoInputCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C297D8151544233E0080294C /* AccountInfoInputCell.xib */; };
-		C29F6663154310B300292031 /* ForgetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C29F6661154310B300292031 /* ForgetPasswordViewController.m */; };
-		C29F6664154310B300292031 /* ForgetPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C29F6662154310B300292031 /* ForgetPasswordViewController.xib */; };
+		C28A93521548364A008C8AFC /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C28A93501548364A008C8AFC /* LoginViewController.m */; };
+		C28A93531548364A008C8AFC /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C28A93511548364A008C8AFC /* LoginViewController.xib */; };
+		C28A935B15484442008C8AFC /* ButtonViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C28A935A15484442008C8AFC /* ButtonViewCell.m */; };
+		C28A935D1548445C008C8AFC /* ButtonViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C28A935C1548445B008C8AFC /* ButtonViewCell.xib */; };
+		C297D814154423280080294C /* (null) in Sources */ = {isa = PBXBuildFile; };
+		C297D8161544233E0080294C /* (null) in Resources */ = {isa = PBXBuildFile; };
+		C297D83B154442C20080294C /* AccountInfoInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C297D836154442C20080294C /* AccountInfoInputCell.m */; };
+		C297D83C154442C20080294C /* AccountInfoInputCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C297D837154442C20080294C /* AccountInfoInputCell.xib */; };
+		C297D83D154442C20080294C /* ForgetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C297D839154442C20080294C /* ForgetPasswordViewController.m */; };
+		C297D83E154442C20080294C /* ForgetPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C297D83A154442C20080294C /* ForgetPasswordViewController.xib */; };
+		C29F6663154310B300292031 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		C29F6664154310B300292031 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		CE029ABF153E682100886227 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE029ABE153E682100886227 /* UIKit.framework */; };
 		CE029AC1153E682100886227 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE029AC0153E682100886227 /* Foundation.framework */; };
 		CE029AC3153E682100886227 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE029AC2153E682100886227 /* CoreGraphics.framework */; };
@@ -76,6 +85,29 @@
 		CE029B8B153E695D00886227 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE029B8A153E695D00886227 /* Security.framework */; };
 		CE029B98153E6A4000886227 /* RootTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE029B96153E6A4000886227 /* RootTabViewController.m */; };
 		CE029B99153E6A4000886227 /* RootTabViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE029B97153E6A4000886227 /* RootTabViewController.xib */; };
+		CE03385E1545925300775217 /* QFObject.m in Sources */ = {isa = PBXBuildFile; fileRef = CE03382A1545925300775217 /* QFObject.m */; };
+		CE03385F1545925300775217 /* tencentOAuthDemoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE03382C1545925300775217 /* tencentOAuthDemoAppDelegate.m */; };
+		CE0338601545925300775217 /* tencentOAuthDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE03382E1545925300775217 /* tencentOAuthDemoViewController.m */; };
+		CE0338681545925300775217 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE03383E1545925300775217 /* MainWindow.xib */; };
+		CE0338691545925300775217 /* buttonhover.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0338401545925300775217 /* buttonhover.png */; };
+		CE03386A1545925300775217 /* buttonnormal.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0338411545925300775217 /* buttonnormal.png */; };
+		CE03386B1545925300775217 /* close_btn_src_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0338421545925300775217 /* close_btn_src_normal.png */; };
+		CE03386C1545925300775217 /* closeimg.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0338431545925300775217 /* closeimg.png */; };
+		CE03386D1545925300775217 /* Thumbs.db in Resources */ = {isa = PBXBuildFile; fileRef = CE0338441545925300775217 /* Thumbs.db */; };
+		CE03386E1545925300775217 /* title_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0338451545925300775217 /* title_btn.png */; };
+		CE03386F1545925300775217 /* APIBase.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0338491545925300775217 /* APIBase.m */; };
+		CE0338701545925300775217 /* APIResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = CE03384B1545925300775217 /* APIResponse.m */; };
+		CE0338711545925300775217 /* TencentLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE03384D1545925300775217 /* TencentLoginView.m */; };
+		CE0338721545925300775217 /* TencentOAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = CE03384F1545925300775217 /* TencentOAuth.m */; };
+		CE0338731545925300775217 /* TencentRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0338511545925300775217 /* TencentRequest.m */; };
+		CE0338741545925300775217 /* TencentTargetSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0338531545925300775217 /* TencentTargetSelector.m */; };
+		CE0338751545925300775217 /* tencentOAuthDemo-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE0338541545925300775217 /* tencentOAuthDemo-Info.plist */; };
+		CE0338761545925300775217 /* tencentOAuthDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE0338591545925300775217 /* tencentOAuthDemoViewController.xib */; };
+		CE03389315459DF500775217 /* SinaRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE03389015459DF500775217 /* SinaRequest.m */; };
+		CE03389415459DF500775217 /* SinaSDKManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE03389215459DF500775217 /* SinaSDKManager.m */; };
+		CE03389B1545A22D00775217 /* BaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE03389A1545A22D00775217 /* BaseManager.m */; };
+		CE03389D1545A84900775217 /* WBAuthorizeWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE03389C1545A84900775217 /* WBAuthorizeWebView.xib */; };
+		CE38B7EE15483CB10080DD99 /* QZoneSDKManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE38B7ED15483CB10080DD99 /* QZoneSDKManager.m */; };
 		CE74544C153F1D0C00CB751A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE74544D153F1D0C00CB751A /* InfoPlist.strings */; };
 		CE74544E153F1D3D00CB751A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE74544F153F1D3D00CB751A /* Localizable.strings */; };
 		CE745455153F1F8900CB751A /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = CE745451153F1F8900CB751A /* first.png */; };
@@ -115,9 +147,20 @@
 			remoteGlobalIDString = E6ABCC1914988423008E0A37;
 			remoteInfo = SinaWeiBoSDK;
 		};
+		CE0338781545925300775217 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE0338551545925300775217 /* tencentOAuthDemo.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1D6058910D05DD3D006BFB54;
+			remoteInfo = tencentOAuthDemo;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C20B53D5154701320014812B /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		C20B53D6154701320014812B /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		C20B53D7154701320014812B /* MapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
+		C20B53EB154706340014812B /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		C24776431540645600D2A487 /* UnRegisterTopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnRegisterTopView.xib; sourceTree = "<group>"; };
 		C2477645154065CD00D2A487 /* UnRegisterTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnRegisterTopView.h; sourceTree = "<group>"; };
 		C2477646154065CD00D2A487 /* UnRegisterTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnRegisterTopView.m; sourceTree = "<group>"; };
@@ -139,15 +182,18 @@
 		C28A4B8A15413AE2008A806D /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		C28A4B8B15413AE2008A806D /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
 		C28A4B8C15413AE2008A806D /* RegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterViewController.xib; sourceTree = "<group>"; };
-		C28A4B8F15413D32008A806D /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
-		C28A4B9015413D32008A806D /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
-		C28A4B9115413D32008A806D /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
-		C297D812154423280080294C /* AccountInfoInputCell.h */ = {isa = PBXFileReference; fileEncoding = 4; path = AccountInfoInputCell.h; sourceTree = "<group>"; };
-		C297D813154423280080294C /* AccountInfoInputCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountInfoInputCell.m; sourceTree = "<group>"; };
-		C297D8151544233E0080294C /* AccountInfoInputCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountInfoInputCell.xib; sourceTree = "<group>"; };
-		C29F6660154310B300292031 /* ForgetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetPasswordViewController.h; sourceTree = "<group>"; };
-		C29F6661154310B300292031 /* ForgetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPasswordViewController.m; sourceTree = "<group>"; };
-		C29F6662154310B300292031 /* ForgetPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForgetPasswordViewController.xib; sourceTree = "<group>"; };
+		C28A934F1548364A008C8AFC /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		C28A93501548364A008C8AFC /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		C28A93511548364A008C8AFC /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		C28A935915484442008C8AFC /* ButtonViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; path = ButtonViewCell.h; sourceTree = "<group>"; };
+		C28A935A15484442008C8AFC /* ButtonViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonViewCell.m; sourceTree = "<group>"; };
+		C28A935C1548445B008C8AFC /* ButtonViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonViewCell.xib; sourceTree = "<group>"; };
+		C297D835154442C20080294C /* AccountInfoInputCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountInfoInputCell.h; sourceTree = "<group>"; };
+		C297D836154442C20080294C /* AccountInfoInputCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountInfoInputCell.m; sourceTree = "<group>"; };
+		C297D837154442C20080294C /* AccountInfoInputCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountInfoInputCell.xib; sourceTree = "<group>"; };
+		C297D838154442C20080294C /* ForgetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetPasswordViewController.h; sourceTree = "<group>"; };
+		C297D839154442C20080294C /* ForgetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPasswordViewController.m; sourceTree = "<group>"; };
+		C297D83A154442C20080294C /* ForgetPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForgetPasswordViewController.xib; sourceTree = "<group>"; };
 		CE029ABA153E682100886227 /* BeautifulDaRen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeautifulDaRen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE029ABE153E682100886227 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CE029AC0153E682100886227 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -237,6 +283,45 @@
 		CE029B95153E6A4000886227 /* RootTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootTabViewController.h; sourceTree = "<group>"; };
 		CE029B96153E6A4000886227 /* RootTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootTabViewController.m; sourceTree = "<group>"; };
 		CE029B97153E6A4000886227 /* RootTabViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootTabViewController.xib; sourceTree = "<group>"; };
+		CE0338291545925300775217 /* QFObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QFObject.h; sourceTree = "<group>"; };
+		CE03382A1545925300775217 /* QFObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QFObject.m; sourceTree = "<group>"; };
+		CE03382B1545925300775217 /* tencentOAuthDemoAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tencentOAuthDemoAppDelegate.h; sourceTree = "<group>"; };
+		CE03382C1545925300775217 /* tencentOAuthDemoAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tencentOAuthDemoAppDelegate.m; sourceTree = "<group>"; };
+		CE03382D1545925300775217 /* tencentOAuthDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tencentOAuthDemoViewController.h; sourceTree = "<group>"; };
+		CE03382E1545925300775217 /* tencentOAuthDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tencentOAuthDemoViewController.m; sourceTree = "<group>"; };
+		CE03383E1545925300775217 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		CE0338401545925300775217 /* buttonhover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonhover.png; sourceTree = "<group>"; };
+		CE0338411545925300775217 /* buttonnormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonnormal.png; sourceTree = "<group>"; };
+		CE0338421545925300775217 /* close_btn_src_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close_btn_src_normal.png; sourceTree = "<group>"; };
+		CE0338431545925300775217 /* closeimg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = closeimg.png; sourceTree = "<group>"; };
+		CE0338441545925300775217 /* Thumbs.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = Thumbs.db; sourceTree = "<group>"; };
+		CE0338451545925300775217 /* title_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = title_btn.png; sourceTree = "<group>"; };
+		CE0338481545925300775217 /* APIBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIBase.h; sourceTree = "<group>"; };
+		CE0338491545925300775217 /* APIBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIBase.m; sourceTree = "<group>"; };
+		CE03384A1545925300775217 /* APIResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIResponse.h; sourceTree = "<group>"; };
+		CE03384B1545925300775217 /* APIResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIResponse.m; sourceTree = "<group>"; };
+		CE03384C1545925300775217 /* TencentLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TencentLoginView.h; sourceTree = "<group>"; };
+		CE03384D1545925300775217 /* TencentLoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TencentLoginView.m; sourceTree = "<group>"; };
+		CE03384E1545925300775217 /* TencentOAuth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TencentOAuth.h; sourceTree = "<group>"; };
+		CE03384F1545925300775217 /* TencentOAuth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TencentOAuth.m; sourceTree = "<group>"; };
+		CE0338501545925300775217 /* TencentRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TencentRequest.h; sourceTree = "<group>"; };
+		CE0338511545925300775217 /* TencentRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TencentRequest.m; sourceTree = "<group>"; };
+		CE0338521545925300775217 /* TencentTargetSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TencentTargetSelector.h; sourceTree = "<group>"; };
+		CE0338531545925300775217 /* TencentTargetSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TencentTargetSelector.m; sourceTree = "<group>"; };
+		CE0338541545925300775217 /* tencentOAuthDemo-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "tencentOAuthDemo-Info.plist"; sourceTree = "<group>"; };
+		CE0338551545925300775217 /* tencentOAuthDemo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = tencentOAuthDemo.xcodeproj; sourceTree = "<group>"; };
+		CE0338581545925300775217 /* tencentOAuthDemo_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tencentOAuthDemo_Prefix.pch; sourceTree = "<group>"; };
+		CE0338591545925300775217 /* tencentOAuthDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = tencentOAuthDemoViewController.xib; sourceTree = "<group>"; };
+		CE03388F15459DF500775217 /* SinaRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinaRequest.h; sourceTree = "<group>"; };
+		CE03389015459DF500775217 /* SinaRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinaRequest.m; sourceTree = "<group>"; };
+		CE03389115459DF500775217 /* SinaSDKManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinaSDKManager.h; sourceTree = "<group>"; };
+		CE03389215459DF500775217 /* SinaSDKManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinaSDKManager.m; sourceTree = "<group>"; };
+		CE0338961545A18000775217 /* ControllerConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControllerConstants.h; sourceTree = "<group>"; };
+		CE0338991545A22D00775217 /* BaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseManager.h; sourceTree = "<group>"; };
+		CE03389A1545A22D00775217 /* BaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseManager.m; sourceTree = "<group>"; };
+		CE03389C1545A84900775217 /* WBAuthorizeWebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WBAuthorizeWebView.xib; sourceTree = "<group>"; };
+		CE38B7EC15483CB10080DD99 /* QZoneSDKManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QZoneSDKManager.h; path = Tencent/QZoneSDKManager.h; sourceTree = "<group>"; };
+		CE38B7ED15483CB10080DD99 /* QZoneSDKManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QZoneSDKManager.m; path = Tencent/QZoneSDKManager.m; sourceTree = "<group>"; };
 		CE74544D153F1D0C00CB751A /* InfoPlist.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
 		CE74544F153F1D3D00CB751A /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		CE745451153F1F8900CB751A /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
@@ -274,6 +359,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C20B53EC154706340014812B /* MapKit.framework in Frameworks */,
 				CE74545A153F22F700CB751A /* QuartzCore.framework in Frameworks */,
 				CE029B8B153E695D00886227 /* Security.framework in Frameworks */,
 				CE029ABF153E682100886227 /* UIKit.framework in Frameworks */,
@@ -288,12 +374,12 @@
 		C28A4B8915413AB2008A806D /* SubView */ = {
 			isa = PBXGroup;
 			children = (
+				C297D835154442C20080294C /* AccountInfoInputCell.h */,
+				C297D836154442C20080294C /* AccountInfoInputCell.m */,
+				C297D837154442C20080294C /* AccountInfoInputCell.xib */,
 				C24776431540645600D2A487 /* UnRegisterTopView.xib */,
 				C2477645154065CD00D2A487 /* UnRegisterTopView.h */,
 				C2477646154065CD00D2A487 /* UnRegisterTopView.m */,
-				C297D812154423280080294C /* AccountInfoInputCell.h */,
-				C297D813154423280080294C /* AccountInfoInputCell.m */,
-				C297D8151544233E0080294C /* AccountInfoInputCell.xib */,
 			);
 			name = SubView;
 			sourceTree = "<group>";
@@ -301,12 +387,12 @@
 		CE029AAF153E682100886227 = {
 			isa = PBXGroup;
 			children = (
-				CE745459153F22F700CB751A /* QuartzCore.framework */,
 				CE029AC4153E682100886227 /* BeautifulDaRen */,
-				CE029ABB153E682100886227 /* Products */,
 				CE029ABD153E682100886227 /* Frameworks */,
+				CE029ABB153E682100886227 /* Products */,
 				CE029AFB153E68FA00886227 /* SDWebImage */,
 				CE029B24153E690300886227 /* SinaWeiBoSDK */,
+				CE0338271545925300775217 /* TencentOAuthDemo */,
 			);
 			sourceTree = "<group>";
 		};
@@ -321,6 +407,8 @@
 		CE029ABD153E682100886227 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CE745459153F22F700CB751A /* QuartzCore.framework */,
+				C20B53EB154706340014812B /* MapKit.framework */,
 				CE029B8A153E695D00886227 /* Security.framework */,
 				CE029ABE153E682100886227 /* UIKit.framework */,
 				CE029AC0153E682100886227 /* Foundation.framework */,
@@ -358,6 +446,11 @@
 		CE029AF2153E68CD00886227 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				CE38B7EF15483CB80080DD99 /* Tencent */,
+				CE0338991545A22D00775217 /* BaseManager.h */,
+				CE03389A1545A22D00775217 /* BaseManager.m */,
+				CE0338961545A18000775217 /* ControllerConstants.h */,
+				CE03388E15459DF500775217 /* Sina */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -382,6 +475,9 @@
 				CE029B95153E6A4000886227 /* RootTabViewController.h */,
 				CE029B96153E6A4000886227 /* RootTabViewController.m */,
 				CE029B97153E6A4000886227 /* RootTabViewController.xib */,
+				C20B53D5154701320014812B /* MapViewController.h */,
+				C20B53D6154701320014812B /* MapViewController.m */,
+				C20B53D7154701320014812B /* MapViewController.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -455,6 +551,7 @@
 				CE029B4F153E690300886227 /* WBAuthorize.m */,
 				CE029B50153E690300886227 /* WBAuthorizeWebView.h */,
 				CE029B51153E690300886227 /* WBAuthorizeWebView.m */,
+				CE03389C1545A84900775217 /* WBAuthorizeWebView.xib */,
 				CE029B52153E690300886227 /* WBEngine.h */,
 				CE029B53153E690300886227 /* WBEngine.m */,
 				CE029B54153E690300886227 /* WBLogInAlertView.h */,
@@ -546,6 +643,102 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		CE0338271545925300775217 /* TencentOAuthDemo */ = {
+			isa = PBXGroup;
+			children = (
+				CE0338281545925300775217 /* Classes */,
+				CE03383E1545925300775217 /* MainWindow.xib */,
+				CE03383F1545925300775217 /* Res */,
+				CE0338461545925300775217 /* TencentOAuth */,
+				CE0338541545925300775217 /* tencentOAuthDemo-Info.plist */,
+				CE0338551545925300775217 /* tencentOAuthDemo.xcodeproj */,
+				CE0338581545925300775217 /* tencentOAuthDemo_Prefix.pch */,
+				CE0338591545925300775217 /* tencentOAuthDemoViewController.xib */,
+			);
+			path = TencentOAuthDemo;
+			sourceTree = "<group>";
+		};
+		CE0338281545925300775217 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				CE0338291545925300775217 /* QFObject.h */,
+				CE03382A1545925300775217 /* QFObject.m */,
+				CE03382B1545925300775217 /* tencentOAuthDemoAppDelegate.h */,
+				CE03382C1545925300775217 /* tencentOAuthDemoAppDelegate.m */,
+				CE03382D1545925300775217 /* tencentOAuthDemoViewController.h */,
+				CE03382E1545925300775217 /* tencentOAuthDemoViewController.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		CE03383F1545925300775217 /* Res */ = {
+			isa = PBXGroup;
+			children = (
+				CE0338401545925300775217 /* buttonhover.png */,
+				CE0338411545925300775217 /* buttonnormal.png */,
+				CE0338421545925300775217 /* close_btn_src_normal.png */,
+				CE0338431545925300775217 /* closeimg.png */,
+				CE0338441545925300775217 /* Thumbs.db */,
+				CE0338451545925300775217 /* title_btn.png */,
+			);
+			path = Res;
+			sourceTree = "<group>";
+		};
+		CE0338461545925300775217 /* TencentOAuth */ = {
+			isa = PBXGroup;
+			children = (
+				CE0338471545925300775217 /* API */,
+				CE03384C1545925300775217 /* TencentLoginView.h */,
+				CE03384D1545925300775217 /* TencentLoginView.m */,
+				CE03384E1545925300775217 /* TencentOAuth.h */,
+				CE03384F1545925300775217 /* TencentOAuth.m */,
+				CE0338501545925300775217 /* TencentRequest.h */,
+				CE0338511545925300775217 /* TencentRequest.m */,
+				CE0338521545925300775217 /* TencentTargetSelector.h */,
+				CE0338531545925300775217 /* TencentTargetSelector.m */,
+			);
+			path = TencentOAuth;
+			sourceTree = "<group>";
+		};
+		CE0338471545925300775217 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				CE0338481545925300775217 /* APIBase.h */,
+				CE0338491545925300775217 /* APIBase.m */,
+				CE03384A1545925300775217 /* APIResponse.h */,
+				CE03384B1545925300775217 /* APIResponse.m */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		CE0338561545925300775217 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CE0338791545925300775217 /* tencentOAuthDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CE03388E15459DF500775217 /* Sina */ = {
+			isa = PBXGroup;
+			children = (
+				CE03388F15459DF500775217 /* SinaRequest.h */,
+				CE03389015459DF500775217 /* SinaRequest.m */,
+				CE03389115459DF500775217 /* SinaSDKManager.h */,
+				CE03389215459DF500775217 /* SinaSDKManager.m */,
+			);
+			path = Sina;
+			sourceTree = "<group>";
+		};
+		CE38B7EF15483CB80080DD99 /* Tencent */ = {
+			isa = PBXGroup;
+			children = (
+				CE38B7EC15483CB10080DD99 /* QZoneSDKManager.h */,
+				CE38B7ED15483CB10080DD99 /* QZoneSDKManager.m */,
+			);
+			name = Tencent;
+			sourceTree = "<group>";
+		};
 		CE745450153F1F8900CB751A /* Asserts */ = {
 			isa = PBXGroup;
 			children = (
@@ -587,19 +780,19 @@
 		CEC0B58B153EFBF600F20DC0 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				C28A4B8915413AB2008A806D /* SubView */,
+				C297D838154442C20080294C /* ForgetPasswordViewController.h */,
+				C297D839154442C20080294C /* ForgetPasswordViewController.m */,
+				C297D83A154442C20080294C /* ForgetPasswordViewController.xib */,
 				CEC0B58C153EFBF600F20DC0 /* HomeViewController.h */,
 				CEC0B58D153EFBF600F20DC0 /* HomeViewController.m */,
 				CEC0B58E153EFBF600F20DC0 /* HomeViewController.xib */,
+				C28A934F1548364A008C8AFC /* LoginViewController.h */,
+				C28A93501548364A008C8AFC /* LoginViewController.m */,
+				C28A93511548364A008C8AFC /* LoginViewController.xib */,
 				C28A4B8A15413AE2008A806D /* RegisterViewController.h */,
 				C28A4B8B15413AE2008A806D /* RegisterViewController.m */,
 				C28A4B8C15413AE2008A806D /* RegisterViewController.xib */,
-				C28A4B8F15413D32008A806D /* LoginViewController.h */,
-				C28A4B9015413D32008A806D /* LoginViewController.m */,
-				C28A4B9115413D32008A806D /* LoginViewController.xib */,
-				C29F6660154310B300292031 /* ForgetPasswordViewController.h */,
-				C29F6661154310B300292031 /* ForgetPasswordViewController.m */,
-				C29F6662154310B300292031 /* ForgetPasswordViewController.xib */,
+				C28A4B8915413AB2008A806D /* SubView */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -643,6 +836,9 @@
 				CEDC918F153FDC7700BA6C35 /* AdsPageView.h */,
 				CEDC9190153FDC7700BA6C35 /* AdsPageView.m */,
 				CE7C9D1715400ED000F3812F /* ViewConstants.h */,
+				C28A935915484442008C8AFC /* ButtonViewCell.h */,
+				C28A935A15484442008C8AFC /* ButtonViewCell.m */,
+				C28A935C1548445B008C8AFC /* ButtonViewCell.xib */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -696,6 +892,10 @@
 					ProductGroup = CE029B63153E690300886227 /* Products */;
 					ProjectRef = CE029B62153E690300886227 /* SinaWeiBoSDK.xcodeproj */;
 				},
+				{
+					ProductGroup = CE0338561545925300775217 /* Products */;
+					ProjectRef = CE0338551545925300775217 /* tencentOAuthDemo.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -717,6 +917,13 @@
 			fileType = archive.ar;
 			path = libSinaWeiBoSDK.a;
 			remoteRef = CE029B88153E690300886227 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CE0338791545925300775217 /* tencentOAuthDemo.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = tencentOAuthDemo.app;
+			remoteRef = CE0338781545925300775217 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -759,19 +966,30 @@
 				CEDC918E153FDC5700BA6C35 /* AdsPageView.xib in Resources */,
 				C24776441540645600D2A487 /* UnRegisterTopView.xib in Resources */,
 				C28A4B8E15413AE2008A806D /* RegisterViewController.xib in Resources */,
-				C28A4B9315413D32008A806D /* LoginViewController.xib in Resources */,
 				C26717AF1542BF0000DC40D8 /* CommonScrollView.xib in Resources */,
 				C26717B11542BF0000DC40D8 /* CommonScrollViewItem.xib in Resources */,
 				C26717B31542BF0000DC40D8 /* UserInforCellViewController.xib in Resources */,
 				C26717BB1542BF2200DC40D8 /* CategoryContentViewController.xib in Resources */,
 				C26717BD1542BF2200DC40D8 /* CategoryItemCell.xib in Resources */,
-<<<<<<< HEAD
-				C29F6664154310B300292031 /* ForgetPasswordViewController.xib in Resources */,
-				C297D8161544233E0080294C /* AccountInfoInputCell.xib in Resources */,
-=======
+				C29F6664154310B300292031 /* (null) in Resources */,
+				C297D8161544233E0080294C /* (null) in Resources */,
 				CEC2D1351542F215001FA8D0 /* WeiboDetailViewController.xib in Resources */,
 				CEC2D158154304E6001FA8D0 /* avatar_icon.png in Resources */,
->>>>>>> c3f5552aa405c96bc88d433c5725abb5e3c4db57
+				C297D83C154442C20080294C /* AccountInfoInputCell.xib in Resources */,
+				C297D83E154442C20080294C /* ForgetPasswordViewController.xib in Resources */,
+				CE0338681545925300775217 /* MainWindow.xib in Resources */,
+				CE0338691545925300775217 /* buttonhover.png in Resources */,
+				CE03386A1545925300775217 /* buttonnormal.png in Resources */,
+				CE03386B1545925300775217 /* close_btn_src_normal.png in Resources */,
+				CE03386C1545925300775217 /* closeimg.png in Resources */,
+				CE03386D1545925300775217 /* Thumbs.db in Resources */,
+				CE03386E1545925300775217 /* title_btn.png in Resources */,
+				CE0338751545925300775217 /* tencentOAuthDemo-Info.plist in Resources */,
+				CE0338761545925300775217 /* tencentOAuthDemoViewController.xib in Resources */,
+				CE03389D1545A84900775217 /* WBAuthorizeWebView.xib in Resources */,
+				C20B53D9154701320014812B /* MapViewController.xib in Resources */,
+				C28A93531548364A008C8AFC /* LoginViewController.xib in Resources */,
+				C28A935D1548445C008C8AFC /* ButtonViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -816,18 +1034,35 @@
 				CEDC9191153FDC7700BA6C35 /* AdsPageView.m in Sources */,
 				C2477647154065CD00D2A487 /* UnRegisterTopView.m in Sources */,
 				C28A4B8D15413AE2008A806D /* RegisterViewController.m in Sources */,
-				C28A4B9215413D32008A806D /* LoginViewController.m in Sources */,
 				C26717AE1542BF0000DC40D8 /* CommonScrollView.m in Sources */,
 				C26717B01542BF0000DC40D8 /* CommonScrollViewItem.m in Sources */,
 				C26717B21542BF0000DC40D8 /* UserInforCellViewController.m in Sources */,
 				C26717BA1542BF2200DC40D8 /* CategoryContentViewController.m in Sources */,
 				C26717BC1542BF2200DC40D8 /* CategoryItemCell.m in Sources */,
-<<<<<<< HEAD
-				C29F6663154310B300292031 /* ForgetPasswordViewController.m in Sources */,
-				C297D814154423280080294C /* AccountInfoInputCell.m in Sources */,
-=======
+				C29F6663154310B300292031 /* (null) in Sources */,
+				C297D814154423280080294C /* (null) in Sources */,
 				CEC2D1341542F215001FA8D0 /* WeiboDetailViewController.m in Sources */,
->>>>>>> c3f5552aa405c96bc88d433c5725abb5e3c4db57
+				C297D83B154442C20080294C /* AccountInfoInputCell.m in Sources */,
+				C297D83D154442C20080294C /* ForgetPasswordViewController.m in Sources */,
+				CE03385E1545925300775217 /* QFObject.m in Sources */,
+				CE03385F1545925300775217 /* tencentOAuthDemoAppDelegate.m in Sources */,
+				CE0338601545925300775217 /* tencentOAuthDemoViewController.m in Sources */,
+				CE03386F1545925300775217 /* APIBase.m in Sources */,
+				CE0338701545925300775217 /* APIResponse.m in Sources */,
+				CE0338711545925300775217 /* TencentLoginView.m in Sources */,
+				CE0338721545925300775217 /* TencentOAuth.m in Sources */,
+				CE0338731545925300775217 /* TencentRequest.m in Sources */,
+				CE0338741545925300775217 /* TencentTargetSelector.m in Sources */,
+				CE03389315459DF500775217 /* SinaRequest.m in Sources */,
+				CE03389415459DF500775217 /* SinaSDKManager.m in Sources */,
+				CE03389B1545A22D00775217 /* BaseManager.m in Sources */,
+				C20B53D8154701320014812B /* MapViewController.m in Sources */,
+<<<<<<< HEAD
+				C28A93521548364A008C8AFC /* LoginViewController.m in Sources */,
+				C28A935B15484442008C8AFC /* ButtonViewCell.m in Sources */,
+=======
+				CE38B7EE15483CB10080DD99 /* QZoneSDKManager.m in Sources */,
+>>>>>>> ab809050cf503ffee0ae16f47e871a87170ac3d6
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

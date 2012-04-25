@@ -107,6 +107,7 @@
 		CE03389415459DF500775217 /* SinaSDKManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE03389215459DF500775217 /* SinaSDKManager.m */; };
 		CE03389B1545A22D00775217 /* BaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE03389A1545A22D00775217 /* BaseManager.m */; };
 		CE03389D1545A84900775217 /* WBAuthorizeWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE03389C1545A84900775217 /* WBAuthorizeWebView.xib */; };
+		CE38B7EE15483CB10080DD99 /* QZoneSDKManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE38B7ED15483CB10080DD99 /* QZoneSDKManager.m */; };
 		CE74544C153F1D0C00CB751A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE74544D153F1D0C00CB751A /* InfoPlist.strings */; };
 		CE74544E153F1D3D00CB751A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE74544F153F1D3D00CB751A /* Localizable.strings */; };
 		CE745455153F1F8900CB751A /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = CE745451153F1F8900CB751A /* first.png */; };
@@ -184,7 +185,7 @@
 		C28A934F1548364A008C8AFC /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		C28A93501548364A008C8AFC /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		C28A93511548364A008C8AFC /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
-		C28A935915484442008C8AFC /* ButtonViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; path = ButtonViewCell.h; sourceTree = "<group>"; };
+		C28A935915484442008C8AFC /* ButtonViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonViewCell.h; sourceTree = "<group>"; };
 		C28A935A15484442008C8AFC /* ButtonViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonViewCell.m; sourceTree = "<group>"; };
 		C28A935C1548445B008C8AFC /* ButtonViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonViewCell.xib; sourceTree = "<group>"; };
 		C297D835154442C20080294C /* AccountInfoInputCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountInfoInputCell.h; sourceTree = "<group>"; };
@@ -319,6 +320,8 @@
 		CE0338991545A22D00775217 /* BaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseManager.h; sourceTree = "<group>"; };
 		CE03389A1545A22D00775217 /* BaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseManager.m; sourceTree = "<group>"; };
 		CE03389C1545A84900775217 /* WBAuthorizeWebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WBAuthorizeWebView.xib; sourceTree = "<group>"; };
+		CE38B7EC15483CB10080DD99 /* QZoneSDKManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QZoneSDKManager.h; path = Tencent/QZoneSDKManager.h; sourceTree = "<group>"; };
+		CE38B7ED15483CB10080DD99 /* QZoneSDKManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QZoneSDKManager.m; path = Tencent/QZoneSDKManager.m; sourceTree = "<group>"; };
 		CE74544D153F1D0C00CB751A /* InfoPlist.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
 		CE74544F153F1D3D00CB751A /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		CE745451153F1F8900CB751A /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
@@ -443,6 +446,7 @@
 		CE029AF2153E68CD00886227 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				CE38B7EF15483CB80080DD99 /* Tencent */,
 				CE0338991545A22D00775217 /* BaseManager.h */,
 				CE03389A1545A22D00775217 /* BaseManager.m */,
 				CE0338961545A18000775217 /* ControllerConstants.h */,
@@ -724,6 +728,15 @@
 				CE03389215459DF500775217 /* SinaSDKManager.m */,
 			);
 			path = Sina;
+			sourceTree = "<group>";
+		};
+		CE38B7EF15483CB80080DD99 /* Tencent */ = {
+			isa = PBXGroup;
+			children = (
+				CE38B7EC15483CB10080DD99 /* QZoneSDKManager.h */,
+				CE38B7ED15483CB10080DD99 /* QZoneSDKManager.m */,
+			);
+			name = Tencent;
 			sourceTree = "<group>";
 		};
 		CE745450153F1F8900CB751A /* Asserts */ = {
@@ -1046,6 +1059,7 @@
 				C20B53D8154701320014812B /* MapViewController.m in Sources */,
 				C28A93521548364A008C8AFC /* LoginViewController.m in Sources */,
 				C28A935B15484442008C8AFC /* ButtonViewCell.m in Sources */,
+				CE38B7EE15483CB10080DD99 /* QZoneSDKManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

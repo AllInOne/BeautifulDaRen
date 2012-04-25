@@ -64,11 +64,11 @@
 
 - (void)start
 {
-    [self.engine loadRequestWithMethodName:@"statuses/home_timeline.json"
-                                        httpMethod:@"GET"
-                                            params:nil
-                                      postDataType:kWBRequestPostDataTypeNone
-                                  httpHeaderFields:nil];
+    [self.engine loadRequestWithMethodName:self.methodUrl
+                                        httpMethod:self.httpMethod
+                                            params:self.params
+                                      postDataType:self.postDataType
+                                  httpHeaderFields:self.httpHeaderFields];
 }
 
 - (void)doneWithStatus: (AIO_STATUS)status andData: (NSDictionary*)data

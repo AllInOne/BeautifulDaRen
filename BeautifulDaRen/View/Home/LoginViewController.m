@@ -9,6 +9,8 @@
 #import "LoginViewController.h"
 #import "AccountInfoInputCell.h"
 #import "ButtonViewCell.h"
+#import "SinaSDKManager.h"
+#import "QZoneSDKManager.h"
 
 #define ACCOUNT_INPUT_SECTION 0
 #define ACCOUNT_LOGIN_BUTTON_SECTION 1
@@ -47,6 +49,20 @@
     [super didReceiveMemoryWarning];
     
     // Release any cached data, images, etc that aren't in use.
+}
+
+-(IBAction)onSinaLoginButtonPressed:(id)sender
+{
+    [[SinaSDKManager sharedManager] loginWithDoneCallback:^(LOGIN_STATUS status) {
+        NSLog(@"Sina SDK login done, status:%d", status);
+    }];
+}
+
+-(IBAction)onTencentLoginButtonPressed:(id)sender
+{
+    [[QZoneSDKManager sharedManager] loginWithDoneCallback:^(LOGIN_STATUS status) {
+        NSLog(@"QZone SDK login done, status:%d", status);
+    }];
 }
 
 #pragma mark - View lifecycle
