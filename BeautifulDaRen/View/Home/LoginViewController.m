@@ -8,6 +8,7 @@
 
 #import "LoginViewController.h"
 #import "SinaSDKManager.h"
+#import "QZoneSDKManager.h"
 
 @implementation LoginViewController
 
@@ -39,7 +40,9 @@
 
 -(IBAction)onTencentLoginButtonPressed:(id)sender
 {
-
+    [[QZoneSDKManager sharedManager] loginWithDoneCallback:^(LOGIN_STATUS status) {
+        NSLog(@"QZone SDK login done, status:%d", status);
+    }];
 }
 
 #pragma mark - View lifecycle
