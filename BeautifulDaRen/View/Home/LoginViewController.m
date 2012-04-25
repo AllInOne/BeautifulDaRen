@@ -34,6 +34,9 @@
 {
     [[SinaSDKManager sharedManager] loginWithDoneCallback:^(LOGIN_STATUS status) {
         NSLog(@"Sina SDK login done, status:%d", status);
+        [[SinaSDKManager sharedManager] sendWeiBoWithText:@"Nice" image:[UIImage imageNamed:@"123.jpg"] doneCallback:^(AIO_STATUS status, NSDictionary *data) {
+            NSLog(@"send done, status:%d", status);
+        }];
     }];
 }
 

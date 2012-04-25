@@ -25,4 +25,7 @@
                      postDataType:(WBRequestPostDataType)postDataType
                  httpHeaderFields:(NSDictionary *)httpHeaderFields
                      doneCallback:(processDoneWithDictBlock)callback;
+
+// Send a Weibo, to which you can attach an image.
+- (void)sendWeiBoWithText:(NSString *)text image:(UIImage *)image doneCallback:(processDoneWithDictBlock)callback;
 @end
