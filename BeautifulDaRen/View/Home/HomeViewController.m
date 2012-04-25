@@ -81,10 +81,10 @@
 }
 - (IBAction)onRegisterBtnSelected:(UIButton*)sender
 {
-//    RegisterViewController * registerController = [[RegisterViewController alloc] initWithNibName:@"RegisterViewController" bundle:nil];
-//    [self.navigationController pushViewController:registerController animated:YES];
-    MapViewController * mapController = [[MapViewController alloc] initWithName:@"AAA" description:@"BBB" latitude:12.32f longitude:77.12f];
-    [self.navigationController pushViewController:mapController animated:YES];
+    RegisterViewController * registerController = [[RegisterViewController alloc] initWithNibName:@"RegisterViewController" bundle:nil];
+    [self.navigationController pushViewController:registerController animated:YES];
+//    MapViewController * mapController = [[MapViewController alloc] initWithName:@"AAA" description:@"BBB" latitude:12.32f longitude:77.12f];
+//    [self.navigationController pushViewController:mapController animated:YES];
 }
 
 
