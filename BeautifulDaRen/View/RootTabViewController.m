@@ -19,6 +19,11 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        UIImageView * tabBarBg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg.png"]];
+        tabBarBg.frame = CGRectMake(0, 0, 320, 49);
+        tabBarBg.contentMode = UIViewContentModeScaleToFill;
+        
+        [self.tabBarController.tabBar insertSubview:tabBarBg atIndex:1];
     }
     return self;
 }

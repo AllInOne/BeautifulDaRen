@@ -10,4 +10,7 @@
 
 @interface UserInforCellViewController : UIViewController
 
+
+- (IBAction)onNewWeiboButtonPressed:(id)sender;
+
 @end
