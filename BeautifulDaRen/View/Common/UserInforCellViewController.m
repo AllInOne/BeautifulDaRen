@@ -8,6 +8,8 @@
 
 #import "UserInforCellViewController.h"
 #import "ViewConstants.h"
+#import "WeiboComposerViewController.h"
+#import "AppDelegate.h"
 
 @implementation UserInforCellViewController
 
@@ -48,6 +50,17 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (IBAction)onNewWeiboButtonPressed:(id)sender
+{
+    WeiboComposerViewController *weiboComposerController = 
+    [[[WeiboComposerViewController alloc] initWithNibName:nil bundle:nil] autorelease];
+    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: weiboComposerController];
+    
+    [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
+    
+    [navController release];
 }
 
 @end

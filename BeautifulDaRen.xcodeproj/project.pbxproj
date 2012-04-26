@@ -108,6 +108,13 @@
 		CE03389B1545A22D00775217 /* BaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE03389A1545A22D00775217 /* BaseManager.m */; };
 		CE03389D1545A84900775217 /* WBAuthorizeWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE03389C1545A84900775217 /* WBAuthorizeWebView.xib */; };
 		CE38B7EE15483CB10080DD99 /* QZoneSDKManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE38B7ED15483CB10080DD99 /* QZoneSDKManager.m */; };
+		CE38B96F15498E9F0080DD99 /* WeiboDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE38B96D15498E9F0080DD99 /* WeiboDetailViewController.m */; };
+		CE38B97015498E9F0080DD99 /* WeiboDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE38B96E15498E9F0080DD99 /* WeiboDetailViewController.xib */; };
+		CE38B98215498FF80080DD99 /* WeiboComposerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE38B98015498FF80080DD99 /* WeiboComposerViewController.m */; };
+		CE38B98315498FF80080DD99 /* WeiboComposerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE38B98115498FF80080DD99 /* WeiboComposerViewController.xib */; };
+		CE38B987154990E60080DD99 /* cammer_button_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CE38B984154990E60080DD99 /* cammer_button_bg.png */; };
+		CE38B988154990E60080DD99 /* cammer_button_disable_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CE38B985154990E60080DD99 /* cammer_button_disable_bg.png */; };
+		CE38B989154990E60080DD99 /* cammer_button_pressed_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CE38B986154990E60080DD99 /* cammer_button_pressed_bg.png */; };
 		CE74544C153F1D0C00CB751A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE74544D153F1D0C00CB751A /* InfoPlist.strings */; };
 		CE74544E153F1D3D00CB751A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE74544F153F1D3D00CB751A /* Localizable.strings */; };
 		CE745455153F1F8900CB751A /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = CE745451153F1F8900CB751A /* first.png */; };
@@ -125,8 +132,6 @@
 		CEC0B596153EFBFE00F20DC0 /* MineViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC0B594153EFBFE00F20DC0 /* MineViewController.xib */; };
 		CEC0B59B153EFC0500F20DC0 /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC0B599153EFC0500F20DC0 /* MoreViewController.m */; };
 		CEC0B59C153EFC0500F20DC0 /* MoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC0B59A153EFC0500F20DC0 /* MoreViewController.xib */; };
-		CEC2D1341542F215001FA8D0 /* WeiboDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC2D1321542F214001FA8D0 /* WeiboDetailViewController.m */; };
-		CEC2D1351542F215001FA8D0 /* WeiboDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC2D1331542F215001FA8D0 /* WeiboDetailViewController.xib */; };
 		CEC2D158154304E6001FA8D0 /* avatar_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CEC2D157154304E6001FA8D0 /* avatar_icon.png */; };
 		CEDC918E153FDC5700BA6C35 /* AdsPageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEDC918D153FDC5700BA6C35 /* AdsPageView.xib */; };
 		CEDC9191153FDC7700BA6C35 /* AdsPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDC9190153FDC7700BA6C35 /* AdsPageView.m */; };
@@ -322,6 +327,15 @@
 		CE03389C1545A84900775217 /* WBAuthorizeWebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WBAuthorizeWebView.xib; sourceTree = "<group>"; };
 		CE38B7EC15483CB10080DD99 /* QZoneSDKManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QZoneSDKManager.h; path = Tencent/QZoneSDKManager.h; sourceTree = "<group>"; };
 		CE38B7ED15483CB10080DD99 /* QZoneSDKManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QZoneSDKManager.m; path = Tencent/QZoneSDKManager.m; sourceTree = "<group>"; };
+		CE38B96C15498E9F0080DD99 /* WeiboDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboDetailViewController.h; sourceTree = "<group>"; };
+		CE38B96D15498E9F0080DD99 /* WeiboDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboDetailViewController.m; sourceTree = "<group>"; };
+		CE38B96E15498E9F0080DD99 /* WeiboDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeiboDetailViewController.xib; sourceTree = "<group>"; };
+		CE38B97F15498FF80080DD99 /* WeiboComposerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboComposerViewController.h; sourceTree = "<group>"; };
+		CE38B98015498FF80080DD99 /* WeiboComposerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboComposerViewController.m; sourceTree = "<group>"; };
+		CE38B98115498FF80080DD99 /* WeiboComposerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeiboComposerViewController.xib; sourceTree = "<group>"; };
+		CE38B984154990E60080DD99 /* cammer_button_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cammer_button_bg.png; sourceTree = "<group>"; };
+		CE38B985154990E60080DD99 /* cammer_button_disable_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cammer_button_disable_bg.png; sourceTree = "<group>"; };
+		CE38B986154990E60080DD99 /* cammer_button_pressed_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cammer_button_pressed_bg.png; sourceTree = "<group>"; };
 		CE74544D153F1D0C00CB751A /* InfoPlist.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
 		CE74544F153F1D3D00CB751A /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		CE745451153F1F8900CB751A /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
@@ -345,9 +359,6 @@
 		CEC0B598153EFC0500F20DC0 /* MoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreViewController.h; sourceTree = "<group>"; };
 		CEC0B599153EFC0500F20DC0 /* MoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreViewController.m; sourceTree = "<group>"; };
 		CEC0B59A153EFC0500F20DC0 /* MoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoreViewController.xib; sourceTree = "<group>"; };
-		CEC2D1311542F214001FA8D0 /* WeiboDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboDetailViewController.h; sourceTree = "<group>"; };
-		CEC2D1321542F214001FA8D0 /* WeiboDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboDetailViewController.m; sourceTree = "<group>"; };
-		CEC2D1331542F215001FA8D0 /* WeiboDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeiboDetailViewController.xib; sourceTree = "<group>"; };
 		CEC2D157154304E6001FA8D0 /* avatar_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = avatar_icon.png; sourceTree = "<group>"; };
 		CEDC918D153FDC5700BA6C35 /* AdsPageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdsPageView.xib; sourceTree = "<group>"; };
 		CEDC918F153FDC7700BA6C35 /* AdsPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdsPageView.h; sourceTree = "<group>"; };
@@ -466,6 +477,7 @@
 		CE029AF4153E68E100886227 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				CE38B96B15498E9F0080DD99 /* Weibo */,
 				CEDC918C153FDBCA00BA6C35 /* Common */,
 				CEC0B597153EFC0500F20DC0 /* More */,
 				CEC0B591153EFBFE00F20DC0 /* Mine */,
@@ -739,9 +751,25 @@
 			name = Tencent;
 			sourceTree = "<group>";
 		};
+		CE38B96B15498E9F0080DD99 /* Weibo */ = {
+			isa = PBXGroup;
+			children = (
+				CE38B96C15498E9F0080DD99 /* WeiboDetailViewController.h */,
+				CE38B96D15498E9F0080DD99 /* WeiboDetailViewController.m */,
+				CE38B96E15498E9F0080DD99 /* WeiboDetailViewController.xib */,
+				CE38B97F15498FF80080DD99 /* WeiboComposerViewController.h */,
+				CE38B98015498FF80080DD99 /* WeiboComposerViewController.m */,
+				CE38B98115498FF80080DD99 /* WeiboComposerViewController.xib */,
+			);
+			path = Weibo;
+			sourceTree = "<group>";
+		};
 		CE745450153F1F8900CB751A /* Asserts */ = {
 			isa = PBXGroup;
 			children = (
+				CE38B984154990E60080DD99 /* cammer_button_bg.png */,
+				CE38B985154990E60080DD99 /* cammer_button_disable_bg.png */,
+				CE38B986154990E60080DD99 /* cammer_button_pressed_bg.png */,
 				CEC2D157154304E6001FA8D0 /* avatar_icon.png */,
 				CE745451153F1F8900CB751A /* first.png */,
 				CE745452153F1F8900CB751A /* first@2x.png */,
@@ -820,9 +848,6 @@
 		CEDC918C153FDBCA00BA6C35 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				CEC2D1311542F214001FA8D0 /* WeiboDetailViewController.h */,
-				CEC2D1321542F214001FA8D0 /* WeiboDetailViewController.m */,
-				CEC2D1331542F215001FA8D0 /* WeiboDetailViewController.xib */,
 				C26717A51542BF0000DC40D8 /* CommonScrollView.h */,
 				C26717A61542BF0000DC40D8 /* CommonScrollView.m */,
 				C26717A71542BF0000DC40D8 /* CommonScrollView.xib */,
@@ -973,7 +998,6 @@
 				C26717BD1542BF2200DC40D8 /* CategoryItemCell.xib in Resources */,
 				C29F6664154310B300292031 /* (null) in Resources */,
 				C297D8161544233E0080294C /* (null) in Resources */,
-				CEC2D1351542F215001FA8D0 /* WeiboDetailViewController.xib in Resources */,
 				CEC2D158154304E6001FA8D0 /* avatar_icon.png in Resources */,
 				C297D83C154442C20080294C /* AccountInfoInputCell.xib in Resources */,
 				C297D83E154442C20080294C /* ForgetPasswordViewController.xib in Resources */,
@@ -990,6 +1014,11 @@
 				C20B53D9154701320014812B /* MapViewController.xib in Resources */,
 				C28A93531548364A008C8AFC /* LoginViewController.xib in Resources */,
 				C28A935D1548445C008C8AFC /* ButtonViewCell.xib in Resources */,
+				CE38B97015498E9F0080DD99 /* WeiboDetailViewController.xib in Resources */,
+				CE38B98315498FF80080DD99 /* WeiboComposerViewController.xib in Resources */,
+				CE38B987154990E60080DD99 /* cammer_button_bg.png in Resources */,
+				CE38B988154990E60080DD99 /* cammer_button_disable_bg.png in Resources */,
+				CE38B989154990E60080DD99 /* cammer_button_pressed_bg.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1041,7 +1070,6 @@
 				C26717BC1542BF2200DC40D8 /* CategoryItemCell.m in Sources */,
 				C29F6663154310B300292031 /* (null) in Sources */,
 				C297D814154423280080294C /* (null) in Sources */,
-				CEC2D1341542F215001FA8D0 /* WeiboDetailViewController.m in Sources */,
 				C297D83B154442C20080294C /* AccountInfoInputCell.m in Sources */,
 				C297D83D154442C20080294C /* ForgetPasswordViewController.m in Sources */,
 				CE03385E1545925300775217 /* QFObject.m in Sources */,
@@ -1060,6 +1088,8 @@
 				C28A93521548364A008C8AFC /* LoginViewController.m in Sources */,
 				C28A935B15484442008C8AFC /* ButtonViewCell.m in Sources */,
 				CE38B7EE15483CB10080DD99 /* QZoneSDKManager.m in Sources */,
+				CE38B96F15498E9F0080DD99 /* WeiboDetailViewController.m in Sources */,
+				CE38B98215498FF80080DD99 /* WeiboComposerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1098,7 +1128,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1115,7 +1145,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
