@@ -2,32 +2,38 @@
 //  RegisterViewController.m
 //  BeautifulDaRen
 //
-//  Created by gang liu on 4/20/12.
+//  Created by gang liu on 4/26/12.
 //  Copyright (c) 2012 myriad. All rights reserved.
 //
 
 #import "RegisterViewController.h"
+#import "AccountInfoInputCell.h"
+#import "ButtonViewCell.h"
+
+#import "ViewHelper.h"
 
 @interface RegisterViewController()
 
-@property (nonatomic, retain) IBOutlet UIPickerView * cityPickerView;
-@property (nonatomic, retain) NSMutableArray * cityPickerDataSrouce;
-@property (nonatomic, retain) IBOutlet UISegmentedControl * genderChooser;
+@property (retain, nonatomic) IBOutlet UITableView * accountInfoTable;
+@property (retain, nonatomic) IBOutlet UITableView * loginWithExtenalTable;
+@property (retain, nonatomic) IBOutlet UIButton * registerButton;
+@property (retain, nonatomic) IBOutlet UILabel * noticeForuseLabel;
 
+@property (retain, nonatomic) IBOutlet UIScrollView * scrollView;
 @end
 
 @implementation RegisterViewController
-
-@synthesize cityPickerView = _cityPickerView;
-@synthesize cityPickerDataSrouce = _cityPickerDataSrouce;
-@synthesize scrollView = _scrollView;
-@synthesize genderChooser = _genderChooser;
+@synthesize accountInfoTable;
+@synthesize loginWithExtenalTable;
+@synthesize registerButton;
+@synthesize noticeForuseLabel;
+@synthesize scrollView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.cityPickerDataSrouce = [NSMutableArray arrayWithObjects:@"成都", @"重庆", @"北京", @"上海", nil];
+        // Custom initialization
     }
     return self;
 }
@@ -45,8 +51,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.scrollView setContentSize:CGSizeMake(320, 720)];
-    [self.genderChooser addTarget:self action:@selector(genderChooserAction:) forControlEvents:UIControlEventValueChanged];
+    [self.scrollView setContentSize:CGSizeMake(320, 510)];
+    self.registerButton.titleLabel.text = NSLocalizedString(@"register",@"");
+    self.noticeForuseLabel.text = NSLocalizedString(@"notice_for_use",@"");
+    // Do any additional setup after loading the view from its nib.
 }
 
 - (void)viewDidUnload
@@ -62,37 +70,110 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-#pragma mark PickerDataSrouce
-
-- (NSInteger) numberOfComponentsInPickerView:(UIPickerView *)pickerView
+-(IBAction)registerButtonSelected:(id)sender
 {
-    return 1;
+    // TODO 
+    NSLog(@"TO handle register button.");
 }
 
-- (NSInteger) pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+-(void) genderChooserAction: (UISegmentedControl*)seg
 {
-    return [self.cityPickerDataSrouce count];
+    // TODO
+    NSLog(@"TO handle segmented control");
+}
+#pragma mark UITableViewDelegate
+-(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 50;
 }
 
-- (UIView*) pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
+#pragma mark UITableViewDataSource
+- (UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UILabel *showLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0f,0.0f,240.0f,240.0f)];
-    showLabel.text = [self.cityPickerDataSrouce objectAtIndex:row];
-    showLabel.backgroundColor = [UIColor clearColor];
-    showLabel.textAlignment = UITextAlignmentCenter;
-    return [showLabel autorelease];
+    static NSString * account_input_identifier = @"AccountInfoInputCell";
+    UITableViewCell * cell;
+    if(tableView == self.accountInfoTable)
+    {
+        cell = [tableView dequeueReusableCellWithIdentifier:account_input_identifier];
+        if(!cell)
+        {
+            NSInteger index = 0;
+            switch ([indexPath row]) {
+                case 0:
+                case 1:
+                case 2:
+                    index = 0;
+                    break;
+                case 3:
+                    index = 3;
+                    break;
+                case 4:
+                    index = 2;
+                    break;
+                case 5:
+                    index = 1;
+                    break;
+            }
+            cell = [[[NSBundle mainBundle] loadNibNamed:account_input_identifier owner:self options:nil] objectAtIndex:index];
+        }
+        switch ([indexPath row]) {
+            case 0:
+            {
+                ((AccountInfoInputCell*)cell).inputLabel.text = NSLocalizedString(@"account_user_account", @"");
+                break;
+            }
+            case 1:
+            {
+                ((AccountInfoInputCell*)cell).inputLabel.text = NSLocalizedString(@"password", @"");
+                break;
+            }
+            case 2:
+            {
+                ((AccountInfoInputCell*)cell).inputLabel.text = NSLocalizedString(@"account_register_email", @"");
+                break;
+            }
+            case 3:
+            {
+                ((AccountInfoInputCell*)cell).inputLabel.text = NSLocalizedString(@"local_city", @"");
+                break;
+            }
+            case 4:
+            {
+                ((AccountInfoInputCell*)cell).inputLabel.text = NSLocalizedString(@"my_gender", @"");
+                [((AccountInfoInputCell*)cell).segementedController setTitle:NSLocalizedString(@"female", @"") forSegmentAtIndex:0];
+                [((AccountInfoInputCell*)cell).segementedController setTitle:NSLocalizedString(@"male", @"") forSegmentAtIndex:1];
+                [((AccountInfoInputCell*)cell).segementedController addTarget:self action:@selector(genderChooserAction:) forControlEvents:UIControlEventValueChanged];
+                break;
+            }
+            case 5:
+            {
+                ((AccountInfoInputCell*)cell).inputLabel.text = NSLocalizedString(@"add_avatar", @"");
+                ((AccountInfoInputCell*)cell).imageView.image = [UIImage imageNamed:@"first"];
+                ((AccountInfoInputCell*)cell).secondLabel.text = NSLocalizedString(@"set_avatar", @"");
+                break;
+            }
+        }
+    }
+    else if(tableView == self.loginWithExtenalTable)
+    {
+        cell = [ViewHelper getLoginWithExtenalViewCellInTableView:tableView cellForRowAtIndexPath:indexPath];
+    }
+    return cell;
 }
 
-#pragma mark UIPickerViewDelegate
-
-- (void) pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    //TODO handle select city information.
+    NSInteger number = 0;
+    if(tableView == self.accountInfoTable)
+    {
+        number = 6;
+    }
+    else if(tableView == self.loginWithExtenalTable)
+    {
+        number = 2;
+    }
+    return number;
 }
 
--(void)genderChooserAction:(UISegmentedControl *)Seg
-{
-    // TODO handle change gender action.
-}
 
 @end

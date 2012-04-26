@@ -12,6 +12,9 @@
 
 @synthesize inputLabel;
 @synthesize inputTextField;
+@synthesize segementedController;
+@synthesize imageView;
+@synthesize secondLabel;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

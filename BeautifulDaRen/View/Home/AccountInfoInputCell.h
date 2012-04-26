@@ -12,5 +12,8 @@
 
 @property (retain, nonatomic) IBOutlet UILabel * inputLabel;
 @property (retain, nonatomic) IBOutlet UITextField * inputTextField;
+@property (retain, nonatomic) IBOutlet UISegmentedControl * segementedController;
+@property (retain, nonatomic) IBOutlet UIImageView * imageView;
+@property (retain, nonatomic) IBOutlet UILabel * secondLabel;
 
 @end

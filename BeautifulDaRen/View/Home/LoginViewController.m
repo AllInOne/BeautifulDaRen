@@ -12,10 +12,7 @@
 #import "SinaSDKManager.h"
 #import "QZoneSDKManager.h"
 
-#define ACCOUNT_INPUT_SECTION 0
-#define ACCOUNT_LOGIN_BUTTON_SECTION 1
-#define ACCOUNT_REGITER_SECTION 2
-#define ACCOUNT_LOGIN_WITH_EXTENAL 3
+#import "ViewHelper.h"
 
 @interface LoginViewController()
 
@@ -149,29 +146,7 @@
     }
     else if (tableView == self.loginWithExtenalTable)
     {
-        cell = [tableView dequeueReusableCellWithIdentifier:button_view_identifier];
-        if(!cell)
-        {
-            cell = [[[NSBundle mainBundle] loadNibNamed:button_view_identifier owner:self options:nil] objectAtIndex:0];
-        }
-        switch ([indexPath row]) {
-            case 0:
-            {
-                // sina weibo
-                ((ButtonViewCell*)cell).buttonText.text = NSLocalizedString(@"login_with_sina_weibo", @"You are not user, please register");
-                ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"first"]; 
-                ((ButtonViewCell*)cell).buttonRightIcon.image = [UIImage imageNamed:@"second"]; 
-                break;
-            } 
-            case 1:
-            {
-                // tencent weibo
-                ((ButtonViewCell*)cell).buttonText.text = NSLocalizedString(@"login_with_tencent_qq", @"You are not user, please register");
-                ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"first"]; 
-                ((ButtonViewCell*)cell).buttonRightIcon.image = [UIImage imageNamed:@"second"]; 
-                break;
-            }
-        }
+        cell = [ViewHelper getLoginWithExtenalViewCellInTableView:tableView cellForRowAtIndexPath:indexPath];
     }
     return cell;
 }

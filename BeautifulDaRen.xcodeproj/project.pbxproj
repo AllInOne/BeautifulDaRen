@@ -12,6 +12,9 @@
 		C20B53EC154706340014812B /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C20B53EB154706340014812B /* MapKit.framework */; };
 		C24776441540645600D2A487 /* UnRegisterTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C24776431540645600D2A487 /* UnRegisterTopView.xib */; };
 		C2477647154065CD00D2A487 /* UnRegisterTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2477646154065CD00D2A487 /* UnRegisterTopView.m */; };
+		C24B11A015499641004F6F8E /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C24B119E15499641004F6F8E /* RegisterViewController.m */; };
+		C24B11A115499641004F6F8E /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C24B119F15499641004F6F8E /* RegisterViewController.xib */; };
+		C24B11A91549A5B6004F6F8E /* ViewHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C24B11A81549A5B6004F6F8E /* ViewHelper.m */; };
 		C26717AE1542BF0000DC40D8 /* CommonScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = C26717A61542BF0000DC40D8 /* CommonScrollView.m */; };
 		C26717AF1542BF0000DC40D8 /* CommonScrollView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C26717A71542BF0000DC40D8 /* CommonScrollView.xib */; };
 		C26717B01542BF0000DC40D8 /* CommonScrollViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C26717A91542BF0000DC40D8 /* CommonScrollViewItem.m */; };
@@ -22,8 +25,6 @@
 		C26717BB1542BF2200DC40D8 /* CategoryContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C26717B61542BF2200DC40D8 /* CategoryContentViewController.xib */; };
 		C26717BC1542BF2200DC40D8 /* CategoryItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C26717B81542BF2200DC40D8 /* CategoryItemCell.m */; };
 		C26717BD1542BF2200DC40D8 /* CategoryItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C26717B91542BF2200DC40D8 /* CategoryItemCell.xib */; };
-		C28A4B8D15413AE2008A806D /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C28A4B8B15413AE2008A806D /* RegisterViewController.m */; };
-		C28A4B8E15413AE2008A806D /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C28A4B8C15413AE2008A806D /* RegisterViewController.xib */; };
 		C28A93521548364A008C8AFC /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C28A93501548364A008C8AFC /* LoginViewController.m */; };
 		C28A93531548364A008C8AFC /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C28A93511548364A008C8AFC /* LoginViewController.xib */; };
 		C28A935B15484442008C8AFC /* ButtonViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C28A935A15484442008C8AFC /* ButtonViewCell.m */; };
@@ -164,6 +165,11 @@
 		C24776431540645600D2A487 /* UnRegisterTopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnRegisterTopView.xib; sourceTree = "<group>"; };
 		C2477645154065CD00D2A487 /* UnRegisterTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnRegisterTopView.h; sourceTree = "<group>"; };
 		C2477646154065CD00D2A487 /* UnRegisterTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnRegisterTopView.m; sourceTree = "<group>"; };
+		C24B119D15499640004F6F8E /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
+		C24B119E15499641004F6F8E /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
+		C24B119F15499641004F6F8E /* RegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterViewController.xib; sourceTree = "<group>"; };
+		C24B11A71549A5B6004F6F8E /* ViewHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewHelper.h; sourceTree = "<group>"; };
+		C24B11A81549A5B6004F6F8E /* ViewHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewHelper.m; sourceTree = "<group>"; };
 		C26717A51542BF0000DC40D8 /* CommonScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonScrollView.h; sourceTree = "<group>"; };
 		C26717A61542BF0000DC40D8 /* CommonScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonScrollView.m; sourceTree = "<group>"; };
 		C26717A71542BF0000DC40D8 /* CommonScrollView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommonScrollView.xib; sourceTree = "<group>"; };
@@ -179,9 +185,6 @@
 		C26717B71542BF2200DC40D8 /* CategoryItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryItemCell.h; sourceTree = "<group>"; };
 		C26717B81542BF2200DC40D8 /* CategoryItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryItemCell.m; sourceTree = "<group>"; };
 		C26717B91542BF2200DC40D8 /* CategoryItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CategoryItemCell.xib; sourceTree = "<group>"; };
-		C28A4B8A15413AE2008A806D /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
-		C28A4B8B15413AE2008A806D /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
-		C28A4B8C15413AE2008A806D /* RegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterViewController.xib; sourceTree = "<group>"; };
 		C28A934F1548364A008C8AFC /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		C28A93501548364A008C8AFC /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		C28A93511548364A008C8AFC /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
@@ -478,6 +481,8 @@
 				C20B53D5154701320014812B /* MapViewController.h */,
 				C20B53D6154701320014812B /* MapViewController.m */,
 				C20B53D7154701320014812B /* MapViewController.xib */,
+				C24B11A71549A5B6004F6F8E /* ViewHelper.h */,
+				C24B11A81549A5B6004F6F8E /* ViewHelper.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -789,9 +794,9 @@
 				C28A934F1548364A008C8AFC /* LoginViewController.h */,
 				C28A93501548364A008C8AFC /* LoginViewController.m */,
 				C28A93511548364A008C8AFC /* LoginViewController.xib */,
-				C28A4B8A15413AE2008A806D /* RegisterViewController.h */,
-				C28A4B8B15413AE2008A806D /* RegisterViewController.m */,
-				C28A4B8C15413AE2008A806D /* RegisterViewController.xib */,
+				C24B119D15499640004F6F8E /* RegisterViewController.h */,
+				C24B119E15499641004F6F8E /* RegisterViewController.m */,
+				C24B119F15499641004F6F8E /* RegisterViewController.xib */,
 				C28A4B8915413AB2008A806D /* SubView */,
 			);
 			path = Home;
@@ -965,7 +970,6 @@
 				CE745458153F1F8900CB751A /* second@2x.png in Resources */,
 				CEDC918E153FDC5700BA6C35 /* AdsPageView.xib in Resources */,
 				C24776441540645600D2A487 /* UnRegisterTopView.xib in Resources */,
-				C28A4B8E15413AE2008A806D /* RegisterViewController.xib in Resources */,
 				C26717AF1542BF0000DC40D8 /* CommonScrollView.xib in Resources */,
 				C26717B11542BF0000DC40D8 /* CommonScrollViewItem.xib in Resources */,
 				C26717B31542BF0000DC40D8 /* UserInforCellViewController.xib in Resources */,
@@ -990,6 +994,7 @@
 				C20B53D9154701320014812B /* MapViewController.xib in Resources */,
 				C28A93531548364A008C8AFC /* LoginViewController.xib in Resources */,
 				C28A935D1548445C008C8AFC /* ButtonViewCell.xib in Resources */,
+				C24B11A115499641004F6F8E /* RegisterViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1033,7 +1038,6 @@
 				CEC0B59B153EFC0500F20DC0 /* MoreViewController.m in Sources */,
 				CEDC9191153FDC7700BA6C35 /* AdsPageView.m in Sources */,
 				C2477647154065CD00D2A487 /* UnRegisterTopView.m in Sources */,
-				C28A4B8D15413AE2008A806D /* RegisterViewController.m in Sources */,
 				C26717AE1542BF0000DC40D8 /* CommonScrollView.m in Sources */,
 				C26717B01542BF0000DC40D8 /* CommonScrollViewItem.m in Sources */,
 				C26717B21542BF0000DC40D8 /* UserInforCellViewController.m in Sources */,
@@ -1060,6 +1064,8 @@
 				C28A93521548364A008C8AFC /* LoginViewController.m in Sources */,
 				C28A935B15484442008C8AFC /* ButtonViewCell.m in Sources */,
 				CE38B7EE15483CB10080DD99 /* QZoneSDKManager.m in Sources */,
+				C24B11A015499641004F6F8E /* RegisterViewController.m in Sources */,
+				C24B11A91549A5B6004F6F8E /* ViewHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

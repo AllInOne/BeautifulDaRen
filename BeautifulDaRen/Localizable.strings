@@ -23,6 +23,17 @@
 "account_register_email" = "注册邮箱";
 "user_name" = "用户名";
 "password" = "密码";
+"login" = "登录";
+"register" = "注册";
+
 "not_user_to_register" = "还不是美丽达人用户？立即注册";
 "login_with_sina_weibo" = "新浪微博账号登录";
 "login_with_tencent_qq" = "腾讯QQ账号登录";
+"notice_for_use" = "《美丽达人网络服务使用协议》";
+
+"local_city" = "所在城市";
+"my_gender" = "我的性别";
+"add_avatar" = "添加头像";
+"set_avatar" = "设置头像";
+"female" = "女";
+"male" = "男";
