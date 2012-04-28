@@ -10,8 +10,8 @@
 #import "AppDelegate.h"
 #import "SinaRequest.h"
 
-#define SINA_WEIBO_APP_KEY          @"1254803621"
-#define SINA_WEIBO_APP_SECRET       @"6ba1f144ae930cab4baa7702c43af805"
+#define SINA_WEIBO_APP_KEY          @"3180275481"
+#define SINA_WEIBO_APP_SECRET       @"aff34d0c349a1d5b7ee254f1a6e06706"
 
 static SinaSDKManager *sharedInstance;
 

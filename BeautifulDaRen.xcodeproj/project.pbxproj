@@ -109,10 +109,6 @@
 		CE03389B1545A22D00775217 /* BaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE03389A1545A22D00775217 /* BaseManager.m */; };
 		CE03389D1545A84900775217 /* WBAuthorizeWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE03389C1545A84900775217 /* WBAuthorizeWebView.xib */; };
 		CE38B7EE15483CB10080DD99 /* QZoneSDKManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE38B7ED15483CB10080DD99 /* QZoneSDKManager.m */; };
-		CE38B96F15498E9F0080DD99 /* WeiboDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE38B96D15498E9F0080DD99 /* WeiboDetailViewController.m */; };
-		CE38B97015498E9F0080DD99 /* WeiboDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE38B96E15498E9F0080DD99 /* WeiboDetailViewController.xib */; };
-		CE38B98215498FF80080DD99 /* WeiboComposerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE38B98015498FF80080DD99 /* WeiboComposerViewController.m */; };
-		CE38B98315498FF80080DD99 /* WeiboComposerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE38B98115498FF80080DD99 /* WeiboComposerViewController.xib */; };
 		CE38B987154990E60080DD99 /* cammer_button_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CE38B984154990E60080DD99 /* cammer_button_bg.png */; };
 		CE38B988154990E60080DD99 /* cammer_button_disable_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CE38B985154990E60080DD99 /* cammer_button_disable_bg.png */; };
 		CE38B989154990E60080DD99 /* cammer_button_pressed_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CE38B986154990E60080DD99 /* cammer_button_pressed_bg.png */; };
@@ -123,6 +119,10 @@
 		CE745457153F1F8900CB751A /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = CE745453153F1F8900CB751A /* second.png */; };
 		CE745458153F1F8900CB751A /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE745454153F1F8900CB751A /* second@2x.png */; };
 		CE74545A153F22F700CB751A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE745459153F22F700CB751A /* QuartzCore.framework */; };
+		CE83A1B8154C29EC005187F7 /* WeiboDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE83A1B6154C29EC005187F7 /* WeiboDetailViewController.m */; };
+		CE83A1B9154C29EC005187F7 /* WeiboDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE83A1B7154C29EC005187F7 /* WeiboDetailViewController.xib */; };
+		CE83A1BD154C2A26005187F7 /* WeiboComposerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE83A1BB154C2A26005187F7 /* WeiboComposerViewController.m */; };
+		CE83A1BE154C2A26005187F7 /* WeiboComposerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE83A1BC154C2A26005187F7 /* WeiboComposerViewController.xib */; };
 		CEC0B583153EFBE000F20DC0 /* CameraShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC0B581153EFBE000F20DC0 /* CameraShareViewController.m */; };
 		CEC0B584153EFBE000F20DC0 /* CameraShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC0B582153EFBE000F20DC0 /* CameraShareViewController.xib */; };
 		CEC0B589153EFBE800F20DC0 /* CategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC0B587153EFBE800F20DC0 /* CategoryViewController.m */; };
@@ -330,12 +330,6 @@
 		CE03389C1545A84900775217 /* WBAuthorizeWebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WBAuthorizeWebView.xib; sourceTree = "<group>"; };
 		CE38B7EC15483CB10080DD99 /* QZoneSDKManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QZoneSDKManager.h; path = Tencent/QZoneSDKManager.h; sourceTree = "<group>"; };
 		CE38B7ED15483CB10080DD99 /* QZoneSDKManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QZoneSDKManager.m; path = Tencent/QZoneSDKManager.m; sourceTree = "<group>"; };
-		CE38B96C15498E9F0080DD99 /* WeiboDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboDetailViewController.h; sourceTree = "<group>"; };
-		CE38B96D15498E9F0080DD99 /* WeiboDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboDetailViewController.m; sourceTree = "<group>"; };
-		CE38B96E15498E9F0080DD99 /* WeiboDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeiboDetailViewController.xib; sourceTree = "<group>"; };
-		CE38B97F15498FF80080DD99 /* WeiboComposerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboComposerViewController.h; sourceTree = "<group>"; };
-		CE38B98015498FF80080DD99 /* WeiboComposerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboComposerViewController.m; sourceTree = "<group>"; };
-		CE38B98115498FF80080DD99 /* WeiboComposerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeiboComposerViewController.xib; sourceTree = "<group>"; };
 		CE38B984154990E60080DD99 /* cammer_button_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cammer_button_bg.png; sourceTree = "<group>"; };
 		CE38B985154990E60080DD99 /* cammer_button_disable_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cammer_button_disable_bg.png; sourceTree = "<group>"; };
 		CE38B986154990E60080DD99 /* cammer_button_pressed_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cammer_button_pressed_bg.png; sourceTree = "<group>"; };
@@ -347,6 +341,12 @@
 		CE745454153F1F8900CB751A /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
 		CE745459153F22F700CB751A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CE7C9D1715400ED000F3812F /* ViewConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewConstants.h; sourceTree = "<group>"; };
+		CE83A1B5154C29EC005187F7 /* WeiboDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboDetailViewController.h; sourceTree = "<group>"; };
+		CE83A1B6154C29EC005187F7 /* WeiboDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboDetailViewController.m; sourceTree = "<group>"; };
+		CE83A1B7154C29EC005187F7 /* WeiboDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeiboDetailViewController.xib; sourceTree = "<group>"; };
+		CE83A1BA154C2A26005187F7 /* WeiboComposerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboComposerViewController.h; sourceTree = "<group>"; };
+		CE83A1BB154C2A26005187F7 /* WeiboComposerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboComposerViewController.m; sourceTree = "<group>"; };
+		CE83A1BC154C2A26005187F7 /* WeiboComposerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeiboComposerViewController.xib; sourceTree = "<group>"; };
 		CEC0B580153EFBE000F20DC0 /* CameraShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraShareViewController.h; sourceTree = "<group>"; };
 		CEC0B581153EFBE000F20DC0 /* CameraShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraShareViewController.m; sourceTree = "<group>"; };
 		CEC0B582153EFBE000F20DC0 /* CameraShareViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraShareViewController.xib; sourceTree = "<group>"; };
@@ -759,12 +759,12 @@
 		CE38B96B15498E9F0080DD99 /* Weibo */ = {
 			isa = PBXGroup;
 			children = (
-				CE38B96C15498E9F0080DD99 /* WeiboDetailViewController.h */,
-				CE38B96D15498E9F0080DD99 /* WeiboDetailViewController.m */,
-				CE38B96E15498E9F0080DD99 /* WeiboDetailViewController.xib */,
-				CE38B97F15498FF80080DD99 /* WeiboComposerViewController.h */,
-				CE38B98015498FF80080DD99 /* WeiboComposerViewController.m */,
-				CE38B98115498FF80080DD99 /* WeiboComposerViewController.xib */,
+				CE83A1BA154C2A26005187F7 /* WeiboComposerViewController.h */,
+				CE83A1BB154C2A26005187F7 /* WeiboComposerViewController.m */,
+				CE83A1BC154C2A26005187F7 /* WeiboComposerViewController.xib */,
+				CE83A1B5154C29EC005187F7 /* WeiboDetailViewController.h */,
+				CE83A1B6154C29EC005187F7 /* WeiboDetailViewController.m */,
+				CE83A1B7154C29EC005187F7 /* WeiboDetailViewController.xib */,
 			);
 			path = Weibo;
 			sourceTree = "<group>";
@@ -1019,11 +1019,11 @@
 				C28A93531548364A008C8AFC /* LoginViewController.xib in Resources */,
 				C28A935D1548445C008C8AFC /* ButtonViewCell.xib in Resources */,
 				C24B11A115499641004F6F8E /* RegisterViewController.xib in Resources */,
-				CE38B97015498E9F0080DD99 /* WeiboDetailViewController.xib in Resources */,
-				CE38B98315498FF80080DD99 /* WeiboComposerViewController.xib in Resources */,
 				CE38B987154990E60080DD99 /* cammer_button_bg.png in Resources */,
 				CE38B988154990E60080DD99 /* cammer_button_disable_bg.png in Resources */,
 				CE38B989154990E60080DD99 /* cammer_button_pressed_bg.png in Resources */,
+				CE83A1B9154C29EC005187F7 /* WeiboDetailViewController.xib in Resources */,
+				CE83A1BE154C2A26005187F7 /* WeiboComposerViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1094,8 +1094,8 @@
 				CE38B7EE15483CB10080DD99 /* QZoneSDKManager.m in Sources */,
 				C24B11A015499641004F6F8E /* RegisterViewController.m in Sources */,
 				C24B11A91549A5B6004F6F8E /* ViewHelper.m in Sources */,
-				CE38B96F15498E9F0080DD99 /* WeiboDetailViewController.m in Sources */,
-				CE38B98215498FF80080DD99 /* WeiboComposerViewController.m in Sources */,
+				CE83A1B8154C29EC005187F7 /* WeiboDetailViewController.m in Sources */,
+				CE83A1BD154C2A26005187F7 /* WeiboComposerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

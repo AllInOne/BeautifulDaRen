@@ -12,8 +12,8 @@
 
 @property (nonatomic, retain) IBOutlet UIButton * cameraButton;
 @property (nonatomic, retain) IBOutlet UITextView * weiboContentTextView;
-@property (nonatomic, retain) IBOutlet UITextView * maketTextView;
-@property (nonatomic, retain) IBOutlet UITextView * brandTextView;
+@property (nonatomic, retain) IBOutlet UITextField * maketTextView;
+@property (nonatomic, retain) IBOutlet UITextField * brandTextView;
 @property (nonatomic, retain) IBOutlet UIView * footerView;
 
 @end

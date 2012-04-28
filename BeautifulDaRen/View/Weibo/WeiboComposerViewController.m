@@ -8,7 +8,7 @@
 
 #import "WeiboComposerViewController.h"
 
-#define WEIBO_CONTENT_TEXTVIEW_Y_OFFSET (110.0)
+#define WEIBO_CONTENT_TEXTVIEW_Y_OFFSET (80.0)
 #define TOOL_BAR_HEIGHT                 (30.0)
 
 @implementation WeiboComposerViewController
@@ -26,11 +26,15 @@
         // Custom initialization
         _cameraButton.enabled = YES;
         [_weiboContentTextView setDelegate:self];
-        [_maketTextView setDelegate:self];
-        [_brandTextView setDelegate:self];
         
-        _weiboContentTextView.frame = CGRectMake(0, WEIBO_CONTENT_TEXTVIEW_Y_OFFSET, _weiboContentTextView.frame.size.width, _weiboContentTextView.frame.size.height);
-        _footerView.frame = CGRectMake(_footerView.frame.origin.x, _footerView.frame.origin.y, _footerView.frame.size.width, TOOL_BAR_HEIGHT);
+        UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:(UIBarButtonItemStylePlain) target:self action:@selector(onBackButtonClicked)];
+        [self.navigationItem setLeftBarButtonItem:backButton];
+        
+        [backButton release];
+        
+        UIBarButtonItem *sendButton = [[UIBarButtonItem alloc] initWithTitle:@"发送" style:(UIBarButtonItemStylePlain) target:self action:@selector(onSendButtonClicked)];
+        [self.navigationItem setRightBarButtonItem:sendButton];        
+        
     }
     return self;
 }
@@ -52,6 +56,9 @@
     // Do any additional setup after loading the view from its nib.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    _weiboContentTextView.frame = CGRectMake(0, WEIBO_CONTENT_TEXTVIEW_Y_OFFSET, _weiboContentTextView.frame.size.width, _weiboContentTextView.frame.size.height);
+
+    [_brandTextView becomeFirstResponder];
 }
 
 - (void)viewDidUnload
@@ -100,6 +107,8 @@
          self.footerView.center = CGPointMake(self.footerView.center.x,
                                               self.footerView.center.y - kbSize.height);
      }];
+    
+     NSLog(@"keyboardWillShow, weibo content frame.y = %f", _weiboContentTextView.frame.origin.y);
 }
 
 - (void)keyboardWillHide:(NSNotification *)note
@@ -119,6 +128,16 @@
          self.footerView.center = CGPointMake(self.footerView.center.x,
                                               self.footerView.center.y + kbSize.height);
      }];
+    
+    NSLog(@"keyboardWillHide, weibo content frame.y = %f", _weiboContentTextView.frame.origin.y);
+}
+
+- (void)onBackButtonClicked {
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)onSendButtonClicked {
+    // TODO:
 }
 
 @end

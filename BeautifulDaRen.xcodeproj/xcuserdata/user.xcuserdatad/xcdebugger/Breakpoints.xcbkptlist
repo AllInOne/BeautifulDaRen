@@ -36,13 +36,13 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "BeautifulDaRen/View/Common/UserInforCellViewController.m"
-         timestampString = "357143156.537938"
+         filePath = "TencentOAuthDemo/TencentOAuth/TencentOAuth.m"
+         timestampString = "357229835.237032"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "57"
-         endingLineNumber = "57"
-         landmarkName = "-onNewWeiboButtonPressed:"
+         startingLineNumber = "146"
+         endingLineNumber = "146"
+         landmarkName = "-authorizeWithTencentAppAuthInSafari:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -50,13 +50,13 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "BeautifulDaRen/View/Weibo/WeiboComposerViewController.m"
-         timestampString = "357146341.606095"
+         filePath = "TencentOAuthDemo/TencentOAuth/TencentLoginView.m"
+         timestampString = "357229958.026391"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "107"
-         endingLineNumber = "107"
-         landmarkName = "-keyboardWillHide:"
+         startingLineNumber = "550"
+         endingLineNumber = "550"
+         landmarkName = "-loadURL:get:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
@@ -67,6 +67,14 @@
          continueAfterRunningActions = "No"
          symbolName = "raise"
          moduleName = "">
+         <Locations>
+            <Location
+               shouldBeEnabled = "Yes"
+               ignoreCount = "0"
+               continueAfterRunningActions = "No"
+               symbolName = "-[NSException raise]">
+            </Location>
+         </Locations>
       </SymbolicBreakpoint>
    </SymbolicBreakpoints>
    <ExceptionBreakpoints>

@@ -41,7 +41,7 @@ static QZoneSDKManager *sharedInstance;
         _permissions =  [[NSArray arrayWithObjects:
                           @"get_user_info",@"add_share", @"add_topic",@"add_one_blog", @"list_album", 
                           @"upload_pic",@"list_photo", @"add_album", @"check_page_fans",nil] retain];
-        _tencentOAuth = [[TencentOAuth alloc] initWithAppId:@"222222"
+        _tencentOAuth = [[TencentOAuth alloc] initWithAppId:@"100628456"
                                                 andDelegate:self];
         _tencentOAuth.redirectURI = @"www.qq.com";
     }
