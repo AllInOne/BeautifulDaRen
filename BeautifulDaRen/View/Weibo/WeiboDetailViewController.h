@@ -17,7 +17,7 @@
 
 @property (nonatomic, retain) IBOutlet UILabel  * contentLabel;
 
-@property (nonatomic, retain) IBOutlet UIButton * forwardButton;
+@property (nonatomic, retain) IBOutlet UIButton * forwardedButton;
 @property (nonatomic, retain) IBOutlet UIButton * commentButton;
 @property (nonatomic, retain) IBOutlet UIButton * favourateButton;
 

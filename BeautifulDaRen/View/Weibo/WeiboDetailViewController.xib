@@ -456,14 +456,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">forwardButton</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="981995516"/>
-					</object>
-					<int key="connectionID">48</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">commentButton</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="958531439"/>
@@ -477,6 +469,14 @@
 						<reference key="destination" ref="942924528"/>
 					</object>
 					<int key="connectionID">50</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">forwardedButton</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="981995516"/>
+					</object>
+					<int key="connectionID">51</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -625,7 +625,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">50</int>
+			<int key="maxID">51</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -637,7 +637,7 @@
 						<string key="contentLabel">UILabel</string>
 						<string key="detailScrollView">UIScrollView</string>
 						<string key="favourateButton">UIButton</string>
-						<string key="forwardButton">UIButton</string>
+						<string key="forwardedButton">UIButton</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="commentButton">
@@ -656,8 +656,8 @@
 							<string key="name">favourateButton</string>
 							<string key="candidateClassName">UIButton</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="forwardButton">
-							<string key="name">forwardButton</string>
+						<object class="IBToOneOutletInfo" key="forwardedButton">
+							<string key="name">forwardedButton</string>
 							<string key="candidateClassName">UIButton</string>
 						</object>
 					</dictionary>
