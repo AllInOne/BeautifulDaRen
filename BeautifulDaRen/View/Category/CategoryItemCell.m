@@ -62,20 +62,20 @@
 
 - (void)onItemSelected:(int)index
 {
-//    NSLog(@"Category %d selected", index);
-//    WeiboDetailViewController *weiboDetailController = 
-//    [[[WeiboDetailViewController alloc] init] autorelease];
-//    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: weiboDetailController];
-//    
-//    [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
-//    
-//    [navController release];
-    WeiboComposerViewController *weiboComposerController = 
-    [[[WeiboComposerViewController alloc] initWithNibName:nil bundle:nil] autorelease];
-    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: weiboComposerController];
+    NSLog(@"Category %d selected", index);
+    WeiboDetailViewController *weiboDetailController = 
+    [[[WeiboDetailViewController alloc] init] autorelease];
+    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: weiboDetailController];
     
     [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
     
     [navController release];
+//    WeiboComposerViewController *weiboComposerController = 
+//    [[[WeiboComposerViewController alloc] initWithNibName:nil bundle:nil] autorelease];
+//    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: weiboComposerController];
+//    
+//    [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
+//    
+//    [navController release];
 }
 @end
