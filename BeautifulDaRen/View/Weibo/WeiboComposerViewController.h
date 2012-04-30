@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WeiboComposerViewController : UIViewController <UITextViewDelegate>
+@interface WeiboComposerViewController : UIViewController <UIActionSheetDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (nonatomic, retain) IBOutlet UIButton * cameraButton;
 @property (nonatomic, retain) IBOutlet UITextView * weiboContentTextView;
@@ -17,5 +17,9 @@
 @property (nonatomic, retain) IBOutlet UITextField * weiboContentBgTextFiled;
 @property (nonatomic, retain) IBOutlet UIView * footerView;
 
+@property (nonatomic, retain) IBOutlet UIImageView * attachedImageView;
+
 @property (nonatomic, retain) IBOutlet UIScrollView * contentScrollView;
+
+- (IBAction)onImagePickerPressed:(id)sender;
 @end

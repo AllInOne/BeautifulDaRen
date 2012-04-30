@@ -13,6 +13,13 @@
 #define WEIBO_CONTENT_TEXTVIEW_MARGIN   (2.0)
 #define WEIBO_CONTENT_SCROLL_BOUNCE_SIZE   (30.0)
 
+#define ACTIONSHEET_IMAGE_PICKER 1
+
+#define IMAGE_PICKER_CAMERA       NSLocalizedString(@"照相", @"Label for Action Sheet to take a photo using rear camera")
+#define IMAGE_PICKER_LIBRARY      NSLocalizedString(@"相册", @"Label for Action Sheet to take a photo from library")
+#define IMAGE_PICKER_DELETE       NSLocalizedString(@"删除已选择相片", @"Label for Action Sheet to delete current photo")
+
+
 @interface WeiboComposerViewController ()
 
 - (void)setContentFrame:(CGRect)frame;
@@ -27,6 +34,7 @@
 @synthesize brandTextView = _brandTextView;
 @synthesize weiboContentBgTextFiled = _weiboContentBgTextFiled;
 @synthesize contentScrollView = _contentScrollView;
+@synthesize attachedImageView = _attachedImageView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -42,8 +50,9 @@
         [backButton release];
         
         UIBarButtonItem *sendButton = [[UIBarButtonItem alloc] initWithTitle:@"发送" style:(UIBarButtonItemStylePlain) target:self action:@selector(onSendButtonClicked)];
-        [self.navigationItem setRightBarButtonItem:sendButton];        
+        [self.navigationItem setRightBarButtonItem:sendButton];
         
+        [sendButton release];
     }
     return self;
 }
@@ -72,6 +81,8 @@
      NSLog(@"%@", self.weiboContentTextView);
     
     [_brandTextView becomeFirstResponder];
+    
+    _attachedImageView.hidden = YES;
 }
 
 - (void)viewDidUnload
@@ -164,4 +175,94 @@
     // TODO:
 }
 
+- (IBAction)onImagePickerPressed:(id)sender
+{
+    UIActionSheet * imagePickerActionSheet = [[UIActionSheet alloc] initWithTitle:@""
+                                                                         delegate:self
+                                                                cancelButtonTitle:nil
+                                                           destructiveButtonTitle:nil
+                                                                otherButtonTitles:nil];
+    
+    imagePickerActionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+    imagePickerActionSheet.tag = ACTIONSHEET_IMAGE_PICKER;
+    
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+    {
+        if ([UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceRear])
+            [imagePickerActionSheet addButtonWithTitle:IMAGE_PICKER_CAMERA];
+    }
+    
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
+        [imagePickerActionSheet addButtonWithTitle:IMAGE_PICKER_LIBRARY];
+    
+//    if (self.messageImage.image)
+//        [imagePickerActionSheet addButtonWithTitle:IMAGE_PICKER_DELETE];
+    
+    if ([imagePickerActionSheet numberOfButtons] > 0)
+    {
+        [imagePickerActionSheet setDestructiveButtonIndex:[imagePickerActionSheet addButtonWithTitle:@"取消"]];
+        [imagePickerActionSheet showInView:self.view];
+    }
+    
+    [imagePickerActionSheet release];
+}
+
+#pragma mark - UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex != [actionSheet destructiveButtonIndex])
+    {
+        switch (actionSheet.tag)
+        {
+            case ACTIONSHEET_IMAGE_PICKER:
+            {
+                NSString *pressed = [actionSheet buttonTitleAtIndex:buttonIndex];
+                
+                if ([pressed isEqualToString:IMAGE_PICKER_CAMERA])
+                {
+                    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+                    picker.delegate = self;
+                    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+                    [self presentModalViewController:picker animated:YES];
+                    [picker release];
+                }
+                else if ([pressed isEqualToString:IMAGE_PICKER_LIBRARY])
+                {
+                    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+                    picker.delegate = self;
+                    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                    [self presentModalViewController:picker animated:YES];
+                    [picker release];
+                }
+                else if ([pressed isEqualToString:IMAGE_PICKER_DELETE])
+                {
+                    // TODO:
+                }
+            }
+            default:
+                break;
+        }
+    }
+}
+
+#pragma mark - UIImagePickerControllerDelegate/UINavigationControllerDelegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    self.attachedImageView.image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+    if (self.attachedImageView.image)
+    {
+        self.attachedImageView.hidden = NO;
+        self.attachedImageView.frame = self.cameraButton.frame;
+        self.cameraButton.hidden = YES;
+    }
+
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [self dismissModalViewControllerAnimated:YES];
+}
 @end
