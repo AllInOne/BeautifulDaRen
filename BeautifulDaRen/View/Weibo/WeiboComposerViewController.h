@@ -14,6 +14,8 @@
 @property (nonatomic, retain) IBOutlet UITextView * weiboContentTextView;
 @property (nonatomic, retain) IBOutlet UITextField * maketTextView;
 @property (nonatomic, retain) IBOutlet UITextField * brandTextView;
+@property (nonatomic, retain) IBOutlet UITextField * weiboContentBgTextFiled;
 @property (nonatomic, retain) IBOutlet UIView * footerView;
 
+@property (nonatomic, retain) IBOutlet UIScrollView * contentScrollView;
 @end
