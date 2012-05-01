@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FriendsSelectionViewControllerDelegate.h"
 
-@interface WeiboComposerViewController : UIViewController <UIActionSheetDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface WeiboComposerViewController : UIViewController <UIActionSheetDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate,
+    FriendsSelectionViewControllerDelegate>
 
 @property (nonatomic, retain) IBOutlet UIButton * cameraButton;
 @property (nonatomic, retain) IBOutlet UITextView * weiboContentTextView;
@@ -18,8 +20,15 @@
 @property (nonatomic, retain) IBOutlet UIView * footerView;
 
 @property (nonatomic, retain) IBOutlet UIImageView * attachedImageView;
+@property (nonatomic, retain) IBOutlet UIButton * attachedImageBgButton;
 
 @property (nonatomic, retain) IBOutlet UIScrollView * contentScrollView;
 
 - (IBAction)onImagePickerPressed:(id)sender;
+- (IBAction)onPickedImagePressed:(id)sender;
+
+- (IBAction)onAtFriendPressed:(id)sender;
+- (IBAction)onLocationPressed:(id)sender;
+- (IBAction)onTraderPressed:(id)sender;
+- (IBAction)onCategoryPressed:(id)sender;
 @end

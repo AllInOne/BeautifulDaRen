@@ -7,8 +7,9 @@
 //
 
 #import "WeiboComposerViewController.h"
+#import "FriendsSelectionViewController.h"
 
-#define WEIBO_CONTENT_TEXTVIEW_Y_OFFSET (130.0)
+#define WEIBO_CONTENT_TEXTVIEW_Y_OFFSET (90.0)
 #define TOOL_BAR_HEIGHT                 (30.0)
 #define WEIBO_CONTENT_TEXTVIEW_MARGIN   (2.0)
 #define WEIBO_CONTENT_SCROLL_BOUNCE_SIZE   (30.0)
@@ -35,6 +36,7 @@
 @synthesize weiboContentBgTextFiled = _weiboContentBgTextFiled;
 @synthesize contentScrollView = _contentScrollView;
 @synthesize attachedImageView = _attachedImageView;
+@synthesize attachedImageBgButton = _attachedImageBgButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -42,6 +44,9 @@
     if (self) {
         // Custom initialization
         _cameraButton.enabled = YES;
+        _attachedImageBgButton.enabled = NO;
+        
+        
         [_weiboContentTextView setDelegate:self];
         
         UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:(UIBarButtonItemStylePlain) target:self action:@selector(onBackButtonClicked)];
@@ -156,6 +161,10 @@
          self.footerView.center = CGPointMake(self.footerView.center.x,
                                               self.footerView.center.y + kbSize.height);
      }];
+
+    self.contentScrollView.frame = CGRectMake(self.contentScrollView.frame.origin.x, self.contentScrollView.frame.origin.y, self.contentScrollView.frame.size.width, self.contentScrollView.frame.size.height + kbSize.height);
+    
+    self.contentScrollView.contentSize = CGSizeMake(self.contentScrollView.contentSize.width, self.contentScrollView.contentSize.height + kbSize.height);
     
     NSLog(@"keyboardWillHide, weibo content frame.y = %f", _weiboContentTextView.frame.origin.y);
 }
@@ -173,6 +182,11 @@
 
 - (void)onSendButtonClicked {
     // TODO:
+}
+
+- (IBAction)onPickedImagePressed:(id)sender
+{
+    [self onImagePickerPressed:sender];
 }
 
 - (IBAction)onImagePickerPressed:(id)sender
@@ -205,6 +219,37 @@
     }
     
     [imagePickerActionSheet release];
+}
+
+- (IBAction)onAtFriendPressed:(id)sender
+{
+    FriendsSelectionViewController *friendSelectionController = 
+    [[[FriendsSelectionViewController alloc] initWithNibName:nil bundle:nil] autorelease];
+    friendSelectionController.delegate = self;
+    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: friendSelectionController];
+    
+    [self.navigationController presentModalViewController:navController animated:YES];
+    
+    [navController release];
+}
+
+- (IBAction)onLocationPressed:(id)sender
+{
+    //TODO:
+}
+- (IBAction)onTraderPressed:(id)sender
+{
+    //TODO:
+}
+
+- (IBAction)onCategoryPressed:(id)sender
+{
+    //TODO:
+}
+
+- (void)didFinishContactSelectionWithContacts:(NSString *)friendId
+{
+    self.weiboContentTextView.text = [self.weiboContentTextView.text stringByAppendingString: [NSString stringWithFormat:@"@ %@ ", friendId]];
 }
 
 #pragma mark - UIActionSheetDelegate
@@ -254,7 +299,8 @@
     if (self.attachedImageView.image)
     {
         self.attachedImageView.hidden = NO;
-        self.attachedImageView.frame = self.cameraButton.frame;
+        self.attachedImageBgButton.enabled = YES;
+        self.attachedImageView.center = self.cameraButton.center;
         self.cameraButton.hidden = YES;
     }
 

@@ -60,17 +60,17 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "No"
+         shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "BeautifulDaRen/View/Weibo/WeiboComposerViewController.m"
-         timestampString = "357494266.37252"
+         timestampString = "357555508.119241"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "225"
-         endingLineNumber = "225"
-         landmarkName = "-actionSheet:clickedButtonAtIndex:"
+         startingLineNumber = "95"
+         endingLineNumber = "95"
+         landmarkName = "-viewDidUnload"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -79,12 +79,12 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "BeautifulDaRen/View/Weibo/WeiboComposerViewController.m"
-         timestampString = "357494285.058459"
+         timestampString = "357555538.971979"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "253"
-         endingLineNumber = "253"
-         landmarkName = "-imagePickerController:didFinishPickingMediaWithInfo:"
+         startingLineNumber = "124"
+         endingLineNumber = "124"
+         landmarkName = "-keyboardWillShow:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
