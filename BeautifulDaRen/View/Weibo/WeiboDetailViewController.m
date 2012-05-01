@@ -8,6 +8,8 @@
 
 #import "WeiboDetailViewController.h"
 #import "ViewConstants.h"
+#import "WeiboForwardCommentViewController.h"
+#import "WeiboComposerViewController.h"
 
 #define FONT_SIZE 14.0f
 #define CELL_CONTENT_WIDTH 300.0f
@@ -170,12 +172,26 @@
 
 - (void)onForward
 {
-    // TODO:
+    WeiboForwardCommentViewController *forwardViewContoller = 
+    [[[WeiboForwardCommentViewController alloc] initWithNibName:nil bundle:nil] autorelease];
+    forwardViewContoller.forwardMode = YES;
+    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: forwardViewContoller];
+ 
+    [self.navigationController presentModalViewController:navController animated:YES];
+    
+    [navController release];
 }
 
 - (void)onComment
 {
-    // TODO:
+    WeiboForwardCommentViewController *forwardViewContoller = 
+    [[[WeiboForwardCommentViewController alloc] initWithNibName:nil bundle:nil] autorelease];
+    forwardViewContoller.forwardMode = NO;
+    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: forwardViewContoller];
+    
+    [self.navigationController presentModalViewController:navController animated:YES];
+    
+    [navController release];
 }
 
 - (void)onFavourate
@@ -206,7 +222,6 @@
     
     // Custom initialization
     [_detailScrollView setContentSize:CGSizeMake(320, self.commentButton.frame.origin.y + 180)];
-    
     
     NSLog(@"%@", self.favourateButton);
     NSLog(@"%@", self.contentLabel);
