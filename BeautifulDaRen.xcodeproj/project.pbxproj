@@ -106,7 +106,6 @@
 		CE0338761545925300775217 /* tencentOAuthDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE0338591545925300775217 /* tencentOAuthDemoViewController.xib */; };
 		CE03389315459DF500775217 /* SinaRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE03389015459DF500775217 /* SinaRequest.m */; };
 		CE03389415459DF500775217 /* SinaSDKManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE03389215459DF500775217 /* SinaSDKManager.m */; };
-		CE03389B1545A22D00775217 /* BaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE03389A1545A22D00775217 /* BaseManager.m */; };
 		CE03389D1545A84900775217 /* WBAuthorizeWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE03389C1545A84900775217 /* WBAuthorizeWebView.xib */; };
 		CE38B7EE15483CB10080DD99 /* QZoneSDKManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE38B7ED15483CB10080DD99 /* QZoneSDKManager.m */; };
 		CE38B987154990E60080DD99 /* cammer_button_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CE38B984154990E60080DD99 /* cammer_button_bg.png */; };
@@ -124,6 +123,11 @@
 		CE83A1BD154C2A26005187F7 /* WeiboComposerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE83A1BB154C2A26005187F7 /* WeiboComposerViewController.m */; };
 		CE83A1BE154C2A26005187F7 /* WeiboComposerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE83A1BC154C2A26005187F7 /* WeiboComposerViewController.xib */; };
 		CEBCD04C154FD253000D41E1 /* ChineseToPinyin.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBCD04B154FD253000D41E1 /* ChineseToPinyin.m */; };
+		CEBCD04E154FF0EE000D41E1 /* follow.png in Resources */ = {isa = PBXBuildFile; fileRef = CEBCD04D154FF0EE000D41E1 /* follow.png */; };
+		CEBCD053154FF377000D41E1 /* BaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBCD051154FF377000D41E1 /* BaseManager.m */; };
+		CEBCD056154FF3A6000D41E1 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBCD055154FF3A6000D41E1 /* DataManager.m */; };
+		CEBCD05A15500CF8000D41E1 /* WeiboForwardCommentViewControlle.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBCD05715500CF8000D41E1 /* WeiboForwardCommentViewControlle.m */; };
+		CEBCD05D155018D9000D41E1 /* WeiboForwardCommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEBCD05C155018D9000D41E1 /* WeiboForwardCommentViewController.xib */; };
 		CEC0B583153EFBE000F20DC0 /* CameraShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC0B581153EFBE000F20DC0 /* CameraShareViewController.m */; };
 		CEC0B584153EFBE000F20DC0 /* CameraShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC0B582153EFBE000F20DC0 /* CameraShareViewController.xib */; };
 		CEC0B589153EFBE800F20DC0 /* CategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC0B587153EFBE800F20DC0 /* CategoryViewController.m */; };
@@ -337,9 +341,6 @@
 		CE03389015459DF500775217 /* SinaRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinaRequest.m; sourceTree = "<group>"; };
 		CE03389115459DF500775217 /* SinaSDKManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinaSDKManager.h; sourceTree = "<group>"; };
 		CE03389215459DF500775217 /* SinaSDKManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinaSDKManager.m; sourceTree = "<group>"; };
-		CE0338961545A18000775217 /* ControllerConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControllerConstants.h; sourceTree = "<group>"; };
-		CE0338991545A22D00775217 /* BaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseManager.h; sourceTree = "<group>"; };
-		CE03389A1545A22D00775217 /* BaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseManager.m; sourceTree = "<group>"; };
 		CE03389C1545A84900775217 /* WBAuthorizeWebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WBAuthorizeWebView.xib; sourceTree = "<group>"; };
 		CE38B7EC15483CB10080DD99 /* QZoneSDKManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QZoneSDKManager.h; path = Tencent/QZoneSDKManager.h; sourceTree = "<group>"; };
 		CE38B7ED15483CB10080DD99 /* QZoneSDKManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QZoneSDKManager.m; path = Tencent/QZoneSDKManager.m; sourceTree = "<group>"; };
@@ -362,6 +363,15 @@
 		CE83A1BC154C2A26005187F7 /* WeiboComposerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeiboComposerViewController.xib; sourceTree = "<group>"; };
 		CEBCD04A154FD253000D41E1 /* ChineseToPinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChineseToPinyin.h; path = Utility/ChineseToPinyin.h; sourceTree = "<group>"; };
 		CEBCD04B154FD253000D41E1 /* ChineseToPinyin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChineseToPinyin.m; path = Utility/ChineseToPinyin.m; sourceTree = "<group>"; };
+		CEBCD04D154FF0EE000D41E1 /* follow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = follow.png; sourceTree = "<group>"; };
+		CEBCD050154FF377000D41E1 /* BaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseManager.h; path = Common/BaseManager.h; sourceTree = "<group>"; };
+		CEBCD051154FF377000D41E1 /* BaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseManager.m; path = Common/BaseManager.m; sourceTree = "<group>"; };
+		CEBCD052154FF377000D41E1 /* ControllerConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ControllerConstants.h; path = Common/ControllerConstants.h; sourceTree = "<group>"; };
+		CEBCD054154FF3A6000D41E1 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
+		CEBCD055154FF3A6000D41E1 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
+		CEBCD05715500CF8000D41E1 /* WeiboForwardCommentViewControlle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboForwardCommentViewControlle.m; sourceTree = "<group>"; };
+		CEBCD05915500CF8000D41E1 /* WeiboForwardCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboForwardCommentViewController.h; sourceTree = "<group>"; };
+		CEBCD05C155018D9000D41E1 /* WeiboForwardCommentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeiboForwardCommentViewController.xib; sourceTree = "<group>"; };
 		CEC0B580153EFBE000F20DC0 /* CameraShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraShareViewController.h; sourceTree = "<group>"; };
 		CEC0B581153EFBE000F20DC0 /* CameraShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraShareViewController.m; sourceTree = "<group>"; };
 		CEC0B582153EFBE000F20DC0 /* CameraShareViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraShareViewController.xib; sourceTree = "<group>"; };
@@ -491,11 +501,11 @@
 		CE029AF2153E68CD00886227 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				CEBCD054154FF3A6000D41E1 /* DataManager.h */,
+				CEBCD055154FF3A6000D41E1 /* DataManager.m */,
+				CEBCD04F154FF361000D41E1 /* Common */,
 				CEE30724154FCAB4004D2E96 /* Utility */,
 				CE38B7EF15483CB80080DD99 /* Tencent */,
-				CE0338991545A22D00775217 /* BaseManager.h */,
-				CE03389A1545A22D00775217 /* BaseManager.m */,
-				CE0338961545A18000775217 /* ControllerConstants.h */,
 				CE03388E15459DF500775217 /* Sina */,
 			);
 			path = Controller;
@@ -792,6 +802,9 @@
 		CE38B96B15498E9F0080DD99 /* Weibo */ = {
 			isa = PBXGroup;
 			children = (
+				CEBCD05715500CF8000D41E1 /* WeiboForwardCommentViewControlle.m */,
+				CEBCD05915500CF8000D41E1 /* WeiboForwardCommentViewController.h */,
+				CEBCD05C155018D9000D41E1 /* WeiboForwardCommentViewController.xib */,
 				CE83A1BA154C2A26005187F7 /* WeiboComposerViewController.h */,
 				CE83A1BB154C2A26005187F7 /* WeiboComposerViewController.m */,
 				CE83A1BC154C2A26005187F7 /* WeiboComposerViewController.xib */,
@@ -805,6 +818,7 @@
 		CE745450153F1F8900CB751A /* Asserts */ = {
 			isa = PBXGroup;
 			children = (
+				CEBCD04D154FF0EE000D41E1 /* follow.png */,
 				CEE306FC154F7943004D2E96 /* camera.png */,
 				CEE306FD154F7943004D2E96 /* category.png */,
 				CEE306FE154F7943004D2E96 /* draft.png */,
@@ -821,6 +835,16 @@
 				CE745454153F1F8900CB751A /* second@2x.png */,
 			);
 			path = Asserts;
+			sourceTree = "<group>";
+		};
+		CEBCD04F154FF361000D41E1 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				CEBCD050154FF377000D41E1 /* BaseManager.h */,
+				CEBCD051154FF377000D41E1 /* BaseManager.m */,
+				CEBCD052154FF377000D41E1 /* ControllerConstants.h */,
+			);
+			name = Common;
 			sourceTree = "<group>";
 		};
 		CEC0B57F153EFBE000F20DC0 /* CameraShare */ = {
@@ -1098,6 +1122,8 @@
 				CEE30718154F8026004D2E96 /* FriendsSelectionViewController.xib in Resources */,
 				CEE3071E154F80BD004D2E96 /* FriendsViewController.xib in Resources */,
 				CEE30723154F8533004D2E96 /* FriendListCellView.xib in Resources */,
+				CEBCD04E154FF0EE000D41E1 /* follow.png in Resources */,
+				CEBCD05D155018D9000D41E1 /* WeiboForwardCommentViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1161,7 +1187,6 @@
 				CE0338741545925300775217 /* TencentTargetSelector.m in Sources */,
 				CE03389315459DF500775217 /* SinaRequest.m in Sources */,
 				CE03389415459DF500775217 /* SinaSDKManager.m in Sources */,
-				CE03389B1545A22D00775217 /* BaseManager.m in Sources */,
 				C20B53D8154701320014812B /* MapViewController.m in Sources */,
 				C28A93521548364A008C8AFC /* LoginViewController.m in Sources */,
 				C28A935B15484442008C8AFC /* ButtonViewCell.m in Sources */,
@@ -1174,6 +1199,9 @@
 				CEE3071D154F80BD004D2E96 /* FriendsViewController.m in Sources */,
 				CEE30722154F8533004D2E96 /* FriendListCellView.m in Sources */,
 				CEBCD04C154FD253000D41E1 /* ChineseToPinyin.m in Sources */,
+				CEBCD053154FF377000D41E1 /* BaseManager.m in Sources */,
+				CEBCD056154FF3A6000D41E1 /* DataManager.m in Sources */,
+				CEBCD05A15500CF8000D41E1 /* WeiboForwardCommentViewControlle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
