@@ -28,9 +28,9 @@
 
 // TODO: Set the background image of tab bar
 
-//    UIImageView * tabBarBg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg.png"]];
+//    UIImageView * tabBarBg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"底部背景.png"]];
 //    tabBarBg.frame = CGRectMake(0, 0, 320, 50);
-//    tabBarBg.contentMode = UIViewContentModeTop;
+//    tabBarBg.contentMode = UIViewContentModeScaleToFill;
 //    
 //    [_rootViewController.tabBar insertSubview:tabBarBg atIndex:1];
     

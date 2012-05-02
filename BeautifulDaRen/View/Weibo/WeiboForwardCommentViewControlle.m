@@ -173,7 +173,7 @@
 
 - (void)didFinishContactSelectionWithContacts:(NSString *)friendId
 {
-    self.weiboContentTextView.text = [self.weiboContentTextView.text stringByAppendingString: [NSString stringWithFormat:@"@ %@ ", friendId]];
+    self.weiboContentTextView.text = [self.weiboContentTextView.text stringByAppendingString: [NSString stringWithFormat:@"@%@ ", friendId]];
 }
 
 @end

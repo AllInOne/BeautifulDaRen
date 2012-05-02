@@ -19,10 +19,6 @@
 
 @property (nonatomic, retain) NSString * weiboContent;
 - (CGFloat)getTextHeight: (NSString*)text;
-- (CGImageRef)createForwardArrowImageRef;
-- (CGContextRef)createContext;
-- (UIBarButtonItem *)refreshButton;
-- (UIBarButtonItem *)forwardButton;
 @end
 
 @implementation WeiboDetailViewController
@@ -68,13 +64,13 @@
         UIBarButtonItem *flexible = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
         
         
-        UIBarButtonItem *refreshButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(onRefresh)];
+        UIBarButtonItem *buyButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(onBuy)];
         UIBarButtonItem *forwardButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(onForward)];
         UIBarButtonItem *commentButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemReply target:self action:@selector(onComment)];      
         UIBarButtonItem *favourateButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(onFavourate)];
         UIBarButtonItem *moreButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(onMore)]; 
         
-        NSArray *barItems = [[NSArray alloc]initWithObjects:refreshButtonItem,flexible, forwardButtonItem,flexible,commentButtonItem,flexible,favourateButtonItem,flexible,moreButtonItem, nil];
+        NSArray *barItems = [[NSArray alloc]initWithObjects:forwardButtonItem,flexible,commentButtonItem,flexible,favourateButtonItem,flexible,moreButtonItem, flexible, buyButtonItem, nil];
         
         tempToolbar.items= barItems;
         tempToolbar.tintColor = [UIColor blackColor];
@@ -93,79 +89,7 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
-- (CGContextRef)createContext
-{
-    // create the bitmap context
-    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-    CGContextRef context = CGBitmapContextCreate(nil,27,27,8,0,
-                                                 colorSpace,kCGImageAlphaPremultipliedLast);
-    CFRelease(colorSpace);
-    return context;
-}
-- (CGImageRef)createRefreshArrowImageRef
-{
-    CGContextRef context = [self createContext];
-    // set the fill color
-    CGColorRef fillColor = [[UIColor blackColor] CGColor];
-    CGContextSetFillColor(context, CGColorGetComponents(fillColor));
-    CGContextBeginPath(context);
-    CGContextMoveToPoint(context, 8.0f, 13.0f);
-    CGContextAddLineToPoint(context, 24.0f, 4.0f);
-    CGContextAddLineToPoint(context, 24.0f, 22.0f);
-    CGContextClosePath(context);
-    CGContextFillPath(context);
-    // convert the context into a CGImageRef
-    CGImageRef image = CGBitmapContextCreateImage(context);
-    CGContextRelease(context);
-    return image;
-}
-
-- (CGImageRef)createForwardArrowImageRef
-{
-    CGContextRef context = [self createContext];
-    // set the fill color
-    CGColorRef fillColor = [[UIColor blackColor] CGColor];
-    CGContextSetFillColor(context, CGColorGetComponents(fillColor));
-    CGContextBeginPath(context);
-    CGContextMoveToPoint(context, 24.0f, 13.0f);
-    CGContextAddLineToPoint(context, 8.0f, 4.0f);
-    CGContextAddLineToPoint(context, 8.0f, 22.0f);
-    CGContextClosePath(context);
-    CGContextFillPath(context);
-    // convert the context into a CGImageRef
-    CGImageRef image = CGBitmapContextCreateImage(context);
-    CGContextRelease(context);
-    return image;
-}
-
-
-- (UIBarButtonItem *)refreshButton
-{
-    CGImageRef theCGImage = [self createRefreshArrowImageRef];
-    UIImage *backImage = [[UIImage alloc] initWithCGImage:theCGImage];
-    CGImageRelease(theCGImage);
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:backImage
-                                                                   style:UIBarButtonItemStylePlain
-                                                                  target:self
-                                                                  action:@selector(onRefresh)];
-    [backImage release], backImage = nil;
-    return [backButton autorelease];
-}
-
-- (UIBarButtonItem *)forwardButton
-{
-    CGImageRef theCGImage = [self createForwardArrowImageRef];
-    UIImage *backImage = [[UIImage alloc] initWithCGImage:theCGImage];
-    CGImageRelease(theCGImage);
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:backImage
-                                                                   style:UIBarButtonItemStylePlain
-                                                                  target:self
-                                                                  action:@selector(onForward)];
-    [backImage release], backImage = nil;
-    return [backButton autorelease];
-}
-
-- (void)onRefresh
+- (void)onBuy
 {
     // TODO:
 }
@@ -222,9 +146,6 @@
     
     // Custom initialization
     [_detailScrollView setContentSize:CGSizeMake(320, self.commentButton.frame.origin.y + 180)];
-    
-    NSLog(@"%@", self.favourateButton);
-    NSLog(@"%@", self.contentLabel);
 }
 
 - (void)viewDidUnload
