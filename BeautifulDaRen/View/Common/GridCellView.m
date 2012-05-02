@@ -13,6 +13,7 @@
 @synthesize cellImageView = _cellImageView;
 @synthesize cellTitle = _cellTitle;
 @synthesize delegate = _delegate;
+@synthesize cellObject = _cellObject;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -31,4 +32,9 @@
     // Drawing code
 }
 */
+
+- (IBAction)gridCellPressed:(UIButton*)sender
+{
+    [self.delegate didPressGridCell:self];
+}
 @end
