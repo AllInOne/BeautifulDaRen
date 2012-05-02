@@ -13,6 +13,7 @@
 
 @property (retain, nonatomic) IBOutlet UIImageView * cellImageView;
 @property (retain, nonatomic) IBOutlet UILabel * cellTitle;
+@property (retain, nonatomic) id cellObject;
 
 @property (retain, nonatomic) id<GridCellViewDelegate> delegate; 
 

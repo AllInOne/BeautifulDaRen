@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "GridCellViewDelegate.h"
 
-@interface ItemsViewController : UIViewController <GridCellViewDelegate>
+@interface ItemsViewController : UIViewController <GridCellViewDelegate, UIScrollViewDelegate>
 
 @end
