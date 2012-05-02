@@ -44,9 +44,7 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:0.6f green:0.6f blue:0.6f alpha:1.0f]];
-        
+    if (self) {        
         UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(onBackButtonClicked)];
         [self.navigationItem setLeftBarButtonItem:backButton];
         

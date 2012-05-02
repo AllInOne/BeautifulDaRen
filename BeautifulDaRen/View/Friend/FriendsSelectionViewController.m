@@ -29,7 +29,10 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(onBackButtonClicked)];
+        [self.navigationItem setLeftBarButtonItem:backButton];
         
+        [backButton release];
     }
     return self;
 }
@@ -99,6 +102,10 @@
         [self.delegate didFinishContactSelectionWithContacts:friendId];
     }
     [self.navigationController dismissModalViewControllerAnimated:YES];
+}
+
+- (void)onBackButtonClicked {
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 @end

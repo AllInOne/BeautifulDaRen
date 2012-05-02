@@ -134,6 +134,8 @@
 		CE62B353155172C00017AA88 /* 首页文字.png in Resources */ = {isa = PBXBuildFile; fileRef = CE62B342155172C00017AA88 /* 首页文字.png */; };
 		CE62B354155172C00017AA88 /* 首页背景.png in Resources */ = {isa = PBXBuildFile; fileRef = CE62B343155172C00017AA88 /* 首页背景.png */; };
 		CE62B355155172C00017AA88 /* 首页选中.png in Resources */ = {isa = PBXBuildFile; fileRef = CE62B344155172C00017AA88 /* 首页选中.png */; };
+		CE62B3621551790A0017AA88 /* SelectCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE62B3601551790A0017AA88 /* SelectCityViewController.m */; };
+		CE62B3631551790A0017AA88 /* SelectCityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE62B3611551790A0017AA88 /* SelectCityViewController.xib */; };
 		CE74544C153F1D0C00CB751A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE74544D153F1D0C00CB751A /* InfoPlist.strings */; };
 		CE74544E153F1D3D00CB751A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE74544F153F1D3D00CB751A /* Localizable.strings */; };
 		CE745455153F1F8900CB751A /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = CE745451153F1F8900CB751A /* first.png */; };
@@ -397,6 +399,9 @@
 		CE62B342155172C00017AA88 /* 首页文字.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页文字.png"; sourceTree = "<group>"; };
 		CE62B343155172C00017AA88 /* 首页背景.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页背景.png"; sourceTree = "<group>"; };
 		CE62B344155172C00017AA88 /* 首页选中.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页选中.png"; sourceTree = "<group>"; };
+		CE62B35F1551790A0017AA88 /* SelectCityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectCityViewController.h; sourceTree = "<group>"; };
+		CE62B3601551790A0017AA88 /* SelectCityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectCityViewController.m; sourceTree = "<group>"; };
+		CE62B3611551790A0017AA88 /* SelectCityViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectCityViewController.xib; sourceTree = "<group>"; };
 		CE74544D153F1D0C00CB751A /* InfoPlist.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
 		CE74544F153F1D3D00CB751A /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		CE745451153F1F8900CB751A /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
@@ -1025,6 +1030,9 @@
 				C28D6A86154FCAEB005E14CE /* GridCellView.h */,
 				C28D6A87154FCAEB005E14CE /* GridCellView.m */,
 				C28D6A89154FCB04005E14CE /* GridCellView.xib */,
+				CE62B35F1551790A0017AA88 /* SelectCityViewController.h */,
+				CE62B3601551790A0017AA88 /* SelectCityViewController.m */,
+				CE62B3611551790A0017AA88 /* SelectCityViewController.xib */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1237,6 +1245,7 @@
 				CE62B353155172C00017AA88 /* 首页文字.png in Resources */,
 				CE62B354155172C00017AA88 /* 首页背景.png in Resources */,
 				CE62B355155172C00017AA88 /* 首页选中.png in Resources */,
+				CE62B3631551790A0017AA88 /* SelectCityViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1318,6 +1327,7 @@
 				CEBCD053154FF377000D41E1 /* BaseManager.m in Sources */,
 				CEBCD056154FF3A6000D41E1 /* DataManager.m in Sources */,
 				CEBCD05A15500CF8000D41E1 /* WeiboForwardCommentViewControlle.m in Sources */,
+				CE62B3621551790A0017AA88 /* SelectCityViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
