@@ -98,7 +98,8 @@
     }
     else
     {
-        [self.tabBar setBackgroundImage:[UIImage imageNamed:@"底部背景.png"]];
+// Open it when the Ux image is resized to small ones
+//        [self.tabBar setBackgroundImage:[UIImage imageNamed:@"底部背景.png"]];
     }
 }
 
