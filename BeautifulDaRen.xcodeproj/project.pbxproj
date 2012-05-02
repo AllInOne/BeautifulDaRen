@@ -136,6 +136,8 @@
 		CE62B355155172C00017AA88 /* 首页选中.png in Resources */ = {isa = PBXBuildFile; fileRef = CE62B344155172C00017AA88 /* 首页选中.png */; };
 		CE62B3621551790A0017AA88 /* SelectCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE62B3601551790A0017AA88 /* SelectCityViewController.m */; };
 		CE62B3631551790A0017AA88 /* SelectCityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE62B3611551790A0017AA88 /* SelectCityViewController.xib */; };
+		CE62B3671551842D0017AA88 /* SelectCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE62B3651551842D0017AA88 /* SelectCategoryViewController.m */; };
+		CE62B3681551842D0017AA88 /* SelectCategoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE62B3661551842D0017AA88 /* SelectCategoryViewController.xib */; };
 		CE74544C153F1D0C00CB751A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE74544D153F1D0C00CB751A /* InfoPlist.strings */; };
 		CE74544E153F1D3D00CB751A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE74544F153F1D3D00CB751A /* Localizable.strings */; };
 		CE745455153F1F8900CB751A /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = CE745451153F1F8900CB751A /* first.png */; };
@@ -402,6 +404,9 @@
 		CE62B35F1551790A0017AA88 /* SelectCityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectCityViewController.h; sourceTree = "<group>"; };
 		CE62B3601551790A0017AA88 /* SelectCityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectCityViewController.m; sourceTree = "<group>"; };
 		CE62B3611551790A0017AA88 /* SelectCityViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectCityViewController.xib; sourceTree = "<group>"; };
+		CE62B3641551842D0017AA88 /* SelectCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectCategoryViewController.h; sourceTree = "<group>"; };
+		CE62B3651551842D0017AA88 /* SelectCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectCategoryViewController.m; sourceTree = "<group>"; };
+		CE62B3661551842D0017AA88 /* SelectCategoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectCategoryViewController.xib; sourceTree = "<group>"; };
 		CE74544D153F1D0C00CB751A /* InfoPlist.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
 		CE74544F153F1D3D00CB751A /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		CE745451153F1F8900CB751A /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
@@ -961,6 +966,9 @@
 				CEC0B586153EFBE800F20DC0 /* CategoryViewController.h */,
 				CEC0B587153EFBE800F20DC0 /* CategoryViewController.m */,
 				CEC0B588153EFBE800F20DC0 /* CategoryViewController.xib */,
+				CE62B3641551842D0017AA88 /* SelectCategoryViewController.h */,
+				CE62B3651551842D0017AA88 /* SelectCategoryViewController.m */,
+				CE62B3661551842D0017AA88 /* SelectCategoryViewController.xib */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1246,6 +1254,7 @@
 				CE62B354155172C00017AA88 /* 首页背景.png in Resources */,
 				CE62B355155172C00017AA88 /* 首页选中.png in Resources */,
 				CE62B3631551790A0017AA88 /* SelectCityViewController.xib in Resources */,
+				CE62B3681551842D0017AA88 /* SelectCategoryViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1328,6 +1337,7 @@
 				CEBCD056154FF3A6000D41E1 /* DataManager.m in Sources */,
 				CEBCD05A15500CF8000D41E1 /* WeiboForwardCommentViewControlle.m in Sources */,
 				CE62B3621551790A0017AA88 /* SelectCityViewController.m in Sources */,
+				CE62B3671551842D0017AA88 /* SelectCategoryViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

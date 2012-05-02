@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "FriendsSelectionViewControllerDelegate.h"
+#import "SelectCategoryViewController.h"
 
 @interface WeiboComposerViewController : UIViewController <UIActionSheetDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate,
-    FriendsSelectionViewControllerDelegate>
+    FriendsSelectionViewControllerDelegate,
+    SelectCategoryProtocol>
 
 @property (nonatomic, retain) IBOutlet UIButton * cameraButton;
 @property (nonatomic, retain) IBOutlet UITextView * weiboContentTextView;
