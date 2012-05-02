@@ -117,6 +117,25 @@
 		CE38B987154990E60080DD99 /* cammer_button_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CE38B984154990E60080DD99 /* cammer_button_bg.png */; };
 		CE38B988154990E60080DD99 /* cammer_button_disable_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CE38B985154990E60080DD99 /* cammer_button_disable_bg.png */; };
 		CE38B989154990E60080DD99 /* cammer_button_pressed_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CE38B986154990E60080DD99 /* cammer_button_pressed_bg.png */; };
+		CE62B345155172C00017AA88 /* 发现文字.png in Resources */ = {isa = PBXBuildFile; fileRef = CE62B334155172C00017AA88 /* 发现文字.png */; };
+		CE62B346155172C00017AA88 /* 发现背景.png in Resources */ = {isa = PBXBuildFile; fileRef = CE62B335155172C00017AA88 /* 发现背景.png */; };
+		CE62B347155172C00017AA88 /* 发现选中.png in Resources */ = {isa = PBXBuildFile; fileRef = CE62B336155172C00017AA88 /* 发现选中.png */; };
+		CE62B348155172C00017AA88 /* 底部背景.png in Resources */ = {isa = PBXBuildFile; fileRef = CE62B337155172C00017AA88 /* 底部背景.png */; };
+		CE62B349155172C00017AA88 /* 我的文字.png in Resources */ = {isa = PBXBuildFile; fileRef = CE62B338155172C00017AA88 /* 我的文字.png */; };
+		CE62B34A155172C00017AA88 /* 我的背景.png in Resources */ = {isa = PBXBuildFile; fileRef = CE62B339155172C00017AA88 /* 我的背景.png */; };
+		CE62B34B155172C00017AA88 /* 我的选中.png in Resources */ = {isa = PBXBuildFile; fileRef = CE62B33A155172C00017AA88 /* 我的选中.png */; };
+		CE62B34C155172C00017AA88 /* 我秀文字.png in Resources */ = {isa = PBXBuildFile; fileRef = CE62B33B155172C00017AA88 /* 我秀文字.png */; };
+		CE62B34D155172C00017AA88 /* 我秀背景.png in Resources */ = {isa = PBXBuildFile; fileRef = CE62B33C155172C00017AA88 /* 我秀背景.png */; };
+		CE62B34E155172C00017AA88 /* 我秀选中.png in Resources */ = {isa = PBXBuildFile; fileRef = CE62B33D155172C00017AA88 /* 我秀选中.png */; };
+		CE62B34F155172C00017AA88 /* 热门文字.png in Resources */ = {isa = PBXBuildFile; fileRef = CE62B33E155172C00017AA88 /* 热门文字.png */; };
+		CE62B350155172C00017AA88 /* 热门背景.png in Resources */ = {isa = PBXBuildFile; fileRef = CE62B33F155172C00017AA88 /* 热门背景.png */; };
+		CE62B351155172C00017AA88 /* 热门选中.png in Resources */ = {isa = PBXBuildFile; fileRef = CE62B340155172C00017AA88 /* 热门选中.png */; };
+		CE62B352155172C00017AA88 /* 顶部背景.png in Resources */ = {isa = PBXBuildFile; fileRef = CE62B341155172C00017AA88 /* 顶部背景.png */; };
+		CE62B353155172C00017AA88 /* 首页文字.png in Resources */ = {isa = PBXBuildFile; fileRef = CE62B342155172C00017AA88 /* 首页文字.png */; };
+		CE62B354155172C00017AA88 /* 首页背景.png in Resources */ = {isa = PBXBuildFile; fileRef = CE62B343155172C00017AA88 /* 首页背景.png */; };
+		CE62B355155172C00017AA88 /* 首页选中.png in Resources */ = {isa = PBXBuildFile; fileRef = CE62B344155172C00017AA88 /* 首页选中.png */; };
+		CE62B3621551790A0017AA88 /* SelectCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE62B3601551790A0017AA88 /* SelectCityViewController.m */; };
+		CE62B3631551790A0017AA88 /* SelectCityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE62B3611551790A0017AA88 /* SelectCityViewController.xib */; };
 		CE74544C153F1D0C00CB751A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE74544D153F1D0C00CB751A /* InfoPlist.strings */; };
 		CE74544E153F1D3D00CB751A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE74544F153F1D3D00CB751A /* Localizable.strings */; };
 		CE745455153F1F8900CB751A /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = CE745451153F1F8900CB751A /* first.png */; };
@@ -363,6 +382,26 @@
 		CE38B984154990E60080DD99 /* cammer_button_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cammer_button_bg.png; sourceTree = "<group>"; };
 		CE38B985154990E60080DD99 /* cammer_button_disable_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cammer_button_disable_bg.png; sourceTree = "<group>"; };
 		CE38B986154990E60080DD99 /* cammer_button_pressed_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cammer_button_pressed_bg.png; sourceTree = "<group>"; };
+		CE62B334155172C00017AA88 /* 发现文字.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "发现文字.png"; sourceTree = "<group>"; };
+		CE62B335155172C00017AA88 /* 发现背景.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "发现背景.png"; sourceTree = "<group>"; };
+		CE62B336155172C00017AA88 /* 发现选中.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "发现选中.png"; sourceTree = "<group>"; };
+		CE62B337155172C00017AA88 /* 底部背景.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "底部背景.png"; sourceTree = "<group>"; };
+		CE62B338155172C00017AA88 /* 我的文字.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "我的文字.png"; sourceTree = "<group>"; };
+		CE62B339155172C00017AA88 /* 我的背景.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "我的背景.png"; sourceTree = "<group>"; };
+		CE62B33A155172C00017AA88 /* 我的选中.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "我的选中.png"; sourceTree = "<group>"; };
+		CE62B33B155172C00017AA88 /* 我秀文字.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "我秀文字.png"; sourceTree = "<group>"; };
+		CE62B33C155172C00017AA88 /* 我秀背景.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "我秀背景.png"; sourceTree = "<group>"; };
+		CE62B33D155172C00017AA88 /* 我秀选中.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "我秀选中.png"; sourceTree = "<group>"; };
+		CE62B33E155172C00017AA88 /* 热门文字.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "热门文字.png"; sourceTree = "<group>"; };
+		CE62B33F155172C00017AA88 /* 热门背景.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "热门背景.png"; sourceTree = "<group>"; };
+		CE62B340155172C00017AA88 /* 热门选中.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "热门选中.png"; sourceTree = "<group>"; };
+		CE62B341155172C00017AA88 /* 顶部背景.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "顶部背景.png"; sourceTree = "<group>"; };
+		CE62B342155172C00017AA88 /* 首页文字.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页文字.png"; sourceTree = "<group>"; };
+		CE62B343155172C00017AA88 /* 首页背景.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页背景.png"; sourceTree = "<group>"; };
+		CE62B344155172C00017AA88 /* 首页选中.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页选中.png"; sourceTree = "<group>"; };
+		CE62B35F1551790A0017AA88 /* SelectCityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectCityViewController.h; sourceTree = "<group>"; };
+		CE62B3601551790A0017AA88 /* SelectCityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectCityViewController.m; sourceTree = "<group>"; };
+		CE62B3611551790A0017AA88 /* SelectCityViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectCityViewController.xib; sourceTree = "<group>"; };
 		CE74544D153F1D0C00CB751A /* InfoPlist.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
 		CE74544F153F1D3D00CB751A /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		CE745451153F1F8900CB751A /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
@@ -853,6 +892,23 @@
 		CE745450153F1F8900CB751A /* Asserts */ = {
 			isa = PBXGroup;
 			children = (
+				CE62B334155172C00017AA88 /* 发现文字.png */,
+				CE62B335155172C00017AA88 /* 发现背景.png */,
+				CE62B336155172C00017AA88 /* 发现选中.png */,
+				CE62B337155172C00017AA88 /* 底部背景.png */,
+				CE62B338155172C00017AA88 /* 我的文字.png */,
+				CE62B339155172C00017AA88 /* 我的背景.png */,
+				CE62B33A155172C00017AA88 /* 我的选中.png */,
+				CE62B33B155172C00017AA88 /* 我秀文字.png */,
+				CE62B33C155172C00017AA88 /* 我秀背景.png */,
+				CE62B33D155172C00017AA88 /* 我秀选中.png */,
+				CE62B33E155172C00017AA88 /* 热门文字.png */,
+				CE62B33F155172C00017AA88 /* 热门背景.png */,
+				CE62B340155172C00017AA88 /* 热门选中.png */,
+				CE62B341155172C00017AA88 /* 顶部背景.png */,
+				CE62B342155172C00017AA88 /* 首页文字.png */,
+				CE62B343155172C00017AA88 /* 首页背景.png */,
+				CE62B344155172C00017AA88 /* 首页选中.png */,
 				C28D6A9E15502ED9005E14CE /* fake image */,
 				CEBCD04D154FF0EE000D41E1 /* follow.png */,
 				CEE306FC154F7943004D2E96 /* camera.png */,
@@ -974,6 +1030,9 @@
 				C28D6A86154FCAEB005E14CE /* GridCellView.h */,
 				C28D6A87154FCAEB005E14CE /* GridCellView.m */,
 				C28D6A89154FCB04005E14CE /* GridCellView.xib */,
+				CE62B35F1551790A0017AA88 /* SelectCityViewController.h */,
+				CE62B3601551790A0017AA88 /* SelectCityViewController.m */,
+				CE62B3611551790A0017AA88 /* SelectCityViewController.xib */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1169,6 +1228,24 @@
 				CEBCD04E154FF0EE000D41E1 /* follow.png in Resources */,
 				CEBCD05D155018D9000D41E1 /* WeiboForwardCommentViewController.xib in Resources */,
 				C25E4C8415516CA0007D66E0 /* item_fake.png in Resources */,
+				CE62B345155172C00017AA88 /* 发现文字.png in Resources */,
+				CE62B346155172C00017AA88 /* 发现背景.png in Resources */,
+				CE62B347155172C00017AA88 /* 发现选中.png in Resources */,
+				CE62B348155172C00017AA88 /* 底部背景.png in Resources */,
+				CE62B349155172C00017AA88 /* 我的文字.png in Resources */,
+				CE62B34A155172C00017AA88 /* 我的背景.png in Resources */,
+				CE62B34B155172C00017AA88 /* 我的选中.png in Resources */,
+				CE62B34C155172C00017AA88 /* 我秀文字.png in Resources */,
+				CE62B34D155172C00017AA88 /* 我秀背景.png in Resources */,
+				CE62B34E155172C00017AA88 /* 我秀选中.png in Resources */,
+				CE62B34F155172C00017AA88 /* 热门文字.png in Resources */,
+				CE62B350155172C00017AA88 /* 热门背景.png in Resources */,
+				CE62B351155172C00017AA88 /* 热门选中.png in Resources */,
+				CE62B352155172C00017AA88 /* 顶部背景.png in Resources */,
+				CE62B353155172C00017AA88 /* 首页文字.png in Resources */,
+				CE62B354155172C00017AA88 /* 首页背景.png in Resources */,
+				CE62B355155172C00017AA88 /* 首页选中.png in Resources */,
+				CE62B3631551790A0017AA88 /* SelectCityViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1250,6 +1327,7 @@
 				CEBCD053154FF377000D41E1 /* BaseManager.m in Sources */,
 				CEBCD056154FF3A6000D41E1 /* DataManager.m in Sources */,
 				CEBCD05A15500CF8000D41E1 /* WeiboForwardCommentViewControlle.m in Sources */,
+				CE62B3621551790A0017AA88 /* SelectCityViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

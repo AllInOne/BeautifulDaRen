@@ -10,8 +10,19 @@
 #import "AccountInfoInputCell.h"
 #import "ButtonViewCell.h"
 #import "QZoneSDKManager.h"
+#import "SelectCityViewController.h"
 
 #import "ViewHelper.h"
+
+enum
+{
+    ACCOUNT_SETTING_USER_ID = 0,
+    ACCOUNT_SETTING_PASSWORD,
+    ACCOUNT_SETTING_EMAIL,
+    ACCOUNT_SETTING_CITY,
+    ACCOUNT_SETTING_GENDER,
+    ACCOUNT_SETTING_AVATAR
+};
 
 @interface RegisterViewController()
 
@@ -118,27 +129,27 @@
             cell = [[[NSBundle mainBundle] loadNibNamed:account_input_identifier owner:self options:nil] objectAtIndex:index];
         }
         switch ([indexPath row]) {
-            case 0:
+            case ACCOUNT_SETTING_USER_ID:
             {
                 ((AccountInfoInputCell*)cell).inputLabel.text = NSLocalizedString(@"account_user_account", @"");
                 break;
             }
-            case 1:
+            case ACCOUNT_SETTING_PASSWORD:
             {
                 ((AccountInfoInputCell*)cell).inputLabel.text = NSLocalizedString(@"password", @"");
                 break;
             }
-            case 2:
+            case ACCOUNT_SETTING_EMAIL:
             {
                 ((AccountInfoInputCell*)cell).inputLabel.text = NSLocalizedString(@"account_register_email", @"");
                 break;
             }
-            case 3:
+            case ACCOUNT_SETTING_CITY:
             {
                 ((AccountInfoInputCell*)cell).inputLabel.text = NSLocalizedString(@"local_city", @"");
                 break;
             }
-            case 4:
+            case ACCOUNT_SETTING_GENDER:
             {
                 ((AccountInfoInputCell*)cell).inputLabel.text = NSLocalizedString(@"my_gender", @"");
                 [((AccountInfoInputCell*)cell).segementedController setTitle:NSLocalizedString(@"female", @"") forSegmentAtIndex:0];
@@ -146,7 +157,7 @@
                 [((AccountInfoInputCell*)cell).segementedController addTarget:self action:@selector(genderChooserAction:) forControlEvents:UIControlEventValueChanged];
                 break;
             }
-            case 5:
+            case ACCOUNT_SETTING_AVATAR:
             {
                 ((AccountInfoInputCell*)cell).inputLabel.text = NSLocalizedString(@"add_avatar", @"");
                 ((AccountInfoInputCell*)cell).imageView.image = [UIImage imageNamed:@"first"];
@@ -180,7 +191,40 @@
     
     if(tableView == self.accountInfoTable)
     {
-        // TODO:
+        switch ([indexPath row]) {
+            case ACCOUNT_SETTING_USER_ID:
+            {
+                break;
+            }
+            case ACCOUNT_SETTING_PASSWORD:
+            {
+                break;
+            }
+            case ACCOUNT_SETTING_EMAIL:
+            {
+                break;
+            }
+            case ACCOUNT_SETTING_CITY:
+            {
+                SelectCityViewController *citySelectionController = 
+                [[[SelectCityViewController alloc] initWithNibName:nil bundle:nil] autorelease];
+
+                UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: citySelectionController];
+                
+                [self.navigationController presentModalViewController:navController animated:YES];
+                
+                [navController release];
+                break;
+            }
+            case ACCOUNT_SETTING_GENDER:
+            {
+                break;
+            }
+            case ACCOUNT_SETTING_AVATAR:
+            {
+                break;
+            }
+        }
     }
     else if(tableView == self.loginWithExtenalTable)
     {

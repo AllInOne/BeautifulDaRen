@@ -7,9 +7,18 @@
 //
 
 #import "RootTabViewController.h"
+#import "ViewConstants.h"
 
 @interface RootTabViewController()
 - (void)initLocalizedString;
+@end
+
+@implementation UINavigationBar (UINavigationBarCategory)
+- (void)drawRect:(CGRect)rect {
+    NSLog(@"%f:%f", self.frame.size.width, self.frame.size.height);
+    UIImage *image = [UIImage imageNamed: @"顶部背景.png"];
+    [image drawInRect:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+}
 @end
 
 @implementation RootTabViewController
@@ -19,11 +28,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        UIImageView * tabBarBg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg.png"]];
-        tabBarBg.frame = CGRectMake(0, 0, 320, 49);
-        tabBarBg.contentMode = UIViewContentModeScaleToFill;
-        
-        [self.tabBarController.tabBar insertSubview:tabBarBg atIndex:1];
     }
     return self;
 }
@@ -78,6 +82,24 @@
         NSArray* textArray = [localizedStringsArray objectAtIndex:index++];
         [navigationItem setTitle:[textArray objectAtIndex:0]];
         navigation.tabBarItem.title = [textArray objectAtIndex:1];
+        
+        if (!SYSTEM_VERSION_LESS_THAN(@"5.0"))
+        {
+            [navigation.navigationBar setBackgroundImage:[UIImage imageNamed:@"顶部背景"] forBarMetrics:UIBarMetricsDefault];
+        }
+    }
+
+    if (SYSTEM_VERSION_LESS_THAN(@"5.0")) {
+        UIImageView * tabBarBg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"底部背景.png"]];
+        tabBarBg.frame = CGRectMake(0, 0, 320, 50);
+        tabBarBg.contentMode = UIViewContentModeScaleToFill;
+        
+        [self.tabBar insertSubview:tabBarBg atIndex:0];    
+    }
+    else
+    {
+// Open it when the Ux image is resized to small ones
+//        [self.tabBar setBackgroundImage:[UIImage imageNamed:@"底部背景.png"]];
     }
 }
 
