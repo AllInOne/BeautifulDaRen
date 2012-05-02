@@ -17,6 +17,7 @@
 #import "MapViewController.h"
 
 @implementation HomeViewController
+@synthesize itemsViewController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -40,6 +41,10 @@
     AdsPageView * adsPageView = [[[AdsPageView alloc] initWithNibName:@"AdsPageView" bundle:nil] autorelease];
     adsPageView.view.frame = CGRectMake(0, 30, self.view.frame.size.width, ADS_CELL_HEIGHT);
     [self.view insertSubview:adsPageView.view belowSubview:topView];
+    
+    self.itemsViewController = [[ItemsViewController alloc] initWithNibName:@"ItemsViewController" bundle:nil];
+    self.itemsViewController.view.frame = CGRectMake(0, 120, 320, 240);
+    [self.view insertSubview:self.itemsViewController.view belowSubview:adsPageView.view];
 
 }
 

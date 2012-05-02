@@ -565,11 +565,8 @@
 		CE029AF4153E68E100886227 /* View */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
 				C28D6A95154FCBD9005E14CE /* Protocol */,
-=======
 				CEE30719154F802C004D2E96 /* Friend */,
->>>>>>> c3db48bc114dd13b6594ef80b9de1c07e447a17c
 				CE38B96B15498E9F0080DD99 /* Weibo */,
 				CEDC918C153FDBCA00BA6C35 /* Common */,
 				CEC0B597153EFC0500F20DC0 /* More */,
@@ -865,9 +862,7 @@
 		CE745450153F1F8900CB751A /* Asserts */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
 				C28D6A9E15502ED9005E14CE /* fake image */,
-=======
 				CEBCD04D154FF0EE000D41E1 /* follow.png */,
 				CEE306FC154F7943004D2E96 /* camera.png */,
 				CEE306FD154F7943004D2E96 /* category.png */,
@@ -875,7 +870,6 @@
 				CEE306FF154F7943004D2E96 /* location.png */,
 				CEE30700154F7943004D2E96 /* shop.png */,
 				CEE306FA154F781D004D2E96 /* @.png */,
->>>>>>> c3db48bc114dd13b6594ef80b9de1c07e447a17c
 				CE38B984154990E60080DD99 /* cammer_button_bg.png */,
 				CE38B985154990E60080DD99 /* cammer_button_disable_bg.png */,
 				CE38B986154990E60080DD99 /* cammer_button_pressed_bg.png */,
@@ -1170,14 +1164,12 @@
 				CE38B989154990E60080DD99 /* cammer_button_pressed_bg.png in Resources */,
 				CE83A1B9154C29EC005187F7 /* WeiboDetailViewController.xib in Resources */,
 				CE83A1BE154C2A26005187F7 /* WeiboComposerViewController.xib in Resources */,
-<<<<<<< HEAD
 				C28D6A8A154FCB04005E14CE /* GridCellView.xib in Resources */,
 				C28D6A9D155026DF005E14CE /* ItemsViewController.xib in Resources */,
 				C28D6AA615503551005E14CE /* item1.png in Resources */,
 				C28D6AA715503551005E14CE /* item2.png in Resources */,
 				C28D6AA815503551005E14CE /* item3.png in Resources */,
 				C28D6AA915503551005E14CE /* item4.png in Resources */,
-=======
 				CEE306FB154F781D004D2E96 /* @.png in Resources */,
 				CEE30701154F7943004D2E96 /* camera.png in Resources */,
 				CEE30702154F7943004D2E96 /* category.png in Resources */,
@@ -1189,7 +1181,6 @@
 				CEE30723154F8533004D2E96 /* FriendListCellView.xib in Resources */,
 				CEBCD04E154FF0EE000D41E1 /* follow.png in Resources */,
 				CEBCD05D155018D9000D41E1 /* WeiboForwardCommentViewController.xib in Resources */,
->>>>>>> c3db48bc114dd13b6594ef80b9de1c07e447a17c
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1261,11 +1252,9 @@
 				C24B11A91549A5B6004F6F8E /* ViewHelper.m in Sources */,
 				CE83A1B8154C29EC005187F7 /* WeiboDetailViewController.m in Sources */,
 				CE83A1BD154C2A26005187F7 /* WeiboComposerViewController.m in Sources */,
-<<<<<<< HEAD
 				C28D6A88154FCAEB005E14CE /* GridCellView.m in Sources */,
 				C28D6A9C155026DF005E14CE /* ItemsViewController.m in Sources */,
 				C28D6AA115502FDC005E14CE /* WaresItem.m in Sources */,
-=======
 				CEE30717154F8026004D2E96 /* FriendsSelectionViewController.m in Sources */,
 				CEE3071D154F80BD004D2E96 /* FriendsViewController.m in Sources */,
 				CEE30722154F8533004D2E96 /* FriendListCellView.m in Sources */,
@@ -1273,7 +1262,6 @@
 				CEBCD053154FF377000D41E1 /* BaseManager.m in Sources */,
 				CEBCD056154FF3A6000D41E1 /* DataManager.m in Sources */,
 				CEBCD05A15500CF8000D41E1 /* WeiboForwardCommentViewControlle.m in Sources */,
->>>>>>> c3db48bc114dd13b6594ef80b9de1c07e447a17c
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

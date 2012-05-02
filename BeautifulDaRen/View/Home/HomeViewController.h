@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ItemsViewController.h"
 
 
 @interface HomeViewController : UIViewController
+
+@property (retain, nonatomic) ItemsViewController* itemsViewController;
 
 - (IBAction)onLoginBtnSelected:(UIButton*)sender;
 - (IBAction)onRegisterBtnSelected:(UIButton*)sender;
