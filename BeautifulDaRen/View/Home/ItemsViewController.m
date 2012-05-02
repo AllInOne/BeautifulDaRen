@@ -11,7 +11,7 @@
 #import "WaresItem.h"
 
 #define COLUMNS_PER_ROW 4
-#define GRID_X_DELTA 75
+#define GRID_X_DELTA 80
 #define GRID_Y_DELTA 120
 
 @interface ItemsViewController()
@@ -51,8 +51,8 @@
         GridCellView * cell = [[[NSBundle mainBundle] loadNibNamed:cellViewIdentifier owner:self options:nil] objectAtIndex:0];
         cell.frame = CGRectMake((i % COLUMNS_PER_ROW) * GRID_X_DELTA,
                                 (i / COLUMNS_PER_ROW) * GRID_Y_DELTA,
-                                cell.frame.size.width,
-                                cell.frame.size.height);
+                                GRID_X_DELTA,
+                                GRID_Y_DELTA);
         cell.delegate = self;
         [self.gridCells addObject:cell];
         [self.view addSubview:cell];
@@ -70,8 +70,8 @@
 
 - (void) loadFakeData
 {
-    NSArray * imageNames = [NSArray arrayWithObjects:@"item1",@"item2",
-                           @"item3",@"item4",@"item4",@"item3",@"item2",@"item1", nil];
+    NSArray * imageNames = [NSArray arrayWithObjects:@"item_fake",@"item_fake",
+                           @"item_fake",@"item_fake",@"item_fake",@"item_fake",@"item_fake",@"item_fake", nil];
     NSArray * imageIds = [NSArray arrayWithObjects:@"NO.001",@"NO.002",
                            @"NO.003",@"NO.004",@"NO.005",@"NO.006",@"NO.007",@"NO.008", nil];
     NSArray * imageTitles = [NSArray arrayWithObjects:@"谢谢你",@"不客气",
