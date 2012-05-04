@@ -244,7 +244,14 @@
 
 - (IBAction)onCategoryPressed:(id)sender
 {
-    //TODO:
+    SelectCategoryViewController *categorySelectionController = 
+    [[[SelectCategoryViewController alloc] initWithNibName:nil bundle:nil] autorelease];
+    categorySelectionController.delegate = self;
+    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: categorySelectionController];
+    
+    [self.navigationController presentModalViewController:navController animated:YES];
+    
+    [navController release];
 }
 
 - (void)didFinishContactSelectionWithContacts:(NSString *)friendId
@@ -310,5 +317,11 @@
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     [self dismissModalViewControllerAnimated:YES];
+}
+
+#pragma mark - select category delegate
+- (void)onCategorySelected:(NSString*)category
+{
+    //TODO:
 }
 @end
