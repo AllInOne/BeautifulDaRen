@@ -7,8 +7,16 @@
 //
 
 #import "MineViewController.h"
+#import "MyInfoViewController.h"
+
+@interface MineViewController()
+
+@property (retain, nonatomic) MyInfoViewController * myInfoViewController;
+
+@end
 
 @implementation MineViewController
+@synthesize myInfoViewController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -31,7 +39,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+     self.myInfoViewController = [[[MyInfoViewController alloc] initWithNibName:@"MyInfoViewController" bundle:nil] autorelease];
+    [self.view addSubview:myInfoViewController.view];
 }
 
 - (void)viewDidUnload

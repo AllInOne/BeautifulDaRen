@@ -22,13 +22,13 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "BeautifulDaRen/View/Home/ItemsViewController.m"
-         timestampString = "357659182.054332"
+         filePath = "BeautifulDaRen/View/Mine/MyInfoViewController.m"
+         timestampString = "357820403.531209"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "121"
-         endingLineNumber = "121"
-         landmarkName = "-didPressGridCell:"
+         startingLineNumber = "246"
+         endingLineNumber = "246"
+         landmarkName = "-tableView:didSelectRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
