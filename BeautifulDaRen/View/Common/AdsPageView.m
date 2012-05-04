@@ -39,16 +39,16 @@
     if (self) {
         self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, ADS_CELL_HEIGHT);
         // TODO: get it from server
-        _adsImageNames = [[NSMutableArray alloc] initWithObjects:@"logo.png",
-                                                                 @"bg.png",
-                                                                 @"btn.png",
-                                                                 @"bg_land.png",
+        _adsImageNames = [[NSMutableArray alloc] initWithObjects:@"banner320x136.png",
+                                                                 @"banner320x136.png",
+                                                                 @"banner320x136.png",
+                                                                 @"banner320x136.png",
                                                                  nil];
-        _firstImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
+        _firstImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"banner320x136.png"]];
         _firstImageView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
         [self.view insertSubview:_firstImageView belowSubview:self.adsPageController];
         
-        _secondImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg.png"]];
+        _secondImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"banner320x136.png"]];
         _secondImageView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
         [self.view insertSubview:_secondImageView belowSubview:self.adsPageController];
         [_secondImageView setHidden:YES];
@@ -90,7 +90,6 @@
 -(void)loadView{
     [super loadView];
     //控件区域
-    self.adsPageController.backgroundColor=[UIColor blackColor];
     self.adsPageController.numberOfPages = MAX_ADS_PAGES;
     self.adsPageController.currentPage = 0;
     // 设定翻页事件的处理方法

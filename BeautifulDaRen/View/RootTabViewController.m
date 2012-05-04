@@ -85,7 +85,7 @@
         
         if (!SYSTEM_VERSION_LESS_THAN(@"5.0"))
         {
-            [navigation.navigationBar setBackgroundImage:[UIImage imageNamed:@"顶部背景"] forBarMetrics:UIBarMetricsDefault];
+            [navigation.navigationBar setBackgroundImage:[UIImage imageNamed:@"顶部背景.png"] forBarMetrics:UIBarMetricsDefault];
         }
     }
 
@@ -98,7 +98,6 @@
     }
     else
     {
-// Open it when the Ux image is resized to small ones
         [self.tabBar setBackgroundImage:[UIImage imageNamed:@"底部背景.png"]];
     }
 }

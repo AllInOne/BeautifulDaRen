@@ -13,6 +13,7 @@
 #import "SelectCityViewController.h"
 
 #import "ViewHelper.h"
+#import "ViewConstants.h"
 
 enum
 {
@@ -210,6 +211,11 @@ enum
                 [[[SelectCityViewController alloc] initWithNibName:nil bundle:nil] autorelease];
 
                 UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: citySelectionController];
+                
+                if (!SYSTEM_VERSION_LESS_THAN(@"5.0"))
+                {
+                    [navController.navigationBar setBackgroundImage:[UIImage imageNamed:@"顶部背景.png"] forBarMetrics:UIBarMetricsDefault];
+                }
                 
                 [self.navigationController presentModalViewController:navController animated:YES];
                 

@@ -9,7 +9,7 @@
 #ifndef BeautifulDaRen_ViewConstants_Header_h
 #define BeautifulDaRen_ViewConstants_Header_h
 
-#define ADS_CELL_HEIGHT             (80)
+#define ADS_CELL_HEIGHT             (136)
 #define USER_INFOR_CELL_HEIGHT      (80)
 
 #define SCROLL_ITEM_MARGIN      (10.0)

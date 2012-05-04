@@ -7,6 +7,7 @@
 //
 
 #import "SelectCityViewController.h"
+#import "ViewConstants.h"
 
 @interface SelectCityViewController ()
 
@@ -31,8 +32,15 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(onBackButtonClicked)];
-        [self.navigationItem setLeftBarButtonItem:backButton];
+        UIButton * backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [backButton setBackgroundImage:[UIImage imageNamed:@"顶部按钮50x29.png"] forState:UIControlStateNormal];
+        [backButton setTitle:@"返回" forState:UIControlStateNormal];
+        [backButton addTarget:self action:@selector(onBackButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+        
+        [backButton.titleLabel setFont:[UIFont boldSystemFontOfSize:13]];
+        backButton.frame = CGRectMake(0, 0, 50, 30);
+        UIBarButtonItem * backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+        [self.navigationItem setLeftBarButtonItem:backButtonItem];
         
         [backButton release];
         
