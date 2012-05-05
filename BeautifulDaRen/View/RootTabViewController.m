@@ -74,11 +74,11 @@
 
 - (void)initLocalizedString
 {
-    NSArray* homeArray = [NSArray arrayWithObjects:NSLocalizedString(@"tab_home", @""),NSLocalizedString(@"title_home", @""),nil];
-    NSArray* mineArray = [NSArray arrayWithObjects:NSLocalizedString(@"tab_mine", @""),NSLocalizedString(@"title_mine", @""),nil];
-    NSArray* cameraShareArray = [NSArray arrayWithObjects:NSLocalizedString(@"tab_camerashare", @""),NSLocalizedString(@"title_camerashare", @""),nil];
-    NSArray* categoryArray = [NSArray arrayWithObjects:NSLocalizedString(@"tab_category", @""),NSLocalizedString(@"title_category", @""),nil];
-    NSArray* moreArray = [NSArray arrayWithObjects:NSLocalizedString(@"tab_more", @""), NSLocalizedString(@"title_more", @""),nil];
+    NSArray* homeArray = [NSArray arrayWithObjects:@"首页",@"首页",nil];
+    NSArray* mineArray = [NSArray arrayWithObjects:@"我的",@"我的",nil];
+    NSArray* cameraShareArray = [NSArray arrayWithObjects:@"我秀",@"我秀",nil];
+    NSArray* categoryArray = [NSArray arrayWithObjects:@"热门",@"热门",nil];
+    NSArray* moreArray = [NSArray arrayWithObjects:@"发现", @"发现",nil];
     NSArray* localizedStringsArray = [NSArray arrayWithObjects:homeArray, mineArray, cameraShareArray, categoryArray, moreArray, nil];
     
     NSInteger index = 0;

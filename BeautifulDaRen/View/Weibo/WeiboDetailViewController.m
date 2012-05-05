@@ -7,9 +7,11 @@
 //
 
 #import "WeiboDetailViewController.h"
+#import "ViewHelper.h"
 #import "ViewConstants.h"
 #import "WeiboForwardCommentViewController.h"
 #import "WeiboComposerViewController.h"
+#import "ForwardCommentListViewController.h"
 
 #define FONT_SIZE 14.0f
 #define CELL_CONTENT_WIDTH 300.0f
@@ -18,7 +20,6 @@
 @interface WeiboDetailViewController ()
 
 @property (nonatomic, retain) NSString * weiboContent;
-- (CGFloat)getTextHeight: (NSString*)text;
 @end
 
 @implementation WeiboDetailViewController
@@ -133,6 +134,17 @@
     // TODO:
 }
 
+-(IBAction)onCommentListButtonPressed:(id)sender
+{
+    ForwardCommentListViewController *commentListViewContoller = 
+    [[[ForwardCommentListViewController alloc] initWithNibName:nil bundle:nil] autorelease];
+    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: commentListViewContoller];
+    
+    [self.navigationController presentModalViewController:navController animated:YES];
+    
+    [navController release];
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
@@ -141,7 +153,7 @@
     // Do any additional setup after loading the view from its nib.
     self.contentLabel.text = self.weiboContent;
     
-    self.contentLabel.frame = CGRectMake(self.contentLabel.frame.origin.x, self.contentLabel.frame.origin.y, self.contentLabel.frame.size.width, [self getTextHeight:self.weiboContent]);
+    self.contentLabel.frame = CGRectMake(self.contentLabel.frame.origin.x, self.contentLabel.frame.origin.y, self.contentLabel.frame.size.width, [ViewHelper getHeightOfText:self.weiboContent ByFontSize:FONT_SIZE contentWidth:CELL_CONTENT_WIDTH]);
     
     self.favourateButton.frame = CGRectMake(self.favourateButton.frame.origin.x, self.contentLabel.frame.origin.y + self.contentLabel.frame.size.height, self.favourateButton.frame.size.width, self.favourateButton.frame.size.height);
 
@@ -169,16 +181,6 @@
 
 - (void)onBackButtonClicked {
     [self dismissModalViewControllerAnimated:YES];
-}
-
-- (CGFloat)getTextHeight: (NSString*)text
-{
-    CGSize constraint = CGSizeMake(CELL_CONTENT_WIDTH - (CELL_CONTENT_MARGIN*2), 20000.0f);
-    
-    CGSize size = [text
-                   sizeWithFont:[UIFont systemFontOfSize: FONT_SIZE] constrainedToSize: constraint];
-    
-    return size.height;
 }
 
 @end

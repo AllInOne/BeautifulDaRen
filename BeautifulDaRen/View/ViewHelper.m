@@ -10,6 +10,7 @@
 
 #import "ButtonViewCell.h"
 
+
 @implementation ViewHelper
 
 +(UITableViewCell*) getLoginWithExtenalViewCellInTableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -39,6 +40,16 @@
         }
     }
     return cell;
+}
+
++ (CGFloat)getHeightOfText: (NSString*)text ByFontSize:(CGFloat)fontSize contentWidth:(CGFloat)width
+{
+    CGSize constraint = CGSizeMake(width, 20000.0f);
+    
+    CGSize size = [text
+                   sizeWithFont:[UIFont systemFontOfSize: fontSize] constrainedToSize: constraint];
+    
+    return size.height;
 }
 
 @end

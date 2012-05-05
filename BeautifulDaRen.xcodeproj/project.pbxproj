@@ -171,7 +171,7 @@
 		CEBCD04E154FF0EE000D41E1 /* follow.png in Resources */ = {isa = PBXBuildFile; fileRef = CEBCD04D154FF0EE000D41E1 /* follow.png */; };
 		CEBCD053154FF377000D41E1 /* BaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBCD051154FF377000D41E1 /* BaseManager.m */; };
 		CEBCD056154FF3A6000D41E1 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBCD055154FF3A6000D41E1 /* DataManager.m */; };
-		CEBCD05A15500CF8000D41E1 /* WeiboForwardCommentViewControlle.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBCD05715500CF8000D41E1 /* WeiboForwardCommentViewControlle.m */; };
+		CEBCD05A15500CF8000D41E1 /* WeiboForwardCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBCD05715500CF8000D41E1 /* WeiboForwardCommentViewController.m */; };
 		CEBCD05D155018D9000D41E1 /* WeiboForwardCommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEBCD05C155018D9000D41E1 /* WeiboForwardCommentViewController.xib */; };
 		CEC0B583153EFBE000F20DC0 /* CameraShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC0B581153EFBE000F20DC0 /* CameraShareViewController.m */; };
 		CEC0B584153EFBE000F20DC0 /* CameraShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC0B582153EFBE000F20DC0 /* CameraShareViewController.xib */; };
@@ -198,6 +198,11 @@
 		CEE3071E154F80BD004D2E96 /* FriendsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEE3071C154F80BD004D2E96 /* FriendsViewController.xib */; };
 		CEE30722154F8533004D2E96 /* FriendListCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE30720154F8532004D2E96 /* FriendListCellView.m */; };
 		CEE30723154F8533004D2E96 /* FriendListCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEE30721154F8532004D2E96 /* FriendListCellView.xib */; };
+		CEEF7B20155549B5001ABCEC /* ForwardCommentListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEF7B1E155549B5001ABCEC /* ForwardCommentListViewController.m */; };
+		CEEF7B21155549B5001ABCEC /* ForwardCommentListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEF7B1F155549B5001ABCEC /* ForwardCommentListViewController.xib */; };
+		CEEF7B34155557BC001ABCEC /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEF7B33155557BC001ABCEC /* Comment.m */; };
+		CEEF7B381555599A001ABCEC /* ForwardCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEF7B361555599A001ABCEC /* ForwardCommentTableViewCell.m */; };
+		CEEF7B6415556430001ABCEC /* ForwardCommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEF7B6315556430001ABCEC /* ForwardCommentTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -471,7 +476,7 @@
 		CEBCD052154FF377000D41E1 /* ControllerConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ControllerConstants.h; path = Common/ControllerConstants.h; sourceTree = "<group>"; };
 		CEBCD054154FF3A6000D41E1 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
 		CEBCD055154FF3A6000D41E1 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
-		CEBCD05715500CF8000D41E1 /* WeiboForwardCommentViewControlle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboForwardCommentViewControlle.m; sourceTree = "<group>"; };
+		CEBCD05715500CF8000D41E1 /* WeiboForwardCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboForwardCommentViewController.m; sourceTree = "<group>"; };
 		CEBCD05915500CF8000D41E1 /* WeiboForwardCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboForwardCommentViewController.h; sourceTree = "<group>"; };
 		CEBCD05C155018D9000D41E1 /* WeiboForwardCommentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeiboForwardCommentViewController.xib; sourceTree = "<group>"; };
 		CEC0B580153EFBE000F20DC0 /* CameraShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraShareViewController.h; sourceTree = "<group>"; };
@@ -509,6 +514,14 @@
 		CEE3071F154F8532004D2E96 /* FriendListCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendListCellView.h; sourceTree = "<group>"; };
 		CEE30720154F8532004D2E96 /* FriendListCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendListCellView.m; sourceTree = "<group>"; };
 		CEE30721154F8532004D2E96 /* FriendListCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendListCellView.xib; sourceTree = "<group>"; };
+		CEEF7B1D155549B5001ABCEC /* ForwardCommentListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForwardCommentListViewController.h; sourceTree = "<group>"; };
+		CEEF7B1E155549B5001ABCEC /* ForwardCommentListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForwardCommentListViewController.m; sourceTree = "<group>"; };
+		CEEF7B1F155549B5001ABCEC /* ForwardCommentListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForwardCommentListViewController.xib; sourceTree = "<group>"; };
+		CEEF7B32155557BC001ABCEC /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
+		CEEF7B33155557BC001ABCEC /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
+		CEEF7B351555599A001ABCEC /* ForwardCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForwardCommentTableViewCell.h; sourceTree = "<group>"; };
+		CEEF7B361555599A001ABCEC /* ForwardCommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForwardCommentTableViewCell.m; sourceTree = "<group>"; };
+		CEEF7B6315556430001ABCEC /* ForwardCommentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForwardCommentTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -646,6 +659,8 @@
 		CE029AF3153E68D800886227 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CEEF7B32155557BC001ABCEC /* Comment.h */,
+				CEEF7B33155557BC001ABCEC /* Comment.m */,
 				C215A79D1553EABF001BF379 /* UserAccount.h */,
 				C215A79E1553EABF001BF379 /* UserAccount.m */,
 				C215A79F1553EABF001BF379 /* WaresItem.h */,
@@ -939,7 +954,7 @@
 		CE38B96B15498E9F0080DD99 /* Weibo */ = {
 			isa = PBXGroup;
 			children = (
-				CEBCD05715500CF8000D41E1 /* WeiboForwardCommentViewControlle.m */,
+				CEBCD05715500CF8000D41E1 /* WeiboForwardCommentViewController.m */,
 				CEBCD05915500CF8000D41E1 /* WeiboForwardCommentViewController.h */,
 				CEBCD05C155018D9000D41E1 /* WeiboForwardCommentViewController.xib */,
 				CE83A1BA154C2A26005187F7 /* WeiboComposerViewController.h */,
@@ -948,6 +963,12 @@
 				CE83A1B5154C29EC005187F7 /* WeiboDetailViewController.h */,
 				CE83A1B6154C29EC005187F7 /* WeiboDetailViewController.m */,
 				CE83A1B7154C29EC005187F7 /* WeiboDetailViewController.xib */,
+				CEEF7B1D155549B5001ABCEC /* ForwardCommentListViewController.h */,
+				CEEF7B1E155549B5001ABCEC /* ForwardCommentListViewController.m */,
+				CEEF7B1F155549B5001ABCEC /* ForwardCommentListViewController.xib */,
+				CEEF7B351555599A001ABCEC /* ForwardCommentTableViewCell.h */,
+				CEEF7B361555599A001ABCEC /* ForwardCommentTableViewCell.m */,
+				CEEF7B6315556430001ABCEC /* ForwardCommentTableViewCell.xib */,
 			);
 			path = Weibo;
 			sourceTree = "<group>";
@@ -1350,6 +1371,8 @@
 				CE8442F81553D98000106045 /* 顶部按钮50x29.png in Resources */,
 				CE8442F91553D98000106045 /* 顶部背景.png in Resources */,
 				CE8442FA1553D98000106045 /* 首页30x30.png in Resources */,
+				CEEF7B21155549B5001ABCEC /* ForwardCommentListViewController.xib in Resources */,
+				CEEF7B6415556430001ABCEC /* ForwardCommentTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1429,7 +1452,7 @@
 				CEBCD04C154FD253000D41E1 /* ChineseToPinyin.m in Sources */,
 				CEBCD053154FF377000D41E1 /* BaseManager.m in Sources */,
 				CEBCD056154FF3A6000D41E1 /* DataManager.m in Sources */,
-				CEBCD05A15500CF8000D41E1 /* WeiboForwardCommentViewControlle.m in Sources */,
+				CEBCD05A15500CF8000D41E1 /* WeiboForwardCommentViewController.m in Sources */,
 				CE62B3621551790A0017AA88 /* SelectCityViewController.m in Sources */,
 				C216EDBE1551893500CA8CE8 /* MyInfoViewController.m in Sources */,
 				C216EDC215518B8C00CA8CE8 /* MyInfoTopViewCell.m in Sources */,
@@ -1438,6 +1461,9 @@
 				CE62B3671551842D0017AA88 /* SelectCategoryViewController.m in Sources */,
 				C215A7A11553EABF001BF379 /* UserAccount.m in Sources */,
 				C215A7A21553EABF001BF379 /* WaresItem.m in Sources */,
+				CEEF7B20155549B5001ABCEC /* ForwardCommentListViewController.m in Sources */,
+				CEEF7B34155557BC001ABCEC /* Comment.m in Sources */,
+				CEEF7B381555599A001ABCEC /* ForwardCommentTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

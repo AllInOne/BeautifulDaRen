@@ -21,4 +21,6 @@
 @property (nonatomic, retain) IBOutlet UIButton * commentButton;
 @property (nonatomic, retain) IBOutlet UIButton * favourateButton;
 
+-(IBAction)onCommentListButtonPressed:(id)sender;
+
 @end
