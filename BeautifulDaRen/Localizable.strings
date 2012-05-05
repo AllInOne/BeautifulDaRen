@@ -25,6 +25,7 @@
 "password" = "密码";
 "login" = "登录";
 "register" = "注册";
+"to_select" = "选择";
 
 "not_user_to_register" = "还不是美丽达人用户？立即注册";
 "login_with_sina_weibo" = "新浪微博账号登录";
@@ -37,3 +38,13 @@
 "set_avatar" = "设置头像";
 "female" = "女";
 "male" = "男";
+
+"follow" = "关注";
+"fans" = "粉丝";
+"collection" = "收藏";
+"black_list" = "黑名单";
+"my_publish" = "我发表的";
+"private_letter" = "私信";
+"at_me" = "@我";
+"comment_me" = "评论我的";
+"my_interesting" = "我的兴趣";

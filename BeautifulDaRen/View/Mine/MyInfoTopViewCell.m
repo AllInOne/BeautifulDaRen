@@ -10,11 +10,12 @@
 
 @implementation MyInfoTopViewCell
 @synthesize avatarImageView;
-@synthesize levelImageView;
+@synthesize levelLabel;
 @synthesize leftImageView;
 @synthesize beautifulIdLabel;
 @synthesize cityLabel;
-@synthesize levelLabel;
+@synthesize levelLabelTitle;
+
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

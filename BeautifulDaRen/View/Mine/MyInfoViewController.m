@@ -48,7 +48,7 @@
     self.userAccount.uniqueneId = @"UID1234567890";
     self.userAccount.userDisplayId = @"我是美丽达人";
     self.userAccount.level = 12;
-    self.userAccount.levelDescription = @"哈哈，我是12级的达人哟";
+    self.userAccount.levelDescription = @"资深美丽达人";
     self.userAccount.localCity = @"成都";
     self.userAccount.imageData = UIImagePNGRepresentation([UIImage imageNamed:@"avatar_icon"]);
 }
@@ -95,24 +95,24 @@
         }
         // TODO to use the real data.
         ((MyInfoTopViewCell*)cell).avatarImageView.image = [UIImage imageWithData:self.userAccount.imageData];
-        ((MyInfoTopViewCell*)cell).levelImageView.image = [UIImage imageNamed:@"shop"];
-        ((MyInfoTopViewCell*)cell).levelLabel.text = self.userAccount.levelDescription;
+        ((MyInfoTopViewCell*)cell).levelLabel.text = [NSString stringWithFormat:@"LV%d", self.userAccount.level];
+        ((MyInfoTopViewCell*)cell).levelLabelTitle.text = self.userAccount.levelDescription;
         ((MyInfoTopViewCell*)cell).beautifulIdLabel.text = self.userAccount.userDisplayId;
         ((MyInfoTopViewCell*)cell).leftImageView.image = [UIImage imageNamed:@"location"];
-        ((MyInfoTopViewCell*)cell).cityLabel.text = [NSString stringWithFormat:@"城市:%@",self.userAccount.localCity];
+        ((MyInfoTopViewCell*)cell).cityLabel.text = [NSString stringWithFormat:@"%@ : %@",NSLocalizedString(@"local_city", @""),self.userAccount.localCity];
     }
     else if(section == 1) {
         cell = [tableView dequeueReusableCellWithIdentifier:fourGridViewIndentifier];
         if(!cell) {
             cell = [[[NSBundle mainBundle] loadNibNamed:fourGridViewIndentifier owner:self options:nil] objectAtIndex:0];
         }
-        ((FourGridViewCell*)cell).leftTopLabelName.text = @"关注";
+        ((FourGridViewCell*)cell).leftTopLabelName.text = NSLocalizedString(@"follow", @"");
         ((FourGridViewCell*)cell).leftTopLabelNumber.text = @"(10)";
-        ((FourGridViewCell*)cell).rightTopLabelName.text = @"粉丝";
+        ((FourGridViewCell*)cell).rightTopLabelName.text = NSLocalizedString(@"fans", @"");
         ((FourGridViewCell*)cell).rightTopLabelNumber.text = @"(20)";
-        ((FourGridViewCell*)cell).leftBottomLabelName.text = @"收藏";
+        ((FourGridViewCell*)cell).leftBottomLabelName.text = NSLocalizedString(@"collection", @"");
         ((FourGridViewCell*)cell).leftBottomLabelNumber.text = @"(12)";
-        ((FourGridViewCell*)cell).rightBottomLabelName.text = @"黑名单";
+        ((FourGridViewCell*)cell).rightBottomLabelName.text = NSLocalizedString(@"black_list", @"");
         ((FourGridViewCell*)cell).rightBottomLabelNumber.text = @"(32)";
     }
     else if (section == 2) {
@@ -124,14 +124,14 @@
             case 0:
             {
                 ((ButtonViewCell*)cell).buttonRightIcon.image = [UIImage imageNamed:@"shop"];
-                ((ButtonViewCell*)cell).buttonText.text = @"我发表的";
+                ((ButtonViewCell*)cell).buttonText.text = NSLocalizedString(@"my_publish", @"");
                 ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"shop"];
                 break;
             }
             case 1:
             {
                 ((ButtonViewCell*)cell).buttonRightIcon.image = [UIImage imageNamed:@"shop"];
-                ((ButtonViewCell*)cell).buttonText.text = @"私信";
+                ((ButtonViewCell*)cell).buttonText.text = NSLocalizedString(@"private_letter", @"");
                 ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"shop"];
                 break;
             }
@@ -146,14 +146,14 @@
             case 0:
             {
                 ((ButtonViewCell*)cell).buttonRightIcon.image = [UIImage imageNamed:@"shop"];
-                ((ButtonViewCell*)cell).buttonText.text = @"@我";
+                ((ButtonViewCell*)cell).buttonText.text = NSLocalizedString(@"at_me", @"");
                 ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"shop"];
                 break;
             }
             case 1:
             {
                 ((ButtonViewCell*)cell).buttonRightIcon.image = [UIImage imageNamed:@"shop"];
-                ((ButtonViewCell*)cell).buttonText.text = @"评论我的";
+                ((ButtonViewCell*)cell).buttonText.text = NSLocalizedString(@"comment_me", @"");
                 ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"shop"];
                 break;
             }
@@ -165,7 +165,7 @@
             cell = [[[NSBundle mainBundle] loadNibNamed:buttonViewCellIdentifier owner:self options:nil] objectAtIndex:0];
         }
         ((ButtonViewCell*)cell).buttonRightIcon.image = [UIImage imageNamed:@"shop"];
-        ((ButtonViewCell*)cell).buttonText.text = @"我的兴趣";
+        ((ButtonViewCell*)cell).buttonText.text = NSLocalizedString(@"my_interesting", @"");
         ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"shop"];
     }
     else if (section == 5) {
@@ -216,29 +216,49 @@
     NSInteger section = [indexPath section];
     if(section == 0)
     {
-        height = 84.0f;
+        height = 75.0f;
     }
     else if (section == 1)
     {
-        height = 100.0f;
+        height = 80.0f;
     }
     else if (section == 2)
     {
-        height = 60.0f;
+        height = 40.0f;
     }
     else if (section == 3)
     {
-        height = 60.0f;
+        height = 40.0f;
     }
     else if (section == 4)
     {
-        height = 50.0f;
+        height = 40.0f;
     }
     else if (section == 5)
     {
         height = 120.0f;
     }
     return height;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 3;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 3;
+}
+
+- (UIView*) tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    return [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+}
+
+- (UIView*) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    return [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

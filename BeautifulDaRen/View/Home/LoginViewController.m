@@ -151,6 +151,9 @@
     return cell;
 }
 
+#pragma mark UITableViewDelegate
+
+
 #pragma mark LoginViewController
 - (IBAction)loginButtonSelected:(id)sender
 {

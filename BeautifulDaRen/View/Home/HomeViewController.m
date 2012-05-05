@@ -43,7 +43,7 @@
     [self.view insertSubview:adsPageView.view belowSubview:topView];
     
     self.itemsViewController = [[ItemsViewController alloc] initWithNibName:@"ItemsViewController" bundle:nil];
-    self.itemsViewController.view.frame = CGRectMake(0, 120, 320, 240);
+    self.itemsViewController.view.frame = CGRectMake(0, 135, self.view.frame.size.width, 235);
     [self.view insertSubview:self.itemsViewController.view belowSubview:adsPageView.view];
 
 }

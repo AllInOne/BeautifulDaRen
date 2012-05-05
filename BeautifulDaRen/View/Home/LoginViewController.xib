@@ -248,7 +248,6 @@ AAgACAAIAAEAAQABAAE</bytes>
 								<string key="NSFrameSize">{320, 148}</string>
 								<reference key="NSSuperview" ref="205119523"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:418</string>
 								<reference key="IBUIBackgroundColor" ref="578138472"/>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -263,7 +262,7 @@ AAgACAAIAAEAAQABAAE</bytes>
 								<float key="IBUISectionFooterHeight">10</float>
 							</object>
 						</array>
-						<string key="NSFrame">{{0, 267}, {320, 101}}</string>
+						<string key="NSFrame">{{0, 259}, {320, 101}}</string>
 						<reference key="NSSuperview" ref="450203311"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="127633783"/>

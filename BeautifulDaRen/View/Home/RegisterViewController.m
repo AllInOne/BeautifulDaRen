@@ -25,6 +25,8 @@ enum
     ACCOUNT_SETTING_AVATAR
 };
 
+#define REGISTER_SCROLL_CONTENT_HEIGHT 440
+
 @interface RegisterViewController()
 
 @property (retain, nonatomic) IBOutlet UITableView * accountInfoTable;
@@ -64,8 +66,7 @@ enum
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.scrollView setContentSize:CGSizeMake(320, 510)];
-    self.registerButton.titleLabel.text = NSLocalizedString(@"register",@"");
+    [self.scrollView setContentSize:CGSizeMake(self.view.frame.size.width, REGISTER_SCROLL_CONTENT_HEIGHT)];
     self.noticeForuseLabel.text = NSLocalizedString(@"notice_for_use",@"");
     // Do any additional setup after loading the view from its nib.
 }
@@ -97,7 +98,7 @@ enum
 #pragma mark UITableViewDelegate
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 50;
+    return 40;
 }
 
 #pragma mark UITableViewDataSource
@@ -148,6 +149,8 @@ enum
             case ACCOUNT_SETTING_CITY:
             {
                 ((AccountInfoInputCell*)cell).inputLabel.text = NSLocalizedString(@"local_city", @"");
+                ((AccountInfoInputCell*)cell).secondLabel.text = NSLocalizedString(@"to_select", @"");
+                ((AccountInfoInputCell*)cell).imageView.image = [UIImage imageNamed:@"first"];
                 break;
             }
             case ACCOUNT_SETTING_GENDER:
