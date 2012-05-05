@@ -41,8 +41,6 @@
         UIBarButtonItem * backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
         [self.navigationItem setLeftBarButtonItem:backButtonItem];
         
-        [backButton release];
-        
         _categoryListData = [[NSArray alloc] initWithObjects:@"鞋子", 
                                                          @"裙子",
                                                          @"裤子",

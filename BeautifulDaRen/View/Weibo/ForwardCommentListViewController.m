@@ -48,8 +48,6 @@
         backButton.frame = CGRectMake(0, 0, 50, 30);
         UIBarButtonItem * backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
         [self.navigationItem setLeftBarButtonItem:backButtonItem];
-        
-        [backButton release];
     }
     return self;
 }

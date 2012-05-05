@@ -56,8 +56,6 @@
         UIBarButtonItem * backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
         [self.navigationItem setLeftBarButtonItem:backButtonItem];
         
-        [backButton release];
-        
         self.navigationItem.title = @"微博详情";
         
         //Content for test

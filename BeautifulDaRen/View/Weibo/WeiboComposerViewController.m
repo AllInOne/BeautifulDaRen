@@ -58,9 +58,7 @@
         backButton.frame = CGRectMake(0, 0, 50, 30);
         UIBarButtonItem * backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
         [self.navigationItem setLeftBarButtonItem:backButtonItem];
-        
-        [backButton release];
-        
+
         UIButton * sendButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [sendButton setBackgroundImage:[UIImage imageNamed:@"顶部按钮50x29.png"] forState:UIControlStateNormal];
         [sendButton setTitle:@"发送" forState:UIControlStateNormal];

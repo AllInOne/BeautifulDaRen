@@ -447,7 +447,7 @@ redirectURI = _redirectURI;
 		return NO;
 	}
 	
-	APIBase *apiRequest = [[APIBase alloc] initWithTarget:self andSelector:@selector(addAlbumResponse:) andHttpMethod:@"POST"];
+	APIBase *apiRequest = [[[APIBase alloc] initWithTarget:self andSelector:@selector(addAlbumResponse:) andHttpMethod:@"POST"] autorelease];
 	NSString * fullURL = [kRestserverBaseURL stringByAppendingString:@"photo/add_album"];
 	[apiRequest openUrl:fullURL token:_accessToken openid:_openId appid:_appId params:params];
 	[_apiRequests setObject:apiRequest forKey:[NSString stringWithFormat:@"%d", apiRequest.seq]];
