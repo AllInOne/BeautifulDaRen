@@ -10,6 +10,6 @@
 
 @protocol ButtonPressDelegate <NSObject>
 
-- (void) didButtonPressed: (UIView *) view;
+- (void) didButtonPressed:(UIButton*)button  inView:(UIView *) view;
 
 @end

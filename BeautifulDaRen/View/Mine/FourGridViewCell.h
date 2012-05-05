@@ -20,6 +20,11 @@
 @property (retain, nonatomic) IBOutlet UILabel * rightBottomLabelName;
 @property (retain, nonatomic) IBOutlet UILabel * rightBottomLabelNumber;
 
+@property (retain, nonatomic) IBOutlet UIButton * leftTopButton;
+@property (retain, nonatomic) IBOutlet UIButton * leftButtomButton;
+@property (retain, nonatomic) IBOutlet UIButton * rightTopButton;
+@property (retain, nonatomic) IBOutlet UIButton * rightButtomButton;
+
 @property (retain, nonatomic) id<ButtonPressDelegate> delegate;
 
 @end

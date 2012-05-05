@@ -15,6 +15,10 @@
 #import "UserAccount.h"
 
 @interface MyInfoViewController()
+@property (retain, nonatomic) IBOutlet UIButton * followButton;
+@property (retain, nonatomic) IBOutlet UIButton * fansButton;
+@property (retain, nonatomic) IBOutlet UIButton * collectionButton;
+@property (retain, nonatomic) IBOutlet UIButton * blackListButton;
 
 // TODO use core data.
 @property (retain, nonatomic) UserAccount * userAccount;
@@ -22,6 +26,11 @@
 @end
 
 @implementation MyInfoViewController
+@synthesize followButton;
+@synthesize fansButton;
+@synthesize collectionButton;
+@synthesize blackListButton;
+
 @synthesize userAccount;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -106,6 +115,7 @@
         if(!cell) {
             cell = [[[NSBundle mainBundle] loadNibNamed:fourGridViewIndentifier owner:self options:nil] objectAtIndex:0];
         }
+        ((FourGridViewCell*)cell).delegate = self;
         ((FourGridViewCell*)cell).leftTopLabelName.text = NSLocalizedString(@"follow", @"");
         ((FourGridViewCell*)cell).leftTopLabelNumber.text = @"(10)";
         ((FourGridViewCell*)cell).rightTopLabelName.text = NSLocalizedString(@"fans", @"");
@@ -114,6 +124,11 @@
         ((FourGridViewCell*)cell).leftBottomLabelNumber.text = @"(12)";
         ((FourGridViewCell*)cell).rightBottomLabelName.text = NSLocalizedString(@"black_list", @"");
         ((FourGridViewCell*)cell).rightBottomLabelNumber.text = @"(32)";
+        
+        self.followButton = ((FourGridViewCell*)cell).leftTopButton;
+        self.fansButton = ((FourGridViewCell*)cell).rightTopButton;
+        self.collectionButton = ((FourGridViewCell*)cell).leftButtomButton;
+        self.blackListButton = ((FourGridViewCell*)cell).rightButtomButton;
     }
     else if (section == 2) {
         cell = [tableView dequeueReusableCellWithIdentifier:buttonViewCellIdentifier];
@@ -267,9 +282,28 @@
 }
 
 #pragma mark ButtonPressDelegate
-- (void) didButtonPressed: (UIView *)view
+- (void) didButtonPressed:(UIButton*)button inView:(UIView *)view
 {
-    NSLog(@"button pressed");
+    if(button == self.followButton)
+    {
+        NSLog(@"followButton pressed");
+    }
+    else if (button == self.fansButton)
+    {
+        NSLog(@"fansButton pressed");
+    }
+    else if (button == self.collectionButton)
+    {
+        NSLog(@"collectionButton pressed");
+    }
+    else if (button == self.blackListButton)
+    {
+        NSLog(@"blackListButton pressed");
+    }
+    else
+    {
+        NSAssert(NO, @"There is not any other button should be pressed!");
+    }
 }
 
 @end

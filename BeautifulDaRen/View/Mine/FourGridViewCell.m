@@ -18,6 +18,11 @@
 @synthesize rightBottomLabelName;
 @synthesize rightBottomLabelNumber;
 
+@synthesize leftTopButton;
+@synthesize leftButtomButton;
+@synthesize rightTopButton;
+@synthesize rightButtomButton;
+
 @synthesize delegate;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -38,7 +43,8 @@
 
 - (IBAction)buttonPressed:(id)sender
 {
-    [self.delegate didButtonPressed: self];
+    NSAssert([sender isKindOfClass:[UIButton class]], @"sender is not a ");
+    [self.delegate didButtonPressed:sender inView:self];
 }
 
 @end
