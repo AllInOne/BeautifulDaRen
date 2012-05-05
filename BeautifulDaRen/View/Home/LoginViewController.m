@@ -124,12 +124,14 @@
             {
                 // "user name"
                 ((AccountInfoInputCell*)cell).inputLabel.text = NSLocalizedString(@"user_name", @"user name");
+                ((AccountInfoInputCell*)cell).inputTextField.delegate = self;
                 break;
             }
             case 1:
             {
                 // "password"
                 ((AccountInfoInputCell*)cell).inputLabel.text = NSLocalizedString(@"password", @"password");
+                ((AccountInfoInputCell*)cell).inputTextField.delegate = self;
                 break;
             }
         }
@@ -160,5 +162,11 @@
     NSLog(@"TODO loginButtonSelected IN LoginViewController.m");
 }
 
+#pragma mark UITextFieldDelegate
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
 
 @end

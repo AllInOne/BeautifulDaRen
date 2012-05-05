@@ -38,6 +38,7 @@ enum
 @end
 
 @implementation RegisterViewController
+
 @synthesize accountInfoTable;
 @synthesize loginWithExtenalTable;
 @synthesize registerButton;
@@ -134,16 +135,19 @@ enum
             case ACCOUNT_SETTING_USER_ID:
             {
                 ((AccountInfoInputCell*)cell).inputLabel.text = NSLocalizedString(@"account_user_account", @"");
+                ((AccountInfoInputCell*)cell).inputTextField.delegate = self;
                 break;
             }
             case ACCOUNT_SETTING_PASSWORD:
             {
                 ((AccountInfoInputCell*)cell).inputLabel.text = NSLocalizedString(@"password", @"");
+                ((AccountInfoInputCell*)cell).inputTextField.delegate = self;
                 break;
             }
             case ACCOUNT_SETTING_EMAIL:
             {
                 ((AccountInfoInputCell*)cell).inputLabel.text = NSLocalizedString(@"account_register_email", @"");
+                ((AccountInfoInputCell*)cell).inputTextField.delegate = self;
                 break;
             }
             case ACCOUNT_SETTING_CITY:
@@ -240,10 +244,15 @@ enum
             [[QZoneSDKManager sharedManager] loginWithDoneCallback:^(LOGIN_STATUS status) {
                 NSLog(@"QZone login done, status:%d", status);
             }];
-        
         }
-    }    
-    
+    }
+}
+
+#pragma mark UITextFieldDelegate
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
 }
 
 @end
