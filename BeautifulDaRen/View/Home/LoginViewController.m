@@ -8,6 +8,7 @@
 
 #import "LoginViewController.h"
 #import "AccountInfoInputCell.h"
+#import "RegisterViewController.h"
 #import "ButtonViewCell.h"
 #import "SinaSDKManager.h"
 #import "QZoneSDKManager.h"
@@ -154,7 +155,26 @@
 }
 
 #pragma mark UITableViewDelegate
-
+-(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(tableView == self.registerTable)
+    {
+        RegisterViewController * registerController = [[RegisterViewController alloc] initWithNibName:@"RegisterViewController" bundle:nil];
+        [self.navigationController pushViewController:registerController animated:YES];
+    }
+    else if(tableView == self.loginWithExtenalTable)
+    {
+        if ([indexPath row] == 0) {
+            
+        }
+        else
+        {
+            [[QZoneSDKManager sharedManager] loginWithDoneCallback:^(LOGIN_STATUS status) {
+                NSLog(@"QZone login done, status:%d", status);
+            }];
+        }
+    }
+}
 
 #pragma mark LoginViewController
 - (IBAction)loginButtonSelected:(id)sender

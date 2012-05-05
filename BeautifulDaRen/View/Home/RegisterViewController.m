@@ -32,9 +32,10 @@ enum
 @property (retain, nonatomic) IBOutlet UITableView * accountInfoTable;
 @property (retain, nonatomic) IBOutlet UITableView * loginWithExtenalTable;
 @property (retain, nonatomic) IBOutlet UIButton * registerButton;
-@property (retain, nonatomic) IBOutlet UILabel * noticeForuseLabel;
+@property (retain, nonatomic) IBOutlet UIButton * noticeForUseButton;
 
 @property (retain, nonatomic) IBOutlet UIScrollView * scrollView;
+
 @end
 
 @implementation RegisterViewController
@@ -42,7 +43,7 @@ enum
 @synthesize accountInfoTable;
 @synthesize loginWithExtenalTable;
 @synthesize registerButton;
-@synthesize noticeForuseLabel;
+@synthesize noticeForUseButton;
 @synthesize scrollView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -68,8 +69,6 @@ enum
 {
     [super viewDidLoad];
     [self.scrollView setContentSize:CGSizeMake(self.view.frame.size.width, REGISTER_SCROLL_CONTENT_HEIGHT)];
-    self.noticeForuseLabel.text = NSLocalizedString(@"notice_for_use",@"");
-    // Do any additional setup after loading the view from its nib.
 }
 
 - (void)viewDidUnload
@@ -85,10 +84,18 @@ enum
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+#pragma mark Action
+
 -(IBAction)registerButtonSelected:(id)sender
 {
     // TODO 
     NSLog(@"TO handle register button.");
+}
+
+-(IBAction)noticeForUseSelected:(id)sender
+{
+    // TODO
+    NSLog(@"TO handle notice for use button.");
 }
 
 -(void) genderChooserAction: (UISegmentedControl*)seg
@@ -196,7 +203,6 @@ enum
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     if(tableView == self.accountInfoTable)
     {
         switch ([indexPath row]) {

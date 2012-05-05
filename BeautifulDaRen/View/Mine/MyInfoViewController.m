@@ -278,7 +278,49 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    NSInteger section = [indexPath section];
+    // 我发表的 and 私信
+    if(section == 2)
+    {
+        switch ([indexPath row]) {
+            case 0:
+            {
+                // TODO
+                NSLog(@"To handle press my publish");
+                break;
+            }
+            case 1:
+            {
+                // TODO
+                NSLog(@"To handle press private letter");
+                break;
+            }
+        }
+    }
+    // @我 and 评论我的
+    else if(section == 3)
+    {
+        switch ([indexPath row]) {
+            case 0:
+            {
+                // TODO
+                NSLog(@"To handle press @me");
+                break;
+            }
+            case 1:
+            {
+                // TODO
+                NSLog(@"To handle press comment me");
+                break;
+            }
+        }
+    }
+    // 我的兴趣
+    else if(section == 4)
+    {
+        // TODO
+        NSLog(@"To handle press my interesting");
+    }
 }
 
 #pragma mark ButtonPressDelegate
