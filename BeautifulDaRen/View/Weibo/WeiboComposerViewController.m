@@ -48,14 +48,28 @@
         
         
         [_weiboContentTextView setDelegate:self];
+
+        UIButton * backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [backButton setBackgroundImage:[UIImage imageNamed:@"顶部按钮50x29.png"] forState:UIControlStateNormal];
+        [backButton setTitle:@"返回" forState:UIControlStateNormal];
+        [backButton addTarget:self action:@selector(onBackButtonClicked) forControlEvents:UIControlEventTouchUpInside];
         
-        UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:(UIBarButtonItemStylePlain) target:self action:@selector(onBackButtonClicked)];
-        [self.navigationItem setLeftBarButtonItem:backButton];
+        [backButton.titleLabel setFont:[UIFont boldSystemFontOfSize:13]];
+        backButton.frame = CGRectMake(0, 0, 50, 30);
+        UIBarButtonItem * backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+        [self.navigationItem setLeftBarButtonItem:backButtonItem];
         
         [backButton release];
         
-        UIBarButtonItem *sendButton = [[UIBarButtonItem alloc] initWithTitle:@"发送" style:(UIBarButtonItemStylePlain) target:self action:@selector(onSendButtonClicked)];
-        [self.navigationItem setRightBarButtonItem:sendButton];
+        UIButton * sendButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [sendButton setBackgroundImage:[UIImage imageNamed:@"顶部按钮50x29.png"] forState:UIControlStateNormal];
+        [sendButton setTitle:@"发送" forState:UIControlStateNormal];
+        [sendButton addTarget:self action:@selector(onSendButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+        
+        [sendButton.titleLabel setFont:[UIFont boldSystemFontOfSize:13]];
+        sendButton.frame = CGRectMake(0, 0, 50, 30);
+        UIBarButtonItem * sendButtonItem = [[UIBarButtonItem alloc] initWithCustomView:sendButton];
+        [self.navigationItem setRightBarButtonItem:sendButtonItem];
         
         [sendButton release];
     }

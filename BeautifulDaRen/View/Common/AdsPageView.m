@@ -123,7 +123,7 @@
             [self.firstImageView setHidden:NO];
             [self.secondImageView setHidden:YES];
 
-        [[self.firstImageView layer] addAnimation:[self getAnimation:kCATransitionFromLeft] forKey:@"pageTurnAnimation"];
+        [[self.firstImageView layer] addAnimation:[self getAnimation:kCATransitionFromRight] forKey:@"pageTurnAnimation"];
     }
 }
 

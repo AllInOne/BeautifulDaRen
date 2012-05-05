@@ -47,6 +47,11 @@
     [super viewDidLoad];
     self.delegate = self;
     [self initLocalizedString];
+
+    if (!SYSTEM_VERSION_LESS_THAN(@"5.0"))
+    {
+        [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"顶部背景.png"] forBarMetrics:UIBarMetricsDefault];
+    }
 }
 
 - (void)viewDidUnload
@@ -82,11 +87,6 @@
         NSArray* textArray = [localizedStringsArray objectAtIndex:index++];
         [navigationItem setTitle:[textArray objectAtIndex:0]];
         navigation.tabBarItem.title = [textArray objectAtIndex:1];
-        
-        if (!SYSTEM_VERSION_LESS_THAN(@"5.0"))
-        {
-            [navigation.navigationBar setBackgroundImage:[UIImage imageNamed:@"顶部背景.png"] forBarMetrics:UIBarMetricsDefault];
-        }
     }
 
     if (SYSTEM_VERSION_LESS_THAN(@"5.0")) {
