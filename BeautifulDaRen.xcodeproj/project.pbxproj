@@ -30,8 +30,6 @@
 		C26717AF1542BF0000DC40D8 /* CommonScrollView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C26717A71542BF0000DC40D8 /* CommonScrollView.xib */; };
 		C26717B01542BF0000DC40D8 /* CommonScrollViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C26717A91542BF0000DC40D8 /* CommonScrollViewItem.m */; };
 		C26717B11542BF0000DC40D8 /* CommonScrollViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = C26717AA1542BF0000DC40D8 /* CommonScrollViewItem.xib */; };
-		C26717B21542BF0000DC40D8 /* UserInforCellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C26717AC1542BF0000DC40D8 /* UserInforCellViewController.m */; };
-		C26717B31542BF0000DC40D8 /* UserInforCellViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C26717AD1542BF0000DC40D8 /* UserInforCellViewController.xib */; };
 		C26717BA1542BF2200DC40D8 /* CategoryContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C26717B51542BF2200DC40D8 /* CategoryContentViewController.m */; };
 		C26717BB1542BF2200DC40D8 /* CategoryContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C26717B61542BF2200DC40D8 /* CategoryContentViewController.xib */; };
 		C26717BC1542BF2200DC40D8 /* CategoryItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C26717B81542BF2200DC40D8 /* CategoryItemCell.m */; };
@@ -266,9 +264,6 @@
 		C26717A81542BF0000DC40D8 /* CommonScrollViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonScrollViewItem.h; sourceTree = "<group>"; };
 		C26717A91542BF0000DC40D8 /* CommonScrollViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonScrollViewItem.m; sourceTree = "<group>"; };
 		C26717AA1542BF0000DC40D8 /* CommonScrollViewItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommonScrollViewItem.xib; sourceTree = "<group>"; };
-		C26717AB1542BF0000DC40D8 /* UserInforCellViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInforCellViewController.h; sourceTree = "<group>"; };
-		C26717AC1542BF0000DC40D8 /* UserInforCellViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInforCellViewController.m; sourceTree = "<group>"; };
-		C26717AD1542BF0000DC40D8 /* UserInforCellViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserInforCellViewController.xib; sourceTree = "<group>"; };
 		C26717B41542BF2200DC40D8 /* CategoryContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryContentViewController.h; sourceTree = "<group>"; };
 		C26717B51542BF2200DC40D8 /* CategoryContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryContentViewController.m; sourceTree = "<group>"; };
 		C26717B61542BF2200DC40D8 /* CategoryContentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CategoryContentViewController.xib; sourceTree = "<group>"; };
@@ -1140,9 +1135,6 @@
 				CE62B35F1551790A0017AA88 /* SelectCityViewController.h */,
 				CE62B3601551790A0017AA88 /* SelectCityViewController.m */,
 				CE62B3611551790A0017AA88 /* SelectCityViewController.xib */,
-				C26717AB1542BF0000DC40D8 /* UserInforCellViewController.h */,
-				C26717AC1542BF0000DC40D8 /* UserInforCellViewController.m */,
-				C26717AD1542BF0000DC40D8 /* UserInforCellViewController.xib */,
 				CE7C9D1715400ED000F3812F /* ViewConstants.h */,
 			);
 			path = Common;
@@ -1298,7 +1290,6 @@
 				C24776441540645600D2A487 /* UnRegisterTopView.xib in Resources */,
 				C26717AF1542BF0000DC40D8 /* CommonScrollView.xib in Resources */,
 				C26717B11542BF0000DC40D8 /* CommonScrollViewItem.xib in Resources */,
-				C26717B31542BF0000DC40D8 /* UserInforCellViewController.xib in Resources */,
 				C26717BB1542BF2200DC40D8 /* CategoryContentViewController.xib in Resources */,
 				C26717BD1542BF2200DC40D8 /* CategoryItemCell.xib in Resources */,
 				C29F6664154310B300292031 /* (null) in Resources */,
@@ -1418,7 +1409,6 @@
 				C2477647154065CD00D2A487 /* UnRegisterTopView.m in Sources */,
 				C26717AE1542BF0000DC40D8 /* CommonScrollView.m in Sources */,
 				C26717B01542BF0000DC40D8 /* CommonScrollViewItem.m in Sources */,
-				C26717B21542BF0000DC40D8 /* UserInforCellViewController.m in Sources */,
 				C26717BA1542BF2200DC40D8 /* CategoryContentViewController.m in Sources */,
 				C26717BC1542BF2200DC40D8 /* CategoryItemCell.m in Sources */,
 				C29F6663154310B300292031 /* (null) in Sources */,
