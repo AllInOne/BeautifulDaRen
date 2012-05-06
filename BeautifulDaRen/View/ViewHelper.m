@@ -59,7 +59,7 @@
     [backButton setTitle:title forState:UIControlStateNormal];
     [backButton addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     
-    [backButton.titleLabel setFont:[UIFont boldSystemFontOfSize:14]];
+    [backButton.titleLabel setFont:[UIFont systemFontOfSize:13]];
     [backButton setTitleColor:[UIColor purpleColor] forState:UIControlStateNormal];
     backButton.frame = CGRectMake(0, 0, 50, 30);
     return [[UIBarButtonItem alloc] initWithCustomView:backButton];

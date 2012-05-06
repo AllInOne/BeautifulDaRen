@@ -13,6 +13,6 @@
 @interface AdsPageView : UIViewController
 
 @property (nonatomic, retain) IBOutlet UIPageControl * adsPageController;
-
+@property (nonatomic, retain) IBOutlet UIButton * adsButton;
 -(IBAction)onAdsPressed:(id)sender;
 @end

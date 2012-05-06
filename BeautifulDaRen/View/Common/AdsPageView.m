@@ -9,19 +9,27 @@
 #import "AdsPageView.h"
 #import "ViewConstants.h"
 
-#define ADS_EXCHANGE_TIME_OUT_SECONDS   (3.0)
+#define ADS_EXCHANGE_TIME_OUT_SECONDS   (5.0)
+#define ADS_ANIMATION_DURATION          (0.5)
 #define MAX_ADS_PAGES                   (4)
 
 @interface AdsPageView ()
 @property (nonatomic, assign) int currentPage;
 @property (nonatomic, assign) NSMutableArray * adsImageNames;
-@property (nonatomic, assign) UIImageView * firstImageView;
-@property (nonatomic, assign) UIImageView * secondImageView;
+@property (nonatomic, retain) UIImageView * firstImageView;
+@property (nonatomic, retain) UIImageView * secondImageView;
 
 @property (nonatomic, retain) NSTimer * adsExchangeTimer;
+
+@property (nonatomic, assign) bool isNextImageFromLeft;
+@property (nonatomic, assign) bool isNextImageInitialized;
+@property (nonatomic, assign) bool isAdsAutoChangeDisabled;
+
 -(void)transitionPage:(int)from toPage:(int)to;
 -(CATransition *) getAnimation:(NSString *) direction;
 - (void)handleTimeOut:(NSTimer*)theTimer;
+-(void)setCurrentPageIndex:(int)currentPage;
+-(CABasicAnimation*)getAnimation;
 @end
 
 @implementation AdsPageView
@@ -32,6 +40,11 @@
 @synthesize adsExchangeTimer = _adsExchangeTimer;
 @synthesize firstImageView = _firstImageView;
 @synthesize secondImageView = _secondImageView;
+
+@synthesize adsButton = _adsButton;
+@synthesize isNextImageFromLeft = _isNextImageFromLeft;
+@synthesize isNextImageInitialized = _isNextImageInitialized;
+@synthesize isAdsAutoChangeDisabled;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -59,16 +72,17 @@
 }
 
 - (void)dealloc {
-    [_adsPageController release];
     [super dealloc];
 }
 
 #pragma mark - View lifecycle
 - (void)viewDidUnload
 {
-    [super viewDidUnload];
+    self.adsImageNames = nil;
+    self.adsPageController = nil;
     [_adsExchangeTimer invalidate];
     [_adsExchangeTimer release];
+    [super viewDidUnload];
 }
 
 
@@ -81,6 +95,10 @@
                                                      userInfo:nil
                                                       repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:self.adsExchangeTimer forMode:NSDefaultRunLoopMode];
+    
+    UIPanGestureRecognizer * adsDragGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(onAdsDragged:)];
+    [self.view addGestureRecognizer:adsDragGesture];
+    [adsDragGesture release];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -99,15 +117,24 @@
 
 - (void)handleTimeOut:(NSTimer*)theTimer
 {
-    int destPage = 0;
-    if (currentPage != (MAX_ADS_PAGES - 1)) {
-        destPage = currentPage + 1;
+    if (!self.isAdsAutoChangeDisabled)
+    {
+        int destPage = 0;
+        if (currentPage != (MAX_ADS_PAGES - 1)) {
+            destPage = currentPage + 1;
+        }
+        
+        [self transitionPage:currentPage toPage: destPage];
+        
+        [self setCurrentPageIndex:destPage];
     }
-    
-    [self transitionPage:currentPage toPage: destPage];
-    
-    [self.adsPageController setCurrentPage:destPage];
-    currentPage = destPage;
+}
+
+-(void)setCurrentPageIndex:(int)pageIndex
+{
+    NSLog(@"setCurrentPageIndex:%d:%d", self.currentPage, pageIndex);
+    [self.adsPageController setCurrentPage:pageIndex];
+    self.currentPage = pageIndex;
 }
 
 -(void)pageTurn:(UIPageControl*)pageControl{
@@ -116,14 +143,25 @@
 
 -(void)transitionPage:(int)from toPage:(int)to{
     if (from!=to) {
-
-            [self.firstImageView setImage:[UIImage imageNamed:[self.adsImageNames objectAtIndex:from]]];
-            [self.secondImageView setImage:[UIImage imageNamed:[self.adsImageNames objectAtIndex:to]]];
+        self.secondImageView.center = CGPointMake(160, self.secondImageView.center.y);
+        self.firstImageView.center = CGPointMake(160, self.firstImageView.center.y);
         
-            [self.firstImageView setHidden:NO];
-            [self.secondImageView setHidden:YES];
-
-        [[self.firstImageView layer] addAnimation:[self getAnimation:kCATransitionFromRight] forKey:@"pageTurnAnimation"];
+        [self.firstImageView setImage:[UIImage imageNamed:[self.adsImageNames objectAtIndex:from]]];
+        
+        CABasicAnimation * firstAnimation = [self getAnimation];
+        [firstAnimation setFromValue:[NSValue valueWithCGPoint:CGPointMake(160, self.secondImageView.center.y)]];
+        [firstAnimation setToValue:[NSValue valueWithCGPoint:CGPointMake(-160, self.firstImageView.center.y)]];
+        
+        [[self.firstImageView layer] addAnimation:firstAnimation forKey:@"firstImageGoBackAutoAnimation"];
+        
+        [self.secondImageView setHidden:NO];
+        [self.secondImageView setImage:[UIImage imageNamed:[self.adsImageNames objectAtIndex:to]]];        
+        
+        CABasicAnimation * secondAnimation = [self getAnimation];
+        [secondAnimation setFromValue:[NSValue valueWithCGPoint:CGPointMake(480, self.secondImageView.center.y)]];
+        [secondAnimation setToValue:[NSValue valueWithCGPoint:CGPointMake(160, self.secondImageView.center.y)]];
+        
+        [[self.secondImageView layer] addAnimation:secondAnimation forKey:@"secondImageGoBackAutoAnimation"];   
     }
 }
 
@@ -143,4 +181,118 @@
     NSLog(@"Ads Pressed, current ads index = %d", currentPage);
 }
 
+- (void)onAdsDragged:(UIPanGestureRecognizer *)sender
+{
+    switch (sender.state) {
+        case UIGestureRecognizerStateBegan: {
+            self.secondImageView.center = CGPointMake(160, self.secondImageView.center.y);
+            self.firstImageView.center = CGPointMake(160, self.firstImageView.center.y);
+            [self.firstImageView setImage:[UIImage imageNamed:[self.adsImageNames objectAtIndex:self.currentPage]]];
+            self.isNextImageInitialized = NO;
+            self.isAdsAutoChangeDisabled = YES;
+            [self.firstImageView setHidden:NO];
+            [self.secondImageView setHidden:NO];
+            break;
+        }
+        case UIGestureRecognizerStateChanged: {
+            CGPoint delta = [sender translationInView:self.firstImageView];
+            if (delta.x != 0) {
+                int nextAdsPage = 0;
+                if ((self.firstImageView.center.x + delta.x) > 160)
+                {
+                    _isNextImageFromLeft = YES;
+                }
+                else
+                {
+                    _isNextImageFromLeft = NO;
+                }
+                
+                if (!self.isNextImageInitialized)
+                {
+                    if (_isNextImageFromLeft) {
+                        nextAdsPage = (self.currentPage > 0 ? (self.currentPage - 1) : (MAX_ADS_PAGES - 1));
+                    }
+                    else
+                    {
+                        nextAdsPage = (self.currentPage < (MAX_ADS_PAGES - 1) ? (self.currentPage + 1) : 0);                    
+                    }
+                    [self.secondImageView setImage:[UIImage imageNamed:[self.adsImageNames objectAtIndex: nextAdsPage]]];
+                self.secondImageView.center = CGPointMake(self.firstImageView.center.x + ( _isNextImageFromLeft ? (-320) : 320 ), self.firstImageView.center.y);
+                    self.isNextImageInitialized = YES;
+                }
+                                                
+                self.firstImageView.center = CGPointMake(self.firstImageView.center.x + delta.x, self.firstImageView.center.y);
+                self.secondImageView.center = CGPointMake(self.secondImageView.center.x + delta.x, self.secondImageView.center.y);
+                [sender setTranslation:CGPointZero inView:self.secondImageView];
+                [sender setTranslation:CGPointZero inView:self.firstImageView];
+            }
+
+            break;
+        }
+        case UIGestureRecognizerStateCancelled:
+        case UIGestureRecognizerStateEnded: 
+        {
+            CABasicAnimation *firstImageGoBackAnimation = [self getAnimation];
+            [firstImageGoBackAnimation setFromValue:[NSValue valueWithCGPoint:self.firstImageView.center]];
+
+            CABasicAnimation *secondImageGoBackAnimation = [self getAnimation];
+            [secondImageGoBackAnimation setFromValue:[NSValue valueWithCGPoint:self.secondImageView.center]];
+
+            if (self.firstImageView.center.x <= 90)
+            {
+                [firstImageGoBackAnimation setToValue:[NSValue valueWithCGPoint:CGPointMake(-160, self.firstImageView.center.y)]];
+                self.firstImageView.center = CGPointMake(-160, self.firstImageView.center.y);
+                
+                
+                [secondImageGoBackAnimation setToValue:[NSValue valueWithCGPoint:CGPointMake(160, self.secondImageView.center.y)]];
+                self.secondImageView.center = CGPointMake(160, self.secondImageView.center.y);
+                
+                [self setCurrentPageIndex:(self.currentPage < (MAX_ADS_PAGES - 1) ? (self.currentPage + 1) : 0)];
+            }
+            else if (self.firstImageView.center.x >= 270)
+            {
+                [firstImageGoBackAnimation setToValue:[NSValue valueWithCGPoint:CGPointMake(480, self.firstImageView.center.y)]];
+                self.firstImageView.center = CGPointMake(480, self.firstImageView.center.y);
+                
+                
+                [secondImageGoBackAnimation setToValue:[NSValue valueWithCGPoint:CGPointMake(160, self.secondImageView.center.y)]];
+                self.secondImageView.center = CGPointMake(160, self.secondImageView.center.y);
+                
+                [self setCurrentPageIndex:(self.currentPage > 0 ? (self.currentPage - 1) : (MAX_ADS_PAGES - 1))];
+            }
+            else
+            {
+                [firstImageGoBackAnimation setToValue:[NSValue valueWithCGPoint:CGPointMake(160, self.firstImageView.center.y)]];
+                self.firstImageView.center = CGPointMake(160, self.firstImageView.center.y);
+
+                if (self.isNextImageFromLeft) {
+                    [secondImageGoBackAnimation setToValue:[NSValue valueWithCGPoint:CGPointMake(-160, self.secondImageView.center.y)]];
+                    self.secondImageView.center = CGPointMake(-160, self.secondImageView.center.y); 
+                }
+                else
+                {
+                    [secondImageGoBackAnimation setToValue:[NSValue valueWithCGPoint:CGPointMake(480, self.secondImageView.center.y)]];
+                    self.secondImageView.center = CGPointMake(480, self.secondImageView.center.y); 
+                }
+            }
+            
+            [[self.firstImageView layer] addAnimation:firstImageGoBackAnimation forKey:@"firstImageGoBackAnimation"];
+            [[self.secondImageView layer] addAnimation:secondImageGoBackAnimation forKey:@"secondImageGoBackAnimation"];
+            self.isAdsAutoChangeDisabled = NO;
+            break;
+        }
+        default:
+            break;
+    }
+}
+-(CABasicAnimation*)getAnimation
+{
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
+    [animation setDuration:ADS_ANIMATION_DURATION];
+    [animation setBeginTime:CACurrentMediaTime()];
+    [animation setAutoreverses:NO];
+    [animation setRepeatCount:0];
+    
+    return animation;
+}
 @end

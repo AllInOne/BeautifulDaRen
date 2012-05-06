@@ -4,7 +4,7 @@
    version = "1.0">
    <FileBreakpoints>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
@@ -18,7 +18,7 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
@@ -44,20 +44,6 @@
          endingLineNumber = "107"
          landmarkName = "-viewDidUnload"
          landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "BeautifulDaRen/Controller/DataManager.m"
-         timestampString = "357561852.325966"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "13"
-         endingLineNumber = "13"
-         landmarkName = "@implementation DataManager"
-         landmarkType = "3">
       </FileBreakpoint>
    </FileBreakpoints>
    <SymbolicBreakpoints>

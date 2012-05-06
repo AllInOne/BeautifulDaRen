@@ -55,19 +55,18 @@
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<int key="IBUINumberOfPages">3</int>
 							</object>
-							<object class="IBUIButton" id="656488933">
+							<object class="IBUIButton" id="30700287">
 								<reference key="NSNextResponder" ref="801499767"/>
 								<int key="NSvFlags">292</int>
 								<string key="NSFrameSize">{320, 136}</string>
 								<reference key="NSSuperview" ref="801499767"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="975356761"/>
 								<string key="NSReuseIdentifierKey">_NS:225</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
-								<object class="NSColor" key="IBUIHighlightedTitleColor" id="260260032">
+								<object class="NSColor" key="IBUIHighlightedTitleColor">
 									<int key="NSColorSpace">3</int>
 									<bytes key="NSWhite">MQA</bytes>
 								</object>
@@ -75,7 +74,10 @@
 									<int key="NSColorSpace">1</int>
 									<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 								</object>
-								<reference key="IBUINormalTitleShadowColor" ref="260260032"/>
+								<object class="NSColor" key="IBUINormalTitleShadowColor">
+									<int key="NSColorSpace">3</int>
+									<bytes key="NSWhite">MC41AA</bytes>
+								</object>
 								<object class="IBUIFontDescription" key="IBUIFontDescription">
 									<int key="type">2</int>
 									<double key="pointSize">15</double>
@@ -90,7 +92,7 @@
 						<string key="NSFrameSize">{320, 136}</string>
 						<reference key="NSSuperview" ref="744383833"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="656488933"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:196</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
@@ -136,11 +138,11 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">onAdsPressed:</string>
-						<reference key="source" ref="656488933"/>
+						<reference key="source" ref="30700287"/>
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">7</int>
 					</object>
-					<int key="connectionID">23</int>
+					<int key="connectionID">28</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -175,7 +177,7 @@
 						<reference key="object" ref="801499767"/>
 						<array class="NSMutableArray" key="children">
 							<reference ref="975356761"/>
-							<reference ref="656488933"/>
+							<reference ref="30700287"/>
 						</array>
 						<reference key="parent" ref="744383833"/>
 					</object>
@@ -185,8 +187,8 @@
 						<reference key="parent" ref="801499767"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">22</int>
-						<reference key="object" ref="656488933"/>
+						<int key="objectID">27</int>
+						<reference key="object" ref="30700287"/>
 						<reference key="parent" ref="801499767"/>
 					</object>
 				</array>
@@ -197,8 +199,7 @@
 				<string key="-2.CustomClassName">UIResponder</string>
 				<string key="-2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="17.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="22.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<real value="0.0" key="22.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
+				<string key="27.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="4.CustomClassName">AdsPageView</string>
 				<string key="4.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="7.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -207,7 +208,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">23</int>
+			<int key="maxID">28</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -225,17 +226,20 @@
 							<string key="candidateClassName">id</string>
 						</object>
 					</object>
-					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">adsPageController</string>
-						<string key="NS.object.0">UIPageControl</string>
-					</object>
-					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<string key="NS.key.0">adsPageController</string>
-						<object class="IBToOneOutletInfo" key="NS.object.0">
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="adsButton">UIButton</string>
+						<string key="adsPageController">UIPageControl</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="adsButton">
+							<string key="name">adsButton</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="adsPageController">
 							<string key="name">adsPageController</string>
 							<string key="candidateClassName">UIPageControl</string>
 						</object>
-					</object>
+					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/AdsPageView.h</string>

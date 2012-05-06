@@ -14,6 +14,5 @@
 @interface CategoryViewController : UIViewController
 
 @property (nonatomic, retain) AdsPageView * adsPageView;
-@property (nonatomic, retain) UserInforCellViewController * userInforCellView;
 @property (nonatomic, retain) CategoryContentViewController * categoryContentView;
 @end
