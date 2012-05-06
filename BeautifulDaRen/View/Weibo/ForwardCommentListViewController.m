@@ -39,15 +39,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        UIButton * backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [backButton setBackgroundImage:[UIImage imageNamed:@"顶部按钮50x29.png"] forState:UIControlStateNormal];
-        [backButton setTitle:@"返回" forState:UIControlStateNormal];
-        [backButton addTarget:self action:@selector(onBackButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-        
-        [backButton.titleLabel setFont:[UIFont boldSystemFontOfSize:13]];
-        backButton.frame = CGRectMake(0, 0, 50, 30);
-        UIBarButtonItem * backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-        [self.navigationItem setLeftBarButtonItem:backButtonItem];
+        [self.navigationItem setLeftBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onBackButtonClicked) title:@"返回"]];
     }
     return self;
 }

@@ -14,4 +14,5 @@
 
 @property (nonatomic, retain) IBOutlet UIPageControl * adsPageController;
 
+-(IBAction)onAdsPressed:(id)sender;
 @end

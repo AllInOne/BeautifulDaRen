@@ -8,6 +8,7 @@
 
 #import "WeiboForwardCommentViewController.h"
 #import "FriendsSelectionViewController.h"
+#import "ViewHelper.h"
 
 #define WEIBO_CONTENT_TEXTVIEW_Y_OFFSET (90.0)
 #define TOOL_BAR_HEIGHT                 (30.0)
@@ -27,28 +28,10 @@
         // Custom initialization
 
         [_weiboContentTextView setDelegate:self];
-        
-        UIButton * backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [backButton setBackgroundImage:[UIImage imageNamed:@"顶部按钮50x29.png"] forState:UIControlStateNormal];
-        [backButton setTitle:@"返回" forState:UIControlStateNormal];
-        [backButton addTarget:self action:@selector(onBackButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-        
-        [backButton.titleLabel setFont:[UIFont boldSystemFontOfSize:13]];
-        backButton.frame = CGRectMake(0, 0, 50, 30);
-        UIBarButtonItem * backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-        [self.navigationItem setLeftBarButtonItem:backButtonItem];
-        
-        UIButton * sendButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [sendButton setBackgroundImage:[UIImage imageNamed:@"顶部按钮50x29.png"] forState:UIControlStateNormal];
-        [sendButton setTitle:@"发送" forState:UIControlStateNormal];
-        [sendButton addTarget:self action:@selector(onSendButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-        
-        [sendButton.titleLabel setFont:[UIFont boldSystemFontOfSize:13]];
-        sendButton.frame = CGRectMake(0, 0, 50, 30);
-        UIBarButtonItem * sendButtonItem = [[UIBarButtonItem alloc] initWithCustomView:sendButton];
-        [self.navigationItem setRightBarButtonItem:sendButtonItem];
-        
-        [sendButton release];
+
+        [self.navigationItem setLeftBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onBackButtonClicked) title:@"返回"]];
+
+        [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onSendButtonClicked) title:@"发送"]];
     }
     return self;
 }

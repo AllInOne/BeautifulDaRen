@@ -52,4 +52,17 @@
     return size.height;
 }
 
++ (UIBarButtonItem*)getBarItemOfTarget:(id)target action:(SEL)action title:(NSString*)title
+{
+    UIButton * backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [backButton setBackgroundImage:[UIImage imageNamed:@"顶部按钮50x29.png"] forState:UIControlStateNormal];
+    [backButton setTitle:title forState:UIControlStateNormal];
+    [backButton addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    
+    [backButton.titleLabel setFont:[UIFont boldSystemFontOfSize:14]];
+    [backButton setTitleColor:[UIColor purpleColor] forState:UIControlStateNormal];
+    backButton.frame = CGRectMake(0, 0, 50, 30);
+    return [[UIBarButtonItem alloc] initWithCustomView:backButton];
+}
+
 @end

@@ -138,4 +138,9 @@
     return animation;
 }
 
+-(IBAction)onAdsPressed:(id)sender
+{
+    NSLog(@"Ads Pressed, current ads index = %d", currentPage);
+}
+
 @end
