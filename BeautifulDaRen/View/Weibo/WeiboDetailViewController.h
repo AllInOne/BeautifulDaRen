@@ -7,11 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UserInforCellViewController.h"
 
 @interface WeiboDetailViewController : UIViewController
 
-@property (nonatomic, retain) UserInforCellViewController * userInforCellView;
 @property (nonatomic, retain) IBOutlet UIScrollView * detailScrollView;
 @property (nonatomic, retain) NSString * userId;
 

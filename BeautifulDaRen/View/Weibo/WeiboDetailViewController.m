@@ -24,7 +24,6 @@
 
 @implementation WeiboDetailViewController
 
-@synthesize userInforCellView = _userInforCellView;
 @synthesize userId = _userId;
 @synthesize detailScrollView = _detailScrollView;
 @synthesize weiboContent = _weiboContent;
@@ -33,7 +32,6 @@
 
 - (void)dealloc
 {
-    [_userInforCellView release];
     [_detailScrollView release];
     [_userId release];
     [_weiboContent release];

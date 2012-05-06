@@ -171,8 +171,6 @@
 		CEBCD056154FF3A6000D41E1 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBCD055154FF3A6000D41E1 /* DataManager.m */; };
 		CEBCD05A15500CF8000D41E1 /* WeiboForwardCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBCD05715500CF8000D41E1 /* WeiboForwardCommentViewController.m */; };
 		CEBCD05D155018D9000D41E1 /* WeiboForwardCommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEBCD05C155018D9000D41E1 /* WeiboForwardCommentViewController.xib */; };
-		CEC0B583153EFBE000F20DC0 /* CameraShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC0B581153EFBE000F20DC0 /* CameraShareViewController.m */; };
-		CEC0B584153EFBE000F20DC0 /* CameraShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC0B582153EFBE000F20DC0 /* CameraShareViewController.xib */; };
 		CEC0B589153EFBE800F20DC0 /* CategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC0B587153EFBE800F20DC0 /* CategoryViewController.m */; };
 		CEC0B58A153EFBE800F20DC0 /* CategoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC0B588153EFBE800F20DC0 /* CategoryViewController.xib */; };
 		CEC0B58F153EFBF600F20DC0 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC0B58D153EFBF600F20DC0 /* HomeViewController.m */; };
@@ -181,6 +179,8 @@
 		CEC0B596153EFBFE00F20DC0 /* MineViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC0B594153EFBFE00F20DC0 /* MineViewController.xib */; };
 		CEC0B59B153EFC0500F20DC0 /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC0B599153EFC0500F20DC0 /* MoreViewController.m */; };
 		CEC0B59C153EFC0500F20DC0 /* MoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC0B59A153EFC0500F20DC0 /* MoreViewController.xib */; };
+		CEC29FE51556C56600052A14 /* MyShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC29FE31556C56600052A14 /* MyShowViewController.m */; };
+		CEC29FE61556C56600052A14 /* MyShowViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC29FE41556C56600052A14 /* MyShowViewController.xib */; };
 		CEC2D158154304E6001FA8D0 /* avatar_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CEC2D157154304E6001FA8D0 /* avatar_icon.png */; };
 		CEDC918E153FDC5700BA6C35 /* AdsPageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEDC918D153FDC5700BA6C35 /* AdsPageView.xib */; };
 		CEDC9191153FDC7700BA6C35 /* AdsPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDC9190153FDC7700BA6C35 /* AdsPageView.m */; };
@@ -201,6 +201,9 @@
 		CEEF7B34155557BC001ABCEC /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEF7B33155557BC001ABCEC /* Comment.m */; };
 		CEEF7B381555599A001ABCEC /* ForwardCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEF7B361555599A001ABCEC /* ForwardCommentTableViewCell.m */; };
 		CEEF7B6415556430001ABCEC /* ForwardCommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEF7B6315556430001ABCEC /* ForwardCommentTableViewCell.xib */; };
+		CEF432431556AB5D004D47BA /* TakePhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF432411556AB5D004D47BA /* TakePhotoViewController.m */; };
+		CEF432441556AB5D004D47BA /* TakePhotoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF432421556AB5D004D47BA /* TakePhotoViewController.xib */; };
+		CEF432461556B749004D47BA /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEF432451556B748004D47BA /* AudioToolbox.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -474,9 +477,6 @@
 		CEBCD05715500CF8000D41E1 /* WeiboForwardCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboForwardCommentViewController.m; sourceTree = "<group>"; };
 		CEBCD05915500CF8000D41E1 /* WeiboForwardCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboForwardCommentViewController.h; sourceTree = "<group>"; };
 		CEBCD05C155018D9000D41E1 /* WeiboForwardCommentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeiboForwardCommentViewController.xib; sourceTree = "<group>"; };
-		CEC0B580153EFBE000F20DC0 /* CameraShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraShareViewController.h; sourceTree = "<group>"; };
-		CEC0B581153EFBE000F20DC0 /* CameraShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraShareViewController.m; sourceTree = "<group>"; };
-		CEC0B582153EFBE000F20DC0 /* CameraShareViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraShareViewController.xib; sourceTree = "<group>"; };
 		CEC0B586153EFBE800F20DC0 /* CategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryViewController.h; sourceTree = "<group>"; };
 		CEC0B587153EFBE800F20DC0 /* CategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryViewController.m; sourceTree = "<group>"; };
 		CEC0B588153EFBE800F20DC0 /* CategoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CategoryViewController.xib; sourceTree = "<group>"; };
@@ -489,6 +489,9 @@
 		CEC0B598153EFC0500F20DC0 /* MoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreViewController.h; sourceTree = "<group>"; };
 		CEC0B599153EFC0500F20DC0 /* MoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreViewController.m; sourceTree = "<group>"; };
 		CEC0B59A153EFC0500F20DC0 /* MoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoreViewController.xib; sourceTree = "<group>"; };
+		CEC29FE21556C56600052A14 /* MyShowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyShowViewController.h; path = BeautifulDaRen/View/MyShow/MyShowViewController.h; sourceTree = SOURCE_ROOT; };
+		CEC29FE31556C56600052A14 /* MyShowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyShowViewController.m; path = BeautifulDaRen/View/MyShow/MyShowViewController.m; sourceTree = SOURCE_ROOT; };
+		CEC29FE41556C56600052A14 /* MyShowViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MyShowViewController.xib; path = BeautifulDaRen/View/MyShow/MyShowViewController.xib; sourceTree = SOURCE_ROOT; };
 		CEC2D157154304E6001FA8D0 /* avatar_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = avatar_icon.png; sourceTree = "<group>"; };
 		CEDC918D153FDC5700BA6C35 /* AdsPageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdsPageView.xib; sourceTree = "<group>"; };
 		CEDC918F153FDC7700BA6C35 /* AdsPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdsPageView.h; sourceTree = "<group>"; };
@@ -517,6 +520,10 @@
 		CEEF7B351555599A001ABCEC /* ForwardCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForwardCommentTableViewCell.h; sourceTree = "<group>"; };
 		CEEF7B361555599A001ABCEC /* ForwardCommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForwardCommentTableViewCell.m; sourceTree = "<group>"; };
 		CEEF7B6315556430001ABCEC /* ForwardCommentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForwardCommentTableViewCell.xib; sourceTree = "<group>"; };
+		CEF432401556AB5D004D47BA /* TakePhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TakePhotoViewController.h; path = BeautifulDaRen/View/MyShow/TakePhotoViewController.h; sourceTree = SOURCE_ROOT; };
+		CEF432411556AB5D004D47BA /* TakePhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TakePhotoViewController.m; path = BeautifulDaRen/View/MyShow/TakePhotoViewController.m; sourceTree = SOURCE_ROOT; };
+		CEF432421556AB5D004D47BA /* TakePhotoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TakePhotoViewController.xib; path = BeautifulDaRen/View/MyShow/TakePhotoViewController.xib; sourceTree = SOURCE_ROOT; };
+		CEF432451556B748004D47BA /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -524,6 +531,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEF432461556B749004D47BA /* AudioToolbox.framework in Frameworks */,
 				C20B53EC154706340014812B /* MapKit.framework in Frameworks */,
 				CE74545A153F22F700CB751A /* QuartzCore.framework in Frameworks */,
 				CE029B8B153E695D00886227 /* Security.framework in Frameworks */,
@@ -602,6 +610,7 @@
 		CE029ABD153E682100886227 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CEF432451556B748004D47BA /* AudioToolbox.framework */,
 				CE745459153F22F700CB751A /* QuartzCore.framework */,
 				C20B53EB154706340014812B /* MapKit.framework */,
 				CE029B8A153E695D00886227 /* Security.framework */,
@@ -668,7 +677,7 @@
 		CE029AF4153E68E100886227 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				CEC0B57F153EFBE000F20DC0 /* CameraShare */,
+				CEC0B57F153EFBE000F20DC0 /* MyShow */,
 				CEC0B585153EFBE800F20DC0 /* Category */,
 				CEDC918C153FDBCA00BA6C35 /* Common */,
 				CEE30719154F802C004D2E96 /* Friend */,
@@ -1035,13 +1044,17 @@
 			name = Common;
 			sourceTree = "<group>";
 		};
-		CEC0B57F153EFBE000F20DC0 /* CameraShare */ = {
+		CEC0B57F153EFBE000F20DC0 /* MyShow */ = {
 			isa = PBXGroup;
 			children = (
-				CEC0B580153EFBE000F20DC0 /* CameraShareViewController.h */,
-				CEC0B581153EFBE000F20DC0 /* CameraShareViewController.m */,
-				CEC0B582153EFBE000F20DC0 /* CameraShareViewController.xib */,
+				CEF432401556AB5D004D47BA /* TakePhotoViewController.h */,
+				CEF432411556AB5D004D47BA /* TakePhotoViewController.m */,
+				CEF432421556AB5D004D47BA /* TakePhotoViewController.xib */,
+				CEC29FE21556C56600052A14 /* MyShowViewController.h */,
+				CEC29FE31556C56600052A14 /* MyShowViewController.m */,
+				CEC29FE41556C56600052A14 /* MyShowViewController.xib */,
 			);
+			name = MyShow;
 			path = CameraShare;
 			sourceTree = "<group>";
 		};
@@ -1276,7 +1289,6 @@
 				CE029B76153E690300886227 /* logo.png in Resources */,
 				CE029B77153E690300886227 /* logo@2x.png in Resources */,
 				CE029B99153E6A4000886227 /* RootTabViewController.xib in Resources */,
-				CEC0B584153EFBE000F20DC0 /* CameraShareViewController.xib in Resources */,
 				CEC0B58A153EFBE800F20DC0 /* CategoryViewController.xib in Resources */,
 				CEC0B590153EFBF600F20DC0 /* HomeViewController.xib in Resources */,
 				CEC0B596153EFBFE00F20DC0 /* MineViewController.xib in Resources */,
@@ -1364,6 +1376,8 @@
 				CE8442FA1553D98000106045 /* 首页30x30.png in Resources */,
 				CEEF7B21155549B5001ABCEC /* ForwardCommentListViewController.xib in Resources */,
 				CEEF7B6415556430001ABCEC /* ForwardCommentTableViewCell.xib in Resources */,
+				CEF432441556AB5D004D47BA /* TakePhotoViewController.xib in Resources */,
+				CEC29FE61556C56600052A14 /* MyShowViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1400,7 +1414,6 @@
 				CE029B85153E690300886227 /* WBUtil.m in Sources */,
 				CE029B86153E690300886227 /* SinaWeiBoSDK.m in Sources */,
 				CE029B98153E6A4000886227 /* RootTabViewController.m in Sources */,
-				CEC0B583153EFBE000F20DC0 /* CameraShareViewController.m in Sources */,
 				CEC0B589153EFBE800F20DC0 /* CategoryViewController.m in Sources */,
 				CEC0B58F153EFBF600F20DC0 /* HomeViewController.m in Sources */,
 				CEC0B595153EFBFE00F20DC0 /* MineViewController.m in Sources */,
@@ -1454,6 +1467,8 @@
 				CEEF7B20155549B5001ABCEC /* ForwardCommentListViewController.m in Sources */,
 				CEEF7B34155557BC001ABCEC /* Comment.m in Sources */,
 				CEEF7B381555599A001ABCEC /* ForwardCommentTableViewCell.m in Sources */,
+				CEF432431556AB5D004D47BA /* TakePhotoViewController.m in Sources */,
+				CEC29FE51556C56600052A14 /* MyShowViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

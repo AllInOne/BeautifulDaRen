@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "AdsPageView.h"
-#import "UserInforCellViewController.h"
 #import "CategoryContentViewController.h"
 
 @interface CategoryViewController : UIViewController
