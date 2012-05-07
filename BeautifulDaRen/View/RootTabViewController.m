@@ -51,6 +51,8 @@
     if (!SYSTEM_VERSION_LESS_THAN(@"5.0"))
     {
         [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"顶部背景.png"] forBarMetrics:UIBarMetricsDefault];
+
+        [[UIToolbar appearance]setBackgroundImage:[UIImage imageNamed:@"toolbar320X44.png"] forToolbarPosition:UIToolbarPositionBottom barMetrics:UIBarMetricsDefault];
     }
 }
 
