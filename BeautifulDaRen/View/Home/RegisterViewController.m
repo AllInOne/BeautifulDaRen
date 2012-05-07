@@ -50,7 +50,7 @@ enum
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        [self.navigationItem setLeftBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onBackButtonClicked) title:@"返回"]];
     }
     return self;
 }
@@ -61,6 +61,10 @@ enum
     [super didReceiveMemoryWarning];
     
     // Release any cached data, images, etc that aren't in use.
+}
+
+- (void)onBackButtonClicked {
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 #pragma mark - View lifecycle

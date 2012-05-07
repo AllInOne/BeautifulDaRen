@@ -94,7 +94,7 @@
         tabBarBg.frame = CGRectMake(0, 0, 320, 50);
         tabBarBg.contentMode = UIViewContentModeScaleToFill;
         
-        [self.tabBar insertSubview:tabBarBg atIndex:0];    
+        [self.tabBar insertSubview:tabBarBg atIndex:0];
     }
     else
     {

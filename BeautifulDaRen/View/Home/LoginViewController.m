@@ -36,7 +36,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        [self.navigationItem setLeftBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onBackButtonClicked) title:@"返回"]];
     }
     return self;
 }
@@ -61,6 +61,10 @@
     [[QZoneSDKManager sharedManager] loginWithDoneCallback:^(LOGIN_STATUS status) {
         NSLog(@"QZone SDK login done, status:%d", status);
     }];
+}
+
+- (void)onBackButtonClicked {
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 #pragma mark - View lifecycle
