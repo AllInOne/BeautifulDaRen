@@ -38,7 +38,7 @@
 					<object class="IBUIScrollView" id="842754364">
 						<reference key="NSNextResponder" ref="1056440247"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrameSize">{330, 205}</string>
+						<string key="NSFrame">{{0, 5}, {320, 235}}</string>
 						<reference key="NSSuperview" ref="1056440247"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
@@ -49,9 +49,10 @@
 						<bool key="IBUIAlwaysBounceVertical">YES</bool>
 					</object>
 				</array>
-				<string key="NSFrameSize">{320, 205}</string>
+				<string key="NSFrameSize">{320, 220}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
+				<reference key="NSNextKeyView" ref="842754364"/>
 				<string key="NSReuseIdentifierKey">_NS:196</string>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>

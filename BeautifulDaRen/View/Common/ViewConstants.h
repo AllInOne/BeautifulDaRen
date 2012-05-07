@@ -6,6 +6,8 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
+#import "AppDelegate.h"
+
 #ifndef BeautifulDaRen_ViewConstants_Header_h
 #define BeautifulDaRen_ViewConstants_Header_h
 

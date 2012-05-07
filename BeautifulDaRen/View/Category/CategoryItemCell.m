@@ -10,7 +10,6 @@
 #import "ViewConstants.h"
 #import "WeiboDetailViewController.h"
 #import "WeiboComposerViewController.h"
-#import "AppDelegate.h"
 
 @implementation CategoryItemCell
 

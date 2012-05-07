@@ -677,22 +677,22 @@
 		CE029AF4153E68E100886227 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				CEC0B57F153EFBE000F20DC0 /* MyShow */,
+				C20B53D5154701320014812B /* MapViewController.h */,
+				CE029B95153E6A4000886227 /* RootTabViewController.h */,
+				C24B11A71549A5B6004F6F8E /* ViewHelper.h */,
+				C20B53D6154701320014812B /* MapViewController.m */,
+				CE029B96153E6A4000886227 /* RootTabViewController.m */,
+				C24B11A81549A5B6004F6F8E /* ViewHelper.m */,
+				C20B53D7154701320014812B /* MapViewController.xib */,
+				CE029B97153E6A4000886227 /* RootTabViewController.xib */,
 				CEC0B585153EFBE800F20DC0 /* Category */,
 				CEDC918C153FDBCA00BA6C35 /* Common */,
 				CEE30719154F802C004D2E96 /* Friend */,
 				CEC0B58B153EFBF600F20DC0 /* Home */,
-				C20B53D5154701320014812B /* MapViewController.h */,
-				C20B53D6154701320014812B /* MapViewController.m */,
-				C20B53D7154701320014812B /* MapViewController.xib */,
 				CEC0B591153EFBFE00F20DC0 /* Mine */,
 				CEC0B597153EFC0500F20DC0 /* More */,
+				CEC0B57F153EFBE000F20DC0 /* MyShow */,
 				C28D6A95154FCBD9005E14CE /* Protocol */,
-				CE029B95153E6A4000886227 /* RootTabViewController.h */,
-				CE029B96153E6A4000886227 /* RootTabViewController.m */,
-				CE029B97153E6A4000886227 /* RootTabViewController.xib */,
-				C24B11A71549A5B6004F6F8E /* ViewHelper.h */,
-				C24B11A81549A5B6004F6F8E /* ViewHelper.m */,
 				CE38B96B15498E9F0080DD99 /* Weibo */,
 			);
 			path = View;

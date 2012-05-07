@@ -11,7 +11,6 @@
 @implementation GridCellView
 
 @synthesize cellImageView = _cellImageView;
-@synthesize cellTitle = _cellTitle;
 @synthesize delegate = _delegate;
 @synthesize cellObject = _cellObject;
 

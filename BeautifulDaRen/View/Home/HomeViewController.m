@@ -9,21 +9,27 @@
 #import "HomeViewController.h"
 #import "AdsPageView.h"
 #import "ViewConstants.h"
+#import "ViewHelper.h"
 #import "LoginViewController.h"
 #import "RegisterViewController.h"
 #import "ForgetPasswordViewController.h"
 
-// TODO delete this
-#import "MapViewController.h"
+@interface HomeViewController()
+
+@property (retain, nonatomic) IBOutlet UIBarButtonItem * loginButton;
+@property (retain, nonatomic) IBOutlet UIBarButtonItem * registerButton;
+
+@end
 
 @implementation HomeViewController
 @synthesize itemsViewController;
+@synthesize loginButton = _loginButton;
+@synthesize registerButton = _registerButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = NSLocalizedString(@"First", @"First");
         self.tabBarItem.image = [UIImage imageNamed:@"first"];
         
     }
@@ -35,17 +41,22 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    UIView * topView = [[[NSBundle mainBundle] loadNibNamed:@"UnRegisterTopView" owner:self options:nil] objectAtIndex:0];
-    [self.view addSubview:topView];
+
     AdsPageView * adsPageView = [[[AdsPageView alloc] initWithNibName:@"AdsPageView" bundle:nil] autorelease];
-    adsPageView.view.frame = CGRectMake(0, 30, self.view.frame.size.width, ADS_CELL_HEIGHT);
-    [self.view insertSubview:adsPageView.view belowSubview:topView];
+    adsPageView.view.frame = CGRectMake(0, 0, self.view.frame.size.width, ADS_CELL_HEIGHT);
+    [self.view addSubview:adsPageView.view];
     
     self.itemsViewController = [[ItemsViewController alloc] initWithNibName:@"ItemsViewController" bundle:nil];
-    self.itemsViewController.view.frame = CGRectMake(0, 135, self.view.frame.size.width, 235);
+    self.itemsViewController.view.frame = CGRectMake(0, 115, self.view.frame.size.width, 235);
     [self.view insertSubview:self.itemsViewController.view belowSubview:adsPageView.view];
+    
+    _loginButton = [ViewHelper getBarItemOfTarget:self action:@selector(onLoginBtnSelected:) title:NSLocalizedString(@"login", @"login button on navigation")];
 
+    _registerButton =[ViewHelper getBarItemOfTarget:self action:@selector(onRegisterBtnSelected:) title:NSLocalizedString(@"register", @"register button on navigation")];
+    
+    NSArray * navigationBtns = [NSArray arrayWithObjects:_registerButton, _loginButton, nil];
+    
+    [self.navigationItem setRightBarButtonItems:navigationBtns animated:YES];
 }
 
 - (void)viewDidUnload

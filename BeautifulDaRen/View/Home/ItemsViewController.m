@@ -8,12 +8,14 @@
 
 #import "ItemsViewController.h"
 #import "GridCellView.h"
+#import "ViewConstants.h"
 #import "WaresItem.h"
+#import "WeiboDetailViewController.h"
 
 #define COLUMNS_PER_ROW 4
 #define GRID_X_OFFSET 5
 #define GRID_X_DELTA 80
-#define GRID_Y_DELTA 100
+#define GRID_Y_DELTA 80
 
 @interface ItemsViewController()
 @property (nonatomic, retain) IBOutlet UIScrollView * scrollView;
@@ -62,7 +64,6 @@
         [self.scrollView addSubview:cell];
         
         WaresItem * item = [self.fakeData objectAtIndex:i];
-        cell.cellTitle.text = item.itemTitle;
         cell.cellImageView.image = [UIImage imageWithData:item.itemImageData];
         cell.cellObject = item;
         
@@ -127,6 +128,13 @@
 - (void)didPressGridCell:(GridCellView *)sender
 {
     NSLog(@"item id: %@",((WaresItem*)sender.cellObject).itemId);
+    WeiboDetailViewController *weiboDetailController = 
+    [[[WeiboDetailViewController alloc] init] autorelease];
+    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: weiboDetailController];
+    
+    [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
+    
+    [navController release];
 }
 
 @end
