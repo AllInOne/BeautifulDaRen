@@ -194,6 +194,9 @@
 		CEE3071E154F80BD004D2E96 /* FriendsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEE3071C154F80BD004D2E96 /* FriendsViewController.xib */; };
 		CEE30722154F8533004D2E96 /* FriendListCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE30720154F8532004D2E96 /* FriendListCellView.m */; };
 		CEE30723154F8533004D2E96 /* FriendListCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEE30721154F8532004D2E96 /* FriendListCellView.xib */; };
+		CEEADAA41557C17600931EEF /* tabbar320x50.png in Resources */ = {isa = PBXBuildFile; fileRef = CEEADAA31557C17600931EEF /* tabbar320x50.png */; };
+		CEEADAA61557C1B600931EEF /* toolbar320X44.png in Resources */ = {isa = PBXBuildFile; fileRef = CEEADAA51557C1B600931EEF /* toolbar320X44.png */; };
+		CEEADABD1557C67E00931EEF /* tabbar首页30x30.png in Resources */ = {isa = PBXBuildFile; fileRef = CEEADABC1557C67E00931EEF /* tabbar首页30x30.png */; };
 		CEEF7B20155549B5001ABCEC /* ForwardCommentListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEF7B1E155549B5001ABCEC /* ForwardCommentListViewController.m */; };
 		CEEF7B21155549B5001ABCEC /* ForwardCommentListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEF7B1F155549B5001ABCEC /* ForwardCommentListViewController.xib */; };
 		CEEF7B34155557BC001ABCEC /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEF7B33155557BC001ABCEC /* Comment.m */; };
@@ -507,6 +510,9 @@
 		CEE3071F154F8532004D2E96 /* FriendListCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendListCellView.h; sourceTree = "<group>"; };
 		CEE30720154F8532004D2E96 /* FriendListCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendListCellView.m; sourceTree = "<group>"; };
 		CEE30721154F8532004D2E96 /* FriendListCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendListCellView.xib; sourceTree = "<group>"; };
+		CEEADAA31557C17600931EEF /* tabbar320x50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar320x50.png; sourceTree = "<group>"; };
+		CEEADAA51557C1B600931EEF /* toolbar320X44.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = toolbar320X44.png; sourceTree = "<group>"; };
+		CEEADABC1557C67E00931EEF /* tabbar首页30x30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar首页30x30.png"; sourceTree = "<group>"; };
 		CEEF7B1D155549B5001ABCEC /* ForwardCommentListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForwardCommentListViewController.h; sourceTree = "<group>"; };
 		CEEF7B1E155549B5001ABCEC /* ForwardCommentListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForwardCommentListViewController.m; sourceTree = "<group>"; };
 		CEEF7B1F155549B5001ABCEC /* ForwardCommentListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForwardCommentListViewController.xib; sourceTree = "<group>"; };
@@ -1011,6 +1017,9 @@
 		CE8442E41553D98000106045 /* 320*480 */ = {
 			isa = PBXGroup;
 			children = (
+				CEEADABC1557C67E00931EEF /* tabbar首页30x30.png */,
+				CEEADAA51557C1B600931EEF /* toolbar320X44.png */,
+				CEEADAA31557C17600931EEF /* tabbar320x50.png */,
 				CE8442E51553D98000106045 /* banner320x136.png */,
 				CE8442E61553D98000106045 /* logo114x29.png */,
 				CE8442E71553D98000106045 /* 内容图片66x66.png */,
@@ -1369,6 +1378,9 @@
 				CEEF7B6415556430001ABCEC /* ForwardCommentTableViewCell.xib in Resources */,
 				CEF432441556AB5D004D47BA /* TakePhotoViewController.xib in Resources */,
 				CEC29FE61556C56600052A14 /* MyShowViewController.xib in Resources */,
+				CEEADAA41557C17600931EEF /* tabbar320x50.png in Resources */,
+				CEEADAA61557C1B600931EEF /* toolbar320X44.png in Resources */,
+				CEEADABD1557C67E00931EEF /* tabbar首页30x30.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
