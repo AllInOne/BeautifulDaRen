@@ -54,15 +54,22 @@
 
 + (UIBarButtonItem*)getBarItemOfTarget:(id)target action:(SEL)action title:(NSString*)title
 {
-    UIButton * backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [backButton setBackgroundImage:[UIImage imageNamed:@"顶部按钮50x29.png"] forState:UIControlStateNormal];
-    [backButton setTitle:title forState:UIControlStateNormal];
-    [backButton addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setBackgroundImage:[UIImage imageNamed:@"顶部按钮50x29.png"] forState:UIControlStateNormal];
+    [button setTitle:title forState:UIControlStateNormal];
+    [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     
-    [backButton.titleLabel setFont:[UIFont systemFontOfSize:13]];
-    [backButton setTitleColor:[UIColor purpleColor] forState:UIControlStateNormal];
-    backButton.frame = CGRectMake(0, 0, 50, 30);
-    return [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    [button.titleLabel setFont:[UIFont systemFontOfSize:13]];
+    [button setTitleColor:[UIColor purpleColor] forState:UIControlStateNormal];
+    button.frame = CGRectMake(0, 0, 50, 30);
+    return [[[UIBarButtonItem alloc] initWithCustomView:button] autorelease];
+}
+
++ (UIBarButtonItem*) getLeftBarItemOfImageName:(NSString*)image rectSize:(CGRect)rectSize
+{
+    UIImageView * imageView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:image]] autorelease];
+    imageView.frame =rectSize;
+    return [[[UIBarButtonItem alloc] initWithCustomView:imageView] autorelease];
 }
 
 @end

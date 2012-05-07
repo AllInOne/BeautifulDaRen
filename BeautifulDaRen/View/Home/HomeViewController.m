@@ -57,6 +57,8 @@
     NSArray * navigationBtns = [NSArray arrayWithObjects:_registerButton, _loginButton, nil];
     
     [self.navigationItem setRightBarButtonItems:navigationBtns animated:YES];
+
+    [self.navigationItem setLeftBarButtonItem:[ViewHelper getLeftBarItemOfImageName:@"logo114x29" rectSize:CGRectMake(0, 0, NAVIGATION_LEFT_LOGO_WIDTH, NAVIGATION_LEFT_LOGO_HEIGHT)]];
 }
 
 - (void)viewDidUnload
