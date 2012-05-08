@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "TakePhotoViewController.h"
 
-@interface MyShowViewController : UIViewController
+@interface MyShowViewController : UIViewController <TakePhotoControllerDelegate>
 
 @property (nonatomic, retain) TakePhotoViewController *takePhotoViewController;
 
