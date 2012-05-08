@@ -7,8 +7,14 @@
 //
 
 #import "MoreViewController.h"
+#import "FindMoreViewController.h"
+
+@interface MoreViewController()
+@property (retain, nonatomic) IBOutlet FindMoreViewController * findMoreViewController;
+@end 
 
 @implementation MoreViewController
+@synthesize findMoreViewController = _findMoreViewController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -27,11 +33,12 @@
 }
 
 #pragma mark - View lifecycle
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    
+    _findMoreViewController = [[[FindMoreViewController alloc] initWithNibName:@"FindMoreViewController" bundle:nil] autorelease];
+    [self.view addSubview:_findMoreViewController.view];
 }
 
 - (void)viewDidUnload

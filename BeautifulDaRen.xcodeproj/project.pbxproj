@@ -10,6 +10,10 @@
 		C20B53D8154701320014812B /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C20B53D6154701320014812B /* MapViewController.m */; };
 		C20B53D9154701320014812B /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C20B53D7154701320014812B /* MapViewController.xib */; };
 		C20B53EC154706340014812B /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C20B53EB154706340014812B /* MapKit.framework */; };
+		C20BD4B215591F72006BEEC8 /* FindMoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C20BD4B015591F71006BEEC8 /* FindMoreViewController.m */; };
+		C20BD4B315591F72006BEEC8 /* FindMoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C20BD4B115591F71006BEEC8 /* FindMoreViewController.xib */; };
+		C20FAB0E1559539400895272 /* ContactItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C20FAB0D1559539400895272 /* ContactItemCell.m */; };
+		C20FAB10155953A600895272 /* ContactItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C20FAB0F155953A600895272 /* ContactItemCell.xib */; };
 		C215A75F15539B7C001BF379 /* FourGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C215A75E15539B7C001BF379 /* FourGridViewCell.m */; };
 		C215A76115539B9E001BF379 /* FourGridViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C215A76015539B9E001BF379 /* FourGridViewCell.xib */; };
 		C215A7701553E51A001BF379 /* MyInfoDetailViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C215A76F1553E51A001BF379 /* MyInfoDetailViewCell.m */; };
@@ -236,6 +240,12 @@
 		C20B53D6154701320014812B /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		C20B53D7154701320014812B /* MapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
 		C20B53EB154706340014812B /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		C20BD4AF15591F70006BEEC8 /* FindMoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindMoreViewController.h; sourceTree = "<group>"; };
+		C20BD4B015591F71006BEEC8 /* FindMoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindMoreViewController.m; sourceTree = "<group>"; };
+		C20BD4B115591F71006BEEC8 /* FindMoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FindMoreViewController.xib; sourceTree = "<group>"; };
+		C20FAB0C1559539400895272 /* ContactItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactItemCell.h; sourceTree = "<group>"; };
+		C20FAB0D1559539400895272 /* ContactItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactItemCell.m; sourceTree = "<group>"; };
+		C20FAB0F155953A600895272 /* ContactItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactItemCell.xib; sourceTree = "<group>"; };
 		C215A75D15539B7C001BF379 /* FourGridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FourGridViewCell.h; path = ../Mine/FourGridViewCell.h; sourceTree = "<group>"; };
 		C215A75E15539B7C001BF379 /* FourGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FourGridViewCell.m; path = ../Mine/FourGridViewCell.m; sourceTree = "<group>"; };
 		C215A76015539B9E001BF379 /* FourGridViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FourGridViewCell.xib; sourceTree = "<group>"; };
@@ -1121,6 +1131,12 @@
 				CEC0B598153EFC0500F20DC0 /* MoreViewController.h */,
 				CEC0B599153EFC0500F20DC0 /* MoreViewController.m */,
 				CEC0B59A153EFC0500F20DC0 /* MoreViewController.xib */,
+				C20BD4AF15591F70006BEEC8 /* FindMoreViewController.h */,
+				C20BD4B015591F71006BEEC8 /* FindMoreViewController.m */,
+				C20BD4B115591F71006BEEC8 /* FindMoreViewController.xib */,
+				C20FAB0C1559539400895272 /* ContactItemCell.h */,
+				C20FAB0D1559539400895272 /* ContactItemCell.m */,
+				C20FAB0F155953A600895272 /* ContactItemCell.xib */,
 			);
 			path = More;
 			sourceTree = "<group>";
@@ -1381,6 +1397,8 @@
 				CEEADAA41557C17600931EEF /* tabbar320x50.png in Resources */,
 				CEEADAA61557C1B600931EEF /* toolbar320X44.png in Resources */,
 				CEEADABD1557C67E00931EEF /* tabbar首页30x30.png in Resources */,
+				C20BD4B315591F72006BEEC8 /* FindMoreViewController.xib in Resources */,
+				C20FAB10155953A600895272 /* ContactItemCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1471,6 +1489,8 @@
 				CEEF7B381555599A001ABCEC /* ForwardCommentTableViewCell.m in Sources */,
 				CEF432431556AB5D004D47BA /* TakePhotoViewController.m in Sources */,
 				CEC29FE51556C56600052A14 /* MyShowViewController.m in Sources */,
+				C20BD4B215591F72006BEEC8 /* FindMoreViewController.m in Sources */,
+				C20FAB0E1559539400895272 /* ContactItemCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
