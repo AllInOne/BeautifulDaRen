@@ -1,6 +1,6 @@
 //
 //  ButtonWithIconViewCell.m
-//  BeautifulDaRen
+//  
 //
 //  Created by gang liu on 4/25/12.
 //  Copyright (c) 2012 myriad. All rights reserved.
@@ -12,6 +12,11 @@
 @synthesize buttonRightIcon;
 @synthesize buttonLeftIcon;
 @synthesize buttonText;
+@synthesize buttonRightText;
+@synthesize leftButton = _leftButton;
+@synthesize rightButton = _rightButton;
+
+@synthesize delegate;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -27,6 +32,11 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+-(IBAction)buttonPressed:(UIButton*)sender
+{
+    [self.delegate didButtonPressed:sender inView:self];
 }
 
 @end
