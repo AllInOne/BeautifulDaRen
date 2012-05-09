@@ -7,6 +7,7 @@
 //
 
 #import "MyShowViewController.h"
+#import "ViewConstants.h"
 
 @implementation MyShowViewController
 
@@ -40,11 +41,22 @@
     self.takePhotoViewController =
     [[[TakePhotoViewController alloc] initWithNibName:nil bundle:nil] autorelease];
     
+    [self.takePhotoViewController setDelegate:self];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
     {
         [self.takePhotoViewController setupImagePicker:UIImagePickerControllerSourceTypeCamera];
         [self presentModalViewController:self.takePhotoViewController.imagePickerController animated:YES];
     }
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+	[super viewWillDisappear:animated];
 }
 
 - (void)viewDidUnload
@@ -60,4 +72,15 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (void)didTakePicture:(UIImage *)picture
+{
+    [self.tabBarController setSelectedIndex:0];
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)didFinishWithCamera
+{
+    [self.tabBarController setSelectedIndex:0];
+    [self dismissModalViewControllerAnimated:YES];
+}
 @end

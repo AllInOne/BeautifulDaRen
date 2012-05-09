@@ -29,6 +29,8 @@
 #define KEY_CATEGORY_TITLE      @"CATEGORY_TITLE"
 #define KEY_CATEGORY_ITEMS      @"CATEGORY_ITEMS"
 
+#define APPDELEGATE ((AppDelegate*)([UIApplication sharedApplication].delegate))
+
 #define APPDELEGATE_ROOTVIEW_CONTROLLER ((AppDelegate*)([UIApplication sharedApplication].delegate)).rootViewController
 
 #define SYSTEM_VERSION_LESS_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)

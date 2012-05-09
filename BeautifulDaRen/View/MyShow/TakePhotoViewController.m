@@ -128,14 +128,12 @@
 - (IBAction)takePhoto:(id)sender
 {
     [self.imagePickerController takePicture];
-    [self dismissModalViewControllerAnimated:YES];
 }
 
 - (IBAction)done:(id)sender
 {
     // dismiss the camera
     [self.delegate didFinishWithCamera];
-    [self dismissModalViewControllerAnimated:YES];
 }
 
 #pragma mark -
