@@ -92,7 +92,7 @@
 #pragma mark UITableViewDataSource
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4;
+    return 3;
 }
 
 - (UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -169,26 +169,11 @@
             case 2:
             {
                 ((ButtonViewCell*)cell).buttonRightIcon.image = [UIImage imageNamed:@"shop"];
-                ((ButtonViewCell*)cell).buttonText.text = NSLocalizedString(@"draft", @"");
-                ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"shop"];
-                break;
-            }
-        }
-    }
-    else if (section == 3) {
-        cell = [tableView dequeueReusableCellWithIdentifier:buttonViewCellIdentifier];
-        if(!cell) {
-            cell = [[[NSBundle mainBundle] loadNibNamed:buttonViewCellIdentifier owner:self options:nil] objectAtIndex:0];
-        }
-        switch ([indexPath row]) {
-            case 0:
-            {
-                ((ButtonViewCell*)cell).buttonRightIcon.image = [UIImage imageNamed:@"shop"];
                 ((ButtonViewCell*)cell).buttonText.text = NSLocalizedString(@"at_me", @"");
                 ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"shop"];
                 break;
             }
-            case 1:
+            case 3:
             {
                 ((ButtonViewCell*)cell).buttonRightIcon.image = [UIImage imageNamed:@"shop"];
                 ((ButtonViewCell*)cell).buttonText.text = NSLocalizedString(@"comment_me", @"");
@@ -196,8 +181,7 @@
                 break;
             }
         }
-    }
-    return cell;
+    }    return cell;
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -213,10 +197,7 @@
             numberOfRows = 1;
             break;
         case 2:
-            numberOfRows = 3;
-            break;
-        case 3:
-            numberOfRows = 2;
+            numberOfRows = 4;
             break;
     }
     return numberOfRows;
@@ -233,13 +214,9 @@
     }
     else if (section == 1)
     {
-        height = 122.0f;
+        height = 107.0f;
     }
     else if (section == 2)
-    {
-        height = 40.0f;
-    }
-    else if (section == 3)
     {
         height = 40.0f;
     }
@@ -288,22 +265,10 @@
             case 2:
             {
                 // TODO
-                NSLog(@"To handle press draft");
-                break;
-            }
-        }
-    }
-    // @我 and 评论我的
-    else if(section == 3)
-    {
-        switch ([indexPath row]) {
-            case 0:
-            {
-                // TODO
                 NSLog(@"To handle press @me");
                 break;
             }
-            case 1:
+            case 3:
             {
                 // TODO
                 NSLog(@"To handle press comment me");

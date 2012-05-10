@@ -104,6 +104,7 @@ AAgACAAIAAEAAQABAAE</bytes>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<bool key="IBUIAlwaysBounceVertical">YES</bool>
+						<bool key="IBUIScrollEnabled">NO</bool>
 						<int key="IBUIStyle">1</int>
 						<int key="IBUISeparatorStyle">2</int>
 						<object class="NSColor" key="IBUISeparatorColor">
@@ -213,17 +214,28 @@ AAgACAAIAAEAAQABAAE</bytes>
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="blackListButton">UIButton</string>
+						<string key="buyedButton">UIButton</string>
 						<string key="collectionButton">UIButton</string>
+						<string key="editButton">UIButton</string>
 						<string key="fansButton">UIButton</string>
 						<string key="followButton">UIButton</string>
+						<string key="topicButton">UIButton</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="blackListButton">
 							<string key="name">blackListButton</string>
 							<string key="candidateClassName">UIButton</string>
 						</object>
+						<object class="IBToOneOutletInfo" key="buyedButton">
+							<string key="name">buyedButton</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="collectionButton">
 							<string key="name">collectionButton</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="editButton">
+							<string key="name">editButton</string>
 							<string key="candidateClassName">UIButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="fansButton">
@@ -232,6 +244,10 @@ AAgACAAIAAEAAQABAAE</bytes>
 						</object>
 						<object class="IBToOneOutletInfo" key="followButton">
 							<string key="name">followButton</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="topicButton">
+							<string key="name">topicButton</string>
 							<string key="candidateClassName">UIButton</string>
 						</object>
 					</dictionary>
