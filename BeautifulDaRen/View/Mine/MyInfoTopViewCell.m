@@ -16,6 +16,7 @@
 @synthesize cityLabel;
 @synthesize levelLabelTitle;
 @synthesize editButton;
+@synthesize updateAvatarButton;
 @synthesize editImageView;
 @synthesize delegate = _delegate;
 

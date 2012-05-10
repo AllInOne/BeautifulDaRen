@@ -18,6 +18,7 @@
 @property (retain, nonatomic) IBOutlet UILabel * levelLabelTitle;
 @property (retain, nonatomic) IBOutlet UILabel * cityLabel;
 @property (retain, nonatomic) IBOutlet UIButton * editButton;
+@property (retain, nonatomic) IBOutlet UIButton * updateAvatarButton;
 @property (retain, nonatomic) IBOutlet UIImageView * editImageView;
 @property (retain, nonatomic) id<ButtonPressDelegate> delegate;
 
