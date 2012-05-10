@@ -7,14 +7,24 @@
 //
 
 #import "MineEditingViewController.h"
+#import "MyInfoTopViewCell.h"
+#import "ViewHelper.h"
+#import "GenderSelectCell.h"
+#import "ButtonViewCell.h"
+
+@interface MineEditingViewController()
+
+@property (retain, nonatomic) IBOutlet UIButton * updateAvatarButton;
+
+@end
 
 @implementation MineEditingViewController
+@synthesize updateAvatarButton = _updateAvatarButton;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
-        // Custom initialization
     }
     return self;
 }
@@ -27,17 +37,17 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+-(void)onBackButtonClicked
+{
+    [self dismissModalViewControllerAnimated:YES];
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [self.navigationItem setLeftBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onBackButtonClicked) title:@"返回"]];
 }
 
 - (void)viewDidUnload
@@ -77,32 +87,111 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    NSInteger number = 0;
+    switch (section) {
+        case 0:
+        case 1:
+        {
+            number = 1;
+            break;
+        }
+        case 2:
+        {
+            number = 4;
+            break;
+        }
+    }
+    return number;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString * infoTopViewIdentifier = @"MyInfoTopViewCell";
+    static NSString * genderSelectCellIdentifier = @"GenderSelectCell";
+    static NSString * buttonViewCellIdentifier = @"ButtonViewCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+    UITableViewCell * cell;
+    NSInteger section = [indexPath section];
+    if(section == 0)
+    {
+        cell = [tableView dequeueReusableCellWithIdentifier:infoTopViewIdentifier];
+        if (cell == nil) {
+            cell = [[[NSBundle mainBundle] loadNibNamed:infoTopViewIdentifier owner:self options:nil] objectAtIndex:1];
+            ((MyInfoTopViewCell*)cell).avatarImageView.image = [UIImage imageNamed:@"item_fake"];
+            ((MyInfoTopViewCell*)cell).rightImageView.image = [UIImage imageNamed:@"next_flag"];
+            _updateAvatarButton =  ((MyInfoTopViewCell*)cell).updateAvatarButton;
+            ((MyInfoTopViewCell*)cell).delegate = self;
+        }
     }
-    
-    // Configure the cell...
-    
+    else if(section == 1)
+    {
+        cell = [tableView dequeueReusableCellWithIdentifier:genderSelectCellIdentifier];
+        if (cell == nil) {
+            cell = [[[NSBundle mainBundle] loadNibNamed:genderSelectCellIdentifier owner:self options:nil] objectAtIndex:0];
+        }
+        cell.backgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+    }
+    else if(section == 2)
+    {
+        cell = [tableView dequeueReusableCellWithIdentifier:buttonViewCellIdentifier];
+        if (cell == nil) {
+            cell = [[[NSBundle mainBundle] loadNibNamed:buttonViewCellIdentifier owner:self options:nil] objectAtIndex:3];
+        }
+        switch ([indexPath row]) {
+            case 0:
+            {
+                ((ButtonViewCell*)cell).leftLabel.text = NSLocalizedString(@"nickname", @"");
+                break;
+            }
+            case 1:
+            {
+                ((ButtonViewCell*)cell).leftLabel.text = NSLocalizedString(@"brief", @"");
+                break;
+            }
+            case 2:
+            {
+                ((ButtonViewCell*)cell).leftLabel.text = NSLocalizedString(@"city", @"");
+                break;
+            }
+            case 3:
+            {
+                ((ButtonViewCell*)cell).leftLabel.text = NSLocalizedString(@"privacy", @"");
+                break;
+            }   
+        }
+        ((ButtonViewCell*)cell).buttonRightIcon.image = [UIImage imageNamed:@"next_flag"];
+    }
     return cell;
 }
 
+#pragma mark UITableViewDelegate
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGFloat height = 0.0f;
+    NSInteger section = [indexPath section];
+    switch (section) {
+        case 0:
+        {
+            height = 78.0f;
+            break;
+        }
+        case 1:
+        {
+            height = 40.0f;
+            break;
+        }
+        case 2:
+        {
+            height = 60.0f;
+            break;
+        }    }
+    return height;
+}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -154,6 +243,15 @@
      [self.navigationController pushViewController:detailViewController animated:YES];
      [detailViewController release];
      */
+}
+
+#pragma mark ButtonPressDelegate
+- (void) didButtonPressed:(UIButton *)button inView:(UIView *)view
+{
+    if(button == _updateAvatarButton)
+    {
+        NSLog(@"_updateAvatarButton pressed");
+    }
 }
 
 @end

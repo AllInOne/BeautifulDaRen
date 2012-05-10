@@ -11,7 +11,7 @@
 @implementation MyInfoTopViewCell
 @synthesize avatarImageView;
 @synthesize levelLabel;
-@synthesize leftImageView;
+@synthesize rightImageView;
 @synthesize beautifulIdLabel;
 @synthesize cityLabel;
 @synthesize levelLabelTitle;

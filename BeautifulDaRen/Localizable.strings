@@ -22,7 +22,10 @@
 "account_user_account" = "用户账号";
 "account_register_email" = "注册邮箱";
 "user_name" = "用户名";
+"user_name_id" = "用户名ID";
 "password" = "密码";
+"type_password" = "输入密码";
+"type_password_again" = "确认密码";
 "login" = "登录";
 "register" = "注册";
 "to_select" = "选择";
@@ -50,3 +53,8 @@
 "topic" = "话题";
 "at_me" = "@我";
 "comment_me" = "评论我的";
+
+"nickname" = "昵称";
+"city" = "城市";
+"brief" = "简介";
+"privacy" = "隐私";

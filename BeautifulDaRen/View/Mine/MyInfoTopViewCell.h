@@ -13,7 +13,7 @@
 
 @property (retain, nonatomic) IBOutlet UIImageView * avatarImageView;
 @property (retain, nonatomic) IBOutlet UILabel * levelLabel;
-@property (retain, nonatomic) IBOutlet UIImageView * leftImageView;
+@property (retain, nonatomic) IBOutlet UIImageView * rightImageView;
 @property (retain, nonatomic) IBOutlet UILabel * beautifulIdLabel;
 @property (retain, nonatomic) IBOutlet UILabel * levelLabelTitle;
 @property (retain, nonatomic) IBOutlet UILabel * cityLabel;

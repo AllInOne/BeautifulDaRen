@@ -7,9 +7,11 @@
 //
 
 #import "MyInfoViewController.h"
+#import "MineEditingViewController.h"
 #import "MyInfoTopViewCell.h"
 #import "FourGridViewCell.h"
 #import "ButtonViewCell.h"
+#import "ViewConstants.h"
 
 #import "UserAccount.h"
 
@@ -111,7 +113,7 @@
         ((MyInfoTopViewCell*)cell).levelLabel.text = [NSString stringWithFormat:@"LV%d", self.userAccount.level];
         ((MyInfoTopViewCell*)cell).levelLabelTitle.text = self.userAccount.levelDescription;
         ((MyInfoTopViewCell*)cell).beautifulIdLabel.text = self.userAccount.userDisplayId;
-        ((MyInfoTopViewCell*)cell).leftImageView.image = [UIImage imageNamed:@"location"];
+        ((MyInfoTopViewCell*)cell).rightImageView.image = [UIImage imageNamed:@"location"];
         ((MyInfoTopViewCell*)cell).editImageView.image = [UIImage imageNamed:@"location"];
         ((MyInfoTopViewCell*)cell).cityLabel.text = [NSString stringWithFormat:@"%@ : %@",NSLocalizedString(@"local_city", @""),self.userAccount.localCity];
         _editButton = ((MyInfoTopViewCell*)cell).editButton;
@@ -306,7 +308,13 @@
     }
     else if(button == _editButton)
     {
-        NSLog(@"edit button pressed");
+        MineEditingViewController * editingViewController = [[[MineEditingViewController alloc] initWithNibName:@"MineEditingViewController" bundle:nil] autorelease];
+        
+        UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: editingViewController];
+        
+        [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
+        
+        [navController release];
     }
     else
     {

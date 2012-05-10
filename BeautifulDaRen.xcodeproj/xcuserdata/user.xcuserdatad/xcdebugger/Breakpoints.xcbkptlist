@@ -126,6 +126,12 @@
                continueAfterRunningActions = "No"
                symbolName = "-[NSException raise]">
             </Location>
+            <Location
+               shouldBeEnabled = "Yes"
+               ignoreCount = "0"
+               continueAfterRunningActions = "No"
+               symbolName = "raise">
+            </Location>
          </Locations>
       </SymbolicBreakpoint>
    </SymbolicBreakpoints>
