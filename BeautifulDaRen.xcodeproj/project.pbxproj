@@ -21,6 +21,9 @@
 		C213AB94155C05BE00667556 /* female.png in Resources */ = {isa = PBXBuildFile; fileRef = C213AB92155C05BE00667556 /* female.png */; };
 		C213AB95155C05BE00667556 /* male.png in Resources */ = {isa = PBXBuildFile; fileRef = C213AB93155C05BE00667556 /* male.png */; };
 		C213AB97155C11F900667556 /* next_flag.png in Resources */ = {isa = PBXBuildFile; fileRef = C213AB96155C11F900667556 /* next_flag.png */; };
+		C213AB9A155C1BCD00667556 /* BeautifulDaRen.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C213AB98155C1BCD00667556 /* BeautifulDaRen.xcdatamodeld */; };
+		C213AB9D155C1C9D00667556 /* UserIdentity.m in Sources */ = {isa = PBXBuildFile; fileRef = C213AB9C155C1C9D00667556 /* UserIdentity.m */; };
+		C213AB9F155C1CD800667556 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C213AB9E155C1CD800667556 /* CoreData.framework */; };
 		C215A75F15539B7C001BF379 /* FourGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C215A75E15539B7C001BF379 /* FourGridViewCell.m */; };
 		C215A76115539B9E001BF379 /* FourGridViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C215A76015539B9E001BF379 /* FourGridViewCell.xib */; };
 		C215A7A11553EABF001BF379 /* UserAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = C215A79E1553EABF001BF379 /* UserAccount.m */; };
@@ -273,6 +276,10 @@
 		C213AB92155C05BE00667556 /* female.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = female.png; sourceTree = "<group>"; };
 		C213AB93155C05BE00667556 /* male.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = male.png; sourceTree = "<group>"; };
 		C213AB96155C11F900667556 /* next_flag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = next_flag.png; sourceTree = "<group>"; };
+		C213AB99155C1BCD00667556 /* BeautifulDaRen.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BeautifulDaRen.xcdatamodel; sourceTree = "<group>"; };
+		C213AB9B155C1C9D00667556 /* UserIdentity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserIdentity.h; sourceTree = "<group>"; };
+		C213AB9C155C1C9D00667556 /* UserIdentity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserIdentity.m; sourceTree = "<group>"; };
+		C213AB9E155C1CD800667556 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		C215A75D15539B7C001BF379 /* FourGridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FourGridViewCell.h; path = ../Mine/FourGridViewCell.h; sourceTree = "<group>"; };
 		C215A75E15539B7C001BF379 /* FourGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FourGridViewCell.m; path = ../Mine/FourGridViewCell.m; sourceTree = "<group>"; };
 		C215A76015539B9E001BF379 /* FourGridViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FourGridViewCell.xib; sourceTree = "<group>"; };
@@ -583,6 +590,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C213AB9F155C1CD800667556 /* CoreData.framework in Frameworks */,
 				CEF432461556B749004D47BA /* AudioToolbox.framework in Frameworks */,
 				C20B53EC154706340014812B /* MapKit.framework in Frameworks */,
 				CE74545A153F22F700CB751A /* QuartzCore.framework in Frameworks */,
@@ -660,6 +668,7 @@
 		CE029ABD153E682100886227 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C213AB9E155C1CD800667556 /* CoreData.framework */,
 				CEF432451556B748004D47BA /* AudioToolbox.framework */,
 				CE745459153F22F700CB751A /* QuartzCore.framework */,
 				C20B53EB154706340014812B /* MapKit.framework */,
@@ -713,6 +722,9 @@
 		CE029AF3153E68D800886227 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				C213AB98155C1BCD00667556 /* BeautifulDaRen.xcdatamodeld */,
+				C213AB9B155C1C9D00667556 /* UserIdentity.h */,
+				C213AB9C155C1C9D00667556 /* UserIdentity.m */,
 				CEEF7B32155557BC001ABCEC /* Comment.h */,
 				CEEF7B33155557BC001ABCEC /* Comment.m */,
 				C215A79D1553EABF001BF379 /* UserAccount.h */,
@@ -1573,6 +1585,8 @@
 				C24B1008155BDB1100918530 /* MineEditingViewController.m in Sources */,
 				C24B1011155BDE7B00918530 /* RadioButton.m in Sources */,
 				C213AB8B155C044100667556 /* GenderSelectCell.m in Sources */,
+				C213AB9A155C1BCD00667556 /* BeautifulDaRen.xcdatamodeld in Sources */,
+				C213AB9D155C1C9D00667556 /* UserIdentity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1679,6 +1693,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		C213AB98155C1BCD00667556 /* BeautifulDaRen.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				C213AB99155C1BCD00667556 /* BeautifulDaRen.xcdatamodel */,
+			);
+			currentVersion = C213AB99155C1BCD00667556 /* BeautifulDaRen.xcdatamodel */;
+			path = BeautifulDaRen.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = CE029AB1153E682100886227 /* Project object */;
 }
