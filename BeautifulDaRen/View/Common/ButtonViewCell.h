@@ -15,7 +15,8 @@
 @property (retain, nonatomic) IBOutlet UILabel * buttonText;
 @property (retain, nonatomic) IBOutlet UIImageView * buttonRightIcon;
 @property (retain, nonatomic) IBOutlet UILabel * buttonRightText;
-
+@property (retain, nonatomic) IBOutlet UILabel * leftLabel;
+@property (retain, nonatomic) IBOutlet UITextView * inputTextView;
 @property (retain, nonatomic) IBOutlet UIButton * leftButton;
 @property (retain, nonatomic) IBOutlet UIButton * rightButton;
 

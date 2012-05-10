@@ -14,6 +14,13 @@
 		C20BD4B315591F72006BEEC8 /* FindMoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C20BD4B115591F71006BEEC8 /* FindMoreViewController.xib */; };
 		C20FAB0E1559539400895272 /* ContactItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C20FAB0D1559539400895272 /* ContactItemCell.m */; };
 		C20FAB10155953A600895272 /* ContactItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C20FAB0F155953A600895272 /* ContactItemCell.xib */; };
+		C213AB8B155C044100667556 /* GenderSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C213AB8A155C044100667556 /* GenderSelectCell.m */; };
+		C213AB8D155C048400667556 /* GenderSelectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C213AB8C155C048400667556 /* GenderSelectCell.xib */; };
+		C213AB90155C053600667556 /* RadioButton-Selected.png in Resources */ = {isa = PBXBuildFile; fileRef = C213AB8E155C053600667556 /* RadioButton-Selected.png */; };
+		C213AB91155C053600667556 /* RadioButton-Unselected.png in Resources */ = {isa = PBXBuildFile; fileRef = C213AB8F155C053600667556 /* RadioButton-Unselected.png */; };
+		C213AB94155C05BE00667556 /* female.png in Resources */ = {isa = PBXBuildFile; fileRef = C213AB92155C05BE00667556 /* female.png */; };
+		C213AB95155C05BE00667556 /* male.png in Resources */ = {isa = PBXBuildFile; fileRef = C213AB93155C05BE00667556 /* male.png */; };
+		C213AB97155C11F900667556 /* next_flag.png in Resources */ = {isa = PBXBuildFile; fileRef = C213AB96155C11F900667556 /* next_flag.png */; };
 		C215A75F15539B7C001BF379 /* FourGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C215A75E15539B7C001BF379 /* FourGridViewCell.m */; };
 		C215A76115539B9E001BF379 /* FourGridViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C215A76015539B9E001BF379 /* FourGridViewCell.xib */; };
 		C215A7A11553EABF001BF379 /* UserAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = C215A79E1553EABF001BF379 /* UserAccount.m */; };
@@ -258,6 +265,14 @@
 		C20FAB0C1559539400895272 /* ContactItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactItemCell.h; sourceTree = "<group>"; };
 		C20FAB0D1559539400895272 /* ContactItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactItemCell.m; sourceTree = "<group>"; };
 		C20FAB0F155953A600895272 /* ContactItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactItemCell.xib; sourceTree = "<group>"; };
+		C213AB89155C044100667556 /* GenderSelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenderSelectCell.h; sourceTree = "<group>"; };
+		C213AB8A155C044100667556 /* GenderSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenderSelectCell.m; sourceTree = "<group>"; };
+		C213AB8C155C048400667556 /* GenderSelectCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GenderSelectCell.xib; sourceTree = "<group>"; };
+		C213AB8E155C053600667556 /* RadioButton-Selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RadioButton-Selected.png"; sourceTree = "<group>"; };
+		C213AB8F155C053600667556 /* RadioButton-Unselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RadioButton-Unselected.png"; sourceTree = "<group>"; };
+		C213AB92155C05BE00667556 /* female.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = female.png; sourceTree = "<group>"; };
+		C213AB93155C05BE00667556 /* male.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = male.png; sourceTree = "<group>"; };
+		C213AB96155C11F900667556 /* next_flag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = next_flag.png; sourceTree = "<group>"; };
 		C215A75D15539B7C001BF379 /* FourGridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FourGridViewCell.h; path = ../Mine/FourGridViewCell.h; sourceTree = "<group>"; };
 		C215A75E15539B7C001BF379 /* FourGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FourGridViewCell.m; path = ../Mine/FourGridViewCell.m; sourceTree = "<group>"; };
 		C215A76015539B9E001BF379 /* FourGridViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FourGridViewCell.xib; sourceTree = "<group>"; };
@@ -587,6 +602,9 @@
 				C216EDC015518B8C00CA8CE8 /* MyInfoTopViewCell.h */,
 				C216EDC115518B8C00CA8CE8 /* MyInfoTopViewCell.m */,
 				C216EDC315518BD300CA8CE8 /* MyInfoTopViewCell.xib */,
+				C213AB89155C044100667556 /* GenderSelectCell.h */,
+				C213AB8A155C044100667556 /* GenderSelectCell.m */,
+				C213AB8C155C048400667556 /* GenderSelectCell.xib */,
 			);
 			name = SubView;
 			sourceTree = "<group>";
@@ -1012,6 +1030,11 @@
 		CE745450153F1F8900CB751A /* Asserts */ = {
 			isa = PBXGroup;
 			children = (
+				C213AB96155C11F900667556 /* next_flag.png */,
+				C213AB92155C05BE00667556 /* female.png */,
+				C213AB93155C05BE00667556 /* male.png */,
+				C213AB8E155C053600667556 /* RadioButton-Selected.png */,
+				C213AB8F155C053600667556 /* RadioButton-Unselected.png */,
 				CE8442E41553D98000106045 /* 320*480 */,
 				CE62B334155172C00017AA88 /* 发现文字.png */,
 				CE62B335155172C00017AA88 /* 发现背景.png */,
@@ -1450,6 +1473,12 @@
 				CE1C66F5155A913F00D3E4FF /* 顶部背景.png in Resources */,
 				CE1C66F6155A913F00D3E4FF /* 首页30x30.png in Resources */,
 				C24B1009155BDB1100918530 /* MineEditingViewController.xib in Resources */,
+				C213AB8D155C048400667556 /* GenderSelectCell.xib in Resources */,
+				C213AB90155C053600667556 /* RadioButton-Selected.png in Resources */,
+				C213AB91155C053600667556 /* RadioButton-Unselected.png in Resources */,
+				C213AB94155C05BE00667556 /* female.png in Resources */,
+				C213AB95155C05BE00667556 /* male.png in Resources */,
+				C213AB97155C11F900667556 /* next_flag.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1543,6 +1572,7 @@
 				C20FAB0E1559539400895272 /* ContactItemCell.m in Sources */,
 				C24B1008155BDB1100918530 /* MineEditingViewController.m in Sources */,
 				C24B1011155BDE7B00918530 /* RadioButton.m in Sources */,
+				C213AB8B155C044100667556 /* GenderSelectCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -267,7 +267,6 @@
 								<string key="NSFrame">{{246, 42}, {42, 21}}</string>
 								<reference key="NSSuperview" ref="269859911"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:328</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -338,7 +337,6 @@
 								<string key="NSFrame">{{249, 23}, {25, 25}}</string>
 								<reference key="NSSuperview" ref="833527566"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:567</string>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -431,14 +429,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">leftImageView</string>
-						<reference key="source" ref="164424400"/>
-						<reference key="destination" ref="326541829"/>
-					</object>
-					<int key="connectionID">17</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">cityLabel</string>
 						<reference key="source" ref="164424400"/>
 						<reference key="destination" ref="96959763"/>
@@ -486,6 +476,14 @@
 					<int key="connectionID">32</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">rightImageView</string>
+						<reference key="source" ref="164424400"/>
+						<reference key="destination" ref="326541829"/>
+					</object>
+					<int key="connectionID">58</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">buttonPressed:</string>
 						<reference key="source" ref="973162525"/>
@@ -509,6 +507,14 @@
 						<reference key="destination" ref="351188168"/>
 					</object>
 					<int key="connectionID">56</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">rightImageView</string>
+						<reference key="source" ref="37571204"/>
+						<reference key="destination" ref="987009132"/>
+					</object>
+					<int key="connectionID">59</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -675,7 +681,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">56</int>
+			<int key="maxID">59</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -688,9 +694,9 @@
 						<string key="cityLabel">UILabel</string>
 						<string key="editButton">UIButton</string>
 						<string key="editImageView">UIImageView</string>
-						<string key="leftImageView">UIImageView</string>
 						<string key="levelLabel">UILabel</string>
 						<string key="levelLabelTitle">UILabel</string>
+						<string key="rightImageView">UIImageView</string>
 						<string key="updateAvatarButton">UIButton</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -714,10 +720,6 @@
 							<string key="name">editImageView</string>
 							<string key="candidateClassName">UIImageView</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="leftImageView">
-							<string key="name">leftImageView</string>
-							<string key="candidateClassName">UIImageView</string>
-						</object>
 						<object class="IBToOneOutletInfo" key="levelLabel">
 							<string key="name">levelLabel</string>
 							<string key="candidateClassName">UILabel</string>
@@ -725,6 +727,10 @@
 						<object class="IBToOneOutletInfo" key="levelLabelTitle">
 							<string key="name">levelLabelTitle</string>
 							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="rightImageView">
+							<string key="name">rightImageView</string>
+							<string key="candidateClassName">UIImageView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="updateAvatarButton">
 							<string key="name">updateAvatarButton</string>
