@@ -22,6 +22,9 @@
 @property (retain, nonatomic) IBOutlet UITableView * loginWithExtenalTable;
 @property (retain, nonatomic) IBOutlet UIButton * loginButton;
 
+@property (retain, nonatomic) IBOutlet UIButton * loginWithSinaWeiboButton;
+@property (retain, nonatomic) IBOutlet UIButton * loginWithQQButton;
+
 - (IBAction)loginButtonSelected:(id)sender;
 
 @end
@@ -31,12 +34,15 @@
 @synthesize registerTable;
 @synthesize loginWithExtenalTable;
 @synthesize loginButton;
+@synthesize loginWithQQButton;
+@synthesize loginWithSinaWeiboButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         [self.navigationItem setLeftBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onBackButtonClicked) title:@"返回"]];
+        [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onBackButtonClicked) title:@"找回密码"]];
     }
     return self;
 }
@@ -101,7 +107,7 @@
     }
     else if (tableView == self.loginWithExtenalTable)
     {
-        number = 2;
+        number = 1;
     }
     return number;
 }
@@ -154,6 +160,9 @@
     else if (tableView == self.loginWithExtenalTable)
     {
         cell = [ViewHelper getLoginWithExtenalViewCellInTableView:tableView cellForRowAtIndexPath:indexPath];
+        self.loginWithQQButton = ((ButtonViewCell*)cell).rightButton;
+        self.loginWithSinaWeiboButton = ((ButtonViewCell*)cell).leftButton;
+        ((ButtonViewCell*)cell).delegate = self;
     }
     return cell;
 }
@@ -165,18 +174,6 @@
     {
         RegisterViewController * registerController = [[RegisterViewController alloc] initWithNibName:@"RegisterViewController" bundle:nil];
         [self.navigationController pushViewController:registerController animated:YES];
-    }
-    else if(tableView == self.loginWithExtenalTable)
-    {
-        if ([indexPath row] == 0) {
-            
-        }
-        else
-        {
-            [[QZoneSDKManager sharedManager] loginWithDoneCallback:^(LOGIN_STATUS status) {
-                NSLog(@"QZone login done, status:%d", status);
-            }];
-        }
     }
 }
 
@@ -191,6 +188,21 @@
 {
     [textField resignFirstResponder];
     return YES;
+}
+
+#pragma mark ButtonPressDelegate
+- (void)didButtonPressed:(UIButton *)button inView:(UIView *)view
+{
+    if(button ==  self.loginWithSinaWeiboButton)
+    {
+        NSLog(@"loginWithSinaWeiboButton");
+    }
+    else if(button == self.loginWithQQButton)
+    {
+        [[QZoneSDKManager sharedManager] loginWithDoneCallback:^(LOGIN_STATUS status) {
+            NSLog(@"QZone login done, status:%d", status);
+        }];
+    }
 }
 
 @end

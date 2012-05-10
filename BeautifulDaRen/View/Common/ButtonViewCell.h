@@ -7,11 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ButtonPressDelegate.h"
 
 @interface ButtonViewCell : UITableViewCell
 
 @property (retain, nonatomic) IBOutlet UIImageView * buttonLeftIcon;
 @property (retain, nonatomic) IBOutlet UILabel * buttonText;
 @property (retain, nonatomic) IBOutlet UIImageView * buttonRightIcon;
+@property (retain, nonatomic) IBOutlet UILabel * buttonRightText;
+
+@property (retain, nonatomic) IBOutlet UIButton * leftButton;
+@property (retain, nonatomic) IBOutlet UIButton * rightButton;
+
+@property (retain, nonatomic) id<ButtonPressDelegate> delegate;
 
 @end

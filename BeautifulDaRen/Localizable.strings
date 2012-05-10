@@ -28,8 +28,8 @@
 "to_select" = "选择";
 
 "not_user_to_register" = "还不是美丽达人用户？立即注册";
-"login_with_sina_weibo" = "新浪微博账号登录";
-"login_with_tencent_qq" = "腾讯QQ账号登录";
+"login_with_sina_weibo" = "微博登录";
+"login_with_tencent_qq" = "QQ登录";
 "notice_for_use" = "《美丽达人网络服务使用协议》";
 
 "local_city" = "所在城市";

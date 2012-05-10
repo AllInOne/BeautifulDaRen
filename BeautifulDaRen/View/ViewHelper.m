@@ -19,26 +19,16 @@
     cell = [tableView dequeueReusableCellWithIdentifier:@"ButtonViewCell"];
     if(!cell)
     {
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"ButtonViewCell" owner:self options:nil] objectAtIndex:0];
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"ButtonViewCell" owner:self options:nil] objectAtIndex:2];
     }
-    switch ([indexPath row]) {
-        case 0:
-        {
-            // sina weibo
-            ((ButtonViewCell*)cell).buttonText.text = NSLocalizedString(@"login_with_sina_weibo", @"You are not user, please register");
-            ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"first"]; 
-            ((ButtonViewCell*)cell).buttonRightIcon.image = [UIImage imageNamed:@"second"]; 
-            break;
-        } 
-        case 1:
-        {
-            // tencent weibo
-            ((ButtonViewCell*)cell).buttonText.text = NSLocalizedString(@"login_with_tencent_qq", @"You are not user, please register");
-            ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"first"]; 
-            ((ButtonViewCell*)cell).buttonRightIcon.image = [UIImage imageNamed:@"second"]; 
-            break;
-        }
-    }
+
+    // sina weibo
+    ((ButtonViewCell*)cell).buttonText.text = NSLocalizedString(@"login_with_sina_weibo", @"You are not user, please register");
+    ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"first"]; 
+    // tencent weibo
+    ((ButtonViewCell*)cell).buttonRightText.text = NSLocalizedString(@"login_with_tencent_qq", @"You are not user, please register");
+    ((ButtonViewCell*)cell).buttonRightIcon.image = [UIImage imageNamed:@"second"]; 
+
     return cell;
 }
 

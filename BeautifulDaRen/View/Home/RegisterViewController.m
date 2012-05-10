@@ -34,6 +34,9 @@ enum
 @property (retain, nonatomic) IBOutlet UIButton * registerButton;
 @property (retain, nonatomic) IBOutlet UIButton * noticeForUseButton;
 
+@property (retain, nonatomic) IBOutlet UIButton * loginWithSinaWeiboButton;
+@property (retain, nonatomic) IBOutlet UIButton * loginWithQQButton;
+
 @property (retain, nonatomic) IBOutlet UIScrollView * scrollView;
 
 @end
@@ -45,6 +48,9 @@ enum
 @synthesize registerButton;
 @synthesize noticeForUseButton;
 @synthesize scrollView;
+
+@synthesize loginWithQQButton;
+@synthesize loginWithSinaWeiboButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -185,9 +191,12 @@ enum
             }
         }
     }
-    else if(tableView == self.loginWithExtenalTable)
+    else if (tableView == self.loginWithExtenalTable)
     {
         cell = [ViewHelper getLoginWithExtenalViewCellInTableView:tableView cellForRowAtIndexPath:indexPath];
+        self.loginWithQQButton = ((ButtonViewCell*)cell).rightButton;
+        self.loginWithSinaWeiboButton = ((ButtonViewCell*)cell).leftButton;
+        ((ButtonViewCell*)cell).delegate = self;
     }
     return cell;
 }
@@ -201,7 +210,7 @@ enum
     }
     else if(tableView == self.loginWithExtenalTable)
     {
-        number = 2;
+        number = 1;
     }
     return number;
 }
@@ -244,18 +253,6 @@ enum
             }
         }
     }
-    else if(tableView == self.loginWithExtenalTable)
-    {
-        if ([indexPath row] == 0) {
-            
-        }
-        else
-        {
-            [[QZoneSDKManager sharedManager] loginWithDoneCallback:^(LOGIN_STATUS status) {
-                NSLog(@"QZone login done, status:%d", status);
-            }];
-        }
-    }
 }
 
 #pragma mark UITextFieldDelegate
@@ -263,6 +260,21 @@ enum
 {
     [textField resignFirstResponder];
     return YES;
+}
+
+#pragma mark ButtonPressDelegate
+- (void)didButtonPressed:(UIButton *)button inView:(UIView *)view
+{
+    if(button ==  self.loginWithSinaWeiboButton)
+    {
+        NSLog(@"loginWithSinaWeiboButton");
+    }
+    else if(button == self.loginWithQQButton)
+    {
+        [[QZoneSDKManager sharedManager] loginWithDoneCallback:^(LOGIN_STATUS status) {
+            NSLog(@"QZone login done, status:%d", status);
+        }];
+    }
 }
 
 @end

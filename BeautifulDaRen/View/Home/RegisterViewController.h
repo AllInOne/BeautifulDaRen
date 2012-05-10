@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ButtonPressDelegate.h"
 
-@interface RegisterViewController : UIViewController <UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
+@interface RegisterViewController : UIViewController <UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate,ButtonPressDelegate>
 
 @end
