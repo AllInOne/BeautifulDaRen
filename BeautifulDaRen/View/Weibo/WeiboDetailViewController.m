@@ -58,13 +58,13 @@
         UIBarButtonItem *flexible = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
         
         
-        UIBarButtonItem *buyButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(onBuy)];
-        UIBarButtonItem *forwardButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(onForward)];
+        UIBarButtonItem *buyButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"toolbar购买"] style:UIBarButtonItemStylePlain target:self action:@selector(onBuy)];
+        UIBarButtonItem *forwardButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"toolbar转发"] style:UIBarButtonItemStyleDone target:self action:@selector(onForward)];
         UIBarButtonItem *commentButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemReply target:self action:@selector(onComment)];      
         UIBarButtonItem *favourateButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(onFavourate)];
         UIBarButtonItem *moreButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(onMore)]; 
         
-        NSArray *barItems = [[NSArray alloc]initWithObjects:forwardButtonItem,flexible,commentButtonItem,flexible,favourateButtonItem,flexible,moreButtonItem, flexible, buyButtonItem, nil];
+        NSArray *barItems = [[NSArray alloc]initWithObjects:flexible, forwardButtonItem,flexible,commentButtonItem,flexible,favourateButtonItem,flexible,moreButtonItem, flexible, buyButtonItem, nil];
         
         tempToolbar.items= barItems;
         tempToolbar.tintColor = [UIColor blackColor];

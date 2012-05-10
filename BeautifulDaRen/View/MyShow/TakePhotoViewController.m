@@ -115,7 +115,7 @@
         {
             CGRect defaultFrame = self.imagePickerController.cameraOverlayView.frame;
             CGRect newFrame = CGRectMake(0.0,
-                                        430.0,
+                                        436.0,
                                         CGRectGetWidth(defaultFrame),
                                         44.0);
             self.view.frame = newFrame;
