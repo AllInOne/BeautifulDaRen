@@ -56,6 +56,7 @@
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<bool key="IBUIBounces">NO</bool>
+								<bool key="IBUIScrollEnabled">NO</bool>
 								<int key="IBUIStyle">1</int>
 								<int key="IBUISeparatorStyle">2</int>
 								<object class="NSColor" key="IBUISeparatorColor">
@@ -461,6 +462,8 @@
 						<string key="accountInputTable">UITableView</string>
 						<string key="loginButton">UIButton</string>
 						<string key="loginWithExtenalTable">UITableView</string>
+						<string key="loginWithQQButton">UIButton</string>
+						<string key="loginWithSinaWeiboButton">UIButton</string>
 						<string key="registerTable">UITableView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -475,6 +478,14 @@
 						<object class="IBToOneOutletInfo" key="loginWithExtenalTable">
 							<string key="name">loginWithExtenalTable</string>
 							<string key="candidateClassName">UITableView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="loginWithQQButton">
+							<string key="name">loginWithQQButton</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="loginWithSinaWeiboButton">
+							<string key="name">loginWithSinaWeiboButton</string>
+							<string key="candidateClassName">UIButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="registerTable">
 							<string key="name">registerTable</string>
