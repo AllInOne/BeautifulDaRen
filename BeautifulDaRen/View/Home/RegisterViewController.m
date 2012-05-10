@@ -17,12 +17,11 @@
 
 enum
 {
-    ACCOUNT_SETTING_USER_ID = 0,
+    ACCOUNT_SETTING_EMAIL = 0,
+    ACCOUNT_SETTING_USER_ID,
     ACCOUNT_SETTING_PASSWORD,
-    ACCOUNT_SETTING_EMAIL,
-    ACCOUNT_SETTING_CITY,
-    ACCOUNT_SETTING_GENDER,
-    ACCOUNT_SETTING_AVATAR
+    ACCOUNT_SETTING_PASSWORD_AGAIN,
+    ACCOUNT_SETTING_CITY
 };
 
 #define REGISTER_SCROLL_CONTENT_HEIGHT 440
@@ -134,36 +133,37 @@ enum
                 case 0:
                 case 1:
                 case 2:
+                case 3:
                     index = 0;
                     break;
-                case 3:
-                    index = 3;
-                    break;
                 case 4:
-                    index = 2;
-                    break;
-                case 5:
-                    index = 1;
+                    index = 3;
                     break;
             }
             cell = [[[NSBundle mainBundle] loadNibNamed:account_input_identifier owner:self options:nil] objectAtIndex:index];
         }
         switch ([indexPath row]) {
+            case ACCOUNT_SETTING_EMAIL:
+            {
+                ((AccountInfoInputCell*)cell).inputLabel.text = NSLocalizedString(@"account_register_email", @"");
+                ((AccountInfoInputCell*)cell).inputTextField.delegate = self;
+                break;
+            }
             case ACCOUNT_SETTING_USER_ID:
             {
-                ((AccountInfoInputCell*)cell).inputLabel.text = NSLocalizedString(@"account_user_account", @"");
+                ((AccountInfoInputCell*)cell).inputLabel.text = NSLocalizedString(@"user_name_id", @"");
                 ((AccountInfoInputCell*)cell).inputTextField.delegate = self;
                 break;
             }
             case ACCOUNT_SETTING_PASSWORD:
             {
-                ((AccountInfoInputCell*)cell).inputLabel.text = NSLocalizedString(@"password", @"");
+                ((AccountInfoInputCell*)cell).inputLabel.text = NSLocalizedString(@"type_password", @"");
                 ((AccountInfoInputCell*)cell).inputTextField.delegate = self;
                 break;
             }
-            case ACCOUNT_SETTING_EMAIL:
+            case ACCOUNT_SETTING_PASSWORD_AGAIN:
             {
-                ((AccountInfoInputCell*)cell).inputLabel.text = NSLocalizedString(@"account_register_email", @"");
+                ((AccountInfoInputCell*)cell).inputLabel.text = NSLocalizedString(@"type_password_again", @"");
                 ((AccountInfoInputCell*)cell).inputTextField.delegate = self;
                 break;
             }
@@ -172,21 +172,6 @@ enum
                 ((AccountInfoInputCell*)cell).inputLabel.text = NSLocalizedString(@"local_city", @"");
                 ((AccountInfoInputCell*)cell).secondLabel.text = NSLocalizedString(@"to_select", @"");
                 ((AccountInfoInputCell*)cell).imageView.image = [UIImage imageNamed:@"first"];
-                break;
-            }
-            case ACCOUNT_SETTING_GENDER:
-            {
-                ((AccountInfoInputCell*)cell).inputLabel.text = NSLocalizedString(@"my_gender", @"");
-                [((AccountInfoInputCell*)cell).segementedController setTitle:NSLocalizedString(@"female", @"") forSegmentAtIndex:0];
-                [((AccountInfoInputCell*)cell).segementedController setTitle:NSLocalizedString(@"male", @"") forSegmentAtIndex:1];
-                [((AccountInfoInputCell*)cell).segementedController addTarget:self action:@selector(genderChooserAction:) forControlEvents:UIControlEventValueChanged];
-                break;
-            }
-            case ACCOUNT_SETTING_AVATAR:
-            {
-                ((AccountInfoInputCell*)cell).inputLabel.text = NSLocalizedString(@"add_avatar", @"");
-                ((AccountInfoInputCell*)cell).imageView.image = [UIImage imageNamed:@"first"];
-                ((AccountInfoInputCell*)cell).secondLabel.text = NSLocalizedString(@"set_avatar", @"");
                 break;
             }
         }
@@ -206,7 +191,7 @@ enum
     NSInteger number = 0;
     if(tableView == self.accountInfoTable)
     {
-        number = 6;
+        number = 5;
     }
     else if(tableView == self.loginWithExtenalTable)
     {
@@ -223,11 +208,15 @@ enum
             {
                 break;
             }
+            case ACCOUNT_SETTING_EMAIL:
+            {
+                break;
+            }
             case ACCOUNT_SETTING_PASSWORD:
             {
                 break;
             }
-            case ACCOUNT_SETTING_EMAIL:
+            case ACCOUNT_SETTING_PASSWORD_AGAIN:
             {
                 break;
             }
@@ -241,14 +230,6 @@ enum
                 [self.navigationController presentModalViewController:navController animated:YES];
                 
                 [navController release];
-                break;
-            }
-            case ACCOUNT_SETTING_GENDER:
-            {
-                break;
-            }
-            case ACCOUNT_SETTING_AVATAR:
-            {
                 break;
             }
         }
