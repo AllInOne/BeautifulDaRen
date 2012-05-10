@@ -10,12 +10,10 @@
 #import "CommonScrollView.h"
 #import "CategoryContentViewController.h"
 
-@interface CategoryItemCell : UITableViewCell <CommonScrollViewProtocol>
+@interface CategoryItemCell : UIViewController <CommonScrollViewProtocol>
 
 @property (nonatomic, retain) CommonScrollView * categoryScrollItem;
-@property (nonatomic, retain) UILabel * categoryTitle;
-
-@property (nonatomic, retain) CategoryContentViewController * parentViewController;
+@property (nonatomic, retain) IBOutlet UILabel * categoryTitle;
 
 /**
  @brief Init the Category item with data.
@@ -26,6 +24,8 @@
 
  @return YES if success, otherwise NO.
  */
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier andData: (NSDictionary *)dataDict;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil title: (NSString*)title andData: (NSDictionary *)dataDict;
+
+- (CGFloat)getHeight;
 
 @end

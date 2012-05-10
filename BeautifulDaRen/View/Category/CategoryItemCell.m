@@ -15,26 +15,19 @@
 
 @synthesize categoryScrollItem = _categoryScrollItem;
 @synthesize categoryTitle = _categoryTitle;
-@synthesize parentViewController = _parentViewController;
 
 - (void)dealloc {
     [_categoryScrollItem release];
     [_categoryTitle release];
-    [_parentViewController release];
     [super dealloc];
 }
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier andData: (NSDictionary *)dataDict
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil title: (NSString*)title andData: (NSDictionary *)dataDict
 {
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Initialization code
         // TODO: test code
-        _categoryTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 30)];
-        _categoryTitle.text = @"Test category title";
-        [_categoryTitle setFont:[UIFont systemFontOfSize:CATEGORY_TITLE_FONT_HEIGHT]];
-        [self addSubview:_categoryTitle];
-        
         NSArray * images = [NSArray arrayWithObjects:
                             @"1",                    
                             @"2",                        
@@ -47,16 +40,10 @@
                             @"3",
                             nil];
         _categoryScrollItem = [[CommonScrollView alloc] initWithNibName:@"CommonScrollView" bundle:nil data:images andDelegate:self];
-        [_categoryScrollItem.view setFrame:CGRectMake(0, CATEGORY_TITLE_FONT_HEIGHT *2, self.frame.size.width, CATEGORY_ITEM_HEIGHT)];
-        [self addSubview:_categoryScrollItem.view];
+        [_categoryScrollItem.view setFrame:CGRectMake(0, CATEGORY_TITLE_FONT_HEIGHT *2, self.view.frame.size.width, CATEGORY_ITEM_HEIGHT)];
+        [self.view addSubview:_categoryScrollItem.view];
     }
     return self;
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
-    // Configure the view for the selected state
 }
 
 - (void)onItemSelected:(int)index
@@ -69,12 +56,10 @@
     [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
     
     [navController release];
-//    WeiboComposerViewController *weiboComposerController = 
-//    [[[WeiboComposerViewController alloc] initWithNibName:nil bundle:nil] autorelease];
-//    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: weiboComposerController];
-//    
-//    [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
-//    
-//    [navController release];
+}
+
+- (CGFloat)getHeight
+{
+    return CATEGORY_ITEM_HEIGHT;
 }
 @end

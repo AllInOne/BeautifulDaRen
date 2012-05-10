@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CategoryContentViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@interface CategoryContentViewController : UIViewController
 
-@property (nonatomic, retain) IBOutlet UITableView * categoryListView;
+@property (nonatomic, retain) IBOutlet UIScrollView * categoryListView;
 
 @end

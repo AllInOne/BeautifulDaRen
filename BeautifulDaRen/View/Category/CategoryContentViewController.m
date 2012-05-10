@@ -11,6 +11,9 @@
 #import "CategoryItemCell.h"
 #import "ViewConstants.h"
 
+#define CATEGORY_CONTENT_Y_OFFSET   (70.0)
+#define CATEGORY_ITEM_HEIGHT        (120.0)
+
 @interface CategoryContentViewController ()
 
 @end
@@ -24,9 +27,18 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-//        _femaleClothes = [[CommonScrollView alloc] initWithNibName:@"CommonScrollView" bundle:nil];
-//        [self.categoryScrollView addSubview:_femaleClothes.view];
-
+        // TODO: Read categories from network
+        NSInteger index = 0;
+        CGFloat height = CATEGORY_CONTENT_Y_OFFSET;
+        NSArray * titles = [NSArray arrayWithObjects:@"女装", @""@"上装", @"化妆品", @"裙子", nil];
+        while (index < [titles count]) {
+            CategoryItemCell * categoryCell = [[CategoryItemCell alloc] initWithNibName:nil bundle:nil title:[titles objectAtIndex:index] andData:nil];
+            
+            categoryCell.view.frame = CGRectMake(0, CATEGORY_CONTENT_Y_OFFSET, CGRectGetWidth(self.view.frame), [categoryCell getHeight]);
+            
+            [self.categoryListView addSubview: categoryCell.view];
+        }
+        
     }
     return self;
 }
@@ -45,8 +57,6 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [self.categoryListView setDelegate:self];
-    [self.categoryListView setDataSource:self];
 }
 
 - (void)viewDidUnload
@@ -60,37 +70,6 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-#pragma mark - UITableViewDelegate/UITableViewDataSource
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-}
-
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return CATEGORY_ITEM_HEIGHT;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier: @"CategoryItemCell"];
-    if (!cell) {
-        cell = [[[CategoryItemCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CategoryItemCell" andData:nil] autorelease];
-
-    }
-    CategoryItemCell * categoryCell = (CategoryItemCell*)cell;
-    categoryCell.parentViewController = self;
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    [cell setFrame:CGRectMake(0, 0, 320, 240)];
-    return cell;
 }
 
 @end
