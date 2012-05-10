@@ -17,11 +17,17 @@
 @synthesize leftBottomLabelNumber;
 @synthesize rightBottomLabelName;
 @synthesize rightBottomLabelNumber;
+@synthesize thirdLeftLabelName;
+@synthesize thirdLeftLabelNumber;
+@synthesize thirdRightLabelName;
+@synthesize thirdRIghtLabelNumber;
 
 @synthesize leftTopButton;
 @synthesize leftButtomButton;
 @synthesize rightTopButton;
 @synthesize rightButtomButton;
+@synthesize thirdLeftButton;
+@synthesize thirdRightButton;
 
 @synthesize delegate;
 

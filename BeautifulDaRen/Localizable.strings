@@ -45,6 +45,8 @@
 "black_list" = "黑名单";
 "my_publish" = "我发表的";
 "private_letter" = "私信";
+"draft" = "草稿箱";
+"buyed" = "购买的";
+"topic" = "话题";
 "at_me" = "@我";
 "comment_me" = "评论我的";
-"my_interesting" = "我的兴趣";

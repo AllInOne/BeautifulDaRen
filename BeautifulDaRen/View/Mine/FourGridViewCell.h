@@ -19,11 +19,17 @@
 @property (retain, nonatomic) IBOutlet UILabel * leftBottomLabelNumber;
 @property (retain, nonatomic) IBOutlet UILabel * rightBottomLabelName;
 @property (retain, nonatomic) IBOutlet UILabel * rightBottomLabelNumber;
+@property (retain, nonatomic) IBOutlet UILabel * thirdLeftLabelName;
+@property (retain, nonatomic) IBOutlet UILabel * thirdLeftLabelNumber;
+@property (retain, nonatomic) IBOutlet UILabel * thirdRightLabelName;
+@property (retain, nonatomic) IBOutlet UILabel * thirdRIghtLabelNumber;
 
 @property (retain, nonatomic) IBOutlet UIButton * leftTopButton;
 @property (retain, nonatomic) IBOutlet UIButton * leftButtomButton;
 @property (retain, nonatomic) IBOutlet UIButton * rightTopButton;
 @property (retain, nonatomic) IBOutlet UIButton * rightButtomButton;
+@property (retain, nonatomic) IBOutlet UIButton * thirdLeftButton;
+@property (retain, nonatomic) IBOutlet UIButton * thirdRightButton;
 
 @property (retain, nonatomic) id<ButtonPressDelegate> delegate;
 

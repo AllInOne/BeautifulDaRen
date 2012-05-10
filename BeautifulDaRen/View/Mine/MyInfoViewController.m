@@ -19,6 +19,9 @@
 @property (retain, nonatomic) IBOutlet UIButton * fansButton;
 @property (retain, nonatomic) IBOutlet UIButton * collectionButton;
 @property (retain, nonatomic) IBOutlet UIButton * blackListButton;
+@property (retain, nonatomic) IBOutlet UIButton * buyedButton;
+@property (retain, nonatomic) IBOutlet UIButton * topicButton;
+@property (retain, nonatomic) IBOutlet UIButton * editButton;
 
 // TODO use core data.
 @property (retain, nonatomic) UserAccount * userAccount;
@@ -26,10 +29,13 @@
 @end
 
 @implementation MyInfoViewController
-@synthesize followButton;
-@synthesize fansButton;
-@synthesize collectionButton;
-@synthesize blackListButton;
+@synthesize followButton = _followButton;
+@synthesize fansButton = _fansButton;
+@synthesize collectionButton = _collectionButton;
+@synthesize blackListButton = _blackListButton;
+@synthesize buyedButton = _buyedButton;
+@synthesize topicButton = _topicButton;
+@synthesize editButton = _editButton;
 
 @synthesize userAccount;
 
@@ -59,7 +65,7 @@
     self.userAccount.level = 12;
     self.userAccount.levelDescription = @"资深美丽达人";
     self.userAccount.localCity = @"成都";
-    self.userAccount.imageData = UIImagePNGRepresentation([UIImage imageNamed:@"avatar_icon"]);
+    self.userAccount.imageData = UIImagePNGRepresentation([UIImage imageNamed:@"item_fake"]);
 }
 #pragma mark - View lifecycle
 
@@ -86,7 +92,7 @@
 #pragma mark UITableViewDataSource
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 6;
+    return 4;
 }
 
 - (UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -94,7 +100,6 @@
     static NSString * myInfoTopViewIdentifier = @"MyInfoTopViewCell";
     static NSString * fourGridViewIndentifier = @"FourGridViewCell";
     static NSString * buttonViewCellIdentifier = @"ButtonViewCell";
-    static NSString * myInfoDetailCellIdentifier = @"MyInfoDetailViewCell";
     UITableViewCell * cell = nil;
     NSInteger section = [indexPath section];
     if (section == 0) {
@@ -108,7 +113,10 @@
         ((MyInfoTopViewCell*)cell).levelLabelTitle.text = self.userAccount.levelDescription;
         ((MyInfoTopViewCell*)cell).beautifulIdLabel.text = self.userAccount.userDisplayId;
         ((MyInfoTopViewCell*)cell).leftImageView.image = [UIImage imageNamed:@"location"];
+        ((MyInfoTopViewCell*)cell).editImageView.image = [UIImage imageNamed:@"location"];
         ((MyInfoTopViewCell*)cell).cityLabel.text = [NSString stringWithFormat:@"%@ : %@",NSLocalizedString(@"local_city", @""),self.userAccount.localCity];
+        _editButton = ((MyInfoTopViewCell*)cell).editButton;
+        ((MyInfoTopViewCell*)cell).delegate = self;
     }
     else if(section == 1) {
         cell = [tableView dequeueReusableCellWithIdentifier:fourGridViewIndentifier];
@@ -122,13 +130,21 @@
         ((FourGridViewCell*)cell).rightTopLabelNumber.text = @"(20)";
         ((FourGridViewCell*)cell).leftBottomLabelName.text = NSLocalizedString(@"collection", @"");
         ((FourGridViewCell*)cell).leftBottomLabelNumber.text = @"(12)";
-        ((FourGridViewCell*)cell).rightBottomLabelName.text = NSLocalizedString(@"black_list", @"");
+        ((FourGridViewCell*)cell).rightBottomLabelName.text = NSLocalizedString(@"buyed", @"");
         ((FourGridViewCell*)cell).rightBottomLabelNumber.text = @"(32)";
+
+        ((FourGridViewCell*)cell).thirdLeftLabelName.text = NSLocalizedString(@"topic", @"");
+        ((FourGridViewCell*)cell).thirdLeftLabelNumber.text = @"(32)";  
+
+        ((FourGridViewCell*)cell).thirdRightLabelName.text = NSLocalizedString(@"black_list", @"");
+        ((FourGridViewCell*)cell).thirdRIghtLabelNumber.text = @"(1)";
         
-        self.followButton = ((FourGridViewCell*)cell).leftTopButton;
-        self.fansButton = ((FourGridViewCell*)cell).rightTopButton;
-        self.collectionButton = ((FourGridViewCell*)cell).leftButtomButton;
-        self.blackListButton = ((FourGridViewCell*)cell).rightButtomButton;
+        _followButton = ((FourGridViewCell*)cell).leftTopButton;
+        _fansButton = ((FourGridViewCell*)cell).rightTopButton;
+        _collectionButton = ((FourGridViewCell*)cell).leftButtomButton;
+        _buyedButton = ((FourGridViewCell*)cell).rightButtomButton;
+        _topicButton = ((FourGridViewCell*)cell).thirdLeftButton;
+        _blackListButton = ((FourGridViewCell*)cell).thirdRightButton;
     }
     else if (section == 2) {
         cell = [tableView dequeueReusableCellWithIdentifier:buttonViewCellIdentifier];
@@ -147,6 +163,13 @@
             {
                 ((ButtonViewCell*)cell).buttonRightIcon.image = [UIImage imageNamed:@"shop"];
                 ((ButtonViewCell*)cell).buttonText.text = NSLocalizedString(@"private_letter", @"");
+                ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"shop"];
+                break;
+            }
+            case 2:
+            {
+                ((ButtonViewCell*)cell).buttonRightIcon.image = [UIImage imageNamed:@"shop"];
+                ((ButtonViewCell*)cell).buttonText.text = NSLocalizedString(@"draft", @"");
                 ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"shop"];
                 break;
             }
@@ -174,23 +197,6 @@
             }
         }
     }
-    else if (section == 4) {
-        cell = [tableView dequeueReusableCellWithIdentifier:buttonViewCellIdentifier];
-        if(!cell) {
-            cell = [[[NSBundle mainBundle] loadNibNamed:buttonViewCellIdentifier owner:self options:nil] objectAtIndex:0];
-        }
-        ((ButtonViewCell*)cell).buttonRightIcon.image = [UIImage imageNamed:@"shop"];
-        ((ButtonViewCell*)cell).buttonText.text = NSLocalizedString(@"my_interesting", @"");
-        ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"shop"];
-    }
-    else if (section == 5) {
-        cell = [tableView dequeueReusableCellWithIdentifier:myInfoDetailCellIdentifier];
-        if(!cell) {
-            cell = [[[NSBundle mainBundle] loadNibNamed:myInfoDetailCellIdentifier owner:self options:nil] objectAtIndex:0];
-        }
-        ((MyInfoDetailViewCell*)cell).cellTextView.text = @"显示个人资料，详细信息，生日，其他的一些。尼古拉斯凯奇";
-        ((MyInfoDetailViewCell*)cell).cellImageView.image = [UIImage imageNamed:@"shop"];
-    }
     return cell;
 }
 
@@ -207,18 +213,10 @@
             numberOfRows = 1;
             break;
         case 2:
-            numberOfRows = 2;
+            numberOfRows = 3;
             break;
         case 3:
             numberOfRows = 2;
-            break;
-        // my interesting 
-        case 4:
-            numberOfRows = 1;
-            break;
-        // personal info
-        case 5:
-            numberOfRows = 1;
             break;
     }
     return numberOfRows;
@@ -235,7 +233,7 @@
     }
     else if (section == 1)
     {
-        height = 80.0f;
+        height = 122.0f;
     }
     else if (section == 2)
     {
@@ -244,14 +242,6 @@
     else if (section == 3)
     {
         height = 40.0f;
-    }
-    else if (section == 4)
-    {
-        height = 40.0f;
-    }
-    else if (section == 5)
-    {
-        height = 120.0f;
     }
     return height;
 }
@@ -295,6 +285,12 @@
                 NSLog(@"To handle press private letter");
                 break;
             }
+            case 2:
+            {
+                // TODO
+                NSLog(@"To handle press draft");
+                break;
+            }
         }
     }
     // @我 and 评论我的
@@ -315,32 +311,38 @@
             }
         }
     }
-    // 我的兴趣
-    else if(section == 4)
-    {
-        // TODO
-        NSLog(@"To handle press my interesting");
-    }
 }
 
 #pragma mark ButtonPressDelegate
 - (void) didButtonPressed:(UIButton*)button inView:(UIView *)view
 {
-    if(button == self.followButton)
+    if(button == _followButton)
     {
         NSLog(@"followButton pressed");
     }
-    else if (button == self.fansButton)
+    else if (button == _fansButton)
     {
         NSLog(@"fansButton pressed");
     }
-    else if (button == self.collectionButton)
+    else if (button == _collectionButton)
     {
         NSLog(@"collectionButton pressed");
     }
-    else if (button == self.blackListButton)
+    else if (button == _blackListButton)
     {
         NSLog(@"blackListButton pressed");
+    }
+    else if(button == _buyedButton)
+    {
+        NSLog(@"buyed button pressed");
+    }
+    else if(button == _topicButton)
+    {
+        NSLog(@"topic button pressed");
+    }
+    else if(button == _editButton)
+    {
+        NSLog(@"edit button pressed");
     }
     else
     {

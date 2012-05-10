@@ -15,6 +15,9 @@
 @synthesize beautifulIdLabel;
 @synthesize cityLabel;
 @synthesize levelLabelTitle;
+@synthesize editButton;
+@synthesize editImageView;
+@synthesize delegate = _delegate;
 
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -29,6 +32,11 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
+}
+
+-(IBAction)buttonPressed:(UIButton*)sender
+{
+    [_delegate didButtonPressed:sender inView:self];
 }
 
 @end
