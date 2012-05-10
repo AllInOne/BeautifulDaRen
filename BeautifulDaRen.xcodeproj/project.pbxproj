@@ -16,8 +16,6 @@
 		C20FAB10155953A600895272 /* ContactItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C20FAB0F155953A600895272 /* ContactItemCell.xib */; };
 		C215A75F15539B7C001BF379 /* FourGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C215A75E15539B7C001BF379 /* FourGridViewCell.m */; };
 		C215A76115539B9E001BF379 /* FourGridViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C215A76015539B9E001BF379 /* FourGridViewCell.xib */; };
-		C215A7701553E51A001BF379 /* MyInfoDetailViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C215A76F1553E51A001BF379 /* MyInfoDetailViewCell.m */; };
-		C215A7721553E53F001BF379 /* MyInfoDetailViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C215A7711553E53E001BF379 /* MyInfoDetailViewCell.xib */; };
 		C215A7A11553EABF001BF379 /* UserAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = C215A79E1553EABF001BF379 /* UserAccount.m */; };
 		C215A7A21553EABF001BF379 /* WaresItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C215A7A01553EABF001BF379 /* WaresItem.m */; };
 		C216EDBE1551893500CA8CE8 /* MyInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C216EDBC1551893500CA8CE8 /* MyInfoViewController.m */; };
@@ -261,9 +259,6 @@
 		C215A75E15539B7C001BF379 /* FourGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FourGridViewCell.m; path = ../Mine/FourGridViewCell.m; sourceTree = "<group>"; };
 		C215A76015539B9E001BF379 /* FourGridViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FourGridViewCell.xib; sourceTree = "<group>"; };
 		C215A76D1553CCEF001BF379 /* ButtonPressDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonPressDelegate.h; sourceTree = "<group>"; };
-		C215A76E1553E51A001BF379 /* MyInfoDetailViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfoDetailViewCell.h; sourceTree = "<group>"; };
-		C215A76F1553E51A001BF379 /* MyInfoDetailViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfoDetailViewCell.m; sourceTree = "<group>"; };
-		C215A7711553E53E001BF379 /* MyInfoDetailViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyInfoDetailViewCell.xib; sourceTree = "<group>"; };
 		C215A79D1553EABF001BF379 /* UserAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAccount.h; sourceTree = "<group>"; };
 		C215A79E1553EABF001BF379 /* UserAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAccount.m; sourceTree = "<group>"; };
 		C215A79F1553EABF001BF379 /* WaresItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaresItem.h; sourceTree = "<group>"; };
@@ -583,9 +578,6 @@
 				C216EDC015518B8C00CA8CE8 /* MyInfoTopViewCell.h */,
 				C216EDC115518B8C00CA8CE8 /* MyInfoTopViewCell.m */,
 				C216EDC315518BD300CA8CE8 /* MyInfoTopViewCell.xib */,
-				C215A76E1553E51A001BF379 /* MyInfoDetailViewCell.h */,
-				C215A76F1553E51A001BF379 /* MyInfoDetailViewCell.m */,
-				C215A7711553E53E001BF379 /* MyInfoDetailViewCell.xib */,
 			);
 			name = SubView;
 			sourceTree = "<group>";
@@ -1410,7 +1402,6 @@
 				C216EDBF1551893500CA8CE8 /* MyInfoViewController.xib in Resources */,
 				C216EDC415518BD300CA8CE8 /* MyInfoTopViewCell.xib in Resources */,
 				C215A76115539B9E001BF379 /* FourGridViewCell.xib in Resources */,
-				C215A7721553E53F001BF379 /* MyInfoDetailViewCell.xib in Resources */,
 				CE62B3681551842D0017AA88 /* SelectCategoryViewController.xib in Resources */,
 				CEEF7B21155549B5001ABCEC /* ForwardCommentListViewController.xib in Resources */,
 				CEEF7B6415556430001ABCEC /* ForwardCommentTableViewCell.xib in Resources */,
@@ -1524,7 +1515,6 @@
 				C216EDBE1551893500CA8CE8 /* MyInfoViewController.m in Sources */,
 				C216EDC215518B8C00CA8CE8 /* MyInfoTopViewCell.m in Sources */,
 				C215A75F15539B7C001BF379 /* FourGridViewCell.m in Sources */,
-				C215A7701553E51A001BF379 /* MyInfoDetailViewCell.m in Sources */,
 				CE62B3671551842D0017AA88 /* SelectCategoryViewController.m in Sources */,
 				C215A7A11553EABF001BF379 /* UserAccount.m in Sources */,
 				C215A7A21553EABF001BF379 /* WaresItem.m in Sources */,

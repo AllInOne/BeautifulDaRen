@@ -10,7 +10,6 @@
 #import "MyInfoTopViewCell.h"
 #import "FourGridViewCell.h"
 #import "ButtonViewCell.h"
-#import "MyInfoDetailViewCell.h"
 
 #import "UserAccount.h"
 
