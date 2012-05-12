@@ -47,6 +47,9 @@
 		C26717BB1542BF2200DC40D8 /* CategoryContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C26717B61542BF2200DC40D8 /* CategoryContentViewController.xib */; };
 		C26717BC1542BF2200DC40D8 /* CategoryItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C26717B81542BF2200DC40D8 /* CategoryItemCell.m */; };
 		C26717BD1542BF2200DC40D8 /* CategoryItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C26717B91542BF2200DC40D8 /* CategoryItemCell.xib */; };
+		C26798EC155E9F7C001E1D2E /* FindPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C26798EA155E9F7B001E1D2E /* FindPasswordViewController.m */; };
+		C26798ED155E9F7C001E1D2E /* FindPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C26798EB155E9F7C001E1D2E /* FindPasswordViewController.xib */; };
+		C26798EF155EA741001E1D2E /* buttonBackGround.png in Resources */ = {isa = PBXBuildFile; fileRef = C26798EE155EA741001E1D2E /* buttonBackGround.png */; };
 		C28A93521548364A008C8AFC /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C28A93501548364A008C8AFC /* LoginViewController.m */; };
 		C28A93531548364A008C8AFC /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C28A93511548364A008C8AFC /* LoginViewController.xib */; };
 		C28A935B15484442008C8AFC /* ButtonViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C28A935A15484442008C8AFC /* ButtonViewCell.m */; };
@@ -319,6 +322,10 @@
 		C26717B71542BF2200DC40D8 /* CategoryItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryItemCell.h; sourceTree = "<group>"; };
 		C26717B81542BF2200DC40D8 /* CategoryItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryItemCell.m; sourceTree = "<group>"; };
 		C26717B91542BF2200DC40D8 /* CategoryItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CategoryItemCell.xib; sourceTree = "<group>"; };
+		C26798E9155E9F7B001E1D2E /* FindPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindPasswordViewController.h; sourceTree = "<group>"; };
+		C26798EA155E9F7B001E1D2E /* FindPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindPasswordViewController.m; sourceTree = "<group>"; };
+		C26798EB155E9F7C001E1D2E /* FindPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FindPasswordViewController.xib; sourceTree = "<group>"; };
+		C26798EE155EA741001E1D2E /* buttonBackGround.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonBackGround.png; sourceTree = "<group>"; };
 		C28A934F1548364A008C8AFC /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		C28A93501548364A008C8AFC /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		C28A93511548364A008C8AFC /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
@@ -1057,6 +1064,7 @@
 		CE745450153F1F8900CB751A /* Asserts */ = {
 			isa = PBXGroup;
 			children = (
+				C26798EE155EA741001E1D2E /* buttonBackGround.png */,
 				C213AB96155C11F900667556 /* next_flag.png */,
 				C213AB92155C05BE00667556 /* female.png */,
 				C213AB93155C05BE00667556 /* male.png */,
@@ -1177,6 +1185,9 @@
 		CEC0B58B153EFBF600F20DC0 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				C26798E9155E9F7B001E1D2E /* FindPasswordViewController.h */,
+				C26798EA155E9F7B001E1D2E /* FindPasswordViewController.m */,
+				C26798EB155E9F7C001E1D2E /* FindPasswordViewController.xib */,
 				C297D838154442C20080294C /* ForgetPasswordViewController.h */,
 				C297D839154442C20080294C /* ForgetPasswordViewController.m */,
 				C297D83A154442C20080294C /* ForgetPasswordViewController.xib */,
@@ -1502,6 +1513,8 @@
 				C213AB94155C05BE00667556 /* female.png in Resources */,
 				C213AB95155C05BE00667556 /* male.png in Resources */,
 				C213AB97155C11F900667556 /* next_flag.png in Resources */,
+				C26798ED155E9F7C001E1D2E /* FindPasswordViewController.xib in Resources */,
+				C26798EF155EA741001E1D2E /* buttonBackGround.png in Resources */,
 				CEE6A694155EA02E00EA8790 /* deletebtn.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1599,6 +1612,7 @@
 				C213AB8B155C044100667556 /* GenderSelectCell.m in Sources */,
 				C213AB9A155C1BCD00667556 /* BeautifulDaRen.xcdatamodeld in Sources */,
 				C213AB9D155C1C9D00667556 /* UserIdentity.m in Sources */,
+				C26798EC155E9F7C001E1D2E /* FindPasswordViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
