@@ -20,6 +20,8 @@
 @interface WeiboDetailViewController ()
 
 @property (nonatomic, retain) NSString * weiboContent;
+
+
 @end
 
 @implementation WeiboDetailViewController
@@ -51,20 +53,30 @@
         //Content for test
         _weiboContent = [[NSString alloc] initWithString:@"start我最近买了一双鞋子，很漂亮，你看看吧！我最近买了一双鞋子，很漂亮，你看看吧！我最近买了一双鞋子，很漂亮，你看看吧！我最近买了一双鞋子，很漂亮，你看看吧！我最近买了一双鞋子，很漂亮，你看看吧！我最近买了一双鞋子，很漂亮，你看看吧！我最近买了一双鞋子，很漂亮，你看看吧！我最近买了一双鞋子，很漂亮，你看看吧！我最近买了一双鞋子，很漂亮，你看看吧！我最近买了一双鞋子，很漂亮，你看看吧！我最近买了一双鞋子，很漂亮，你看看吧！我最近买了一双鞋子，很漂亮，你看看吧！我最近买了一双鞋子，很漂亮，你看看吧！我最近买了一双鞋子，很漂亮，你看看吧！我最近买了一双鞋子，很漂亮，你看看吧！我最近买了一双鞋子，很漂亮，你看看吧！我最近买了一双鞋子，很漂亮，你看看吧！我最近买了一双鞋子，很漂亮，你看看吧！我最近买了一双鞋子，很漂亮，你看看吧！我最近买了一双鞋子，很漂亮，你看看吧！我最近买了一双鞋子，很漂亮，你看看吧！我最近买了一双鞋子，很漂亮，你看看吧！我最近买了一双鞋子，很漂亮，你看看吧！我最近买了一双鞋子，很漂亮，你看看吧！我最近买了一双鞋子，很漂亮，你看看吧！end"];
         
-        UIToolbar *tempToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0,372, 320,44)];
-        //空格
-        
-        // TODO: use custom pictures
+        UIToolbar *tempToolbar = [[[UIToolbar alloc]initWithFrame:CGRectMake(0,372, 320,44)] autorelease];
+  
         UIBarButtonItem *flexible = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+
+//        UIBarButtonItem *buyButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar购买22x22" target:self action:@selector(onBuy)];
+
+        UIBarButtonItem *refreshButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar刷新22x22" target:self action:@selector(onRefresh)];
         
+        UIBarButtonItem *forwardButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar转发22x22" target:self action:@selector(onForward)];
+
+        UIBarButtonItem *commentButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar评论22x22" target:self action:@selector(onComment)];
+
+        UIBarButtonItem *favourateButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar收藏22x22" target:self action:@selector(onFavourate)];
         
-        UIBarButtonItem *buyButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"toolbar购买"] style:UIBarButtonItemStylePlain target:self action:@selector(onBuy)];
-        UIBarButtonItem *forwardButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"toolbar转发"] style:UIBarButtonItemStyleDone target:self action:@selector(onForward)];
-        UIBarButtonItem *commentButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemReply target:self action:@selector(onComment)];      
-        UIBarButtonItem *favourateButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(onFavourate)];
-        UIBarButtonItem *moreButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(onMore)]; 
-        
-        NSArray *barItems = [[NSArray alloc]initWithObjects:flexible, forwardButtonItem,flexible,commentButtonItem,flexible,favourateButtonItem,flexible,moreButtonItem, flexible, buyButtonItem, nil];
+        NSArray *barItems = [[NSArray alloc]initWithObjects:flexible, 
+                                                            refreshButtonItem, 
+                                                            flexible,
+                                                            forwardButtonItem,
+                                                            flexible,
+                                                            commentButtonItem, 
+                                                            flexible, 
+                                                            favourateButtonItem,
+                                                            flexible,
+                                                            nil];
         
         tempToolbar.items= barItems;
         tempToolbar.tintColor = [UIColor blackColor];
@@ -117,7 +129,7 @@
     // TODO:
 }
 
-- (void)onMore
+- (void)onRefresh
 {
     // TODO:
 }
@@ -151,6 +163,11 @@
     
     // Custom initialization
     [_detailScrollView setContentSize:CGSizeMake(320, self.commentButton.frame.origin.y + 180)];
+
+}
+
+- (UIBarButtonItem *)getUIBarButtonItemByImageName:(NSString*)imageName
+{
 
 }
 

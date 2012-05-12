@@ -50,7 +50,7 @@
     [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     
     [button.titleLabel setFont:[UIFont systemFontOfSize:14]];
-//    [button setTitleColor:[UIColor purpleColor] forState:UIControlStateNormal];
+
     button.frame = CGRectMake(0, 0, 50, 30);
     return [[[UIBarButtonItem alloc] initWithCustomView:button] autorelease];
 }
@@ -62,4 +62,14 @@
     return [[[UIBarButtonItem alloc] initWithCustomView:imageView] autorelease];
 }
 
++ (UIBarButtonItem*)getToolBarItemOfImageName:(NSString*)imageName target:(id)target action:(SEL)action
+{
+    UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setBackgroundImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+    [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    
+    button.frame = CGRectMake(0, 0, 22, 22);
+    return [[[UIBarButtonItem alloc] initWithCustomView:button] autorelease];
+
+}
 @end
