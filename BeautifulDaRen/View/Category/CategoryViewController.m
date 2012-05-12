@@ -10,10 +10,19 @@
 #import "ViewConstants.h"
 #import "CommonScrollView.h"
 
+@interface CategoryViewController ()
+
+@property (nonatomic, assign) Boolean shouldAdsViewShow;
+
+@end
+
+
+
 @implementation CategoryViewController
 
 @synthesize adsPageView = _adsPageView;
 @synthesize categoryContentView = _categoryContentView;
+@synthesize shouldAdsViewShow = _shouldAdsViewShow;
 
 - (void)dealloc {
     [_adsPageView release];
@@ -45,6 +54,7 @@
     if (self.adsPageView == nil) {
         _adsPageView = [[AdsPageView alloc] initWithNibName:@"AdsPageView" bundle:nil];
         _adsPageView.view.frame = CGRectMake(0, 0, self.view.frame.size.width, ADS_CELL_HEIGHT);
+        [_adsPageView setDelegate:self];
         [self.view addSubview:_adsPageView.view];
     }
     
@@ -88,4 +98,16 @@
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
+- (void)onAdsPageViewClosed
+{
+    self.shouldAdsViewShow = NO;
+    
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.3];
+    
+    [self.adsPageView.view setHidden:YES];
+    [self.categoryContentView.view setFrame:CGRectMake(0, 0, CGRectGetWidth(self.categoryContentView.view.frame), USER_WINDOW_HEIGHT)];
+    
+    [UIView commitAnimations];
+}
 @end

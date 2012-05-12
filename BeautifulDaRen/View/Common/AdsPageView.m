@@ -40,6 +40,7 @@
 @synthesize adsExchangeTimer = _adsExchangeTimer;
 @synthesize firstImageView = _firstImageView;
 @synthesize secondImageView = _secondImageView;
+@synthesize delegate = _delegate;
 
 @synthesize adsButton = _adsButton;
 @synthesize isNextImageFromLeft = _isNextImageFromLeft;
@@ -132,7 +133,6 @@
 
 -(void)setCurrentPageIndex:(int)pageIndex
 {
-    NSLog(@"setCurrentPageIndex:%d:%d", self.currentPage, pageIndex);
     [self.adsPageController setCurrentPage:pageIndex];
     self.currentPage = pageIndex;
 }
@@ -179,6 +179,14 @@
 -(IBAction)onAdsPressed:(id)sender
 {
     NSLog(@"Ads Pressed, current ads index = %d", currentPage);
+}
+
+-(IBAction)onAdsPageClosedPressed:(id)sender
+{
+    NSLog(@"Ads page view close buttion Pressed!");
+    if ([self.delegate respondsToSelector:@selector(onAdsPageViewClosed)]) {
+        [self.delegate onAdsPageViewClosed];
+    }
 }
 
 - (void)onAdsDragged:(UIPanGestureRecognizer *)sender

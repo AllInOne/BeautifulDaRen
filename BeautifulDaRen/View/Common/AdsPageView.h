@@ -10,9 +10,16 @@
 
 #import <QuartzCore/QuartzCore.h>
 
+@protocol AdsPageViewProtocol <NSObject>
+- (void)onAdsPageViewClosed;
+@end
+
 @interface AdsPageView : UIViewController
 
 @property (nonatomic, retain) IBOutlet UIPageControl * adsPageController;
 @property (nonatomic, retain) IBOutlet UIButton * adsButton;
+@property (nonatomic, assign) id<AdsPageViewProtocol> delegate;
+
 -(IBAction)onAdsPressed:(id)sender;
+-(IBAction)onAdsPageClosedPressed:(id)sender;
 @end

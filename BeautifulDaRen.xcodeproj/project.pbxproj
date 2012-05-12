@@ -223,6 +223,7 @@
 		CEE3071E154F80BD004D2E96 /* FriendsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEE3071C154F80BD004D2E96 /* FriendsViewController.xib */; };
 		CEE30722154F8533004D2E96 /* FriendListCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE30720154F8532004D2E96 /* FriendListCellView.m */; };
 		CEE30723154F8533004D2E96 /* FriendListCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEE30721154F8532004D2E96 /* FriendListCellView.xib */; };
+		CEE6A694155EA02E00EA8790 /* deletebtn.png in Resources */ = {isa = PBXBuildFile; fileRef = CEE6A693155EA02E00EA8790 /* deletebtn.png */; };
 		CEEF7B20155549B5001ABCEC /* ForwardCommentListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEF7B1E155549B5001ABCEC /* ForwardCommentListViewController.m */; };
 		CEEF7B21155549B5001ABCEC /* ForwardCommentListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEF7B1F155549B5001ABCEC /* ForwardCommentListViewController.xib */; };
 		CEEF7B34155557BC001ABCEC /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEF7B33155557BC001ABCEC /* Comment.m */; };
@@ -571,6 +572,7 @@
 		CEE3071F154F8532004D2E96 /* FriendListCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendListCellView.h; sourceTree = "<group>"; };
 		CEE30720154F8532004D2E96 /* FriendListCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendListCellView.m; sourceTree = "<group>"; };
 		CEE30721154F8532004D2E96 /* FriendListCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendListCellView.xib; sourceTree = "<group>"; };
+		CEE6A693155EA02E00EA8790 /* deletebtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = deletebtn.png; sourceTree = "<group>"; };
 		CEEF7B1D155549B5001ABCEC /* ForwardCommentListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForwardCommentListViewController.h; sourceTree = "<group>"; };
 		CEEF7B1E155549B5001ABCEC /* ForwardCommentListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForwardCommentListViewController.m; sourceTree = "<group>"; };
 		CEEF7B1F155549B5001ABCEC /* ForwardCommentListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForwardCommentListViewController.xib; sourceTree = "<group>"; };
@@ -1099,6 +1101,7 @@
 		CE8442E41553D98000106045 /* 320*480 */ = {
 			isa = PBXGroup;
 			children = (
+				CEE6A693155EA02E00EA8790 /* deletebtn.png */,
 				CE1C66C5155A913F00D3E4FF /* banner320x136.png */,
 				CE1C66C6155A913F00D3E4FF /* logo114x29.png */,
 				CE1C66C7155A913F00D3E4FF /* logo124x44.png */,
@@ -1499,6 +1502,7 @@
 				C213AB94155C05BE00667556 /* female.png in Resources */,
 				C213AB95155C05BE00667556 /* male.png in Resources */,
 				C213AB97155C11F900667556 /* next_flag.png in Resources */,
+				CEE6A694155EA02E00EA8790 /* deletebtn.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
