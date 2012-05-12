@@ -10,7 +10,7 @@
 #import "AdsPageView.h"
 #import "CategoryContentViewController.h"
 
-@interface CategoryViewController : UIViewController
+@interface CategoryViewController : UIViewController <AdsPageViewProtocol>
 
 @property (nonatomic, retain) AdsPageView * adsPageView;
 @property (nonatomic, retain) CategoryContentViewController * categoryContentView;

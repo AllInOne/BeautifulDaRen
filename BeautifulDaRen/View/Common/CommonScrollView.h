@@ -21,7 +21,6 @@
 
 @property (nonatomic, assign) id<CommonScrollViewProtocol> delegate;
 
-@property (nonatomic, retain) IBOutlet UILabel * scrollTitle;
 @property (nonatomic, retain) IBOutlet UIScrollView * scrollView;
 
 -(IBAction)onScrollItemClicked:(id)sender;
