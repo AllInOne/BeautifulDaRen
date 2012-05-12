@@ -12,6 +12,7 @@
 #import "ButtonViewCell.h"
 #import "SinaSDKManager.h"
 #import "QZoneSDKManager.h"
+#import "FindPasswordViewController.h"
 
 #import "ViewHelper.h"
 
@@ -42,7 +43,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         [self.navigationItem setLeftBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onBackButtonClicked) title:@"返回"]];
-        [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onBackButtonClicked) title:@"找回密码"]];
+        [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onFindPasswordButtonClicked) title:@"找回密码"]];
     }
     return self;
 }
@@ -71,6 +72,12 @@
 
 - (void)onBackButtonClicked {
     [self dismissModalViewControllerAnimated:YES];
+}
+
+-(void) onFindPasswordButtonClicked
+{
+    FindPasswordViewController * findPasswordViewController = [[[FindPasswordViewController alloc] initWithNibName:@"FindPasswordViewController" bundle:nil] autorelease];
+    [self.navigationController pushViewController:findPasswordViewController animated:YES];
 }
 
 #pragma mark - View lifecycle
@@ -172,7 +179,7 @@
 {
     if(tableView == self.registerTable)
     {
-        RegisterViewController * registerController = [[RegisterViewController alloc] initWithNibName:@"RegisterViewController" bundle:nil];
+        RegisterViewController * registerController = [[[RegisterViewController alloc] initWithNibName:@"RegisterViewController" bundle:nil] autorelease];
         [self.navigationController pushViewController:registerController animated:YES];
     }
 }
