@@ -22,7 +22,6 @@
 		C213AB95155C05BE00667556 /* male.png in Resources */ = {isa = PBXBuildFile; fileRef = C213AB93155C05BE00667556 /* male.png */; };
 		C213AB97155C11F900667556 /* next_flag.png in Resources */ = {isa = PBXBuildFile; fileRef = C213AB96155C11F900667556 /* next_flag.png */; };
 		C213AB9A155C1BCD00667556 /* BeautifulDaRen.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C213AB98155C1BCD00667556 /* BeautifulDaRen.xcdatamodeld */; };
-		C213AB9D155C1C9D00667556 /* UserIdentity.m in Sources */ = {isa = PBXBuildFile; fileRef = C213AB9C155C1C9D00667556 /* UserIdentity.m */; };
 		C213AB9F155C1CD800667556 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C213AB9E155C1CD800667556 /* CoreData.framework */; };
 		C215A75F15539B7C001BF379 /* FourGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C215A75E15539B7C001BF379 /* FourGridViewCell.m */; };
 		C215A76115539B9E001BF379 /* FourGridViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C215A76015539B9E001BF379 /* FourGridViewCell.xib */; };
@@ -50,6 +49,8 @@
 		C26798EC155E9F7C001E1D2E /* FindPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C26798EA155E9F7B001E1D2E /* FindPasswordViewController.m */; };
 		C26798ED155E9F7C001E1D2E /* FindPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C26798EB155E9F7C001E1D2E /* FindPasswordViewController.xib */; };
 		C26798EF155EA741001E1D2E /* buttonBackGround.png in Resources */ = {isa = PBXBuildFile; fileRef = C26798EE155EA741001E1D2E /* buttonBackGround.png */; };
+		C274DCBE155EB7BA0098EE22 /* UserIdentity.m in Sources */ = {isa = PBXBuildFile; fileRef = C274DCBD155EB7BA0098EE22 /* UserIdentity.m */; };
+		C274DCC1155EB99B0098EE22 /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C274DCC0155EB99B0098EE22 /* CoreDataManager.m */; };
 		C28A93521548364A008C8AFC /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C28A93501548364A008C8AFC /* LoginViewController.m */; };
 		C28A93531548364A008C8AFC /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C28A93511548364A008C8AFC /* LoginViewController.xib */; };
 		C28A935B15484442008C8AFC /* ButtonViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C28A935A15484442008C8AFC /* ButtonViewCell.m */; };
@@ -281,8 +282,6 @@
 		C213AB93155C05BE00667556 /* male.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = male.png; sourceTree = "<group>"; };
 		C213AB96155C11F900667556 /* next_flag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = next_flag.png; sourceTree = "<group>"; };
 		C213AB99155C1BCD00667556 /* BeautifulDaRen.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BeautifulDaRen.xcdatamodel; sourceTree = "<group>"; };
-		C213AB9B155C1C9D00667556 /* UserIdentity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserIdentity.h; sourceTree = "<group>"; };
-		C213AB9C155C1C9D00667556 /* UserIdentity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserIdentity.m; sourceTree = "<group>"; };
 		C213AB9E155C1CD800667556 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		C215A75D15539B7C001BF379 /* FourGridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FourGridViewCell.h; path = ../Mine/FourGridViewCell.h; sourceTree = "<group>"; };
 		C215A75E15539B7C001BF379 /* FourGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FourGridViewCell.m; path = ../Mine/FourGridViewCell.m; sourceTree = "<group>"; };
@@ -326,6 +325,13 @@
 		C26798EA155E9F7B001E1D2E /* FindPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindPasswordViewController.m; sourceTree = "<group>"; };
 		C26798EB155E9F7C001E1D2E /* FindPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FindPasswordViewController.xib; sourceTree = "<group>"; };
 		C26798EE155EA741001E1D2E /* buttonBackGround.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonBackGround.png; sourceTree = "<group>"; };
+		C274DCBC155EB7BA0098EE22 /* UserIdentity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserIdentity.h; sourceTree = "<group>"; };
+		C274DCBD155EB7BA0098EE22 /* UserIdentity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserIdentity.m; sourceTree = "<group>"; };
+		C274DCBF155EB99B0098EE22 /* CoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreDataManager.h; path = Common/CoreDataManager.h; sourceTree = "<group>"; };
+		C274DCC0155EB99B0098EE22 /* CoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreDataManager.m; path = Common/CoreDataManager.m; sourceTree = "<group>"; };
+		C274DCC2155EBA6F0098EE22 /* DataManagerCallbacks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataManagerCallbacks.h; path = Common/DataManagerCallbacks.h; sourceTree = "<group>"; };
+		C274DCDA155EBBBD0098EE22 /* DataConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataConstants.h; sourceTree = "<group>"; };
+		C274DCDC155EC3D70098EE22 /* UpdateViewControllerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UpdateViewControllerProtocol.h; path = Protocol/UpdateViewControllerProtocol.h; sourceTree = "<group>"; };
 		C28A934F1548364A008C8AFC /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		C28A93501548364A008C8AFC /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		C28A93511548364A008C8AFC /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
@@ -639,6 +645,7 @@
 		C28D6A95154FCBD9005E14CE /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
+				C274DCDC155EC3D70098EE22 /* UpdateViewControllerProtocol.h */,
 				C28D6A96154FCC12005E14CE /* GridCellViewDelegate.h */,
 				C215A76D1553CCEF001BF379 /* ButtonPressDelegate.h */,
 				C24B100E155BDE4700918530 /* RadioButtonDelegate.h */,
@@ -731,9 +738,10 @@
 		CE029AF3153E68D800886227 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				C274DCDA155EBBBD0098EE22 /* DataConstants.h */,
 				C213AB98155C1BCD00667556 /* BeautifulDaRen.xcdatamodeld */,
-				C213AB9B155C1C9D00667556 /* UserIdentity.h */,
-				C213AB9C155C1C9D00667556 /* UserIdentity.m */,
+				C274DCBC155EB7BA0098EE22 /* UserIdentity.h */,
+				C274DCBD155EB7BA0098EE22 /* UserIdentity.m */,
 				CEEF7B32155557BC001ABCEC /* Comment.h */,
 				CEEF7B33155557BC001ABCEC /* Comment.m */,
 				C215A79D1553EABF001BF379 /* UserAccount.h */,
@@ -1142,6 +1150,9 @@
 		CEBCD04F154FF361000D41E1 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				C274DCC2155EBA6F0098EE22 /* DataManagerCallbacks.h */,
+				C274DCBF155EB99B0098EE22 /* CoreDataManager.h */,
+				C274DCC0155EB99B0098EE22 /* CoreDataManager.m */,
 				CEBCD050154FF377000D41E1 /* BaseManager.h */,
 				CEBCD051154FF377000D41E1 /* BaseManager.m */,
 				CEBCD052154FF377000D41E1 /* ControllerConstants.h */,
@@ -1611,8 +1622,9 @@
 				C24B1011155BDE7B00918530 /* RadioButton.m in Sources */,
 				C213AB8B155C044100667556 /* GenderSelectCell.m in Sources */,
 				C213AB9A155C1BCD00667556 /* BeautifulDaRen.xcdatamodeld in Sources */,
-				C213AB9D155C1C9D00667556 /* UserIdentity.m in Sources */,
 				C26798EC155E9F7C001E1D2E /* FindPasswordViewController.m in Sources */,
+				C274DCBE155EB7BA0098EE22 /* UserIdentity.m in Sources */,
+				C274DCC1155EB99B0098EE22 /* CoreDataManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="878" systemVersion="11D50b" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="UserIdentity" representedClassName="UserIdentity" syncable="YES"/>
+    <entity name="UserIdentity" representedClassName="UserIdentity" syncable="YES">
+        <attribute name="blackListCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="buyedCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="collectionCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="detailedAddress" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="displayName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="fansCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="followCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="isMale" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="level" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="localCity" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="personalBrief" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="topicCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="uniqueId" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <elements>
-        <element name="UserIdentity" positionX="-63" positionY="-27" width="128" height="45"/>
+        <element name="UserIdentity" positionX="-63" positionY="-27" width="128" height="240"/>
     </elements>
 </model>
