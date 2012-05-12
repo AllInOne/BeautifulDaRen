@@ -70,7 +70,6 @@
         cell.delegate = self;
     }
     [self.scrollView setContentSize:CGSizeMake(0, scrollHeight)];
-    [self.view addSubview:self.scrollView];
 }
 
 - (void) loadViewData
