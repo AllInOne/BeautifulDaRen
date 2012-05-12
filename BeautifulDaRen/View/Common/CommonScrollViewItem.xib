@@ -43,6 +43,7 @@
 						<string key="NSFrameSize">{72, 63}</string>
 						<reference key="NSSuperview" ref="193333928"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="118202395"/>
 						<string key="NSReuseIdentifierKey">_NS:225</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -73,10 +74,10 @@
 					<object class="IBUIImageView" id="118202395">
 						<reference key="NSNextResponder" ref="193333928"/>
 						<int key="NSvFlags">274</int>
-						<string key="NSFrameSize">{63, 63}</string>
+						<string key="NSFrameSize">{70, 70}</string>
 						<reference key="NSSuperview" ref="193333928"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="833193961"/>
+						<reference key="NSNextKeyView" ref="613056291"/>
 						<string key="NSReuseIdentifierKey">_NS:567</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -87,10 +88,11 @@
 					</object>
 					<object class="IBUILabel" id="613056291">
 						<reference key="NSNextResponder" ref="193333928"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">-2147483356</int>
 						<string key="NSFrame">{{10, 64}, {42, 21}}</string>
 						<reference key="NSSuperview" ref="193333928"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:328</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -116,10 +118,10 @@
 						</object>
 					</object>
 				</array>
-				<string key="NSFrameSize">{63, 92}</string>
+				<string key="NSFrameSize">{70, 70}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="118202395"/>
+				<reference key="NSNextKeyView" ref="833193961"/>
 				<string key="NSReuseIdentifierKey">_NS:196</string>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
@@ -238,20 +240,17 @@
 							<string key="candidateClassName">id</string>
 						</object>
 					</object>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="scrollTitle">UILabel</string>
-						<string key="scrollView">UIScrollView</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="scrollTitle">
-							<string key="name">scrollTitle</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="scrollView">
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">scrollView</string>
+						<string key="NS.object.0">UIScrollView</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">scrollView</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
 							<string key="name">scrollView</string>
 							<string key="candidateClassName">UIScrollView</string>
 						</object>
-					</dictionary>
+					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/CommonScrollView.h</string>

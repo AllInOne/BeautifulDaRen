@@ -39,11 +39,20 @@
                             @"2",
                             @"3",
                             nil];
-        _categoryScrollItem = [[CommonScrollView alloc] initWithNibName:@"CommonScrollView" bundle:nil data:images andDelegate:self];
-        [_categoryScrollItem.view setFrame:CGRectMake(0, CATEGORY_TITLE_FONT_HEIGHT *2, self.view.frame.size.width, CATEGORY_ITEM_HEIGHT)];
+        _categoryScrollItem = [[CommonScrollView alloc] initWithNibName:nil bundle:nil data:images andDelegate:self];
         [self.view addSubview:_categoryScrollItem.view];
+        
+        _categoryScrollItem.view.frame = CGRectMake(0, CATEGORY_TITLE_FONT_HEIGHT + CONTENT_MARGIN, self.view.frame.size.width, CATEGORY_ITEM_HEIGHT);
+        
+        self.categoryTitle.text = title;
+
     }
     return self;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
 }
 
 - (void)onItemSelected:(int)index

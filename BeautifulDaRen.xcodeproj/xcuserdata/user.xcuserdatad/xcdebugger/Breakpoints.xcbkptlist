@@ -73,44 +73,6 @@
          landmarkName = "-initWithNibName:bundle:"
          landmarkType = "5">
       </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "BeautifulDaRen/View/Category/CategoryContentViewController.m"
-         timestampString = "358358014.117344"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "15"
-         endingLineNumber = "15">
-         <Locations>
-            <Location
-               shouldBeEnabled = "No"
-               ignoreCount = "0"
-               continueAfterRunningActions = "No"
-               symbolName = "-[CategoryContentViewController categoryListView]"
-               urlString = "file://localhost/Users/user/Personal/BeautifulDaRen/BeautifulDaRen/View/Category/CategoryContentViewController.m"
-               timestampString = "358358014.169857"
-               startingColumnNumber = "9223372036854775807"
-               endingColumnNumber = "9223372036854775807"
-               startingLineNumber = "20"
-               endingLineNumber = "20">
-            </Location>
-            <Location
-               shouldBeEnabled = "No"
-               ignoreCount = "0"
-               continueAfterRunningActions = "No"
-               symbolName = "-[CategoryContentViewController setCategoryListView:]"
-               urlString = "file://localhost/Users/user/Personal/BeautifulDaRen/BeautifulDaRen/View/Category/CategoryContentViewController.m"
-               timestampString = "358358014.170401"
-               startingColumnNumber = "9223372036854775807"
-               endingColumnNumber = "9223372036854775807"
-               startingLineNumber = "20"
-               endingLineNumber = "20">
-            </Location>
-         </Locations>
-      </FileBreakpoint>
    </FileBreakpoints>
    <SymbolicBreakpoints>
       <SymbolicBreakpoint
@@ -119,20 +81,6 @@
          continueAfterRunningActions = "No"
          symbolName = "raise"
          moduleName = "">
-         <Locations>
-            <Location
-               shouldBeEnabled = "Yes"
-               ignoreCount = "0"
-               continueAfterRunningActions = "No"
-               symbolName = "-[NSException raise]">
-            </Location>
-            <Location
-               shouldBeEnabled = "Yes"
-               ignoreCount = "0"
-               continueAfterRunningActions = "No"
-               symbolName = "raise">
-            </Location>
-         </Locations>
       </SymbolicBreakpoint>
    </SymbolicBreakpoints>
    <ExceptionBreakpoints>

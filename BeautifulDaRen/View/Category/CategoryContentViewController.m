@@ -11,8 +11,8 @@
 #import "CategoryItemCell.h"
 #import "ViewConstants.h"
 
+
 #define CATEGORY_CONTENT_Y_OFFSET   (70.0)
-#define CATEGORY_ITEM_HEIGHT        (120.0)
 
 @interface CategoryContentViewController ()
 
@@ -29,15 +29,21 @@
         // Custom initialization
         // TODO: Read categories from network
         NSInteger index = 0;
-        CGFloat height = CATEGORY_CONTENT_Y_OFFSET;
+        CGFloat height = CONTENT_MARGIN;
         NSArray * titles = [NSArray arrayWithObjects:@"女装", @""@"上装", @"化妆品", @"裙子", nil];
         while (index < [titles count]) {
             CategoryItemCell * categoryCell = [[CategoryItemCell alloc] initWithNibName:nil bundle:nil title:[titles objectAtIndex:index] andData:nil];
             
-            categoryCell.view.frame = CGRectMake(0, CATEGORY_CONTENT_Y_OFFSET, CGRectGetWidth(self.view.frame), [categoryCell getHeight]);
+            categoryCell.view.frame = CGRectMake(0, height, CGRectGetWidth(self.view.frame), [categoryCell getHeight]);
+            
+            height += ([categoryCell getHeight] + CONTENT_MARGIN);
             
             [self.categoryListView addSubview: categoryCell.view];
+            index++;
         }
+        
+        [self.categoryListView setContentSize:CGSizeMake(SCREEN_WIDTH, height)];
+        [self.categoryListView setFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame))];
         
     }
     return self;

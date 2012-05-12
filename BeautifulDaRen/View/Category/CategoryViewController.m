@@ -44,13 +44,13 @@
 
     if (self.adsPageView == nil) {
         _adsPageView = [[AdsPageView alloc] initWithNibName:@"AdsPageView" bundle:nil];
-        _adsPageView.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+        _adsPageView.view.frame = CGRectMake(0, 0, self.view.frame.size.width, ADS_CELL_HEIGHT);
         [self.view addSubview:_adsPageView.view];
     }
     
     if (self.categoryContentView == nil) {
         _categoryContentView = [[CategoryContentViewController  alloc] initWithNibName:@"CategoryContentViewController" bundle:nil];
-        _categoryContentView.view.frame = CGRectMake(0,ADS_CELL_HEIGHT, self.view.frame.size.width, 220);
+        _categoryContentView.view.frame = CGRectMake(0, ADS_CELL_HEIGHT + CONTENT_MARGIN, self.view.frame.size.width, USER_WINDOW_HEIGHT - ADS_CELL_HEIGHT - CONTENT_MARGIN);
         [self.view addSubview:_categoryContentView.view];
     }
 }
