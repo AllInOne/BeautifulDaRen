@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-
+#import "DataConstants.h"
 
 @interface UserIdentity : NSManagedObject
 
@@ -25,5 +25,7 @@
 @property (nonatomic, retain) NSNumber * blackListCount;
 @property (nonatomic, retain) NSString * personalBrief;
 @property (nonatomic, retain) NSString * detailedAddress;
+
++ (UserIdentity*)userIdentityWithDictionary:(NSDictionary *)dict insideObjectContext:(NSManagedObjectContext*) objectContext; 
 
 @end

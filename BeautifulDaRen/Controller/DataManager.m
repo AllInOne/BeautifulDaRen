@@ -10,9 +10,13 @@
 #import "CoreDataManager.h"
 #import "ViewConstants.h"
 
+#import "UserIdentity.h"
+
 static DataManager *sharedInstance;
 
-@interface DataManager (Common)
+@interface DataManager()
+@property (retain, nonatomic) CoreDataManager * coreDataManager;
+
 - (void)contextWillSaveObjects:(NSNotification*)notif;
 - (void)contextDidSaveObjects:(NSNotification*)notif;
 - (void)contextObjectsDidChange:(NSNotification*)notif;
@@ -21,6 +25,7 @@ static DataManager *sharedInstance;
 @implementation DataManager
 
 @synthesize delegate;
+@synthesize coreDataManager = _coreDataManager;
 
 #pragma mark - Class methods
 
@@ -35,11 +40,14 @@ static DataManager *sharedInstance;
 
 #pragma mark - init/dealloc
 - (void)dealloc {
+    [_coreDataManager release];
+    
     [super dealloc];
 }
 
 - (id)init {
     self = [super init];
+    _coreDataManager = [[CoreDataManager alloc] init];
     
     if (self) {
         // run at next iteration to avoid call datamanager init recursively.
@@ -58,10 +66,18 @@ static DataManager *sharedInstance;
 }
 
 //#pragma mark - Data accessors
-- (void)saveLocalUserWithFinishBlock:(ProcessFinishBlock)finishBlock {
-    finishBlock(nil);
+- (void)saveLocalUserWithDictionary:(NSDictionary*)dictionary FinishBlock:(ProcessFinishBlock)finishBlock
+{
+    [self.coreDataManager saveUsingBackgroundContextWithBlock:^(NSManagedObjectContext *objectContext) {
+        [UserIdentity userIdentityWithDictionary:dictionary insideObjectContext:objectContext];
+    } onFinish:^(NSError *error) {
+        finishBlock(error);
+    }];
 }
 
+- (void)getLocalIdentityWithFinishBlock:(ProcessFinishBlock)finishBlock
+{
+}
 #pragma mark - CoreDataManager delegate
 - (void)contextWillSaveObjects:(NSNotification*)notif {
     //No actions

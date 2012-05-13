@@ -9,7 +9,7 @@
 @protocol ManagedObjectDelegate;
 
 typedef void(^DataSaveFinishBlock)(NSError* error);
-typedef void(^CoreDataSaveBlock)(NSManagedObjectContext *otherContext);
+typedef void(^CoreDataSaveBlock)(NSManagedObjectContext *objectContext);
 
 /**
  @brief Handles all CoreData related functionalities, as creation, merging, and offers utility method to save to

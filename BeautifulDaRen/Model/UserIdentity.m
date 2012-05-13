@@ -25,4 +25,10 @@
 @dynamic personalBrief;
 @dynamic detailedAddress;
 
++ (UserIdentity*) userIdentityWithDictionary:(NSDictionary *)dict insideObjectContext:(NSManagedObjectContext*) objectContext
+{
+    NSEntityDescription *userIdentityDescription = [NSEntityDescription entityForName:@"UserIdentity" inManagedObjectContext:objectContext];
+    UserIdentity * userIdentity = [[UserIdentity alloc] initWithEntity:userIdentityDescription insertIntoManagedObjectContext:objectContext];
+    return [userIdentity autorelease];
+}
 @end
