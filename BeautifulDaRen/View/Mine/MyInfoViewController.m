@@ -12,8 +12,9 @@
 #import "FourGridViewCell.h"
 #import "ButtonViewCell.h"
 #import "ViewConstants.h"
+#import "DataManager.h"
 
-#import "UserAccount.h"
+#import "UserIdentity.h"
 
 @interface MyInfoViewController()
 @property (retain, nonatomic) IBOutlet UIButton * followButton;
@@ -23,9 +24,6 @@
 @property (retain, nonatomic) IBOutlet UIButton * buyedButton;
 @property (retain, nonatomic) IBOutlet UIButton * topicButton;
 @property (retain, nonatomic) IBOutlet UIButton * editButton;
-
-// TODO use core data.
-@property (retain, nonatomic) UserAccount * userAccount;
 
 @end
 
@@ -37,8 +35,6 @@
 @synthesize buyedButton = _buyedButton;
 @synthesize topicButton = _topicButton;
 @synthesize editButton = _editButton;
-
-@synthesize userAccount;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -60,13 +56,24 @@
 #pragma mark FAKE
 - (void) loadFakeData
 {
-    self.userAccount = [[[UserAccount alloc] init] autorelease];
-    self.userAccount.uniqueneId = @"UID1234567890";
-    self.userAccount.userDisplayId = @"我是美丽达人";
-    self.userAccount.level = 12;
-    self.userAccount.levelDescription = @"资深美丽达人";
-    self.userAccount.localCity = @"成都";
-    self.userAccount.imageData = UIImagePNGRepresentation([UIImage imageNamed:@"item_fake"]);
+    NSDictionary * userIdentityDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                                       @"userId1001", USERIDENTITY_UNIQUE_ID,
+                                       @"user name", USERIDENTITY_DISPLAY_NAME,
+                                       @"12", USERIDENTITY_LEVEL,
+                                       @"成都", USERIDENTITY_LOCAL_CITY,
+                                       @"9", USERIDENTITY_FOLLOW_COUNT,
+                                       @"10", USERIDENTITY_FANS_COUNT,
+                                       @"11", USERIDENTITY_BUYED_COUNT,
+                                       @"12", USERIDENTITY_COLLECTION_COUNT,
+                                       @"13", USERIDENTITY_TOPIC_COUNT,
+                                       @"14", USERIDENTITY_BLACK_LIST_COUNT,
+                                       @"0", USERIDENTITY_IS_MALE,
+                                       @"I am super.", USERIDENTITY_PERSONAL_BRIEF,
+                                       @"成都，天府软件园", USERIDENTITY_DETAILED_ADDRESS,
+                                       nil];
+    [[DataManager sharedManager] saveLocalIdentityWithDictionary:userIdentityDict FinishBlock:^(NSError *error) {
+        NSLog(@"Save local identity successful");
+    }];
 }
 #pragma mark - View lifecycle
 
@@ -74,7 +81,6 @@
 {
     [super viewDidLoad];
     [self loadFakeData];
-    // Do any additional setup after loading the view from its nib.
 }
 
 - (void)viewDidUnload
@@ -108,14 +114,18 @@
         if(!cell) {
             cell = [[[NSBundle mainBundle] loadNibNamed:myInfoTopViewIdentifier owner:self options:nil] objectAtIndex:0];
         }
-        // TODO to use the real data.
-        ((MyInfoTopViewCell*)cell).avatarImageView.image = [UIImage imageWithData:self.userAccount.imageData];
-        ((MyInfoTopViewCell*)cell).levelLabel.text = [NSString stringWithFormat:@"LV%d", self.userAccount.level];
-        ((MyInfoTopViewCell*)cell).levelLabelTitle.text = self.userAccount.levelDescription;
-        ((MyInfoTopViewCell*)cell).beautifulIdLabel.text = self.userAccount.userDisplayId;
+        
+        UserIdentity * userIdentity = [[DataManager sharedManager] getLocalIdentityWithFinishBlock:^(NSError *error) {
+            NSLog(@"Get local identity successful");
+        }];
+
+        ((MyInfoTopViewCell*)cell).avatarImageView.image = [UIImage imageNamed:@"item_fake"];
+        ((MyInfoTopViewCell*)cell).levelLabel.text = [NSString stringWithFormat:@"LV%d", [userIdentity.level intValue]];
+        ((MyInfoTopViewCell*)cell).levelLabelTitle.text = @"xxxx";
+        ((MyInfoTopViewCell*)cell).beautifulIdLabel.text = userIdentity.uniqueId;
         ((MyInfoTopViewCell*)cell).rightImageView.image = [UIImage imageNamed:@"location"];
         ((MyInfoTopViewCell*)cell).editImageView.image = [UIImage imageNamed:@"location"];
-        ((MyInfoTopViewCell*)cell).cityLabel.text = [NSString stringWithFormat:@"%@ : %@",NSLocalizedString(@"local_city", @""),self.userAccount.localCity];
+        ((MyInfoTopViewCell*)cell).cityLabel.text = [NSString stringWithFormat:@"%@ : %@",NSLocalizedString(@"local_city", @""),userIdentity.localCity];
         _editButton = ((MyInfoTopViewCell*)cell).editButton;
         ((MyInfoTopViewCell*)cell).delegate = self;
     }
@@ -124,21 +134,25 @@
         if(!cell) {
             cell = [[[NSBundle mainBundle] loadNibNamed:fourGridViewIndentifier owner:self options:nil] objectAtIndex:0];
         }
+        UserIdentity * userIdentity = [[DataManager sharedManager] getLocalIdentityWithFinishBlock:^(NSError *error) {
+            NSLog(@"Get local identity successful");
+        }];
+        
         ((FourGridViewCell*)cell).delegate = self;
         ((FourGridViewCell*)cell).leftTopLabelName.text = NSLocalizedString(@"follow", @"");
-        ((FourGridViewCell*)cell).leftTopLabelNumber.text = @"(10)";
+        ((FourGridViewCell*)cell).leftTopLabelNumber.text = [NSString stringWithFormat:@"%d", [userIdentity.followCount intValue]];
         ((FourGridViewCell*)cell).rightTopLabelName.text = NSLocalizedString(@"fans", @"");
-        ((FourGridViewCell*)cell).rightTopLabelNumber.text = @"(20)";
+        ((FourGridViewCell*)cell).rightTopLabelNumber.text = [NSString stringWithFormat:@"%d", [userIdentity.fansCount intValue]];
         ((FourGridViewCell*)cell).leftBottomLabelName.text = NSLocalizedString(@"collection", @"");
-        ((FourGridViewCell*)cell).leftBottomLabelNumber.text = @"(12)";
+        ((FourGridViewCell*)cell).leftBottomLabelNumber.text = [NSString stringWithFormat:@"%d", [userIdentity.collectionCount intValue]];
         ((FourGridViewCell*)cell).rightBottomLabelName.text = NSLocalizedString(@"buyed", @"");
-        ((FourGridViewCell*)cell).rightBottomLabelNumber.text = @"(32)";
+        ((FourGridViewCell*)cell).rightBottomLabelNumber.text = [NSString stringWithFormat:@"%d", [userIdentity.buyedCount intValue]];
 
         ((FourGridViewCell*)cell).thirdLeftLabelName.text = NSLocalizedString(@"topic", @"");
-        ((FourGridViewCell*)cell).thirdLeftLabelNumber.text = @"(32)";  
+        ((FourGridViewCell*)cell).thirdLeftLabelNumber.text = [NSString stringWithFormat:@"%d", [userIdentity.topicCount intValue]];  
 
         ((FourGridViewCell*)cell).thirdRightLabelName.text = NSLocalizedString(@"black_list", @"");
-        ((FourGridViewCell*)cell).thirdRIghtLabelNumber.text = @"(1)";
+        ((FourGridViewCell*)cell).thirdRIghtLabelNumber.text = [NSString stringWithFormat:@"%d", [userIdentity.blackListCount intValue]];
         
         _followButton = ((FourGridViewCell*)cell).leftTopButton;
         _fansButton = ((FourGridViewCell*)cell).rightTopButton;

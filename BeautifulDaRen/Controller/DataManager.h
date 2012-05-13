@@ -5,6 +5,7 @@
 #import "UpdateViewControllerProtocol.h"
 #import "DataManagerCallbacks.h"
 #import "DataConstants.h"
+#import "UserIdentity.h"
 
 @interface DataManager : NSObject{
 @private
@@ -20,9 +21,9 @@
 - (void)handleLowMemory;
 
 
-- (void)saveLocalUserWithDictionary:(NSDictionary*)dictionary FinishBlock:(ProcessFinishBlock)finishBlock;
+- (void)saveLocalIdentityWithDictionary:(NSDictionary*)dictionary FinishBlock:(ProcessFinishBlock)finishBlock;
 
-- (void)getLocalIdentityWithFinishBlock:(ProcessFinishBlock)finishBlock;
+- (UserIdentity*)getLocalIdentityWithFinishBlock:(ProcessFinishBlock)finishBlock;
 
 @end
 /** @} */

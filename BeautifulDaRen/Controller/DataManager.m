@@ -15,7 +15,7 @@
 static DataManager *sharedInstance;
 
 @interface DataManager()
-@property (retain, nonatomic) CoreDataManager * coreDataManager;
+@property (retain, nonatomic) CoreDataManager * cdm;
 
 - (void)contextWillSaveObjects:(NSNotification*)notif;
 - (void)contextDidSaveObjects:(NSNotification*)notif;
@@ -25,7 +25,7 @@ static DataManager *sharedInstance;
 @implementation DataManager
 
 @synthesize delegate;
-@synthesize coreDataManager = _coreDataManager;
+@synthesize cdm = _cdm;
 
 #pragma mark - Class methods
 
@@ -40,14 +40,14 @@ static DataManager *sharedInstance;
 
 #pragma mark - init/dealloc
 - (void)dealloc {
-    [_coreDataManager release];
+    [_cdm release];
     
     [super dealloc];
 }
 
 - (id)init {
     self = [super init];
-    _coreDataManager = [[CoreDataManager alloc] init];
+    _cdm = [[CoreDataManager alloc] init];
     
     if (self) {
         // run at next iteration to avoid call datamanager init recursively.
@@ -66,17 +66,18 @@ static DataManager *sharedInstance;
 }
 
 //#pragma mark - Data accessors
-- (void)saveLocalUserWithDictionary:(NSDictionary*)dictionary FinishBlock:(ProcessFinishBlock)finishBlock
+- (void)saveLocalIdentityWithDictionary:(NSDictionary*)dictionary FinishBlock:(ProcessFinishBlock)finishBlock
 {
-    [self.coreDataManager saveUsingBackgroundContextWithBlock:^(NSManagedObjectContext *objectContext) {
+    [_cdm saveUsingBackgroundContextWithBlock:^(NSManagedObjectContext *objectContext) {
         [UserIdentity userIdentityWithDictionary:dictionary insideObjectContext:objectContext];
     } onFinish:^(NSError *error) {
         finishBlock(error);
     }];
 }
 
-- (void)getLocalIdentityWithFinishBlock:(ProcessFinishBlock)finishBlock
+- (UserIdentity*)getLocalIdentityWithFinishBlock:(ProcessFinishBlock)finishBlock
 {
+    return [[_cdm fetchAllEntities:@"UserIdentity" withPredicate:nil withSorting:nil fetchLimit:1 prefetchRelations:nil context:nil] objectAtIndex:0];
 }
 #pragma mark - CoreDataManager delegate
 - (void)contextWillSaveObjects:(NSNotification*)notif {
