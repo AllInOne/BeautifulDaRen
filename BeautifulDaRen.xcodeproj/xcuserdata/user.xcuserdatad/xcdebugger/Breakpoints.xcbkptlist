@@ -23,11 +23,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TencentOAuthDemo/TencentOAuth/TencentLoginView.m"
-         timestampString = "357229958.026391"
+         timestampString = "358571441.158571"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "550"
-         endingLineNumber = "550"
+         startingLineNumber = "551"
+         endingLineNumber = "551"
          landmarkName = "-loadURL:get:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -50,13 +50,13 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "BeautifulDaRen/View/MyShow/TakePhotoViewController.m"
-         timestampString = "358007849.598008"
+         filePath = "BeautifulDaRen/View/MyShow/MyShowViewController.m"
+         timestampString = "358575852.13601"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "72"
-         endingLineNumber = "72"
-         landmarkName = "-dealloc"
+         startingLineNumber = "24"
+         endingLineNumber = "24"
+         landmarkName = "-initWithNibName:bundle:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -64,13 +64,41 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "BeautifulDaRen/View/MyShow/MyShowViewController.m"
-         timestampString = "358184874.596904"
+         filePath = "BeautifulDaRen/View/MyShow/TakePhotoViewController.m"
+         timestampString = "358577742.886626"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "18"
-         endingLineNumber = "18"
-         landmarkName = "-initWithNibName:bundle:"
+         startingLineNumber = "115"
+         endingLineNumber = "115"
+         landmarkName = "-setupImagePicker:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "BeautifulDaRen/View/MyShow/TakePhotoViewController.m"
+         timestampString = "358577742.886626"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "177"
+         endingLineNumber = "177"
+         landmarkName = "-imagePickerControllerDidCancel:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "BeautifulDaRen/View/MyShow/TakePhotoViewController.m"
+         timestampString = "358577778.330215"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "144"
+         endingLineNumber = "144"
+         landmarkName = "-done:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
@@ -81,6 +109,14 @@
          continueAfterRunningActions = "No"
          symbolName = "raise"
          moduleName = "">
+         <Locations>
+            <Location
+               shouldBeEnabled = "Yes"
+               ignoreCount = "0"
+               continueAfterRunningActions = "No"
+               symbolName = "-[NSException raise]">
+            </Location>
+         </Locations>
       </SymbolicBreakpoint>
    </SymbolicBreakpoints>
    <ExceptionBreakpoints>

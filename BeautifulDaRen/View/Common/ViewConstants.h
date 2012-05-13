@@ -36,6 +36,7 @@
 
 #define VERTICAL_SCROLL_VIEW_BOUNCE_SIZE (50.0)
 
+#define TOOL_BAR_HEIGHT             (44.0)
 #define NAVIGATION_BAR_HEIGHT       (44.0)
 #define TAB_BAR_HEIGHT              (50.0)
 #define STATUS_BAR_HEIGHT           (20.0)

@@ -7,6 +7,13 @@
 //
 
 #import "TakePhotoViewController.h"
+#import "ViewConstants.h"
+#import "WeiboForwardCommentViewController.h"
+
+@interface TakePhotoViewController ()
+@property (nonatomic, retain)  TakePhotoViewController * galleryPhotoViewController;
+@property (nonatomic, assign)  UIImagePickerControllerSourceType currentSourceType; 
+@end
 
 @implementation TakePhotoViewController
 
@@ -14,19 +21,17 @@
 @synthesize imagePickerController;
 @synthesize takePictureButton;
 @synthesize cancelButton;
+@synthesize galleryPhotoViewController = _galleryPhotoViewController;
+@synthesize currentSourceType = _currentSourceType;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-//        AudioServicesCreateSystemSoundID((CFURLRef)[NSURL fileURLWithPath:
-//                                                    [[NSBundle mainBundle] pathForResource:@"tick"
-//                                                                                    ofType:@"aiff"]],
-//                                         &tickSound);
-//        
         self.imagePickerController = [[[UIImagePickerController alloc] init] autorelease];
         self.imagePickerController.delegate = self;
+        self.currentSourceType = UIImagePickerControllerSourceTypeCamera;
     }
     return self;
 }
@@ -43,19 +48,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-//    AudioServicesCreateSystemSoundID((CFURLRef)[NSURL fileURLWithPath:
-//                                                [[NSBundle mainBundle] pathForResource:@"tick"
-//                                                                                ofType:@"aiff"]],
-//                                     &tickSound);
-    
-//    self.imagePickerController = [[[UIImagePickerController alloc] init] autorelease];
-//    self.imagePickerController.delegate = self;
-//
-//    if ([UIImagePickerController isSourceTypeAvailable:self.imagePickerController.sourceType])
-//    {
-//        [self setupImagePicker:UIImagePickerControllerSourceTypeCamera];
-//        [self presentModalViewController:self.imagePickerController animated:YES];
-//    }
 }
 
 - (void)viewDidUnload
@@ -115,14 +107,18 @@
         {
             CGRect defaultFrame = self.imagePickerController.cameraOverlayView.frame;
             CGRect newFrame = CGRectMake(0.0,
-                                        436.0,
-                                        CGRectGetWidth(defaultFrame),
-                                        44.0);
+                                         CGRectGetHeight(defaultFrame) -
+                                         self.view.frame.size.height - 10.0,
+                                         CGRectGetWidth(defaultFrame),
+                                         self.view.frame.size.height + 10.0);
             self.view.frame = newFrame;
             [self.imagePickerController.cameraOverlayView addSubview:self.view];
         }
     }
-
+    else
+    {
+        
+    }
 }
 
 - (IBAction)takePhoto:(id)sender
@@ -133,7 +129,26 @@
 - (IBAction)done:(id)sender
 {
     // dismiss the camera
-    [self.delegate didFinishWithCamera];
+    //[self.delegate didFinishWithCamera];
+    
+//    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
+//    {
+//        self.galleryPhotoViewController = nil;
+//        self.galleryPhotoViewController = [[[TakePhotoViewController alloc] initWithNibName:nil bundle:nil] autorelease];
+//        
+//        [self.galleryPhotoViewController setupImagePicker:UIImagePickerControllerSourceTypePhotoLibrary];
+//        [self presentModalViewController:self.galleryPhotoViewController.imagePickerController animated:YES];
+//        [self.galleryPhotoViewController.imagePickerController setDelegate:self];
+//        self.currentSourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+//    }
+    WeiboForwardCommentViewController *forwardViewContoller = 
+    [[[WeiboForwardCommentViewController alloc] initWithNibName:nil bundle:nil] autorelease];
+    forwardViewContoller.forwardMode = YES;
+    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: forwardViewContoller];
+    
+    [self presentModalViewController:navController animated:YES];
+    
+    [navController release];
 }
 
 #pragma mark -
@@ -147,12 +162,28 @@
     
     // give the taken picture to our delegate
     if (self.delegate)
-        [self.delegate didTakePicture:image];
+        [self.delegate didTakePicture:image sourceType:self.currentSourceType];
+
+    if (self.currentSourceType == UIImagePickerControllerSourceTypePhotoLibrary)
+    {
+        [self.galleryPhotoViewController dismissModalViewControllerAnimated:NO];
+        self.galleryPhotoViewController = nil;
+        self.currentSourceType = UIImagePickerControllerSourceTypeCamera;
+    }
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-    [self.delegate didFinishWithCamera];    // tell our delegate we are finished with the picker
+    if (self.currentSourceType == UIImagePickerControllerSourceTypePhotoLibrary) {
+        [self dismissModalViewControllerAnimated:YES];
+        self.currentSourceType = UIImagePickerControllerSourceTypeCamera;
+        [self.imagePickerController reloadInputViews];
+    }
+    else
+    {
+        [self.delegate didFinishWithCamera];    
+    }
+
 }
 
 @end

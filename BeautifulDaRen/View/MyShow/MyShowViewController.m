@@ -13,6 +13,12 @@
 
 @synthesize takePhotoViewController = _takePhotoViewController;
 
+- (void)dealloc
+{
+    [self.takePhotoViewController release];
+    [super dealloc];
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -64,6 +70,7 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    self.takePhotoViewController = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -72,7 +79,7 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (void)didTakePicture:(UIImage *)picture
+- (void)didTakePicture:(UIImage *)picture sourceType:(UIImagePickerControllerSourceType)type
 {
     [self.tabBarController setSelectedIndex:0];
     [self dismissModalViewControllerAnimated:YES];
