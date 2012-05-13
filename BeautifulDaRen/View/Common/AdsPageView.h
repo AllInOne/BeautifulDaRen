@@ -7,12 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "AdsPageViewProtocol.h"
 #import <QuartzCore/QuartzCore.h>
 
-@protocol AdsPageViewProtocol <NSObject>
-- (void)onAdsPageViewClosed;
-@end
 
 @interface AdsPageView : UIViewController
 
