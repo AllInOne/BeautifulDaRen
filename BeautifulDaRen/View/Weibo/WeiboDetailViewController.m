@@ -21,7 +21,6 @@
 
 @property (nonatomic, retain) NSString * weiboContent;
 
-
 @end
 
 @implementation WeiboDetailViewController
@@ -163,11 +162,6 @@
     
     // Custom initialization
     [_detailScrollView setContentSize:CGSizeMake(320, self.commentButton.frame.origin.y + 180)];
-
-}
-
-- (UIBarButtonItem *)getUIBarButtonItemByImageName:(NSString*)imageName
-{
 
 }
 

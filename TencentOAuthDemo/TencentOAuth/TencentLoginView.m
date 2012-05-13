@@ -13,6 +13,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // global
 
+BOOL TencentIsDeviceIPad(void);
 static NSString* kDefaultTitle = @"QQ登录";
 
 //static CGFloat kTencentBlue[4] = {0.42578125, 0.515625, 0.703125, 1.0};
