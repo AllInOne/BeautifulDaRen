@@ -29,7 +29,7 @@
 @end
 
 @implementation HomeViewController
-@synthesize itemsViewController;
+@synthesize itemsViewController = _itemsViewController;
 @synthesize paintHeight = _paintHeight;
 @synthesize adsPageView = _adsPageView;
 @synthesize isShowAdsPage = _isShowAdsPage;
@@ -62,6 +62,8 @@
     [self.navigationItem setLeftBarButtonItem:[ViewHelper getLeftBarItemOfImageName:@"logo114x29" rectSize:CGRectMake(0, 0, NAVIGATION_LEFT_LOGO_WIDTH, NAVIGATION_LEFT_LOGO_HEIGHT)]];
     
     [self refreshView];
+
+    _adsPageView.delegate = self;
 }
 
 - (void)viewDidUnload
@@ -94,6 +96,7 @@
     // Return YES for supported orientations
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
+
 #pragma mark Action
 - (IBAction)onLoginBtnSelected:(UIButton*)sender
 {
@@ -102,6 +105,7 @@
     
     [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
 }
+
 - (IBAction)onRegisterBtnSelected:(UIButton*)sender
 {
     RegisterViewController * registerController = [[[RegisterViewController alloc] initWithNibName:@"RegisterViewController" bundle:nil] autorelease];
@@ -128,10 +132,13 @@
 
 -(void) showItemsView
 {
-    self.itemsViewController = [[ItemsViewController alloc] initWithNibName:@"ItemsViewController" bundle:nil];
+    _itemsViewController = [[ItemsViewController alloc] initWithNibName:@"ItemsViewController" bundle:nil];
     CGFloat height = (_isShowAdsPage) ? 280 : 350;
-    self.itemsViewController.view.frame = CGRectMake(0, _paintHeight+ 100, self.itemsViewController.view.frame.size.width, height);
-    [self.view addSubview:self.itemsViewController.view];
+    // TODO the offset will be used showing view, I am not sure why.
+    CGFloat offset = (_isShowAdsPage) ? 100 : 10;
+    
+    _itemsViewController.view.frame = CGRectMake(0, _paintHeight + offset, _itemsViewController.view.frame.size.width, height);
+    [self.view addSubview:_itemsViewController.view];
     _paintHeight += ADS_CELL_HEIGHT;
 }
 
@@ -141,5 +148,18 @@
     [self showAdsPageView];
     [self showItemsView];
     
+}
+
+#pragma mark AdsPageViewProtocol
+-(void) onAdsPageViewClosed
+{
+    _isShowAdsPage = NO;
+    
+    // Remove items view from super view
+    [_itemsViewController.view removeFromSuperview];
+    // Remove ads page view from super view
+    [_adsPageView.view removeFromSuperview];
+
+    [self refreshView];
 }
 @end

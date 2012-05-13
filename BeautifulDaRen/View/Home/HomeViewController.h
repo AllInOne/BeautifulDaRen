@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "ItemsViewController.h"
+#import "AdsPageViewProtocol.h"
 
 
-@interface HomeViewController : UIViewController
+@interface HomeViewController : UIViewController<AdsPageViewProtocol>
 
 @property (retain, nonatomic) ItemsViewController* itemsViewController;
 
