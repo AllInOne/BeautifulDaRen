@@ -11,4 +11,5 @@
 
 @interface ItemsViewController : UIViewController <GridCellViewDelegate, UIScrollViewDelegate>
 
+@property (nonatomic, retain) IBOutlet UIScrollView * scrollView;
 @end

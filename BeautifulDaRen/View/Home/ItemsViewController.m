@@ -13,12 +13,13 @@
 #import "WeiboDetailViewController.h"
 
 #define COLUMNS_PER_ROW 4
-#define GRID_X_OFFSET 5
+#define GRID_X_OFFSET 3
+#define GRID_Y_OFFSET 5
+
 #define GRID_X_DELTA 80
 #define GRID_Y_DELTA 80
 
 @interface ItemsViewController()
-@property (nonatomic, retain) IBOutlet UIScrollView * scrollView;
 
 @property (retain, nonatomic) NSMutableArray * fakeData;
 
@@ -32,7 +33,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        [self.scrollView setFrame:CGRectMake(0, GRID_Y_OFFSET, self.view.frame.size.width, self.view.frame.size.height)];
     }
     return self;
 }
@@ -54,7 +55,7 @@
     for (int i = 0; i < [self.fakeData count]; i++) {
         GridCellView * cell = [[[NSBundle mainBundle] loadNibNamed:cellViewIdentifier owner:self options:nil] objectAtIndex:0];
         cell.frame = CGRectMake((i % COLUMNS_PER_ROW) * GRID_X_DELTA + GRID_X_OFFSET,
-                                (i / COLUMNS_PER_ROW) * GRID_Y_DELTA,
+                                (i / COLUMNS_PER_ROW) * GRID_Y_DELTA + GRID_Y_OFFSET,
                                 cell.frame.size.width,
                                 cell.frame.size.height);
         if(i % COLUMNS_PER_ROW == 0) {
