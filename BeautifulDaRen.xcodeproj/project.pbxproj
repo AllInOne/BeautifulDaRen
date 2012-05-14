@@ -30,6 +30,9 @@
 		C216EDBF1551893500CA8CE8 /* MyInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C216EDBD1551893500CA8CE8 /* MyInfoViewController.xib */; };
 		C216EDC215518B8C00CA8CE8 /* MyInfoTopViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C216EDC115518B8C00CA8CE8 /* MyInfoTopViewCell.m */; };
 		C216EDC415518BD300CA8CE8 /* MyInfoTopViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C216EDC315518BD300CA8CE8 /* MyInfoTopViewCell.xib */; };
+		C2319FAF1560EF7B005CCD4E /* qq_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C2319FAD1560EF7A005CCD4E /* qq_icon.png */; };
+		C2319FB01560EF7B005CCD4E /* sina_weibo_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C2319FAE1560EF7A005CCD4E /* sina_weibo_icon.png */; };
+		C2319FB21560F9AA005CCD4E /* HomeViewHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2319FB11560F9AA005CCD4E /* HomeViewHeaderView.xib */; };
 		C24B1008155BDB1100918530 /* MineEditingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C24B1006155BDB1000918530 /* MineEditingViewController.m */; };
 		C24B1009155BDB1100918530 /* MineEditingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C24B1007155BDB1100918530 /* MineEditingViewController.xib */; };
 		C24B1011155BDE7B00918530 /* RadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C24B1010155BDE7A00918530 /* RadioButton.m */; };
@@ -294,6 +297,9 @@
 		C216EDC015518B8C00CA8CE8 /* MyInfoTopViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfoTopViewCell.h; sourceTree = "<group>"; };
 		C216EDC115518B8C00CA8CE8 /* MyInfoTopViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfoTopViewCell.m; sourceTree = "<group>"; };
 		C216EDC315518BD300CA8CE8 /* MyInfoTopViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyInfoTopViewCell.xib; sourceTree = "<group>"; };
+		C2319FAD1560EF7A005CCD4E /* qq_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = qq_icon.png; sourceTree = "<group>"; };
+		C2319FAE1560EF7A005CCD4E /* sina_weibo_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sina_weibo_icon.png; sourceTree = "<group>"; };
+		C2319FB11560F9AA005CCD4E /* HomeViewHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewHeaderView.xib; sourceTree = "<group>"; };
 		C233C147155F779D0038BAB6 /* AdsPageViewProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AdsPageViewProtocol.h; path = Protocol/AdsPageViewProtocol.h; sourceTree = "<group>"; };
 		C24B1005155BDB0F00918530 /* MineEditingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineEditingViewController.h; sourceTree = "<group>"; };
 		C24B1006155BDB1000918530 /* MineEditingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineEditingViewController.m; sourceTree = "<group>"; };
@@ -633,6 +639,7 @@
 		C28A4B8915413AB2008A806D /* SubView */ = {
 			isa = PBXGroup;
 			children = (
+				C2319FB11560F9AA005CCD4E /* HomeViewHeaderView.xib */,
 				C297D835154442C20080294C /* AccountInfoInputCell.h */,
 				C297D836154442C20080294C /* AccountInfoInputCell.m */,
 				C297D837154442C20080294C /* AccountInfoInputCell.xib */,
@@ -1069,6 +1076,8 @@
 		CE745450153F1F8900CB751A /* Asserts */ = {
 			isa = PBXGroup;
 			children = (
+				C2319FAD1560EF7A005CCD4E /* qq_icon.png */,
+				C2319FAE1560EF7A005CCD4E /* sina_weibo_icon.png */,
 				C26798EE155EA741001E1D2E /* buttonBackGround.png */,
 				C213AB96155C11F900667556 /* next_flag.png */,
 				C213AB92155C05BE00667556 /* female.png */,
@@ -1524,6 +1533,9 @@
 				C26798ED155E9F7C001E1D2E /* FindPasswordViewController.xib in Resources */,
 				C26798EF155EA741001E1D2E /* buttonBackGround.png in Resources */,
 				CEE6A694155EA02E00EA8790 /* deletebtn.png in Resources */,
+				C2319FAF1560EF7B005CCD4E /* qq_icon.png in Resources */,
+				C2319FB01560EF7B005CCD4E /* sina_weibo_icon.png in Resources */,
+				C2319FB21560F9AA005CCD4E /* HomeViewHeaderView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
