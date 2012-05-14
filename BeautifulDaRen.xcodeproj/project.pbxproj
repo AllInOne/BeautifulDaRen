@@ -33,6 +33,10 @@
 		C2319FAF1560EF7B005CCD4E /* qq_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C2319FAD1560EF7A005CCD4E /* qq_icon.png */; };
 		C2319FB01560EF7B005CCD4E /* sina_weibo_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C2319FAE1560EF7A005CCD4E /* sina_weibo_icon.png */; };
 		C2319FB21560F9AA005CCD4E /* HomeViewHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2319FB11560F9AA005CCD4E /* HomeViewHeaderView.xib */; };
+		C2319FB61561446B005CCD4E /* AtMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2319FB41561446A005CCD4E /* AtMeViewController.m */; };
+		C2319FB71561446B005CCD4E /* AtMeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2319FB51561446B005CCD4E /* AtMeViewController.xib */; };
+		C2319FBA156145BC005CCD4E /* AtMeViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C2319FB9156145BC005CCD4E /* AtMeViewCell.m */; };
+		C2319FBC156145DC005CCD4E /* AtMeViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2319FBB156145DC005CCD4E /* AtMeViewCell.xib */; };
 		C24B1008155BDB1100918530 /* MineEditingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C24B1006155BDB1000918530 /* MineEditingViewController.m */; };
 		C24B1009155BDB1100918530 /* MineEditingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C24B1007155BDB1100918530 /* MineEditingViewController.xib */; };
 		C24B1011155BDE7B00918530 /* RadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C24B1010155BDE7A00918530 /* RadioButton.m */; };
@@ -300,6 +304,12 @@
 		C2319FAD1560EF7A005CCD4E /* qq_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = qq_icon.png; sourceTree = "<group>"; };
 		C2319FAE1560EF7A005CCD4E /* sina_weibo_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sina_weibo_icon.png; sourceTree = "<group>"; };
 		C2319FB11560F9AA005CCD4E /* HomeViewHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewHeaderView.xib; sourceTree = "<group>"; };
+		C2319FB31561446A005CCD4E /* AtMeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AtMeViewController.h; sourceTree = "<group>"; };
+		C2319FB41561446A005CCD4E /* AtMeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AtMeViewController.m; sourceTree = "<group>"; };
+		C2319FB51561446B005CCD4E /* AtMeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AtMeViewController.xib; sourceTree = "<group>"; };
+		C2319FB8156145BC005CCD4E /* AtMeViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AtMeViewCell.h; sourceTree = "<group>"; };
+		C2319FB9156145BC005CCD4E /* AtMeViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AtMeViewCell.m; sourceTree = "<group>"; };
+		C2319FBB156145DC005CCD4E /* AtMeViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AtMeViewCell.xib; sourceTree = "<group>"; };
 		C233C147155F779D0038BAB6 /* AdsPageViewProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AdsPageViewProtocol.h; path = Protocol/AdsPageViewProtocol.h; sourceTree = "<group>"; };
 		C24B1005155BDB0F00918530 /* MineEditingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineEditingViewController.h; sourceTree = "<group>"; };
 		C24B1006155BDB1000918530 /* MineEditingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineEditingViewController.m; sourceTree = "<group>"; };
@@ -632,6 +642,9 @@
 				C213AB89155C044100667556 /* GenderSelectCell.h */,
 				C213AB8A155C044100667556 /* GenderSelectCell.m */,
 				C213AB8C155C048400667556 /* GenderSelectCell.xib */,
+				C2319FB8156145BC005CCD4E /* AtMeViewCell.h */,
+				C2319FB9156145BC005CCD4E /* AtMeViewCell.m */,
+				C2319FBB156145DC005CCD4E /* AtMeViewCell.xib */,
 			);
 			name = SubView;
 			sourceTree = "<group>";
@@ -1238,6 +1251,9 @@
 				C24B1005155BDB0F00918530 /* MineEditingViewController.h */,
 				C24B1006155BDB1000918530 /* MineEditingViewController.m */,
 				C24B1007155BDB1100918530 /* MineEditingViewController.xib */,
+				C2319FB31561446A005CCD4E /* AtMeViewController.h */,
+				C2319FB41561446A005CCD4E /* AtMeViewController.m */,
+				C2319FB51561446B005CCD4E /* AtMeViewController.xib */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -1536,6 +1552,8 @@
 				C2319FAF1560EF7B005CCD4E /* qq_icon.png in Resources */,
 				C2319FB01560EF7B005CCD4E /* sina_weibo_icon.png in Resources */,
 				C2319FB21560F9AA005CCD4E /* HomeViewHeaderView.xib in Resources */,
+				C2319FB71561446B005CCD4E /* AtMeViewController.xib in Resources */,
+				C2319FBC156145DC005CCD4E /* AtMeViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1633,6 +1651,8 @@
 				C26798EC155E9F7C001E1D2E /* FindPasswordViewController.m in Sources */,
 				C274DCBE155EB7BA0098EE22 /* UserIdentity.m in Sources */,
 				C274DCC1155EB99B0098EE22 /* CoreDataManager.m in Sources */,
+				C2319FB61561446B005CCD4E /* AtMeViewController.m in Sources */,
+				C2319FBA156145BC005CCD4E /* AtMeViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,6 +13,7 @@
 #import "ButtonViewCell.h"
 #import "ViewConstants.h"
 #import "DataManager.h"
+#import "AtMeViewController.h"
 
 #import "UserIdentity.h"
 
@@ -279,8 +280,12 @@
             }
             case 2:
             {
-                // TODO
-                NSLog(@"To handle press @me");
+                AtMeViewController * atMeViewController = [[[AtMeViewController alloc] initWithNibName:@"AtMeViewController" bundle:nil] autorelease];
+                
+                UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: atMeViewController];
+                
+                [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
+                [navController release];
                 break;
             }
             case 3:
