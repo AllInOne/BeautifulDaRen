@@ -65,19 +65,22 @@
     [self.takePictureButton release];
     [self.cancelButton release];
     
-    AudioServicesDisposeSystemSoundID(tickSound);
-    
     [super dealloc];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+//
+//    if (self.currentSourceType == UIImagePickerControllerSourceTypePhotoLibrary) {
+//        self.imagePickerController.cameraOverlayView = nil;
+//    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -99,25 +102,24 @@
 - (void)setupImagePicker:(UIImagePickerControllerSourceType)sourceType
 {
     [self.imagePickerController setSourceType:sourceType];
+    self.currentSourceType = UIImagePickerControllerSourceTypeCamera;
     
     if (sourceType == UIImagePickerControllerSourceTypeCamera) {
         self.imagePickerController.showsCameraControls = NO;
+
+        CGRect defaultFrame = self.imagePickerController.cameraOverlayView.frame;
+        CGRect newFrame = CGRectMake(0.0,
+                                     SCREEN_HEIGHT -
+                                     TOOL_BAR_HEIGHT - 10.0,
+                                     CGRectGetWidth(defaultFrame),
+                                     TOOL_BAR_HEIGHT + 10.0);
+        self.view.frame = newFrame;
         
         if ([[self.imagePickerController.cameraOverlayView subviews] count] == 0)
         {
-            CGRect defaultFrame = self.imagePickerController.cameraOverlayView.frame;
-            CGRect newFrame = CGRectMake(0.0,
-                                         CGRectGetHeight(defaultFrame) -
-                                         self.view.frame.size.height - 10.0,
-                                         CGRectGetWidth(defaultFrame),
-                                         self.view.frame.size.height + 10.0);
-            self.view.frame = newFrame;
+
             [self.imagePickerController.cameraOverlayView addSubview:self.view];
         }
-    }
-    else
-    {
-        
     }
 }
 
@@ -129,7 +131,9 @@
 - (IBAction)done:(id)sender
 {
     // dismiss the camera
-    //[self.delegate didFinishWithCamera];
+//    [self.delegate didFinishWithCamera];
+    [self.delegate didChangeToGalleryMode];
+    self.imagePickerController.cameraOverlayView = nil;
     
 //    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
 //    {
@@ -140,15 +144,11 @@
 //        [self presentModalViewController:self.galleryPhotoViewController.imagePickerController animated:YES];
 //        [self.galleryPhotoViewController.imagePickerController setDelegate:self];
 //        self.currentSourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+//        
+//        // reomve and readd the overlay to work around a display issue
+////        self.imagePickerController.cameraOverlayView = nil;
 //    }
-    WeiboForwardCommentViewController *forwardViewContoller = 
-    [[[WeiboForwardCommentViewController alloc] initWithNibName:nil bundle:nil] autorelease];
-    forwardViewContoller.forwardMode = YES;
-    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: forwardViewContoller];
-    
-    [self presentModalViewController:navController animated:YES];
-    
-    [navController release];
+
 }
 
 #pragma mark -
@@ -162,7 +162,7 @@
     
     // give the taken picture to our delegate
     if (self.delegate)
-        [self.delegate didTakePicture:image sourceType:self.currentSourceType];
+        [self.delegate didTakePicture:image];
 
     if (self.currentSourceType == UIImagePickerControllerSourceTypePhotoLibrary)
     {
@@ -172,18 +172,12 @@
     }
 }
 
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
-{
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+
     if (self.currentSourceType == UIImagePickerControllerSourceTypePhotoLibrary) {
         [self dismissModalViewControllerAnimated:YES];
-        self.currentSourceType = UIImagePickerControllerSourceTypeCamera;
-        [self.imagePickerController reloadInputViews];
     }
-    else
-    {
-        [self.delegate didFinishWithCamera];    
-    }
-
+    [self.delegate didFinishWithCamera]; 
 }
 
 @end

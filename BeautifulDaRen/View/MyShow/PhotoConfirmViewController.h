@@ -10,4 +10,6 @@
 
 @interface PhotoConfirmViewController : UIViewController
 
+@property (nonatomic, retain) IBOutlet UIImageView * photoImageView;
+
 @end

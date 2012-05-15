@@ -235,8 +235,6 @@
 		CEEF7B6415556430001ABCEC /* ForwardCommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEF7B6315556430001ABCEC /* ForwardCommentTableViewCell.xib */; };
 		CEF1FE27155F655B005DFDC8 /* PhotoConfirmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF1FE25155F655B005DFDC8 /* PhotoConfirmViewController.m */; };
 		CEF1FE28155F655B005DFDC8 /* PhotoConfirmViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF1FE26155F655B005DFDC8 /* PhotoConfirmViewController.xib */; };
-		CEF1FE2C155F68A4005DFDC8 /* PhotoGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF1FE2A155F68A4005DFDC8 /* PhotoGalleryViewController.m */; };
-		CEF1FE2D155F68A4005DFDC8 /* PhotoGalleryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF1FE2B155F68A4005DFDC8 /* PhotoGalleryViewController.xib */; };
 		CEF432431556AB5D004D47BA /* TakePhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF432411556AB5D004D47BA /* TakePhotoViewController.m */; };
 		CEF432441556AB5D004D47BA /* TakePhotoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF432421556AB5D004D47BA /* TakePhotoViewController.xib */; };
 		CEF432461556B749004D47BA /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEF432451556B748004D47BA /* AudioToolbox.framework */; };
@@ -602,9 +600,6 @@
 		CEF1FE24155F655B005DFDC8 /* PhotoConfirmViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhotoConfirmViewController.h; path = BeautifulDaRen/View/MyShow/PhotoConfirmViewController.h; sourceTree = SOURCE_ROOT; };
 		CEF1FE25155F655B005DFDC8 /* PhotoConfirmViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoConfirmViewController.m; path = BeautifulDaRen/View/MyShow/PhotoConfirmViewController.m; sourceTree = SOURCE_ROOT; };
 		CEF1FE26155F655B005DFDC8 /* PhotoConfirmViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PhotoConfirmViewController.xib; path = BeautifulDaRen/View/MyShow/PhotoConfirmViewController.xib; sourceTree = SOURCE_ROOT; };
-		CEF1FE29155F68A3005DFDC8 /* PhotoGalleryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhotoGalleryViewController.h; path = BeautifulDaRen/View/MyShow/PhotoGalleryViewController.h; sourceTree = SOURCE_ROOT; };
-		CEF1FE2A155F68A4005DFDC8 /* PhotoGalleryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoGalleryViewController.m; path = BeautifulDaRen/View/MyShow/PhotoGalleryViewController.m; sourceTree = SOURCE_ROOT; };
-		CEF1FE2B155F68A4005DFDC8 /* PhotoGalleryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PhotoGalleryViewController.xib; path = BeautifulDaRen/View/MyShow/PhotoGalleryViewController.xib; sourceTree = SOURCE_ROOT; };
 		CEF432401556AB5D004D47BA /* TakePhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TakePhotoViewController.h; path = BeautifulDaRen/View/MyShow/TakePhotoViewController.h; sourceTree = SOURCE_ROOT; };
 		CEF432411556AB5D004D47BA /* TakePhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TakePhotoViewController.m; path = BeautifulDaRen/View/MyShow/TakePhotoViewController.m; sourceTree = SOURCE_ROOT; };
 		CEF432421556AB5D004D47BA /* TakePhotoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TakePhotoViewController.xib; path = BeautifulDaRen/View/MyShow/TakePhotoViewController.xib; sourceTree = SOURCE_ROOT; };
@@ -1184,9 +1179,6 @@
 				CEF1FE24155F655B005DFDC8 /* PhotoConfirmViewController.h */,
 				CEF1FE25155F655B005DFDC8 /* PhotoConfirmViewController.m */,
 				CEF1FE26155F655B005DFDC8 /* PhotoConfirmViewController.xib */,
-				CEF1FE29155F68A3005DFDC8 /* PhotoGalleryViewController.h */,
-				CEF1FE2A155F68A4005DFDC8 /* PhotoGalleryViewController.m */,
-				CEF1FE2B155F68A4005DFDC8 /* PhotoGalleryViewController.xib */,
 			);
 			name = MyShow;
 			path = CameraShare;
@@ -1546,7 +1538,6 @@
 				C26798EF155EA741001E1D2E /* buttonBackGround.png in Resources */,
 				CEE6A694155EA02E00EA8790 /* deletebtn.png in Resources */,
 				CEF1FE28155F655B005DFDC8 /* PhotoConfirmViewController.xib in Resources */,
-				CEF1FE2D155F68A4005DFDC8 /* PhotoGalleryViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1646,7 +1637,6 @@
 				C274DCBE155EB7BA0098EE22 /* UserIdentity.m in Sources */,
 				C274DCC1155EB99B0098EE22 /* CoreDataManager.m in Sources */,
 				CEF1FE27155F655B005DFDC8 /* PhotoConfirmViewController.m in Sources */,
-				CEF1FE2C155F68A4005DFDC8 /* PhotoGalleryViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

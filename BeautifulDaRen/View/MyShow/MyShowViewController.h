@@ -12,5 +12,6 @@
 @interface MyShowViewController : UIViewController <TakePhotoControllerDelegate>
 
 @property (nonatomic, retain) TakePhotoViewController *takePhotoViewController;
+@property (nonatomic, retain) TakePhotoViewController *selectPhotoViewController;
 
 @end

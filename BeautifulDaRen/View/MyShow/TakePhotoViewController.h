@@ -10,7 +10,8 @@
 #import <AudioToolbox/AudioToolbox.h>
 
 @protocol TakePhotoControllerDelegate
-- (void)didTakePicture:(UIImage *)picture sourceType: (UIImagePickerControllerSourceType)type;
+- (void)didTakePicture:(UIImage *)picture;
+- (void)didChangeToGalleryMode;
 - (void)didFinishWithCamera;
 @end
 
