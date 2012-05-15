@@ -28,28 +28,18 @@ enum
 
 @interface RegisterViewController()
 
-@property (retain, nonatomic) IBOutlet UITableView * accountInfoTable;
-@property (retain, nonatomic) IBOutlet UITableView * loginWithExtenalTable;
-@property (retain, nonatomic) IBOutlet UIButton * registerButton;
-@property (retain, nonatomic) IBOutlet UIButton * noticeForUseButton;
+@property (retain, nonatomic) IBOutlet UITableView * tableView;
 
 @property (retain, nonatomic) IBOutlet UIButton * loginWithSinaWeiboButton;
 @property (retain, nonatomic) IBOutlet UIButton * loginWithQQButton;
-
-@property (retain, nonatomic) IBOutlet UIScrollView * scrollView;
 
 @end
 
 @implementation RegisterViewController
 
-@synthesize accountInfoTable;
-@synthesize loginWithExtenalTable;
-@synthesize registerButton;
-@synthesize noticeForUseButton;
-@synthesize scrollView;
-
-@synthesize loginWithQQButton;
-@synthesize loginWithSinaWeiboButton;
+@synthesize tableView = _tableView;
+@synthesize loginWithQQButton = _loginWithQQButton;
+@synthesize loginWithSinaWeiboButton = _loginWithSinaWeiboButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -77,7 +67,6 @@ enum
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.scrollView setContentSize:CGSizeMake(self.view.frame.size.width, REGISTER_SCROLL_CONTENT_HEIGHT)];
 }
 
 - (void)viewDidUnload
@@ -122,8 +111,10 @@ enum
 - (UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString * account_input_identifier = @"AccountInfoInputCell";
-    UITableViewCell * cell;
-    if(tableView == self.accountInfoTable)
+    static NSString * button_view_identifier = @"ButtonViewCell";
+    UITableViewCell * cell = nil;
+    NSInteger section = [indexPath section];
+    if(section == 0)
     {
         cell = [tableView dequeueReusableCellWithIdentifier:account_input_identifier];
         if(!cell)
@@ -176,24 +167,47 @@ enum
             }
         }
     }
-    else if (tableView == self.loginWithExtenalTable)
+    else if (section == 1)
+    {
+        cell = [tableView dequeueReusableCellWithIdentifier:button_view_identifier];
+        if(!cell)
+        {
+            cell = [[[NSBundle mainBundle] loadNibNamed:button_view_identifier owner:self options:nil] objectAtIndex:4];
+        }
+        ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"buttonBackGround"];
+        ((ButtonViewCell*)cell).leftLabel.text = NSLocalizedString(@"enter", @"enter");
+        
+        cell.backgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+    }
+    else if (section == 2)
     {
         cell = [ViewHelper getLoginWithExtenalViewCellInTableView:tableView cellForRowAtIndexPath:indexPath];
-        self.loginWithQQButton = ((ButtonViewCell*)cell).rightButton;
+        ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"sina_weibo_icon"];
         self.loginWithSinaWeiboButton = ((ButtonViewCell*)cell).leftButton;
+        self.loginWithQQButton = ((ButtonViewCell*)cell).rightButton;
+        ((ButtonViewCell*)cell).buttonRightIcon.image = [UIImage imageNamed:@"qq_icon"];
         ((ButtonViewCell*)cell).delegate = self;
     }
     return cell;
 }
 
+-(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 3;
+}
+
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     NSInteger number = 0;
-    if(tableView == self.accountInfoTable)
+    if(section == 0)
     {
         number = 5;
     }
-    else if(tableView == self.loginWithExtenalTable)
+    else if(section == 1)
+    {
+        number = 1;
+    }
+    else if(section == 2)
     {
         number = 1;
     }
@@ -201,7 +215,8 @@ enum
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(tableView == self.accountInfoTable)
+    NSInteger section = [indexPath section];
+    if(section == 0)
     {
         switch ([indexPath row]) {
             case ACCOUNT_SETTING_USER_ID:
@@ -235,6 +250,23 @@ enum
         }
     }
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 20;
+}
+
+-(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView * view = nil;
+    if(section == 2)
+    {
+        view = [[[NSBundle mainBundle] loadNibNamed:@"HomeViewHeaderView" owner:self options:nil] objectAtIndex:0];
+        UILabel * label = (UILabel*)[view viewWithTag:1];
+        label.text = NSLocalizedString(@"login_with_cooperation", @"login_with_cooperation");
+    }
+    return view;
+}
+
 
 #pragma mark UITextFieldDelegate
 -(BOOL)textFieldShouldReturn:(UITextField *)textField

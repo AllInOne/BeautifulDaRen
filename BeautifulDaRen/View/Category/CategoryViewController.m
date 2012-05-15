@@ -10,19 +10,10 @@
 #import "ViewConstants.h"
 #import "CommonScrollView.h"
 
-@interface CategoryViewController ()
-
-@property (nonatomic, assign) Boolean shouldAdsViewShow;
-
-@end
-
-
-
 @implementation CategoryViewController
 
 @synthesize adsPageView = _adsPageView;
 @synthesize categoryContentView = _categoryContentView;
-@synthesize shouldAdsViewShow = _shouldAdsViewShow;
 
 - (void)dealloc {
     [_adsPageView release];
@@ -100,8 +91,6 @@
 
 - (void)onAdsPageViewClosed
 {
-    self.shouldAdsViewShow = NO;
-    
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.3];
     

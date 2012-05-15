@@ -101,7 +101,7 @@ static void releaseBGSaveQueue() {
 
     dispatch_async(getBGSaveQueue(), ^{
         //Create a context to perform the save operation specified by the block
-        NSManagedObjectContext *bgContext = [[NSManagedObjectContext alloc] init ];
+        NSManagedObjectContext *bgContext = [[NSManagedObjectContext alloc] init];
         [bgContext setPersistentStoreCoordinator:[self persistentStoreCoordinator]];
         [bgContext setUndoManager:nil]; //No undo is needed in our application. Increases performance
 

@@ -18,30 +18,24 @@
 
 @interface LoginViewController()
 
-@property (retain, nonatomic) IBOutlet UITableView * accountInputTable;
-@property (retain, nonatomic) IBOutlet UITableView * registerTable;
-@property (retain, nonatomic) IBOutlet UITableView * loginWithExtenalTable;
-@property (retain, nonatomic) IBOutlet UIButton * loginButton;
-
-@property (retain, nonatomic) IBOutlet UIButton * loginWithSinaWeiboButton;
+@property (retain, nonatomic) IBOutlet UITableView * tableView;
 @property (retain, nonatomic) IBOutlet UIButton * loginWithQQButton;
+@property (retain, nonatomic) IBOutlet UIButton * loginWithSinaWeiboButton;
 
 - (IBAction)loginButtonSelected:(id)sender;
 
 @end
 
 @implementation LoginViewController
-@synthesize accountInputTable;
-@synthesize registerTable;
-@synthesize loginWithExtenalTable;
-@synthesize loginButton;
-@synthesize loginWithQQButton;
-@synthesize loginWithSinaWeiboButton;
+@synthesize tableView = _tableView;
+@synthesize loginWithQQButton =_loginWithQQButton;
+@synthesize loginWithSinaWeiboButton = _loginWithSinaWeiboButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        [self.navigationItem setTitle:NSLocalizedString(@"login", @"login")];
         [self.navigationItem setLeftBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onBackButtonClicked) title:@"返回"]];
         [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onFindPasswordButtonClicked) title:@"找回密码"]];
     }
@@ -105,23 +99,26 @@
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     NSInteger number = 0;
-    if (tableView == self.accountInputTable) {
-        number = 2;
-    }
-    else if (tableView == self.registerTable)
-    {
-        number = 1;
-    }
-    else if (tableView == self.loginWithExtenalTable)
-    {
-        number = 1;
+    switch (section) {
+        case 0:
+        {
+            number = 2;
+            break;
+        }   
+        case 1:
+        case 2:
+        case 3:
+        {
+            number = 1;
+            break;
+        }
     }
     return number;
 }
 
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 4;
 }
 
 - (UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -129,7 +126,8 @@
     static NSString * account_input_identifier = @"AccountInfoInputCell";
     static NSString * button_view_identifier = @"ButtonViewCell";
     UITableViewCell * cell = nil;
-    if(tableView == self.accountInputTable)
+    NSInteger section = [indexPath section];
+    if(section == 0)
     {
         cell = [tableView dequeueReusableCellWithIdentifier:account_input_identifier];
         if(!cell)
@@ -154,7 +152,19 @@
             }
         }
     }
-    else if (tableView == self.registerTable)
+    else if(section == 1)
+    {
+        cell = [tableView dequeueReusableCellWithIdentifier:button_view_identifier];
+        if(!cell)
+        {
+            cell = [[[NSBundle mainBundle] loadNibNamed:button_view_identifier owner:self options:nil] objectAtIndex:4];
+        }
+        ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"buttonBackGround"];
+        ((ButtonViewCell*)cell).leftLabel.text = NSLocalizedString(@"enter", @"enter");
+        
+        cell.backgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+    }
+    else if (section == 2)
     {
         cell = [tableView dequeueReusableCellWithIdentifier:button_view_identifier];
         if(!cell)
@@ -162,13 +172,15 @@
             cell = [[[NSBundle mainBundle] loadNibNamed:button_view_identifier owner:self options:nil] objectAtIndex:1];
         }
         ((ButtonViewCell*)cell).buttonText.text = NSLocalizedString(@"not_user_to_register", @"You are not user, please register");
-        ((ButtonViewCell*)cell).buttonRightIcon.image = [UIImage imageNamed:@"first"]; 
+        ((ButtonViewCell*)cell).buttonRightIcon.image = [UIImage imageNamed:@"next_flag"]; 
     }
-    else if (tableView == self.loginWithExtenalTable)
+    else if (section == 3)
     {
         cell = [ViewHelper getLoginWithExtenalViewCellInTableView:tableView cellForRowAtIndexPath:indexPath];
-        self.loginWithQQButton = ((ButtonViewCell*)cell).rightButton;
-        self.loginWithSinaWeiboButton = ((ButtonViewCell*)cell).leftButton;
+        _loginWithSinaWeiboButton = ((ButtonViewCell*)cell).leftButton;
+        ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"sina_weibo_icon"];
+        _loginWithQQButton = ((ButtonViewCell*)cell).rightButton;
+        ((ButtonViewCell*)cell).buttonRightIcon.image = [UIImage imageNamed:@"qq_icon"];
         ((ButtonViewCell*)cell).delegate = self;
     }
     return cell;
@@ -177,11 +189,27 @@
 #pragma mark UITableViewDelegate
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(tableView == self.registerTable)
+    if([indexPath section] == 2)
     {
         RegisterViewController * registerController = [[[RegisterViewController alloc] initWithNibName:@"RegisterViewController" bundle:nil] autorelease];
         [self.navigationController pushViewController:registerController animated:YES];
     }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 20;
+}
+
+-(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView * view = nil;
+    if(section == 3)
+    {
+        view = [[[NSBundle mainBundle] loadNibNamed:@"HomeViewHeaderView" owner:self options:nil] objectAtIndex:0];
+        UILabel * label = (UILabel*)[view viewWithTag:1];
+        label.text = NSLocalizedString(@"login_with_cooperation", @"login_with_cooperation");
+    }
+    return view;
 }
 
 #pragma mark LoginViewController
