@@ -16,8 +16,6 @@
 
 @interface HomeViewController()
 
-@property (retain, nonatomic) IBOutlet UIBarButtonItem * loginButton;
-@property (retain, nonatomic) IBOutlet UIBarButtonItem * registerButton;
 @property (retain, nonatomic) AdsPageView * adsPageView; 
 
 
@@ -26,9 +24,6 @@
 @implementation HomeViewController
 @synthesize itemsViewController = _itemsViewController;
 @synthesize adsPageView = _adsPageView;
-@synthesize loginButton = _loginButton;
-@synthesize registerButton = _registerButton;
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -50,14 +45,20 @@
 {
     [super viewDidLoad];
 
-    _loginButton = [ViewHelper getBarItemOfTarget:self action:@selector(onLoginBtnSelected:) title:NSLocalizedString(@"login", @"login button on navigation")];
-
-    _registerButton =[ViewHelper getBarItemOfTarget:self action:@selector(onRegisterBtnSelected:) title:NSLocalizedString(@"register", @"register button on navigation")];
-    
-    NSArray * navigationBtns = [NSArray arrayWithObjects:_registerButton, _loginButton, nil];
-    
-    [self.navigationItem setRightBarButtonItems:navigationBtns animated:YES];
-
+    if([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0)
+    {
+        UIBarButtonItem* loginButton = [ViewHelper getBarItemOfTarget:self action:@selector(onLoginBtnSelected:) title:NSLocalizedString(@"login", @"login button on navigation")];
+        
+        UIBarButtonItem* registerButton =[ViewHelper getBarItemOfTarget:self action:@selector(onRegisterBtnSelected:) title:NSLocalizedString(@"register", @"register button on navigation")];
+        
+        NSArray * navigationBtns = [NSArray arrayWithObjects:registerButton, loginButton, nil];
+        // setRightBarButtonItems only availability on ios 5.0 and later.
+        [self.navigationItem setRightBarButtonItems:navigationBtns animated:YES];
+    }
+    else
+    {
+        [self.navigationItem setRightBarButtonItem:[ViewHelper getRightBarItemOfTarget1:self action1:@selector(onLoginBtnSelected:) title1:NSLocalizedString(@"login", @"login button on navigation") target2:self action2:@selector(onRegisterBtnSelected:) title2:NSLocalizedString(@"register", @"register button on navigation")]];
+    }
     [self.navigationItem setLeftBarButtonItem:[ViewHelper getLeftBarItemOfImageName:@"logo114x29" rectSize:CGRectMake(0, 0, NAVIGATION_LEFT_LOGO_WIDTH, NAVIGATION_LEFT_LOGO_HEIGHT)]];
     
     if(_adsPageView == nil)
