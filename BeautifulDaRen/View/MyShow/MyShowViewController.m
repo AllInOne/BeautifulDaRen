@@ -101,7 +101,7 @@
     PhotoConfirmViewController *photoConfirmViewControlller = 
     [[[PhotoConfirmViewController alloc] initWithNibName:@"PhotoConfirmViewController" bundle:nil] autorelease];
     //    photoConfirmViewControlller.delegate = self;
-    [photoConfirmViewControlller.photoImageView setImage:[UIImage imageNamed:@"顶部按钮50x29.png"]];
+    [photoConfirmViewControlller.photoImageView setImage:[UIImage imageNamed:@"toolbar_button"]];
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: photoConfirmViewControlller];
     
     [self dismissViewControllerAnimated:NO completion:^{
