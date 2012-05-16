@@ -40,8 +40,6 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        [self.navigationItem setTitle:NSLocalizedString(@"title_mine", @"title_mine")];
-        [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onFindPasswordButtonClicked) title:NSLocalizedString(@"refresh", @"refresh")]];
     }
     return self;
 }
@@ -79,6 +77,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self.navigationItem setTitle:NSLocalizedString(@"title_mine", @"title_mine")];
+    [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClick) title:NSLocalizedString(@"refresh", @"refresh")]];
+
     [self loadFakeData];
 }
 
@@ -93,6 +95,11 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (void) onRefreshButtonClick
+{
+    [ViewHelper showSimpleMessage:@"refresh button clicked" withTitle:nil withButtonText:@"ok"];
 }
 
 #pragma mark UITableViewDataSource
@@ -280,10 +287,7 @@
             {
                 AtMeViewController * atMeViewController = [[[AtMeViewController alloc] initWithNibName:@"AtMeViewController" bundle:nil] autorelease];
                 
-                UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: atMeViewController];
-                
-                [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
-                [navController release];
+                [self.navigationController pushViewController:atMeViewController animated:YES];
                 break;
             }
             case 3:
