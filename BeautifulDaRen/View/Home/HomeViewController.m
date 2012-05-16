@@ -114,20 +114,15 @@
 - (IBAction)onLoginBtnSelected:(UIButton*)sender
 {
     LoginViewController * loginContorller = [[[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil] autorelease];
-    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: loginContorller];
-    
-    [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
+    [self.navigationController pushViewController:loginContorller animated:YES];
 }
 
 - (IBAction)onRegisterBtnSelected:(UIButton*)sender
 {
     RegisterViewController * registerController = [[[RegisterViewController alloc] initWithNibName:@"RegisterViewController" bundle:nil] autorelease];
     
-    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: registerController];
-    
-    [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
-    
-    [navController release];
+    [self.navigationController pushViewController:registerController animated:YES];
+
 //    MapViewController * mapController = [[MapViewController alloc] initWithName:@"AAA" description:@"BBB" latitude:12.32f longitude:77.12f];
 //    [self.navigationController pushViewController:mapController animated:YES];
 }

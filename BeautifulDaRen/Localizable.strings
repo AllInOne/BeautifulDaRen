@@ -12,12 +12,14 @@
 "tab_category" = "分类";
 "tab_more" = "更多";
 "enter" = "确认";
+"go_back" = "返回";
 
 "title_home" = "首页";
 "title_mine" = "我的";
 "title_camerashare" = "拍照/分享";
 "title_category" = "分类";
 "title_more" = "更多";
+"title_help" = "帮助";
 
 "account_user_account" = "用户账号";
 "account_register_email" = "注册邮箱";

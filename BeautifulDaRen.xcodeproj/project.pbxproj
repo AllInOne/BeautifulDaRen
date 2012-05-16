@@ -30,6 +30,8 @@
 		C216EDBF1551893500CA8CE8 /* MyInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C216EDBD1551893500CA8CE8 /* MyInfoViewController.xib */; };
 		C216EDC215518B8C00CA8CE8 /* MyInfoTopViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C216EDC115518B8C00CA8CE8 /* MyInfoTopViewCell.m */; };
 		C216EDC415518BD300CA8CE8 /* MyInfoTopViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C216EDC315518BD300CA8CE8 /* MyInfoTopViewCell.xib */; };
+		C22CC1831563A3A7000DF1BD /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C22CC1811563A3A7000DF1BD /* HelpViewController.m */; };
+		C22CC1841563A3A7000DF1BD /* HelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C22CC1821563A3A7000DF1BD /* HelpViewController.xib */; };
 		C2319FAF1560EF7B005CCD4E /* qq_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C2319FAD1560EF7A005CCD4E /* qq_icon.png */; };
 		C2319FB01560EF7B005CCD4E /* sina_weibo_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C2319FAE1560EF7A005CCD4E /* sina_weibo_icon.png */; };
 		C2319FB21560F9AA005CCD4E /* HomeViewHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2319FB11560F9AA005CCD4E /* HomeViewHeaderView.xib */; };
@@ -300,6 +302,9 @@
 		C216EDC015518B8C00CA8CE8 /* MyInfoTopViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfoTopViewCell.h; sourceTree = "<group>"; };
 		C216EDC115518B8C00CA8CE8 /* MyInfoTopViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfoTopViewCell.m; sourceTree = "<group>"; };
 		C216EDC315518BD300CA8CE8 /* MyInfoTopViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyInfoTopViewCell.xib; sourceTree = "<group>"; };
+		C22CC1801563A3A7000DF1BD /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpViewController.h; sourceTree = "<group>"; };
+		C22CC1811563A3A7000DF1BD /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpViewController.m; sourceTree = "<group>"; };
+		C22CC1821563A3A7000DF1BD /* HelpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HelpViewController.xib; sourceTree = "<group>"; };
 		C2319FAD1560EF7A005CCD4E /* qq_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = qq_icon.png; sourceTree = "<group>"; };
 		C2319FAE1560EF7A005CCD4E /* sina_weibo_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sina_weibo_icon.png; sourceTree = "<group>"; };
 		C2319FB11560F9AA005CCD4E /* HomeViewHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewHeaderView.xib; sourceTree = "<group>"; };
@@ -1218,6 +1223,9 @@
 				C297D838154442C20080294C /* ForgetPasswordViewController.h */,
 				C297D839154442C20080294C /* ForgetPasswordViewController.m */,
 				C297D83A154442C20080294C /* ForgetPasswordViewController.xib */,
+				C22CC1801563A3A7000DF1BD /* HelpViewController.h */,
+				C22CC1811563A3A7000DF1BD /* HelpViewController.m */,
+				C22CC1821563A3A7000DF1BD /* HelpViewController.xib */,
 				CEC0B58C153EFBF600F20DC0 /* HomeViewController.h */,
 				CEC0B58D153EFBF600F20DC0 /* HomeViewController.m */,
 				CEC0B58E153EFBF600F20DC0 /* HomeViewController.xib */,
@@ -1549,6 +1557,7 @@
 				C2319FB21560F9AA005CCD4E /* HomeViewHeaderView.xib in Resources */,
 				C2319FB71561446B005CCD4E /* AtMeViewController.xib in Resources */,
 				C2319FBC156145DC005CCD4E /* AtMeViewCell.xib in Resources */,
+				C22CC1841563A3A7000DF1BD /* HelpViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1647,6 +1656,7 @@
 				C274DCC1155EB99B0098EE22 /* CoreDataManager.m in Sources */,
 				C2319FB61561446B005CCD4E /* AtMeViewController.m in Sources */,
 				C2319FBA156145BC005CCD4E /* AtMeViewCell.m in Sources */,
+				C22CC1831563A3A7000DF1BD /* HelpViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -65,7 +65,7 @@
 }
 
 - (void)onBackButtonClicked {
-    [self dismissModalViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void) onFindPasswordButtonClicked
@@ -197,7 +197,12 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 20;
+    CGFloat height = 3;
+    if(section == 3 || section == 0)
+    {
+        height = 20;
+    }
+    return height;
 }
 
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -209,8 +214,23 @@
         UILabel * label = (UILabel*)[view viewWithTag:1];
         label.text = NSLocalizedString(@"login_with_cooperation", @"login_with_cooperation");
     }
+    else
+    {
+        view = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+    }
     return view;
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 3;
+}
+
+- (UIView*) tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    return [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+}
+
 
 #pragma mark LoginViewController
 - (IBAction)loginButtonSelected:(id)sender

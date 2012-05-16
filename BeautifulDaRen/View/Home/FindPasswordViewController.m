@@ -8,6 +8,7 @@
 
 #import "FindPasswordViewController.h"
 #import "ButtonViewCell.h"
+#import "HelpViewController.h"
 #import "ViewHelper.h"
 
 @implementation FindPasswordViewController
@@ -34,8 +35,8 @@
 {
     [super viewDidLoad];
     [self.navigationItem setTitle:NSLocalizedString(@"find_password", @"find_password")];
-    [self.navigationItem setLeftBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onBackButtonClicked) title:@"返回"]];
-    [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onBackButtonClicked) title:@"帮助"]];
+    [self.navigationItem setLeftBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
+    [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onHelpButtonClicked) title:NSLocalizedString(@"title_help", @"title_help")]];
 }
 
 - (void)viewDidUnload
@@ -71,8 +72,15 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (void)onBackButtonClicked {
-    [self dismissModalViewControllerAnimated:YES];
+- (void)onBackButtonClicked
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)onHelpButtonClicked
+{
+    HelpViewController * helpViewController = [[[HelpViewController alloc] initWithNibName:@"HelpViewController" bundle:nil] autorelease];
+    [self.navigationController pushViewController:helpViewController animated:YES];
 }
 
 #pragma mark - Table view data source
