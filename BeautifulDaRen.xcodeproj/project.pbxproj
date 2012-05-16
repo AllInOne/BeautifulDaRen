@@ -39,7 +39,6 @@
 		C2319FBC156145DC005CCD4E /* AtMeViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2319FBB156145DC005CCD4E /* AtMeViewCell.xib */; };
 		C24B1008155BDB1100918530 /* MineEditingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C24B1006155BDB1000918530 /* MineEditingViewController.m */; };
 		C24B1009155BDB1100918530 /* MineEditingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C24B1007155BDB1100918530 /* MineEditingViewController.xib */; };
-		C24B1011155BDE7B00918530 /* RadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C24B1010155BDE7A00918530 /* RadioButton.m */; };
 		C24B11A015499641004F6F8E /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C24B119E15499641004F6F8E /* RegisterViewController.m */; };
 		C24B11A115499641004F6F8E /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C24B119F15499641004F6F8E /* RegisterViewController.xib */; };
 		C24B11A91549A5B6004F6F8E /* ViewHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C24B11A81549A5B6004F6F8E /* ViewHelper.m */; };
@@ -315,8 +314,6 @@
 		C24B1006155BDB1000918530 /* MineEditingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineEditingViewController.m; sourceTree = "<group>"; };
 		C24B1007155BDB1100918530 /* MineEditingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MineEditingViewController.xib; sourceTree = "<group>"; };
 		C24B100E155BDE4700918530 /* RadioButtonDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RadioButtonDelegate.h; path = Protocol/RadioButtonDelegate.h; sourceTree = "<group>"; };
-		C24B100F155BDE7A00918530 /* RadioButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadioButton.h; sourceTree = "<group>"; };
-		C24B1010155BDE7A00918530 /* RadioButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadioButton.m; sourceTree = "<group>"; };
 		C24B119D15499640004F6F8E /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		C24B119E15499641004F6F8E /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
 		C24B119F15499641004F6F8E /* RegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterViewController.xib; sourceTree = "<group>"; };
@@ -1294,8 +1291,6 @@
 				CE62B3601551790A0017AA88 /* SelectCityViewController.m */,
 				CE62B3611551790A0017AA88 /* SelectCityViewController.xib */,
 				CE7C9D1715400ED000F3812F /* ViewConstants.h */,
-				C24B100F155BDE7A00918530 /* RadioButton.h */,
-				C24B1010155BDE7A00918530 /* RadioButton.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1645,7 +1640,6 @@
 				C20BD4B215591F72006BEEC8 /* FindMoreViewController.m in Sources */,
 				C20FAB0E1559539400895272 /* ContactItemCell.m in Sources */,
 				C24B1008155BDB1100918530 /* MineEditingViewController.m in Sources */,
-				C24B1011155BDE7B00918530 /* RadioButton.m in Sources */,
 				C213AB8B155C044100667556 /* GenderSelectCell.m in Sources */,
 				C213AB9A155C1BCD00667556 /* BeautifulDaRen.xcdatamodeld in Sources */,
 				C26798EC155E9F7C001E1D2E /* FindPasswordViewController.m in Sources */,
