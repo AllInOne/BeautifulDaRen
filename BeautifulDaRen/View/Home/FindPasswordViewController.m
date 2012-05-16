@@ -7,8 +7,8 @@
 //
 
 #import "FindPasswordViewController.h"
-#import "AccountInfoInputCell.h"
 #import "ButtonViewCell.h"
+#import "HelpViewController.h"
 #import "ViewHelper.h"
 
 @implementation FindPasswordViewController
@@ -34,9 +34,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    [self.navigationItem setLeftBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onBackButtonClicked) title:@"返回"]];
-    [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onBackButtonClicked) title:@"帮助"]];
+    [self.navigationItem setTitle:NSLocalizedString(@"find_password", @"find_password")];
+    [self.navigationItem setLeftBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
+    [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onHelpButtonClicked) title:NSLocalizedString(@"title_help", @"title_help")]];
 }
 
 - (void)viewDidUnload
@@ -72,8 +72,15 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (void)onBackButtonClicked {
-    [self dismissModalViewControllerAnimated:YES];
+- (void)onBackButtonClicked
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)onHelpButtonClicked
+{
+    HelpViewController * helpViewController = [[[HelpViewController alloc] initWithNibName:@"HelpViewController" bundle:nil] autorelease];
+    [self.navigationController pushViewController:helpViewController animated:YES];
 }
 
 #pragma mark - Table view data source
@@ -85,52 +92,20 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSInteger number = 0;
-    switch (section) {
-        case 0:
-        {
-            number = 2;
-            break;
-        }   
-        case 1:
-        {
-            number = 1;
-            break;
-        }
-    }
-    return number;
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString * account_input_identifier = @"AccountInfoInputCell";
     static NSString * buttonViewCellIdentifier = @"ButtonViewCell";
     UITableViewCell * cell = nil;
     NSInteger section = [indexPath section];
     if(section == 0)
     {
-        cell = [tableView dequeueReusableCellWithIdentifier:account_input_identifier];
-        if(!cell)
-        {
-            cell = [[[NSBundle mainBundle] loadNibNamed:account_input_identifier owner:self options:nil] objectAtIndex:0];
-        }
-        switch ([indexPath row])
-        {
-            case 0:
-            {
-                // "user name"
-                ((AccountInfoInputCell*)cell).inputLabel.text = NSLocalizedString(@"user_name", @"user name");
-                ((AccountInfoInputCell*)cell).inputTextField.delegate = self;
-                break;
-            }
-            case 1:
-            {
-                // "password"
-                ((AccountInfoInputCell*)cell).inputLabel.text = NSLocalizedString(@"account_register_email", @"account register email");
-                ((AccountInfoInputCell*)cell).inputTextField.delegate = self;
-                break;
-            }
-        }
+        cell = [[[UITableViewCell alloc] init] autorelease];
+        UITextField * textFiled = [[[UITextField alloc] initWithFrame:CGRectMake(20, 10, 300, 40)] autorelease];
+        textFiled.placeholder = NSLocalizedString(@"please_input_email_or_account_name", @"please_input_email_or_account_name");
+        [cell addSubview:textFiled];
     }
     else if (section == 1)
     {
@@ -152,14 +127,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
+    switch ([indexPath section]) {
+        case 1:
+        {
+            [ViewHelper showSimpleMessage:NSLocalizedString(@"sent_password_to_email", @"sent_password_to_email") withTitle:NSLocalizedString(@"prompt", @"prompt") withButtonText:NSLocalizedString(@"ok_I_know", @"ok_I_know")];
+            break;
+        }
+    }
 }
 
 #pragma mark UITextFieldDelegate

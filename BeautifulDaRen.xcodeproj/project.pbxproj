@@ -26,10 +26,10 @@
 		C215A75F15539B7C001BF379 /* FourGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C215A75E15539B7C001BF379 /* FourGridViewCell.m */; };
 		C215A76115539B9E001BF379 /* FourGridViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C215A76015539B9E001BF379 /* FourGridViewCell.xib */; };
 		C215A7A21553EABF001BF379 /* WaresItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C215A7A01553EABF001BF379 /* WaresItem.m */; };
-		C216EDBE1551893500CA8CE8 /* MyInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C216EDBC1551893500CA8CE8 /* MyInfoViewController.m */; };
-		C216EDBF1551893500CA8CE8 /* MyInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C216EDBD1551893500CA8CE8 /* MyInfoViewController.xib */; };
 		C216EDC215518B8C00CA8CE8 /* MyInfoTopViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C216EDC115518B8C00CA8CE8 /* MyInfoTopViewCell.m */; };
 		C216EDC415518BD300CA8CE8 /* MyInfoTopViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C216EDC315518BD300CA8CE8 /* MyInfoTopViewCell.xib */; };
+		C22CC1831563A3A7000DF1BD /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C22CC1811563A3A7000DF1BD /* HelpViewController.m */; };
+		C22CC1841563A3A7000DF1BD /* HelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C22CC1821563A3A7000DF1BD /* HelpViewController.xib */; };
 		C2319FAF1560EF7B005CCD4E /* qq_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C2319FAD1560EF7A005CCD4E /* qq_icon.png */; };
 		C2319FB01560EF7B005CCD4E /* sina_weibo_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C2319FAE1560EF7A005CCD4E /* sina_weibo_icon.png */; };
 		C2319FB21560F9AA005CCD4E /* HomeViewHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2319FB11560F9AA005CCD4E /* HomeViewHeaderView.xib */; };
@@ -39,7 +39,6 @@
 		C2319FBC156145DC005CCD4E /* AtMeViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2319FBB156145DC005CCD4E /* AtMeViewCell.xib */; };
 		C24B1008155BDB1100918530 /* MineEditingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C24B1006155BDB1000918530 /* MineEditingViewController.m */; };
 		C24B1009155BDB1100918530 /* MineEditingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C24B1007155BDB1100918530 /* MineEditingViewController.xib */; };
-		C24B1011155BDE7B00918530 /* RadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C24B1010155BDE7A00918530 /* RadioButton.m */; };
 		C24B11A015499641004F6F8E /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C24B119E15499641004F6F8E /* RegisterViewController.m */; };
 		C24B11A115499641004F6F8E /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C24B119F15499641004F6F8E /* RegisterViewController.xib */; };
 		C24B11A91549A5B6004F6F8E /* ViewHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C24B11A81549A5B6004F6F8E /* ViewHelper.m */; };
@@ -301,12 +300,12 @@
 		C215A79E1553EABF001BF379 /* UserAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAccount.m; sourceTree = "<group>"; };
 		C215A79F1553EABF001BF379 /* WaresItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaresItem.h; sourceTree = "<group>"; };
 		C215A7A01553EABF001BF379 /* WaresItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaresItem.m; sourceTree = "<group>"; };
-		C216EDBB1551893500CA8CE8 /* MyInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfoViewController.h; sourceTree = "<group>"; };
-		C216EDBC1551893500CA8CE8 /* MyInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfoViewController.m; sourceTree = "<group>"; };
-		C216EDBD1551893500CA8CE8 /* MyInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyInfoViewController.xib; sourceTree = "<group>"; };
 		C216EDC015518B8C00CA8CE8 /* MyInfoTopViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfoTopViewCell.h; sourceTree = "<group>"; };
 		C216EDC115518B8C00CA8CE8 /* MyInfoTopViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfoTopViewCell.m; sourceTree = "<group>"; };
 		C216EDC315518BD300CA8CE8 /* MyInfoTopViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyInfoTopViewCell.xib; sourceTree = "<group>"; };
+		C22CC1801563A3A7000DF1BD /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpViewController.h; sourceTree = "<group>"; };
+		C22CC1811563A3A7000DF1BD /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpViewController.m; sourceTree = "<group>"; };
+		C22CC1821563A3A7000DF1BD /* HelpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HelpViewController.xib; sourceTree = "<group>"; };
 		C2319FAD1560EF7A005CCD4E /* qq_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = qq_icon.png; sourceTree = "<group>"; };
 		C2319FAE1560EF7A005CCD4E /* sina_weibo_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sina_weibo_icon.png; sourceTree = "<group>"; };
 		C2319FB11560F9AA005CCD4E /* HomeViewHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewHeaderView.xib; sourceTree = "<group>"; };
@@ -321,8 +320,6 @@
 		C24B1006155BDB1000918530 /* MineEditingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineEditingViewController.m; sourceTree = "<group>"; };
 		C24B1007155BDB1100918530 /* MineEditingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MineEditingViewController.xib; sourceTree = "<group>"; };
 		C24B100E155BDE4700918530 /* RadioButtonDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RadioButtonDelegate.h; path = Protocol/RadioButtonDelegate.h; sourceTree = "<group>"; };
-		C24B100F155BDE7A00918530 /* RadioButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadioButton.h; sourceTree = "<group>"; };
-		C24B1010155BDE7A00918530 /* RadioButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadioButton.m; sourceTree = "<group>"; };
 		C24B119D15499640004F6F8E /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		C24B119E15499641004F6F8E /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
 		C24B119F15499641004F6F8E /* RegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterViewController.xib; sourceTree = "<group>"; };
@@ -1205,6 +1202,9 @@
 				C297D838154442C20080294C /* ForgetPasswordViewController.h */,
 				C297D839154442C20080294C /* ForgetPasswordViewController.m */,
 				C297D83A154442C20080294C /* ForgetPasswordViewController.xib */,
+				C22CC1801563A3A7000DF1BD /* HelpViewController.h */,
+				C22CC1811563A3A7000DF1BD /* HelpViewController.m */,
+				C22CC1821563A3A7000DF1BD /* HelpViewController.xib */,
 				CEC0B58C153EFBF600F20DC0 /* HomeViewController.h */,
 				CEC0B58D153EFBF600F20DC0 /* HomeViewController.m */,
 				CEC0B58E153EFBF600F20DC0 /* HomeViewController.xib */,
@@ -1229,9 +1229,6 @@
 				CEC0B592153EFBFE00F20DC0 /* MineViewController.h */,
 				CEC0B593153EFBFE00F20DC0 /* MineViewController.m */,
 				CEC0B594153EFBFE00F20DC0 /* MineViewController.xib */,
-				C216EDBB1551893500CA8CE8 /* MyInfoViewController.h */,
-				C216EDBC1551893500CA8CE8 /* MyInfoViewController.m */,
-				C216EDBD1551893500CA8CE8 /* MyInfoViewController.xib */,
 				C24B1005155BDB0F00918530 /* MineEditingViewController.h */,
 				C24B1006155BDB1000918530 /* MineEditingViewController.m */,
 				C24B1007155BDB1100918530 /* MineEditingViewController.xib */,
@@ -1320,8 +1317,6 @@
 				CE62B3601551790A0017AA88 /* SelectCityViewController.m */,
 				CE62B3611551790A0017AA88 /* SelectCityViewController.xib */,
 				CE7C9D1715400ED000F3812F /* ViewConstants.h */,
-				C24B100F155BDE7A00918530 /* RadioButton.h */,
-				C24B1010155BDE7A00918530 /* RadioButton.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1530,7 +1525,6 @@
 				CE62B354155172C00017AA88 /* 首页背景.png in Resources */,
 				CE62B355155172C00017AA88 /* 首页选中.png in Resources */,
 				CE62B3631551790A0017AA88 /* SelectCityViewController.xib in Resources */,
-				C216EDBF1551893500CA8CE8 /* MyInfoViewController.xib in Resources */,
 				C216EDC415518BD300CA8CE8 /* MyInfoTopViewCell.xib in Resources */,
 				C215A76115539B9E001BF379 /* FourGridViewCell.xib in Resources */,
 				CE62B3681551842D0017AA88 /* SelectCategoryViewController.xib in Resources */,
@@ -1555,6 +1549,7 @@
 				C2319FB21560F9AA005CCD4E /* HomeViewHeaderView.xib in Resources */,
 				C2319FB71561446B005CCD4E /* AtMeViewController.xib in Resources */,
 				C2319FBC156145DC005CCD4E /* AtMeViewCell.xib in Resources */,
+				C22CC1841563A3A7000DF1BD /* HelpViewController.xib in Resources */,
 				CECE2A061562B38E00E2A40A /* banner.png in Resources */,
 				CECE2A071562B38E00E2A40A /* content.png in Resources */,
 				CECE2A081562B38E00E2A40A /* deletebtn.png in Resources */,
@@ -1661,7 +1656,6 @@
 				CEBCD056154FF3A6000D41E1 /* DataManager.m in Sources */,
 				CEBCD05A15500CF8000D41E1 /* WeiboForwardCommentViewController.m in Sources */,
 				CE62B3621551790A0017AA88 /* SelectCityViewController.m in Sources */,
-				C216EDBE1551893500CA8CE8 /* MyInfoViewController.m in Sources */,
 				C216EDC215518B8C00CA8CE8 /* MyInfoTopViewCell.m in Sources */,
 				C215A75F15539B7C001BF379 /* FourGridViewCell.m in Sources */,
 				CE62B3671551842D0017AA88 /* SelectCategoryViewController.m in Sources */,
@@ -1674,7 +1668,6 @@
 				C20BD4B215591F72006BEEC8 /* FindMoreViewController.m in Sources */,
 				C20FAB0E1559539400895272 /* ContactItemCell.m in Sources */,
 				C24B1008155BDB1100918530 /* MineEditingViewController.m in Sources */,
-				C24B1011155BDE7B00918530 /* RadioButton.m in Sources */,
 				C213AB8B155C044100667556 /* GenderSelectCell.m in Sources */,
 				C213AB9A155C1BCD00667556 /* BeautifulDaRen.xcdatamodeld in Sources */,
 				C26798EC155E9F7C001E1D2E /* FindPasswordViewController.m in Sources */,
@@ -1683,6 +1676,7 @@
 				CEF1FE27155F655B005DFDC8 /* PhotoConfirmViewController.m in Sources */,
 				C2319FB61561446B005CCD4E /* AtMeViewController.m in Sources */,
 				C2319FBA156145BC005CCD4E /* AtMeViewCell.m in Sources */,
+				C22CC1831563A3A7000DF1BD /* HelpViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

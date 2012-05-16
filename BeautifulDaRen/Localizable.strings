@@ -12,12 +12,14 @@
 "tab_category" = "分类";
 "tab_more" = "更多";
 "enter" = "确认";
+"go_back" = "返回";
 
 "title_home" = "首页";
 "title_mine" = "我的";
 "title_camerashare" = "拍照/分享";
 "title_category" = "分类";
 "title_more" = "更多";
+"title_help" = "帮助";
 
 "account_user_account" = "用户账号";
 "account_register_email" = "注册邮箱";
@@ -26,11 +28,13 @@
 "password" = "密码";
 "type_password" = "输入密码";
 "type_password_again" = "确认密码";
+"find_password" = "找回密码";
 "login" = "登录";
 "register" = "注册";
 "to_select" = "选择";
 
 "not_user_to_register" = "还不是美丽达人用户？立即注册";
+"please_input_email_or_account_name" = "请输入注册邮箱/登录账户";
 "login_with_sina_weibo" = "微博登录";
 "login_with_tencent_qq" = "QQ登录";
 "notice_for_use" = "《美丽达人网络服务使用协议》";
@@ -59,3 +63,8 @@
 "city" = "城市";
 "brief" = "简介";
 "privacy" = "隐私";
+
+"sent_password_to_email" = "密码已发至邮箱，请查收";
+"prompt" = "提示";
+"ok_I_know" = "我知道了";
+"refresh" = "刷新";

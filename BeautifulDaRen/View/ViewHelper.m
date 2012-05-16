@@ -13,6 +13,18 @@
 
 @implementation ViewHelper
 
++(void)showSimpleMessage:(NSString*)message withTitle:(NSString*)title withButtonText:(NSString*)buttonText
+{
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:title
+                                                    message:message
+                                                   delegate:nil
+                                          cancelButtonTitle:buttonText
+                                          otherButtonTitles:nil];
+    
+    [alert show];
+    [alert release];
+}
+
 +(UITableViewCell*) getLoginWithExtenalViewCellInTableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell * cell = nil;
@@ -60,6 +72,33 @@
     UIImageView * imageView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:image]] autorelease];
     imageView.frame =rectSize;
     return [[[UIBarButtonItem alloc] initWithCustomView:imageView] autorelease];
+}
+
++ (UIBarButtonItem*)getRightBarItemOfTarget1:(id)target1 action1:(SEL)action1 title1:(NSString*)title1 target2:(id)target2 action2:(SEL)action2 title2:(NSString*)title2
+{
+    UIButton * button1 = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button1 setBackgroundImage:[UIImage imageNamed:@"顶部按钮50x29.png"] forState:UIControlStateNormal];
+    [button1 setTitle:title1 forState:UIControlStateNormal];
+    [button1 addTarget:target1 action:action1 forControlEvents:UIControlEventTouchUpInside];
+    
+    [button1.titleLabel setFont:[UIFont systemFontOfSize:14]];
+    
+    button1.frame = CGRectMake(0, 0, 50, 30);
+    
+    UIButton * button2 = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button2 setBackgroundImage:[UIImage imageNamed:@"顶部按钮50x29.png"] forState:UIControlStateNormal];
+    [button2 setTitle:title2 forState:UIControlStateNormal];
+    [button2 addTarget:target2 action:action2 forControlEvents:UIControlEventTouchUpInside];
+    
+    [button2.titleLabel setFont:[UIFont systemFontOfSize:14]];
+    
+    button2.frame = CGRectMake(60, 0, 50, 30);
+    
+    UIView * view = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 110, 30)] autorelease];
+    [view addSubview:button1];
+    [view addSubview:button2];
+    
+    return [[[UIBarButtonItem alloc] initWithCustomView:view] autorelease];
 }
 
 + (UIBarButtonItem*)getToolBarItemOfImageName:(NSString*)imageName target:(id)target action:(SEL)action

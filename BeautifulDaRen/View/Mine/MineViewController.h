@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ButtonPressDelegate.h"
 
-@interface MineViewController : UIViewController
+@interface MineViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, ButtonPressDelegate>
 
 @end
