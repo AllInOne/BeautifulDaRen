@@ -13,6 +13,18 @@
 
 @implementation ViewHelper
 
++(void)showSimpleMessage:(NSString*)message withTitle:(NSString*)title withButtonText:(NSString*)buttonText
+{
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:title
+                                                    message:message
+                                                   delegate:nil
+                                          cancelButtonTitle:buttonText
+                                          otherButtonTitles:nil];
+    
+    [alert show];
+    [alert release];
+}
+
 +(UITableViewCell*) getLoginWithExtenalViewCellInTableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell * cell = nil;

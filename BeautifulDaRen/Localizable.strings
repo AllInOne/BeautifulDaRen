@@ -26,11 +26,13 @@
 "password" = "密码";
 "type_password" = "输入密码";
 "type_password_again" = "确认密码";
+"find_password" = "找回密码";
 "login" = "登录";
 "register" = "注册";
 "to_select" = "选择";
 
 "not_user_to_register" = "还不是美丽达人用户？立即注册";
+"please_input_email_or_account_name" = "请输入注册邮箱/登录账户";
 "login_with_sina_weibo" = "微博登录";
 "login_with_tencent_qq" = "QQ登录";
 "notice_for_use" = "《美丽达人网络服务使用协议》";
@@ -59,3 +61,7 @@
 "city" = "城市";
 "brief" = "简介";
 "privacy" = "隐私";
+
+"sent_password_to_email" = "密码已发至邮箱，请查收";
+"prompt" = "提示";
+"ok_I_know" = "我知道了";
