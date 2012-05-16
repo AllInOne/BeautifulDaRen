@@ -15,6 +15,8 @@
 #import "DataManager.h"
 #import "AtMeViewController.h"
 #import "ViewHelper.h"
+#import "PrivateLetterViewController.h"
+
 @interface MineViewController()
 
 @property (retain, nonatomic) IBOutlet UIButton * followButton;
@@ -279,8 +281,8 @@
             }
             case 1:
             {
-                // TODO
-                NSLog(@"To handle press private letter");
+                PrivateLetterViewController * privateLetterViewController = [[[PrivateLetterViewController alloc] initWithNibName:@"PrivateLetterViewController" bundle:nil] autorelease];
+                [self.navigationController pushViewController:privateLetterViewController animated:YES];
                 break;
             }
             case 2:
