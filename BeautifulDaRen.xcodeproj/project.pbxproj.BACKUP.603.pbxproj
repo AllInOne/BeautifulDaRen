@@ -15,7 +15,9 @@
 		C20FAB0E1559539400895272 /* ContactItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C20FAB0D1559539400895272 /* ContactItemCell.m */; };
 		C20FAB10155953A600895272 /* ContactItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C20FAB0F155953A600895272 /* ContactItemCell.xib */; };
 		C2139A6A1564087600C3922D /* PrivateLetterViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C2139A691564087600C3922D /* PrivateLetterViewCell.m */; };
+		C2139A6C156408B400C3922D /* PrivateLetterViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2139A6B156408B400C3922D /* PrivateLetterViewCell.xib */; };
 		C2139A7515640E2900C3922D /* PrivateLetterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2139A7315640E2900C3922D /* PrivateLetterViewController.m */; };
+		C2139A7615640E2900C3922D /* PrivateLetterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2139A7415640E2900C3922D /* PrivateLetterViewController.xib */; };
 		C213AB8B155C044100667556 /* GenderSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C213AB8A155C044100667556 /* GenderSelectCell.m */; };
 		C213AB8D155C048400667556 /* GenderSelectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C213AB8C155C048400667556 /* GenderSelectCell.xib */; };
 		C213AB90155C053600667556 /* RadioButton-Selected.png in Resources */ = {isa = PBXBuildFile; fileRef = C213AB8E155C053600667556 /* RadioButton-Selected.png */; };
@@ -1608,6 +1610,7 @@
 				CECE2A141562B38E00E2A40A /* toolbar_forward_icon.png in Resources */,
 				CECE2A151562B38E00E2A40A /* toolbar_refresh_icon.png in Resources */,
 				CECE2A161562B38E00E2A40A /* toolbar_request_icon.png in Resources */,
+<<<<<<< HEAD
 				CE0DEFC2156527FB00B2C9DD /* banner@2x.png in Resources */,
 				CE0DEFC3156527FB00B2C9DD /* content@2x.png in Resources */,
 				CE0DEFC4156527FB00B2C9DD /* logo@2x.png in Resources */,
@@ -1628,6 +1631,16 @@
 				CE0DEFD3156527FB00B2C9DD /* toolbar_refresh_icon@2x.png in Resources */,
 				CE0DEFD4156527FB00B2C9DD /* toolbar_refresh@2x.png in Resources */,
 				CE0DEFD5156527FB00B2C9DD /* toolbar_request_icon@2x.png in Resources */,
+=======
+				CEE072C41564013A0016E388 /* toolbar_buy_icon@2x.png in Resources */,
+				CEE072C51564013A0016E388 /* toolbar_comment_icon@2x.png in Resources */,
+				CEE072C61564013A0016E388 /* toolbar_favourate@2x.png in Resources */,
+				CEE072C71564013A0016E388 /* toolbar_forward_icon@2x.png in Resources */,
+				CEE072C81564013A0016E388 /* toolbar_refresh@2x.png in Resources */,
+				CEE072C91564013A0016E388 /* toolbar_request_icon@2x.png in Resources */,
+				C2139A6C156408B400C3922D /* PrivateLetterViewCell.xib in Resources */,
+				C2139A7615640E2900C3922D /* PrivateLetterViewController.xib in Resources */,
+>>>>>>> 23d0f3b6cbc908156f3c75693aa7d3d447d8a156
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
