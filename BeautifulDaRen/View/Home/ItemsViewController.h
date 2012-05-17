@@ -1,15 +1,7 @@
-//
-//  ItemsViewController.h
-//  BeautifulDaRen
-//
-//  Created by gang liu on 5/1/12.
-//  Copyright (c) 2012 myriad. All rights reserved.
-//
-
 #import <UIKit/UIKit.h>
-#import "GridCellViewDelegate.h"
+#import "WaterFlowView.h"
 
-@interface ItemsViewController : UIViewController <GridCellViewDelegate, UIScrollViewDelegate>
+@interface ItemsViewController : UIViewController <WaterFlowViewDelegate, WaterFlowViewDatasource, UIScrollViewDelegate>
 
-@property (nonatomic, retain) IBOutlet UIScrollView * scrollView;
+@property (nonatomic, retain) IBOutlet WaterFlowView * waterFlowView;
 @end
