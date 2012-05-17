@@ -57,7 +57,7 @@
 + (UIBarButtonItem*)getBarItemOfTarget:(id)target action:(SEL)action title:(NSString*)title
 {
     UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setBackgroundImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+    [button setBackgroundImage:[UIImage imageNamed:@"nav_button"] forState:UIControlStateNormal];
     [button setTitle:title forState:UIControlStateNormal];
     [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     
@@ -77,7 +77,7 @@
 + (UIBarButtonItem*)getRightBarItemOfTarget1:(id)target1 action1:(SEL)action1 title1:(NSString*)title1 target2:(id)target2 action2:(SEL)action2 title2:(NSString*)title2
 {
     UIButton * button1 = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button1 setBackgroundImage:[UIImage imageNamed:@"toolbar_button"] forState:UIControlStateNormal];
+    [button1 setBackgroundImage:[UIImage imageNamed:@"nav_button"] forState:UIControlStateNormal];
     [button1 setTitle:title1 forState:UIControlStateNormal];
     [button1 addTarget:target1 action:action1 forControlEvents:UIControlEventTouchUpInside];
     
@@ -86,7 +86,7 @@
     button1.frame = CGRectMake(0, 0, 50, 30);
     
     UIButton * button2 = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button2 setBackgroundImage:[UIImage imageNamed:@"toolbar_button"] forState:UIControlStateNormal];
+    [button2 setBackgroundImage:[UIImage imageNamed:@"nav_button"] forState:UIControlStateNormal];
     [button2 setTitle:title2 forState:UIControlStateNormal];
     [button2 addTarget:target2 action:action2 forControlEvents:UIControlEventTouchUpInside];
     

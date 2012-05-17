@@ -164,6 +164,7 @@
 		CE0DEFD3156527FB00B2C9DD /* toolbar_refresh_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0DEFBF156527FB00B2C9DD /* toolbar_refresh_icon@2x.png */; };
 		CE0DEFD4156527FB00B2C9DD /* toolbar_refresh@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0DEFC0156527FB00B2C9DD /* toolbar_refresh@2x.png */; };
 		CE0DEFD5156527FB00B2C9DD /* toolbar_request_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0DEFC1156527FB00B2C9DD /* toolbar_request_icon@2x.png */; };
+		CE0DF001156529D700B2C9DD /* nav_button.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0DF000156529D700B2C9DD /* nav_button.png */; };
 		CE38B7EE15483CB10080DD99 /* QZoneSDKManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE38B7ED15483CB10080DD99 /* QZoneSDKManager.m */; };
 		CE38B987154990E60080DD99 /* cammer_button_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CE38B984154990E60080DD99 /* cammer_button_bg.png */; };
 		CE38B988154990E60080DD99 /* cammer_button_disable_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CE38B985154990E60080DD99 /* cammer_button_disable_bg.png */; };
@@ -528,6 +529,7 @@
 		CE0DEFBF156527FB00B2C9DD /* toolbar_refresh_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toolbar_refresh_icon@2x.png"; sourceTree = "<group>"; };
 		CE0DEFC0156527FB00B2C9DD /* toolbar_refresh@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toolbar_refresh@2x.png"; sourceTree = "<group>"; };
 		CE0DEFC1156527FB00B2C9DD /* toolbar_request_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toolbar_request_icon@2x.png"; sourceTree = "<group>"; };
+		CE0DF000156529D700B2C9DD /* nav_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav_button.png; sourceTree = "<group>"; };
 		CE38B7EC15483CB10080DD99 /* QZoneSDKManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QZoneSDKManager.h; path = Tencent/QZoneSDKManager.h; sourceTree = "<group>"; };
 		CE38B7ED15483CB10080DD99 /* QZoneSDKManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QZoneSDKManager.m; path = Tencent/QZoneSDKManager.m; sourceTree = "<group>"; };
 		CE38B984154990E60080DD99 /* cammer_button_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cammer_button_bg.png; sourceTree = "<group>"; };
@@ -1290,6 +1292,7 @@
 		CECE29F41562B38E00E2A40A /* 320*480 */ = {
 			isa = PBXGroup;
 			children = (
+				CE0DF000156529D700B2C9DD /* nav_button.png */,
 				CECE29F51562B38E00E2A40A /* banner.png */,
 				CECE29F61562B38E00E2A40A /* content.png */,
 				CECE29F71562B38E00E2A40A /* deletebtn.png */,
@@ -1628,6 +1631,7 @@
 				CE0DEFD3156527FB00B2C9DD /* toolbar_refresh_icon@2x.png in Resources */,
 				CE0DEFD4156527FB00B2C9DD /* toolbar_refresh@2x.png in Resources */,
 				CE0DEFD5156527FB00B2C9DD /* toolbar_request_icon@2x.png in Resources */,
+				CE0DF001156529D700B2C9DD /* nav_button.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
