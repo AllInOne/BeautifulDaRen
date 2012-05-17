@@ -24,10 +24,20 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         [self.navigationItem setTitle:NSLocalizedString(@"@me", @"@me")];
-        [self.navigationItem setLeftBarButtonItem:[ViewHelper getBarItemOfTarget:self action:nil title:@"XXX"]];
-        [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:nil title:@"图片模式"]];
+        [self.navigationItem setLeftBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
+        [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClicked) title:NSLocalizedString(@"refresh", @"refresh")]];
     }
     return self;
+}
+
+- (void) onBackButtonClicked
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void) onRefreshButtonClicked
+{
+    [ViewHelper showSimpleMessage:@"refresh button click" withTitle:nil withButtonText:@"ok"];
 }
 
 - (void)didReceiveMemoryWarning

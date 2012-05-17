@@ -14,6 +14,10 @@
 		C20BD4B315591F72006BEEC8 /* FindMoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C20BD4B115591F71006BEEC8 /* FindMoreViewController.xib */; };
 		C20FAB0E1559539400895272 /* ContactItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C20FAB0D1559539400895272 /* ContactItemCell.m */; };
 		C20FAB10155953A600895272 /* ContactItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C20FAB0F155953A600895272 /* ContactItemCell.xib */; };
+		C2139A6A1564087600C3922D /* PrivateLetterViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C2139A691564087600C3922D /* PrivateLetterViewCell.m */; };
+		C2139A6C156408B400C3922D /* PrivateLetterViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2139A6B156408B400C3922D /* PrivateLetterViewCell.xib */; };
+		C2139A7515640E2900C3922D /* PrivateLetterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2139A7315640E2900C3922D /* PrivateLetterViewController.m */; };
+		C2139A7615640E2900C3922D /* PrivateLetterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2139A7415640E2900C3922D /* PrivateLetterViewController.xib */; };
 		C213AB8B155C044100667556 /* GenderSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C213AB8A155C044100667556 /* GenderSelectCell.m */; };
 		C213AB8D155C048400667556 /* GenderSelectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C213AB8C155C048400667556 /* GenderSelectCell.xib */; };
 		C213AB90155C053600667556 /* RadioButton-Selected.png in Resources */ = {isa = PBXBuildFile; fileRef = C213AB8E155C053600667556 /* RadioButton-Selected.png */; };
@@ -291,6 +295,12 @@
 		C20FAB0C1559539400895272 /* ContactItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactItemCell.h; sourceTree = "<group>"; };
 		C20FAB0D1559539400895272 /* ContactItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactItemCell.m; sourceTree = "<group>"; };
 		C20FAB0F155953A600895272 /* ContactItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactItemCell.xib; sourceTree = "<group>"; };
+		C2139A681564087600C3922D /* PrivateLetterViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivateLetterViewCell.h; sourceTree = "<group>"; };
+		C2139A691564087600C3922D /* PrivateLetterViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivateLetterViewCell.m; sourceTree = "<group>"; };
+		C2139A6B156408B400C3922D /* PrivateLetterViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrivateLetterViewCell.xib; sourceTree = "<group>"; };
+		C2139A7215640E2900C3922D /* PrivateLetterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivateLetterViewController.h; sourceTree = "<group>"; };
+		C2139A7315640E2900C3922D /* PrivateLetterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivateLetterViewController.m; sourceTree = "<group>"; };
+		C2139A7415640E2900C3922D /* PrivateLetterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrivateLetterViewController.xib; sourceTree = "<group>"; };
 		C213AB89155C044100667556 /* GenderSelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenderSelectCell.h; sourceTree = "<group>"; };
 		C213AB8A155C044100667556 /* GenderSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenderSelectCell.m; sourceTree = "<group>"; };
 		C213AB8C155C048400667556 /* GenderSelectCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GenderSelectCell.xib; sourceTree = "<group>"; };
@@ -671,6 +681,9 @@
 				C2319FB8156145BC005CCD4E /* AtMeViewCell.h */,
 				C2319FB9156145BC005CCD4E /* AtMeViewCell.m */,
 				C2319FBB156145DC005CCD4E /* AtMeViewCell.xib */,
+				C2139A681564087600C3922D /* PrivateLetterViewCell.h */,
+				C2139A691564087600C3922D /* PrivateLetterViewCell.m */,
+				C2139A6B156408B400C3922D /* PrivateLetterViewCell.xib */,
 			);
 			name = SubView;
 			sourceTree = "<group>";
@@ -1253,6 +1266,9 @@
 				C2319FB31561446A005CCD4E /* AtMeViewController.h */,
 				C2319FB41561446A005CCD4E /* AtMeViewController.m */,
 				C2319FB51561446B005CCD4E /* AtMeViewController.xib */,
+				C2139A7215640E2900C3922D /* PrivateLetterViewController.h */,
+				C2139A7315640E2900C3922D /* PrivateLetterViewController.m */,
+				C2139A7415640E2900C3922D /* PrivateLetterViewController.xib */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -1713,6 +1729,8 @@
 				C2319FB61561446B005CCD4E /* AtMeViewController.m in Sources */,
 				C2319FBA156145BC005CCD4E /* AtMeViewCell.m in Sources */,
 				C22CC1831563A3A7000DF1BD /* HelpViewController.m in Sources */,
+				C2139A6A1564087600C3922D /* PrivateLetterViewCell.m in Sources */,
+				C2139A7515640E2900C3922D /* PrivateLetterViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
