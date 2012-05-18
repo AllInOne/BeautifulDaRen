@@ -81,6 +81,9 @@
 		C297D83E154442C20080294C /* ForgetPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C297D83A154442C20080294C /* ForgetPasswordViewController.xib */; };
 		C29F6663154310B300292031 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		C29F6664154310B300292031 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		C2A810C31566230A008FF2B7 /* PrivateLetterViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2A810C21566230A008FF2B7 /* PrivateLetterViewCell.xib */; };
+		C2A810DD1566611E008FF2B7 /* PrivateLetter.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A810DC1566611E008FF2B7 /* PrivateLetter.m */; };
+		C2A810E01566611F008FF2B7 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A810DF1566611F008FF2B7 /* Comment.m */; };
 		CE029ABF153E682100886227 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE029ABE153E682100886227 /* UIKit.framework */; };
 		CE029AC1153E682100886227 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE029AC0153E682100886227 /* Foundation.framework */; };
 		CE029AC3153E682100886227 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE029AC2153E682100886227 /* CoreGraphics.framework */; };
@@ -256,7 +259,6 @@
 		CEE30723154F8533004D2E96 /* FriendListCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEE30721154F8532004D2E96 /* FriendListCellView.xib */; };
 		CEEF7B20155549B5001ABCEC /* ForwardCommentListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEF7B1E155549B5001ABCEC /* ForwardCommentListViewController.m */; };
 		CEEF7B21155549B5001ABCEC /* ForwardCommentListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEF7B1F155549B5001ABCEC /* ForwardCommentListViewController.xib */; };
-		CEEF7B34155557BC001ABCEC /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEF7B33155557BC001ABCEC /* Comment.m */; };
 		CEEF7B381555599A001ABCEC /* ForwardCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEF7B361555599A001ABCEC /* ForwardCommentTableViewCell.m */; };
 		CEEF7B6415556430001ABCEC /* ForwardCommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEF7B6315556430001ABCEC /* ForwardCommentTableViewCell.xib */; };
 		CEF1FE27155F655B005DFDC8 /* PhotoConfirmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF1FE25155F655B005DFDC8 /* PhotoConfirmViewController.m */; };
@@ -303,7 +305,6 @@
 		C20FAB0F155953A600895272 /* ContactItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactItemCell.xib; sourceTree = "<group>"; };
 		C2139A681564087600C3922D /* PrivateLetterViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivateLetterViewCell.h; sourceTree = "<group>"; };
 		C2139A691564087600C3922D /* PrivateLetterViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivateLetterViewCell.m; sourceTree = "<group>"; };
-		C2139A6B156408B400C3922D /* PrivateLetterViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrivateLetterViewCell.xib; sourceTree = "<group>"; };
 		C2139A7215640E2900C3922D /* PrivateLetterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivateLetterViewController.h; sourceTree = "<group>"; };
 		C2139A7315640E2900C3922D /* PrivateLetterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivateLetterViewController.m; sourceTree = "<group>"; };
 		C2139A7415640E2900C3922D /* PrivateLetterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrivateLetterViewController.xib; sourceTree = "<group>"; };
@@ -398,6 +399,11 @@
 		C297D838154442C20080294C /* ForgetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetPasswordViewController.h; sourceTree = "<group>"; };
 		C297D839154442C20080294C /* ForgetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPasswordViewController.m; sourceTree = "<group>"; };
 		C297D83A154442C20080294C /* ForgetPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForgetPasswordViewController.xib; sourceTree = "<group>"; };
+		C2A810C21566230A008FF2B7 /* PrivateLetterViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrivateLetterViewCell.xib; sourceTree = "<group>"; };
+		C2A810DB1566611E008FF2B7 /* PrivateLetter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivateLetter.h; sourceTree = "<group>"; };
+		C2A810DC1566611E008FF2B7 /* PrivateLetter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivateLetter.m; sourceTree = "<group>"; };
+		C2A810DE1566611F008FF2B7 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
+		C2A810DF1566611F008FF2B7 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
 		CE029ABA153E682100886227 /* BeautifulDaRen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeautifulDaRen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE029ABE153E682100886227 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CE029AC0153E682100886227 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -648,8 +654,6 @@
 		CEEF7B1D155549B5001ABCEC /* ForwardCommentListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForwardCommentListViewController.h; sourceTree = "<group>"; };
 		CEEF7B1E155549B5001ABCEC /* ForwardCommentListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForwardCommentListViewController.m; sourceTree = "<group>"; };
 		CEEF7B1F155549B5001ABCEC /* ForwardCommentListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForwardCommentListViewController.xib; sourceTree = "<group>"; };
-		CEEF7B32155557BC001ABCEC /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
-		CEEF7B33155557BC001ABCEC /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
 		CEEF7B351555599A001ABCEC /* ForwardCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForwardCommentTableViewCell.h; sourceTree = "<group>"; };
 		CEEF7B361555599A001ABCEC /* ForwardCommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForwardCommentTableViewCell.m; sourceTree = "<group>"; };
 		CEEF7B6315556430001ABCEC /* ForwardCommentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForwardCommentTableViewCell.xib; sourceTree = "<group>"; };
@@ -692,7 +696,7 @@
 				C2319FBB156145DC005CCD4E /* AtMeViewCell.xib */,
 				C2139A681564087600C3922D /* PrivateLetterViewCell.h */,
 				C2139A691564087600C3922D /* PrivateLetterViewCell.m */,
-				C2139A6B156408B400C3922D /* PrivateLetterViewCell.xib */,
+				C2A810C21566230A008FF2B7 /* PrivateLetterViewCell.xib */,
 			);
 			name = SubView;
 			sourceTree = "<group>";
@@ -817,12 +821,14 @@
 		CE029AF3153E68D800886227 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C274DCDA155EBBBD0098EE22 /* DataConstants.h */,
 				C213AB98155C1BCD00667556 /* BeautifulDaRen.xcdatamodeld */,
+				C2A810DE1566611F008FF2B7 /* Comment.h */,
+				C2A810DF1566611F008FF2B7 /* Comment.m */,
+				C274DCDA155EBBBD0098EE22 /* DataConstants.h */,
+				C2A810DB1566611E008FF2B7 /* PrivateLetter.h */,
+				C2A810DC1566611E008FF2B7 /* PrivateLetter.m */,
 				C274DCBC155EB7BA0098EE22 /* UserIdentity.h */,
 				C274DCBD155EB7BA0098EE22 /* UserIdentity.m */,
-				CEEF7B32155557BC001ABCEC /* Comment.h */,
-				CEEF7B33155557BC001ABCEC /* Comment.m */,
 				C215A79F1553EABF001BF379 /* WaresItem.h */,
 				C215A7A01553EABF001BF379 /* WaresItem.m */,
 			);
@@ -1656,6 +1662,7 @@
 				CE0DEFD4156527FB00B2C9DD /* toolbar_refresh@2x.png in Resources */,
 				CE0DEFD5156527FB00B2C9DD /* toolbar_request_icon@2x.png in Resources */,
 				CE0DF001156529D700B2C9DD /* nav_button.png in Resources */,
+				C2A810C31566230A008FF2B7 /* PrivateLetterViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1739,7 +1746,6 @@
 				CE62B3671551842D0017AA88 /* SelectCategoryViewController.m in Sources */,
 				C215A7A21553EABF001BF379 /* WaresItem.m in Sources */,
 				CEEF7B20155549B5001ABCEC /* ForwardCommentListViewController.m in Sources */,
-				CEEF7B34155557BC001ABCEC /* Comment.m in Sources */,
 				CEEF7B381555599A001ABCEC /* ForwardCommentTableViewCell.m in Sources */,
 				CEF432431556AB5D004D47BA /* TakePhotoViewController.m in Sources */,
 				CEC29FE51556C56600052A14 /* MyShowViewController.m in Sources */,
@@ -1757,6 +1763,8 @@
 				C2139A6A1564087600C3922D /* PrivateLetterViewCell.m in Sources */,
 				C2139A7515640E2900C3922D /* PrivateLetterViewController.m in Sources */,
 				C2519F9B1564E36E0040EBC5 /* WaterFlowView.m in Sources */,
+				C2A810DD1566611E008FF2B7 /* PrivateLetter.m in Sources */,
+				C2A810E01566611F008FF2B7 /* Comment.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 
 #import "RootTabViewController.h"
+#import "DataConstants.h"
 
 @implementation AppDelegate
 
@@ -20,6 +21,12 @@
     [_window release];
     [_rootViewController release];
     [super dealloc];
+}
+
+// TODO
+-(void) loadFakeData
+{
+    [[NSUserDefaults standardUserDefaults] setValue:@"LOCAL_IDENTITY_001" forKey:BEAUTIFUL_DAREN_USER_IDENTITY_ID];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -36,6 +43,8 @@
     
     [self.window addSubview:_rootViewController.view];
     [self.window makeKeyAndVisible];
+    
+    [self loadFakeData];
     return YES;
 }
 

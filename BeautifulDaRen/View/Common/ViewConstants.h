@@ -40,6 +40,7 @@
 #define NAVIGATION_BAR_HEIGHT       (44.0)
 #define TAB_BAR_HEIGHT              (50.0)
 #define STATUS_BAR_HEIGHT           (20.0)
+#define TEXT_VIEW_MARGE_HEIGHT      (20.0)
 // The height of the screen user could use. (Whole screen height minus navigation bar and tab bar)
 #define USER_WINDOW_HEIGHT          (SCREEN_HEIGHT - NAVIGATION_BAR_HEIGHT - TAB_BAR_HEIGHT - STATUS_BAR_HEIGHT)
 

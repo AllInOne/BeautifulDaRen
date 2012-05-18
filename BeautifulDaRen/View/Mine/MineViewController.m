@@ -56,7 +56,7 @@
 - (void) loadFakeData
 {
     NSDictionary * userIdentityDict = [NSDictionary dictionaryWithObjectsAndKeys:
-                                       @"userId1001", USERIDENTITY_UNIQUE_ID,
+                                       @"LOCAL_IDENTITY_001", USERIDENTITY_UNIQUE_ID,
                                        @"user name", USERIDENTITY_DISPLAY_NAME,
                                        @"12", USERIDENTITY_LEVEL,
                                        @"成都", USERIDENTITY_LOCAL_CITY,
@@ -70,7 +70,7 @@
                                        @"I am super.", USERIDENTITY_PERSONAL_BRIEF,
                                        @"成都，天府软件园", USERIDENTITY_DETAILED_ADDRESS,
                                        nil];
-    [[DataManager sharedManager] saveLocalIdentityWithDictionary:userIdentityDict FinishBlock:^(NSError *error) {
+    [[DataManager sharedManager] saveLocalIdentityWithDictionary:userIdentityDict finishBlock:^(NSError *error) {
         NSLog(@"Save local identity successful");
     }];
 }
@@ -123,9 +123,7 @@
             cell = [[[NSBundle mainBundle] loadNibNamed:myInfoTopViewIdentifier owner:self options:nil] objectAtIndex:0];
         }
         
-        UserIdentity * userIdentity = [[DataManager sharedManager] getLocalIdentityWithFinishBlock:^(NSError *error) {
-            NSLog(@"Get local identity successful");
-        }];
+        UserIdentity * userIdentity = [[DataManager sharedManager] getCurrentLocalIdentityInContext:nil];
         
         ((MyInfoTopViewCell*)cell).avatarImageView.image = [UIImage imageNamed:@"item_fake"];
         ((MyInfoTopViewCell*)cell).levelLabel.text = [NSString stringWithFormat:@"LV%d", [userIdentity.level intValue]];
@@ -142,9 +140,7 @@
         if(!cell) {
             cell = [[[NSBundle mainBundle] loadNibNamed:fourGridViewIndentifier owner:self options:nil] objectAtIndex:0];
         }
-        UserIdentity * userIdentity = [[DataManager sharedManager] getLocalIdentityWithFinishBlock:^(NSError *error) {
-            NSLog(@"Get local identity successful");
-        }];
+        UserIdentity * userIdentity = [[DataManager sharedManager] getCurrentLocalIdentityInContext:nil];
         
         ((FourGridViewCell*)cell).delegate = self;
         ((FourGridViewCell*)cell).leftTopLabelName.text = NSLocalizedString(@"follow", @"");

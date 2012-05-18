@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="878" systemVersion="11D50b" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Comment" representedClassName="Comment" syncable="YES">
+        <attribute name="detail" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="personId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="personName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="timeStamp" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="uniqueId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="weiBoId" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="userIdentity" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="UserIdentity" inverseName="comments" inverseEntity="UserIdentity" syncable="YES"/>
+    </entity>
+    <entity name="PrivateLetter" representedClassName="PrivateLetter" syncable="YES">
+        <attribute name="detail" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="personId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="personName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="timeStamp" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="Integer 32" syncable="YES"/>
+        <attribute name="uniqueId" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="userIdentity" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="UserIdentity" inverseName="privateLetters" inverseEntity="UserIdentity" syncable="YES"/>
+    </entity>
     <entity name="UserIdentity" representedClassName="UserIdentity" syncable="YES">
         <attribute name="blackListCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="buyedCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -14,8 +32,12 @@
         <attribute name="personalBrief" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="topicCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="uniqueId" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="comments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Comment" inverseName="userIdentity" inverseEntity="Comment" syncable="YES"/>
+        <relationship name="privateLetters" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PrivateLetter" inverseName="userIdentity" inverseEntity="PrivateLetter" syncable="YES"/>
     </entity>
     <elements>
-        <element name="UserIdentity" positionX="-63" positionY="-27" width="128" height="240"/>
+        <element name="Comment" positionX="-4086" positionY="-2925" width="128" height="150"/>
+        <element name="PrivateLetter" positionX="-4104" positionY="-2952" width="128" height="150"/>
+        <element name="UserIdentity" positionX="-63" positionY="-27" width="128" height="270"/>
     </elements>
 </model>
