@@ -16,12 +16,6 @@
 		C20FAB10155953A600895272 /* ContactItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C20FAB0F155953A600895272 /* ContactItemCell.xib */; };
 		C2139A6A1564087600C3922D /* PrivateLetterViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C2139A691564087600C3922D /* PrivateLetterViewCell.m */; };
 		C2139A7515640E2900C3922D /* PrivateLetterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2139A7315640E2900C3922D /* PrivateLetterViewController.m */; };
-		C213AB8B155C044100667556 /* GenderSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C213AB8A155C044100667556 /* GenderSelectCell.m */; };
-		C213AB8D155C048400667556 /* GenderSelectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C213AB8C155C048400667556 /* GenderSelectCell.xib */; };
-		C213AB90155C053600667556 /* RadioButton-Selected.png in Resources */ = {isa = PBXBuildFile; fileRef = C213AB8E155C053600667556 /* RadioButton-Selected.png */; };
-		C213AB91155C053600667556 /* RadioButton-Unselected.png in Resources */ = {isa = PBXBuildFile; fileRef = C213AB8F155C053600667556 /* RadioButton-Unselected.png */; };
-		C213AB94155C05BE00667556 /* female.png in Resources */ = {isa = PBXBuildFile; fileRef = C213AB92155C05BE00667556 /* female.png */; };
-		C213AB95155C05BE00667556 /* male.png in Resources */ = {isa = PBXBuildFile; fileRef = C213AB93155C05BE00667556 /* male.png */; };
 		C213AB97155C11F900667556 /* next_flag.png in Resources */ = {isa = PBXBuildFile; fileRef = C213AB96155C11F900667556 /* next_flag.png */; };
 		C213AB9A155C1BCD00667556 /* BeautifulDaRen.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C213AB98155C1BCD00667556 /* BeautifulDaRen.xcdatamodeld */; };
 		C213AB9F155C1CD800667556 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C213AB9E155C1CD800667556 /* CoreData.framework */; };
@@ -298,13 +292,6 @@
 		C2139A7215640E2900C3922D /* PrivateLetterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivateLetterViewController.h; sourceTree = "<group>"; };
 		C2139A7315640E2900C3922D /* PrivateLetterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivateLetterViewController.m; sourceTree = "<group>"; };
 		C2139A7415640E2900C3922D /* PrivateLetterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrivateLetterViewController.xib; sourceTree = "<group>"; };
-		C213AB89155C044100667556 /* GenderSelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenderSelectCell.h; sourceTree = "<group>"; };
-		C213AB8A155C044100667556 /* GenderSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenderSelectCell.m; sourceTree = "<group>"; };
-		C213AB8C155C048400667556 /* GenderSelectCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GenderSelectCell.xib; sourceTree = "<group>"; };
-		C213AB8E155C053600667556 /* RadioButton-Selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RadioButton-Selected.png"; sourceTree = "<group>"; };
-		C213AB8F155C053600667556 /* RadioButton-Unselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RadioButton-Unselected.png"; sourceTree = "<group>"; };
-		C213AB92155C05BE00667556 /* female.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = female.png; sourceTree = "<group>"; };
-		C213AB93155C05BE00667556 /* male.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = male.png; sourceTree = "<group>"; };
 		C213AB96155C11F900667556 /* next_flag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = next_flag.png; sourceTree = "<group>"; };
 		C213AB99155C1BCD00667556 /* BeautifulDaRen.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BeautifulDaRen.xcdatamodel; sourceTree = "<group>"; };
 		C213AB9E155C1CD800667556 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -670,9 +657,6 @@
 				C216EDC015518B8C00CA8CE8 /* MyInfoTopViewCell.h */,
 				C216EDC115518B8C00CA8CE8 /* MyInfoTopViewCell.m */,
 				C216EDC315518BD300CA8CE8 /* MyInfoTopViewCell.xib */,
-				C213AB89155C044100667556 /* GenderSelectCell.h */,
-				C213AB8A155C044100667556 /* GenderSelectCell.m */,
-				C213AB8C155C048400667556 /* GenderSelectCell.xib */,
 				C2319FB8156145BC005CCD4E /* AtMeViewCell.h */,
 				C2319FB9156145BC005CCD4E /* AtMeViewCell.m */,
 				C2319FBB156145DC005CCD4E /* AtMeViewCell.xib */,
@@ -1141,10 +1125,28 @@
 				C2319FAE1560EF7A005CCD4E /* sina_weibo_icon.png */,
 				C26798EE155EA741001E1D2E /* buttonBackGround.png */,
 				C213AB96155C11F900667556 /* next_flag.png */,
+<<<<<<< HEAD
 				C213AB92155C05BE00667556 /* female.png */,
 				C213AB93155C05BE00667556 /* male.png */,
 				C213AB8E155C053600667556 /* RadioButton-Selected.png */,
 				C213AB8F155C053600667556 /* RadioButton-Unselected.png */,
+=======
+				CE62B334155172C00017AA88 /* 发现文字.png */,
+				CE62B335155172C00017AA88 /* 发现背景.png */,
+				CE62B336155172C00017AA88 /* 发现选中.png */,
+				CE62B338155172C00017AA88 /* 我的文字.png */,
+				CE62B339155172C00017AA88 /* 我的背景.png */,
+				CE62B33A155172C00017AA88 /* 我的选中.png */,
+				CE62B33B155172C00017AA88 /* 我秀文字.png */,
+				CE62B33C155172C00017AA88 /* 我秀背景.png */,
+				CE62B33D155172C00017AA88 /* 我秀选中.png */,
+				CE62B33E155172C00017AA88 /* 热门文字.png */,
+				CE62B33F155172C00017AA88 /* 热门背景.png */,
+				CE62B340155172C00017AA88 /* 热门选中.png */,
+				CE62B342155172C00017AA88 /* 首页文字.png */,
+				CE62B343155172C00017AA88 /* 首页背景.png */,
+				CE62B344155172C00017AA88 /* 首页选中.png */,
+>>>>>>> e8ea622bb4f664f5b2d3dabf02d99d8de5463e04
 				C28D6A9E15502ED9005E14CE /* fake image */,
 				CEBCD04D154FF0EE000D41E1 /* follow.png */,
 				CEE306FC154F7943004D2E96 /* camera.png */,
@@ -1556,11 +1558,6 @@
 				C20BD4B315591F72006BEEC8 /* FindMoreViewController.xib in Resources */,
 				C20FAB10155953A600895272 /* ContactItemCell.xib in Resources */,
 				C24B1009155BDB1100918530 /* MineEditingViewController.xib in Resources */,
-				C213AB8D155C048400667556 /* GenderSelectCell.xib in Resources */,
-				C213AB90155C053600667556 /* RadioButton-Selected.png in Resources */,
-				C213AB91155C053600667556 /* RadioButton-Unselected.png in Resources */,
-				C213AB94155C05BE00667556 /* female.png in Resources */,
-				C213AB95155C05BE00667556 /* male.png in Resources */,
 				C213AB97155C11F900667556 /* next_flag.png in Resources */,
 				C26798ED155E9F7C001E1D2E /* FindPasswordViewController.xib in Resources */,
 				C26798EF155EA741001E1D2E /* buttonBackGround.png in Resources */,
@@ -1711,7 +1708,6 @@
 				C20BD4B215591F72006BEEC8 /* FindMoreViewController.m in Sources */,
 				C20FAB0E1559539400895272 /* ContactItemCell.m in Sources */,
 				C24B1008155BDB1100918530 /* MineEditingViewController.m in Sources */,
-				C213AB8B155C044100667556 /* GenderSelectCell.m in Sources */,
 				C213AB9A155C1BCD00667556 /* BeautifulDaRen.xcdatamodeld in Sources */,
 				C26798EC155E9F7C001E1D2E /* FindPasswordViewController.m in Sources */,
 				C274DCBE155EB7BA0098EE22 /* UserIdentity.m in Sources */,

@@ -9,7 +9,6 @@
 #import "MineEditingViewController.h"
 #import "MyInfoTopViewCell.h"
 #import "ViewHelper.h"
-#import "GenderSelectCell.h"
 #import "ButtonViewCell.h"
 
 @interface MineEditingViewController()
@@ -112,7 +111,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString * infoTopViewIdentifier = @"MyInfoTopViewCell";
-    static NSString * genderSelectCellIdentifier = @"GenderSelectCell";
     static NSString * buttonViewCellIdentifier = @"ButtonViewCell";
     
     UITableViewCell * cell;
@@ -130,10 +128,11 @@
     }
     else if(section == 1)
     {
-        cell = [tableView dequeueReusableCellWithIdentifier:genderSelectCellIdentifier];
-        if (cell == nil) {
-            cell = [[[NSBundle mainBundle] loadNibNamed:genderSelectCellIdentifier owner:self options:nil] objectAtIndex:0];
-        }
+        // TODO 
+        cell = [[[UITableViewCell alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 40.0f)] autorelease];
+        UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(30, 0, 40, 40)];
+        label.text = @"性别";
+        [cell addSubview:label];
         cell.backgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
     }
     else if(section == 2)
