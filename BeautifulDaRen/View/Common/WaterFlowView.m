@@ -1,7 +1,7 @@
 
 #import "WaterflowView.h"
 
-#define LOADINGVIEW_HEIGHT 44
+#define LOADINGVIEW_HEIGHT 0
 #define REFRESHINGVIEW_HEIGHT 88
 #define MAX_PAGE 10
 
@@ -19,7 +19,7 @@
 
 - (void)initialize;
 - (void)reloadData;
-- (void)recycleCellIntoReusableQueue:(WaterFlowCell*)cell;
+//- (void)recycleCellIntoReusableQueue:(WaterFlowCell*)cell withIndex:(NSInteger)index;
 - (void)pageScroll;
 - (void)cellSelected:(NSNotification*)notification;
 
@@ -49,6 +49,13 @@
                                                  selector:@selector(cellSelected:)
                                                      name:@"CellSelected"
                                                    object:nil];
+        [self setAutoresizingMask:
+         UIViewAutoresizingFlexibleLeftMargin |
+         UIViewAutoresizingFlexibleWidth |
+         UIViewAutoresizingFlexibleRightMargin |
+         UIViewAutoresizingFlexibleTopMargin |
+         UIViewAutoresizingFlexibleHeight |
+         UIViewAutoresizingFlexibleBottomMargin];
         
         _currentPage = 1;
         [self initialize];
@@ -95,45 +102,45 @@
 
 #pragma mark-
 #pragma mark - manage and reuse cells
-- (id)dequeueReusableCellWithIdentifier:(NSString *)identifier
-{
-    if (!identifier || identifier == 0 ) return nil;
-    
-    NSArray *cellsWithIndentifier = [NSArray arrayWithArray:[self.reusableCells objectForKey:identifier]];
-    if (cellsWithIndentifier &&  cellsWithIndentifier.count > 0)
-    {
-        WaterFlowCell *cell = [cellsWithIndentifier lastObject];
-        [[cell retain] autorelease];
-        [[self.reusableCells objectForKey:identifier] removeLastObject];
-        return cell;
-    }
-    return nil;
-}
-
-- (void)recycleCellIntoReusableQueue:(WaterFlowCell *)cell
-{
-    if(!self.reusableCells)
-    {
-        self.reusableCells = [NSMutableDictionary dictionary];
-        
-        NSMutableArray *array = [NSMutableArray arrayWithObject:cell];
-        [self.reusableCells setObject:array forKey:cell.reuseIdentifier];
-    }
-    
-    else 
-    {
-        if (![self.reusableCells objectForKey:cell.reuseIdentifier])
-        {
-            NSMutableArray *array = [NSMutableArray arrayWithObject:cell];
-            [self.reusableCells setObject:array forKey:cell.reuseIdentifier];
-        }
-        else 
-        {
-            [[self.reusableCells objectForKey:cell.reuseIdentifier] addObject:cell];
-        }
-    }
-    
-}
+//- (id)dequeueReusableCellWithIdentifier:(NSString *)identifier withIndex:(NSInteger)index
+//{
+//    WaterFlowCell *cell = nil;
+//    if (!identifier || identifier == 0 ) return nil;
+//    NSLog(@"dequeueReusableCellWithIdentifier  index  %d", index);
+//    NSMutableDictionary * cellsWithIndentifier = [self.reusableCells objectForKey:identifier];
+//    if (cellsWithIndentifier &&  cellsWithIndentifier.count > 0)
+//    {
+//        cell = [cellsWithIndentifier objectForKey:[NSNumber numberWithInt:index]];
+//        [[cell retain] autorelease];
+//        [[self.reusableCells objectForKey:identifier] removeObjectForKey:[NSNumber numberWithInt:index]];
+//        return cell;
+//    }
+//    return cell;
+//}
+//
+//- (void)recycleCellIntoReusableQueue:(WaterFlowCell *)cell withIndex:(NSInteger)index
+//{
+//    if(!self.reusableCells)
+//    {
+//        self.reusableCells = [NSMutableDictionary dictionary];
+//        
+//        NSMutableDictionary * dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:cell, [NSNumber numberWithInt:index], nil];
+//        [self.reusableCells setObject:dictionary forKey:cell.reuseIdentifier];
+//    }
+//    
+//    else 
+//    {
+//        if (![self.reusableCells objectForKey:cell.reuseIdentifier])
+//        {
+//            NSMutableDictionary * dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:cell, [NSNumber numberWithInt:index], nil];
+//            [self.reusableCells setObject:dictionary forKey:cell.reuseIdentifier];
+//        }
+//        else 
+//        {
+//            [[self.reusableCells objectForKey:cell.reuseIdentifier] setObject:cell forKey:[NSNumber numberWithInt:index]];
+//        }
+//    }
+//}
 
 #pragma mark-
 #pragma mark- methods
@@ -197,9 +204,11 @@
     for (int i = 0; i < _numberOfColumns; i++)
     {
         NSMutableArray *array = [self.visibleCells objectAtIndex:i];
-        for (id cell in array)
+        WaterFlowCell * cell = nil;
+        for (NSInteger j = 0; j < [array count]; j ++)
         {
-            [self recycleCellIntoReusableQueue:(WaterFlowCell*)cell];
+            cell = [array objectAtIndex:j];
+//            [self recycleCellIntoReusableQueue:(WaterFlowCell*)cell withIndex:[[[self.cellIndex objectAtIndex:i] objectAtIndex:j] intValue]];
             [cell removeFromSuperview];
         }
     }
@@ -227,11 +236,7 @@
 					rowToDisplay ++;
 				}
 			}
-			
-#ifdef DEBUG
-			NSLog(@"row to display %d", rowToDisplay);
-#endif	
-            
+
 			float origin_y = 0;
 			float height = 0;
 			if(rowToDisplay == 0)  
@@ -285,13 +290,13 @@
             cell.frame = CGRectMake(origin_x,origin_y , width, height);
             [[self.visibleCells objectAtIndex:i] insertObject:cell atIndex:0];
             
-            [self insertSubview:cell atIndex:0];
+            [self addSubview:cell];
         }
         //2. remove cell above this basic cell if there's no margin between basic cell and top
         while (cell &&  ((cell.frame.origin.y + cell.frame.size.height  - self.contentOffset.y) <  0.0001)) 
 		{
 			[cell removeFromSuperview];
-			[self recycleCellIntoReusableQueue:cell];
+//			[self recycleCellIntoReusableQueue:cell withIndex:[[[self.cellIndex objectAtIndex:i] objectAtIndex:0] intValue]];
 			[[self.visibleCells objectAtIndex:i] removeObject:cell];
 			
 			if(((NSMutableArray*)[self.visibleCells objectAtIndex:i]).count > 0)
@@ -335,7 +340,7 @@
         while (cell &&  ((cell.frame.origin.y - self.frame.size.height - self.contentOffset.y) > 0.0001)) 
 		{
 			[cell removeFromSuperview];
-			[self recycleCellIntoReusableQueue:cell];
+//			[self recycleCellIntoReusableQueue:cell withIndex:[[[self.cellIndex objectAtIndex:i] objectAtIndex:[self.cellIndex count] -1 ] intValue]];
 			[[self.visibleCells objectAtIndex:i] removeObject:cell];
 			
 			if(((NSMutableArray*)[self.visibleCells objectAtIndex:i]).count > 0)
