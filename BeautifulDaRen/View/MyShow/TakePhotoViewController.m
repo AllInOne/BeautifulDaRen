@@ -8,21 +8,23 @@
 
 #import "TakePhotoViewController.h"
 #import "ViewConstants.h"
+#import "ViewHelper.h"
 #import "WeiboForwardCommentViewController.h"
 
 @interface TakePhotoViewController ()
 @property (nonatomic, retain)  TakePhotoViewController * galleryPhotoViewController;
 @property (nonatomic, assign)  UIImagePickerControllerSourceType currentSourceType; 
+
+- (void)setToolbar;
 @end
 
 @implementation TakePhotoViewController
 
 @synthesize delegate;
 @synthesize imagePickerController;
-@synthesize takePictureButton;
-@synthesize cancelButton;
 @synthesize galleryPhotoViewController = _galleryPhotoViewController;
 @synthesize currentSourceType = _currentSourceType;
+@synthesize toolbarView = _toolbarView;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -53,8 +55,7 @@
 - (void)viewDidUnload
 {
     self.imagePickerController = nil;
-    self.takePictureButton = nil;
-    self.cancelButton = nil;
+    self.toolbarView = nil;
     
     [super viewDidUnload];
 }
@@ -62,8 +63,7 @@
 - (void)dealloc
 {
     [self.imagePickerController release];
-    [self.takePictureButton release];
-    [self.cancelButton release];
+    [self.toolbarView release];
     
     [super dealloc];
 }
@@ -99,6 +99,42 @@
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
+- (void)onGalleryBartButtonPressed {
+    [self.delegate didChangeToGalleryMode];
+    self.imagePickerController.cameraOverlayView = nil;
+}
+
+- (void)onCameraBarButtonPressed {
+    [self.imagePickerController takePicture]; 
+}
+
+- (void)onAvatarBartButtonPressed {
+    
+}
+
+- (void)setToolbar
+{
+    UIBarButtonItem *flexible = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    
+    UIBarButtonItem *galleryBarButton = [ViewHelper getBarItemOfTarget:self action:@selector(onGalleryBartButtonPressed) title:@"相册"];
+    
+    UIBarButtonItem *cameraBarButton = [ViewHelper getBarItemOfTarget:self action:@selector(onCameraBarButtonPressed) title:@"拍照"];
+    
+    UIBarButtonItem *avatarBarButton = [ViewHelper getBarItemOfTarget:self action:@selector(onAvatarBartButtonPressed) title:@"头像"];
+
+    
+    NSArray *barItems = [[NSArray alloc]initWithObjects:galleryBarButton, 
+                         flexible,
+                         cameraBarButton,
+                         flexible,
+                         avatarBarButton,
+                         nil];
+    
+    self.toolbarView.items= barItems;
+    
+    [flexible release];
+}
+
 - (void)setupImagePicker:(UIImagePickerControllerSourceType)sourceType
 {
     [self.imagePickerController setSourceType:sourceType];
@@ -117,38 +153,21 @@
         
         if ([[self.imagePickerController.cameraOverlayView subviews] count] == 0)
         {
-
-            [self.imagePickerController.cameraOverlayView addSubview:self.view];
+            self.toolbarView.frame = newFrame;
+            UIImageView * tabBarBg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tabbar_background"]];
+            tabBarBg.frame = CGRectMake(0, 0, 320, 50);
+            tabBarBg.contentMode = UIViewContentModeScaleToFill;
+            if (SYSTEM_VERSION_LESS_THAN(@"5.0")) {
+                [self.toolbarView  insertSubview:tabBarBg atIndex:0];
+            }
+            else
+            {
+                [self.toolbarView  insertSubview:tabBarBg atIndex:1];            
+            }
+            [self setToolbar];
+            [self.imagePickerController.cameraOverlayView addSubview:self.toolbarView];
         }
     }
-}
-
-- (IBAction)takePhoto:(id)sender
-{
-    [self.imagePickerController takePicture];
-}
-
-- (IBAction)done:(id)sender
-{
-    // dismiss the camera
-//    [self.delegate didFinishWithCamera];
-    [self.delegate didChangeToGalleryMode];
-    self.imagePickerController.cameraOverlayView = nil;
-    
-//    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
-//    {
-//        self.galleryPhotoViewController = nil;
-//        self.galleryPhotoViewController = [[[TakePhotoViewController alloc] initWithNibName:nil bundle:nil] autorelease];
-//        
-//        [self.galleryPhotoViewController setupImagePicker:UIImagePickerControllerSourceTypePhotoLibrary];
-//        [self presentModalViewController:self.galleryPhotoViewController.imagePickerController animated:YES];
-//        [self.galleryPhotoViewController.imagePickerController setDelegate:self];
-//        self.currentSourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-//        
-//        // reomve and readd the overlay to work around a display issue
-////        self.imagePickerController.cameraOverlayView = nil;
-//    }
-
 }
 
 #pragma mark -

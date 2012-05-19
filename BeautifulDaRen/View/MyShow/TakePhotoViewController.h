@@ -18,18 +18,14 @@
 @interface TakePhotoViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 {
 @private
-    SystemSoundID tickSound;
     UIImagePickerController *imagePickerController;
 }
 
 @property (nonatomic, assign) id <TakePhotoControllerDelegate> delegate;
 @property (nonatomic, retain) UIImagePickerController *imagePickerController;
 
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *takePictureButton;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *cancelButton;
+@property (nonatomic, retain) IBOutlet UIToolbar * toolbarView;
 
 - (void)setupImagePicker:(UIImagePickerControllerSourceType)sourceType;
 
-- (IBAction)done:(id)sender;
-- (IBAction)takePhoto:(id)sender;
 @end

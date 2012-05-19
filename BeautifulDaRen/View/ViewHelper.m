@@ -10,6 +10,7 @@
 
 #import "ButtonViewCell.h"
 
+#define BACK_BUTTON_LABEL_X_OFFSET  (5.0)
 
 @implementation ViewHelper
 
@@ -72,6 +73,8 @@
     UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
     [button setTitle:title forState:UIControlStateNormal];
+    button.titleEdgeInsets = UIEdgeInsetsMake(0, BACK_BUTTON_LABEL_X_OFFSET, 0, 0);
+    button.titleLabel.frame = CGRectMake(button.titleLabel.frame.origin.x + 10, button.titleLabel.frame.origin.y, CGRectGetWidth(button.titleLabel.frame), CGRectGetHeight(button.titleLabel.frame));
     [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     
     [button.titleLabel setFont:[UIFont systemFontOfSize:14]];

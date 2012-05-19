@@ -38,6 +38,7 @@
 @synthesize contentScrollView = _contentScrollView;
 @synthesize attachedImageView = _attachedImageView;
 @synthesize attachedImageBgButton = _attachedImageBgButton;
+@synthesize selectedImage = _selectedImage;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -82,6 +83,11 @@
     
     [_brandTextView becomeFirstResponder];
     
+    if (self.selectedImage != nil)
+    {
+        [self.cameraButton setImage:self.selectedImage forState:UIControlStateNormal];
+    }
+    
     _attachedImageView.hidden = YES;
 }
 
@@ -93,6 +99,7 @@
     [self setBrandTextView:nil];
     [self setWeiboContentTextView:nil];
     [self setMaketTextView:nil];
+    [self setSelectedImage: nil];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
@@ -104,6 +111,8 @@
     [_weiboContentTextView release];
     [_maketTextView release];
     [_brandTextView release];
+    [_selectedImage release];
+    
     [super dealloc];
 }
 

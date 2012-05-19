@@ -32,6 +32,7 @@
 @synthesize contentLabel = _contentLabel;
 @synthesize avatarImageView = _avatarImageView;
 @synthesize weiboAttachedImageView = _weiboAttachedImageView;
+@synthesize timestampLabel = _timestampLabel;
 
 - (void)dealloc
 {
@@ -40,6 +41,7 @@
     [_weiboContent release];
     [_avatarImageView release];
     [_weiboAttachedImageView release];
+    [_timestampLabel release];
     
     [super dealloc];
 }
@@ -50,6 +52,7 @@
     if (self) {
         [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onBackButtonClicked) title:@"返回"]];
         
+        [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClicked) title:@"刷新"]];       
         self.navigationItem.title = @"微博详情";
         
         //Content for test
@@ -146,6 +149,11 @@
     [navController release];
 }
 
+-(IBAction)onForwardButtonPressed:(id)sender
+{
+    [self onForward];
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
@@ -164,10 +172,13 @@
     self.contentLabel.frame = CGRectMake(self.contentLabel.frame.origin.x, self.favourateButton.frame.origin.y + CGRectGetHeight(self.favourateButton.frame) + CELL_CONTENT_MARGIN, self.contentLabel.frame.size.width, [ViewHelper getHeightOfText:self.weiboContent ByFontSize:FONT_SIZE contentWidth:CELL_CONTENT_WIDTH]);
     
     // Custom initialization
-    [_detailScrollView setContentSize:CGSizeMake(SCREEN_WIDTH, self.contentLabel.frame.origin.y + CGRectGetHeight(self.contentLabel.frame) + 180)];
+    [_detailScrollView setContentSize:CGSizeMake(SCREEN_WIDTH, self.contentLabel.frame.origin.y + CGRectGetHeight(self.contentLabel.frame) + 100)];
     
     [self.avatarImageView setImage:[UIImage imageNamed:@"weibo_sample3"]];
     [self.weiboAttachedImageView setImage:[UIImage imageNamed:@"weibo_sample2"]];
+    
+    self.timestampLabel.text = @"一小时前";
+    [self.timestampLabel setTextColor:[UIColor purpleColor]];
 
 }
 
@@ -182,6 +193,7 @@
     self.forwardedButton = nil;
     self.commentButton = nil;
     self.favourateButton = nil;
+    self.timestampLabel = nil;
 
     [super viewDidUnload];
     // Release any retained subviews of the main view.
@@ -196,6 +208,10 @@
 
 - (void)onBackButtonClicked {
     [self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)onRefreshButtonClicked {
+
 }
 
 @end

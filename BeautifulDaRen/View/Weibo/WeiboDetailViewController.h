@@ -14,6 +14,7 @@
 @property (nonatomic, retain) NSString * userId;
 
 @property (nonatomic, retain) IBOutlet UILabel  * contentLabel;
+@property (nonatomic, retain) IBOutlet UILabel  * timestampLabel;
 
 @property (nonatomic, retain) IBOutlet UIButton * forwardedButton;
 @property (nonatomic, retain) IBOutlet UIButton * commentButton;
@@ -23,5 +24,5 @@
 @property (nonatomic, retain) IBOutlet UIImageView * weiboAttachedImageView;
 
 -(IBAction)onCommentListButtonPressed:(id)sender;
-
+-(IBAction)onForwardButtonPressed:(id)sender;
 @end
