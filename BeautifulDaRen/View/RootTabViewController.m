@@ -15,8 +15,7 @@
 
 @implementation UINavigationBar (UINavigationBarCategory)
 - (void)drawRect:(CGRect)rect {
-    NSLog(@"%f:%f", self.frame.size.width, self.frame.size.height);
-    UIImage *image = [UIImage imageNamed: @"顶部背景.png"];
+    UIImage *image = [UIImage imageNamed: @"nav_bar_background"];
     [image drawInRect:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
 }
 @end
@@ -50,9 +49,9 @@
 
     if (!SYSTEM_VERSION_LESS_THAN(@"5.0"))
     {
-        [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"顶部背景.png"] forBarMetrics:UIBarMetricsDefault];
+        [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"nav_bar_background"] forBarMetrics:UIBarMetricsDefault];
 
-        [[UIToolbar appearance]setBackgroundImage:[UIImage imageNamed:@"toolbar320X44.png"] forToolbarPosition:UIToolbarPositionBottom barMetrics:UIBarMetricsDefault];
+        [[UIToolbar appearance]setBackgroundImage:[UIImage imageNamed:@"toolbar_background"] forToolbarPosition:UIToolbarPositionBottom barMetrics:UIBarMetricsDefault];
     }
 }
 
@@ -92,7 +91,7 @@
     }
 
     if (SYSTEM_VERSION_LESS_THAN(@"5.0")) {
-        UIImageView * tabBarBg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"底部背景.png"]];
+        UIImageView * tabBarBg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tabbar_background"]];
         tabBarBg.frame = CGRectMake(0, 0, 320, 50);
         tabBarBg.contentMode = UIViewContentModeScaleToFill;
         
@@ -100,7 +99,7 @@
     }
     else
     {
-        [self.tabBar setBackgroundImage:[UIImage imageNamed:@"底部背景.png"]];
+        [self.tabBar setBackgroundImage:[UIImage imageNamed:@"tabbar_background"]];
     }
 }
 

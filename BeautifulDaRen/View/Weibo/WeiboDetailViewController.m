@@ -15,7 +15,7 @@
 
 #define FONT_SIZE 14.0f
 #define CELL_CONTENT_WIDTH 280.0f
-#define CELL_CONTENT_MARGIN 10.0f
+#define CELL_CONTENT_MARGIN 5.0f
 
 @interface WeiboDetailViewController ()
 
@@ -30,13 +30,16 @@
 @synthesize weiboContent = _weiboContent;
 @synthesize forwardedButton, commentButton, favourateButton;
 @synthesize contentLabel = _contentLabel;
+@synthesize avatarImageView = _avatarImageView;
+@synthesize weiboAttachedImageView = _weiboAttachedImageView;
 
 - (void)dealloc
 {
     [_detailScrollView release];
     [_userId release];
     [_weiboContent release];
-    
+    [_avatarImageView release];
+    [_weiboAttachedImageView release];
     
     [super dealloc];
 }
@@ -45,7 +48,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        [self.navigationItem setLeftBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onBackButtonClicked) title:@"返回"]];
+        [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onBackButtonClicked) title:@"返回"]];
         
         self.navigationItem.title = @"微博详情";
         
@@ -80,8 +83,7 @@
         tempToolbar.items= barItems;
         tempToolbar.tintColor = [UIColor blackColor];
         [self.view addSubview: tempToolbar];
-        
-        [flexible release];
+        [flexible release]; 
     }
     return self;
 }
@@ -150,23 +152,37 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    self.favourateButton.frame = CGRectMake(self.favourateButton.frame.origin.x, self.weiboAttachedImageView.frame.origin.y + CGRectGetHeight(self.weiboAttachedImageView.frame) + CELL_CONTENT_MARGIN, self.favourateButton.frame.size.width, self.favourateButton.frame.size.height);
+
+    self.forwardedButton.frame = CGRectMake(self.forwardedButton.frame.origin.x, self.favourateButton.frame.origin.y, self.forwardedButton.frame.size.width, self.forwardedButton.frame.size.height);
+
+    self.commentButton.frame = CGRectMake(self.commentButton.frame.origin.x, self.favourateButton.frame.origin.y, self.commentButton.frame.size.width, self.commentButton.frame.size.height);
+    
     self.contentLabel.text = self.weiboContent;
     
-    self.contentLabel.frame = CGRectMake(self.contentLabel.frame.origin.x, self.contentLabel.frame.origin.y, self.contentLabel.frame.size.width, [ViewHelper getHeightOfText:self.weiboContent ByFontSize:FONT_SIZE contentWidth:CELL_CONTENT_WIDTH]);
-    
-    self.favourateButton.frame = CGRectMake(self.favourateButton.frame.origin.x, self.contentLabel.frame.origin.y + self.contentLabel.frame.size.height, self.favourateButton.frame.size.width, self.favourateButton.frame.size.height);
-
-    self.forwardedButton.frame = CGRectMake(self.forwardedButton.frame.origin.x, self.contentLabel.frame.origin.y + self.contentLabel.frame.size.height, self.forwardedButton.frame.size.width, self.forwardedButton.frame.size.height);
-
-    self.commentButton.frame = CGRectMake(self.commentButton.frame.origin.x, self.contentLabel.frame.origin.y + self.contentLabel.frame.size.height, self.commentButton.frame.size.width, self.commentButton.frame.size.height);
+    self.contentLabel.frame = CGRectMake(self.contentLabel.frame.origin.x, self.favourateButton.frame.origin.y + CGRectGetHeight(self.favourateButton.frame) + CELL_CONTENT_MARGIN, self.contentLabel.frame.size.width, [ViewHelper getHeightOfText:self.weiboContent ByFontSize:FONT_SIZE contentWidth:CELL_CONTENT_WIDTH]);
     
     // Custom initialization
-    [_detailScrollView setContentSize:CGSizeMake(320, self.commentButton.frame.origin.y + 180)];
+    [_detailScrollView setContentSize:CGSizeMake(SCREEN_WIDTH, self.contentLabel.frame.origin.y + CGRectGetHeight(self.contentLabel.frame) + 180)];
+    
+    [self.avatarImageView setImage:[UIImage imageNamed:@"weibo_sample3"]];
+    [self.weiboAttachedImageView setImage:[UIImage imageNamed:@"weibo_sample2"]];
 
 }
 
 - (void)viewDidUnload
 {
+    self.weiboAttachedImageView = nil;
+    self.avatarImageView = nil;
+    self.weiboContent = nil;
+    self.contentLabel = nil;
+    self.detailScrollView = nil;
+    self.userId = nil;
+    self.forwardedButton = nil;
+    self.commentButton = nil;
+    self.favourateButton = nil;
+
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

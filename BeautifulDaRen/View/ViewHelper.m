@@ -67,6 +67,19 @@
     return [[[UIBarButtonItem alloc] initWithCustomView:button] autorelease];
 }
 
++ (UIBarButtonItem*)getBackBarItemOfTarget:(id)target action:(SEL)action title:(NSString*)title
+{
+    UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
+    [button setTitle:title forState:UIControlStateNormal];
+    [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    
+    [button.titleLabel setFont:[UIFont systemFontOfSize:14]];
+    
+    button.frame = CGRectMake(0, 0, 50, 30);
+    return [[[UIBarButtonItem alloc] initWithCustomView:button] autorelease];
+}
+
 + (UIBarButtonItem*) getLeftBarItemOfImageName:(NSString*)image rectSize:(CGRect)rectSize
 {
     UIImageView * imageView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:image]] autorelease];

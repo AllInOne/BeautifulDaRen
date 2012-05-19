@@ -19,6 +19,9 @@
 @property (nonatomic, retain) IBOutlet UIButton * commentButton;
 @property (nonatomic, retain) IBOutlet UIButton * favourateButton;
 
+@property (nonatomic, retain) IBOutlet UIImageView * avatarImageView;
+@property (nonatomic, retain) IBOutlet UIImageView * weiboAttachedImageView;
+
 -(IBAction)onCommentListButtonPressed:(id)sender;
 
 @end
