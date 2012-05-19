@@ -11,6 +11,15 @@
 @implementation PhotoConfirmViewController
 
 @synthesize photoImageView = _photoImageView;
+@synthesize photoImageData = _photoImageData;
+
+
+- (void)dealloc {
+    [self.photoImageView release];
+    [self.photoImageData release];
+    [super dealloc];
+}
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -35,6 +44,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self.photoImageView setImage:self.photoImageData];
 }
 
 - (void)viewDidUnload
@@ -42,6 +52,8 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    self.photoImageData = nil;
+    self.photoImageView = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

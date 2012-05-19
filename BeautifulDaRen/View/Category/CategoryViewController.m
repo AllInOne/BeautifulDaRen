@@ -8,6 +8,7 @@
 
 #import "CategoryViewController.h"
 #import "ViewConstants.h"
+#import "ViewHelper.h"
 #import "CommonScrollView.h"
 
 @implementation CategoryViewController
@@ -25,6 +26,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClicked) title:@"刷新"]]; 
     }
     return self;
 }
@@ -98,5 +100,9 @@
     [self.categoryContentView.view setFrame:CGRectMake(0, 0, CGRectGetWidth(self.categoryContentView.view.frame), USER_WINDOW_HEIGHT)];
     
     [UIView commitAnimations];
+}
+
+- (void)onRefreshButtonClicked {
+    
 }
 @end

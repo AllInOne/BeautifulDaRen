@@ -16,6 +16,8 @@
 
 + (CGFloat)getHeightOfText: (NSString*)text ByFontSize:(CGFloat)fontSize contentWidth:(CGFloat)width;
 
++ (UIBarButtonItem*)getBackBarItemOfTarget:(id)target action:(SEL)action title:(NSString*)title;
+
 + (UIBarButtonItem*)getBarItemOfTarget:(id)target action:(SEL)action title:(NSString*)title;
 
 + (UIBarButtonItem*)getLeftBarItemOfImageName:(NSString*)image rectSize:(CGRect)rectSize;

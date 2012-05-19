@@ -14,6 +14,8 @@
     FriendsSelectionViewControllerDelegate,
     SelectCategoryProtocol>
 
+@property (nonatomic, retain) UIImage * selectedImage;
+
 @property (nonatomic, retain) IBOutlet UIButton * cameraButton;
 @property (nonatomic, retain) IBOutlet UITextView * weiboContentTextView;
 @property (nonatomic, retain) IBOutlet UITextField * maketTextView;

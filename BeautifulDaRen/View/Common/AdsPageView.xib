@@ -110,7 +110,7 @@
 								<reference key="IBUINormalTitleShadowColor" ref="976888002"/>
 								<object class="NSCustomResource" key="IBUINormalImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">deletebtn.png</string>
+									<string key="NSResourceName">banner_close_btn.png</string>
 								</object>
 								<reference key="IBUIFontDescription" ref="918202687"/>
 								<reference key="IBUIFont" ref="208551646"/>
@@ -298,8 +298,8 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="NS.key.0">deletebtn.png</string>
-			<string key="NS.object.0">{20, 20}</string>
+			<string key="NS.key.0">banner_close_btn.png</string>
+			<string key="NS.object.0">{19, 19}</string>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">933</string>
 	</data>

@@ -8,6 +8,7 @@
 
 #import "WeiboComposerViewController.h"
 #import "FriendsSelectionViewController.h"
+#import "ViewHelper.h"
 
 #define WEIBO_CONTENT_TEXTVIEW_Y_OFFSET (90.0)
 #define TOOL_BAR_HEIGHT                 (30.0)
@@ -22,7 +23,7 @@
 
 
 @interface WeiboComposerViewController ()
-
+@property (nonatomic, assign) BOOL isKeypadShow;
 - (void)setContentFrame:(CGRect)frame;
 @end
 
@@ -37,6 +38,8 @@
 @synthesize contentScrollView = _contentScrollView;
 @synthesize attachedImageView = _attachedImageView;
 @synthesize attachedImageBgButton = _attachedImageBgButton;
+@synthesize selectedImage = _selectedImage;
+@synthesize isKeypadShow = _isKeypadShow;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -45,31 +48,12 @@
         // Custom initialization
         _cameraButton.enabled = YES;
         _attachedImageBgButton.enabled = NO;
-        
-        
+
         [_weiboContentTextView setDelegate:self];
 
-        UIButton * backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [backButton setBackgroundImage:[UIImage imageNamed:@"顶部按钮50x29.png"] forState:UIControlStateNormal];
-        [backButton setTitle:@"返回" forState:UIControlStateNormal];
-        [backButton addTarget:self action:@selector(onBackButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-        
-        [backButton.titleLabel setFont:[UIFont boldSystemFontOfSize:13]];
-        backButton.frame = CGRectMake(0, 0, 50, 30);
-        UIBarButtonItem * backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-        [self.navigationItem setLeftBarButtonItem:backButtonItem];
+        [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onBackButtonClicked) title:@"返回"]];
 
-        UIButton * sendButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [sendButton setBackgroundImage:[UIImage imageNamed:@"顶部按钮50x29.png"] forState:UIControlStateNormal];
-        [sendButton setTitle:@"发送" forState:UIControlStateNormal];
-        [sendButton addTarget:self action:@selector(onSendButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-        
-        [sendButton.titleLabel setFont:[UIFont boldSystemFontOfSize:13]];
-        sendButton.frame = CGRectMake(0, 0, 50, 30);
-        UIBarButtonItem * sendButtonItem = [[UIBarButtonItem alloc] initWithCustomView:sendButton];
-        [self.navigationItem setRightBarButtonItem:sendButtonItem];
-        
-        [sendButton release];
+        [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onSendButtonClicked) title:@"发送"]];
     }
     return self;
 }
@@ -88,6 +72,7 @@
 {
     [super viewDidLoad];
 
+    [_brandTextView becomeFirstResponder];
     // Do any additional setup after loading the view from its nib.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
@@ -95,9 +80,13 @@
     [self setContentFrame:CGRectMake(_weiboContentBgTextFiled.frame.origin.x, WEIBO_CONTENT_TEXTVIEW_Y_OFFSET, _weiboContentBgTextFiled.frame.size.width, _weiboContentTextView.frame.size.height)];
     
     [_contentScrollView setContentSize:CGSizeMake(_weiboContentTextView.frame.size.width, WEIBO_CONTENT_TEXTVIEW_Y_OFFSET + _weiboContentTextView.frame.size.height + WEIBO_CONTENT_SCROLL_BOUNCE_SIZE)];
-     NSLog(@"%@", self.weiboContentTextView);
+//     NSLog(@"%@", self.weiboContentTextView);
+
     
-    [_brandTextView becomeFirstResponder];
+    if (self.selectedImage != nil)
+    {
+        [self.cameraButton setImage:self.selectedImage forState:UIControlStateNormal];
+    }
     
     _attachedImageView.hidden = YES;
 }
@@ -110,6 +99,7 @@
     [self setBrandTextView:nil];
     [self setWeiboContentTextView:nil];
     [self setMaketTextView:nil];
+    [self setSelectedImage: nil];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
@@ -121,7 +111,19 @@
     [_weiboContentTextView release];
     [_maketTextView release];
     [_brandTextView release];
+    [_selectedImage release];
+    
     [super dealloc];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+	[super viewWillDisappear:animated];
 }
 
 
@@ -133,52 +135,57 @@
 
 - (void)keyboardWillShow:(NSNotification *)note 
 {
-    NSDictionary *info = [note userInfo];
-    
-    CGSize kbSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
-    double animDuration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    NSLog(@"%@", self.weiboContentTextView);
-    [UIView animateWithDuration:animDuration animations:^
-     {
-         [self setContentFrame: CGRectMake(self.weiboContentTextView.frame.origin.x,
-                                          WEIBO_CONTENT_TEXTVIEW_Y_OFFSET,
-                                          self.weiboContentTextView.frame.size.width,
-                                          self.weiboContentTextView.frame.size.height - kbSize.height)];
-         
-         self.footerView.center = CGPointMake(self.footerView.center.x,
-                                              self.footerView.center.y - kbSize.height);
-     }];
-    
-     self.contentScrollView.frame = CGRectMake(self.contentScrollView.frame.origin.x, self.contentScrollView.frame.origin.y, self.contentScrollView.frame.size.width, self.contentScrollView.frame.size.height - kbSize.height);
-    
-    self.contentScrollView.contentSize = CGSizeMake(self.contentScrollView.contentSize.width, self.contentScrollView.contentSize.height - kbSize.height);
-    
-     NSLog(@"keyboardWillShow, weibo content frame.y = %f", _weiboContentTextView.frame.origin.y);
+    if (!self.isKeypadShow)
+    {
+        NSDictionary *info = [note userInfo];
+        
+        CGSize kbSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+        double animDuration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+
+        [UIView animateWithDuration:animDuration animations:^
+         {
+             [self setContentFrame: CGRectMake(self.weiboContentTextView.frame.origin.x,
+                                               WEIBO_CONTENT_TEXTVIEW_Y_OFFSET,
+                                               self.weiboContentTextView.frame.size.width,
+                                               self.weiboContentTextView.frame.size.height - kbSize.height)];
+             
+             self.footerView.center = CGPointMake(self.footerView.center.x,
+                                                  self.footerView.center.y - kbSize.height);
+         }];
+        
+        self.contentScrollView.frame = CGRectMake(self.contentScrollView.frame.origin.x, self.contentScrollView.frame.origin.y, self.contentScrollView.frame.size.width, self.contentScrollView.frame.size.height - kbSize.height);
+        
+        self.contentScrollView.contentSize = CGSizeMake(self.contentScrollView.contentSize.width, self.contentScrollView.contentSize.height - kbSize.height);
+        self.isKeypadShow = YES;
+    }
+
 }
 
 - (void)keyboardWillHide:(NSNotification *)note
 {
-    NSDictionary *info = [note userInfo];
-    
-    CGSize kbSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
-    double animDuration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    
-    [UIView animateWithDuration:animDuration animations:^
-     {
-         [self setContentFrame:CGRectMake(self.weiboContentTextView.frame.origin.x,
-                                          self.weiboContentTextView.frame.origin.y,
-                                          self.weiboContentTextView.frame.size.width,
-                                          self.weiboContentTextView.frame.size.height + kbSize.height)];
-         
-         self.footerView.center = CGPointMake(self.footerView.center.x,
-                                              self.footerView.center.y + kbSize.height);
-     }];
-
-    self.contentScrollView.frame = CGRectMake(self.contentScrollView.frame.origin.x, self.contentScrollView.frame.origin.y, self.contentScrollView.frame.size.width, self.contentScrollView.frame.size.height + kbSize.height);
-    
-    self.contentScrollView.contentSize = CGSizeMake(self.contentScrollView.contentSize.width, self.contentScrollView.contentSize.height + kbSize.height);
-    
-    NSLog(@"keyboardWillHide, weibo content frame.y = %f", _weiboContentTextView.frame.origin.y);
+    if (self.isKeypadShow)
+    {
+        NSDictionary *info = [note userInfo];
+        
+        CGSize kbSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+        double animDuration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+        
+        [UIView animateWithDuration:animDuration animations:^
+         {
+             [self setContentFrame:CGRectMake(self.weiboContentTextView.frame.origin.x,
+                                              self.weiboContentTextView.frame.origin.y,
+                                              self.weiboContentTextView.frame.size.width,
+                                              self.weiboContentTextView.frame.size.height + kbSize.height)];
+             
+             self.footerView.center = CGPointMake(self.footerView.center.x,
+                                                  self.footerView.center.y + kbSize.height);
+         }];
+        
+        self.contentScrollView.frame = CGRectMake(self.contentScrollView.frame.origin.x, self.contentScrollView.frame.origin.y, self.contentScrollView.frame.size.width, self.contentScrollView.frame.size.height + kbSize.height);
+        
+        self.contentScrollView.contentSize = CGSizeMake(self.contentScrollView.contentSize.width, self.contentScrollView.contentSize.height + kbSize.height);
+        self.isKeypadShow = NO;    
+    }
 }
 
 - (void)setContentFrame:(CGRect)frame

@@ -28,14 +28,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-
-// TODO: Set the background image of tab bar
-
-//    UIImageView * tabBarBg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"底部背景.png"]];
-//    tabBarBg.frame = CGRectMake(0, 0, 320, 50);
-//    tabBarBg.contentMode = UIViewContentModeScaleToFill;
-//    
-//    [_rootViewController.tabBar insertSubview:tabBarBg atIndex:1];
     
     [self.window addSubview:_rootViewController.view];
     [self.window makeKeyAndVisible];

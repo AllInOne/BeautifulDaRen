@@ -9,6 +9,7 @@
 #import "MyShowViewController.h"
 #import "ViewConstants.h"
 #import "PhotoConfirmViewController.h"
+#import "WeiboComposerViewController.h"
 
 @interface MyShowViewController ()
 @property (nonatomic, assign) UIImagePickerControllerSourceType currentType;
@@ -98,16 +99,21 @@
 - (void)didTakePicture:(UIImage *)picture
 {
     self.shouldShowSelf = NO;
-    PhotoConfirmViewController *photoConfirmViewControlller = 
-    [[[PhotoConfirmViewController alloc] initWithNibName:@"PhotoConfirmViewController" bundle:nil] autorelease];
-    //    photoConfirmViewControlller.delegate = self;
-    [photoConfirmViewControlller.photoImageView setImage:[UIImage imageNamed:@"toolbar_button"]];
-    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: photoConfirmViewControlller];
+    WeiboComposerViewController *weiboComposerViewControlller = 
+    [[[WeiboComposerViewController alloc] initWithNibName:nil bundle:nil] autorelease];
+    
+    weiboComposerViewControlller.selectedImage = picture;
+
+    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: weiboComposerViewControlller];
     
     [self dismissViewControllerAnimated:NO completion:^{
         [self.navigationController presentModalViewController:navController animated:YES];
         [navController release];
     }];
+    
+    [self.tabBarController setSelectedIndex:0];
+    self.currentType = UIImagePickerControllerSourceTypeCamera;
+    self.shouldShowSelf = YES;
 }
 
 - (void)didFinishWithCamera
@@ -115,6 +121,7 @@
     [self.tabBarController setSelectedIndex:0];
     [self dismissModalViewControllerAnimated:YES];
     self.currentType = UIImagePickerControllerSourceTypeCamera;
+    self.shouldShowSelf = YES;
 }
 
 - (void)didChangeToGalleryMode
