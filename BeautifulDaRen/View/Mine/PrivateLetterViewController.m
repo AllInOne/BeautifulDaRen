@@ -9,8 +9,28 @@
 #import "PrivateLetterViewController.h"
 #import "PrivateLetterViewCell.h"
 #import "ViewHelper.h"
+#import "ViewConstants.h"
+
+@interface PrivateLetterViewController()
+
+@property (retain, nonatomic) NSMutableDictionary * fakeLetters;
+- (void) loadFakeLetters;
+@end
 
 @implementation PrivateLetterViewController
+@synthesize fakeLetters = _fakeLetters;
+
+- (void) loadFakeLetters
+{
+    if(_fakeLetters)
+    {
+        _fakeLetters = nil;
+    }
+    NSDictionary * letter1 = [NSDictionary dictionaryWithObjectsAndKeys: nil];
+    _fakeLetters = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
+                    letter1, nil];
+    [_fakeLetters autorelease];
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -98,11 +118,13 @@
     if (cell == nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:privateLetterViewCellIdentifier owner:self options:nil] objectAtIndex:0];
     }
-    ((PrivateLetterViewCell*)cell).avatarImage.image = [UIImage imageNamed:@"item_fake"];
-    ((PrivateLetterViewCell*)cell).nameLabel.text = @"Adam Lambert";
-    ((PrivateLetterViewCell*)cell).timeLabel.text = @"23分钟前";
-    ((PrivateLetterViewCell*)cell).detailView.text = @"this is a long long long long long\
-        long long long long view";
+    PrivateLetterViewCell * privateLetterCell = ((PrivateLetterViewCell*)cell);
+    privateLetterCell.avatarImage.image = [UIImage imageNamed:@"item_fake"];
+    privateLetterCell.nameLabel.text = @"Adam Lambert";
+    privateLetterCell.timeLabel.text = @"22分钟前";
+    privateLetterCell.detailView.text = @"this is a long long long longa long long long longa long long long longa long long long long long long long  view";
+    CGFloat textViewHeight = [ViewHelper getHeightOfText:privateLetterCell.detailView.text ByFontSize:privateLetterCell.detailView.font.pointSize contentWidth:privateLetterCell.detailView.frame.size.width] + TEXT_VIEW_MARGE_HEIGHT;
+    privateLetterCell.detailView.frame = CGRectMake(privateLetterCell.detailView.frame.origin.x, privateLetterCell.detailView.frame.origin.y, privateLetterCell.detailView.frame.size.width, textViewHeight);
     return cell;
 }
 
@@ -148,7 +170,7 @@
 #pragma mark - Table view delegate
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return  80;
+    return  200;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

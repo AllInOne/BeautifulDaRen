@@ -1,5 +1,5 @@
 //
-//  Comment.h
+//  PrivateLetter.h
 //  BeautifulDaRen
 //
 //  Created by gang liu on 5/18/12.
@@ -11,18 +11,14 @@
 
 @class UserIdentity;
 
-@interface Comment : NSManagedObject
+@interface PrivateLetter : NSManagedObject
 
 @property (nonatomic, retain) NSString * personId;
+@property (nonatomic, retain) NSNumber * type;
 @property (nonatomic, retain) NSDate * timeStamp;
 @property (nonatomic, retain) NSString * detail;
-@property (nonatomic, retain) NSString * weiBoId;
 @property (nonatomic, retain) NSString * uniqueId;
 @property (nonatomic, retain) NSString * personName;
 @property (nonatomic, retain) UserIdentity *userIdentity;
-
-- (void)updateCommentWithDictionary:(NSDictionary *)dict insideObjectContext:(NSManagedObjectContext*) objectContext;
-
-+ (Comment*)commentWithDictionary:(NSDictionary *)dict insideObjectContext:(NSManagedObjectContext*) objectContext; 
 
 @end

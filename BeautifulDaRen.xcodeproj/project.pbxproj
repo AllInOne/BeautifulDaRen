@@ -82,6 +82,7 @@
 		C29F6663154310B300292031 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		C29F6664154310B300292031 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		C2A810C31566230A008FF2B7 /* PrivateLetterViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2A810C21566230A008FF2B7 /* PrivateLetterViewCell.xib */; };
+		C2A810DD1566611E008FF2B7 /* PrivateLetter.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A810DC1566611E008FF2B7 /* PrivateLetter.m */; };
 		C2A810E01566611F008FF2B7 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A810DF1566611F008FF2B7 /* Comment.m */; };
 		CE029ABF153E682100886227 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE029ABE153E682100886227 /* UIKit.framework */; };
 		CE029AC1153E682100886227 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE029AC0153E682100886227 /* Foundation.framework */; };
@@ -410,6 +411,8 @@
 		C297D839154442C20080294C /* ForgetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPasswordViewController.m; sourceTree = "<group>"; };
 		C297D83A154442C20080294C /* ForgetPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForgetPasswordViewController.xib; sourceTree = "<group>"; };
 		C2A810C21566230A008FF2B7 /* PrivateLetterViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrivateLetterViewCell.xib; sourceTree = "<group>"; };
+		C2A810DB1566611E008FF2B7 /* PrivateLetter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivateLetter.h; sourceTree = "<group>"; };
+		C2A810DC1566611E008FF2B7 /* PrivateLetter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivateLetter.m; sourceTree = "<group>"; };
 		C2A810DE1566611F008FF2B7 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
 		C2A810DF1566611F008FF2B7 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
 		CE029ABA153E682100886227 /* BeautifulDaRen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeautifulDaRen.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -844,6 +847,8 @@
 				C2A810DE1566611F008FF2B7 /* Comment.h */,
 				C2A810DF1566611F008FF2B7 /* Comment.m */,
 				C274DCDA155EBBBD0098EE22 /* DataConstants.h */,
+				C2A810DB1566611E008FF2B7 /* PrivateLetter.h */,
+				C2A810DC1566611E008FF2B7 /* PrivateLetter.m */,
 				C274DCBC155EB7BA0098EE22 /* UserIdentity.h */,
 				C274DCBD155EB7BA0098EE22 /* UserIdentity.m */,
 				C215A79F1553EABF001BF379 /* WaresItem.h */,
@@ -1802,6 +1807,7 @@
 				C2139A6A1564087600C3922D /* PrivateLetterViewCell.m in Sources */,
 				C2139A7515640E2900C3922D /* PrivateLetterViewController.m in Sources */,
 				C2519F9B1564E36E0040EBC5 /* WaterFlowView.m in Sources */,
+				C2A810DD1566611E008FF2B7 /* PrivateLetter.m in Sources */,
 				C2A810E01566611F008FF2B7 /* Comment.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

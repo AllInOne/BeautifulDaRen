@@ -26,6 +26,8 @@
 @property (nonatomic, retain) NSString * personalBrief;
 @property (nonatomic, retain) NSString * detailedAddress;
 
+- (void)updateUserIdentityWithDictionary:(NSDictionary *)dict insideObjectContext:(NSManagedObjectContext*) objectContext;
+
 + (UserIdentity*)userIdentityWithDictionary:(NSDictionary *)dict insideObjectContext:(NSManagedObjectContext*) objectContext; 
 
 @end

@@ -9,6 +9,7 @@
 #import "DataManager.h"
 #import "CoreDataManager.h"
 #import "ViewConstants.h"
+#import "Comment.h"
 
 #import "UserIdentity.h"
 
@@ -66,19 +67,62 @@ static DataManager *sharedInstance;
 }
 
 //#pragma mark - Data accessors
-- (void)saveLocalIdentityWithDictionary:(NSDictionary*)dictionary FinishBlock:(ProcessFinishBlock)finishBlock
+- (void)saveLocalIdentityWithDictionary:(NSDictionary*)dictionary finishBlock:(ProcessFinishBlock)finishBlock
 {
     [_cdm saveUsingBackgroundContextWithBlock:^(NSManagedObjectContext *objectContext) {
-        [UserIdentity userIdentityWithDictionary:dictionary insideObjectContext:objectContext];
+        UserIdentity * userIdentity = [self getLocalIdentityWithId:[dictionary objectForKey:USERIDENTITY_UNIQUE_ID] inContext:objectContext];
+        if(!userIdentity)
+        {
+            [UserIdentity userIdentityWithDictionary:dictionary insideObjectContext:objectContext];
+        }
+        else
+        {
+            [userIdentity updateUserIdentityWithDictionary:dictionary insideObjectContext:objectContext];
+        }
     } onFinish:^(NSError *error) {
         finishBlock(error);
     }];
 }
 
-- (UserIdentity*)getLocalIdentityWithFinishBlock:(ProcessFinishBlock)finishBlock
+- (void)saveCommentWithDictionary:(NSDictionary*)dictionary finishBlock:(ProcessFinishBlock)finishBlock
 {
-    return [[_cdm fetchAllEntities:@"UserIdentity" withPredicate:nil withSorting:nil fetchLimit:1 prefetchRelations:nil context:nil] objectAtIndex:0];
+    [_cdm saveUsingBackgroundContextWithBlock:^(NSManagedObjectContext *objectContext) {
+        Comment * comment = [self getCommentById:[dictionary objectForKey:COMMENT_UNIQUE_ID] inContext:objectContext];
+        if(!comment)
+        {
+            [Comment commentWithDictionary:dictionary insideObjectContext:objectContext];
+        }
+        else
+        {
+            [comment updateCommentWithDictionary:dictionary insideObjectContext:objectContext];
+        }
+    } onFinish:^(NSError *error) {
+        finishBlock(error);
+    }];
 }
+
+- (Comment*)getCommentById:(NSString*)commentId inContext:(NSManagedObjectContext*)context
+{
+    NSPredicate *predict = [NSPredicate predicateWithFormat:@"uniqueId == %@", commentId];
+    return (Comment*)[_cdm fetchEntity:@"Comment" withPredicate:predict prefetchRelations:nil context:context];
+}
+
+- (NSArray*) getCommentOfLocalIdentityWithLimit:(NSInteger)limit finishBlock:(ProcessFinishBlock)finishBlock
+{
+    NSPredicate *predict = [NSPredicate predicateWithFormat:@"userIdentity.uniqueId == %@", [[NSUserDefaults standardUserDefaults] stringForKey:BEAUTIFUL_DAREN_USER_IDENTITY_ID]];
+    return [_cdm fetchAllEntities:@"Comment" withPredicate:predict withSorting:nil fetchLimit:limit prefetchRelations:nil context:nil];
+}
+
+-(UserIdentity*)getLocalIdentityWithId:(NSString*)id inContext:(NSManagedObjectContext*)context{
+    NSPredicate *predict = [NSPredicate predicateWithFormat:@"uniqueId == %@", id];
+    return (UserIdentity*)[_cdm fetchEntity:@"UserIdentity" withPredicate:predict prefetchRelations:nil context:context];
+}
+
+-(UserIdentity*)getCurrentLocalIdentityInContext:(NSManagedObjectContext*)context
+{
+    return [self getLocalIdentityWithId:[[NSUserDefaults standardUserDefaults] stringForKey:BEAUTIFUL_DAREN_USER_IDENTITY_ID] inContext:context];            
+}
+
 #pragma mark - CoreDataManager delegate
 - (void)contextWillSaveObjects:(NSNotification*)notif {
     //No actions

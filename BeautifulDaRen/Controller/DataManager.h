@@ -6,6 +6,7 @@
 #import "DataManagerCallbacks.h"
 #import "DataConstants.h"
 #import "UserIdentity.h"
+#import "Comment.h"
 
 @interface DataManager : NSObject{
 @private
@@ -20,10 +21,18 @@
 
 - (void)handleLowMemory;
 
+- (void)saveLocalIdentityWithDictionary:(NSDictionary*)dictionary finishBlock:(ProcessFinishBlock)finishBlock;
 
-- (void)saveLocalIdentityWithDictionary:(NSDictionary*)dictionary FinishBlock:(ProcessFinishBlock)finishBlock;
+- (void)saveCommentWithDictionary:(NSDictionary*)dictionary finishBlock:(ProcessFinishBlock)finishBlock;
 
-- (UserIdentity*)getLocalIdentityWithFinishBlock:(ProcessFinishBlock)finishBlock;
+- (Comment*)getCommentById:(NSString*)commentId inContext:(NSManagedObjectContext*)context;
+
+- (NSArray*)getCommentOfLocalIdentityWithLimit:(NSInteger)limit finishBlock:(ProcessFinishBlock)finishBlock;
+
+- (UserIdentity*)getLocalIdentityWithId:(NSString*)id inContext:(NSManagedObjectContext*)context;
+
+- (UserIdentity*)getCurrentLocalIdentityInContext:(NSManagedObjectContext*)context;
+
 
 @end
 /** @} */
