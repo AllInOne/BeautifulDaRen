@@ -23,7 +23,7 @@
 
 
 @interface WeiboComposerViewController ()
-
+@property (nonatomic, assign) BOOL isKeypadShow;
 - (void)setContentFrame:(CGRect)frame;
 @end
 
@@ -39,6 +39,7 @@
 @synthesize attachedImageView = _attachedImageView;
 @synthesize attachedImageBgButton = _attachedImageBgButton;
 @synthesize selectedImage = _selectedImage;
+@synthesize isKeypadShow = _isKeypadShow;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -47,8 +48,7 @@
         // Custom initialization
         _cameraButton.enabled = YES;
         _attachedImageBgButton.enabled = NO;
-        
-        
+
         [_weiboContentTextView setDelegate:self];
 
         [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onBackButtonClicked) title:@"返回"]];
@@ -72,6 +72,7 @@
 {
     [super viewDidLoad];
 
+    [_brandTextView becomeFirstResponder];
     // Do any additional setup after loading the view from its nib.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
@@ -79,9 +80,8 @@
     [self setContentFrame:CGRectMake(_weiboContentBgTextFiled.frame.origin.x, WEIBO_CONTENT_TEXTVIEW_Y_OFFSET, _weiboContentBgTextFiled.frame.size.width, _weiboContentTextView.frame.size.height)];
     
     [_contentScrollView setContentSize:CGSizeMake(_weiboContentTextView.frame.size.width, WEIBO_CONTENT_TEXTVIEW_Y_OFFSET + _weiboContentTextView.frame.size.height + WEIBO_CONTENT_SCROLL_BOUNCE_SIZE)];
-     NSLog(@"%@", self.weiboContentTextView);
-    
-    [_brandTextView becomeFirstResponder];
+//     NSLog(@"%@", self.weiboContentTextView);
+
     
     if (self.selectedImage != nil)
     {
@@ -116,6 +116,16 @@
     [super dealloc];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+	[super viewWillDisappear:animated];
+}
+
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -125,52 +135,57 @@
 
 - (void)keyboardWillShow:(NSNotification *)note 
 {
-    NSDictionary *info = [note userInfo];
-    
-    CGSize kbSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
-    double animDuration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    NSLog(@"%@", self.weiboContentTextView);
-    [UIView animateWithDuration:animDuration animations:^
-     {
-         [self setContentFrame: CGRectMake(self.weiboContentTextView.frame.origin.x,
-                                          WEIBO_CONTENT_TEXTVIEW_Y_OFFSET,
-                                          self.weiboContentTextView.frame.size.width,
-                                          self.weiboContentTextView.frame.size.height - kbSize.height)];
-         
-         self.footerView.center = CGPointMake(self.footerView.center.x,
-                                              self.footerView.center.y - kbSize.height);
-     }];
-    
-     self.contentScrollView.frame = CGRectMake(self.contentScrollView.frame.origin.x, self.contentScrollView.frame.origin.y, self.contentScrollView.frame.size.width, self.contentScrollView.frame.size.height - kbSize.height);
-    
-    self.contentScrollView.contentSize = CGSizeMake(self.contentScrollView.contentSize.width, self.contentScrollView.contentSize.height - kbSize.height);
-    
-     NSLog(@"keyboardWillShow, weibo content frame.y = %f", _weiboContentTextView.frame.origin.y);
+    if (!self.isKeypadShow)
+    {
+        NSDictionary *info = [note userInfo];
+        
+        CGSize kbSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+        double animDuration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+
+        [UIView animateWithDuration:animDuration animations:^
+         {
+             [self setContentFrame: CGRectMake(self.weiboContentTextView.frame.origin.x,
+                                               WEIBO_CONTENT_TEXTVIEW_Y_OFFSET,
+                                               self.weiboContentTextView.frame.size.width,
+                                               self.weiboContentTextView.frame.size.height - kbSize.height)];
+             
+             self.footerView.center = CGPointMake(self.footerView.center.x,
+                                                  self.footerView.center.y - kbSize.height);
+         }];
+        
+        self.contentScrollView.frame = CGRectMake(self.contentScrollView.frame.origin.x, self.contentScrollView.frame.origin.y, self.contentScrollView.frame.size.width, self.contentScrollView.frame.size.height - kbSize.height);
+        
+        self.contentScrollView.contentSize = CGSizeMake(self.contentScrollView.contentSize.width, self.contentScrollView.contentSize.height - kbSize.height);
+        self.isKeypadShow = YES;
+    }
+
 }
 
 - (void)keyboardWillHide:(NSNotification *)note
 {
-    NSDictionary *info = [note userInfo];
-    
-    CGSize kbSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
-    double animDuration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    
-    [UIView animateWithDuration:animDuration animations:^
-     {
-         [self setContentFrame:CGRectMake(self.weiboContentTextView.frame.origin.x,
-                                          self.weiboContentTextView.frame.origin.y,
-                                          self.weiboContentTextView.frame.size.width,
-                                          self.weiboContentTextView.frame.size.height + kbSize.height)];
-         
-         self.footerView.center = CGPointMake(self.footerView.center.x,
-                                              self.footerView.center.y + kbSize.height);
-     }];
-
-    self.contentScrollView.frame = CGRectMake(self.contentScrollView.frame.origin.x, self.contentScrollView.frame.origin.y, self.contentScrollView.frame.size.width, self.contentScrollView.frame.size.height + kbSize.height);
-    
-    self.contentScrollView.contentSize = CGSizeMake(self.contentScrollView.contentSize.width, self.contentScrollView.contentSize.height + kbSize.height);
-    
-    NSLog(@"keyboardWillHide, weibo content frame.y = %f", _weiboContentTextView.frame.origin.y);
+    if (self.isKeypadShow)
+    {
+        NSDictionary *info = [note userInfo];
+        
+        CGSize kbSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+        double animDuration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+        
+        [UIView animateWithDuration:animDuration animations:^
+         {
+             [self setContentFrame:CGRectMake(self.weiboContentTextView.frame.origin.x,
+                                              self.weiboContentTextView.frame.origin.y,
+                                              self.weiboContentTextView.frame.size.width,
+                                              self.weiboContentTextView.frame.size.height + kbSize.height)];
+             
+             self.footerView.center = CGPointMake(self.footerView.center.x,
+                                                  self.footerView.center.y + kbSize.height);
+         }];
+        
+        self.contentScrollView.frame = CGRectMake(self.contentScrollView.frame.origin.x, self.contentScrollView.frame.origin.y, self.contentScrollView.frame.size.width, self.contentScrollView.frame.size.height + kbSize.height);
+        
+        self.contentScrollView.contentSize = CGSizeMake(self.contentScrollView.contentSize.width, self.contentScrollView.contentSize.height + kbSize.height);
+        self.isKeypadShow = NO;    
+    }
 }
 
 - (void)setContentFrame:(CGRect)frame

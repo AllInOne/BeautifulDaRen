@@ -112,7 +112,7 @@
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: forwardViewContoller];
  
     [self.navigationController presentModalViewController:navController animated:YES];
-    
+
     [navController release];
 }
 

@@ -15,11 +15,16 @@
 #define WEIBO_CONTENT_TEXTVIEW_MARGIN   (2.0)
 #define WEIBO_CONTENT_SCROLL_BOUNCE_SIZE   (30.0)
 
+@interface WeiboForwardCommentViewController ()
+@property (nonatomic, assign) BOOL isKeypadShow;
+@end
+
 @implementation WeiboForwardCommentViewController
 
 @synthesize footerView = _footerView;
 @synthesize weiboContentTextView = _weiboContentTextView;
 @synthesize forwardMode = _forwardMode;
+@synthesize isKeypadShow = _isKeypadShow;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -90,40 +95,48 @@
 
 - (void)keyboardWillShow:(NSNotification *)note 
 {
-    NSDictionary *info = [note userInfo];
-    
-    CGSize kbSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
-    double animDuration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    NSLog(@"%@", self.weiboContentTextView);
-    [UIView animateWithDuration:animDuration animations:^
-     {
-         self.weiboContentTextView.frame =CGRectMake(self.weiboContentTextView.frame.origin.x,
-                                          self.weiboContentTextView.frame.origin.y,
-                                          self.weiboContentTextView.frame.size.width,
-                                          self.weiboContentTextView.frame.size.height - kbSize.height);
-         
-         self.footerView.center = CGPointMake(self.footerView.center.x,
-                                              self.footerView.center.y - kbSize.height);
-     }];
+    if (!self.isKeypadShow)
+    {
+        NSDictionary *info = [note userInfo];
+        
+        CGSize kbSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+        double animDuration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+        NSLog(@"%@", self.weiboContentTextView);
+        [UIView animateWithDuration:animDuration animations:^
+         {
+             self.weiboContentTextView.frame =CGRectMake(self.weiboContentTextView.frame.origin.x,
+                                                         self.weiboContentTextView.frame.origin.y,
+                                                         self.weiboContentTextView.frame.size.width,
+                                                         self.weiboContentTextView.frame.size.height - kbSize.height);
+             
+             self.footerView.center = CGPointMake(self.footerView.center.x,
+                                                  self.footerView.center.y - kbSize.height);
+         }];
+        self.isKeypadShow = YES;
+    }
 }
 
 - (void)keyboardWillHide:(NSNotification *)note
 {
-    NSDictionary *info = [note userInfo];
-    
-    CGSize kbSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
-    double animDuration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    
-    [UIView animateWithDuration:animDuration animations:^
-     {
-         self.weiboContentTextView.frame =CGRectMake(self.weiboContentTextView.frame.origin.x,
-                                          self.weiboContentTextView.frame.origin.y,
-                                          self.weiboContentTextView.frame.size.width,
-                                          self.weiboContentTextView.frame.size.height + kbSize.height);
-         
-         self.footerView.center = CGPointMake(self.footerView.center.x,
-                                              self.footerView.center.y + kbSize.height);
-     }];
+    if (self.isKeypadShow)
+    {
+        NSDictionary *info = [note userInfo];
+        
+        CGSize kbSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+        double animDuration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+        
+        [UIView animateWithDuration:animDuration animations:^
+         {
+             self.weiboContentTextView.frame =CGRectMake(self.weiboContentTextView.frame.origin.x,
+                                                         self.weiboContentTextView.frame.origin.y,
+                                                         self.weiboContentTextView.frame.size.width,
+                                                         self.weiboContentTextView.frame.size.height + kbSize.height);
+             
+             self.footerView.center = CGPointMake(self.footerView.center.x,
+                                                  self.footerView.center.y + kbSize.height);
+         }];
+        self.isKeypadShow = NO;
+    }
 }
 
 - (void)onBackButtonClicked {
