@@ -214,8 +214,8 @@
 		CE20C40F156752930031997B /* weibo_sample1.png in Resources */ = {isa = PBXBuildFile; fileRef = CE20C3F0156752930031997B /* weibo_sample1.png */; };
 		CE20C410156752930031997B /* weibo_sample2.png in Resources */ = {isa = PBXBuildFile; fileRef = CE20C3F1156752930031997B /* weibo_sample2.png */; };
 		CE20C411156752930031997B /* weibo_sample3.png in Resources */ = {isa = PBXBuildFile; fileRef = CE20C3F2156752930031997B /* weibo_sample3.png */; };
-		CE20C428156773C40031997B /* weibodaren_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE20C427156773C30031997B /* weibodaren_logo@2x.png */; };
-		CE20C42A156773E10031997B /* weibodaren_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = CE20C429156773E10031997B /* weibodaren_logo.png */; };
+		CE20C435156776D30031997B /* beautifuldaren_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE20C434156776D20031997B /* beautifuldaren_logo@2x.png */; };
+		CE20C437156776E60031997B /* beautifuldaren_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = CE20C436156776E60031997B /* beautifuldaren_logo.png */; };
 		CE38B7EE15483CB10080DD99 /* QZoneSDKManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE38B7ED15483CB10080DD99 /* QZoneSDKManager.m */; };
 		CE38B987154990E60080DD99 /* cammer_button_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CE38B984154990E60080DD99 /* cammer_button_bg.png */; };
 		CE38B988154990E60080DD99 /* cammer_button_disable_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CE38B985154990E60080DD99 /* cammer_button_disable_bg.png */; };
@@ -596,8 +596,8 @@
 		CE20C3F0156752930031997B /* weibo_sample1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weibo_sample1.png; sourceTree = "<group>"; };
 		CE20C3F1156752930031997B /* weibo_sample2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weibo_sample2.png; sourceTree = "<group>"; };
 		CE20C3F2156752930031997B /* weibo_sample3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weibo_sample3.png; sourceTree = "<group>"; };
-		CE20C427156773C30031997B /* weibodaren_logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weibodaren_logo@2x.png"; sourceTree = "<group>"; };
-		CE20C429156773E10031997B /* weibodaren_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weibodaren_logo.png; sourceTree = "<group>"; };
+		CE20C434156776D20031997B /* beautifuldaren_logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "beautifuldaren_logo@2x.png"; sourceTree = "<group>"; };
+		CE20C436156776E60031997B /* beautifuldaren_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = beautifuldaren_logo.png; sourceTree = "<group>"; };
 		CE38B7EC15483CB10080DD99 /* QZoneSDKManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QZoneSDKManager.h; path = Tencent/QZoneSDKManager.h; sourceTree = "<group>"; };
 		CE38B7ED15483CB10080DD99 /* QZoneSDKManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QZoneSDKManager.m; path = Tencent/QZoneSDKManager.m; sourceTree = "<group>"; };
 		CE38B984154990E60080DD99 /* cammer_button_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cammer_button_bg.png; sourceTree = "<group>"; };
@@ -1316,7 +1316,7 @@
 		CECE29F41562B38E00E2A40A /* 320*480 */ = {
 			isa = PBXGroup;
 			children = (
-				CE20C429156773E10031997B /* weibodaren_logo.png */,
+				CE20C436156776E60031997B /* beautifuldaren_logo.png */,
 				CE20C3D4156752930031997B /* back_buttion.png */,
 				CE20C3D5156752930031997B /* banner_close_btn.png */,
 				CE20C3D6156752930031997B /* banner_switcher_focus.png */,
@@ -1353,7 +1353,7 @@
 		CECE2A171562B39800E2A40A /* 960x640 */ = {
 			isa = PBXGroup;
 			children = (
-				CE20C427156773C30031997B /* weibodaren_logo@2x.png */,
+				CE20C434156776D20031997B /* beautifuldaren_logo@2x.png */,
 				CE20C392156752790031997B /* back_button@2x.png */,
 				CE20C393156752790031997B /* banner_close_btn@2x.png */,
 				CE20C394156752790031997B /* banner_switcher_focus@2x.png */,
@@ -1697,8 +1697,8 @@
 				CE20C40F156752930031997B /* weibo_sample1.png in Resources */,
 				CE20C410156752930031997B /* weibo_sample2.png in Resources */,
 				CE20C411156752930031997B /* weibo_sample3.png in Resources */,
-				CE20C428156773C40031997B /* weibodaren_logo@2x.png in Resources */,
-				CE20C42A156773E10031997B /* weibodaren_logo.png in Resources */,
+				CE20C435156776D30031997B /* beautifuldaren_logo@2x.png in Resources */,
+				CE20C437156776E60031997B /* beautifuldaren_logo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
