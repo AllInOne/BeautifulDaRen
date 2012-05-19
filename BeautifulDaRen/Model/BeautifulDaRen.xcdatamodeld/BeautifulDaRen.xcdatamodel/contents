@@ -9,6 +9,29 @@
         <attribute name="weiBoId" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="userIdentity" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="UserIdentity" inverseName="comments" inverseEntity="UserIdentity" syncable="YES"/>
     </entity>
+    <entity name="Forward" syncable="YES">
+        <attribute name="detail" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isToMe" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="timeStamp" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="uniqueId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="weiboId" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Friend" syncable="YES">
+        <attribute name="buyedCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="collectionCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="displayName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="fansCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="followCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="isFans" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="isFollow" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="isMale" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="level" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="localCity" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="phoneNumber" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="topicCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="uniqueId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="weiboCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    </entity>
     <entity name="PrivateLetter" representedClassName="PrivateLetter" syncable="YES">
         <attribute name="detail" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="personId" optional="YES" attributeType="String" syncable="YES"/>
@@ -35,9 +58,20 @@
         <relationship name="comments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Comment" inverseName="userIdentity" inverseEntity="Comment" syncable="YES"/>
         <relationship name="privateLetters" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PrivateLetter" inverseName="userIdentity" inverseEntity="PrivateLetter" syncable="YES"/>
     </entity>
+    <entity name="Weibo" syncable="YES">
+        <attribute name="creatorId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="detail" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="displayName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isCreateByMe" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="timeStamp" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="uniqueId" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <elements>
         <element name="Comment" positionX="-4086" positionY="-2925" width="128" height="150"/>
         <element name="PrivateLetter" positionX="-4104" positionY="-2952" width="128" height="150"/>
         <element name="UserIdentity" positionX="-63" positionY="-27" width="128" height="270"/>
+        <element name="Forward" positionX="160" positionY="192" width="128" height="120"/>
+        <element name="Friend" positionX="160" positionY="192" width="128" height="255"/>
+        <element name="Weibo" positionX="160" positionY="192" width="128" height="135"/>
     </elements>
 </model>
