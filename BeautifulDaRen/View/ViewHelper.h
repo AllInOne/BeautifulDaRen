@@ -25,4 +25,7 @@
 + (UIBarButtonItem*)getRightBarItemOfTarget1:(id)target1 action1:(SEL)action1 title1:(NSString*)title1 target2:(id)target2 action2:(SEL)action2 title2:(NSString*)title2;
 
 + (UIBarButtonItem*)getToolBarItemOfImageName:(NSString*)image target:(id)target action:(SEL)action;
+
++ (UIImage*) getBubbleImageWithWidth:(NSInteger)width height:(NSInteger)height;
+
 @end

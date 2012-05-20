@@ -128,6 +128,20 @@
     button.titleEdgeInsets = UIEdgeInsetsMake(0, 40, 0, 0);
     
     return [[[UIBarButtonItem alloc] initWithCustomView:button] autorelease];
+}
 
++ (UIImage*) getBubbleImageWithWidth:(NSInteger)width height:(NSInteger)height
+{
+    static NSString * bubbleImageName = @"fake_message_bubble";
+    UIImage * image = nil;
+//    if([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0)
+//    {
+//        imageView.image = [[UIImage imageNamed:bubbleImageName] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+//    }
+//    else
+//    {
+        image = [[UIImage imageNamed:bubbleImageName] stretchableImageWithLeftCapWidth:30 topCapHeight:25];
+//    }
+    return image;
 }
 @end
