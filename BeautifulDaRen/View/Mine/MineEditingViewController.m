@@ -46,7 +46,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.navigationItem setLeftBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onBackButtonClicked) title:@"返回"]];
+    [self.navigationItem setTitle:NSLocalizedString(@"edit_profile", @"edit_profile")];
+    [self.navigationItem setLeftBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
+    [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onFindPasswordButtonClicked) title:NSLocalizedString(@"save", @"save")]];
 }
 
 - (void)viewDidUnload
@@ -101,7 +103,7 @@
         }
         case 2:
         {
-            number = 4;
+            number = 6;
             break;
         }
     }
@@ -128,11 +130,15 @@
     }
     else if(section == 1)
     {
-        // TODO 
-        cell = [[[UITableViewCell alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 40.0f)] autorelease];
-        UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(30, 0, 40, 40)];
-        label.text = @"性别";
-        [cell addSubview:label];
+        cell = [tableView dequeueReusableCellWithIdentifier:buttonViewCellIdentifier];
+        if (cell == nil) {
+            cell = [[[NSBundle mainBundle] loadNibNamed:buttonViewCellIdentifier owner:self options:nil] objectAtIndex:5];
+        }
+        ButtonViewCell * buttonViewCell = (ButtonViewCell*)cell;
+        buttonViewCell.leftLabel.text = NSLocalizedString(@"gender", @"gender");
+        [buttonViewCell.segmentedControl setTitle:NSLocalizedString(@"female", @"gender") forSegmentAtIndex:0];
+        [buttonViewCell.segmentedControl setTitle:NSLocalizedString(@"male", @"gender") forSegmentAtIndex:1];
+        [buttonViewCell.segmentedControl addTarget:self action:@selector(genderSelected:) forControlEvents:UIControlEventValueChanged];
         cell.backgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
     }
     else if(section == 2)
@@ -141,29 +147,46 @@
         if (cell == nil) {
             cell = [[[NSBundle mainBundle] loadNibNamed:buttonViewCellIdentifier owner:self options:nil] objectAtIndex:3];
         }
+        ButtonViewCell * buttonViewCell = (ButtonViewCell*)cell;
         switch ([indexPath row]) {
             case 0:
             {
-                ((ButtonViewCell*)cell).leftLabel.text = NSLocalizedString(@"nickname", @"");
+                buttonViewCell.leftLabel.text = NSLocalizedString(@"nickname", @"");
+                buttonViewCell.buttonText.text = @"JerryLee";
                 break;
             }
             case 1:
             {
-                ((ButtonViewCell*)cell).leftLabel.text = NSLocalizedString(@"brief", @"");
+                buttonViewCell.leftLabel.text = NSLocalizedString(@"city", @"");
+                buttonViewCell.buttonText.text = @"成都";
                 break;
             }
             case 2:
             {
-                ((ButtonViewCell*)cell).leftLabel.text = NSLocalizedString(@"city", @"");
+                buttonViewCell.leftLabel.text = NSLocalizedString(@"address", @"");
+                buttonViewCell.buttonText.text = @"锦江区";
                 break;
             }
             case 3:
             {
-                ((ButtonViewCell*)cell).leftLabel.text = NSLocalizedString(@"privacy", @"");
+                buttonViewCell.leftLabel.text = NSLocalizedString(@"phone", @"");
+                buttonViewCell.buttonText.text = @"+8612345678901";
                 break;
-            }   
+            }
+            case 4:
+            {
+                buttonViewCell.leftLabel.text = NSLocalizedString(@"senior", @"");
+                buttonViewCell.buttonText.text = @"高级内容";
+                break;
+            } 
+            case 5:
+            {
+                buttonViewCell.leftLabel.text = NSLocalizedString(@"brief", @"");
+                buttonViewCell.buttonText.text = @"中国四川成都";
+                break;
+            } 
         }
-        ((ButtonViewCell*)cell).buttonRightIcon.image = [UIImage imageNamed:@"next_flag"];
+        buttonViewCell.buttonRightIcon.image = [UIImage imageNamed:@"next_flag"];
     }
     return cell;
 }
@@ -186,7 +209,7 @@
         }
         case 2:
         {
-            height = 60.0f;
+            height = 40.0f;
             break;
         }    }
     return height;
@@ -242,6 +265,33 @@
      [self.navigationController pushViewController:detailViewController animated:YES];
      [detailViewController release];
      */
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 3;
+}
+
+-(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    
+    return [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 3;
+}
+
+- (UIView*) tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    return [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+}
+
+- (void) genderSelected:(UISegmentedControl*)segmentedControl
+{
+    [ViewHelper showSimpleMessage:@"你修改了性别" withTitle:nil withButtonText:@"好"];
 }
 
 #pragma mark ButtonPressDelegate

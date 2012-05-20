@@ -16,9 +16,9 @@
 @property (retain, nonatomic) IBOutlet UIImageView * buttonRightIcon;
 @property (retain, nonatomic) IBOutlet UILabel * buttonRightText;
 @property (retain, nonatomic) IBOutlet UILabel * leftLabel;
-@property (retain, nonatomic) IBOutlet UITextView * inputTextView;
 @property (retain, nonatomic) IBOutlet UIButton * leftButton;
 @property (retain, nonatomic) IBOutlet UIButton * rightButton;
+@property (retain, nonatomic) IBOutlet UISegmentedControl * segmentedControl;
 
 @property (retain, nonatomic) id<ButtonPressDelegate> delegate;
 
