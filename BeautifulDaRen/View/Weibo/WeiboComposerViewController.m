@@ -87,6 +87,12 @@
     {
         [self.cameraButton setImage:self.selectedImage forState:UIControlStateNormal];
     }
+
+    UIImageView * toolbarBg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"toolbar_background"]];
+    toolbarBg.contentMode = UIViewContentModeScaleToFill;
+    [self.footerView  insertSubview:toolbarBg atIndex:0];
+    
+    [toolbarBg release];
     
     _attachedImageView.hidden = YES;
 }

@@ -37,11 +37,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "BeautifulDaRen/View/Weibo/WeiboComposerViewController.m"
-         timestampString = "359120893.942171"
+         timestampString = "359121875.919155"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "96"
-         endingLineNumber = "96"
+         startingLineNumber = "102"
+         endingLineNumber = "102"
          landmarkName = "-viewDidUnload"
          landmarkType = "5">
       </FileBreakpoint>

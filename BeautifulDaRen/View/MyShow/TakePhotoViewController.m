@@ -165,6 +165,7 @@
                 [self.toolbarView  insertSubview:tabBarBg atIndex:1];            
             }
             [self setToolbar];
+            [tabBarBg release];
             [self.imagePickerController.cameraOverlayView addSubview:self.toolbarView];
         }
     }
