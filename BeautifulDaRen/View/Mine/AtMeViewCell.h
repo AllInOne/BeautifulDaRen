@@ -17,6 +17,8 @@
 @property (retain, nonatomic) IBOutlet UILabel * shopNameLabel;
 @property (retain, nonatomic) IBOutlet UILabel * brandLabel;
 @property (retain, nonatomic) IBOutlet UILabel * costLabel;
-@property (retain, nonatomic) IBOutlet UITextView * descriptionView;
+@property (retain, nonatomic) IBOutlet UILabel * descriptionLabel;
+@property (retain, nonatomic) IBOutlet UIView * weiboView;
+@property (retain, nonatomic) IBOutlet UIImageView * weiboImageView;
 
 @end

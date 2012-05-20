@@ -16,7 +16,9 @@
 @synthesize shopNameLabel;
 @synthesize brandLabel;
 @synthesize costLabel;
-@synthesize descriptionView;
+@synthesize descriptionLabel;
+@synthesize weiboView;
+@synthesize weiboImageView;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

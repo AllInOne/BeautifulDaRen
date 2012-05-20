@@ -34,6 +34,7 @@
 		C2319FBA156145BC005CCD4E /* AtMeViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C2319FB9156145BC005CCD4E /* AtMeViewCell.m */; };
 		C2319FBC156145DC005CCD4E /* AtMeViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2319FBB156145DC005CCD4E /* AtMeViewCell.xib */; };
 		C236348215678917008BE9BB /* LoadFakeData.m in Sources */ = {isa = PBXBuildFile; fileRef = C236348115678917008BE9BB /* LoadFakeData.m */; };
+		C23634AE156801B7008BE9BB /* fake_message_bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = C23634AD156801B7008BE9BB /* fake_message_bubble.png */; };
 		C24B1008155BDB1100918530 /* MineEditingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C24B1006155BDB1000918530 /* MineEditingViewController.m */; };
 		C24B1009155BDB1100918530 /* MineEditingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C24B1007155BDB1100918530 /* MineEditingViewController.xib */; };
 		C24B11A015499641004F6F8E /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C24B119E15499641004F6F8E /* RegisterViewController.m */; };
@@ -342,6 +343,7 @@
 		C233C147155F779D0038BAB6 /* AdsPageViewProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AdsPageViewProtocol.h; path = Protocol/AdsPageViewProtocol.h; sourceTree = "<group>"; };
 		C236348015678917008BE9BB /* LoadFakeData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadFakeData.h; sourceTree = "<group>"; };
 		C236348115678917008BE9BB /* LoadFakeData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadFakeData.m; sourceTree = "<group>"; };
+		C23634AD156801B7008BE9BB /* fake_message_bubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fake_message_bubble.png; path = fake_image/fake_message_bubble.png; sourceTree = "<group>"; };
 		C24B1005155BDB0F00918530 /* MineEditingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineEditingViewController.h; sourceTree = "<group>"; };
 		C24B1006155BDB1000918530 /* MineEditingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineEditingViewController.m; sourceTree = "<group>"; };
 		C24B1007155BDB1100918530 /* MineEditingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MineEditingViewController.xib; sourceTree = "<group>"; };
@@ -742,6 +744,7 @@
 		C28D6A9E15502ED9005E14CE /* fake image */ = {
 			isa = PBXGroup;
 			children = (
+				C23634AD156801B7008BE9BB /* fake_message_bubble.png */,
 				C2519FAC156522240040EBC5 /* fake_item5.png */,
 				C2519FAD156522240040EBC5 /* fake_item6.png */,
 				C2519FAE156522250040EBC5 /* fake_item7.png */,
@@ -1692,6 +1695,7 @@
 				CE20C411156752930031997B /* weibo_sample3.png in Resources */,
 				CE20C435156776D30031997B /* beautifuldaren_logo@2x.png in Resources */,
 				CE20C437156776E60031997B /* beautifuldaren_logo.png in Resources */,
+				C23634AE156801B7008BE9BB /* fake_message_bubble.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

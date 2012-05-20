@@ -277,8 +277,10 @@
             }
             case 1:
             {
-                PrivateLetterViewController * privateLetterViewController = [[[PrivateLetterViewController alloc] initWithNibName:@"PrivateLetterViewController" bundle:nil] autorelease];
-                [self.navigationController pushViewController:privateLetterViewController animated:YES];
+                // TODO
+                [ViewHelper showSimpleMessage:@"暂不支持私信" withTitle:@"抱歉" withButtonText:@"好的"];
+//                PrivateLetterViewController * privateLetterViewController = [[[PrivateLetterViewController alloc] initWithNibName:@"PrivateLetterViewController" bundle:nil] autorelease];
+//                [self.navigationController pushViewController:privateLetterViewController animated:YES];
                 break;
             }
             case 2:
