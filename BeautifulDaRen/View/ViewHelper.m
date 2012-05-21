@@ -124,6 +124,9 @@
     [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     
     button.frame = CGRectMake(0, 0, 22, 22);
+
+    button.titleEdgeInsets = UIEdgeInsetsMake(0, 40, 0, 0);
+    
     return [[[UIBarButtonItem alloc] initWithCustomView:button] autorelease];
 }
 

@@ -67,6 +67,12 @@
         self.navigationItem.title = @"评论";
     }
     
+    UIImageView * toolbarBg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"toolbar_background"]];
+    toolbarBg.contentMode = UIViewContentModeScaleToFill;
+    [self.footerView  insertSubview:toolbarBg atIndex:0];
+    
+    [toolbarBg release];
+    
     [_weiboContentTextView becomeFirstResponder];
 }
 
