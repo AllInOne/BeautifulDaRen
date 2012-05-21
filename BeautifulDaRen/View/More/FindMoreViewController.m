@@ -9,11 +9,11 @@
 #import "FindMoreViewController.h"
 #import "ContactItemCell.h"
 
-#define X_OFFSET 5
-#define X_DELTA 60
+#define X_OFFSET 7
 @interface FindMoreViewController()
 
 @property (retain, nonatomic) IBOutlet UIButton * followOrInviteSinaWeiboFriendButton;
+@property (retain, nonatomic) IBOutlet UIScrollView * contentScrollView;
 @property (retain, nonatomic) IBOutlet UIScrollView * sameCityDaRenView;
 @property (retain, nonatomic) IBOutlet UIScrollView * youMayInterestinView;
 @property (retain, nonatomic) IBOutlet UIScrollView * hotDaRenView;
@@ -28,6 +28,7 @@
 @synthesize sameCityDaRenView = _sameCityDaRenView;
 @synthesize youMayInterestinView = _youMayInterestinView;
 @synthesize hotDaRenView = _hotDaRenView;
+@synthesize contentScrollView = _contentScrollView;
 
 @synthesize followOrInviteSinaWeiboFriendButton = _followOrInviteSinaWeiboFriendButton;
 
@@ -54,15 +55,16 @@
     NSInteger scrollWidth = 0;
     for (int i = 0; i < 10; i++) {
         ContactItemCell * cell = [[[NSBundle mainBundle] loadNibNamed:cellViewIdentifier owner:self options:nil] objectAtIndex:0];
-        cell.frame = CGRectMake(i * X_DELTA, 0,
+        
+        cell.frame = CGRectMake(i * (cell.frame.size.width + X_OFFSET), 0,
                                 cell.frame.size.width,
                                 cell.frame.size.height);
-        scrollWidth += X_DELTA;
+        scrollWidth += (cell.frame.size.width + X_OFFSET);
         
         [_sameCityDaRenView addSubview:cell];
         
         cell.contactImageView.image = [UIImage imageNamed:@"item_fake"];
-        
+        cell.contactLabel.text = @"宇多田光";
     }
     [_sameCityDaRenView setContentSize:CGSizeMake(scrollWidth, 0)];
 }
@@ -73,15 +75,15 @@
     NSInteger scrollWidth = 0;
     for (int i = 0; i < 10; i++) {
         ContactItemCell * cell = [[[NSBundle mainBundle] loadNibNamed:cellViewIdentifier owner:self options:nil] objectAtIndex:0];
-        cell.frame = CGRectMake(i * X_DELTA, 0,
+        cell.frame = CGRectMake(i * (cell.frame.size.width + X_OFFSET), 0,
                                 cell.frame.size.width,
                                 cell.frame.size.height);
-        scrollWidth += X_DELTA;
+        scrollWidth += (cell.frame.size.width + X_OFFSET);
         
         [_youMayInterestinView addSubview:cell];
         
-        cell.contactImageView.image = [UIImage imageNamed:@"item_fake"];
-        
+        cell.contactImageView.image = [UIImage imageNamed:@"fake_item11"];
+        cell.contactLabel.text = @"张东健";
     }
     [_youMayInterestinView setContentSize:CGSizeMake(scrollWidth, 0)];
 }
@@ -92,15 +94,15 @@
     NSInteger scrollWidth = 0;
     for (int i = 0; i < 10; i++) {
         ContactItemCell * cell = [[[NSBundle mainBundle] loadNibNamed:cellViewIdentifier owner:self options:nil] objectAtIndex:0];
-        cell.frame = CGRectMake(i * X_DELTA, 0,
+        cell.frame = CGRectMake(i * (cell.frame.size.width + X_OFFSET), 0,
                                 cell.frame.size.width,
                                 cell.frame.size.height);
-        scrollWidth += X_DELTA;
+        scrollWidth += (cell.frame.size.width + X_OFFSET);
         
         [_hotDaRenView addSubview:cell];
         
-        cell.contactImageView.image = [UIImage imageNamed:@"item_fake"];
-        
+        cell.contactImageView.image = [UIImage imageNamed:@"fake_item9"];
+        cell.contactLabel.text = @"谢霆锋";
     }
     [_hotDaRenView setContentSize:CGSizeMake(scrollWidth, 0)];
 }
@@ -123,6 +125,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [_contentScrollView setContentSize:CGSizeMake(0, 450)];
+
     [self refreshView];
 }
 
