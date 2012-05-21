@@ -14,6 +14,8 @@
 		C20BD4B315591F72006BEEC8 /* FindMoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C20BD4B115591F71006BEEC8 /* FindMoreViewController.xib */; };
 		C20FAB0E1559539400895272 /* ContactItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C20FAB0D1559539400895272 /* ContactItemCell.m */; };
 		C20FAB10155953A600895272 /* ContactItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C20FAB0F155953A600895272 /* ContactItemCell.xib */; };
+		C2118B7515692D56006F4551 /* CommentOrForwardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2118B7315692D56006F4551 /* CommentOrForwardViewController.m */; };
+		C2118B7615692D56006F4551 /* CommentOrForwardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2118B7415692D56006F4551 /* CommentOrForwardViewController.xib */; };
 		C2139A6A1564087600C3922D /* PrivateLetterViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C2139A691564087600C3922D /* PrivateLetterViewCell.m */; };
 		C2139A7515640E2900C3922D /* PrivateLetterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2139A7315640E2900C3922D /* PrivateLetterViewController.m */; };
 		C213AB97155C11F900667556 /* next_flag.png in Resources */ = {isa = PBXBuildFile; fileRef = C213AB96155C11F900667556 /* next_flag.png */; };
@@ -29,8 +31,6 @@
 		C2319FAF1560EF7B005CCD4E /* qq_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C2319FAD1560EF7A005CCD4E /* qq_icon.png */; };
 		C2319FB01560EF7B005CCD4E /* sina_weibo_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C2319FAE1560EF7A005CCD4E /* sina_weibo_icon.png */; };
 		C2319FB21560F9AA005CCD4E /* HomeViewHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2319FB11560F9AA005CCD4E /* HomeViewHeaderView.xib */; };
-		C2319FB61561446B005CCD4E /* AtMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2319FB41561446A005CCD4E /* AtMeViewController.m */; };
-		C2319FB71561446B005CCD4E /* AtMeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2319FB51561446B005CCD4E /* AtMeViewController.xib */; };
 		C2319FBA156145BC005CCD4E /* AtMeViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C2319FB9156145BC005CCD4E /* AtMeViewCell.m */; };
 		C2319FBC156145DC005CCD4E /* AtMeViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2319FBB156145DC005CCD4E /* AtMeViewCell.xib */; };
 		C236348215678917008BE9BB /* LoadFakeData.m in Sources */ = {isa = PBXBuildFile; fileRef = C236348115678917008BE9BB /* LoadFakeData.m */; };
@@ -311,6 +311,9 @@
 		C20FAB0C1559539400895272 /* ContactItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactItemCell.h; sourceTree = "<group>"; };
 		C20FAB0D1559539400895272 /* ContactItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactItemCell.m; sourceTree = "<group>"; };
 		C20FAB0F155953A600895272 /* ContactItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactItemCell.xib; sourceTree = "<group>"; };
+		C2118B7215692D56006F4551 /* CommentOrForwardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentOrForwardViewController.h; sourceTree = "<group>"; };
+		C2118B7315692D56006F4551 /* CommentOrForwardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentOrForwardViewController.m; sourceTree = "<group>"; };
+		C2118B7415692D56006F4551 /* CommentOrForwardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentOrForwardViewController.xib; sourceTree = "<group>"; };
 		C2139A681564087600C3922D /* PrivateLetterViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivateLetterViewCell.h; sourceTree = "<group>"; };
 		C2139A691564087600C3922D /* PrivateLetterViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivateLetterViewCell.m; sourceTree = "<group>"; };
 		C2139A7215640E2900C3922D /* PrivateLetterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivateLetterViewController.h; sourceTree = "<group>"; };
@@ -334,9 +337,6 @@
 		C2319FAD1560EF7A005CCD4E /* qq_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = qq_icon.png; sourceTree = "<group>"; };
 		C2319FAE1560EF7A005CCD4E /* sina_weibo_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sina_weibo_icon.png; sourceTree = "<group>"; };
 		C2319FB11560F9AA005CCD4E /* HomeViewHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewHeaderView.xib; sourceTree = "<group>"; };
-		C2319FB31561446A005CCD4E /* AtMeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AtMeViewController.h; sourceTree = "<group>"; };
-		C2319FB41561446A005CCD4E /* AtMeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AtMeViewController.m; sourceTree = "<group>"; };
-		C2319FB51561446B005CCD4E /* AtMeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AtMeViewController.xib; sourceTree = "<group>"; };
 		C2319FB8156145BC005CCD4E /* AtMeViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AtMeViewCell.h; sourceTree = "<group>"; };
 		C2319FB9156145BC005CCD4E /* AtMeViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AtMeViewCell.m; sourceTree = "<group>"; };
 		C2319FBB156145DC005CCD4E /* AtMeViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AtMeViewCell.xib; sourceTree = "<group>"; };
@@ -1289,12 +1289,12 @@
 				C24B1005155BDB0F00918530 /* MineEditingViewController.h */,
 				C24B1006155BDB1000918530 /* MineEditingViewController.m */,
 				C24B1007155BDB1100918530 /* MineEditingViewController.xib */,
-				C2319FB31561446A005CCD4E /* AtMeViewController.h */,
-				C2319FB41561446A005CCD4E /* AtMeViewController.m */,
-				C2319FB51561446B005CCD4E /* AtMeViewController.xib */,
 				C2139A7215640E2900C3922D /* PrivateLetterViewController.h */,
 				C2139A7315640E2900C3922D /* PrivateLetterViewController.m */,
 				C2139A7415640E2900C3922D /* PrivateLetterViewController.xib */,
+				C2118B7215692D56006F4551 /* CommentOrForwardViewController.h */,
+				C2118B7315692D56006F4551 /* CommentOrForwardViewController.m */,
+				C2118B7415692D56006F4551 /* CommentOrForwardViewController.xib */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -1620,7 +1620,6 @@
 				C2319FAF1560EF7B005CCD4E /* qq_icon.png in Resources */,
 				C2319FB01560EF7B005CCD4E /* sina_weibo_icon.png in Resources */,
 				C2319FB21560F9AA005CCD4E /* HomeViewHeaderView.xib in Resources */,
-				C2319FB71561446B005CCD4E /* AtMeViewController.xib in Resources */,
 				C2319FBC156145DC005CCD4E /* AtMeViewCell.xib in Resources */,
 				C22CC1841563A3A7000DF1BD /* HelpViewController.xib in Resources */,
 				C2519FA81564FFF10040EBC5 /* fake_item1.png in Resources */,
@@ -1696,6 +1695,7 @@
 				CE20C435156776D30031997B /* beautifuldaren_logo@2x.png in Resources */,
 				CE20C437156776E60031997B /* beautifuldaren_logo.png in Resources */,
 				C23634AE156801B7008BE9BB /* fake_message_bubble.png in Resources */,
+				C2118B7615692D56006F4551 /* CommentOrForwardViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1790,7 +1790,6 @@
 				C274DCBE155EB7BA0098EE22 /* UserIdentity.m in Sources */,
 				C274DCC1155EB99B0098EE22 /* CoreDataManager.m in Sources */,
 				CEF1FE27155F655B005DFDC8 /* PhotoConfirmViewController.m in Sources */,
-				C2319FB61561446B005CCD4E /* AtMeViewController.m in Sources */,
 				C2319FBA156145BC005CCD4E /* AtMeViewCell.m in Sources */,
 				C22CC1831563A3A7000DF1BD /* HelpViewController.m in Sources */,
 				C2139A6A1564087600C3922D /* PrivateLetterViewCell.m in Sources */,
@@ -1799,6 +1798,7 @@
 				C2A810DD1566611E008FF2B7 /* PrivateLetter.m in Sources */,
 				C2A810E01566611F008FF2B7 /* Comment.m in Sources */,
 				C236348215678917008BE9BB /* LoadFakeData.m in Sources */,
+				C2118B7515692D56006F4551 /* CommentOrForwardViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

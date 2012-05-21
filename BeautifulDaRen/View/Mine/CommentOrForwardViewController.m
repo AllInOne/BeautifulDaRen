@@ -1,31 +1,34 @@
-//
-//  AtMeViewController.m
-//  BeautifulDaRen
-//
-//  Created by gang liu on 5/14/12.
-//  Copyright (c) 2012 myriad. All rights reserved.
-//
-
-#import "AtMeViewController.h"
+#import "CommentOrForwardViewController.h"
 #import "AtMeViewCell.h"
 #import "ViewHelper.h"
 
-@interface AtMeViewController()
+@interface CommentOrForwardViewController()
 
 @property (retain, nonatomic) IBOutlet UITableView * tableView;
 
+@property (assign, nonatomic) NSInteger controllerType;
+
 @end
 
-@implementation AtMeViewController
+@implementation CommentOrForwardViewController
 @synthesize tableView = _tableView;
+@synthesize controllerType = _controllerType;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil type:(NSInteger)type
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        [self.navigationItem setTitle:NSLocalizedString(@"@me", @"@me")];
         [self.navigationItem setLeftBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
         [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClicked) title:NSLocalizedString(@"refresh", @"refresh")]];
+        _controllerType = type;
+        if(_controllerType == CommentOrForwardViewControllerType_FORWARD)
+        {
+            [self.navigationItem setTitle:NSLocalizedString(@"@me", @"@me")];
+        }
+        else
+        {
+            [self.navigationItem setTitle:NSLocalizedString(@"comment_me", @"comment_me")];
+        }
     }
     return self;
 }

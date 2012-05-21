@@ -13,7 +13,7 @@
 #import "ButtonViewCell.h"
 #import "ViewConstants.h"
 #import "DataManager.h"
-#import "AtMeViewController.h"
+#import "CommentOrForwardViewController.h"
 #import "ViewHelper.h"
 #import "PrivateLetterViewController.h"
 
@@ -285,15 +285,16 @@
             }
             case 2:
             {
-                AtMeViewController * atMeViewController = [[[AtMeViewController alloc] initWithNibName:@"AtMeViewController" bundle:nil] autorelease];
+                CommentOrForwardViewController * forwardViewController = [[[CommentOrForwardViewController alloc] initWithNibName:@"CommentOrForwardViewController" bundle:nil type:CommentOrForwardViewControllerType_FORWARD] autorelease];
                 
-                [self.navigationController pushViewController:atMeViewController animated:YES];
+                [self.navigationController pushViewController:forwardViewController animated:YES];
                 break;
             }
             case 3:
             {
-                // TODO
-                NSLog(@"To handle press comment me");
+                CommentOrForwardViewController * forwardViewController = [[[CommentOrForwardViewController alloc] initWithNibName:@"CommentOrForwardViewController" bundle:nil type:CommentOrForwardViewControllerType_COMMENT] autorelease];
+                
+                [self.navigationController pushViewController:forwardViewController animated:YES];
                 break;
             }
         }

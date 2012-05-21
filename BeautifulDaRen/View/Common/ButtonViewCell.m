@@ -13,10 +13,10 @@
 @synthesize buttonLeftIcon;
 @synthesize buttonText;
 @synthesize buttonRightText;
-@synthesize inputTextView = _inputTextView;
-@synthesize leftLabel = _leftLabel;
-@synthesize leftButton = _leftButton;
-@synthesize rightButton = _rightButton;
+@synthesize leftLabel;
+@synthesize leftButton;
+@synthesize rightButton;
+@synthesize segmentedControl;
 
 @synthesize delegate;
 

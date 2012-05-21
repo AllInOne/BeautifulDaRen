@@ -44,6 +44,7 @@
 "my_gender" = "我的性别";
 "add_avatar" = "添加头像";
 "set_avatar" = "设置头像";
+"gender" = "性别";
 "female" = "女";
 "male" = "男";
 
@@ -61,7 +62,10 @@
 
 "nickname" = "昵称";
 "city" = "城市";
+"address" = "地址";
+"phone" = "电话";
 "brief" = "简介";
+"senior" = "高级";
 "privacy" = "隐私";
 
 "sent_password_to_email" = "密码已发至邮箱，请查收";
@@ -69,3 +73,6 @@
 "ok_I_know" = "我知道了";
 "refresh" = "刷新";
 "@me" = "@我的";
+
+"edit_profile" = "编辑个人资料";
+"save" = "保存";
