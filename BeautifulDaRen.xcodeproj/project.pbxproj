@@ -86,6 +86,10 @@
 		C2A810C31566230A008FF2B7 /* PrivateLetterViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2A810C21566230A008FF2B7 /* PrivateLetterViewCell.xib */; };
 		C2A810DD1566611E008FF2B7 /* PrivateLetter.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A810DC1566611E008FF2B7 /* PrivateLetter.m */; };
 		C2A810E01566611F008FF2B7 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A810DF1566611F008FF2B7 /* Comment.m */; };
+		C2CE7287156A929F00C22E34 /* FriendDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2CE7285156A929F00C22E34 /* FriendDetailViewController.m */; };
+		C2CE7288156A929F00C22E34 /* FriendDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2CE7286156A929F00C22E34 /* FriendDetailViewController.xib */; };
+		C2CE728C156A945600C22E34 /* FindWeiboViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2CE728A156A945600C22E34 /* FindWeiboViewController.m */; };
+		C2CE728D156A945600C22E34 /* FindWeiboViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2CE728B156A945600C22E34 /* FindWeiboViewController.xib */; };
 		CE029ABF153E682100886227 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE029ABE153E682100886227 /* UIKit.framework */; };
 		CE029AC1153E682100886227 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE029AC0153E682100886227 /* Foundation.framework */; };
 		CE029AC3153E682100886227 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE029AC2153E682100886227 /* CoreGraphics.framework */; };
@@ -415,6 +419,12 @@
 		C2A810DC1566611E008FF2B7 /* PrivateLetter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivateLetter.m; sourceTree = "<group>"; };
 		C2A810DE1566611F008FF2B7 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
 		C2A810DF1566611F008FF2B7 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
+		C2CE7284156A929E00C22E34 /* FriendDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendDetailViewController.h; sourceTree = "<group>"; };
+		C2CE7285156A929F00C22E34 /* FriendDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendDetailViewController.m; sourceTree = "<group>"; };
+		C2CE7286156A929F00C22E34 /* FriendDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendDetailViewController.xib; sourceTree = "<group>"; };
+		C2CE7289156A945500C22E34 /* FindWeiboViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindWeiboViewController.h; sourceTree = "<group>"; };
+		C2CE728A156A945600C22E34 /* FindWeiboViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindWeiboViewController.m; sourceTree = "<group>"; };
+		C2CE728B156A945600C22E34 /* FindWeiboViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FindWeiboViewController.xib; sourceTree = "<group>"; };
 		CE029ABA153E682100886227 /* BeautifulDaRen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeautifulDaRen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE029ABE153E682100886227 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CE029AC0153E682100886227 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -1319,6 +1329,12 @@
 				C20BD4AF15591F70006BEEC8 /* FindMoreViewController.h */,
 				C20BD4B015591F71006BEEC8 /* FindMoreViewController.m */,
 				C20BD4B115591F71006BEEC8 /* FindMoreViewController.xib */,
+				C2CE7284156A929E00C22E34 /* FriendDetailViewController.h */,
+				C2CE7285156A929F00C22E34 /* FriendDetailViewController.m */,
+				C2CE7286156A929F00C22E34 /* FriendDetailViewController.xib */,
+				C2CE7289156A945500C22E34 /* FindWeiboViewController.h */,
+				C2CE728A156A945600C22E34 /* FindWeiboViewController.m */,
+				C2CE728B156A945600C22E34 /* FindWeiboViewController.xib */,
 			);
 			path = More;
 			sourceTree = "<group>";
@@ -1704,6 +1720,8 @@
 				CE20C437156776E60031997B /* beautifuldaren_logo.png in Resources */,
 				C23634AE156801B7008BE9BB /* fake_message_bubble.png in Resources */,
 				C2118B7615692D56006F4551 /* CommentOrForwardViewController.xib in Resources */,
+				C2CE7288156A929F00C22E34 /* FriendDetailViewController.xib in Resources */,
+				C2CE728D156A945600C22E34 /* FindWeiboViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1807,6 +1825,8 @@
 				C2A810E01566611F008FF2B7 /* Comment.m in Sources */,
 				C236348215678917008BE9BB /* LoadFakeData.m in Sources */,
 				C2118B7515692D56006F4551 /* CommentOrForwardViewController.m in Sources */,
+				C2CE7287156A929F00C22E34 /* FriendDetailViewController.m in Sources */,
+				C2CE728C156A945600C22E34 /* FindWeiboViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -125,8 +125,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [_contentScrollView setContentSize:CGSizeMake(0, 450)];
-
+    [_contentScrollView setContentSize:CGSizeMake(0, 415)];
+    [_contentScrollView setFrame:CGRectMake(0, 50, _contentScrollView.frame.size.width, _contentScrollView.frame.size.height)];
+    [self.view addSubview:_contentScrollView];
     [self refreshView];
 }
 
