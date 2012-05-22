@@ -177,7 +177,7 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "BeautifulDaRen/View/Mine/MineEditingViewController.m"
-         timestampString = "359221545.70628"
+         timestampString = "359366974.103954"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "294"
@@ -191,13 +191,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "BeautifulDaRen/View/More/MoreViewController.m"
-         timestampString = "359284603.760962"
+         timestampString = "359360188.932112"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "199"
-         endingLineNumber = "199"
-         landmarkName = "-tableView:cellForRowAtIndexPath:"
-         landmarkType = "5">
+         startingLineNumber = "207"
+         endingLineNumber = "207">
       </FileBreakpoint>
    </FileBreakpoints>
    <ExceptionBreakpoints>

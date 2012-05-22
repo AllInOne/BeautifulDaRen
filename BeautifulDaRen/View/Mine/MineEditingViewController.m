@@ -10,6 +10,7 @@
 #import "MyInfoTopViewCell.h"
 #import "ViewHelper.h"
 #import "ButtonViewCell.h"
+#import "EdittingViewController.h"
 
 @interface MineEditingViewController()
 
@@ -41,6 +42,11 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
+-(void)onSaveButtonClicked
+{
+    [ViewHelper showSimpleMessage:@"保存" withTitle:nil withButtonText:@"好的"];
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
@@ -48,7 +54,7 @@
     [super viewDidLoad];
     [self.navigationItem setTitle:NSLocalizedString(@"edit_profile", @"edit_profile")];
     [self.navigationItem setLeftBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
-    [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onFindPasswordButtonClicked) title:NSLocalizedString(@"save", @"save")]];
+    [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onSaveButtonClicked) title:NSLocalizedString(@"save", @"save")]];
 }
 
 - (void)viewDidUnload
@@ -257,14 +263,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
+    EdittingViewController * edittingViewController = [[[EdittingViewController alloc] initWithNibName:@"EdittingViewController" bundle:nil] autorelease];
+    [self.navigationController pushViewController:edittingViewController animated:YES];
 }
 
 
