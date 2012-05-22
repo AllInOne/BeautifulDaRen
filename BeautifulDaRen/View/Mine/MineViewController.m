@@ -127,10 +127,10 @@
         
         ((MyInfoTopViewCell*)cell).avatarImageView.image = [UIImage imageNamed:@"item_fake"];
         ((MyInfoTopViewCell*)cell).levelLabel.text = [NSString stringWithFormat:@"LV%d", [userIdentity.level intValue]];
-        ((MyInfoTopViewCell*)cell).levelLabelTitle.text = @"xxxx";
+        ((MyInfoTopViewCell*)cell).levelLabelTitle.text = @"积分120";
         ((MyInfoTopViewCell*)cell).beautifulIdLabel.text = userIdentity.uniqueId;
-        ((MyInfoTopViewCell*)cell).rightImageView.image = [UIImage imageNamed:@"location"];
-        ((MyInfoTopViewCell*)cell).editImageView.image = [UIImage imageNamed:@"location"];
+        ((MyInfoTopViewCell*)cell).rightImageView.image = [UIImage imageNamed:@"gender_female"];
+        ((MyInfoTopViewCell*)cell).editImageView.image = [UIImage imageNamed:@"my_edit"];
         ((MyInfoTopViewCell*)cell).cityLabel.text = [NSString stringWithFormat:@"%@ : %@",NSLocalizedString(@"local_city", @""),userIdentity.localCity];
         _editButton = ((MyInfoTopViewCell*)cell).editButton;
         ((MyInfoTopViewCell*)cell).delegate = self;
@@ -173,30 +173,26 @@
         switch ([indexPath row]) {
             case 0:
             {
-                ((ButtonViewCell*)cell).buttonRightIcon.image = [UIImage imageNamed:@"shop"];
                 ((ButtonViewCell*)cell).buttonText.text = NSLocalizedString(@"my_publish", @"");
-                ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"shop"];
+                ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"my_composed"];
                 break;
             }
             case 1:
             {
-                ((ButtonViewCell*)cell).buttonRightIcon.image = [UIImage imageNamed:@"shop"];
                 ((ButtonViewCell*)cell).buttonText.text = NSLocalizedString(@"private_letter", @"");
-                ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"shop"];
+                ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"my_private_letter"];
                 break;
             }
             case 2:
             {
-                ((ButtonViewCell*)cell).buttonRightIcon.image = [UIImage imageNamed:@"shop"];
                 ((ButtonViewCell*)cell).buttonText.text = NSLocalizedString(@"at_me", @"");
-                ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"shop"];
+                ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"my_at"];
                 break;
             }
             case 3:
             {
-                ((ButtonViewCell*)cell).buttonRightIcon.image = [UIImage imageNamed:@"shop"];
                 ((ButtonViewCell*)cell).buttonText.text = NSLocalizedString(@"comment_me", @"");
-                ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"shop"];
+                ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"comment_icon"];
                 break;
             }
         }

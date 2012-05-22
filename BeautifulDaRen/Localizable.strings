@@ -21,6 +21,7 @@
 "title_more" = "更多";
 "title_help" = "帮助";
 
+"account" = "账户";
 "account_user_account" = "用户账号";
 "account_register_email" = "注册邮箱";
 "user_name" = "用户名";
@@ -32,9 +33,12 @@
 "login" = "登录";
 "register" = "注册";
 "to_select" = "选择";
+"email_or_nickname" = "邮箱/昵称";
 
 "not_user_to_register" = "还不是美丽达人用户？立即注册";
 "please_input_email_or_account_name" = "请输入注册邮箱/登录账户";
+"please_input_your_common_email" = "请输入你的常用邮箱";
+"please_input_a_beautifu_daren_name" = "取一个在美丽达人的昵称";
 "login_with_sina_weibo" = "微博登录";
 "login_with_tencent_qq" = "QQ登录";
 "notice_for_use" = "《美丽达人网络服务使用协议》";

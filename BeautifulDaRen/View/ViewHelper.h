@@ -14,6 +14,8 @@
 
 +(UITableViewCell*) getLoginWithExtenalViewCellInTableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 
++ (CGFloat)getWidthOfText:(NSString*)text ByFontSize:(CGFloat)fontSize;
+
 + (CGFloat)getHeightOfText: (NSString*)text ByFontSize:(CGFloat)fontSize contentWidth:(CGFloat)width;
 
 + (UIBarButtonItem*)getBackBarItemOfTarget:(id)target action:(SEL)action title:(NSString*)title;

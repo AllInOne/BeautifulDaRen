@@ -134,20 +134,22 @@
         {
             cell = [[[NSBundle mainBundle] loadNibNamed:account_input_identifier owner:self options:nil] objectAtIndex:0];
         }
+        AccountInfoInputCell * accountInfoInputCell = ((AccountInfoInputCell*)cell);
         switch ([indexPath row])
         {
             case 0:
             {
                 // "user name"
-                ((AccountInfoInputCell*)cell).inputLabel.text = NSLocalizedString(@"user_name", @"user name");
-                ((AccountInfoInputCell*)cell).inputTextField.delegate = self;
+                accountInfoInputCell.inputLabel.text = [NSString stringWithFormat:@"%@：", NSLocalizedString(@"account", @"account")];
+                accountInfoInputCell.inputTextField.delegate = self;
+                [accountInfoInputCell.inputTextField setPlaceholder:NSLocalizedString(@"email_or_nickname", @"email_or_nickname")];
                 break;
             }
             case 1:
             {
                 // "password"
-                ((AccountInfoInputCell*)cell).inputLabel.text = NSLocalizedString(@"password", @"password");
-                ((AccountInfoInputCell*)cell).inputTextField.delegate = self;
+                accountInfoInputCell.inputLabel.text =[NSString stringWithFormat:@"%@：", NSLocalizedString(@"password", @"password")];
+               accountInfoInputCell.inputTextField.delegate = self;
                 break;
             }
         }
@@ -160,7 +162,7 @@
             cell = [[[NSBundle mainBundle] loadNibNamed:button_view_identifier owner:self options:nil] objectAtIndex:4];
         }
         ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"common_button"];
-        ((ButtonViewCell*)cell).leftLabel.text = NSLocalizedString(@"enter", @"enter");
+        ((ButtonViewCell*)cell).leftLabel.text = NSLocalizedString(@"login", @"login");
         
         cell.backgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
     }
@@ -172,15 +174,14 @@
             cell = [[[NSBundle mainBundle] loadNibNamed:button_view_identifier owner:self options:nil] objectAtIndex:1];
         }
         ((ButtonViewCell*)cell).buttonText.text = NSLocalizedString(@"not_user_to_register", @"You are not user, please register");
-        ((ButtonViewCell*)cell).buttonRightIcon.image = [UIImage imageNamed:@"next_flag"]; 
     }
     else if (section == 3)
     {
         cell = [ViewHelper getLoginWithExtenalViewCellInTableView:tableView cellForRowAtIndexPath:indexPath];
         _loginWithSinaWeiboButton = ((ButtonViewCell*)cell).leftButton;
-        ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"sina_weibo_icon"];
+        ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"sina_logo"];
         _loginWithQQButton = ((ButtonViewCell*)cell).rightButton;
-        ((ButtonViewCell*)cell).buttonRightIcon.image = [UIImage imageNamed:@"qq_icon"];
+        ((ButtonViewCell*)cell).buttonRightIcon.image = [UIImage imageNamed:@"tencent_logo"];
         ((ButtonViewCell*)cell).delegate = self;
     }
     return cell;
@@ -212,6 +213,7 @@
     {
         view = [[[NSBundle mainBundle] loadNibNamed:@"HomeViewHeaderView" owner:self options:nil] objectAtIndex:0];
         UILabel * label = (UILabel*)[view viewWithTag:1];
+        [label setTextColor:[UIColor darkGrayColor]];
         label.text = NSLocalizedString(@"login_with_cooperation", @"login_with_cooperation");
     }
     else
@@ -223,7 +225,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 3;
+    return 10;
 }
 
 - (UIView*) tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section

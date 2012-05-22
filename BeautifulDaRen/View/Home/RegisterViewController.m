@@ -130,36 +130,39 @@ enum
             }
             cell = [[[NSBundle mainBundle] loadNibNamed:account_input_identifier owner:self options:nil] objectAtIndex:index];
         }
+        AccountInfoInputCell * accountInfoInputCell = ((AccountInfoInputCell*)cell);
         switch ([indexPath row]) {
             case ACCOUNT_SETTING_EMAIL:
             {
-                ((AccountInfoInputCell*)cell).inputLabel.text = NSLocalizedString(@"account_register_email", @"");
-                ((AccountInfoInputCell*)cell).inputTextField.delegate = self;
+                accountInfoInputCell.inputLabel.text = NSLocalizedString(@"account_register_email", @"");
+                accountInfoInputCell.inputTextField.delegate = self;
+                accountInfoInputCell.inputTextField.placeholder = NSLocalizedString(@"please_input_your_common_email", @"");
                 break;
             }
             case ACCOUNT_SETTING_USER_ID:
             {
-                ((AccountInfoInputCell*)cell).inputLabel.text = NSLocalizedString(@"user_name_id", @"");
-                ((AccountInfoInputCell*)cell).inputTextField.delegate = self;
+                accountInfoInputCell.inputLabel.text = NSLocalizedString(@"user_name_id", @"");
+                accountInfoInputCell.inputTextField.delegate = self;
+                
+                accountInfoInputCell.inputTextField.placeholder = NSLocalizedString(@"please_input_a_beautifu_daren_name", @"");
                 break;
             }
             case ACCOUNT_SETTING_PASSWORD:
             {
-                ((AccountInfoInputCell*)cell).inputLabel.text = NSLocalizedString(@"type_password", @"");
-                ((AccountInfoInputCell*)cell).inputTextField.delegate = self;
+                accountInfoInputCell.inputLabel.text = NSLocalizedString(@"type_password", @"");
+                accountInfoInputCell.inputTextField.delegate = self;
                 break;
             }
             case ACCOUNT_SETTING_PASSWORD_AGAIN:
             {
-                ((AccountInfoInputCell*)cell).inputLabel.text = NSLocalizedString(@"type_password_again", @"");
-                ((AccountInfoInputCell*)cell).inputTextField.delegate = self;
+                accountInfoInputCell.inputLabel.text = NSLocalizedString(@"type_password_again", @"");
+                accountInfoInputCell.inputTextField.delegate = self;
                 break;
             }
             case ACCOUNT_SETTING_CITY:
             {
-                ((AccountInfoInputCell*)cell).inputLabel.text = NSLocalizedString(@"local_city", @"");
-                ((AccountInfoInputCell*)cell).secondLabel.text = NSLocalizedString(@"to_select", @"");
-                ((AccountInfoInputCell*)cell).imageView.image = [UIImage imageNamed:@"first"];
+                accountInfoInputCell.inputLabel.text = NSLocalizedString(@"local_city", @"");
+                accountInfoInputCell.secondLabel.text = NSLocalizedString(@"to_select", @"");
                 break;
             }
         }
@@ -172,7 +175,7 @@ enum
             cell = [[[NSBundle mainBundle] loadNibNamed:button_view_identifier owner:self options:nil] objectAtIndex:4];
         }
         ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"common_button"];
-        ((ButtonViewCell*)cell).leftLabel.text = NSLocalizedString(@"enter", @"enter");
+        ((ButtonViewCell*)cell).leftLabel.text = NSLocalizedString(@"register", @"register");
         
         cell.backgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
     }
@@ -264,6 +267,7 @@ enum
     {
         view = [[[NSBundle mainBundle] loadNibNamed:@"HomeViewHeaderView" owner:self options:nil] objectAtIndex:0];
         UILabel * label = (UILabel*)[view viewWithTag:1];
+        label.textColor = [UIColor darkGrayColor];
         label.text = NSLocalizedString(@"login_with_cooperation", @"login_with_cooperation");
     }
     else

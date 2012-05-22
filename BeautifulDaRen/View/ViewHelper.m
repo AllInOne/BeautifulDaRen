@@ -55,6 +55,17 @@
     return size.height;
 }
 
++ (CGFloat)getWidthOfText:(NSString*)text ByFontSize:(CGFloat)fontSize
+{
+    CGSize constraint = CGSizeMake(20000.0f, 50.0f);
+    
+    CGSize size = [text
+                   sizeWithFont:[UIFont systemFontOfSize: fontSize] constrainedToSize: constraint];
+    
+    return size.width;
+}
+
+
 + (UIBarButtonItem*)getBarItemOfTarget:(id)target action:(SEL)action title:(NSString*)title
 {
     UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -63,8 +74,10 @@
     [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     
     [button.titleLabel setFont:[UIFont systemFontOfSize:14]];
+    
+    CGFloat width = [ViewHelper getWidthOfText:title ByFontSize:14];
 
-    button.frame = CGRectMake(0, 0, 50, 30);
+    button.frame = CGRectMake(0, 0, width+20, 30);
     return [[[UIBarButtonItem alloc] initWithCustomView:button] autorelease];
 }
 
