@@ -26,6 +26,8 @@
 		C215A7A21553EABF001BF379 /* WaresItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C215A7A01553EABF001BF379 /* WaresItem.m */; };
 		C216EDC215518B8C00CA8CE8 /* MyInfoTopViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C216EDC115518B8C00CA8CE8 /* MyInfoTopViewCell.m */; };
 		C216EDC415518BD300CA8CE8 /* MyInfoTopViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C216EDC315518BD300CA8CE8 /* MyInfoTopViewCell.xib */; };
+		C21C26A8156B7E36000F8E3C /* EdittingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C21C26A6156B7E33000F8E3C /* EdittingViewController.m */; };
+		C21C26A9156B7E36000F8E3C /* EdittingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C21C26A7156B7E34000F8E3C /* EdittingViewController.xib */; };
 		C22CC1831563A3A7000DF1BD /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C22CC1811563A3A7000DF1BD /* HelpViewController.m */; };
 		C22CC1841563A3A7000DF1BD /* HelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C22CC1821563A3A7000DF1BD /* HelpViewController.xib */; };
 		C2319FAF1560EF7B005CCD4E /* qq_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C2319FAD1560EF7A005CCD4E /* qq_icon.png */; };
@@ -387,6 +389,9 @@
 		C216EDC015518B8C00CA8CE8 /* MyInfoTopViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfoTopViewCell.h; sourceTree = "<group>"; };
 		C216EDC115518B8C00CA8CE8 /* MyInfoTopViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfoTopViewCell.m; sourceTree = "<group>"; };
 		C216EDC315518BD300CA8CE8 /* MyInfoTopViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyInfoTopViewCell.xib; sourceTree = "<group>"; };
+		C21C26A5156B7E33000F8E3C /* EdittingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EdittingViewController.h; sourceTree = "<group>"; };
+		C21C26A6156B7E33000F8E3C /* EdittingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EdittingViewController.m; sourceTree = "<group>"; };
+		C21C26A7156B7E34000F8E3C /* EdittingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EdittingViewController.xib; sourceTree = "<group>"; };
 		C22CC1801563A3A7000DF1BD /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpViewController.h; sourceTree = "<group>"; };
 		C22CC1811563A3A7000DF1BD /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpViewController.m; sourceTree = "<group>"; };
 		C22CC1821563A3A7000DF1BD /* HelpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HelpViewController.xib; sourceTree = "<group>"; };
@@ -1419,6 +1424,9 @@
 				C2118B7215692D56006F4551 /* CommentOrForwardViewController.h */,
 				C2118B7315692D56006F4551 /* CommentOrForwardViewController.m */,
 				C2118B7415692D56006F4551 /* CommentOrForwardViewController.xib */,
+				C21C26A5156B7E33000F8E3C /* EdittingViewController.h */,
+				C21C26A6156B7E33000F8E3C /* EdittingViewController.m */,
+				C21C26A7156B7E34000F8E3C /* EdittingViewController.xib */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -1930,6 +1938,7 @@
 				CECAA82F156A970700B343A3 /* segement_btn_selected.png in Resources */,
 				CECAA830156A970700B343A3 /* segement_btn_unselected.png in Resources */,
 				CECAA831156A970700B343A3 /* triangle_btn.png in Resources */,
+				C21C26A9156B7E36000F8E3C /* EdittingViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2035,6 +2044,7 @@
 				C2118B7515692D56006F4551 /* CommentOrForwardViewController.m in Sources */,
 				C2CE7287156A929F00C22E34 /* FriendDetailViewController.m in Sources */,
 				C2CE728C156A945600C22E34 /* FindWeiboViewController.m in Sources */,
+				C21C26A8156B7E36000F8E3C /* EdittingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

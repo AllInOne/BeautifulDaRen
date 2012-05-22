@@ -79,6 +79,7 @@
 "@me" = "@我的";
 
 "edit_profile" = "编辑个人资料";
+"modify" = "修改";
 "save" = "保存";
 "cancel" = "取消";
 
