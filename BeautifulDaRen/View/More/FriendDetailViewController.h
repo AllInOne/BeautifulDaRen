@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "ButtonPressDelegate.h"
 
-@interface FriendDetailViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, ButtonPressDelegate>
+@interface FriendDetailViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, ButtonPressDelegate, UIActionSheetDelegate>
 
 @end

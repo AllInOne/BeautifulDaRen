@@ -21,6 +21,8 @@
 
 @property (retain, nonatomic) IBOutlet UITableView * friendDetailView;
 @property (assign, nonatomic) BOOL isIdentification;
+
+- (void) onActionButtonClicked: (UIButton*)sender;
 @end
 
 @implementation FriendDetailViewController
@@ -275,6 +277,7 @@
 
 - (void) didButtonPressed:(UIButton*)button inView:(UIView *)view
 {
+    [self onActionButtonClicked:button];
     if(button == _followButton)
     {
         NSLog(@"followButton pressed");
@@ -303,6 +306,20 @@
     {
         NSAssert(NO, @"There is not any other button should be pressed!");
     }
+}
+
+- (void) onActionButtonClicked: (UIButton*)sender
+{
+    UIActionSheet * actionSheet = [[[UIActionSheet alloc] initWithTitle:@""
+                                                              delegate:self
+                                                     cancelButtonTitle:nil
+                                                destructiveButtonTitle:nil
+                                                     otherButtonTitles:nil, nil] autorelease];
+    [actionSheet addButtonWithTitle:NSLocalizedString(@"add_to_black_list", @"add_to_black_list")];
+    [actionSheet addButtonWithTitle:NSLocalizedString(@"impeach", "impeach")];
+    [actionSheet setDestructiveButtonIndex:[actionSheet addButtonWithTitle:NSLocalizedString(@"cancel", @"cancel")]];
+    
+    [actionSheet showInView:sender.superview.superview];
 }
 
 @end

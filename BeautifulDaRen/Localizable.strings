@@ -80,6 +80,7 @@
 
 "edit_profile" = "编辑个人资料";
 "save" = "保存";
+"cancel" = "取消";
 
 "find_weibo_or_friend" = "搜索微博/好友";
 "follow_or_invite_sina_friend" = "关注或邀请新浪微博好友";
@@ -88,3 +89,6 @@
 "her_home_page" = "她的主页";
 "his_home_page" = "他的主页";
 "authentication" = "认证";
+
+"add_to_black_list" = "加入黑名单";
+"impeach" = "举报";
