@@ -28,6 +28,7 @@
 		C216EDC415518BD300CA8CE8 /* MyInfoTopViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C216EDC315518BD300CA8CE8 /* MyInfoTopViewCell.xib */; };
 		C21C26A8156B7E36000F8E3C /* EdittingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C21C26A6156B7E33000F8E3C /* EdittingViewController.m */; };
 		C21C26A9156B7E36000F8E3C /* EdittingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C21C26A7156B7E34000F8E3C /* EdittingViewController.xib */; };
+		C21C26B4156BA875000F8E3C /* RadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C21C26B3156BA874000F8E3C /* RadioButton.m */; };
 		C22CC1831563A3A7000DF1BD /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C22CC1811563A3A7000DF1BD /* HelpViewController.m */; };
 		C22CC1841563A3A7000DF1BD /* HelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C22CC1821563A3A7000DF1BD /* HelpViewController.xib */; };
 		C2319FAF1560EF7B005CCD4E /* qq_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C2319FAD1560EF7A005CCD4E /* qq_icon.png */; };
@@ -392,6 +393,8 @@
 		C21C26A5156B7E33000F8E3C /* EdittingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EdittingViewController.h; sourceTree = "<group>"; };
 		C21C26A6156B7E33000F8E3C /* EdittingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EdittingViewController.m; sourceTree = "<group>"; };
 		C21C26A7156B7E34000F8E3C /* EdittingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EdittingViewController.xib; sourceTree = "<group>"; };
+		C21C26B2156BA872000F8E3C /* RadioButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadioButton.h; sourceTree = "<group>"; };
+		C21C26B3156BA874000F8E3C /* RadioButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadioButton.m; sourceTree = "<group>"; };
 		C22CC1801563A3A7000DF1BD /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpViewController.h; sourceTree = "<group>"; };
 		C22CC1811563A3A7000DF1BD /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpViewController.m; sourceTree = "<group>"; };
 		C22CC1821563A3A7000DF1BD /* HelpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HelpViewController.xib; sourceTree = "<group>"; };
@@ -1582,6 +1585,8 @@
 				CEDC918F153FDC7700BA6C35 /* AdsPageView.h */,
 				CEDC9190153FDC7700BA6C35 /* AdsPageView.m */,
 				CEDC918D153FDC5700BA6C35 /* AdsPageView.xib */,
+				C21C26B2156BA872000F8E3C /* RadioButton.h */,
+				C21C26B3156BA874000F8E3C /* RadioButton.m */,
 				C28A935915484442008C8AFC /* ButtonViewCell.h */,
 				C28A935A15484442008C8AFC /* ButtonViewCell.m */,
 				C28A935C1548445B008C8AFC /* ButtonViewCell.xib */,
@@ -2045,6 +2050,7 @@
 				C2CE7287156A929F00C22E34 /* FriendDetailViewController.m in Sources */,
 				C2CE728C156A945600C22E34 /* FindWeiboViewController.m in Sources */,
 				C21C26A8156B7E36000F8E3C /* EdittingViewController.m in Sources */,
+				C21C26B4156BA875000F8E3C /* RadioButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

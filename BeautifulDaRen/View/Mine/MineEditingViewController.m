@@ -263,8 +263,23 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    EdittingViewController * edittingViewController = [[[EdittingViewController alloc] initWithNibName:@"EdittingViewController" bundle:nil] autorelease];
-    [self.navigationController pushViewController:edittingViewController animated:YES];
+    NSInteger section = [indexPath section];
+    if(section == 2)
+    {
+        NSInteger type = 0;
+        NSInteger row = [indexPath row];
+        if(row == 4)
+        {
+            type = EdittingViewController_type1;
+        }
+        else
+        {
+            type = EdittingViewController_type0;
+        }
+        
+        EdittingViewController * edittingViewController = [[[EdittingViewController alloc] initWithNibName:@"EdittingViewController" bundle:nil type:type] autorelease];
+        [self.navigationController pushViewController:edittingViewController animated:YES];
+    }
 }
 
 

@@ -93,3 +93,5 @@
 
 "add_to_black_list" = "加入黑名单";
 "impeach" = "举报";
+"only_to_my_followed" = "仅对于“我关注的人”可见";
+"not_to_anyone" = "对所有人不可见";

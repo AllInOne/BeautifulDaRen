@@ -177,11 +177,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "BeautifulDaRen/View/Mine/MineEditingViewController.m"
-         timestampString = "359366974.103954"
+         timestampString = "359391596.953831"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "294"
-         endingLineNumber = "294"
+         startingLineNumber = "309"
+         endingLineNumber = "309"
          landmarkName = "-genderSelected:"
          landmarkType = "5">
       </FileBreakpoint>
