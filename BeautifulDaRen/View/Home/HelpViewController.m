@@ -16,7 +16,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         [self.navigationItem setTitle:NSLocalizedString(@"title_help", @"title_help")];
-        [self.navigationItem setLeftBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back",@"go_back")]];
+        [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back",@"go_back")]];
         [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(backToHomePageButtonClicked) title:NSLocalizedString(@"title_home",@"title_home")]];
     }
     return self;

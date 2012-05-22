@@ -47,7 +47,7 @@
     [super viewDidLoad];
     
     [self.navigationItem setTitle:@"仁和春天"];
-    [self.navigationItem setLeftBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
+    [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
     
     if(_itemsViewController == nil)
     {
