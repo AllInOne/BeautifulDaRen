@@ -128,8 +128,7 @@
         cell = [tableView dequeueReusableCellWithIdentifier:infoTopViewIdentifier];
         if (cell == nil) {
             cell = [[[NSBundle mainBundle] loadNibNamed:infoTopViewIdentifier owner:self options:nil] objectAtIndex:1];
-            ((MyInfoTopViewCell*)cell).avatarImageView.image = [UIImage imageNamed:@"item_fake"];
-            ((MyInfoTopViewCell*)cell).rightImageView.image = [UIImage imageNamed:@"next_flag"];
+            ((MyInfoTopViewCell*)cell).avatarImageView.image = [UIImage imageNamed:@"avatar_big"];
             _updateAvatarButton =  ((MyInfoTopViewCell*)cell).updateAvatarButton;
             ((MyInfoTopViewCell*)cell).delegate = self;
         }
@@ -192,7 +191,6 @@
                 break;
             } 
         }
-        buttonViewCell.buttonRightIcon.image = [UIImage imageNamed:@"next_flag"];
     }
     return cell;
 }

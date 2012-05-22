@@ -125,7 +125,7 @@
         
         UserIdentity * userIdentity = [[DataManager sharedManager] getCurrentLocalIdentityInContext:nil];
         
-        ((MyInfoTopViewCell*)cell).avatarImageView.image = [UIImage imageNamed:@"item_fake"];
+        ((MyInfoTopViewCell*)cell).avatarImageView.image = [UIImage imageNamed:@"avatar_big"];
         ((MyInfoTopViewCell*)cell).levelLabel.text = [NSString stringWithFormat:@"LV%d", [userIdentity.level intValue]];
         ((MyInfoTopViewCell*)cell).levelLabelTitle.text = @"积分120";
         ((MyInfoTopViewCell*)cell).beautifulIdLabel.text = userIdentity.uniqueId;

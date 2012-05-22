@@ -42,7 +42,7 @@
     if (self) {
         [self.navigationItem setTitle:NSLocalizedString(@"her_home_page", @"her_home_page")];
         [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
-        [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onHelpButtonClicked) title:NSLocalizedString(@"home_page", @"home_page")]];
+        [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onHomePageButtonClicked) title:NSLocalizedString(@"home_page", @"home_page")]];
         
         _isIdentification = NO;
     }
@@ -56,6 +56,15 @@
     
     // Release any cached data, images, etc that aren't in use.
 }
+- (void)onBackButtonClicked {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void) onHomePageButtonClicked
+{
+    [ViewHelper showSimpleMessage:@"主页" withTitle:nil withButtonText:@"好的"];
+}
+
 
 #pragma mark - View lifecycle
 

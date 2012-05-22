@@ -145,7 +145,7 @@
 
 + (UIImage*) getBubbleImageWithWidth:(NSInteger)width height:(NSInteger)height
 {
-    static NSString * bubbleImageName = @"fake_message_bubble";
+    static NSString * bubbleImageName = @"comment_background";
     UIImage * image = nil;
 //    if([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0)
 //    {
@@ -153,7 +153,7 @@
 //    }
 //    else
 //    {
-        image = [[UIImage imageNamed:bubbleImageName] stretchableImageWithLeftCapWidth:30 topCapHeight:25];
+        image = [[UIImage imageNamed:bubbleImageName] stretchableImageWithLeftCapWidth:30 topCapHeight:50];
 //    }
     return image;
 }
