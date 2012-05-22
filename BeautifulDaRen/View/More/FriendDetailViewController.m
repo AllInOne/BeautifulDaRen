@@ -7,14 +7,42 @@
 //
 
 #import "FriendDetailViewController.h"
+#import "ButtonViewCell.h"
+#import "FourGridViewCell.h"
+#import "ViewHelper.h"
+
+@interface FriendDetailViewController()
+@property (retain, nonatomic) IBOutlet UIButton * followButton;
+@property (retain, nonatomic) IBOutlet UIButton * fansButton;
+@property (retain, nonatomic) IBOutlet UIButton * collectionButton;
+@property (retain, nonatomic) IBOutlet UIButton * blackListButton;
+@property (retain, nonatomic) IBOutlet UIButton * buyedButton;
+@property (retain, nonatomic) IBOutlet UIButton * topicButton;
+
+@property (retain, nonatomic) IBOutlet UITableView * friendDetailView;
+@property (assign, nonatomic) BOOL isIdentification;
+@end
 
 @implementation FriendDetailViewController
+@synthesize friendDetailView = _friendDetailView;
+@synthesize isIdentification = _isIdentification;
 
-- (id)initWithStyle:(UITableViewStyle)style
+@synthesize followButton = _followButton;
+@synthesize fansButton = _fansButton;
+@synthesize collectionButton = _collectionButton;
+@synthesize blackListButton = _blackListButton;
+@synthesize buyedButton = _buyedButton;
+@synthesize topicButton = _topicButton;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithStyle:style];
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        [self.navigationItem setTitle:NSLocalizedString(@"her_home_page", @"her_home_page")];
+        [self.navigationItem setLeftBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
+        [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onHelpButtonClicked) title:NSLocalizedString(@"home_page", @"home_page")]];
+        
+        _isIdentification = NO;
     }
     return self;
 }
@@ -77,28 +105,98 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    NSInteger number = 0;
+    if(section == 0)
+    {
+        number = 1;
+    }
+    else if(section == 1)
+    {
+        number = _isIdentification ? 2 : 1;
+    }
+    else if(section == 2)
+    {
+        number = 1;
+    }
+    return number;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString * buttonViewCellIdentifier = @"ButtonViewCell";
+    static NSString * fourGridViewCellIdentifier = @"FourGridViewCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+    UITableViewCell *cell  = nil;
+
+    NSInteger section = [indexPath section];
+    if(section == 0)
+    {
+        cell = [tableView dequeueReusableCellWithIdentifier:buttonViewCellIdentifier];
+        if(!cell)
+        {
+            cell = [[[NSBundle mainBundle] loadNibNamed:buttonViewCellIdentifier owner:self options:nil] objectAtIndex:3];
+        }
+        ButtonViewCell * buttonViewCell = (ButtonViewCell*)cell;
+        buttonViewCell.leftLabel.text = NSLocalizedString(@"notes", @"notes");
+        buttonViewCell.buttonText.text = NSLocalizedString(@"set_notes", @"set_notes");
     }
-    
-    // Configure the cell...
+    else if(section == 1)
+    {
+        cell = [tableView dequeueReusableCellWithIdentifier:buttonViewCellIdentifier];
+        if(!cell)
+        {
+            cell = [[[NSBundle mainBundle] loadNibNamed:buttonViewCellIdentifier owner:self options:nil] objectAtIndex:3];
+        }
+        if(_isIdentification && [indexPath row] == 0)
+        {
+            ButtonViewCell * buttonViewCell = (ButtonViewCell*)cell;
+            buttonViewCell.leftLabel.text = NSLocalizedString(@"authentication", @"authentication");
+            buttonViewCell.buttonText.text = @"仁和春天人东店官方账号";
+            buttonViewCell.buttonRightIcon.hidden = YES;
+        }
+        else
+        {
+            ButtonViewCell * buttonViewCell = (ButtonViewCell*)cell;
+            buttonViewCell.leftLabel.text = NSLocalizedString(@"brief", @"brief");
+            buttonViewCell.buttonText.text = @"成都仁和春天百货店人东店！";
+            buttonViewCell.buttonRightIcon.hidden = YES;
+        }
+    }
+    else if(section == 2)
+    {
+        cell = [tableView dequeueReusableCellWithIdentifier:fourGridViewCellIdentifier];
+        if(!cell) {
+            cell = [[[NSBundle mainBundle] loadNibNamed:fourGridViewCellIdentifier owner:self options:nil] objectAtIndex:0];
+        }
+        
+        ((FourGridViewCell*)cell).delegate = self;
+        ((FourGridViewCell*)cell).leftTopLabelName.text = NSLocalizedString(@"weibo", @"");
+        ((FourGridViewCell*)cell).leftTopLabelNumber.text = @"12";
+        ((FourGridViewCell*)cell).rightTopLabelName.text = NSLocalizedString(@"topic", @"");
+        ((FourGridViewCell*)cell).rightTopLabelNumber.text = @"12";
+        ((FourGridViewCell*)cell).leftBottomLabelName.text = NSLocalizedString(@"follow", @"");
+        ((FourGridViewCell*)cell).leftBottomLabelNumber.text = @"32";
+        ((FourGridViewCell*)cell).rightBottomLabelName.text = NSLocalizedString(@"fans", @"");
+        ((FourGridViewCell*)cell).rightBottomLabelNumber.text = @"0";
+        
+        ((FourGridViewCell*)cell).thirdLeftLabelName.text = NSLocalizedString(@"collection", @"");
+        ((FourGridViewCell*)cell).thirdLeftLabelNumber.text = @"1";  
+        
+        ((FourGridViewCell*)cell).thirdRightLabelName.text = NSLocalizedString(@"published", @"");
+        ((FourGridViewCell*)cell).thirdRIghtLabelNumber.text = @"11";
+        
+        _followButton = ((FourGridViewCell*)cell).leftTopButton;
+        _fansButton = ((FourGridViewCell*)cell).rightTopButton;
+        _collectionButton = ((FourGridViewCell*)cell).leftButtomButton;
+        _buyedButton = ((FourGridViewCell*)cell).rightButtomButton;
+        _topicButton = ((FourGridViewCell*)cell).thirdLeftButton;
+        _blackListButton = ((FourGridViewCell*)cell).thirdRightButton;
+    }
     
     return cell;
 }
@@ -154,6 +252,57 @@
      [self.navigationController pushViewController:detailViewController animated:YES];
      [detailViewController release];
      */
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGFloat height = 0.0f;
+    NSInteger section = [indexPath section];
+    if(section == 0)
+    {
+        height = 40.0f;
+    }
+    else if (section == 1)
+    {
+        height = 40.0f;
+    }
+    else if (section == 2)
+    {
+        height = 107.0f;
+    }
+    return height;
+}
+
+- (void) didButtonPressed:(UIButton*)button inView:(UIView *)view
+{
+    if(button == _followButton)
+    {
+        NSLog(@"followButton pressed");
+    }
+    else if (button == _fansButton)
+    {
+        NSLog(@"fansButton pressed");
+    }
+    else if (button == _collectionButton)
+    {
+        NSLog(@"collectionButton pressed");
+    }
+    else if (button == _blackListButton)
+    {
+        NSLog(@"blackListButton pressed");
+    }
+    else if(button == _buyedButton)
+    {
+        NSLog(@"buyed button pressed");
+    }
+    else if(button == _topicButton)
+    {
+        NSLog(@"topic button pressed");
+    }
+    else
+    {
+        NSAssert(NO, @"There is not any other button should be pressed!");
+    }
 }
 
 @end

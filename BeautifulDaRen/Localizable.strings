@@ -48,6 +48,7 @@
 "female" = "女";
 "male" = "男";
 
+"weibo" = "微博";
 "follow" = "关注";
 "fans" = "粉丝";
 "collection" = "收藏";
@@ -59,6 +60,7 @@
 "topic" = "话题";
 "at_me" = "@我";
 "comment_me" = "评论我的";
+"published" = "已发布商品";
 
 "nickname" = "昵称";
 "city" = "城市";
@@ -67,6 +69,8 @@
 "brief" = "简介";
 "senior" = "高级";
 "privacy" = "隐私";
+"notes" = "备注";
+"set_notes" = "设置备注";
 
 "sent_password_to_email" = "密码已发至邮箱，请查收";
 "prompt" = "提示";
@@ -79,3 +83,8 @@
 
 "find_weibo_or_friend" = "搜索微博/好友";
 "follow_or_invite_sina_friend" = "关注或邀请新浪微博好友";
+
+"home_page" = "主页";
+"her_home_page" = "她的主页";
+"his_home_page" = "他的主页";
+"authentication" = "认证";

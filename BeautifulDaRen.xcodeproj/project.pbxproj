@@ -189,7 +189,7 @@
 		CE20C3D1156752790031997B /* weibo_sample1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE20C3B0156752790031997B /* weibo_sample1@2x.png */; };
 		CE20C3D2156752790031997B /* weibo_sample2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE20C3B1156752790031997B /* weibo_sample2@2x.png */; };
 		CE20C3D3156752790031997B /* weibo_sample3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE20C3B2156752790031997B /* weibo_sample3@2x.png */; };
-		CE20C3F3156752930031997B /* back_buttion.png in Resources */ = {isa = PBXBuildFile; fileRef = CE20C3D4156752930031997B /* back_buttion.png */; };
+		CE20C3F3156752930031997B /* back_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = CE20C3D4156752930031997B /* back_btn.png */; };
 		CE20C3F4156752930031997B /* banner_close_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = CE20C3D5156752930031997B /* banner_close_btn.png */; };
 		CE20C3F5156752930031997B /* banner_switcher_focus.png in Resources */ = {isa = PBXBuildFile; fileRef = CE20C3D6156752930031997B /* banner_switcher_focus.png */; };
 		CE20C3F6156752930031997B /* banner_switcher_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = CE20C3D7156752930031997B /* banner_switcher_normal.png */; };
@@ -629,7 +629,7 @@
 		CE20C3B0156752790031997B /* weibo_sample1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weibo_sample1@2x.png"; sourceTree = "<group>"; };
 		CE20C3B1156752790031997B /* weibo_sample2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weibo_sample2@2x.png"; sourceTree = "<group>"; };
 		CE20C3B2156752790031997B /* weibo_sample3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weibo_sample3@2x.png"; sourceTree = "<group>"; };
-		CE20C3D4156752930031997B /* back_buttion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back_buttion.png; sourceTree = "<group>"; };
+		CE20C3D4156752930031997B /* back_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back_btn.png; sourceTree = "<group>"; };
 		CE20C3D5156752930031997B /* banner_close_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = banner_close_btn.png; sourceTree = "<group>"; };
 		CE20C3D6156752930031997B /* banner_switcher_focus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = banner_switcher_focus.png; sourceTree = "<group>"; };
 		CE20C3D7156752930031997B /* banner_switcher_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = banner_switcher_normal.png; sourceTree = "<group>"; };
@@ -1473,7 +1473,7 @@
 				CECAA816156A970700B343A3 /* segement_btn_unselected.png */,
 				CECAA817156A970700B343A3 /* triangle_btn.png */,
 				CE20C436156776E60031997B /* beautifuldaren_logo.png */,
-				CE20C3D4156752930031997B /* back_buttion.png */,
+				CE20C3D4156752930031997B /* back_btn.png */,
 				CE20C3D5156752930031997B /* banner_close_btn.png */,
 				CE20C3D6156752930031997B /* banner_switcher_focus.png */,
 				CE20C3D7156752930031997B /* banner_switcher_normal.png */,
@@ -1844,7 +1844,7 @@
 				CE20C3D1156752790031997B /* weibo_sample1@2x.png in Resources */,
 				CE20C3D2156752790031997B /* weibo_sample2@2x.png in Resources */,
 				CE20C3D3156752790031997B /* weibo_sample3@2x.png in Resources */,
-				CE20C3F3156752930031997B /* back_buttion.png in Resources */,
+				CE20C3F3156752930031997B /* back_btn.png in Resources */,
 				CE20C3F4156752930031997B /* banner_close_btn.png in Resources */,
 				CE20C3F5156752930031997B /* banner_switcher_focus.png in Resources */,
 				CE20C3F6156752930031997B /* banner_switcher_normal.png in Resources */,

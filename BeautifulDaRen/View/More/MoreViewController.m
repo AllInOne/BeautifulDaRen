@@ -8,6 +8,7 @@
 
 #import "MoreViewController.h"
 #import "FindMoreViewController.h"
+#import "FriendDetailViewController.h"
 
 @interface MoreViewController()
 @property (retain, nonatomic) IBOutlet FindMoreViewController * findMoreViewController;
@@ -37,8 +38,11 @@
 {
     [super viewDidLoad];
     
-    _findMoreViewController = [[[FindMoreViewController alloc] initWithNibName:@"FindMoreViewController" bundle:nil] autorelease];
-    [self.view addSubview:_findMoreViewController.view];
+//    _findMoreViewController = [[[FindMoreViewController alloc] initWithNibName:@"FindMoreViewController" bundle:nil] autorelease];
+//    [self.view addSubview:_findMoreViewController.view];
+    
+    FriendDetailViewController * f = [[[FriendDetailViewController alloc] initWithNibName:@"FriendDetailViewController" bundle:nil] autorelease];
+    [self.navigationController pushViewController:f animated:YES];
 }
 
 - (void)viewDidUnload
