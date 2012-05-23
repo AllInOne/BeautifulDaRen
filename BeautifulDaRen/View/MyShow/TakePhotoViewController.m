@@ -118,7 +118,7 @@
     
     UIBarButtonItem *galleryBarButton = [ViewHelper getBarItemOfTarget:self action:@selector(onGalleryBartButtonPressed) title:@"相册"];
     
-    UIBarButtonItem *cameraBarButton = [ViewHelper getCameraBarItem];
+    UIBarButtonItem *cameraBarButton = [ViewHelper getCameraBarItemOftarget:self action:@selector(onCameraBarButtonPressed)];
     
     UIBarButtonItem *avatarBarButton = [ViewHelper getBarItemOfTarget:self action:@selector(onAvatarBartButtonPressed) title:@"头像"];
 

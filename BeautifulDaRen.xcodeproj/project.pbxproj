@@ -169,7 +169,6 @@
 		CE20C3B5156752790031997B /* banner_switcher_focus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE20C394156752790031997B /* banner_switcher_focus@2x.png */; };
 		CE20C3B6156752790031997B /* banner_switcher_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE20C395156752790031997B /* banner_switcher_normal@2x.png */; };
 		CE20C3B7156752790031997B /* banner@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE20C396156752790031997B /* banner@2x.png */; };
-		CE20C3B8156752790031997B /* content@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE20C397156752790031997B /* content@2x.png */; };
 		CE20C3B9156752790031997B /* large_buttion@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE20C398156752790031997B /* large_buttion@2x.png */; };
 		CE20C3BA156752790031997B /* login_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE20C399156752790031997B /* login_button@2x.png */; };
 		CE20C3BC156752790031997B /* nav_bar_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE20C39B156752790031997B /* nav_bar_background@2x.png */; };
@@ -198,7 +197,6 @@
 		CE20C3F5156752930031997B /* banner_switcher_focus.png in Resources */ = {isa = PBXBuildFile; fileRef = CE20C3D6156752930031997B /* banner_switcher_focus.png */; };
 		CE20C3F6156752930031997B /* banner_switcher_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = CE20C3D7156752930031997B /* banner_switcher_normal.png */; };
 		CE20C3F7156752930031997B /* banner.png in Resources */ = {isa = PBXBuildFile; fileRef = CE20C3D8156752930031997B /* banner.png */; };
-		CE20C3F8156752930031997B /* content.png in Resources */ = {isa = PBXBuildFile; fileRef = CE20C3D9156752930031997B /* content.png */; };
 		CE20C3FA156752930031997B /* large_button.png in Resources */ = {isa = PBXBuildFile; fileRef = CE20C3DB156752930031997B /* large_button.png */; };
 		CE20C3FB156752930031997B /* common_button.png in Resources */ = {isa = PBXBuildFile; fileRef = CE20C3DC156752930031997B /* common_button.png */; };
 		CE20C3FD156752930031997B /* nav_button.png in Resources */ = {isa = PBXBuildFile; fileRef = CE20C3DE156752930031997B /* nav_button.png */; };
@@ -746,7 +744,6 @@
 		CE20C394156752790031997B /* banner_switcher_focus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "banner_switcher_focus@2x.png"; sourceTree = "<group>"; };
 		CE20C395156752790031997B /* banner_switcher_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "banner_switcher_normal@2x.png"; sourceTree = "<group>"; };
 		CE20C396156752790031997B /* banner@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "banner@2x.png"; sourceTree = "<group>"; };
-		CE20C397156752790031997B /* content@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "content@2x.png"; sourceTree = "<group>"; };
 		CE20C398156752790031997B /* large_buttion@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "large_buttion@2x.png"; sourceTree = "<group>"; };
 		CE20C399156752790031997B /* login_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_button@2x.png"; sourceTree = "<group>"; };
 		CE20C39B156752790031997B /* nav_bar_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav_bar_background@2x.png"; sourceTree = "<group>"; };
@@ -775,7 +772,6 @@
 		CE20C3D6156752930031997B /* banner_switcher_focus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = banner_switcher_focus.png; sourceTree = "<group>"; };
 		CE20C3D7156752930031997B /* banner_switcher_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = banner_switcher_normal.png; sourceTree = "<group>"; };
 		CE20C3D8156752930031997B /* banner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = banner.png; sourceTree = "<group>"; };
-		CE20C3D9156752930031997B /* content.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = content.png; sourceTree = "<group>"; };
 		CE20C3DB156752930031997B /* large_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = large_button.png; sourceTree = "<group>"; };
 		CE20C3DC156752930031997B /* common_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = common_button.png; sourceTree = "<group>"; };
 		CE20C3DE156752930031997B /* nav_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav_button.png; sourceTree = "<group>"; };
@@ -1748,7 +1744,6 @@
 				CED694FD156BE13B00F8F54C /* comment_forward_unchecked.png */,
 				CED694FE156BE13B00F8F54C /* comment_icon.png */,
 				CE20C3DC156752930031997B /* common_button.png */,
-				CE20C3D9156752930031997B /* content.png */,
 				CECAA805156A970600B343A3 /* follow_btn.png */,
 				CECAA806156A970600B343A3 /* follow_status_background.png */,
 				CED694FF156BE13B00F8F54C /* gallery_btn.png */,
@@ -1875,7 +1870,6 @@
 				CED6957F156BE14700F8F54C /* comment_forward_checked@2x.png */,
 				CED69580156BE14700F8F54C /* comment_forward_unchecked@@2x.png */,
 				CED69581156BE14700F8F54C /* comment_icon@2x.png */,
-				CE20C397156752790031997B /* content@2x.png */,
 				CED69582156BE14700F8F54C /* customer_list_btn@2x.png */,
 				CECAA7D1156A96F700B343A3 /* follow_btn@2x.png */,
 				CECAA7D2156A96F700B343A3 /* follow_status_background@2x.png */,
@@ -2225,7 +2219,6 @@
 				CE20C3B5156752790031997B /* banner_switcher_focus@2x.png in Resources */,
 				CE20C3B6156752790031997B /* banner_switcher_normal@2x.png in Resources */,
 				CE20C3B7156752790031997B /* banner@2x.png in Resources */,
-				CE20C3B8156752790031997B /* content@2x.png in Resources */,
 				CE20C3B9156752790031997B /* large_buttion@2x.png in Resources */,
 				CE20C3BA156752790031997B /* login_button@2x.png in Resources */,
 				CE20C3BC156752790031997B /* nav_bar_background@2x.png in Resources */,
@@ -2254,7 +2247,6 @@
 				CE20C3F5156752930031997B /* banner_switcher_focus.png in Resources */,
 				CE20C3F6156752930031997B /* banner_switcher_normal.png in Resources */,
 				CE20C3F7156752930031997B /* banner.png in Resources */,
-				CE20C3F8156752930031997B /* content.png in Resources */,
 				CE20C3FA156752930031997B /* large_button.png in Resources */,
 				CE20C3FB156752930031997B /* common_button.png in Resources */,
 				CE20C3FD156752930031997B /* nav_button.png in Resources */,

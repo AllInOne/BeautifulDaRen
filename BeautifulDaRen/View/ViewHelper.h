@@ -30,5 +30,5 @@
 
 + (UIImage*) getBubbleImageWithWidth:(NSInteger)width height:(NSInteger)height;
 
-+ (UIBarButtonItem*) getCameraBarItem;
++ (UIBarButtonItem*) getCameraBarItemOftarget:(id)target action:(SEL)action;
 @end

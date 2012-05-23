@@ -103,11 +103,16 @@
     return [[[UIBarButtonItem alloc] initWithCustomView:imageView] autorelease];
 }
 
-+ (UIBarButtonItem*) getCameraBarItem
++ (UIBarButtonItem*) getCameraBarItemOftarget:(id)target action:(SEL)action
 {
-    UIImageView * imageView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"camera_btn"]] autorelease];
-    imageView.frame =CGRectMake(0, 0, 100, 30);
-    return [[[UIBarButtonItem alloc] initWithCustomView:imageView] autorelease];
+    UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
+
+    [button setBackgroundImage:[UIImage imageNamed:@"camera_btn.png"] forState:UIControlStateNormal];
+    [button setImage:[UIImage imageNamed:@"camera_icon_big.png"] forState:UIControlStateNormal];
+    button.frame = CGRectMake(0, 0, 100, 40);
+    [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    
+    return [[[UIBarButtonItem alloc] initWithCustomView:button] autorelease];
 }
 
 + (UIBarButtonItem*)getRightBarItemOfTarget1:(id)target1 action1:(SEL)action1 title1:(NSString*)title1 target2:(id)target2 action2:(SEL)action2 title2:(NSString*)title2
