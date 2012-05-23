@@ -54,15 +54,15 @@
         self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, ADS_CELL_HEIGHT);
         // TODO: get it from server
         _adsImageNames = [[NSMutableArray alloc] initWithObjects:@"banner",
+                                                                 @"home_banner2",
                                                                  @"banner",
-                                                                 @"banner",
-                                                                 @"banner",
+                                                                 @"home_banner2",
                                                                  nil];
         _firstImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"banner"]];
         _firstImageView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
         [self.view insertSubview:_firstImageView belowSubview:self.adsPageController];
         
-        _secondImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"banner"]];
+        _secondImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"home_banner2"]];
         _secondImageView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
         [self.view insertSubview:_secondImageView belowSubview:self.adsPageController];
         [_secondImageView setHidden:YES];
