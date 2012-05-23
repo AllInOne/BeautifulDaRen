@@ -119,7 +119,7 @@
         cell = [[[NSBundle mainBundle] loadNibNamed:privateLetterViewCellIdentifier owner:self options:nil] objectAtIndex:0];
     }
     PrivateLetterViewCell * privateLetterCell = ((PrivateLetterViewCell*)cell);
-    privateLetterCell.avatarImage.image = [UIImage imageNamed:@"item_fake"];
+    privateLetterCell.avatarImage.image = [UIImage imageNamed:@"avatar_big"];
     privateLetterCell.nameLabel.text = @"Adam Lambert";
     privateLetterCell.timeLabel.text = @"22分钟前";
     privateLetterCell.detailView.text = @"this is a long long long longa long long long longa long long long longa long long long long long long long  view";

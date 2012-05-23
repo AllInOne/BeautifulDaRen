@@ -11,6 +11,7 @@
 #import "ViewConstants.h"
 #import "ViewHelper.h"
 #import "FindFriendViewCell.h"
+#import "FindWeiboViewCell.h"
 #import "FriendDetailViewController.h"
 
 #define X_OFFSET 7
@@ -66,63 +67,6 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
-- (void)refreshSameCityDaRenView
-{
-    static NSString * cellViewIdentifier = @"ContactItemCell";
-    NSInteger scrollWidth = 0;
-    for (int i = 0; i < 10; i++) {
-        ContactItemCell * cell = [[[NSBundle mainBundle] loadNibNamed:cellViewIdentifier owner:self options:nil] objectAtIndex:0];
-        
-        cell.frame = CGRectMake(i * (cell.frame.size.width + X_OFFSET), 0,
-                                cell.frame.size.width,
-                                cell.frame.size.height);
-        scrollWidth += (cell.frame.size.width + X_OFFSET);
-        
-        [_sameCityDaRenView addSubview:cell];
-        
-        cell.contactImageView.image = [UIImage imageNamed:@"item_fake"];
-        cell.contactLabel.text = @"宇多田光";
-    }
-    [_sameCityDaRenView setContentSize:CGSizeMake(scrollWidth, 0)];
-}
-
--(void) refreshYouMayInterestinView
-{
-    static NSString * cellViewIdentifier = @"ContactItemCell";
-    NSInteger scrollWidth = 0;
-    for (int i = 0; i < 10; i++) {
-        ContactItemCell * cell = [[[NSBundle mainBundle] loadNibNamed:cellViewIdentifier owner:self options:nil] objectAtIndex:0];
-        cell.frame = CGRectMake(i * (cell.frame.size.width + X_OFFSET), 0,
-                                cell.frame.size.width,
-                                cell.frame.size.height);
-        scrollWidth += (cell.frame.size.width + X_OFFSET);
-        
-        [_youMayInterestinView addSubview:cell];
-        
-        cell.contactImageView.image = [UIImage imageNamed:@"fake_item11"];
-        cell.contactLabel.text = @"张东健";
-    }
-    [_youMayInterestinView setContentSize:CGSizeMake(scrollWidth, 0)];
-}
-
-- (void) refreshHotDaRenView
-{
-    static NSString * cellViewIdentifier = @"ContactItemCell";
-    NSInteger scrollWidth = 0;
-    for (int i = 0; i < 10; i++) {
-        ContactItemCell * cell = [[[NSBundle mainBundle] loadNibNamed:cellViewIdentifier owner:self options:nil] objectAtIndex:0];
-        cell.frame = CGRectMake(i * (cell.frame.size.width + X_OFFSET), 0,
-                                cell.frame.size.width,
-                                cell.frame.size.height);
-        scrollWidth += (cell.frame.size.width + X_OFFSET);
-        
-        [_hotDaRenView addSubview:cell];
-        
-        cell.contactImageView.image = [UIImage imageNamed:@"fake_item9"];
-        cell.contactLabel.text = @"谢霆锋";
-    }
-    [_hotDaRenView setContentSize:CGSizeMake(scrollWidth, 0)];
-}
 - (void)onRefreshButtonClicked
 {
     [ViewHelper showSimpleMessage:@"刷新" withTitle:nil withButtonText:@"关闭"];
@@ -153,8 +97,9 @@
      @"葫芦娃",
      @"Daimos",
      nil];
-    
+    _isFindWeibo = NO;
     [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClicked) title:NSLocalizedString(@"refresh", @"refresh")]];
+
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -184,12 +129,72 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (void)refreshSameCityDaRenView
+{
+    static NSString * cellViewIdentifier = @"ContactItemCell";
+    NSInteger scrollWidth = 0;
+    for (int i = 0; i < 10; i++) {
+        ContactItemCell * cell = [[[NSBundle mainBundle] loadNibNamed:cellViewIdentifier owner:self options:nil] objectAtIndex:0];
+        
+        cell.frame = CGRectMake(i * (cell.frame.size.width + X_OFFSET), 0,
+                                cell.frame.size.width,
+                                cell.frame.size.height);
+        scrollWidth += (cell.frame.size.width + X_OFFSET);
+        
+        [_sameCityDaRenView addSubview:cell];
+        
+        cell.contactImageView.image = [UIImage imageNamed:@"avatar_big"];
+        cell.contactLabel.text = @"宇多田光";
+    }
+    [_sameCityDaRenView setContentSize:CGSizeMake(scrollWidth, 0)];
+}
+
+-(void) refreshYouMayInterestinView
+{
+    static NSString * cellViewIdentifier = @"ContactItemCell";
+    NSInteger scrollWidth = 0;
+    for (int i = 0; i < 10; i++) {
+        ContactItemCell * cell = [[[NSBundle mainBundle] loadNibNamed:cellViewIdentifier owner:self options:nil] objectAtIndex:0];
+        cell.frame = CGRectMake(i * (cell.frame.size.width + X_OFFSET), 0,
+                                cell.frame.size.width,
+                                cell.frame.size.height);
+        scrollWidth += (cell.frame.size.width + X_OFFSET);
+        
+        [_youMayInterestinView addSubview:cell];
+        
+        cell.contactImageView.image = [UIImage imageNamed:@"avatar_big"];
+        cell.contactLabel.text = @"张东健";
+    }
+    [_youMayInterestinView setContentSize:CGSizeMake(scrollWidth, 0)];
+}
+
+- (void) refreshHotDaRenView
+{
+    static NSString * cellViewIdentifier = @"ContactItemCell";
+    NSInteger scrollWidth = 0;
+    for (int i = 0; i < 10; i++) {
+        ContactItemCell * cell = [[[NSBundle mainBundle] loadNibNamed:cellViewIdentifier owner:self options:nil] objectAtIndex:0];
+        cell.frame = CGRectMake(i * (cell.frame.size.width + X_OFFSET), 0,
+                                cell.frame.size.width,
+                                cell.frame.size.height);
+        scrollWidth += (cell.frame.size.width + X_OFFSET);
+        
+        [_hotDaRenView addSubview:cell];
+        
+        cell.contactImageView.image = [UIImage imageNamed:@"avatar_big"];
+        cell.contactLabel.text = @"谢霆锋";
+    }
+    [_hotDaRenView setContentSize:CGSizeMake(scrollWidth, 0)];
+}
 #pragma mark UITableViewDelegate
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    FriendDetailViewController * friendDetailViewController = [[[FriendDetailViewController alloc] initWithNibName:@"FriendDetailViewController" bundle:nil] autorelease];
-    [self.navigationController pushViewController:friendDetailViewController animated:YES];
+    if(_isFindWeibo == NO)
+    {
+        FriendDetailViewController * friendDetailViewController = [[[FriendDetailViewController alloc] initWithNibName:@"FriendDetailViewController" bundle:nil] autorelease];
+        [self.navigationController pushViewController:friendDetailViewController animated:YES];
+    }
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -198,6 +203,10 @@
     if(_isFindWeibo == NO)
     {
         height = 75.0f;
+    }
+    else
+    {
+        height = 44.0f;
     }
     return height;
 }
@@ -220,6 +229,7 @@
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *findFriendViewCell = @"FindFriendViewCell";
+    static NSString *findWeiboViewCell = @"FindWeiboViewCell";
     
     UITableViewCell *cell = nil;
     if (_isFindWeibo == NO) {
@@ -229,8 +239,17 @@
             cell = [[[NSBundle mainBundle] loadNibNamed:findFriendViewCell owner:self options:nil] objectAtIndex:0];
         }
     }
+    else
+    {
+        cell = [tableView dequeueReusableCellWithIdentifier:findWeiboViewCell];
+        if(!cell)
+        {
+            cell = [[[NSBundle mainBundle] loadNibNamed:findWeiboViewCell owner:self options:nil] objectAtIndex:0];
+        }
+    }
     return cell;
 }
+
 #pragma mark COMMON
 - (void)filterContentForSearchText:(NSString*)searchText 
                              scope:(NSString*)scope
@@ -282,6 +301,7 @@
     
     [searchBar setShowsCancelButton:isShowsCancelButton animated:YES];
     [searchBar setShowsScopeBar:isShowsScopeButton];
+    [searchBar setSelectedScopeButtonIndex:1];
     [searchBar setFrame:CGRectMake(searchBar.frame.origin.x, searchBar.frame.origin.y, searchBar.frame.size.width, height)];
 }
 
@@ -309,5 +329,11 @@
     [_contentScrollView setFrame:CGRectMake(_contentScrollView.frame.origin.x, CONTENT_VIEW_HEIGHT_OFFSET, _contentScrollView.frame.size.width,_contentScrollView.frame.size.height)];
     
     [UIView commitAnimations];
+}
+
+- (void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope
+{
+    _isFindWeibo = (selectedScope ==0) ? YES : NO;
+    [_friendViewController reloadData];
 }
 @end

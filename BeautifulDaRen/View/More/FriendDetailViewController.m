@@ -44,7 +44,7 @@
         [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
         [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onHomePageButtonClicked) title:NSLocalizedString(@"home_page", @"home_page")]];
         
-        _isIdentification = NO;
+        _isIdentification = YES;
     }
     return self;
 }

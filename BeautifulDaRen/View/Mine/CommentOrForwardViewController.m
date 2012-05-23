@@ -98,7 +98,7 @@
     {
         atMeCell.weiboImageView.image = [ViewHelper getBubbleImageWithWidth:120 height:90];
         UIImageView * originalWeiboAvatarImageView = [[[UIImageView alloc] initWithFrame:CGRectMake(15, 8, 25, 25)] autorelease];
-        originalWeiboAvatarImageView.image = [UIImage imageNamed:@"item_fake"];
+        originalWeiboAvatarImageView.image = [UIImage imageNamed:@"avatar_big"];
         [atMeCell.weiboView addSubview:originalWeiboAvatarImageView];
         
         UILabel * originalWeiBoNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, 12, 150, 25)];
@@ -114,7 +114,7 @@
         [atMeCell.weiboView addSubview:originalWeiBoTimeLineLabel];
         
         UIImageView * originalWeiboItemImageView = [[[UIImageView alloc] initWithFrame:CGRectMake(15, 40, 60, 60)] autorelease];
-        originalWeiboItemImageView.image = [UIImage imageNamed:@"item_fake"];
+        originalWeiboItemImageView.image = [UIImage imageNamed:@"avatar_big"];
         [atMeCell.weiboView addSubview:originalWeiboItemImageView];
         
         UILabel * originalWeiBoCostLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 83, 33, 15)];
