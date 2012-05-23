@@ -70,6 +70,8 @@
 		C26798EF155EA741001E1D2E /* buttonBackGround.png in Resources */ = {isa = PBXBuildFile; fileRef = C26798EE155EA741001E1D2E /* buttonBackGround.png */; };
 		C274DCBE155EB7BA0098EE22 /* UserIdentity.m in Sources */ = {isa = PBXBuildFile; fileRef = C274DCBD155EB7BA0098EE22 /* UserIdentity.m */; };
 		C274DCC1155EB99B0098EE22 /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C274DCC0155EB99B0098EE22 /* CoreDataManager.m */; };
+		C27F8654156CCFE40094402B /* FindFriendViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C27F8653156CCFE30094402B /* FindFriendViewCell.m */; };
+		C27F8656156CCFF70094402B /* FindFriendViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C27F8655156CCFF70094402B /* FindFriendViewCell.xib */; };
 		C28A93521548364A008C8AFC /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C28A93501548364A008C8AFC /* LoginViewController.m */; };
 		C28A93531548364A008C8AFC /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C28A93511548364A008C8AFC /* LoginViewController.xib */; };
 		C28A935B15484442008C8AFC /* ButtonViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C28A935A15484442008C8AFC /* ButtonViewCell.m */; };
@@ -586,6 +588,9 @@
 		C274DCC2155EBA6F0098EE22 /* DataManagerCallbacks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataManagerCallbacks.h; path = Common/DataManagerCallbacks.h; sourceTree = "<group>"; };
 		C274DCDA155EBBBD0098EE22 /* DataConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataConstants.h; sourceTree = "<group>"; };
 		C274DCDC155EC3D70098EE22 /* UpdateViewControllerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UpdateViewControllerProtocol.h; path = Protocol/UpdateViewControllerProtocol.h; sourceTree = "<group>"; };
+		C27F8652156CCFE30094402B /* FindFriendViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindFriendViewCell.h; sourceTree = "<group>"; };
+		C27F8653156CCFE30094402B /* FindFriendViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindFriendViewCell.m; sourceTree = "<group>"; };
+		C27F8655156CCFF70094402B /* FindFriendViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FindFriendViewCell.xib; sourceTree = "<group>"; };
 		C28A934F1548364A008C8AFC /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		C28A93501548364A008C8AFC /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		C28A93511548364A008C8AFC /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
@@ -1152,6 +1157,9 @@
 				C20FAB0C1559539400895272 /* ContactItemCell.h */,
 				C20FAB0D1559539400895272 /* ContactItemCell.m */,
 				C20FAB0F155953A600895272 /* ContactItemCell.xib */,
+				C27F8652156CCFE30094402B /* FindFriendViewCell.h */,
+				C27F8653156CCFE30094402B /* FindFriendViewCell.m */,
+				C27F8655156CCFF70094402B /* FindFriendViewCell.xib */,
 			);
 			name = subview;
 			sourceTree = "<group>";
@@ -2468,6 +2476,7 @@
 				CED695F5156BE14700F8F54C /* weibo_price_background@2x.png in Resources */,
 				CED695F6156BE14700F8F54C /* weibo_price_label@2x.png in Resources */,
 				CED695F7156BE14700F8F54C /* weibo_sample_picture@2x.png in Resources */,
+				C27F8656156CCFF70094402B /* FindFriendViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2575,6 +2584,7 @@
 				C2CE728C156A945600C22E34 /* FindWeiboViewController.m in Sources */,
 				C21C26A8156B7E36000F8E3C /* EdittingViewController.m in Sources */,
 				C21C26B4156BA875000F8E3C /* RadioButton.m in Sources */,
+				C27F8654156CCFE40094402B /* FindFriendViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

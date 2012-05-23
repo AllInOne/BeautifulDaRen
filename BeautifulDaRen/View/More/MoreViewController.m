@@ -38,12 +38,11 @@
 {
     [super viewDidLoad];
     
-//    _findMoreViewController = [[[FindMoreViewController alloc] initWithNibName:@"FindMoreViewController" bundle:nil] autorelease];
-//    [self.view addSubview:_findMoreViewController.view];
+    _findMoreViewController = [[[FindMoreViewController alloc] initWithNibName:@"FindMoreViewController" bundle:nil] autorelease];
+    [self.view addSubview:_findMoreViewController.view];
     
-    // todo
-    FriendDetailViewController * f = [[[FriendDetailViewController alloc] initWithNibName:@"FriendDetailViewController" bundle:nil] autorelease];
-    [self.navigationController pushViewController:f animated:YES];
+//    FriendDetailViewController * f = [[[FriendDetailViewController alloc] initWithNibName:@"FriendDetailViewController" bundle:nil] autorelease];
+//    [self.navigationController pushViewController:f animated:YES];
 }
 
 - (void)viewDidUnload

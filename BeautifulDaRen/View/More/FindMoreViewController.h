@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FindMoreViewController : UIViewController <UIScrollViewDelegate>
+@interface FindMoreViewController : UIViewController <UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UITextFieldDelegate>
+
 
 @end

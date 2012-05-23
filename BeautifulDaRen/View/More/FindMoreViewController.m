@@ -8,8 +8,10 @@
 
 #import "FindMoreViewController.h"
 #import "ContactItemCell.h"
+#import "FindFriendViewCell.h"
 
 #define X_OFFSET 7
+#define CONTENT_VIEW_HEIGHT_OFFSET 50
 @interface FindMoreViewController()
 
 @property (retain, nonatomic) IBOutlet UIButton * followOrInviteSinaWeiboFriendButton;
@@ -18,6 +20,12 @@
 @property (retain, nonatomic) IBOutlet UIScrollView * youMayInterestinView;
 @property (retain, nonatomic) IBOutlet UIScrollView * hotDaRenView;
 
+@property (retain, nonatomic) IBOutlet UITableView * friendViewController;
+@property (retain, nonatomic) IBOutlet UISearchBar * searchBar;
+@property (nonatomic, copy) NSArray *allItems;
+@property (nonatomic, copy) NSArray *searchResults;
+
+@property (nonatomic, assign) BOOL isFindWeibo;
 - (void) refreshSameCityDaRenView;
 - (void) refreshYouMayInterestinView;
 - (void) refreshHotDaRenView;
@@ -29,8 +37,14 @@
 @synthesize youMayInterestinView = _youMayInterestinView;
 @synthesize hotDaRenView = _hotDaRenView;
 @synthesize contentScrollView = _contentScrollView;
+@synthesize friendViewController = _friendViewController;
+@synthesize searchBar = _searchBar;
+@synthesize isFindWeibo = _isFindWeibo;
 
 @synthesize followOrInviteSinaWeiboFriendButton = _followOrInviteSinaWeiboFriendButton;
+
+@synthesize allItems = _allItems;
+@synthesize searchResults = _searchResults;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -125,9 +139,22 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    _allItems = [[NSArray alloc] initWithObjects:
+     @"西西110",
+     @"雅力士",
+     @"Voltes V",
+     @"葫芦娃",
+     @"Daimos",
+     nil];
+    
     [_contentScrollView setContentSize:CGSizeMake(0, 415)];
-    [_contentScrollView setFrame:CGRectMake(0, 50, _contentScrollView.frame.size.width, _contentScrollView.frame.size.height)];
+    [_contentScrollView setFrame:CGRectMake(0, CONTENT_VIEW_HEIGHT_OFFSET, _contentScrollView.frame.size.width, _contentScrollView.frame.size.height)];
     [self.view addSubview:_contentScrollView];
+    
+    [_friendViewController setFrame:CGRectMake(0, CONTENT_VIEW_HEIGHT_OFFSET + 44.0f, _friendViewController.frame.size.width,270)];
+    [self.view addSubview:_friendViewController];
+    [_friendViewController setHidden:YES];
     [self refreshView];
 }
 
@@ -144,4 +171,124 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+#pragma mark UITableViewDelegate
+
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGFloat height = 0.0f;
+    if(_isFindWeibo == NO)
+    {
+        height = 75.0f;
+    }
+    return height;
+}
+
+#pragma mark UITableViewDataSource
+
+-(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    NSInteger rows = 0;
+    if ([tableView isEqual:self.searchDisplayController.searchResultsTableView]) {
+        rows = [_searchResults count];
+    }
+    else
+    {
+        rows = [_allItems count];
+    }
+    return  rows;
+}
+
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *findFriendViewCell = @"FindFriendViewCell";
+    
+    UITableViewCell *cell = nil;
+    if (_isFindWeibo == NO) {
+        cell = [tableView dequeueReusableCellWithIdentifier:findFriendViewCell];
+        if(!cell)
+        {
+            cell = [[[NSBundle mainBundle] loadNibNamed:findFriendViewCell owner:self options:nil] objectAtIndex:0];
+        }
+    }
+    return cell;
+}
+#pragma mark COMMON
+- (void)filterContentForSearchText:(NSString*)searchText 
+                             scope:(NSString*)scope
+{
+    NSPredicate *resultPredicate = [NSPredicate 
+                                    predicateWithFormat:@"SELF contains[cd] %@",
+                                    searchText];
+    
+    self.searchResults = [self.allItems filteredArrayUsingPredicate:resultPredicate];
+}
+#pragma mark - UISearchBarDelegate delegate methods
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    CGFloat height = 44.0f;
+    BOOL isShowsCancelButton = NO;
+    BOOL isShowsScopeButton = NO;
+    if([searchText length] > 0)
+    {
+        height = 88.0f;
+        isShowsCancelButton = YES;
+        isShowsScopeButton = YES;
+        if(_contentScrollView.frame.origin.y == CONTENT_VIEW_HEIGHT_OFFSET)
+        {
+            [UIView beginAnimations:nil context:nil];
+            [UIView setAnimationDuration:0.3];
+            
+            [_contentScrollView setFrame:CGRectMake(_contentScrollView.frame.origin.x, CONTENT_VIEW_HEIGHT_OFFSET + 44.0f, _contentScrollView.frame.size.width,_contentScrollView.frame.size.height)];
+            
+            [UIView commitAnimations];
+        }
+    }
+    else
+    {
+        height = 44.0f;
+        
+        isShowsCancelButton = NO;
+        isShowsScopeButton = NO;
+        if(_contentScrollView.frame.origin.y == CONTENT_VIEW_HEIGHT_OFFSET + 44.0f)
+        {
+            [UIView beginAnimations:nil context:nil];
+            [UIView setAnimationDuration:0.3];
+            
+            [_contentScrollView setFrame:CGRectMake(_contentScrollView.frame.origin.x, CONTENT_VIEW_HEIGHT_OFFSET, _contentScrollView.frame.size.width,_contentScrollView.frame.size.height)];
+            
+            [UIView commitAnimations];
+        }
+    }
+    
+    [searchBar setShowsCancelButton:isShowsCancelButton animated:YES];
+    [searchBar setShowsScopeBar:isShowsScopeButton];
+    [searchBar setFrame:CGRectMake(searchBar.frame.origin.x, searchBar.frame.origin.y, searchBar.frame.size.width, height)];
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    [_contentScrollView setHidden:YES];
+    [_friendViewController setHidden:NO];
+    [_searchBar endEditing:YES];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar
+{
+    [_friendViewController setHidden:YES];
+    [_contentScrollView setHidden:NO];
+
+    searchBar.text = @"";
+    [searchBar endEditing:YES];
+    [searchBar setShowsScopeBar:NO];
+    [searchBar setShowsCancelButton:NO animated:YES];
+    [searchBar setFrame:CGRectMake(searchBar.frame.origin.x, searchBar.frame.origin.y, searchBar.frame.size.width, 44.0f)];
+    
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.3];
+    
+    [_contentScrollView setFrame:CGRectMake(_contentScrollView.frame.origin.x, CONTENT_VIEW_HEIGHT_OFFSET, _contentScrollView.frame.size.width,_contentScrollView.frame.size.height)];
+    
+    [UIView commitAnimations];
+}
 @end
