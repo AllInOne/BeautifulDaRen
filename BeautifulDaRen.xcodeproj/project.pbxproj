@@ -255,8 +255,6 @@
 		CEC0B590153EFBF600F20DC0 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC0B58E153EFBF600F20DC0 /* HomeViewController.xib */; };
 		CEC0B595153EFBFE00F20DC0 /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC0B593153EFBFE00F20DC0 /* MineViewController.m */; };
 		CEC0B596153EFBFE00F20DC0 /* MineViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC0B594153EFBFE00F20DC0 /* MineViewController.xib */; };
-		CEC0B59B153EFC0500F20DC0 /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC0B599153EFC0500F20DC0 /* MoreViewController.m */; };
-		CEC0B59C153EFC0500F20DC0 /* MoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC0B59A153EFC0500F20DC0 /* MoreViewController.xib */; };
 		CEC29FE51556C56600052A14 /* MyShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC29FE31556C56600052A14 /* MyShowViewController.m */; };
 		CEC29FE61556C56600052A14 /* MyShowViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC29FE41556C56600052A14 /* MyShowViewController.xib */; };
 		CEC2D158154304E6001FA8D0 /* avatar_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CEC2D157154304E6001FA8D0 /* avatar_icon.png */; };
@@ -848,9 +846,6 @@
 		CEC0B592153EFBFE00F20DC0 /* MineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineViewController.h; sourceTree = "<group>"; };
 		CEC0B593153EFBFE00F20DC0 /* MineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineViewController.m; sourceTree = "<group>"; };
 		CEC0B594153EFBFE00F20DC0 /* MineViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MineViewController.xib; sourceTree = "<group>"; };
-		CEC0B598153EFC0500F20DC0 /* MoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreViewController.h; sourceTree = "<group>"; };
-		CEC0B599153EFC0500F20DC0 /* MoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreViewController.m; sourceTree = "<group>"; };
-		CEC0B59A153EFC0500F20DC0 /* MoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoreViewController.xib; sourceTree = "<group>"; };
 		CEC29FE21556C56600052A14 /* MyShowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyShowViewController.h; path = BeautifulDaRen/View/MyShow/MyShowViewController.h; sourceTree = SOURCE_ROOT; };
 		CEC29FE31556C56600052A14 /* MyShowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyShowViewController.m; path = BeautifulDaRen/View/MyShow/MyShowViewController.m; sourceTree = SOURCE_ROOT; };
 		CEC29FE41556C56600052A14 /* MyShowViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MyShowViewController.xib; path = BeautifulDaRen/View/MyShow/MyShowViewController.xib; sourceTree = SOURCE_ROOT; };
@@ -1708,9 +1703,6 @@
 			isa = PBXGroup;
 			children = (
 				C2E9898F156A130900ACFEA4 /* subview */,
-				CEC0B598153EFC0500F20DC0 /* MoreViewController.h */,
-				CEC0B599153EFC0500F20DC0 /* MoreViewController.m */,
-				CEC0B59A153EFC0500F20DC0 /* MoreViewController.xib */,
 				C20BD4AF15591F70006BEEC8 /* FindMoreViewController.h */,
 				C20BD4B015591F71006BEEC8 /* FindMoreViewController.m */,
 				C20BD4B115591F71006BEEC8 /* FindMoreViewController.xib */,
@@ -2147,7 +2139,6 @@
 				CEC0B58A153EFBE800F20DC0 /* CategoryViewController.xib in Resources */,
 				CEC0B590153EFBF600F20DC0 /* HomeViewController.xib in Resources */,
 				CEC0B596153EFBFE00F20DC0 /* MineViewController.xib in Resources */,
-				CEC0B59C153EFC0500F20DC0 /* MoreViewController.xib in Resources */,
 				CE74544E153F1D3D00CB751A /* Localizable.strings in Resources */,
 				CE745455153F1F8900CB751A /* first.png in Resources */,
 				CE745456153F1F8900CB751A /* first@2x.png in Resources */,
@@ -2516,7 +2507,6 @@
 				CEC0B589153EFBE800F20DC0 /* CategoryViewController.m in Sources */,
 				CEC0B58F153EFBF600F20DC0 /* HomeViewController.m in Sources */,
 				CEC0B595153EFBFE00F20DC0 /* MineViewController.m in Sources */,
-				CEC0B59B153EFC0500F20DC0 /* MoreViewController.m in Sources */,
 				CEDC9191153FDC7700BA6C35 /* AdsPageView.m in Sources */,
 				C26717AE1542BF0000DC40D8 /* CommonScrollView.m in Sources */,
 				C26717B01542BF0000DC40D8 /* CommonScrollViewItem.m in Sources */,

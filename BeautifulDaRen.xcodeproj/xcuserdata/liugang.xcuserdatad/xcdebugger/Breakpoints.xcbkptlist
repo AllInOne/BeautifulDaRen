@@ -191,11 +191,25 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "BeautifulDaRen/View/More/MoreViewController.m"
-         timestampString = "359443120.04992"
+         timestampString = "359456710.916976"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "207"
-         endingLineNumber = "207">
+         startingLineNumber = "204"
+         endingLineNumber = "204">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "BeautifulDaRen/View/More/FindMoreViewController.m"
+         timestampString = "359461877.188762"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "56"
+         endingLineNumber = "56"
+         landmarkName = "-initWithNibName:bundle:"
+         landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
    <ExceptionBreakpoints>

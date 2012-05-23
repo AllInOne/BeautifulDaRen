@@ -8,7 +8,10 @@
 
 #import "FindMoreViewController.h"
 #import "ContactItemCell.h"
+#import "ViewConstants.h"
+#import "ViewHelper.h"
 #import "FindFriendViewCell.h"
+#import "FriendDetailViewController.h"
 
 #define X_OFFSET 7
 #define CONTENT_VIEW_HEIGHT_OFFSET 50
@@ -120,7 +123,10 @@
     }
     [_hotDaRenView setContentSize:CGSizeMake(scrollWidth, 0)];
 }
-
+- (void)onRefreshButtonClicked
+{
+    [ViewHelper showSimpleMessage:@"刷新" withTitle:nil withButtonText:@"关闭"];
+}
 #pragma mark - View lifecycle
 -(void)dealloc
 {
@@ -148,9 +154,16 @@
      @"Daimos",
      nil];
     
+    [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClicked) title:NSLocalizedString(@"refresh", @"refresh")]];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
     [_contentScrollView setContentSize:CGSizeMake(0, 415)];
     [_contentScrollView setFrame:CGRectMake(0, CONTENT_VIEW_HEIGHT_OFFSET, _contentScrollView.frame.size.width, _contentScrollView.frame.size.height)];
+    
     [self.view addSubview:_contentScrollView];
+    
     
     [_friendViewController setFrame:CGRectMake(0, CONTENT_VIEW_HEIGHT_OFFSET + 44.0f, _friendViewController.frame.size.width,270)];
     [self.view addSubview:_friendViewController];
@@ -172,6 +185,12 @@
 }
 
 #pragma mark UITableViewDelegate
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    FriendDetailViewController * friendDetailViewController = [[[FriendDetailViewController alloc] initWithNibName:@"FriendDetailViewController" bundle:nil] autorelease];
+    [self.navigationController pushViewController:friendDetailViewController animated:YES];
+}
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -270,7 +289,7 @@
 {
     [_contentScrollView setHidden:YES];
     [_friendViewController setHidden:NO];
-    [_searchBar endEditing:YES];
+    [searchBar endEditing:YES];
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar
