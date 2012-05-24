@@ -296,7 +296,6 @@
         while (cell &&  ((cell.frame.origin.y + cell.frame.size.height  - self.contentOffset.y) <  0.0001)) 
 		{
 			[cell removeFromSuperview];
-//			[self recycleCellIntoReusableQueue:cell withIndex:[[[self.cellIndex objectAtIndex:i] objectAtIndex:0] intValue]];
 			[[self.visibleCells objectAtIndex:i] removeObject:cell];
 			
 			if(((NSMutableArray*)[self.visibleCells objectAtIndex:i]).count > 0)
@@ -312,7 +311,6 @@
         cell = [[self.visibleCells objectAtIndex:i] lastObject];
         while (cell &&  ((cell.frame.origin.y + cell.frame.size.height - self.frame.size.height - self.contentOffset.y) <  0.0001)) 
 		{
-            //NSLog(@"self.offset %@, self.frame %@, cell.frame %@, cell.indexpath %@",NSStringFromCGPoint(self.contentOffset),NSStringFromCGRect(self.frame),NSStringFromCGRect(cell.frame),cell.indexPath);
             float origin_y = 0;
 			float height = 0;
             int rowToDisplay = cell.indexPath.row;
@@ -340,7 +338,6 @@
         while (cell &&  ((cell.frame.origin.y - self.frame.size.height - self.contentOffset.y) > 0.0001)) 
 		{
 			[cell removeFromSuperview];
-//			[self recycleCellIntoReusableQueue:cell withIndex:[[[self.cellIndex objectAtIndex:i] objectAtIndex:[self.cellIndex count] -1 ] intValue]];
 			[[self.visibleCells objectAtIndex:i] removeObject:cell];
 			
 			if(((NSMutableArray*)[self.visibleCells objectAtIndex:i]).count > 0)

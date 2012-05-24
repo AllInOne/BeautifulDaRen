@@ -10,6 +10,7 @@
 #import "ViewConstants.h"
 #import "WaresItem.h"
 #import "WeiboDetailViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 #define COLUMNS_PER_ROW 4
 #define GRID_X_OFFSET 3
@@ -135,10 +136,14 @@
         
         UIImageView * imageView = [[[UIImageView alloc] init] autorelease];
         imageView.image = [UIImage imageWithData:((WaresItem*)[self.fakeData objectAtIndex:index]).itemImageData];
-        [cell addSubview:imageView];
+        
+        imageView.frame = CGRectMake(2, 2, self.view.frame.size.width / 3 - 10, imageView.image.size.height - 10);
 
-        imageView.frame = CGRectMake(0, 0, self.view.frame.size.width / 3, imageView.image.size.height);
-
+        UIView * view = [[[UIView alloc] initWithFrame:CGRectMake(2, 2, self.view.frame.size.width / 3 - 6, imageView.image.size.height - 6)] autorelease];
+        [view addSubview:imageView];
+        view.layer.borderColor = [[UIColor grayColor] CGColor];
+        view.layer.borderWidth = 1;
+        [cell addSubview:view];
 	}
 	return cell;
 }
