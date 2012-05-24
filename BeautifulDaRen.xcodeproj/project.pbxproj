@@ -240,8 +240,6 @@
 		CE83A1B9154C29EC005187F7 /* WeiboDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE83A1B7154C29EC005187F7 /* WeiboDetailViewController.xib */; };
 		CE83A1BD154C2A26005187F7 /* WeiboComposerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE83A1BB154C2A26005187F7 /* WeiboComposerViewController.m */; };
 		CE83A1BE154C2A26005187F7 /* WeiboComposerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE83A1BC154C2A26005187F7 /* WeiboComposerViewController.xib */; };
-		CEB21492156CFFC400EACE5F /* weibo_pay_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB21491156CFFC400EACE5F /* weibo_pay_icon@2x.png */; };
-		CEB21494156CFFD200EACE5F /* weibo_pay_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB21493156CFFD200EACE5F /* weibo_pay_icon.png */; };
 		CEBCD04C154FD253000D41E1 /* ChineseToPinyin.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBCD04B154FD253000D41E1 /* ChineseToPinyin.m */; };
 		CEBCD04E154FF0EE000D41E1 /* follow.png in Resources */ = {isa = PBXBuildFile; fileRef = CEBCD04D154FF0EE000D41E1 /* follow.png */; };
 		CEBCD053154FF377000D41E1 /* BaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBCD051154FF377000D41E1 /* BaseManager.m */; };
@@ -821,8 +819,6 @@
 		CE83A1BA154C2A26005187F7 /* WeiboComposerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboComposerViewController.h; sourceTree = "<group>"; };
 		CE83A1BB154C2A26005187F7 /* WeiboComposerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboComposerViewController.m; sourceTree = "<group>"; };
 		CE83A1BC154C2A26005187F7 /* WeiboComposerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeiboComposerViewController.xib; sourceTree = "<group>"; };
-		CEB21491156CFFC400EACE5F /* weibo_pay_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "weibo_pay_icon@2x.png"; path = "../../../../../Downloads/weibo_pay_icon@2x.png"; sourceTree = "<group>"; };
-		CEB21493156CFFD200EACE5F /* weibo_pay_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = weibo_pay_icon.png; path = ../../../../../Downloads/weibo_pay_icon.png; sourceTree = "<group>"; };
 		CEBCD04A154FD253000D41E1 /* ChineseToPinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChineseToPinyin.h; path = Utility/ChineseToPinyin.h; sourceTree = "<group>"; };
 		CEBCD04B154FD253000D41E1 /* ChineseToPinyin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChineseToPinyin.m; path = Utility/ChineseToPinyin.m; sourceTree = "<group>"; };
 		CEBCD04D154FF0EE000D41E1 /* follow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = follow.png; sourceTree = "<group>"; };
@@ -1830,7 +1826,6 @@
 				CED6952D156BE13B00F8F54C /* weibo_favourate.png */,
 				CED6952E156BE13B00F8F54C /* weibo_forward_icon.png */,
 				CED6952F156BE13B00F8F54C /* weibo_pay_button.png */,
-				CEB21493156CFFD200EACE5F /* weibo_pay_icon.png */,
 				CE20C3EF156752930031997B /* weibo_picture_frame.png */,
 				CED69530156BE13B00F8F54C /* weibo_price_background.png */,
 				CED69531156BE13B00F8F54C /* weibo_price_label.png */,
@@ -1959,7 +1954,6 @@
 				CED695B2156BE14700F8F54C /* weibo_forward_icon@2x.png */,
 				CE20C3AF156752790031997B /* weibo_frame@2x.png */,
 				CED695B3156BE14700F8F54C /* weibo_pay_btn@2x.png */,
-				CEB21491156CFFC400EACE5F /* weibo_pay_icon@2x.png */,
 				CED695B4156BE14700F8F54C /* weibo_price_background@2x.png */,
 				CED695B5156BE14700F8F54C /* weibo_price_label@2x.png */,
 				CE20C3B0156752790031997B /* weibo_sample1@2x.png */,
@@ -2460,8 +2454,6 @@
 				CED695F7156BE14700F8F54C /* weibo_sample_picture@2x.png in Resources */,
 				C27F8656156CCFF70094402B /* FindFriendViewCell.xib in Resources */,
 				C27F865D156CF4D70094402B /* FindWeiboViewCell.xib in Resources */,
-				CEB21492156CFFC400EACE5F /* weibo_pay_icon@2x.png in Resources */,
-				CEB21494156CFFD200EACE5F /* weibo_pay_icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
