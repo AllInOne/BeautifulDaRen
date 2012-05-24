@@ -101,7 +101,14 @@
     _isFindWeibo = NO;
     [self.navigationItem setTitle:NSLocalizedString(@"find_weibo_or_friend", @"find_weibo_or_friend")];
     [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClicked) title:NSLocalizedString(@"refresh", @"refresh")]];
-
+    
+    _searchBar.backgroundImage = [UIImage imageNamed:@"search_switcher_btn"];
+    _searchBar.scopeBarBackgroundImage = [UIImage imageNamed:@"search_switcher_btn"];
+    [_searchBar setScopeBarButtonBackgroundImage:[UIImage imageNamed:@"segement_btn_selected"] forState:UIControlStateSelected];
+    [_searchBar setScopeBarButtonBackgroundImage:[UIImage imageNamed:@"segement_btn_unselected"] forState:UIControlStateNormal];
+    _searchBar.scopeButtonTitles = [NSArray arrayWithObjects:
+                                    NSLocalizedString(@"weibo", @""),
+                                    NSLocalizedString(@"user", @""), nil];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -110,7 +117,6 @@
     [_contentScrollView setFrame:CGRectMake(0, CONTENT_VIEW_HEIGHT_OFFSET, _contentScrollView.frame.size.width, _contentScrollView.frame.size.height)];
     
     [self.view addSubview:_contentScrollView];
-    
     
     [_friendViewController setFrame:CGRectMake(0, CONTENT_VIEW_HEIGHT_OFFSET + 44.0f, _friendViewController.frame.size.width,270)];
     [self.view addSubview:_friendViewController];
