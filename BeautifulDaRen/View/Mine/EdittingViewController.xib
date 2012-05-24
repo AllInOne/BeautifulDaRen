@@ -40,7 +40,7 @@
 				<string key="NSFrame">{{0, 64}, {320, 416}}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="505004488"/>
+				<reference key="NSNextKeyView"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MQA</bytes>
@@ -74,7 +74,7 @@
 						<string key="IBUIText">对于我不关注的人，是否允许：</string>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">2</int>
-							<bytes key="NSRGB">MSAwLjYxMTc2NDcyOSAwLjg5ODAzOTI4MTQAA</bytes>
+							<bytes key="NSRGB">MC44MDc4NDMyMDgzIDAuMzQxMTc2NDgwMSAwLjU5MjE1Njg4NzEAA</bytes>
 						</object>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
@@ -282,7 +282,6 @@
 						<string key="NSFrame">{{20, 175}, {238, 21}}</string>
 						<reference key="NSSuperview" ref="104689907"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:328</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -292,7 +291,7 @@
 						<string key="IBUIText">我的收藏和购买记录：</string>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">2</int>
-							<bytes key="NSRGB">MSAwLjYxMTc2NDcyOSAwLjg5ODAzOTI4MTQAA</bytes>
+							<bytes key="NSRGB">MC44MDc4NDMyMDgzIDAuMzQxMTc2NDgwMSAwLjU5MjE1Njg4NzEAA</bytes>
 						</object>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
@@ -365,7 +364,7 @@
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<object class="NSCustomResource" key="IBUIImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">invite_btn.png</string>
+									<string key="NSResourceName">character_input_background.png</string>
 								</object>
 							</object>
 							<object class="IBUIImageView" id="394339331">
@@ -376,6 +375,7 @@
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:567</string>
+								<float key="IBUIAlpha">0.5</float>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<object class="NSCustomResource" key="IBUIImage">
@@ -433,6 +433,7 @@
 				<string key="NSFrameSize">{320, 460}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
+				<reference key="NSNextKeyView" ref="505004488"/>
 				<string key="NSReuseIdentifierKey">_NS:196</string>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
@@ -663,7 +664,7 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="banner_close_btn.png">{19, 19}</string>
-			<string key="invite_btn.png">{53, 24}</string>
+			<string key="character_input_background.png">{42, 14}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">933</string>
 	</data>

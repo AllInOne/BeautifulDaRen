@@ -165,7 +165,7 @@
 //    }
 //    else
 //    {
-        image = [[UIImage imageNamed:bubbleImageName] stretchableImageWithLeftCapWidth:30 topCapHeight:50];
+        image = [[UIImage imageNamed:bubbleImageName] stretchableImageWithLeftCapWidth:50 topCapHeight:50];
 //    }
     return image;
 }

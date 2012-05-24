@@ -203,7 +203,7 @@
     switch (section) {
         case 0:
         {
-            height = 78.0f;
+            height = 72.0f;
             break;
         }
         case 1:

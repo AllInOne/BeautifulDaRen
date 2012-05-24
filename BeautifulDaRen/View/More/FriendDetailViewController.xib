@@ -44,7 +44,6 @@
 						<string key="NSFrame">{{0, 96}, {320, 364}}</string>
 						<reference key="NSSuperview" ref="423715162"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:418</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
@@ -60,7 +59,7 @@
 						<int key="IBUISeparatorStyle">2</int>
 						<object class="NSColor" key="IBUISeparatorColor">
 							<int key="NSColorSpace">2</int>
-							<bytes key="NSRGB">MSAwLjYxMTc2NDcyOSAwLjg5ODAzOTI4MTQAA</bytes>
+							<bytes key="NSRGB">MC44MDc4NDMyMDgzIDAuMzQxMTc2NDgwMSAwLjU5MjE1Njg4NzEAA</bytes>
 						</object>
 						<int key="IBUISectionIndexMinimumDisplayRowCount">0</int>
 						<bool key="IBUIShowsSelectionImmediatelyOnTouchBegin">YES</bool>
@@ -204,13 +203,14 @@
 								<int key="IBUIBaselineAdjustment">1</int>
 								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 								<float key="IBUIMinimumFontSize">10</float>
-								<object class="IBUIFontDescription" key="IBUIFontDescription" id="591859087">
+								<int key="IBUITextAlignment">2</int>
+								<object class="IBUIFontDescription" key="IBUIFontDescription" id="1046067458">
 									<int key="type">1</int>
-									<double key="pointSize">14</double>
+									<double key="pointSize">13</double>
 								</object>
-								<object class="NSFont" key="IBUIFont" id="34215978">
+								<object class="NSFont" key="IBUIFont" id="1066048074">
 									<string key="NSName">Helvetica</string>
-									<double key="NSSize">14</double>
+									<double key="NSSize">13</double>
 									<int key="NSfFlags">16</int>
 								</object>
 							</object>
@@ -335,7 +335,7 @@
 							<object class="IBUILabel" id="977440762">
 								<reference key="NSNextResponder" ref="1005247890"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{87, 64}, {42, 21}}</string>
+								<string key="NSFrame">{{87, 64}, {33, 21}}</string>
 								<reference key="NSSuperview" ref="1005247890"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="914645186"/>
@@ -351,13 +351,13 @@
 								<int key="IBUIBaselineAdjustment">1</int>
 								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 								<float key="IBUIMinimumFontSize">10</float>
-								<reference key="IBUIFontDescription" ref="591859087"/>
-								<reference key="IBUIFont" ref="34215978"/>
+								<reference key="IBUIFontDescription" ref="1046067458"/>
+								<reference key="IBUIFont" ref="1066048074"/>
 							</object>
 							<object class="IBUILabel" id="914645186">
 								<reference key="NSNextResponder" ref="1005247890"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{119, 64}, {85, 21}}</string>
+								<string key="NSFrame">{{120, 64}, {85, 21}}</string>
 								<reference key="NSSuperview" ref="1005247890"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="79307026"/>
@@ -373,8 +373,8 @@
 								<int key="IBUIBaselineAdjustment">1</int>
 								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 								<float key="IBUIMinimumFontSize">10</float>
-								<reference key="IBUIFontDescription" ref="591859087"/>
-								<reference key="IBUIFont" ref="34215978"/>
+								<reference key="IBUIFontDescription" ref="1046067458"/>
+								<reference key="IBUIFont" ref="1066048074"/>
 							</object>
 						</array>
 						<string key="NSFrameSize">{320, 95}</string>

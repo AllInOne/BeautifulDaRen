@@ -182,10 +182,8 @@ enum
     else if (section == 2)
     {
         cell = [ViewHelper getLoginWithExtenalViewCellInTableView:tableView cellForRowAtIndexPath:indexPath];
-        ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"sina_weibo_icon"];
         self.loginWithSinaWeiboButton = ((ButtonViewCell*)cell).leftButton;
         self.loginWithQQButton = ((ButtonViewCell*)cell).rightButton;
-        ((ButtonViewCell*)cell).buttonRightIcon.image = [UIImage imageNamed:@"qq_icon"];
         ((ButtonViewCell*)cell).delegate = self;
     }
     return cell;

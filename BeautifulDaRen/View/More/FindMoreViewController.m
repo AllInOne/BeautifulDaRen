@@ -13,6 +13,7 @@
 #import "FindFriendViewCell.h"
 #import "FindWeiboViewCell.h"
 #import "FriendDetailViewController.h"
+#import "FindWeiboViewController.h"
 
 #define X_OFFSET 7
 #define CONTENT_VIEW_HEIGHT_OFFSET 50
@@ -105,7 +106,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    [_contentScrollView setContentSize:CGSizeMake(0, 415)];
+    [_contentScrollView setContentSize:CGSizeMake(0, 360)];
     [_contentScrollView setFrame:CGRectMake(0, CONTENT_VIEW_HEIGHT_OFFSET, _contentScrollView.frame.size.width, _contentScrollView.frame.size.height)];
     
     [self.view addSubview:_contentScrollView];
@@ -195,6 +196,11 @@
     {
         FriendDetailViewController * friendDetailViewController = [[[FriendDetailViewController alloc] initWithNibName:@"FriendDetailViewController" bundle:nil] autorelease];
         [self.navigationController pushViewController:friendDetailViewController animated:YES];
+    }
+    else
+    {
+        FindWeiboViewController * findWeiboViewController = [[[FindWeiboViewController alloc] initWithNibName:@"FindWeiboViewController" bundle:nil] autorelease];
+        [self.navigationController pushViewController:findWeiboViewController animated:YES];
     }
 }
 

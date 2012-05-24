@@ -51,7 +51,7 @@
 								<string key="NSReuseIdentifierKey">_NS:196</string>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">2</int>
-									<bytes key="NSRGB">MSAwLjYwMDAwMDAyMzggMC44MzUyOTQxODcxAA</bytes>
+									<bytes key="NSRGB">MC43NjQ3MDU5NTYgMC42Mjc0NTEwMDI2IDAuNzAxOTYwODAyMQA</bytes>
 								</object>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
@@ -65,7 +65,7 @@
 								<string key="NSReuseIdentifierKey">_NS:196</string>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">2</int>
-									<bytes key="NSRGB">MSAwLjYwMDAwMDAyMzggMC44MzUyOTQxODcxAA</bytes>
+									<bytes key="NSRGB">MC43NjQ3MDU5NTYgMC42Mjc0NTEwMDI2IDAuNzAxOTYwODAyMQA</bytes>
 								</object>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
@@ -79,7 +79,7 @@
 								<string key="NSReuseIdentifierKey">_NS:196</string>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">2</int>
-									<bytes key="NSRGB">MSAwLjYwMDAwMDAyMzggMC44MzUyOTQxODcxAA</bytes>
+									<bytes key="NSRGB">MC43NjQ3MDU5NTYgMC42Mjc0NTEwMDI2IDAuNzAxOTYwODAyMQA</bytes>
 								</object>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
@@ -135,7 +135,7 @@
 										<string key="IBUIText">number</string>
 										<object class="NSColor" key="IBUITextColor">
 											<int key="NSColorSpace">2</int>
-											<bytes key="NSRGB">MSAwLjYwMDAwMDAyMzggMC44MzUyOTQxODcxAA</bytes>
+											<bytes key="NSRGB">MC44MDc4NDMyMDgzIDAuMzQxMTc2NDgwMSAwLjU5MjE1Njg4NzEAA</bytes>
 										</object>
 										<nil key="IBUIHighlightedColor"/>
 										<int key="IBUIBaselineAdjustment">1</int>
@@ -212,7 +212,7 @@
 										<string key="IBUIText">number</string>
 										<object class="NSColor" key="IBUITextColor">
 											<int key="NSColorSpace">2</int>
-											<bytes key="NSRGB">MSAwLjYwMDAwMDAyMzggMC44MzUyOTQxODcxAA</bytes>
+											<bytes key="NSRGB">MC44MDc4NDMyMDgzIDAuMzQxMTc2NDgwMSAwLjU5MjE1Njg4NzEAA</bytes>
 										</object>
 										<nil key="IBUIHighlightedColor"/>
 										<int key="IBUIBaselineAdjustment">1</int>
@@ -296,7 +296,7 @@
 										<string key="IBUIText">number</string>
 										<object class="NSColor" key="IBUITextColor">
 											<int key="NSColorSpace">2</int>
-											<bytes key="NSRGB">MSAwLjYwMDAwMDAyMzggMC44MzUyOTQxODcxAA</bytes>
+											<bytes key="NSRGB">MC44MDc4NDMyMDgzIDAuMzQxMTc2NDgwMSAwLjU5MjE1Njg4NzEAA</bytes>
 										</object>
 										<nil key="IBUIHighlightedColor"/>
 										<int key="IBUIBaselineAdjustment">1</int>
@@ -380,7 +380,7 @@
 										<string key="IBUIText">number</string>
 										<object class="NSColor" key="IBUITextColor">
 											<int key="NSColorSpace">2</int>
-											<bytes key="NSRGB">MSAwLjYwMDAwMDAyMzggMC44MzUyOTQxODcxAA</bytes>
+											<bytes key="NSRGB">MC44MDc4NDMyMDgzIDAuMzQxMTc2NDgwMSAwLjU5MjE1Njg4NzEAA</bytes>
 										</object>
 										<nil key="IBUIHighlightedColor"/>
 										<int key="IBUIBaselineAdjustment">1</int>
@@ -464,7 +464,7 @@
 										<string key="IBUIText">number</string>
 										<object class="NSColor" key="IBUITextColor">
 											<int key="NSColorSpace">2</int>
-											<bytes key="NSRGB">MSAwLjYwMDAwMDAyMzggMC44MzUyOTQxODcxAA</bytes>
+											<bytes key="NSRGB">MC44MDc4NDMyMDgzIDAuMzQxMTc2NDgwMSAwLjU5MjE1Njg4NzEAA</bytes>
 										</object>
 										<nil key="IBUIHighlightedColor"/>
 										<int key="IBUIBaselineAdjustment">1</int>
@@ -547,7 +547,7 @@
 										<string key="IBUIText">number</string>
 										<object class="NSColor" key="IBUITextColor">
 											<int key="NSColorSpace">2</int>
-											<bytes key="NSRGB">MSAwLjYwMDAwMDAyMzggMC44MzUyOTQxODcxAA</bytes>
+											<bytes key="NSRGB">MC44MDc4NDMyMDgzIDAuMzQxMTc2NDgwMSAwLjU5MjE1Njg4NzEAA</bytes>
 										</object>
 										<nil key="IBUIHighlightedColor"/>
 										<int key="IBUIBaselineAdjustment">1</int>

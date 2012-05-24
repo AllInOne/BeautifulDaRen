@@ -177,19 +177,19 @@
                 ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"my_composed"];
                 break;
             }
+//            case 1:
+//            {
+//                ((ButtonViewCell*)cell).buttonText.text = NSLocalizedString(@"private_letter", @"");
+//                ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"my_private_letter"];
+//                break;
+//            }
             case 1:
-            {
-                ((ButtonViewCell*)cell).buttonText.text = NSLocalizedString(@"private_letter", @"");
-                ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"my_private_letter"];
-                break;
-            }
-            case 2:
             {
                 ((ButtonViewCell*)cell).buttonText.text = NSLocalizedString(@"at_me", @"");
                 ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"my_at"];
                 break;
             }
-            case 3:
+            case 2:
             {
                 ((ButtonViewCell*)cell).buttonText.text = NSLocalizedString(@"comment_me", @"");
                 ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"comment_icon"];
@@ -212,7 +212,7 @@
             numberOfRows = 1;
             break;
         case 2:
-            numberOfRows = 4;
+            numberOfRows = 3;
             break;
     }
     return numberOfRows;
@@ -225,7 +225,7 @@
     NSInteger section = [indexPath section];
     if(section == 0)
     {
-        height = 75.0f;
+        height = 72.0f;
     }
     else if (section == 1)
     {
@@ -273,20 +273,12 @@
             }
             case 1:
             {
-                // TODO
-                [ViewHelper showSimpleMessage:@"暂不支持私信" withTitle:@"抱歉" withButtonText:@"好的"];
-//                PrivateLetterViewController * privateLetterViewController = [[[PrivateLetterViewController alloc] initWithNibName:@"PrivateLetterViewController" bundle:nil] autorelease];
-//                [self.navigationController pushViewController:privateLetterViewController animated:YES];
-                break;
-            }
-            case 2:
-            {
                 CommentOrForwardViewController * forwardViewController = [[[CommentOrForwardViewController alloc] initWithNibName:@"CommentOrForwardViewController" bundle:nil type:CommentOrForwardViewControllerType_FORWARD] autorelease];
                 
                 [self.navigationController pushViewController:forwardViewController animated:YES];
                 break;
             }
-            case 3:
+            case 2:
             {
                 CommentOrForwardViewController * forwardViewController = [[[CommentOrForwardViewController alloc] initWithNibName:@"CommentOrForwardViewController" bundle:nil type:CommentOrForwardViewControllerType_COMMENT] autorelease];
                 

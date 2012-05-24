@@ -74,7 +74,7 @@
 								<string key="NSReuseIdentifierKey">_NS:196</string>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">2</int>
-									<bytes key="NSRGB">MSAwLjYxMTc2NDcyOSAwLjg5ODAzOTI4MTQAA</bytes>
+									<bytes key="NSRGB">MC43NjQ3MDU5NTYgMC42Mjc0NTEwMDI2IDAuNzAxOTYwODAyMQA</bytes>
 								</object>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
@@ -301,7 +301,6 @@
 								<string key="NSFrame">{{246, 42}, {42, 21}}</string>
 								<reference key="NSSuperview" ref="269859911"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:328</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -311,10 +310,11 @@
 								<string key="IBUIText">编辑</string>
 								<object class="NSColor" key="IBUITextColor">
 									<int key="NSColorSpace">2</int>
-									<bytes key="NSRGB">MSAwLjYxMTc2NDcyOSAwLjg5ODAzOTI4MTQAA</bytes>
+									<bytes key="NSRGB">MC44MDc4NDMyMDgzIDAuMzQxMTc2NDgwMSAwLjU5MjE1Njg4NzEAA</bytes>
 								</object>
 								<nil key="IBUIHighlightedColor"/>
 								<int key="IBUIBaselineAdjustment">1</int>
+								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 								<float key="IBUIMinimumFontSize">10</float>
 								<int key="IBUITextAlignment">1</int>
 								<object class="IBUIFontDescription" key="IBUIFontDescription">
@@ -376,7 +376,6 @@
 								<string key="NSFrame">{{264, 29}, {8, 12}}</string>
 								<reference key="NSSuperview" ref="833527566"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:567</string>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -401,7 +400,7 @@
 								<string key="IBUIText">上传头像</string>
 								<object class="NSColor" key="IBUITextColor">
 									<int key="NSColorSpace">2</int>
-									<bytes key="NSRGB">MSAwLjI2NjY2NjY4MDYgMC42NTg4MjM1NDk3AA</bytes>
+									<bytes key="NSRGB">MC44MDc4NDMyMDgzIDAuMzQxMTc2NDgwMSAwLjU5MjE1Njg4NzEAA</bytes>
 								</object>
 								<nil key="IBUIHighlightedColor"/>
 								<int key="IBUIBaselineAdjustment">1</int>
@@ -430,8 +429,8 @@
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<reference key="IBUIHighlightedTitleColor" ref="237353453"/>
 								<object class="NSColor" key="IBUINormalTitleColor">
-									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
+									<int key="NSColorSpace">2</int>
+									<bytes key="NSRGB">MC44MDc4NDMyMDgzIDAuMzQxMTc2NDgwMSAwLjU5MjE1Njg4NzEAA</bytes>
 								</object>
 								<reference key="IBUINormalTitleShadowColor" ref="926218934"/>
 								<reference key="IBUIFontDescription" ref="414592381"/>
