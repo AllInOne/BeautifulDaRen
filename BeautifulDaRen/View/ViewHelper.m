@@ -32,15 +32,15 @@
     cell = [tableView dequeueReusableCellWithIdentifier:@"ButtonViewCell"];
     if(!cell)
     {
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"ButtonViewCell" owner:self options:nil] objectAtIndex:2];
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"ButtonViewCell" owner:self options:nil] objectAtIndex:6];
     }
 
     // sina weibo
     ((ButtonViewCell*)cell).buttonText.text = NSLocalizedString(@"login_with_sina_weibo", @"You are not user, please register");
-    ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"first"]; 
+    ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"sina_logo"]; 
     // tencent weibo
     ((ButtonViewCell*)cell).buttonRightText.text = NSLocalizedString(@"login_with_tencent_qq", @"You are not user, please register");
-    ((ButtonViewCell*)cell).buttonRightIcon.image = [UIImage imageNamed:@"second"]; 
+    ((ButtonViewCell*)cell).buttonRightIcon.image = [UIImage imageNamed:@"tencent_logo"]; 
 
     return cell;
 }

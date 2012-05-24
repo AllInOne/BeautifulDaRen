@@ -179,9 +179,7 @@
     {
         cell = [ViewHelper getLoginWithExtenalViewCellInTableView:tableView cellForRowAtIndexPath:indexPath];
         _loginWithSinaWeiboButton = ((ButtonViewCell*)cell).leftButton;
-        ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"sina_logo"];
         _loginWithQQButton = ((ButtonViewCell*)cell).rightButton;
-        ((ButtonViewCell*)cell).buttonRightIcon.image = [UIImage imageNamed:@"tencent_logo"];
         ((ButtonViewCell*)cell).delegate = self;
     }
     return cell;
