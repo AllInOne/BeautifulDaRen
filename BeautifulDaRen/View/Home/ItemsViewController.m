@@ -53,11 +53,11 @@
 
 - (void) loadFakeData
 {
-    NSArray * imageNames = [NSArray arrayWithObjects:@"fake_item1",@"fake_item2",
-                            @"fake_item3",@"fake_item4",@"fake_item5",@"fake_item6",
-                            @"fake_item7",@"fake_item8",@"fake_item9",@"fake_item10",
+    NSArray * imageNames = [NSArray arrayWithObjects:@"weibo_sample3",@"weibo_sample1",
+                            @"weibo_sample2",@"fake_item9",@"weibo_sample1",@"fake_item4",@"weibo_sample1",
+                            @"weibo_sample2",@"weibo_sample3",@"weibo_sample2",
                             @"fake_item11",@"fake_item12",@"fake_item1",@"fake_item2",
-                            @"fake_item3",@"fake_item4",@"fake_item5",@"fake_item6",
+                            @"weibo_sample2",@"fake_item4",@"weibo_sample3",@"fake_item6",
                             @"fake_item7",@"fake_item8",@"fake_item9",@"fake_item10",
                             @"fake_item11",@"fake_item12", nil];
     NSArray * imageIds = [NSArray arrayWithObjects:@"NO.001",@"NO.002",
