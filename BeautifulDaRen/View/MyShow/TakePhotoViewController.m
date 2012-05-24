@@ -118,7 +118,7 @@
     
     UIBarButtonItem *galleryBarButton = [ViewHelper getBarItemOfTarget:self action:@selector(onGalleryBartButtonPressed) title:@"相册"];
     
-    UIBarButtonItem *cameraBarButton = [ViewHelper getBarItemOfTarget:self action:@selector(onCameraBarButtonPressed) title:@"拍照"];
+    UIBarButtonItem *cameraBarButton = [ViewHelper getCameraBarItemOftarget:self action:@selector(onCameraBarButtonPressed)];
     
     UIBarButtonItem *avatarBarButton = [ViewHelper getBarItemOfTarget:self action:@selector(onAvatarBartButtonPressed) title:@"头像"];
 
@@ -154,8 +154,8 @@
         if ([[self.imagePickerController.cameraOverlayView subviews] count] == 0)
         {
             self.toolbarView.frame = newFrame;
-            UIImageView * tabBarBg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tabbar_background"]];
-            tabBarBg.frame = CGRectMake(0, 0, 320, 50);
+            UIImageView * tabBarBg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"camera_toolbar_background"]];
+            tabBarBg.frame = CGRectMake(0, 0, 320, 55);
             tabBarBg.contentMode = UIViewContentModeScaleToFill;
             if (SYSTEM_VERSION_LESS_THAN(@"5.0")) {
                 [self.toolbarView  insertSubview:tabBarBg atIndex:0];

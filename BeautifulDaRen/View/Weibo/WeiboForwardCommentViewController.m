@@ -17,6 +17,7 @@
 
 @interface WeiboForwardCommentViewController ()
 @property (nonatomic, assign) BOOL isKeypadShow;
+@property (nonatomic, assign) BOOL isCheckBoxChecked;
 @end
 
 @implementation WeiboForwardCommentViewController
@@ -25,6 +26,9 @@
 @synthesize weiboContentTextView = _weiboContentTextView;
 @synthesize forwardMode = _forwardMode;
 @synthesize isKeypadShow = _isKeypadShow;
+@synthesize checkBoxText = _checkBoxText;
+@synthesize checkBoxButton = _checkBoxButton;
+@synthesize isCheckBoxChecked = _isCheckBoxChecked;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -61,9 +65,11 @@
     
     if (self.forwardMode) {
         self.navigationItem.title = @"转发";
+        self.checkBoxText.text = @"同时评论给用户";
     }
     else
     {
+        self.checkBoxText.text = @"同时转发到我的微博";
         self.navigationItem.title = @"评论";
     }
     
@@ -73,6 +79,8 @@
     
     [toolbarBg release];
     
+    self.isCheckBoxChecked = YES;
+    
     [_weiboContentTextView becomeFirstResponder];
 }
 
@@ -81,6 +89,9 @@
     [super viewDidUnload];
     [self setFooterView:nil];
     [self setWeiboContentTextView:nil];
+    [self setCheckBoxText:nil];
+    [self setCheckBoxButton:nil];
+    [self setIsCheckBoxChecked:YES];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
@@ -89,6 +100,8 @@
 {
     [_footerView release];
     [_weiboContentTextView release];
+    [_checkBoxText release];
+    [_checkBoxButton release];
     [super dealloc];
 }
 
@@ -183,6 +196,18 @@
 - (IBAction)onForward2TencentPressed:(id)sender
 {
     //TODO:
+}
+
+- (IBAction)onCheckBoxPressed:(id)sender
+{
+    if (self.isCheckBoxChecked) {
+        self.isCheckBoxChecked = NO;
+        [self.checkBoxButton setImage:[UIImage imageNamed:@"comment_forward_unchecked.png"] forState:UIControlStateNormal];
+    }
+    else {
+        self.isCheckBoxChecked = YES;
+        [self.checkBoxButton setImage:[UIImage imageNamed:@"comment_forward_checked.png"] forState:UIControlStateNormal];        
+    }
 }
 
 - (void)didFinishContactSelectionWithContacts:(NSString *)friendId

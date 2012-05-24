@@ -37,8 +37,8 @@
             CommonScrollViewItem * item = [[[NSBundle mainBundle] loadNibNamed:@"CommonScrollViewItem" owner:self options:nil] objectAtIndex:0];
             item.frame = CGRectMake(SCROLL_ITEM_MARGIN + index * (SCROLL_ITEM_WIDTH + SCROLL_ITEM_MARGIN), 0, SCROLL_ITEM_WIDTH, SCROLL_ITEM_HEIGHT);
             item.button.tag = index;
-            // TODO: set image with real data
-//            [item.image setImage:[UIImage imageNamed:@"内容图片66.png"]];
+
+            [item.image setImage:[UIImage imageNamed:@"hot_items.png"]];
             [item.image setFrame:CGRectMake(0, 0, SCROLL_ITEM_WIDTH, SCROLL_ITEM_HEIGHT)];
             
             [self.view addSubview:item];

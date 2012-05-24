@@ -80,12 +80,10 @@
     [self setContentFrame:CGRectMake(_weiboContentBgTextFiled.frame.origin.x, WEIBO_CONTENT_TEXTVIEW_Y_OFFSET, _weiboContentBgTextFiled.frame.size.width, _weiboContentTextView.frame.size.height)];
     
     [_contentScrollView setContentSize:CGSizeMake(_weiboContentTextView.frame.size.width, WEIBO_CONTENT_TEXTVIEW_Y_OFFSET + _weiboContentTextView.frame.size.height + WEIBO_CONTENT_SCROLL_BOUNCE_SIZE)];
-//     NSLog(@"%@", self.weiboContentTextView);
-
     
     if (self.selectedImage != nil)
     {
-        [self.cameraButton setImage:self.selectedImage forState:UIControlStateNormal];
+        [self.attachedImageBgButton setImage:self.selectedImage forState:UIControlStateNormal];
     }
 
     UIImageView * toolbarBg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"toolbar_background"]];
@@ -330,10 +328,10 @@
     self.attachedImageView.image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
     if (self.attachedImageView.image)
     {
-        self.attachedImageView.hidden = NO;
-        self.attachedImageBgButton.enabled = YES;
-        self.attachedImageView.center = self.cameraButton.center;
-        self.cameraButton.hidden = YES;
+//        self.attachedImageView.hidden = NO;
+        [self.attachedImageBgButton setBackgroundImage:self.attachedImageView.image forState:UIControlStateNormal];
+//        self.attachedImageView.center = self.cameraButton.center;
+//        self.cameraButton.hidden = YES;
     }
 
     [self dismissModalViewControllerAnimated:YES];

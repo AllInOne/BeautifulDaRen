@@ -84,7 +84,7 @@
 + (UIBarButtonItem*)getBackBarItemOfTarget:(id)target action:(SEL)action title:(NSString*)title
 {
     UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
+    [button setBackgroundImage:[UIImage imageNamed:@"back_btn"] forState:UIControlStateNormal];
     [button setTitle:title forState:UIControlStateNormal];
     button.titleEdgeInsets = UIEdgeInsetsMake(0, BACK_BUTTON_LABEL_X_OFFSET, 0, 0);
     button.titleLabel.frame = CGRectMake(button.titleLabel.frame.origin.x + 10, button.titleLabel.frame.origin.y, CGRectGetWidth(button.titleLabel.frame), CGRectGetHeight(button.titleLabel.frame));
@@ -101,6 +101,18 @@
     UIImageView * imageView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:image]] autorelease];
     imageView.frame =rectSize;
     return [[[UIBarButtonItem alloc] initWithCustomView:imageView] autorelease];
+}
+
++ (UIBarButtonItem*) getCameraBarItemOftarget:(id)target action:(SEL)action
+{
+    UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
+
+    [button setBackgroundImage:[UIImage imageNamed:@"camera_btn.png"] forState:UIControlStateNormal];
+    [button setImage:[UIImage imageNamed:@"camera_icon_big.png"] forState:UIControlStateNormal];
+    button.frame = CGRectMake(0, 0, 100, 40);
+    [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    
+    return [[[UIBarButtonItem alloc] initWithCustomView:button] autorelease];
 }
 
 + (UIBarButtonItem*)getRightBarItemOfTarget1:(id)target1 action1:(SEL)action1 title1:(NSString*)title1 target2:(id)target2 action2:(SEL)action2 title2:(NSString*)title2
