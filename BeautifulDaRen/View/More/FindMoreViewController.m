@@ -104,8 +104,10 @@
     
     _searchBar.backgroundImage = [UIImage imageNamed:@"search_switcher_btn"];
     _searchBar.scopeBarBackgroundImage = [UIImage imageNamed:@"search_switcher_btn"];
-    [_searchBar setScopeBarButtonBackgroundImage:[UIImage imageNamed:@"segement_btn_selected"] forState:UIControlStateSelected];
-    [_searchBar setScopeBarButtonBackgroundImage:[UIImage imageNamed:@"segement_btn_unselected"] forState:UIControlStateNormal];
+    [_searchBar setScopeBarButtonBackgroundImage:[UIImage imageNamed:@"search_switcher_selected"] forState:UIControlStateSelected];
+    [_searchBar setScopeBarButtonBackgroundImage:[UIImage imageNamed:@"search_switcher_unselected"] forState:UIControlStateNormal];
+    [_searchBar setScopeBarButtonDividerImage:[UIImage imageNamed:@"segmentDividerRightSelected"] forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateSelected];
+    [_searchBar setScopeBarButtonDividerImage:[UIImage imageNamed:@"segmentDividerLeftSelected"] forLeftSegmentState:UIControlStateSelected rightSegmentState:UIControlStateNormal];
     _searchBar.scopeButtonTitles = [NSArray arrayWithObjects:
                                     NSLocalizedString(@"weibo", @""),
                                     NSLocalizedString(@"user", @""), nil];
