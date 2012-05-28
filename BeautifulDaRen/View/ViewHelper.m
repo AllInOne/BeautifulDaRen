@@ -180,4 +180,10 @@
     [attrStr setTextColor:[UIColor darkGrayColor] range:NSMakeRange(0, [name length])];
     return [attrStr autorelease];
 }
+
++ (CGFloat)getRatioHeightOfImage:(UIImage*)image ratioWidth:(CGFloat)ratioWidth
+{
+    CGFloat ratio = ratioWidth / image.size.width;
+    return ratio * image.size.height;
+}
 @end

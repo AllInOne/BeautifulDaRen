@@ -10,6 +10,7 @@
 #import "ViewConstants.h"
 #import "WaresItem.h"
 #import "WeiboDetailViewController.h"
+#import "ViewHelper.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define COLUMNS_PER_ROW 4
@@ -76,7 +77,10 @@
         UIImage * image = [UIImage imageNamed:[imageNames objectAtIndex:i]];
         item.itemImageData = UIImagePNGRepresentation(image);
         UIImageView * imageView = [[UIImageView alloc] initWithImage:[UIImage imageWithData:item.itemImageData]];
-        [_itemsHeight addObject:[NSNumber numberWithFloat:imageView.frame.size.height]];
+        
+        CGFloat frameWidth = (self.view.frame.size.width - 30) / 3;
+        CGFloat frameHeight = [ViewHelper getRatioHeightOfImage:imageView.image ratioWidth:frameWidth];
+        [_itemsHeight addObject:[NSNumber numberWithFloat:(frameHeight+8)]];
         [self.fakeData addObject:item];
     }
 }
@@ -138,11 +142,11 @@
         imageView.image = [UIImage imageWithData:((WaresItem*)[self.fakeData objectAtIndex:index]).itemImageData];
         
         CGFloat frameWidth = (self.view.frame.size.width - 30) / 3;
-        CGFloat ratio = frameWidth / imageView.image.size.width;
+        CGFloat frameHeight = [ViewHelper getRatioHeightOfImage:imageView.image ratioWidth:frameWidth];
         
-        imageView.frame = CGRectMake(2, 2, frameWidth, ratio * (imageView.image.size.height- 10));
+        imageView.frame = CGRectMake(2, 2, frameWidth, frameHeight);
 
-        UIView * view = [[[UIView alloc] initWithFrame:CGRectMake(2, 2, imageView.frame.size.width + 4, imageView.frame.size.height + 4)] autorelease];
+        UIView * view = [[[UIView alloc] initWithFrame:CGRectMake(2, 2, frameWidth + 4, frameHeight + 4)] autorelease];
         [view addSubview:imageView];
         view.layer.borderColor = [[UIColor grayColor] CGColor];
         view.layer.borderWidth = 1;
