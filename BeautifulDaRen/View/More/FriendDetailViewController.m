@@ -185,21 +185,31 @@
             cell = [[[NSBundle mainBundle] loadNibNamed:fourGridViewCellIdentifier owner:self options:nil] objectAtIndex:0];
         }
         
-        ((FourGridViewCell*)cell).delegate = self;
-        ((FourGridViewCell*)cell).leftTopLabelName.text = NSLocalizedString(@"weibo", @"");
-        ((FourGridViewCell*)cell).leftTopLabelNumber.text = @"12";
-        ((FourGridViewCell*)cell).rightTopLabelName.text = NSLocalizedString(@"topic", @"");
-        ((FourGridViewCell*)cell).rightTopLabelNumber.text = @"12";
-        ((FourGridViewCell*)cell).leftBottomLabelName.text = NSLocalizedString(@"follow", @"");
-        ((FourGridViewCell*)cell).leftBottomLabelNumber.text = @"32";
-        ((FourGridViewCell*)cell).rightBottomLabelName.text = NSLocalizedString(@"fans", @"");
-        ((FourGridViewCell*)cell).rightBottomLabelNumber.text = @"0";
+        NSMutableAttributedString * attrStr = nil;
         
-        ((FourGridViewCell*)cell).thirdLeftLabelName.text = NSLocalizedString(@"collection", @"");
-        ((FourGridViewCell*)cell).thirdLeftLabelNumber.text = @"1";  
+        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"weibo", @"") detail:@"(12)"];
+        ((FourGridViewCell*)cell).firstLabel.attributedText = attrStr;
+        ((FourGridViewCell*)cell).firstLabel.textAlignment = UITextAlignmentCenter;
         
-        ((FourGridViewCell*)cell).thirdRightLabelName.text = NSLocalizedString(@"published", @"");
-        ((FourGridViewCell*)cell).thirdRIghtLabelNumber.text = @"11";
+        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"topic", @"") detail:@"(1)"];
+        ((FourGridViewCell*)cell).secondLabel.attributedText = attrStr;
+        ((FourGridViewCell*)cell).secondLabel.textAlignment = UITextAlignmentCenter;
+        
+        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"follow", @"") detail:@"(99)"];
+        ((FourGridViewCell*)cell).thirdLabel.attributedText = attrStr;
+        ((FourGridViewCell*)cell).thirdLabel.textAlignment = UITextAlignmentCenter;
+        
+        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"fans", @"") detail:@"(100)"];
+        ((FourGridViewCell*)cell).fourthLabel.attributedText = attrStr;
+        ((FourGridViewCell*)cell).fourthLabel.textAlignment = UITextAlignmentCenter;
+        
+        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"collection", @"") detail:@"(33)"];
+        ((FourGridViewCell*)cell).fifthLabel.attributedText = attrStr;
+        ((FourGridViewCell*)cell).fifthLabel.textAlignment = UITextAlignmentCenter;
+        
+        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"published", @"") detail:@"(12)"];
+        ((FourGridViewCell*)cell).sixthLabel.attributedText = attrStr;
+        ((FourGridViewCell*)cell).sixthLabel.textAlignment = UITextAlignmentCenter;
         
         _followButton = ((FourGridViewCell*)cell).leftTopButton;
         _fansButton = ((FourGridViewCell*)cell).rightTopButton;

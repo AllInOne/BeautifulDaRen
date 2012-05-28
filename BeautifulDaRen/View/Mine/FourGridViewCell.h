@@ -8,21 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "ButtonPressDelegate.h"
+#import "OHAttributedLabel.h"
 
 @interface FourGridViewCell : UITableViewCell
 
-@property (retain, nonatomic) IBOutlet UILabel * leftTopLabelName;
-@property (retain, nonatomic) IBOutlet UILabel * leftTopLabelNumber;
-@property (retain, nonatomic) IBOutlet UILabel * rightTopLabelName;
-@property (retain, nonatomic) IBOutlet UILabel * rightTopLabelNumber;
-@property (retain, nonatomic) IBOutlet UILabel * leftBottomLabelName;
-@property (retain, nonatomic) IBOutlet UILabel * leftBottomLabelNumber;
-@property (retain, nonatomic) IBOutlet UILabel * rightBottomLabelName;
-@property (retain, nonatomic) IBOutlet UILabel * rightBottomLabelNumber;
-@property (retain, nonatomic) IBOutlet UILabel * thirdLeftLabelName;
-@property (retain, nonatomic) IBOutlet UILabel * thirdLeftLabelNumber;
-@property (retain, nonatomic) IBOutlet UILabel * thirdRightLabelName;
-@property (retain, nonatomic) IBOutlet UILabel * thirdRIghtLabelNumber;
+@property (retain, nonatomic) IBOutlet OHAttributedLabel * firstLabel;
+@property (retain, nonatomic) IBOutlet OHAttributedLabel * secondLabel;
+@property (retain, nonatomic) IBOutlet OHAttributedLabel * thirdLabel;
+@property (retain, nonatomic) IBOutlet OHAttributedLabel * fourthLabel;
+@property (retain, nonatomic) IBOutlet OHAttributedLabel * fifthLabel;
+@property (retain, nonatomic) IBOutlet OHAttributedLabel * sixthLabel;
 
 @property (retain, nonatomic) IBOutlet UIButton * leftTopButton;
 @property (retain, nonatomic) IBOutlet UIButton * leftButtomButton;

@@ -9,18 +9,12 @@
 #import "FourGridViewCell.h"
 
 @implementation FourGridViewCell
-@synthesize leftTopLabelName;
-@synthesize leftTopLabelNumber;
-@synthesize rightTopLabelName;
-@synthesize rightTopLabelNumber;
-@synthesize leftBottomLabelName;
-@synthesize leftBottomLabelNumber;
-@synthesize rightBottomLabelName;
-@synthesize rightBottomLabelNumber;
-@synthesize thirdLeftLabelName;
-@synthesize thirdLeftLabelNumber;
-@synthesize thirdRightLabelName;
-@synthesize thirdRIghtLabelNumber;
+@synthesize firstLabel;
+@synthesize secondLabel;
+@synthesize thirdLabel;
+@synthesize fourthLabel;
+@synthesize fifthLabel;
+@synthesize sixthLabel;
 
 @synthesize leftTopButton;
 @synthesize leftButtomButton;
