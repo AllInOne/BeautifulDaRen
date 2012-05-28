@@ -137,9 +137,12 @@
         UIImageView * imageView = [[[UIImageView alloc] init] autorelease];
         imageView.image = [UIImage imageWithData:((WaresItem*)[self.fakeData objectAtIndex:index]).itemImageData];
         
-        imageView.frame = CGRectMake(2, 2, self.view.frame.size.width / 3 - 10, imageView.image.size.height - 10);
+        CGFloat frameWidth = (self.view.frame.size.width - 30) / 3;
+        CGFloat ratio = frameWidth / imageView.image.size.width;
+        
+        imageView.frame = CGRectMake(2, 2, frameWidth, ratio * (imageView.image.size.height- 10));
 
-        UIView * view = [[[UIView alloc] initWithFrame:CGRectMake(2, 2, self.view.frame.size.width / 3 - 6, imageView.image.size.height - 6)] autorelease];
+        UIView * view = [[[UIView alloc] initWithFrame:CGRectMake(2, 2, imageView.frame.size.width + 4, imageView.frame.size.height + 4)] autorelease];
         [view addSubview:imageView];
         view.layer.borderColor = [[UIColor grayColor] CGColor];
         view.layer.borderWidth = 1;
