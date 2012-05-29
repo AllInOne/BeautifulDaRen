@@ -191,7 +191,7 @@
 								<reference key="IBUIFont" ref="922964485"/>
 							</object>
 						</array>
-						<string key="NSFrame">{{0, 377}, {320, 39}}</string>
+						<string key="NSFrame">{{0, 377}, {320, 40}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="904975175"/>

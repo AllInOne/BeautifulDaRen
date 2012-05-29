@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "FriendsSelectionViewControllerDelegate.h"
 #import "SelectCategoryViewController.h"
+#import "TakePhotoViewController.h"
 
 @interface WeiboComposerViewController : UIViewController <UIActionSheetDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate,
     FriendsSelectionViewControllerDelegate,
-    SelectCategoryProtocol>
+    SelectCategoryProtocol,TakePhotoControllerDelegate>
 
 @property (nonatomic, retain) UIImage * selectedImage;
 

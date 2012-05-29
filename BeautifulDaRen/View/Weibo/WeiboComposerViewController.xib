@@ -69,7 +69,7 @@
 								</object>
 								<object class="NSCustomResource" key="IBUINormalImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">camera.png</string>
+									<string key="NSResourceName">camera_icon.png</string>
 								</object>
 								<object class="IBUIFontDescription" key="IBUIFontDescription" id="622600564">
 									<int key="type">2</int>
@@ -184,7 +184,7 @@
 							<object class="IBUIImageView" id="18064158">
 								<reference key="NSNextResponder" ref="485515526"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{216, 2}, {14, 32}}</string>
+								<string key="NSFrame">{{222, -3}, {2, 40}}</string>
 								<reference key="NSSuperview" ref="485515526"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="496100090"/>
@@ -247,7 +247,7 @@
 								<reference key="IBUIFont" ref="791486864"/>
 							</object>
 						</array>
-						<string key="NSFrame">{{0, 380}, {320, 35}}</string>
+						<string key="NSFrame">{{0, 380}, {320, 40}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="333808481"/>
@@ -818,12 +818,12 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="camera.png">{44, 30}</string>
+			<string key="camera_icon.png">{30, 21}</string>
 			<string key="myshow_at.png">{20, 20}</string>
 			<string key="myshow_business.png">{20, 20}</string>
 			<string key="myshow_category.png">{20, 20}</string>
 			<string key="myshow_location.png">{20, 20}</string>
-			<string key="myshow_margin.png">{2, 30}</string>
+			<string key="myshow_margin.png">{2, 46}</string>
 			<string key="myshow_qq_color.png">{20, 20}</string>
 			<string key="myshow_sina_color.png">{20, 20}</string>
 		</dictionary>
