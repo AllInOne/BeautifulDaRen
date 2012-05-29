@@ -280,6 +280,8 @@
 		CE5B740C15749B78009C9669 /* weibo_sample9.png in Resources */ = {isa = PBXBuildFile; fileRef = CE5B73F415749B78009C9669 /* weibo_sample9.png */; };
 		CE5B740D15749B78009C9669 /* weibo_sample10.png in Resources */ = {isa = PBXBuildFile; fileRef = CE5B73F515749B78009C9669 /* weibo_sample10.png */; };
 		CE5B740E15749B78009C9669 /* weibo_sample11.png in Resources */ = {isa = PBXBuildFile; fileRef = CE5B73F615749B78009C9669 /* weibo_sample11.png */; };
+		CE5B74211574C461009C9669 /* FullImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5B741F1574C461009C9669 /* FullImageViewController.m */; };
+		CE5B74221574C461009C9669 /* FullImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE5B74201574C461009C9669 /* FullImageViewController.xib */; };
 		CE62B3621551790A0017AA88 /* SelectCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE62B3601551790A0017AA88 /* SelectCityViewController.m */; };
 		CE62B3631551790A0017AA88 /* SelectCityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE62B3611551790A0017AA88 /* SelectCityViewController.xib */; };
 		CE62B3671551842D0017AA88 /* SelectCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE62B3651551842D0017AA88 /* SelectCategoryViewController.m */; };
@@ -911,6 +913,9 @@
 		CE5B73F415749B78009C9669 /* weibo_sample9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weibo_sample9.png; sourceTree = "<group>"; };
 		CE5B73F515749B78009C9669 /* weibo_sample10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weibo_sample10.png; sourceTree = "<group>"; };
 		CE5B73F615749B78009C9669 /* weibo_sample11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weibo_sample11.png; sourceTree = "<group>"; };
+		CE5B741E1574C461009C9669 /* FullImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullImageViewController.h; sourceTree = "<group>"; };
+		CE5B741F1574C461009C9669 /* FullImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FullImageViewController.m; sourceTree = "<group>"; };
+		CE5B74201574C461009C9669 /* FullImageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FullImageViewController.xib; sourceTree = "<group>"; };
 		CE62B35F1551790A0017AA88 /* SelectCityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectCityViewController.h; sourceTree = "<group>"; };
 		CE62B3601551790A0017AA88 /* SelectCityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectCityViewController.m; sourceTree = "<group>"; };
 		CE62B3611551790A0017AA88 /* SelectCityViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectCityViewController.xib; sourceTree = "<group>"; };
@@ -2149,6 +2154,9 @@
 		CEDC918C153FDBCA00BA6C35 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				CE5B741E1574C461009C9669 /* FullImageViewController.h */,
+				CE5B741F1574C461009C9669 /* FullImageViewController.m */,
+				CE5B74201574C461009C9669 /* FullImageViewController.xib */,
 				CEDC918F153FDC7700BA6C35 /* AdsPageView.h */,
 				CEDC9190153FDC7700BA6C35 /* AdsPageView.m */,
 				C2F68D03157340E7006ED8AE /* NSAttributedString+Attributes.h */,
@@ -2692,6 +2700,7 @@
 				CE5B740C15749B78009C9669 /* weibo_sample9.png in Resources */,
 				CE5B740D15749B78009C9669 /* weibo_sample10.png in Resources */,
 				CE5B740E15749B78009C9669 /* weibo_sample11.png in Resources */,
+				CE5B74221574C461009C9669 /* FullImageViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2801,6 +2810,7 @@
 				C27F865B156CF4C10094402B /* FindWeiboViewCell.m in Sources */,
 				C2F68D07157340E7006ED8AE /* NSAttributedString+Attributes.m in Sources */,
 				C2F68D08157340E7006ED8AE /* OHAttributedLabel.m in Sources */,
+				CE5B74211574C461009C9669 /* FullImageViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

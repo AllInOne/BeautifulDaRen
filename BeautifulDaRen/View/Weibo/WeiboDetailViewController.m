@@ -12,6 +12,7 @@
 #import "WeiboForwardCommentViewController.h"
 #import "WeiboComposerViewController.h"
 #import "ForwardCommentListViewController.h"
+#import "FullImageViewController.h"
 
 #define FONT_SIZE 14.0f
 #define CELL_CONTENT_WIDTH 280.0f
@@ -33,6 +34,7 @@
 @synthesize avatarImageView = _avatarImageView;
 @synthesize weiboAttachedImageView = _weiboAttachedImageView;
 @synthesize timestampLabel = _timestampLabel;
+@synthesize weiboAttachedImageButton = _weiboAttachedImageButton;
 
 - (void)dealloc
 {
@@ -42,6 +44,7 @@
     [_avatarImageView release];
     [_weiboAttachedImageView release];
     [_timestampLabel release];
+    [_weiboAttachedImageButton release];
     
     [super dealloc];
 }
@@ -85,7 +88,16 @@
                                                             nil];
         
         tempToolbar.items= barItems;
-        tempToolbar.tintColor = [UIColor blackColor];
+        UIImageView * tabBarBg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"toolbar_background"]];
+        tabBarBg.frame = CGRectMake(0, 0, 320, 45);
+        tabBarBg.contentMode = UIViewContentModeScaleToFill;
+        if (SYSTEM_VERSION_LESS_THAN(@"5.0")) {
+            [tempToolbar  insertSubview:tabBarBg atIndex:0];
+        }
+        else
+        {
+            [tempToolbar  insertSubview:tabBarBg atIndex:1];            
+        }
         [self.view addSubview: tempToolbar];
         [flexible release]; 
     }
@@ -178,6 +190,8 @@
     [self.avatarImageView setImage:[UIImage imageNamed:@"weibo_sample3"]];
     [self.weiboAttachedImageView setImage:[UIImage imageNamed:@"weibo_sample2"]];
     
+    self.weiboAttachedImageButton.frame = self.weiboAttachedImageView.frame;
+    
     self.timestampLabel.text = @"一小时前";
     [self.timestampLabel setTextColor:[UIColor purpleColor]];
 
@@ -195,6 +209,7 @@
     self.commentButton = nil;
     self.favourateButton = nil;
     self.timestampLabel = nil;
+    self.weiboAttachedImageButton = nil;
 
     [super viewDidUnload];
     // Release any retained subviews of the main view.
@@ -215,4 +230,8 @@
 
 }
 
+-(IBAction)onImageButtonPressed:(id)sender
+{
+    [FullImageViewController showImage:[UIImage imageNamed:@"weibo_sample2"]inNavigationController:self.navigationController];
+}
 @end
