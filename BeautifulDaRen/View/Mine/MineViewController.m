@@ -9,7 +9,7 @@
 #import "MineViewController.h"
 #import "MineEditingViewController.h"
 #import "MyInfoTopViewCell.h"
-#import "FourGridViewCell.h"
+#import "GridViewCell.h"
 #import "ButtonViewCell.h"
 #import "ViewConstants.h"
 #import "DataManager.h"
@@ -115,7 +115,7 @@
 - (UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString * myInfoTopViewIdentifier = @"MyInfoTopViewCell";
-    static NSString * fourGridViewIndentifier = @"FourGridViewCell";
+    static NSString * gridViewIndentifier = @"GridViewCell";
     static NSString * buttonViewCellIdentifier = @"ButtonViewCell";
     UITableViewCell * cell = nil;
     NSInteger section = [indexPath section];
@@ -138,45 +138,45 @@
         ((MyInfoTopViewCell*)cell).delegate = self;
     }
     else if(section == 1) {
-        cell = [tableView dequeueReusableCellWithIdentifier:fourGridViewIndentifier];
+        cell = [tableView dequeueReusableCellWithIdentifier:gridViewIndentifier];
         if(!cell) {
-            cell = [[[NSBundle mainBundle] loadNibNamed:fourGridViewIndentifier owner:self options:nil] objectAtIndex:0];
+            cell = [[[NSBundle mainBundle] loadNibNamed:gridViewIndentifier owner:self options:nil] objectAtIndex:0];
         }
         UserIdentity * userIdentity = [[DataManager sharedManager] getCurrentLocalIdentityInContext:nil];
-        ((FourGridViewCell*)cell).delegate = self;
+        ((GridViewCell*)cell).delegate = self;
 
         NSMutableAttributedString * attrStr = nil;
 
         attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"follow", @"") detail:[NSString stringWithFormat:@"(%d)",[userIdentity.followCount intValue]]];
-        ((FourGridViewCell*)cell).firstLabel.attributedText = attrStr;
-        ((FourGridViewCell*)cell).firstLabel.textAlignment = UITextAlignmentCenter;
+        ((GridViewCell*)cell).firstLabel.attributedText = attrStr;
+        ((GridViewCell*)cell).firstLabel.textAlignment = UITextAlignmentCenter;
 
         attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"fans", @"") detail:[NSString stringWithFormat:@"(%d)",[userIdentity.fansCount intValue]]];
-        ((FourGridViewCell*)cell).secondLabel.attributedText = attrStr;
-        ((FourGridViewCell*)cell).secondLabel.textAlignment = UITextAlignmentCenter;
+        ((GridViewCell*)cell).secondLabel.attributedText = attrStr;
+        ((GridViewCell*)cell).secondLabel.textAlignment = UITextAlignmentCenter;
         
         attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"collection", @"") detail:[NSString stringWithFormat:@"(%d)",[userIdentity.collectionCount intValue]]];
-        ((FourGridViewCell*)cell).thirdLabel.attributedText = attrStr;
-        ((FourGridViewCell*)cell).thirdLabel.textAlignment = UITextAlignmentCenter;
+        ((GridViewCell*)cell).thirdLabel.attributedText = attrStr;
+        ((GridViewCell*)cell).thirdLabel.textAlignment = UITextAlignmentCenter;
         
         attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"buyed", @"") detail:[NSString stringWithFormat:@"(%d)",[userIdentity.buyedCount intValue]]];
-        ((FourGridViewCell*)cell).fourthLabel.attributedText = attrStr;
-        ((FourGridViewCell*)cell).fourthLabel.textAlignment = UITextAlignmentCenter;
+        ((GridViewCell*)cell).fourthLabel.attributedText = attrStr;
+        ((GridViewCell*)cell).fourthLabel.textAlignment = UITextAlignmentCenter;
         
         attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"topic", @"") detail:[NSString stringWithFormat:@"(%d)",[userIdentity.topicCount intValue]]];
-        ((FourGridViewCell*)cell).fifthLabel.attributedText = attrStr;
-        ((FourGridViewCell*)cell).fifthLabel.textAlignment = UITextAlignmentCenter;
+        ((GridViewCell*)cell).fifthLabel.attributedText = attrStr;
+        ((GridViewCell*)cell).fifthLabel.textAlignment = UITextAlignmentCenter;
         
          attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"black_list", @"") detail:[NSString stringWithFormat:@"(%d)",[userIdentity.blackListCount intValue]]];
-        ((FourGridViewCell*)cell).sixthLabel.attributedText = attrStr;
-        ((FourGridViewCell*)cell).sixthLabel.textAlignment = UITextAlignmentCenter;
+        ((GridViewCell*)cell).sixthLabel.attributedText = attrStr;
+        ((GridViewCell*)cell).sixthLabel.textAlignment = UITextAlignmentCenter;
         
-        _followButton = ((FourGridViewCell*)cell).firstButton;
-        _fansButton = ((FourGridViewCell*)cell).secondButton;
-        _collectionButton = ((FourGridViewCell*)cell).thirdButton;
-        _buyedButton = ((FourGridViewCell*)cell).fourthButton;
-        _topicButton = ((FourGridViewCell*)cell).fifthButton;
-        _blackListButton = ((FourGridViewCell*)cell).sixthButton;
+        _followButton = ((GridViewCell*)cell).firstButton;
+        _fansButton = ((GridViewCell*)cell).secondButton;
+        _collectionButton = ((GridViewCell*)cell).thirdButton;
+        _buyedButton = ((GridViewCell*)cell).fourthButton;
+        _topicButton = ((GridViewCell*)cell).fifthButton;
+        _blackListButton = ((GridViewCell*)cell).sixthButton;
     }
     else if (section == 2) {
         cell = [tableView dequeueReusableCellWithIdentifier:buttonViewCellIdentifier];

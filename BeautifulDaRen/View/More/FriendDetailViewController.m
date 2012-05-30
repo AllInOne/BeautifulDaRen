@@ -8,7 +8,7 @@
 
 #import "FriendDetailViewController.h"
 #import "ButtonViewCell.h"
-#import "FourGridViewCell.h"
+#import "GridViewCell.h"
 #import "ViewHelper.h"
 
 @interface FriendDetailViewController()
@@ -140,7 +140,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString * buttonViewCellIdentifier = @"ButtonViewCell";
-    static NSString * fourGridViewCellIdentifier = @"FourGridViewCell";
+    static NSString * gridViewCellIdentifier = @"GridViewCell";
     
     UITableViewCell *cell  = nil;
 
@@ -180,43 +180,43 @@
     }
     else if(section == 2)
     {
-        cell = [tableView dequeueReusableCellWithIdentifier:fourGridViewCellIdentifier];
+        cell = [tableView dequeueReusableCellWithIdentifier:gridViewCellIdentifier];
         if(!cell) {
-            cell = [[[NSBundle mainBundle] loadNibNamed:fourGridViewCellIdentifier owner:self options:nil] objectAtIndex:1];
+            cell = [[[NSBundle mainBundle] loadNibNamed:gridViewCellIdentifier owner:self options:nil] objectAtIndex:1];
         }
         
         NSMutableAttributedString * attrStr = nil;
         
         attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"weibo", @"") detail:@"(12)"];
-        ((FourGridViewCell*)cell).firstLabel.attributedText = attrStr;
-        ((FourGridViewCell*)cell).firstLabel.textAlignment = UITextAlignmentCenter;
+        ((GridViewCell*)cell).firstLabel.attributedText = attrStr;
+        ((GridViewCell*)cell).firstLabel.textAlignment = UITextAlignmentCenter;
         
         attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"topic", @"") detail:@"(1)"];
-        ((FourGridViewCell*)cell).secondLabel.attributedText = attrStr;
-        ((FourGridViewCell*)cell).secondLabel.textAlignment = UITextAlignmentCenter;
+        ((GridViewCell*)cell).secondLabel.attributedText = attrStr;
+        ((GridViewCell*)cell).secondLabel.textAlignment = UITextAlignmentCenter;
         
         attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"follow", @"") detail:@"(99)"];
-        ((FourGridViewCell*)cell).thirdLabel.attributedText = attrStr;
-        ((FourGridViewCell*)cell).thirdLabel.textAlignment = UITextAlignmentCenter;
+        ((GridViewCell*)cell).thirdLabel.attributedText = attrStr;
+        ((GridViewCell*)cell).thirdLabel.textAlignment = UITextAlignmentCenter;
         
         attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"fans", @"") detail:@"(100)"];
-        ((FourGridViewCell*)cell).fourthLabel.attributedText = attrStr;
-        ((FourGridViewCell*)cell).fourthLabel.textAlignment = UITextAlignmentCenter;
+        ((GridViewCell*)cell).fourthLabel.attributedText = attrStr;
+        ((GridViewCell*)cell).fourthLabel.textAlignment = UITextAlignmentCenter;
         
         attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"collection", @"") detail:@"(33)"];
-        ((FourGridViewCell*)cell).fifthLabel.attributedText = attrStr;
-        ((FourGridViewCell*)cell).fifthLabel.textAlignment = UITextAlignmentCenter;
+        ((GridViewCell*)cell).fifthLabel.attributedText = attrStr;
+        ((GridViewCell*)cell).fifthLabel.textAlignment = UITextAlignmentCenter;
         
         attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"published", @"") detail:@"(12)"];
-        ((FourGridViewCell*)cell).sixthLabel.attributedText = attrStr;
-        ((FourGridViewCell*)cell).sixthLabel.textAlignment = UITextAlignmentCenter;
+        ((GridViewCell*)cell).sixthLabel.attributedText = attrStr;
+        ((GridViewCell*)cell).sixthLabel.textAlignment = UITextAlignmentCenter;
         
-        _followButton = ((FourGridViewCell*)cell).firstButton;
-        _fansButton = ((FourGridViewCell*)cell).secondButton;
-        _collectionButton = ((FourGridViewCell*)cell).thirdButton;
-        _buyedButton = ((FourGridViewCell*)cell).fourthButton;
-        _topicButton = ((FourGridViewCell*)cell).fifthButton;
-        _blackListButton = ((FourGridViewCell*)cell).sixthButton;
+        _followButton = ((GridViewCell*)cell).firstButton;
+        _fansButton = ((GridViewCell*)cell).secondButton;
+        _collectionButton = ((GridViewCell*)cell).thirdButton;
+        _buyedButton = ((GridViewCell*)cell).fourthButton;
+        _topicButton = ((GridViewCell*)cell).fifthButton;
+        _blackListButton = ((GridViewCell*)cell).sixthButton;
     }
     
     return cell;

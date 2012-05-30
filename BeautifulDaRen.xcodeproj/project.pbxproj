@@ -21,8 +21,8 @@
 		C213AB97155C11F900667556 /* next_flag.png in Resources */ = {isa = PBXBuildFile; fileRef = C213AB96155C11F900667556 /* next_flag.png */; };
 		C213AB9A155C1BCD00667556 /* BeautifulDaRen.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C213AB98155C1BCD00667556 /* BeautifulDaRen.xcdatamodeld */; };
 		C213AB9F155C1CD800667556 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C213AB9E155C1CD800667556 /* CoreData.framework */; };
-		C215A75F15539B7C001BF379 /* FourGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C215A75E15539B7C001BF379 /* FourGridViewCell.m */; };
-		C215A76115539B9E001BF379 /* FourGridViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C215A76015539B9E001BF379 /* FourGridViewCell.xib */; };
+		C215A75F15539B7C001BF379 /* GridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C215A75E15539B7C001BF379 /* GridViewCell.m */; };
+		C215A76115539B9E001BF379 /* GridViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C215A76015539B9E001BF379 /* GridViewCell.xib */; };
 		C215A7A21553EABF001BF379 /* WaresItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C215A7A01553EABF001BF379 /* WaresItem.m */; };
 		C216EDC215518B8C00CA8CE8 /* MyInfoTopViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C216EDC115518B8C00CA8CE8 /* MyInfoTopViewCell.m */; };
 		C216EDC415518BD300CA8CE8 /* MyInfoTopViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C216EDC315518BD300CA8CE8 /* MyInfoTopViewCell.xib */; };
@@ -565,9 +565,9 @@
 		C213AB96155C11F900667556 /* next_flag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = next_flag.png; sourceTree = "<group>"; };
 		C213AB99155C1BCD00667556 /* BeautifulDaRen.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BeautifulDaRen.xcdatamodel; sourceTree = "<group>"; };
 		C213AB9E155C1CD800667556 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		C215A75D15539B7C001BF379 /* FourGridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FourGridViewCell.h; path = ../Mine/FourGridViewCell.h; sourceTree = "<group>"; };
-		C215A75E15539B7C001BF379 /* FourGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FourGridViewCell.m; path = ../Mine/FourGridViewCell.m; sourceTree = "<group>"; };
-		C215A76015539B9E001BF379 /* FourGridViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FourGridViewCell.xib; sourceTree = "<group>"; };
+		C215A75D15539B7C001BF379 /* GridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; name = GridViewCell.h; path = ../Mine/GridViewCell.h; sourceTree = "<group>"; };
+		C215A75E15539B7C001BF379 /* GridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GridViewCell.m; path = ../Mine/GridViewCell.m; sourceTree = "<group>"; };
+		C215A76015539B9E001BF379 /* GridViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GridViewCell.xib; sourceTree = "<group>"; };
 		C215A76D1553CCEF001BF379 /* ButtonPressDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonPressDelegate.h; sourceTree = "<group>"; };
 		C215A79F1553EABF001BF379 /* WaresItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaresItem.h; sourceTree = "<group>"; };
 		C215A7A01553EABF001BF379 /* WaresItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaresItem.m; sourceTree = "<group>"; };
@@ -2158,9 +2158,9 @@
 				C28A935915484442008C8AFC /* ButtonViewCell.h */,
 				C28A935A15484442008C8AFC /* ButtonViewCell.m */,
 				C28A935C1548445B008C8AFC /* ButtonViewCell.xib */,
-				C215A75D15539B7C001BF379 /* FourGridViewCell.h */,
-				C215A75E15539B7C001BF379 /* FourGridViewCell.m */,
-				C215A76015539B9E001BF379 /* FourGridViewCell.xib */,
+				C215A75D15539B7C001BF379 /* GridViewCell.h */,
+				C215A75E15539B7C001BF379 /* GridViewCell.m */,
+				C215A76015539B9E001BF379 /* GridViewCell.xib */,
 				CE5B741E1574C461009C9669 /* FullImageViewController.h */,
 				CE5B741F1574C461009C9669 /* FullImageViewController.m */,
 				CE5B74201574C461009C9669 /* FullImageViewController.xib */,
@@ -2374,7 +2374,7 @@
 				C25E4C8415516CA0007D66E0 /* item_fake.png in Resources */,
 				CE62B3631551790A0017AA88 /* SelectCityViewController.xib in Resources */,
 				C216EDC415518BD300CA8CE8 /* MyInfoTopViewCell.xib in Resources */,
-				C215A76115539B9E001BF379 /* FourGridViewCell.xib in Resources */,
+				C215A76115539B9E001BF379 /* GridViewCell.xib in Resources */,
 				CE62B3681551842D0017AA88 /* SelectCategoryViewController.xib in Resources */,
 				CEEF7B21155549B5001ABCEC /* ForwardCommentListViewController.xib in Resources */,
 				CEEF7B6415556430001ABCEC /* ForwardCommentTableViewCell.xib in Resources */,
@@ -2779,7 +2779,7 @@
 				CEBCD05A15500CF8000D41E1 /* WeiboForwardCommentViewController.m in Sources */,
 				CE62B3621551790A0017AA88 /* SelectCityViewController.m in Sources */,
 				C216EDC215518B8C00CA8CE8 /* MyInfoTopViewCell.m in Sources */,
-				C215A75F15539B7C001BF379 /* FourGridViewCell.m in Sources */,
+				C215A75F15539B7C001BF379 /* GridViewCell.m in Sources */,
 				CE62B3671551842D0017AA88 /* SelectCategoryViewController.m in Sources */,
 				C215A7A21553EABF001BF379 /* WaresItem.m in Sources */,
 				CEEF7B20155549B5001ABCEC /* ForwardCommentListViewController.m in Sources */,
