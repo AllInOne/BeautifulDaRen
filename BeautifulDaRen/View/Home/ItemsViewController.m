@@ -12,6 +12,7 @@
 #import "WeiboDetailViewController.h"
 #import "ViewHelper.h"
 #import <QuartzCore/QuartzCore.h>
+#import "BorderImageView.h"
 
 #define COLUMNS_PER_ROW 4
 #define GRID_X_OFFSET 3
@@ -54,13 +55,13 @@
 
 - (void) loadFakeData
 {
-    NSArray * imageNames = [NSArray arrayWithObjects:@"weibo_sample3",@"weibo_sample1",
-                            @"weibo_sample2",@"fake_item9",@"weibo_sample1",@"fake_item4",@"weibo_sample1",
-                            @"weibo_sample2",@"weibo_sample3",@"weibo_sample2",
-                            @"fake_item11",@"fake_item12",@"fake_item1",@"fake_item2",
-                            @"weibo_sample2",@"fake_item4",@"weibo_sample3",@"fake_item6",
-                            @"fake_item7",@"fake_item8",@"fake_item9",@"fake_item10",
-                            @"fake_item11",@"fake_item12", nil];
+    NSArray * imageNames = [NSArray arrayWithObjects:@"weibo_sample1",@"weibo_sample2",
+                            @"weibo_sample3",@"weibo_sample4",@"weibo_sample5",@"weibo_sample6",@"weibo_sample7",
+                            @"weibo_sample8",@"weibo_sample9",@"weibo_sample10",
+                            @"weibo_sample11",@"weibo_sample1",@"weibo_sample2",@"weibo_sample3",
+                            @"weibo_sample4",@"weibo_sample5",@"weibo_sample6",@"weibo_sample7",
+                            @"weibo_sample8",@"weibo_sample9",@"weibo_sample10",@"weibo_sample1",
+                            @"weibo_sample2",@"weibo_sample3", nil];
     NSArray * imageIds = [NSArray arrayWithObjects:@"NO.001",@"NO.002",
                           @"NO.003",@"NO.004",@"NO.005",@"NO.006",
                           @"NO.007",@"NO.008",@"NO.009",@"NO.010",
@@ -78,9 +79,9 @@
         item.itemImageData = UIImagePNGRepresentation(image);
         UIImageView * imageView = [[UIImageView alloc] initWithImage:[UIImage imageWithData:item.itemImageData]];
         
-        CGFloat frameWidth = (self.view.frame.size.width - 30) / 3;
+        CGFloat frameWidth = (self.view.frame.size.width - 14) / 3;
         CGFloat frameHeight = [ViewHelper getRatioHeightOfImage:imageView.image ratioWidth:frameWidth];
-        [_itemsHeight addObject:[NSNumber numberWithFloat:(frameHeight+8)]];
+        [_itemsHeight addObject:[NSNumber numberWithFloat:(frameHeight+4)]];
         [self.fakeData addObject:item];
     }
 }
@@ -91,6 +92,7 @@
 {
     [_waterFlowView release];
     [_itemsHeight release];
+    [super dealloc];
 }
 
 - (void)viewDidLoad
@@ -138,19 +140,14 @@
 	{
 		cell  = [[[WaterFlowCell alloc] initWithReuseIdentifier:cellIdentifier] autorelease];
         
-        UIImageView * imageView = [[[UIImageView alloc] init] autorelease];
-        imageView.image = [UIImage imageWithData:((WaresItem*)[self.fakeData objectAtIndex:index]).itemImageData];
+        UIImage * image = [UIImage imageWithData:((WaresItem*)[self.fakeData objectAtIndex:index]).itemImageData];
         
-        CGFloat frameWidth = (self.view.frame.size.width - 30) / 3;
-        CGFloat frameHeight = [ViewHelper getRatioHeightOfImage:imageView.image ratioWidth:frameWidth];
+        CGFloat frameWidth = (self.view.frame.size.width - 14) / 3;
+        CGFloat frameHeight = [ViewHelper getRatioHeightOfImage:image ratioWidth:frameWidth];
         
-        imageView.frame = CGRectMake(2, 2, frameWidth, frameHeight);
-
-        UIView * view = [[[UIView alloc] initWithFrame:CGRectMake(2, 2, frameWidth + 4, frameHeight + 4)] autorelease];
-        [view addSubview:imageView];
-        view.layer.borderColor = [[UIColor grayColor] CGColor];
-        view.layer.borderWidth = 1;
-        [cell addSubview:view];
+        BorderImageView * borderImageView = [[BorderImageView alloc] initWithFrame:CGRectMake(2, 2, frameWidth + 2, frameHeight + 2) andImage:image];
+        [cell addSubview:borderImageView];
+        [borderImageView release];
 	}
 	return cell;
 }

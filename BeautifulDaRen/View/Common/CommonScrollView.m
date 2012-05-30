@@ -9,6 +9,7 @@
 #import "CommonScrollView.h"
 #import "CommonScrollViewItem.h"
 #import "ViewConstants.h"
+#import "BorderImageView.h"
 
 @interface CommonScrollView ()
 @property (nonatomic, retain) NSMutableArray * scrollItems;
@@ -24,7 +25,7 @@
 {
     [_scrollView release];
     [_scrollItems release];
-    [super release];
+    [super dealloc];
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil data: (NSArray *)data andDelegate:(id<CommonScrollViewProtocol>) delegate
@@ -35,15 +36,20 @@
         self.scrollItems = [[NSMutableArray alloc] initWithCapacity:[data count]];
         while (index < data.count) {
             CommonScrollViewItem * item = [[[NSBundle mainBundle] loadNibNamed:@"CommonScrollViewItem" owner:self options:nil] objectAtIndex:0];
-            item.frame = CGRectMake(SCROLL_ITEM_MARGIN + index * (SCROLL_ITEM_WIDTH + SCROLL_ITEM_MARGIN), 0, SCROLL_ITEM_WIDTH, SCROLL_ITEM_HEIGHT);
             item.button.tag = index;
 
+<<<<<<< HEAD
             [item.image setImage:[UIImage imageNamed:[data objectAtIndex:index]]];
             [item.image setFrame:CGRectMake(0, 0, SCROLL_ITEM_WIDTH, SCROLL_ITEM_HEIGHT)];
+=======
+            [item.image setImage:[UIImage imageWithData:[data objectAtIndex:index]]];
+>>>>>>> 438dda578e6899db1f934d9697283a12c28f59aa
             
-            [self.view addSubview:item];
-            [self.scrollItems insertObject:item atIndex:index++];
-            [self.scrollView addSubview:item];
+            BorderImageView * borderImageView = [[[BorderImageView alloc] initWithFrame:CGRectMake(SCROLL_ITEM_MARGIN + index * (SCROLL_ITEM_WIDTH + SCROLL_ITEM_MARGIN), 0, SCROLL_ITEM_WIDTH, SCROLL_ITEM_HEIGHT) andView:item]  autorelease];
+            
+            [self.view addSubview:borderImageView];
+            [self.scrollItems insertObject:borderImageView atIndex:index++];
+            [self.scrollView addSubview:borderImageView];
         }
         [self.scrollView setContentSize:CGSizeMake(index * (SCROLL_ITEM_WIDTH + SCROLL_ITEM_MARGIN), SCROLL_ITEM_HEIGHT)];
         self.delegate = delegate;
