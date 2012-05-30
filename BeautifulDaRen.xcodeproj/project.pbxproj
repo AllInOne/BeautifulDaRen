@@ -98,6 +98,7 @@
 		C2CE7288156A929F00C22E34 /* FriendDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2CE7286156A929F00C22E34 /* FriendDetailViewController.xib */; };
 		C2CE728C156A945600C22E34 /* FindWeiboViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2CE728A156A945600C22E34 /* FindWeiboViewController.m */; };
 		C2CE728D156A945600C22E34 /* FindWeiboViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2CE728B156A945600C22E34 /* FindWeiboViewController.xib */; };
+		C2ED62891574B3DC00811A2C /* BorderImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2ED62881574B3DC00811A2C /* BorderImageView.m */; };
 		C2F68D07157340E7006ED8AE /* NSAttributedString+Attributes.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F68D04157340E7006ED8AE /* NSAttributedString+Attributes.m */; };
 		C2F68D08157340E7006ED8AE /* OHAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F68D06157340E7006ED8AE /* OHAttributedLabel.m */; };
 		C2F68D0A1573415D006ED8AE /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2F68D091573415D006ED8AE /* CoreText.framework */; };
@@ -673,6 +674,8 @@
 		C2CE7289156A945500C22E34 /* FindWeiboViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindWeiboViewController.h; sourceTree = "<group>"; };
 		C2CE728A156A945600C22E34 /* FindWeiboViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindWeiboViewController.m; sourceTree = "<group>"; };
 		C2CE728B156A945600C22E34 /* FindWeiboViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FindWeiboViewController.xib; sourceTree = "<group>"; };
+		C2ED62871574B3DB00811A2C /* BorderImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BorderImageView.h; sourceTree = "<group>"; };
+		C2ED62881574B3DC00811A2C /* BorderImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BorderImageView.m; sourceTree = "<group>"; };
 		C2F68D03157340E7006ED8AE /* NSAttributedString+Attributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+Attributes.h"; sourceTree = "<group>"; };
 		C2F68D04157340E7006ED8AE /* NSAttributedString+Attributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+Attributes.m"; sourceTree = "<group>"; };
 		C2F68D05157340E7006ED8AE /* OHAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OHAttributedLabel.h; sourceTree = "<group>"; };
@@ -2151,19 +2154,21 @@
 			children = (
 				CEDC918F153FDC7700BA6C35 /* AdsPageView.h */,
 				CEDC9190153FDC7700BA6C35 /* AdsPageView.m */,
-				C2F68D03157340E7006ED8AE /* NSAttributedString+Attributes.h */,
-				C2F68D04157340E7006ED8AE /* NSAttributedString+Attributes.m */,
-				C2F68D05157340E7006ED8AE /* OHAttributedLabel.h */,
-				C2F68D06157340E7006ED8AE /* OHAttributedLabel.m */,
 				CEDC918D153FDC5700BA6C35 /* AdsPageView.xib */,
-				C21C26B2156BA872000F8E3C /* RadioButton.h */,
-				C21C26B3156BA874000F8E3C /* RadioButton.m */,
+				C2ED62871574B3DB00811A2C /* BorderImageView.h */,
+				C2ED62881574B3DC00811A2C /* BorderImageView.m */,
 				C28A935915484442008C8AFC /* ButtonViewCell.h */,
 				C28A935A15484442008C8AFC /* ButtonViewCell.m */,
 				C28A935C1548445B008C8AFC /* ButtonViewCell.xib */,
 				C215A75D15539B7C001BF379 /* FourGridViewCell.h */,
 				C215A75E15539B7C001BF379 /* FourGridViewCell.m */,
 				C215A76015539B9E001BF379 /* FourGridViewCell.xib */,
+				C2F68D03157340E7006ED8AE /* NSAttributedString+Attributes.h */,
+				C2F68D04157340E7006ED8AE /* NSAttributedString+Attributes.m */,
+				C2F68D05157340E7006ED8AE /* OHAttributedLabel.h */,
+				C2F68D06157340E7006ED8AE /* OHAttributedLabel.m */,
+				C21C26B2156BA872000F8E3C /* RadioButton.h */,
+				C21C26B3156BA874000F8E3C /* RadioButton.m */,
 				CE266ADE155C12EF000AC072 /* ScrollView */,
 				CE62B35F1551790A0017AA88 /* SelectCityViewController.h */,
 				CE62B3601551790A0017AA88 /* SelectCityViewController.m */,
@@ -2227,7 +2232,7 @@
 		CE029AB1153E682100886227 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0430;
 			};
 			buildConfigurationList = CE029AB4153E682100886227 /* Build configuration list for PBXProject "BeautifulDaRen" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -2801,6 +2806,7 @@
 				C27F865B156CF4C10094402B /* FindWeiboViewCell.m in Sources */,
 				C2F68D07157340E7006ED8AE /* NSAttributedString+Attributes.m in Sources */,
 				C2F68D08157340E7006ED8AE /* OHAttributedLabel.m in Sources */,
+				C2ED62891574B3DC00811A2C /* BorderImageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -78,6 +78,7 @@
     [_sameCityDaRenView release];
     [_hotDaRenView release];
     [_youMayInterestinView release];
+    [super dealloc];
 }
 
 -(void)refreshView

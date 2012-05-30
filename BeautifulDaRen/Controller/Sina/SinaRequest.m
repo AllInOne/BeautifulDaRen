@@ -60,6 +60,7 @@
     [self.params release];
     [self.httpHeaderFields release];
     Block_release(self.doneCallback);
+    [super dealloc];
 }
 
 - (void)start
