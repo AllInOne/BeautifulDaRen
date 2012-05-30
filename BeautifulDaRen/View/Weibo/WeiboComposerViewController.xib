@@ -177,7 +177,7 @@
 								<string key="NSFrame">{{263, 2}, {37, 32}}</string>
 								<reference key="NSSuperview" ref="485515526"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
+								<reference key="NSNextKeyView" ref="635250277"/>
 								<string key="NSReuseIdentifierKey">_NS:225</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -195,6 +195,21 @@
 								</object>
 								<reference key="IBUIFontDescription" ref="622600564"/>
 								<reference key="IBUIFont" ref="791486864"/>
+							</object>
+							<object class="IBUIImageView" id="635250277">
+								<reference key="NSNextResponder" ref="485515526"/>
+								<int key="NSvFlags">292</int>
+								<string key="NSFrame">{{285, 7}, {10, 10}}</string>
+								<reference key="NSSuperview" ref="485515526"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
+								<string key="NSReuseIdentifierKey">_NS:567</string>
+								<bool key="IBUIUserInteractionEnabled">NO</bool>
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+								<object class="NSCustomResource" key="IBUIImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">myshow_share_btn.png</string>
+								</object>
 							</object>
 						</array>
 						<string key="NSFrame">{{0, 380}, {320, 40}}</string>
@@ -452,6 +467,22 @@
 					<int key="connectionID">52</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">sinaButton</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="668615164"/>
+					</object>
+					<int key="connectionID">61</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">sinaShareImageView</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="635250277"/>
+					</object>
+					<int key="connectionID">64</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">onPickedImagePressed:</string>
 						<reference key="source" ref="333808481"/>
@@ -535,6 +566,7 @@
 							<reference ref="668615164"/>
 							<reference ref="333808481"/>
 							<reference ref="448779645"/>
+							<reference ref="635250277"/>
 						</array>
 						<reference key="parent" ref="191373211"/>
 					</object>
@@ -605,6 +637,11 @@
 						<reference key="object" ref="668615164"/>
 						<reference key="parent" ref="485515526"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">63</int>
+						<reference key="object" ref="635250277"/>
+						<reference key="parent" ref="485515526"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -627,12 +664,13 @@
 				<string key="53.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="56.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<real value="0.0" key="56.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
+				<string key="63.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">60</int>
+			<int key="maxID">64</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -686,6 +724,8 @@
 						<string key="contentScrollView">UIScrollView</string>
 						<string key="footerView">UIView</string>
 						<string key="maketTextView">UITextField</string>
+						<string key="sinaButton">UIButton</string>
+						<string key="sinaShareImageView">UIImageView</string>
 						<string key="weiboContentBgTextFiled">UITextField</string>
 						<string key="weiboContentTextView">UITextView</string>
 					</dictionary>
@@ -718,6 +758,14 @@
 							<string key="name">maketTextView</string>
 							<string key="candidateClassName">UITextField</string>
 						</object>
+						<object class="IBToOneOutletInfo" key="sinaButton">
+							<string key="name">sinaButton</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="sinaShareImageView">
+							<string key="name">sinaShareImageView</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="weiboContentBgTextFiled">
 							<string key="name">weiboContentBgTextFiled</string>
 							<string key="candidateClassName">UITextField</string>
@@ -744,6 +792,7 @@
 			<string key="myshow_category.png">{20, 20}</string>
 			<string key="myshow_location.png">{20, 20}</string>
 			<string key="myshow_margin.png">{2, 46}</string>
+			<string key="myshow_share_btn.png">{8, 8}</string>
 			<string key="myshow_sina_color.png">{20, 20}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">933</string>

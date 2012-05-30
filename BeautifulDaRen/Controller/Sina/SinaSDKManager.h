@@ -17,6 +17,8 @@
 
 + (SinaSDKManager*) sharedManager;
 
+- (BOOL)isLogin;
+
 - (void)setRootviewController:(UIViewController*)rootViewController;
 
 - (void)loginWithDoneCallback:(loginDoneBlock)doneBlock;

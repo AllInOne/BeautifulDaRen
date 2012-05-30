@@ -44,6 +44,8 @@
 @synthesize selectedImage = _selectedImage;
 @synthesize isKeypadShow = _isKeypadShow;
 @synthesize takePhotoViewController = _takePhotoViewController;
+@synthesize sinaButton = _sinaButton;
+@synthesize sinaShareImageView = _sinaShareImageView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -96,6 +98,16 @@
     
     [toolbarBg release];
     
+    if ([[SinaSDKManager sharedManager] isLogin])
+    {
+        [self.sinaButton setImage:[UIImage imageNamed:@"myshow_sina_color"] forState:UIControlStateNormal];
+    }
+    else
+    {
+        [self.sinaButton setImage:[UIImage imageNamed:@"myshow_sina_gray"] forState:UIControlStateNormal];
+        [self.sinaShareImageView setHidden:YES];
+    }
+    
     _attachedImageView.hidden = YES;
 }
 
@@ -109,6 +121,8 @@
     [self setMaketTextView:nil];
     [self setSelectedImage: nil];
     [self setTakePhotoViewController:nil];
+    [self setSinaButton:nil];
+    [self setSinaShareImageView:nil];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
@@ -122,6 +136,8 @@
     [_brandTextView release];
     [_selectedImage release];
     [_takePhotoViewController release];
+    [_sinaButton release];
+    [_sinaShareImageView release];
     
     [super dealloc];
 }
@@ -285,10 +301,19 @@
 
 - (IBAction)onSinaPressed:(id)sender
 {
-    [[SinaSDKManager sharedManager] setRootviewController:self.navigationController];
-    [[SinaSDKManager sharedManager] loginWithDoneCallback:^(LOGIN_STATUS status) {
-        NSLog(@"Sina SDK login done, status:%d", status);
-    }];
+    if (![[SinaSDKManager sharedManager] isLogin])
+    {
+        [[SinaSDKManager sharedManager] setRootviewController:self.navigationController];
+        [[SinaSDKManager sharedManager] loginWithDoneCallback:^(LOGIN_STATUS status) {
+            NSLog(@"Sina SDK login done, status:%d", status);
+            [self.sinaButton setImage:[UIImage imageNamed:@"myshow_sina_color"] forState:UIControlStateNormal];
+            [self.sinaShareImageView setHidden:NO];
+        }];   
+    }
+    else
+    {
+        [self.sinaShareImageView setHidden:(self.sinaShareImageView.hidden ? NO : YES)];
+    }
 }
 
 - (void)didFinishContactSelectionWithContacts:(NSString *)friendId

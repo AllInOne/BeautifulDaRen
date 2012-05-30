@@ -211,11 +211,11 @@
 									<int key="NSColorSpace">3</int>
 									<bytes key="NSWhite">MC41AA</bytes>
 								</object>
-								<object class="IBUIFontDescription" key="IBUIFontDescription" id="560662090">
+								<object class="IBUIFontDescription" key="IBUIFontDescription">
 									<int key="type">2</int>
 									<double key="pointSize">15</double>
 								</object>
-								<object class="NSFont" key="IBUIFont" id="644237299">
+								<object class="NSFont" key="IBUIFont">
 									<string key="NSName">Helvetica-Bold</string>
 									<double key="NSSize">15</double>
 									<int key="NSfFlags">16</int>
@@ -300,7 +300,6 @@
 								<string key="NSFrame">{{224, 258}, {76, 26}}</string>
 								<reference key="NSSuperview" ref="362104111"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:225</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -323,7 +322,7 @@
 								<string key="NSFrame">{{232, 168}, {72, 29}}</string>
 								<reference key="NSSuperview" ref="362104111"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="657017164"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:225</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -349,31 +348,6 @@
 									<double key="NSSize">20</double>
 									<int key="NSfFlags">16</int>
 								</object>
-							</object>
-							<object class="IBUIButton" id="657017164">
-								<reference key="NSNextResponder" ref="362104111"/>
-								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{233, 204}, {66, 22}}</string>
-								<reference key="NSSuperview" ref="362104111"/>
-								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="942924528"/>
-								<string key="NSReuseIdentifierKey">_NS:225</string>
-								<bool key="IBUIOpaque">NO</bool>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<int key="IBUIContentHorizontalAlignment">0</int>
-								<int key="IBUIContentVerticalAlignment">0</int>
-								<reference key="IBUIHighlightedTitleColor" ref="953005364"/>
-								<object class="NSColor" key="IBUINormalTitleColor">
-									<int key="NSColorSpace">2</int>
-									<bytes key="NSRGB">MSAwLjk4NDMxMzc4NiAwLjk3MjU0OTA4MDgAA</bytes>
-								</object>
-								<reference key="IBUINormalTitleShadowColor" ref="622127201"/>
-								<object class="NSCustomResource" key="IBUINormalBackgroundImage">
-									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">weibo_pay_icon.png</string>
-								</object>
-								<reference key="IBUIFontDescription" ref="560662090"/>
-								<reference key="IBUIFont" ref="644237299"/>
 							</object>
 						</array>
 						<string key="NSFrame">{{0, 57}, {320, 404}}</string>
@@ -629,7 +603,6 @@
 							<reference ref="400405133"/>
 							<reference ref="942924528"/>
 							<reference ref="297656590"/>
-							<reference ref="657017164"/>
 							<reference ref="564808930"/>
 						</array>
 						<reference key="parent" ref="191373211"/>
@@ -700,11 +673,6 @@
 						<reference key="parent" ref="362104111"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">59</int>
-						<reference key="object" ref="657017164"/>
-						<reference key="parent" ref="362104111"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">60</int>
 						<reference key="object" ref="564808930"/>
 						<reference key="parent" ref="362104111"/>
@@ -736,7 +704,6 @@
 				<string key="45.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="46.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="58.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="59.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="60.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="63.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
@@ -825,7 +792,6 @@
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="avatar_icon.png">{38, 38}</string>
 			<string key="weibo_detail_btn.png">{58, 23}</string>
-			<string key="weibo_pay_icon.png">{62, 19}</string>
 			<string key="weibo_price_label.png">{65, 29}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">933</string>

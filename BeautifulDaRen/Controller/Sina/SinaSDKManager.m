@@ -50,6 +50,11 @@ static SinaSDKManager *sharedInstance;
     [super dealloc];
 }
 
+- (BOOL)isLogin
+{
+    return [sinaWeiboEngine isLoggedIn];
+}
+
 - (void)setRootviewController:(UIViewController*)rootViewController
 {
     [sinaWeiboEngine setRootViewController:rootViewController];   

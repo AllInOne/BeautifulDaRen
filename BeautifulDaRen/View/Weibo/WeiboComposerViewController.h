@@ -29,6 +29,9 @@
 
 @property (nonatomic, retain) IBOutlet UIScrollView * contentScrollView;
 
+@property (nonatomic, retain) IBOutlet UIButton * sinaButton;
+@property (nonatomic, retain) IBOutlet UIImageView * sinaShareImageView;
+
 - (IBAction)onImagePickerPressed:(id)sender;
 - (IBAction)onPickedImagePressed:(id)sender;
 
