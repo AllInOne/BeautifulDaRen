@@ -38,7 +38,7 @@
             item.frame = CGRectMake(SCROLL_ITEM_MARGIN + index * (SCROLL_ITEM_WIDTH + SCROLL_ITEM_MARGIN), 0, SCROLL_ITEM_WIDTH, SCROLL_ITEM_HEIGHT);
             item.button.tag = index;
 
-            [item.image setImage:[UIImage imageNamed:@"hot_items.png"]];
+            [item.image setImage:[UIImage imageNamed:[data objectAtIndex:index]]];
             [item.image setFrame:CGRectMake(0, 0, SCROLL_ITEM_WIDTH, SCROLL_ITEM_HEIGHT)];
             
             [self.view addSubview:item];
