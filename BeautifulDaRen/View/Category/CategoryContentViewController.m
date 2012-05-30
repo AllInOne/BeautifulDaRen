@@ -30,7 +30,7 @@
         // TODO: Read categories from network
         NSInteger index = 0;
         CGFloat height = CONTENT_MARGIN;
-<<<<<<< HEAD
+
         NSArray * titles = [NSArray arrayWithObjects:@"女装", @""@"美食", @"化妆品", @"裙子", nil];
         NSArray * samples1 = [NSArray arrayWithObjects:@"hot_clothes_sample1", @""@"hot_clothes_sample2", @"hot_clothes_sample3", @"hot_clothes_sample4", nil];
         
@@ -44,58 +44,7 @@
         
         while (index < [titles count]) {
             CategoryItemCell * categoryCell = [[CategoryItemCell alloc] initWithNibName:nil bundle:nil title:[titles objectAtIndex:index] andData:[samples objectAtIndex:index]];
-=======
-        NSArray * titles = [NSArray arrayWithObjects:@"女装", @"上装", @"化妆品", @"裙子", nil];
-        NSArray * array1 = [NSArray arrayWithObjects:
-                                UIImagePNGRepresentation([UIImage imageNamed:@"hot_clothes_sample1"]),
-                                UIImagePNGRepresentation([UIImage imageNamed:@"hot_clothes_sample2"]),
-                                UIImagePNGRepresentation([UIImage imageNamed:@"hot_clothes_sample3"]),
-                                UIImagePNGRepresentation([UIImage imageNamed:@"hot_clothes_sample4"]),
-                                UIImagePNGRepresentation([UIImage imageNamed:@"hot_clothes_sample5"]),
-                                UIImagePNGRepresentation([UIImage imageNamed:@"hot_clothes_sample6"]),
-                                UIImagePNGRepresentation([UIImage imageNamed:@"hot_clothes_sample7"]),
-                                UIImagePNGRepresentation([UIImage imageNamed:@"hot_clothes_sample8"]),
-                            nil];
-        NSArray * array2 = [NSArray arrayWithObjects:
-                                UIImagePNGRepresentation([UIImage imageNamed:@"hot_food_sample1"]),
-                                UIImagePNGRepresentation([UIImage imageNamed:@"hot_food_sample2"]),
-                                UIImagePNGRepresentation([UIImage imageNamed:@"hot_food_sample3"]),
-                                UIImagePNGRepresentation([UIImage imageNamed:@"hot_food_sample4"]),
-                                UIImagePNGRepresentation([UIImage imageNamed:@"hot_food_sample1"]),
-                                UIImagePNGRepresentation([UIImage imageNamed:@"hot_food_sample2"]),
-                                UIImagePNGRepresentation([UIImage imageNamed:@"hot_food_sample3"]),
-                                UIImagePNGRepresentation([UIImage imageNamed:@"hot_food_sample4"]),
-                            nil];
-        NSArray * array3 = [NSArray arrayWithObjects:
-                                UIImagePNGRepresentation([UIImage imageNamed:@"hot_toiletry_sample1"]),
-                                UIImagePNGRepresentation([UIImage imageNamed:@"hot_toiletry_sample2"]),
-                                UIImagePNGRepresentation([UIImage imageNamed:@"hot_toiletry_sample3"]),
-                                UIImagePNGRepresentation([UIImage imageNamed:@"hot_toiletry_sample4"]), 
-                                UIImagePNGRepresentation([UIImage imageNamed:@"hot_toiletry_sample1"]),
-                                UIImagePNGRepresentation([UIImage imageNamed:@"hot_toiletry_sample2"]),
-                                UIImagePNGRepresentation([UIImage imageNamed:@"hot_toiletry_sample3"]),
-                                UIImagePNGRepresentation([UIImage imageNamed:@"hot_toiletry_sample4"]),
-                            nil];
-        NSArray * array4 = [NSArray arrayWithObjects:
-                                UIImagePNGRepresentation([UIImage imageNamed:@"hot_clothes_sample1"]),
-                                UIImagePNGRepresentation([UIImage imageNamed:@"hot_clothes_sample2"]),
-                                UIImagePNGRepresentation([UIImage imageNamed:@"hot_clothes_sample3"]),
-                                UIImagePNGRepresentation([UIImage imageNamed:@"hot_clothes_sample4"]),
-                                UIImagePNGRepresentation([UIImage imageNamed:@"hot_clothes_sample5"]),
-                                UIImagePNGRepresentation([UIImage imageNamed:@"hot_clothes_sample6"]),
-                                UIImagePNGRepresentation([UIImage imageNamed:@"hot_clothes_sample7"]),
-                                UIImagePNGRepresentation([UIImage imageNamed:@"hot_clothes_sample8"]),
-                                nil];
-        NSArray * arrays = [NSArray arrayWithObjects:
-                            array1,
-                            array2, 
-                            array3, 
-                            array4, 
-                            nil];
-        while (index < [titles count]) {
-            CategoryItemCell * categoryCell = [[CategoryItemCell alloc] initWithNibName:nil bundle:nil title:[titles objectAtIndex:index] andData:[arrays objectAtIndex:index]];
->>>>>>> 438dda578e6899db1f934d9697283a12c28f59aa
-            
+
             categoryCell.view.frame = CGRectMake(0, height, CGRectGetWidth(self.view.frame), [categoryCell getHeight]);
             
             height += ([categoryCell getHeight] + CONTENT_MARGIN);

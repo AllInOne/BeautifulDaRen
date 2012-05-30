@@ -24,11 +24,7 @@
 
  @return YES if success, otherwise NO.
  */
-<<<<<<< HEAD
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil title: (NSString*)title andData: (NSArray *)data;
-=======
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil title: (NSString*)title andData: (NSArray *)dataDict;
->>>>>>> 438dda578e6899db1f934d9697283a12c28f59aa
 
 - (CGFloat)getHeight;
 

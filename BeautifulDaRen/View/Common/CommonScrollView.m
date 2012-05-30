@@ -38,12 +38,7 @@
             CommonScrollViewItem * item = [[[NSBundle mainBundle] loadNibNamed:@"CommonScrollViewItem" owner:self options:nil] objectAtIndex:0];
             item.button.tag = index;
 
-<<<<<<< HEAD
             [item.image setImage:[UIImage imageNamed:[data objectAtIndex:index]]];
-            [item.image setFrame:CGRectMake(0, 0, SCROLL_ITEM_WIDTH, SCROLL_ITEM_HEIGHT)];
-=======
-            [item.image setImage:[UIImage imageWithData:[data objectAtIndex:index]]];
->>>>>>> 438dda578e6899db1f934d9697283a12c28f59aa
             
             BorderImageView * borderImageView = [[[BorderImageView alloc] initWithFrame:CGRectMake(SCROLL_ITEM_MARGIN + index * (SCROLL_ITEM_WIDTH + SCROLL_ITEM_MARGIN), 0, SCROLL_ITEM_WIDTH, SCROLL_ITEM_HEIGHT) andView:item]  autorelease];
             
