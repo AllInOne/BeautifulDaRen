@@ -61,10 +61,12 @@
 "black_list" = "黑名单";
 "my_publish" = "我发表的";
 "private_letter" = "私信";
+"privateLetterMe" = "私信我";
 "draft" = "草稿箱";
 "buyed" = "购买的";
 "topic" = "话题";
 "at_me" = "@我";
+"commentme" = "评论我";
 "comment_me" = "评论我的";
 "published" = "已发布商品";
 
@@ -101,3 +103,6 @@
 "impeach" = "举报";
 "only_to_my_followed" = "仅对于“我关注的人”可见";
 "not_to_anyone" = "对所有人不可见";
+
+"allow" = "允许";
+"not_allow" = "不允许";

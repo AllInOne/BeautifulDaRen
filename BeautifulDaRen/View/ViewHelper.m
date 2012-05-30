@@ -176,7 +176,7 @@
     NSString * tempString = [NSString stringWithFormat:@"%@%@", name, detail];
     NSMutableAttributedString * attrStr = [[NSMutableAttributedString alloc] initWithString:tempString];
     [attrStr setFont:[UIFont fontWithName:@"Helvetica" size:15]];
-    [attrStr setTextColor:[UIColor colorWithRed:1 green:(51.0f/255.0f) blue:(153.0f/255.0f) alpha:1.0f] range:NSMakeRange([name length], [detail length])];
+    [attrStr setTextColor:[UIColor colorWithRed:(204.0f/255.0f) green:(88.0f/255.0f) blue:(151.0f/255.0f) alpha:1.0f] range:NSMakeRange([name length], [detail length])];
     [attrStr setTextColor:[UIColor darkGrayColor] range:NSMakeRange(0, [name length])];
     return [attrStr autorelease];
 }
@@ -186,4 +186,5 @@
     CGFloat ratio = ratioWidth / image.size.width;
     return ratio * image.size.height;
 }
+
 @end

@@ -35,4 +35,5 @@
 + (NSMutableAttributedString*)getGridViewCellForContactInformationWithName:(NSString*)name detail:(NSString*)detail;
 
 + (CGFloat)getRatioHeightOfImage:(UIImage*)image ratioWidth:(CGFloat)ratioWidth;
+
 @end

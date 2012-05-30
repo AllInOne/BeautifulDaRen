@@ -11,6 +11,7 @@
 #import "ViewHelper.h"
 #import "ButtonViewCell.h"
 #import "EdittingViewController.h"
+#import "SegmentControl.h"
 
 @interface MineEditingViewController()
 
@@ -141,9 +142,10 @@
         }
         ButtonViewCell * buttonViewCell = (ButtonViewCell*)cell;
         buttonViewCell.leftLabel.text = NSLocalizedString(@"gender", @"gender");
-        [buttonViewCell.segmentedControl setTitle:NSLocalizedString(@"female", @"gender") forSegmentAtIndex:0];
-        [buttonViewCell.segmentedControl setTitle:NSLocalizedString(@"male", @"gender") forSegmentAtIndex:1];
-        [buttonViewCell.segmentedControl addTarget:self action:@selector(genderSelected:) forControlEvents:UIControlEventValueChanged];
+
+        SegmentControl * seg = [[SegmentControl alloc] initWithFrame:CGRectMake(65, 8, 112, 29) leftText:NSLocalizedString(@"female", @"gender") rightText:NSLocalizedString(@"male", @"gender")];
+        [buttonViewCell addSubview:seg];
+        [seg release];
         cell.backgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
     }
     else if(section == 2)

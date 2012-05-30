@@ -9,12 +9,16 @@
 #import "EdittingViewController.h"
 #import "ViewHelper.h"
 #import "RadioButton.h"
+#import "SegmentControl.h"
 
 @interface EdittingViewController()
 
 @property (assign, nonatomic) NSInteger type;
 @property (retain, nonatomic) IBOutlet UIView * editNormalView;
 @property (retain, nonatomic) IBOutlet UIView * editPrivaceView;
+@property (retain, nonatomic) IBOutlet SegmentControl * commentMeSegmentControl;
+@property (retain, nonatomic) IBOutlet SegmentControl * atMeSegmentControl;
+@property (retain, nonatomic) IBOutlet SegmentControl * privateLetterMeSegmentControl;
 
 @end
 
@@ -22,6 +26,9 @@
 @synthesize inputTextView = _inputTextView;
 @synthesize editNormalView = _editNormalView;
 @synthesize editPrivaceView = _editPrivaceView;
+@synthesize commentMeSegmentControl = _commentMeSegmentControl;
+@synthesize atMeSegmentControl = _atMeSegmentControl;
+@synthesize privateLetterMeSegmentControl = _privateLetterMeSegmentControl;
 @synthesize type = _type;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil type:(NSInteger)type
@@ -71,15 +78,25 @@
     else
     {
         [self.navigationItem setTitle:NSLocalizedString(@"privacy", @"privacy")];
+        _commentMeSegmentControl = [_commentMeSegmentControl initWithFrame:_commentMeSegmentControl.frame leftText:NSLocalizedString(@"allow", @"allow") rightText:NSLocalizedString(@"not_allow", @"not_allow")];
+        _atMeSegmentControl = [_atMeSegmentControl initWithFrame:_atMeSegmentControl.frame leftText:NSLocalizedString(@"allow", @"allow") rightText:NSLocalizedString(@"not_allow", @"not_allow")];
+        _privateLetterMeSegmentControl = [_privateLetterMeSegmentControl initWithFrame:_privateLetterMeSegmentControl.frame leftText:NSLocalizedString(@"allow", @"allow") rightText:NSLocalizedString(@"not_allow", @"not_allow")];
+//
+//        [ViewHelper setSegmentControlWithSegment:_commentMeSegmentControl LeftText:NSLocalizedString(@"allow", @"") rightText:NSLocalizedString(@"not_allow", @"")];
+//        [ViewHelper setSegmentControlWithSegment:_atMeSegmentControl LeftText:NSLocalizedString(@"allow", @"") rightText:NSLocalizedString(@"not_allow", @"")];
+//        [ViewHelper setSegmentControlWithSegment:_privateLetterMeSegmentControl LeftText:NSLocalizedString(@"allow", @"") rightText:NSLocalizedString(@"not_allow", @"")];
         
         NSString * radioButtonGroupId = @"RadioButtonInEdittingView";
-        
+
         RadioButton * radioButton1 = [[[RadioButton alloc] initWithGroupId:radioButtonGroupId text:NSLocalizedString(@"only_to_my_followed", @"") index:0] autorelease];
         RadioButton * radioButton2 = [[[RadioButton alloc] initWithGroupId:radioButtonGroupId text:NSLocalizedString(@"not_to_anyone", @"") index:1] autorelease];
         
         radioButton1.frame = CGRectMake(15, 210, 240, 30);
         radioButton2.frame = CGRectMake(15, 250, 240, 30);
         
+        [_editPrivaceView addSubview:_commentMeSegmentControl];
+        [_editPrivaceView addSubview:_atMeSegmentControl];
+        [_editPrivaceView addSubview:_privateLetterMeSegmentControl];
         [_editPrivaceView addSubview:radioButton1];
         [_editPrivaceView addSubview:radioButton2];
         
@@ -90,13 +107,10 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
