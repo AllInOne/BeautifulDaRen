@@ -10,8 +10,8 @@
 #import "AppDelegate.h"
 #import "SinaRequest.h"
 
-#define SINA_WEIBO_APP_KEY          @"3180275481"
-#define SINA_WEIBO_APP_SECRET       @"aff34d0c349a1d5b7ee254f1a6e06706"
+#define SINA_WEIBO_APP_KEY          @"3283276068"
+#define SINA_WEIBO_APP_SECRET       @"650cf4283c4ef2f79800c046eb92e8e6"
 
 static SinaSDKManager *sharedInstance;
 
@@ -48,6 +48,11 @@ static SinaSDKManager *sharedInstance;
 {
     [sinaWeiboEngine release];
     [super dealloc];
+}
+
+- (void)setRootviewController:(UIViewController*)rootViewController
+{
+    [sinaWeiboEngine setRootViewController:rootViewController];   
 }
 
 - (void)loginWithDoneCallback:(loginDoneBlock)doneBlock

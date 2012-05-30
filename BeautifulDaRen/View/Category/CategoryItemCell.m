@@ -22,14 +22,15 @@
     [super dealloc];
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil title: (NSString*)title andData: (NSArray *)datas
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil title: (NSString*)title andData: (NSArray *)data
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Initialization code
         // TODO: test code
-        NSArray * images = [NSArray arrayWithArray:datas];
-        _categoryScrollItem = [[CommonScrollView alloc] initWithNibName:nil bundle:nil data:images andDelegate:self];
+
+        _categoryScrollItem = [[CommonScrollView alloc] initWithNibName:nil bundle:nil data:data andDelegate:self];
+
         [self.view addSubview:_categoryScrollItem.view];
         
         _categoryScrollItem.view.frame = CGRectMake(0, CATEGORY_TITLE_FONT_HEIGHT + CONTENT_MARGIN, self.view.frame.size.width, CATEGORY_ITEM_HEIGHT);

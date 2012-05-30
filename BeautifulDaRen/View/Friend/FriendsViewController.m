@@ -178,14 +178,14 @@
     }
 }
 
-- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section 
-{
-    UIView *headerView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 30)] autorelease];
-
-    [headerView setBackgroundColor:[UIColor purpleColor]];
-    
-    return headerView;
-}
+//- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section 
+//{
+//    UIView *headerView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 30)] autorelease];
+//
+////    [headerView setBackgroundColor:[UIColor purpleColor]];
+//    
+//    return headerView;
+//}
 
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {

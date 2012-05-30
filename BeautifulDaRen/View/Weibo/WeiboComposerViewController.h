@@ -36,4 +36,5 @@
 - (IBAction)onLocationPressed:(id)sender;
 - (IBAction)onTraderPressed:(id)sender;
 - (IBAction)onCategoryPressed:(id)sender;
+- (IBAction)onSinaPressed:(id)sender;
 @end
