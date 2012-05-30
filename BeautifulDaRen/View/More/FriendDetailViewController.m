@@ -182,7 +182,7 @@
     {
         cell = [tableView dequeueReusableCellWithIdentifier:fourGridViewCellIdentifier];
         if(!cell) {
-            cell = [[[NSBundle mainBundle] loadNibNamed:fourGridViewCellIdentifier owner:self options:nil] objectAtIndex:0];
+            cell = [[[NSBundle mainBundle] loadNibNamed:fourGridViewCellIdentifier owner:self options:nil] objectAtIndex:1];
         }
         
         NSMutableAttributedString * attrStr = nil;
@@ -211,12 +211,12 @@
         ((FourGridViewCell*)cell).sixthLabel.attributedText = attrStr;
         ((FourGridViewCell*)cell).sixthLabel.textAlignment = UITextAlignmentCenter;
         
-        _followButton = ((FourGridViewCell*)cell).leftTopButton;
-        _fansButton = ((FourGridViewCell*)cell).rightTopButton;
-        _collectionButton = ((FourGridViewCell*)cell).leftButtomButton;
-        _buyedButton = ((FourGridViewCell*)cell).rightButtomButton;
-        _topicButton = ((FourGridViewCell*)cell).thirdLeftButton;
-        _blackListButton = ((FourGridViewCell*)cell).thirdRightButton;
+        _followButton = ((FourGridViewCell*)cell).firstButton;
+        _fansButton = ((FourGridViewCell*)cell).secondButton;
+        _collectionButton = ((FourGridViewCell*)cell).thirdButton;
+        _buyedButton = ((FourGridViewCell*)cell).fourthButton;
+        _topicButton = ((FourGridViewCell*)cell).fifthButton;
+        _blackListButton = ((FourGridViewCell*)cell).sixthButton;
     }
     
     return cell;

@@ -16,12 +16,12 @@
 @synthesize fifthLabel;
 @synthesize sixthLabel;
 
-@synthesize leftTopButton;
-@synthesize leftButtomButton;
-@synthesize rightTopButton;
-@synthesize rightButtomButton;
-@synthesize thirdLeftButton;
-@synthesize thirdRightButton;
+@synthesize firstButton;
+@synthesize secondButton;
+@synthesize thirdButton;
+@synthesize fourthButton;
+@synthesize fifthButton;
+@synthesize sixthButton;
 
 @synthesize delegate;
 

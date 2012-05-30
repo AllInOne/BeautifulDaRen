@@ -84,13 +84,11 @@
 		C28A935D1548445C008C8AFC /* ButtonViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C28A935C1548445B008C8AFC /* ButtonViewCell.xib */; };
 		C28D6A9C155026DF005E14CE /* ItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C28D6A9A155026DF005E14CE /* ItemsViewController.m */; };
 		C28D6A9D155026DF005E14CE /* ItemsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C28D6A9B155026DF005E14CE /* ItemsViewController.xib */; };
-		C297D814154423280080294C /* (null) in Sources */ = {isa = PBXBuildFile; };
 		C297D8161544233E0080294C /* (null) in Resources */ = {isa = PBXBuildFile; };
 		C297D83B154442C20080294C /* AccountInfoInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C297D836154442C20080294C /* AccountInfoInputCell.m */; };
 		C297D83C154442C20080294C /* AccountInfoInputCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C297D837154442C20080294C /* AccountInfoInputCell.xib */; };
 		C297D83D154442C20080294C /* ForgetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C297D839154442C20080294C /* ForgetPasswordViewController.m */; };
 		C297D83E154442C20080294C /* ForgetPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C297D83A154442C20080294C /* ForgetPasswordViewController.xib */; };
-		C29F6663154310B300292031 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		C29F6664154310B300292031 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		C2A810C31566230A008FF2B7 /* PrivateLetterViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2A810C21566230A008FF2B7 /* PrivateLetterViewCell.xib */; };
 		C2A810DD1566611E008FF2B7 /* PrivateLetter.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A810DC1566611E008FF2B7 /* PrivateLetter.m */; };
@@ -2750,8 +2748,6 @@
 				C26717B01542BF0000DC40D8 /* CommonScrollViewItem.m in Sources */,
 				C26717BA1542BF2200DC40D8 /* CategoryContentViewController.m in Sources */,
 				C26717BC1542BF2200DC40D8 /* CategoryItemCell.m in Sources */,
-				C29F6663154310B300292031 /* (null) in Sources */,
-				C297D814154423280080294C /* (null) in Sources */,
 				C297D83B154442C20080294C /* AccountInfoInputCell.m in Sources */,
 				C297D83D154442C20080294C /* ForgetPasswordViewController.m in Sources */,
 				CE03385E1545925300775217 /* QFObject.m in Sources */,

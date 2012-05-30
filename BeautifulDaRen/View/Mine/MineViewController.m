@@ -133,7 +133,7 @@
         ((MyInfoTopViewCell*)cell).beautifulIdLabel.text = userIdentity.uniqueId;
         ((MyInfoTopViewCell*)cell).rightImageView.image = [UIImage imageNamed:@"gender_female"];
         ((MyInfoTopViewCell*)cell).editImageView.image = [UIImage imageNamed:@"my_edit"];
-        ((MyInfoTopViewCell*)cell).cityLabel.text = [NSString stringWithFormat:@"%@ : %@",NSLocalizedString(@"local_city", @""),userIdentity.localCity];
+        ((MyInfoTopViewCell*)cell).cityLabel.text = [NSString stringWithFormat:@"%@ 锦江区南街",userIdentity.localCity];
         _editButton = ((MyInfoTopViewCell*)cell).editButton;
         ((MyInfoTopViewCell*)cell).delegate = self;
     }
@@ -171,12 +171,12 @@
         ((FourGridViewCell*)cell).sixthLabel.attributedText = attrStr;
         ((FourGridViewCell*)cell).sixthLabel.textAlignment = UITextAlignmentCenter;
         
-        _followButton = ((FourGridViewCell*)cell).leftTopButton;
-        _fansButton = ((FourGridViewCell*)cell).rightTopButton;
-        _collectionButton = ((FourGridViewCell*)cell).leftButtomButton;
-        _buyedButton = ((FourGridViewCell*)cell).rightButtomButton;
-        _topicButton = ((FourGridViewCell*)cell).thirdLeftButton;
-        _blackListButton = ((FourGridViewCell*)cell).thirdRightButton;
+        _followButton = ((FourGridViewCell*)cell).firstButton;
+        _fansButton = ((FourGridViewCell*)cell).secondButton;
+        _collectionButton = ((FourGridViewCell*)cell).thirdButton;
+        _buyedButton = ((FourGridViewCell*)cell).fourthButton;
+        _topicButton = ((FourGridViewCell*)cell).fifthButton;
+        _blackListButton = ((FourGridViewCell*)cell).sixthButton;
     }
     else if (section == 2) {
         cell = [tableView dequeueReusableCellWithIdentifier:buttonViewCellIdentifier];
@@ -242,7 +242,7 @@
     }
     else if (section == 1)
     {
-        height = 107.0f;
+        height = 35.0f;
     }
     else if (section == 2)
     {

@@ -47,7 +47,7 @@ static LoadFakeData * sharedInstance;
 
 - (void) loadLocalIdentity
 {
-    NSString * fakeLocalIdentityId = @"LOCAL_IDENTITY_001";
+    NSString * fakeLocalIdentityId = @"DaiYongID";
     [[NSUserDefaults standardUserDefaults] setValue:fakeLocalIdentityId forKey:BEAUTIFUL_DAREN_USER_IDENTITY_ID];
     NSDictionary * userIdentityDict = [NSDictionary dictionaryWithObjectsAndKeys:
                                        fakeLocalIdentityId, USERIDENTITY_UNIQUE_ID,
