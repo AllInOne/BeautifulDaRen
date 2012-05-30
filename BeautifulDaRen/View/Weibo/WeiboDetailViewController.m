@@ -13,6 +13,7 @@
 #import "WeiboComposerViewController.h"
 #import "ForwardCommentListViewController.h"
 #import "FullImageViewController.h"
+#import "FriendDetailViewController.h"
 
 #define FONT_SIZE 14.0f
 #define CELL_CONTENT_WIDTH 280.0f
@@ -233,5 +234,17 @@
 -(IBAction)onImageButtonPressed:(id)sender
 {
     [FullImageViewController showImage:[UIImage imageNamed:@"weibo_sample2"]inNavigationController:self.navigationController];
+}
+
+-(IBAction)onBrandButtonPressed:(id)sender
+{
+    FriendDetailViewController * friendDetailViewController = [[[FriendDetailViewController alloc] initWithNibName:@"FriendDetailViewController" bundle:nil] autorelease];
+    [self.navigationController pushViewController:friendDetailViewController animated:YES];
+}
+
+-(IBAction)onBusinessButtonPressed:(id)sender
+{
+    FriendDetailViewController * friendDetailViewController = [[[FriendDetailViewController alloc] initWithNibName:@"FriendDetailViewController" bundle:nil] autorelease];
+    [self.navigationController pushViewController:friendDetailViewController animated:YES];
 }
 @end

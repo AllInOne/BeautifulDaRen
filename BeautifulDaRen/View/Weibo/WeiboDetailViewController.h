@@ -27,4 +27,7 @@
 -(void)onCommentListButtonPressed:(id)sender;
 -(void)onForwardButtonPressed:(id)sender;
 -(IBAction)onImageButtonPressed:(id)sender;
+
+-(IBAction)onBrandButtonPressed:(id)sender;
+-(IBAction)onBusinessButtonPressed:(id)sender;
 @end
