@@ -17,6 +17,7 @@
 
 #import "WBAuthorizeWebView.h"
 #import <QuartzCore/QuartzCore.h> 
+#import "ViewHelper.h"
 
 @interface WBAuthorizeWebView ()
 @property (nonatomic, retain) NSURL * requestUrl;
@@ -35,12 +36,8 @@
     if (self) {
         // Custom initialization.
         self.navigationItem.title = @"认证";
-        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] 
-                                       initWithTitle:@"Done" 
-                                       style:UIBarButtonItemStyleDone 
-                                       target:self 
-                                       action:@selector(onDoneButtonClicked:)];
-        [self.navigationItem setRightBarButtonItem:doneButton];
+
+        [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onDoneButtonClicked:) title:@"完成"]];
     }
     return self;
 }
@@ -108,6 +105,8 @@
         {
             [delegate authorizeWebView:self didReceiveAuthorizeCode:code];
         }
+        
+        [self dismissModalViewControllerAnimated:YES];
     }
     
     return YES;

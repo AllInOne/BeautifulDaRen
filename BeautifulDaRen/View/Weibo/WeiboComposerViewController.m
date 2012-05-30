@@ -10,6 +10,7 @@
 #import "FriendsSelectionViewController.h"
 #import "ViewHelper.h"
 #import "TakePhotoViewController.h"
+#import "SinaSDKManager.h"
 
 #define WEIBO_CONTENT_TEXTVIEW_Y_OFFSET (90.0)
 #define TOOL_BAR_HEIGHT                 (30.0)
@@ -280,6 +281,14 @@
     [self.navigationController presentModalViewController:navController animated:YES];
     
     [navController release];
+}
+
+- (IBAction)onSinaPressed:(id)sender
+{
+    [[SinaSDKManager sharedManager] setRootviewController:self.navigationController];
+    [[SinaSDKManager sharedManager] loginWithDoneCallback:^(LOGIN_STATUS status) {
+        NSLog(@"Sina SDK login done, status:%d", status);
+    }];
 }
 
 - (void)didFinishContactSelectionWithContacts:(NSString *)friendId

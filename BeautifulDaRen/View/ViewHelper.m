@@ -149,7 +149,7 @@
     [button setBackgroundImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
     [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     
-    button.frame = CGRectMake(0, 0, 22, 22);
+    button.frame = CGRectMake(0, 0, 22, 35);
 
     button.titleEdgeInsets = UIEdgeInsetsMake(0, 40, 0, 0);
     
