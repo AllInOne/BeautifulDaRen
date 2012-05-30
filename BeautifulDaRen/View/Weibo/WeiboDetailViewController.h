@@ -22,7 +22,9 @@
 
 @property (nonatomic, retain) IBOutlet UIImageView * avatarImageView;
 @property (nonatomic, retain) IBOutlet UIImageView * weiboAttachedImageView;
+@property (nonatomic, retain) IBOutlet UIButton * weiboAttachedImageButton;
 
--(IBAction)onCommentListButtonPressed:(id)sender;
--(IBAction)onForwardButtonPressed:(id)sender;
+-(void)onCommentListButtonPressed:(id)sender;
+-(void)onForwardButtonPressed:(id)sender;
+-(IBAction)onImageButtonPressed:(id)sender;
 @end
