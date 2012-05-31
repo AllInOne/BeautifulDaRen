@@ -208,13 +208,23 @@
 {
     if(_isFindWeibo == NO)
     {
-        FriendDetailViewController * friendDetailViewController = [[[FriendDetailViewController alloc] initWithNibName:@"FriendDetailViewController" bundle:nil] autorelease];
-        [self.navigationController pushViewController:friendDetailViewController animated:YES];
+        FriendDetailViewController *weiboDetailController = 
+        [[[FriendDetailViewController alloc] init] autorelease];
+        UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: weiboDetailController];
+        
+        [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
+        
+        [navController release];
     }
     else
     {
-        FindWeiboViewController * findWeiboViewController = [[[FindWeiboViewController alloc] initWithNibName:@"FindWeiboViewController" bundle:nil] autorelease];
-        [self.navigationController pushViewController:findWeiboViewController animated:YES];
+        FindWeiboViewController *weiboDetailController = 
+        [[[FindWeiboViewController alloc] init] autorelease];
+        UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: weiboDetailController];
+        
+        [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
+        
+        [navController release];
     }
 }
 

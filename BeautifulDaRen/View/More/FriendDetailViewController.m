@@ -10,6 +10,8 @@
 #import "ButtonViewCell.h"
 #import "GridViewCell.h"
 #import "ViewHelper.h"
+#import "ViewConstants.h"
+#import "iToast.h"
 
 @interface FriendDetailViewController()
 @property (retain, nonatomic) IBOutlet UIButton * followButton;
@@ -43,8 +45,38 @@
         [self.navigationItem setTitle:NSLocalizedString(@"her_home_page", @"her_home_page")];
         [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
         [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onHomePageButtonClicked) title:NSLocalizedString(@"home_page", @"home_page")]];
-        
         _isIdentification = YES;
+        
+        UIToolbar *tempToolbar = [[[UIToolbar alloc]initWithFrame:CGRectMake(0,372, 320,44)] autorelease];
+        
+        UIBarButtonItem *flexible = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+        
+        UIBarButtonItem *atButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar_at_icon" target:self action:@selector(onAt)];
+        
+        UIBarButtonItem *removeButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar_remove_fan_icon" target:self action:@selector(onRemove)];
+        
+        NSArray *barItems = [[NSArray alloc]initWithObjects:flexible, 
+                             atButtonItem, 
+                             flexible,
+                             flexible,
+                             removeButtonItem,
+                             flexible,
+                             nil];
+        
+        tempToolbar.items= barItems;
+        UIImageView * tabBarBg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"toolbar_background"]];
+        tabBarBg.frame = CGRectMake(0, 0, 320, 45);
+        tabBarBg.contentMode = UIViewContentModeScaleToFill;
+        if (SYSTEM_VERSION_LESS_THAN(@"5.0")) {
+            [tempToolbar  insertSubview:tabBarBg atIndex:0];
+        }
+        else
+        {
+            [tempToolbar  insertSubview:tabBarBg atIndex:1];            
+        }
+        [self.view addSubview: tempToolbar];
+        [flexible release]; 
+
     }
     return self;
 }
@@ -57,7 +89,7 @@
     // Release any cached data, images, etc that aren't in use.
 }
 - (void)onBackButtonClicked {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 -(void) onHomePageButtonClicked
@@ -339,6 +371,16 @@
     [actionSheet setDestructiveButtonIndex:[actionSheet addButtonWithTitle:NSLocalizedString(@"cancel", @"cancel")]];
     
     [actionSheet showInView:sender.superview.superview];
+}
+
+- (void)onAt
+{
+    [[iToast makeText:@"at！"] show];
+}
+
+- (void)onRemove
+{
+    [[iToast makeText:@"remove！"] show];
 }
 
 @end
