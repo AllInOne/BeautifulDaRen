@@ -24,8 +24,6 @@ enum
     ACCOUNT_SETTING_CITY
 };
 
-#define REGISTER_SCROLL_CONTENT_HEIGHT 440
-
 @interface RegisterViewController()
 
 @property (retain, nonatomic) IBOutlet UITableView * tableView;
@@ -253,7 +251,7 @@ enum
     CGFloat height = 3;
     if(section == 0)
     {
-        height = 20;
+        height = 10;
     }
     else if (section == 2) {
         height = 25;
