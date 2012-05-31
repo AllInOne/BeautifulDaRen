@@ -102,13 +102,18 @@
     _isFindWeibo = NO;
     [self.navigationItem setTitle:NSLocalizedString(@"find_weibo_or_friend", @"find_weibo_or_friend")];
     [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClicked) title:NSLocalizedString(@"refresh", @"refresh")]];
-    
-    _searchBar.backgroundImage = [UIImage imageNamed:@"search_switcher_btn"];
-    _searchBar.scopeBarBackgroundImage = [UIImage imageNamed:@"search_switcher_btn"];
-    [_searchBar setScopeBarButtonBackgroundImage:[UIImage imageNamed:@"search_switcher_selected"] forState:UIControlStateSelected];
-    [_searchBar setScopeBarButtonBackgroundImage:[UIImage imageNamed:@"search_switcher_unselected"] forState:UIControlStateNormal];
-    [_searchBar setScopeBarButtonDividerImage:[UIImage imageNamed:@"searchScopeDividerRightSelected"] forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateSelected];
-    [_searchBar setScopeBarButtonDividerImage:[UIImage imageNamed:@"searchScopeDividerLeftSelected"] forLeftSegmentState:UIControlStateSelected rightSegmentState:UIControlStateNormal];
+    if([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0)
+    {
+        _searchBar.backgroundImage = [UIImage imageNamed:@"search_switcher_btn"];
+        _searchBar.scopeBarBackgroundImage = [UIImage imageNamed:@"search_switcher_btn"];
+        [_searchBar setScopeBarButtonBackgroundImage:[UIImage imageNamed:@"search_switcher_selected"] forState:UIControlStateSelected];
+        [_searchBar setScopeBarButtonBackgroundImage:[UIImage imageNamed:@"search_switcher_unselected"] forState:UIControlStateNormal];
+        [_searchBar setScopeBarButtonDividerImage:[UIImage imageNamed:@"searchScopeDividerRightSelected"] forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateSelected];
+        [_searchBar setScopeBarButtonDividerImage:[UIImage imageNamed:@"searchScopeDividerLeftSelected"] forLeftSegmentState:UIControlStateSelected rightSegmentState:UIControlStateNormal];
+    }
+    else
+    {
+    }
     _searchBar.scopeButtonTitles = [NSArray arrayWithObjects:
                                     NSLocalizedString(@"weibo", @""),
                                     NSLocalizedString(@"user", @""), nil];
