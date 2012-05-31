@@ -251,9 +251,12 @@ enum
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     CGFloat height = 3;
-    if(section == 2 || section == 0)
+    if(section == 0)
     {
         height = 20;
+    }
+    else if (section == 2) {
+        height = 25;
     }
     return height;
 }
