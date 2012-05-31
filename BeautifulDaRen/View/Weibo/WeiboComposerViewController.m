@@ -9,11 +9,12 @@
 #import "WeiboComposerViewController.h"
 #import "FriendsSelectionViewController.h"
 #import "ViewHelper.h"
+#import "ViewConstants.h"
 #import "TakePhotoViewController.h"
 #import "SinaSDKManager.h"
+#import "UIImage+Scale.h"
 
 #define WEIBO_CONTENT_TEXTVIEW_Y_OFFSET (90.0)
-#define TOOL_BAR_HEIGHT                 (30.0)
 #define WEIBO_CONTENT_TEXTVIEW_MARGIN   (2.0)
 #define WEIBO_CONTENT_SCROLL_BOUNCE_SIZE   (30.0)
 
@@ -27,6 +28,7 @@
 @interface WeiboComposerViewController ()
 @property (nonatomic, assign) BOOL isKeypadShow;
 @property (nonatomic, assign) TakePhotoViewController * takePhotoViewController;
+
 - (void)setContentFrame:(CGRect)frame;
 @end
 
@@ -226,7 +228,24 @@
 }
 
 - (void)onSendButtonClicked {
-    // TODO:
+    [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_SHOWWAITOVERLAY object:self];
+    if ([[SinaSDKManager sharedManager] isLogin])
+    {
+        [[SinaSDKManager sharedManager] sendWeiBoWithText:self.weiboContentTextView.text image:[self.selectedImage scaleToSize:CGSizeMake(320.0, self.selectedImage.size.height * 320.0/self.selectedImage.size.width)] doneCallback:^(AIO_STATUS status, NSDictionary *data) {
+            NSLog(@"Send done: %d", status);
+            [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_HIDEWAITOVERLAY object:self];
+            
+            if (status == 0)
+            {
+                [ViewHelper showSimpleMessage:@"发送成功" withTitle:nil withButtonText:@"好的"];
+            }
+            else
+            {
+                [ViewHelper showSimpleMessage:@"发送失败" withTitle:nil withButtonText:@"好的"];
+            }
+            [self dismissModalViewControllerAnimated:YES];
+        }];
+    }
 }
 
 - (IBAction)onPickedImagePressed:(id)sender
@@ -396,6 +415,8 @@
 {
     [self dismissModalViewControllerAnimated:YES];
     self.attachedImageView.image = picture;
+    self.selectedImage = nil;
+    self.selectedImage = picture;
     if (self.attachedImageView.image)
     {
         [self.attachedImageBgButton setBackgroundImage:self.attachedImageView.image forState:UIControlStateNormal];
