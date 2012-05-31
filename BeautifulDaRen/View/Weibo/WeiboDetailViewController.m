@@ -14,6 +14,7 @@
 #import "ForwardCommentListViewController.h"
 #import "FullImageViewController.h"
 #import "FriendDetailViewController.h"
+#import "iToast.h"
 
 #define FONT_SIZE 14.0f
 #define CELL_CONTENT_WIDTH 280.0f
@@ -144,12 +145,12 @@
 
 - (void)onFavourate
 {
-    // TODO:
+    [[iToast makeText:@"收藏成功！"] show];
 }
 
 - (void)onRefresh
 {
-    // TODO:
+    [[iToast makeText:@"刷新成功！"] show];
 }
 
 -(IBAction)onCommentListButtonPressed:(id)sender
@@ -228,7 +229,7 @@
 }
 
 - (void)onRefreshButtonClicked {
-
+    [[iToast makeText:@"刷新成功！"] show];
 }
 
 -(IBAction)onImageButtonPressed:(id)sender
