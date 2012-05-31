@@ -20,8 +20,8 @@
 		C2139A7515640E2900C3922D /* PrivateLetterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2139A7315640E2900C3922D /* PrivateLetterViewController.m */; };
 		C213AB9A155C1BCD00667556 /* BeautifulDaRen.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C213AB98155C1BCD00667556 /* BeautifulDaRen.xcdatamodeld */; };
 		C213AB9F155C1CD800667556 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C213AB9E155C1CD800667556 /* CoreData.framework */; };
-		C215A75F15539B7C001BF379 /* GridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C215A75E15539B7C001BF379 /* GridViewCell.m */; };
-		C215A76115539B9E001BF379 /* GridViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C215A76015539B9E001BF379 /* GridViewCell.xib */; };
+		C21526B01577842200F044B5 /* GridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C21526AE1577842200F044B5 /* GridViewCell.m */; };
+		C21526B11577842200F044B5 /* GridViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C21526AF1577842200F044B5 /* GridViewCell.xib */; };
 		C215A7A21553EABF001BF379 /* WaresItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C215A7A01553EABF001BF379 /* WaresItem.m */; };
 		C216EDC215518B8C00CA8CE8 /* MyInfoTopViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C216EDC115518B8C00CA8CE8 /* MyInfoTopViewCell.m */; };
 		C216EDC415518BD300CA8CE8 /* MyInfoTopViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C216EDC315518BD300CA8CE8 /* MyInfoTopViewCell.xib */; };
@@ -597,9 +597,9 @@
 		C2139A7415640E2900C3922D /* PrivateLetterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrivateLetterViewController.xib; sourceTree = "<group>"; };
 		C213AB99155C1BCD00667556 /* BeautifulDaRen.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BeautifulDaRen.xcdatamodel; sourceTree = "<group>"; };
 		C213AB9E155C1CD800667556 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		C215A75D15539B7C001BF379 /* GridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GridViewCell.h; path = ../Mine/GridViewCell.h; sourceTree = "<group>"; };
-		C215A75E15539B7C001BF379 /* GridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GridViewCell.m; path = ../Mine/GridViewCell.m; sourceTree = "<group>"; };
-		C215A76015539B9E001BF379 /* GridViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GridViewCell.xib; sourceTree = "<group>"; };
+		C21526AD1577842200F044B5 /* GridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridViewCell.h; sourceTree = "<group>"; };
+		C21526AE1577842200F044B5 /* GridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridViewCell.m; sourceTree = "<group>"; };
+		C21526AF1577842200F044B5 /* GridViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GridViewCell.xib; sourceTree = "<group>"; };
 		C215A76D1553CCEF001BF379 /* ButtonPressDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonPressDelegate.h; sourceTree = "<group>"; };
 		C215A79F1553EABF001BF379 /* WaresItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaresItem.h; sourceTree = "<group>"; };
 		C215A7A01553EABF001BF379 /* WaresItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaresItem.m; sourceTree = "<group>"; };
@@ -2255,13 +2255,13 @@
 				C28A935915484442008C8AFC /* ButtonViewCell.h */,
 				C28A935A15484442008C8AFC /* ButtonViewCell.m */,
 				C28A935C1548445B008C8AFC /* ButtonViewCell.xib */,
-				C215A75D15539B7C001BF379 /* GridViewCell.h */,
-				C215A75E15539B7C001BF379 /* GridViewCell.m */,
-				C215A76015539B9E001BF379 /* GridViewCell.xib */,
 				CE5B741E1574C461009C9669 /* FullImageViewController.h */,
 				CE5B741F1574C461009C9669 /* FullImageViewController.m */,
 				CE5B74201574C461009C9669 /* FullImageViewController.xib */,
 				C20B53D5154701320014812B /* MapViewController.h */,
+				C21526AD1577842200F044B5 /* GridViewCell.h */,
+				C21526AE1577842200F044B5 /* GridViewCell.m */,
+				C21526AF1577842200F044B5 /* GridViewCell.xib */,
 				C20B53D6154701320014812B /* MapViewController.m */,
 				C20B53D7154701320014812B /* MapViewController.xib */,
 				C2F68D03157340E7006ED8AE /* NSAttributedString+Attributes.h */,
@@ -2459,7 +2459,6 @@
 				CEBCD05D155018D9000D41E1 /* WeiboForwardCommentViewController.xib in Resources */,
 				CE62B3631551790A0017AA88 /* SelectCityViewController.xib in Resources */,
 				C216EDC415518BD300CA8CE8 /* MyInfoTopViewCell.xib in Resources */,
-				C215A76115539B9E001BF379 /* GridViewCell.xib in Resources */,
 				CE62B3681551842D0017AA88 /* SelectCategoryViewController.xib in Resources */,
 				CEEF7B21155549B5001ABCEC /* ForwardCommentListViewController.xib in Resources */,
 				CEEF7B6415556430001ABCEC /* ForwardCommentTableViewCell.xib in Resources */,
@@ -2834,6 +2833,7 @@
 				CEE9B0E31577743F00761201 /* search_avatar_sample9.png in Resources */,
 				CEE9B0E41577743F00761201 /* search_avatar_sample10.png in Resources */,
 				CEE9B0E51577743F00761201 /* search_avatar_sample11.png in Resources */,
+				C21526B11577842200F044B5 /* GridViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2909,7 +2909,6 @@
 				CEBCD05A15500CF8000D41E1 /* WeiboForwardCommentViewController.m in Sources */,
 				CE62B3621551790A0017AA88 /* SelectCityViewController.m in Sources */,
 				C216EDC215518B8C00CA8CE8 /* MyInfoTopViewCell.m in Sources */,
-				C215A75F15539B7C001BF379 /* GridViewCell.m in Sources */,
 				CE62B3671551842D0017AA88 /* SelectCategoryViewController.m in Sources */,
 				C215A7A21553EABF001BF379 /* WaresItem.m in Sources */,
 				CEEF7B20155549B5001ABCEC /* ForwardCommentListViewController.m in Sources */,
@@ -2947,6 +2946,7 @@
 				CEE9B0921577335D00761201 /* WaitOverlay.m in Sources */,
 				CEE9B095157738DB00761201 /* UIImage+Scale.m in Sources */,
 				CEE9B09815776E1600761201 /* iToast.m in Sources */,
+				C21526B01577842200F044B5 /* GridViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -95,7 +95,7 @@
 									<object class="IBUIButton" id="244055282">
 										<reference key="NSNextResponder" ref="24866399"/>
 										<int key="NSvFlags">292</int>
-										<string key="NSFrameSize">{144, 34}</string>
+										<string key="NSFrameSize">{140, 34}</string>
 										<reference key="NSSuperview" ref="24866399"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="868200306"/>
@@ -171,7 +171,7 @@
 									<object class="IBUIButton" id="575481023">
 										<reference key="NSNextResponder" ref="783154375"/>
 										<int key="NSvFlags">292</int>
-										<string key="NSFrameSize">{144, 34}</string>
+										<string key="NSFrameSize">{140, 34}</string>
 										<reference key="NSSuperview" ref="783154375"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="636544289"/>
@@ -225,6 +225,7 @@
 				<reference key="NSNextKeyView" ref="708878108"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+				<int key="IBUISelectionStyle">0</int>
 				<reference key="IBUIContentView" ref="708878108"/>
 			</object>
 			<object class="IBUITableViewCell" id="980309180">
@@ -856,10 +857,10 @@
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">buttonPressed:</string>
 						<reference key="source" ref="244055282"/>
-						<reference key="destination" ref="980309180"/>
+						<reference key="destination" ref="955031869"/>
 						<int key="IBEventType">7</int>
 					</object>
-					<int key="connectionID">85</int>
+					<int key="connectionID">103</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -868,7 +869,7 @@
 						<reference key="destination" ref="955031869"/>
 						<int key="IBEventType">7</int>
 					</object>
-					<int key="connectionID">91</int>
+					<int key="connectionID">102</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1139,7 +1140,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">100</int>
+			<int key="maxID">103</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
