@@ -14,6 +14,7 @@
 #import "FindWeiboViewCell.h"
 #import "FriendDetailViewController.h"
 #import "FindWeiboViewController.h"
+#import "BorderImageView.h"
 
 #define X_OFFSET 7
 #define CONTENT_VIEW_HEIGHT_OFFSET 50
@@ -149,7 +150,20 @@
 {
     static NSString * cellViewIdentifier = @"ContactItemCell";
     NSInteger scrollWidth = 0;
-    for (int i = 0; i < 10; i++) {
+    NSArray * avatars = [NSArray arrayWithObjects:
+                         @"search_avatar_sample1",
+                         @"search_avatar_sample2",
+                         @"search_avatar_sample3",
+                         @"search_avatar_sample4",
+                         @"search_avatar_sample5",
+                         @"search_avatar_sample6",
+                         @"search_avatar_sample7",
+                         @"search_avatar_sample8",
+                         @"search_avatar_sample9",
+                         @"search_avatar_sample10",
+                         @"search_avatar_sample11",
+                         nil];
+    for (int i = 0; i < [avatars count]; i++) {
         ContactItemCell * cell = [[[NSBundle mainBundle] loadNibNamed:cellViewIdentifier owner:self options:nil] objectAtIndex:0];
         
         cell.frame = CGRectMake(i * (cell.frame.size.width + X_OFFSET), 0,
@@ -158,8 +172,9 @@
         scrollWidth += (cell.frame.size.width + X_OFFSET);
         
         [_sameCityDaRenView addSubview:cell];
-        
-        cell.contactImageView.image = [UIImage imageNamed:@"avatar_big"];
+    
+        BorderImageView * borderImageView = [[[BorderImageView alloc] initWithFrame:cell.contactImageView.frame andImage:[UIImage imageNamed:[avatars objectAtIndex:i]]] autorelease];
+        [cell addSubview:borderImageView];
         cell.contactLabel.text = @"宇多田光";
     }
     [_sameCityDaRenView setContentSize:CGSizeMake(scrollWidth, 0)];
@@ -169,7 +184,20 @@
 {
     static NSString * cellViewIdentifier = @"ContactItemCell";
     NSInteger scrollWidth = 0;
-    for (int i = 0; i < 10; i++) {
+    NSArray * avatars = [NSArray arrayWithObjects:
+                         @"search_avatar_sample5",
+                         @"search_avatar_sample6",
+                         @"search_avatar_sample7",
+                         @"search_avatar_sample8",
+                         @"search_avatar_sample9",
+                         @"search_avatar_sample10",
+                         @"search_avatar_sample11",
+                         @"search_avatar_sample1",
+                         @"search_avatar_sample2",
+                         @"search_avatar_sample3",
+                         @"search_avatar_sample4",
+                         nil];
+    for (int i = 0; i < [avatars count]; i++) {
         ContactItemCell * cell = [[[NSBundle mainBundle] loadNibNamed:cellViewIdentifier owner:self options:nil] objectAtIndex:0];
         cell.frame = CGRectMake(i * (cell.frame.size.width + X_OFFSET), 0,
                                 cell.frame.size.width,
@@ -178,8 +206,9 @@
         
         [_youMayInterestinView addSubview:cell];
         
-        cell.contactImageView.image = [UIImage imageNamed:@"avatar_big"];
-        cell.contactLabel.text = @"张东健";
+        BorderImageView * borderImageView = [[[BorderImageView alloc] initWithFrame:cell.contactImageView.frame andImage:[UIImage imageNamed:[avatars objectAtIndex:i]]] autorelease];
+        [cell addSubview:borderImageView];
+        cell.contactLabel.text = @"美丽达人";
     }
     [_youMayInterestinView setContentSize:CGSizeMake(scrollWidth, 0)];
 }
@@ -188,7 +217,20 @@
 {
     static NSString * cellViewIdentifier = @"ContactItemCell";
     NSInteger scrollWidth = 0;
-    for (int i = 0; i < 10; i++) {
+    NSArray * avatars = [NSArray arrayWithObjects:
+                         @"search_avatar_sample9",
+                         @"search_avatar_sample10",
+                         @"search_avatar_sample11",
+                         @"search_avatar_sample1",
+                         @"search_avatar_sample2",
+                         @"search_avatar_sample3",
+                         @"search_avatar_sample4",
+                         @"search_avatar_sample5",
+                         @"search_avatar_sample6",
+                         @"search_avatar_sample7",
+                         @"search_avatar_sample8",
+                         nil];
+    for (int i = 0; i < [avatars count]; i++) {
         ContactItemCell * cell = [[[NSBundle mainBundle] loadNibNamed:cellViewIdentifier owner:self options:nil] objectAtIndex:0];
         cell.frame = CGRectMake(i * (cell.frame.size.width + X_OFFSET), 0,
                                 cell.frame.size.width,
@@ -197,8 +239,9 @@
         
         [_hotDaRenView addSubview:cell];
         
-        cell.contactImageView.image = [UIImage imageNamed:@"avatar_big"];
-        cell.contactLabel.text = @"谢霆锋";
+        BorderImageView * borderImageView = [[[BorderImageView alloc] initWithFrame:cell.contactImageView.frame andImage:[UIImage imageNamed:[avatars objectAtIndex:i]]] autorelease];
+        [cell addSubview:borderImageView];
+        cell.contactLabel.text = @"小清新";
     }
     [_hotDaRenView setContentSize:CGSizeMake(scrollWidth, 0)];
 }
