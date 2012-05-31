@@ -510,6 +510,8 @@
 		CEE3071E154F80BD004D2E96 /* FriendsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEE3071C154F80BD004D2E96 /* FriendsViewController.xib */; };
 		CEE30722154F8533004D2E96 /* FriendListCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE30720154F8532004D2E96 /* FriendListCellView.m */; };
 		CEE30723154F8533004D2E96 /* FriendListCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEE30721154F8532004D2E96 /* FriendListCellView.xib */; };
+		CEE9B0921577335D00761201 /* WaitOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE9B0911577335C00761201 /* WaitOverlay.m */; };
+		CEE9B095157738DB00761201 /* UIImage+Scale.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE9B094157738DB00761201 /* UIImage+Scale.m */; };
 		CEEF7B20155549B5001ABCEC /* ForwardCommentListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEF7B1E155549B5001ABCEC /* ForwardCommentListViewController.m */; };
 		CEEF7B21155549B5001ABCEC /* ForwardCommentListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEF7B1F155549B5001ABCEC /* ForwardCommentListViewController.xib */; };
 		CEEF7B381555599A001ABCEC /* ForwardCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEF7B361555599A001ABCEC /* ForwardCommentTableViewCell.m */; };
@@ -1169,6 +1171,10 @@
 		CEE3071F154F8532004D2E96 /* FriendListCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendListCellView.h; sourceTree = "<group>"; };
 		CEE30720154F8532004D2E96 /* FriendListCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendListCellView.m; sourceTree = "<group>"; };
 		CEE30721154F8532004D2E96 /* FriendListCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendListCellView.xib; sourceTree = "<group>"; };
+		CEE9B0901577335B00761201 /* WaitOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WaitOverlay.h; path = Common/WaitOverlay.h; sourceTree = "<group>"; };
+		CEE9B0911577335C00761201 /* WaitOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WaitOverlay.m; path = Common/WaitOverlay.m; sourceTree = "<group>"; };
+		CEE9B093157738DA00761201 /* UIImage+Scale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Scale.h"; sourceTree = "<group>"; };
+		CEE9B094157738DB00761201 /* UIImage+Scale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Scale.m"; sourceTree = "<group>"; };
 		CEEF7B1D155549B5001ABCEC /* ForwardCommentListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForwardCommentListViewController.h; sourceTree = "<group>"; };
 		CEEF7B1E155549B5001ABCEC /* ForwardCommentListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForwardCommentListViewController.m; sourceTree = "<group>"; };
 		CEEF7B1F155549B5001ABCEC /* ForwardCommentListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForwardCommentListViewController.xib; sourceTree = "<group>"; };
@@ -1357,6 +1363,8 @@
 		CE029AF4153E68E100886227 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				CEE9B0901577335B00761201 /* WaitOverlay.h */,
+				CEE9B0911577335C00761201 /* WaitOverlay.m */,
 				CE029B95153E6A4000886227 /* RootTabViewController.h */,
 				CE029B96153E6A4000886227 /* RootTabViewController.m */,
 				CE029B97153E6A4000886227 /* RootTabViewController.xib */,
@@ -2184,6 +2192,8 @@
 				C2519F9A1564E36E0040EBC5 /* WaterFlowView.m */,
 				C250224C1576204F00C0561F /* SegmentControl.h */,
 				C250224D1576205000C0561F /* SegmentControl.m */,
+				CEE9B093157738DA00761201 /* UIImage+Scale.h */,
+				CEE9B094157738DB00761201 /* UIImage+Scale.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -2817,6 +2827,8 @@
 				CE5B74211574C461009C9669 /* FullImageViewController.m in Sources */,
 				C250223B1575E34C00C0561F /* BorderImageView.m in Sources */,
 				C250224E1576205000C0561F /* SegmentControl.m in Sources */,
+				CEE9B0921577335D00761201 /* WaitOverlay.m in Sources */,
+				CEE9B095157738DB00761201 /* UIImage+Scale.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

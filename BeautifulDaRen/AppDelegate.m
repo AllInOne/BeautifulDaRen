@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 
 #import "RootTabViewController.h"
+#import "WaitOverlay.h"
 
 // todo delete it
 #import "LoadFakeData.h"
@@ -22,6 +23,8 @@
 {
     [_window release];
     [_rootViewController release];
+    [_waitOverlay release];
+    
     [super dealloc];
 }
 
@@ -33,6 +36,9 @@
     [self.window makeKeyAndVisible];
     
     [[LoadFakeData sharedLoadManager] load];
+    
+    [_waitOverlay release];
+    _waitOverlay = [[WaitOverlay alloc]initWithFrame:self.window.frame];
     return YES;
 }
 

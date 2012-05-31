@@ -8,7 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@class WaitOverlay;
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>
+{
+@private
+    WaitOverlay* _waitOverlay;
+}
 
 @property (strong, nonatomic) UIWindow *window;
 
