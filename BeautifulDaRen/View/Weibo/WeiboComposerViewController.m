@@ -299,7 +299,7 @@
 
 - (IBAction)onLocationPressed:(id)sender
 {
-    //TODO:
+    self.weiboContentTextView.text = [self.weiboContentTextView.text stringByAppendingString: [NSString stringWithFormat:@"我在这里#成都市＃ "]];
 }
 - (IBAction)onTraderPressed:(id)sender
 {
