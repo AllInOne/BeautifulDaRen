@@ -14,6 +14,7 @@
 #import "FindWeiboViewCell.h"
 #import "FriendDetailViewController.h"
 #import "FindWeiboViewController.h"
+#import "BorderImageView.h"
 
 #define X_OFFSET 7
 #define CONTENT_VIEW_HEIGHT_OFFSET 50
@@ -102,13 +103,18 @@
     _isFindWeibo = NO;
     [self.navigationItem setTitle:NSLocalizedString(@"find_weibo_or_friend", @"find_weibo_or_friend")];
     [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClicked) title:NSLocalizedString(@"refresh", @"refresh")]];
-    
-    _searchBar.backgroundImage = [UIImage imageNamed:@"search_switcher_btn"];
-    _searchBar.scopeBarBackgroundImage = [UIImage imageNamed:@"search_switcher_btn"];
-    [_searchBar setScopeBarButtonBackgroundImage:[UIImage imageNamed:@"search_switcher_selected"] forState:UIControlStateSelected];
-    [_searchBar setScopeBarButtonBackgroundImage:[UIImage imageNamed:@"search_switcher_unselected"] forState:UIControlStateNormal];
-    [_searchBar setScopeBarButtonDividerImage:[UIImage imageNamed:@"searchScopeDividerRightSelected"] forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateSelected];
-    [_searchBar setScopeBarButtonDividerImage:[UIImage imageNamed:@"searchScopeDividerLeftSelected"] forLeftSegmentState:UIControlStateSelected rightSegmentState:UIControlStateNormal];
+    if([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0)
+    {
+        _searchBar.backgroundImage = [UIImage imageNamed:@"search_switcher_btn"];
+        _searchBar.scopeBarBackgroundImage = [UIImage imageNamed:@"search_switcher_btn"];
+        [_searchBar setScopeBarButtonBackgroundImage:[UIImage imageNamed:@"search_switcher_selected"] forState:UIControlStateSelected];
+        [_searchBar setScopeBarButtonBackgroundImage:[UIImage imageNamed:@"search_switcher_unselected"] forState:UIControlStateNormal];
+        [_searchBar setScopeBarButtonDividerImage:[UIImage imageNamed:@"searchScopeDividerRightSelected"] forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateSelected];
+        [_searchBar setScopeBarButtonDividerImage:[UIImage imageNamed:@"searchScopeDividerLeftSelected"] forLeftSegmentState:UIControlStateSelected rightSegmentState:UIControlStateNormal];
+    }
+    else
+    {
+    }
     _searchBar.scopeButtonTitles = [NSArray arrayWithObjects:
                                     NSLocalizedString(@"weibo", @""),
                                     NSLocalizedString(@"user", @""), nil];
@@ -144,7 +150,20 @@
 {
     static NSString * cellViewIdentifier = @"ContactItemCell";
     NSInteger scrollWidth = 0;
-    for (int i = 0; i < 10; i++) {
+    NSArray * avatars = [NSArray arrayWithObjects:
+                         @"search_avatar_sample1",
+                         @"search_avatar_sample2",
+                         @"search_avatar_sample3",
+                         @"search_avatar_sample4",
+                         @"search_avatar_sample5",
+                         @"search_avatar_sample6",
+                         @"search_avatar_sample7",
+                         @"search_avatar_sample8",
+                         @"search_avatar_sample9",
+                         @"search_avatar_sample10",
+                         @"search_avatar_sample11",
+                         nil];
+    for (int i = 0; i < [avatars count]; i++) {
         ContactItemCell * cell = [[[NSBundle mainBundle] loadNibNamed:cellViewIdentifier owner:self options:nil] objectAtIndex:0];
         
         cell.frame = CGRectMake(i * (cell.frame.size.width + X_OFFSET), 0,
@@ -153,8 +172,9 @@
         scrollWidth += (cell.frame.size.width + X_OFFSET);
         
         [_sameCityDaRenView addSubview:cell];
-        
-        cell.contactImageView.image = [UIImage imageNamed:@"avatar_big"];
+    
+        BorderImageView * borderImageView = [[[BorderImageView alloc] initWithFrame:cell.contactImageView.frame andImage:[UIImage imageNamed:[avatars objectAtIndex:i]]] autorelease];
+        [cell addSubview:borderImageView];
         cell.contactLabel.text = @"宇多田光";
     }
     [_sameCityDaRenView setContentSize:CGSizeMake(scrollWidth, 0)];
@@ -164,7 +184,20 @@
 {
     static NSString * cellViewIdentifier = @"ContactItemCell";
     NSInteger scrollWidth = 0;
-    for (int i = 0; i < 10; i++) {
+    NSArray * avatars = [NSArray arrayWithObjects:
+                         @"search_avatar_sample5",
+                         @"search_avatar_sample6",
+                         @"search_avatar_sample7",
+                         @"search_avatar_sample8",
+                         @"search_avatar_sample9",
+                         @"search_avatar_sample10",
+                         @"search_avatar_sample11",
+                         @"search_avatar_sample1",
+                         @"search_avatar_sample2",
+                         @"search_avatar_sample3",
+                         @"search_avatar_sample4",
+                         nil];
+    for (int i = 0; i < [avatars count]; i++) {
         ContactItemCell * cell = [[[NSBundle mainBundle] loadNibNamed:cellViewIdentifier owner:self options:nil] objectAtIndex:0];
         cell.frame = CGRectMake(i * (cell.frame.size.width + X_OFFSET), 0,
                                 cell.frame.size.width,
@@ -173,8 +206,9 @@
         
         [_youMayInterestinView addSubview:cell];
         
-        cell.contactImageView.image = [UIImage imageNamed:@"avatar_big"];
-        cell.contactLabel.text = @"张东健";
+        BorderImageView * borderImageView = [[[BorderImageView alloc] initWithFrame:cell.contactImageView.frame andImage:[UIImage imageNamed:[avatars objectAtIndex:i]]] autorelease];
+        [cell addSubview:borderImageView];
+        cell.contactLabel.text = @"美丽达人";
     }
     [_youMayInterestinView setContentSize:CGSizeMake(scrollWidth, 0)];
 }
@@ -183,7 +217,20 @@
 {
     static NSString * cellViewIdentifier = @"ContactItemCell";
     NSInteger scrollWidth = 0;
-    for (int i = 0; i < 10; i++) {
+    NSArray * avatars = [NSArray arrayWithObjects:
+                         @"search_avatar_sample9",
+                         @"search_avatar_sample10",
+                         @"search_avatar_sample11",
+                         @"search_avatar_sample1",
+                         @"search_avatar_sample2",
+                         @"search_avatar_sample3",
+                         @"search_avatar_sample4",
+                         @"search_avatar_sample5",
+                         @"search_avatar_sample6",
+                         @"search_avatar_sample7",
+                         @"search_avatar_sample8",
+                         nil];
+    for (int i = 0; i < [avatars count]; i++) {
         ContactItemCell * cell = [[[NSBundle mainBundle] loadNibNamed:cellViewIdentifier owner:self options:nil] objectAtIndex:0];
         cell.frame = CGRectMake(i * (cell.frame.size.width + X_OFFSET), 0,
                                 cell.frame.size.width,
@@ -192,8 +239,9 @@
         
         [_hotDaRenView addSubview:cell];
         
-        cell.contactImageView.image = [UIImage imageNamed:@"avatar_big"];
-        cell.contactLabel.text = @"谢霆锋";
+        BorderImageView * borderImageView = [[[BorderImageView alloc] initWithFrame:cell.contactImageView.frame andImage:[UIImage imageNamed:[avatars objectAtIndex:i]]] autorelease];
+        [cell addSubview:borderImageView];
+        cell.contactLabel.text = @"小清新";
     }
     [_hotDaRenView setContentSize:CGSizeMake(scrollWidth, 0)];
 }
@@ -203,13 +251,23 @@
 {
     if(_isFindWeibo == NO)
     {
-        FriendDetailViewController * friendDetailViewController = [[[FriendDetailViewController alloc] initWithNibName:@"FriendDetailViewController" bundle:nil] autorelease];
-        [self.navigationController pushViewController:friendDetailViewController animated:YES];
+        FriendDetailViewController *weiboDetailController = 
+        [[[FriendDetailViewController alloc] init] autorelease];
+        UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: weiboDetailController];
+        
+        [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
+        
+        [navController release];
     }
     else
     {
-        FindWeiboViewController * findWeiboViewController = [[[FindWeiboViewController alloc] initWithNibName:@"FindWeiboViewController" bundle:nil] autorelease];
-        [self.navigationController pushViewController:findWeiboViewController animated:YES];
+        FindWeiboViewController *weiboDetailController = 
+        [[[FindWeiboViewController alloc] init] autorelease];
+        UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: weiboDetailController];
+        
+        [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
+        
+        [navController release];
     }
 }
 

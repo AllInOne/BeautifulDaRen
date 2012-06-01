@@ -20,8 +20,8 @@
 		C2139A7515640E2900C3922D /* PrivateLetterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2139A7315640E2900C3922D /* PrivateLetterViewController.m */; };
 		C213AB9A155C1BCD00667556 /* BeautifulDaRen.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C213AB98155C1BCD00667556 /* BeautifulDaRen.xcdatamodeld */; };
 		C213AB9F155C1CD800667556 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C213AB9E155C1CD800667556 /* CoreData.framework */; };
-		C215A75F15539B7C001BF379 /* GridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C215A75E15539B7C001BF379 /* GridViewCell.m */; };
-		C215A76115539B9E001BF379 /* GridViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C215A76015539B9E001BF379 /* GridViewCell.xib */; };
+		C21526B01577842200F044B5 /* GridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C21526AE1577842200F044B5 /* GridViewCell.m */; };
+		C21526B11577842200F044B5 /* GridViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C21526AF1577842200F044B5 /* GridViewCell.xib */; };
 		C215A7A21553EABF001BF379 /* WaresItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C215A7A01553EABF001BF379 /* WaresItem.m */; };
 		C216EDC215518B8C00CA8CE8 /* MyInfoTopViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C216EDC115518B8C00CA8CE8 /* MyInfoTopViewCell.m */; };
 		C216EDC415518BD300CA8CE8 /* MyInfoTopViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C216EDC315518BD300CA8CE8 /* MyInfoTopViewCell.xib */; };
@@ -597,9 +597,9 @@
 		C2139A7415640E2900C3922D /* PrivateLetterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrivateLetterViewController.xib; sourceTree = "<group>"; };
 		C213AB99155C1BCD00667556 /* BeautifulDaRen.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BeautifulDaRen.xcdatamodel; sourceTree = "<group>"; };
 		C213AB9E155C1CD800667556 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		C215A75D15539B7C001BF379 /* GridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GridViewCell.h; path = ../Mine/GridViewCell.h; sourceTree = "<group>"; };
-		C215A75E15539B7C001BF379 /* GridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GridViewCell.m; path = ../Mine/GridViewCell.m; sourceTree = "<group>"; };
-		C215A76015539B9E001BF379 /* GridViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GridViewCell.xib; sourceTree = "<group>"; };
+		C21526AD1577842200F044B5 /* GridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridViewCell.h; sourceTree = "<group>"; };
+		C21526AE1577842200F044B5 /* GridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridViewCell.m; sourceTree = "<group>"; };
+		C21526AF1577842200F044B5 /* GridViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GridViewCell.xib; sourceTree = "<group>"; };
 		C215A76D1553CCEF001BF379 /* ButtonPressDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonPressDelegate.h; sourceTree = "<group>"; };
 		C215A79F1553EABF001BF379 /* WaresItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaresItem.h; sourceTree = "<group>"; };
 		C215A7A01553EABF001BF379 /* WaresItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaresItem.m; sourceTree = "<group>"; };
@@ -2021,6 +2021,9 @@
 				CED6950C156BE13B00F8F54C /* myshow_at.png */,
 				CED6950D156BE13B00F8F54C /* myshow_business.png */,
 				CED6950E156BE13B00F8F54C /* myshow_category.png */,
+				CEE9B0CA1577743F00761201 /* myshow_category_background.png */,
+				CEE9B0CB1577743F00761201 /* myshow_category_checked.png */,
+				CEE9B0CC1577743F00761201 /* myshow_category_unchekced.png */,
 				CED6950F156BE13B00F8F54C /* myshow_gray_background.png */,
 				CED69510156BE13B00F8F54C /* myshow_location.png */,
 				CED69511156BE13B00F8F54C /* myshow_margin.png */,
@@ -2041,6 +2044,17 @@
 				CECAA813156A970700B343A3 /* radio_btn_unselected.png */,
 				CED6951D156BE13B00F8F54C /* remove_fans_icon.png */,
 				CECAA814156A970700B343A3 /* score.png */,
+				CEE9B0CD1577743F00761201 /* search_avatar_sample1.png */,
+				CEE9B0D61577743F00761201 /* search_avatar_sample10.png */,
+				CEE9B0D71577743F00761201 /* search_avatar_sample11.png */,
+				CEE9B0CE1577743F00761201 /* search_avatar_sample2.png */,
+				CEE9B0CF1577743F00761201 /* search_avatar_sample3.png */,
+				CEE9B0D01577743F00761201 /* search_avatar_sample4.png */,
+				CEE9B0D11577743F00761201 /* search_avatar_sample5.png */,
+				CEE9B0D21577743F00761201 /* search_avatar_sample6.png */,
+				CEE9B0D31577743F00761201 /* search_avatar_sample7.png */,
+				CEE9B0D41577743F00761201 /* search_avatar_sample8.png */,
+				CEE9B0D51577743F00761201 /* search_avatar_sample9.png */,
 				CED6951E156BE13B00F8F54C /* search_map_model_btn.png */,
 				CED6951F156BE13B00F8F54C /* search_sina_btn.png */,
 				CED69520156BE13B00F8F54C /* search_switcher_btn.png */,
@@ -2052,6 +2066,10 @@
 				C24EABAB15762F6500291778 /* segement_btn_left_unselected.png */,
 				C24EABAC15762F6600291778 /* segement_btn_right_selected.png */,
 				CECAA816156A970700B343A3 /* segement_btn_right_unselected.png */,
+				CEADCABC1576675900EF83BA /* segement_btn_selected.png */,
+				CEADCABD1576675900EF83BA /* segement_btn_unselected.png */,
+				CEADCABE1576675900EF83BA /* segmentDividerLeftSelected.png */,
+				CEADCABF1576675900EF83BA /* segmentDividerRightSelected.png */,
 				CE20C3E0156752930031997B /* sina_logo.png */,
 				CE20C3E1156752930031997B /* tabbar_background.png */,
 				CE20C3E2156752930031997B /* tabbar_home_icon.png */,
@@ -2060,17 +2078,27 @@
 				CE20C3E5156752930031997B /* tabbar_search_icon.png */,
 				CE20C3E6156752930031997B /* tabbar_show_icon.png */,
 				CE20C3E7156752930031997B /* tencent_logo.png */,
+				CEADCAC01576675900EF83BA /* toolbar_at_focus.png */,
+				CEADCAC11576675900EF83BA /* toolbar_at_icon.png */,
 				CE20C3E8156752930031997B /* toolbar_background.png */,
 				CED69523156BE13B00F8F54C /* toolbar_buy_focus.png */,
 				CE20C3E9156752930031997B /* toolbar_buy_icon.png */,
+				CEADCAC31576675900EF83BA /* toolbar_category.png */,
+				CEADCAC21576675900EF83BA /* toolbar_category_focus.png */,
 				CED69524156BE13B00F8F54C /* toolbar_comment_focus.png */,
 				CE20C3EA156752930031997B /* toolbar_comment_icon.png */,
 				CED69525156BE13B00F8F54C /* toolbar_favourate_focus.png */,
 				CE20C3EB156752930031997B /* toolbar_favourate_icon.png */,
 				CED69526156BE13B00F8F54C /* toolbar_forward_focus.png */,
 				CE20C3EC156752930031997B /* toolbar_forward_icon.png */,
+				CEADCAC41576675900EF83BA /* toolbar_more_focus.png */,
+				CEADCAC51576675900EF83BA /* toolbar_more_icon.png */,
+				CEADCAC61576675900EF83BA /* toolbar_private_letter_focus.png */,
+				CEADCAC71576675900EF83BA /* toolbar_private_letter_icon.png */,
 				CED69527156BE13B00F8F54C /* toolbar_refresh_focus.png */,
 				CE20C3ED156752930031997B /* toolbar_refresh_icon.png */,
+				CEADCAC81576675900EF83BA /* toolbar_remove_fan_focus.png */,
+				CEADCAC91576675900EF83BA /* toolbar_remove_fan_icon.png */,
 				CED69528156BE13B00F8F54C /* toolbar_request_focus.png */,
 				CE20C3EE156752930031997B /* toolbar_request_icon.png */,
 				CECAA817156A970700B343A3 /* triangle_btn.png */,
@@ -2255,13 +2283,13 @@
 				C28A935915484442008C8AFC /* ButtonViewCell.h */,
 				C28A935A15484442008C8AFC /* ButtonViewCell.m */,
 				C28A935C1548445B008C8AFC /* ButtonViewCell.xib */,
-				C215A75D15539B7C001BF379 /* GridViewCell.h */,
-				C215A75E15539B7C001BF379 /* GridViewCell.m */,
-				C215A76015539B9E001BF379 /* GridViewCell.xib */,
 				CE5B741E1574C461009C9669 /* FullImageViewController.h */,
 				CE5B741F1574C461009C9669 /* FullImageViewController.m */,
 				CE5B74201574C461009C9669 /* FullImageViewController.xib */,
 				C20B53D5154701320014812B /* MapViewController.h */,
+				C21526AD1577842200F044B5 /* GridViewCell.h */,
+				C21526AE1577842200F044B5 /* GridViewCell.m */,
+				C21526AF1577842200F044B5 /* GridViewCell.xib */,
 				C20B53D6154701320014812B /* MapViewController.m */,
 				C20B53D7154701320014812B /* MapViewController.xib */,
 				C2F68D03157340E7006ED8AE /* NSAttributedString+Attributes.h */,
@@ -2459,7 +2487,6 @@
 				CEBCD05D155018D9000D41E1 /* WeiboForwardCommentViewController.xib in Resources */,
 				CE62B3631551790A0017AA88 /* SelectCityViewController.xib in Resources */,
 				C216EDC415518BD300CA8CE8 /* MyInfoTopViewCell.xib in Resources */,
-				C215A76115539B9E001BF379 /* GridViewCell.xib in Resources */,
 				CE62B3681551842D0017AA88 /* SelectCategoryViewController.xib in Resources */,
 				CEEF7B21155549B5001ABCEC /* ForwardCommentListViewController.xib in Resources */,
 				CEEF7B6415556430001ABCEC /* ForwardCommentTableViewCell.xib in Resources */,
@@ -2834,6 +2861,7 @@
 				CEE9B0E31577743F00761201 /* search_avatar_sample9.png in Resources */,
 				CEE9B0E41577743F00761201 /* search_avatar_sample10.png in Resources */,
 				CEE9B0E51577743F00761201 /* search_avatar_sample11.png in Resources */,
+				C21526B11577842200F044B5 /* GridViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2909,7 +2937,6 @@
 				CEBCD05A15500CF8000D41E1 /* WeiboForwardCommentViewController.m in Sources */,
 				CE62B3621551790A0017AA88 /* SelectCityViewController.m in Sources */,
 				C216EDC215518B8C00CA8CE8 /* MyInfoTopViewCell.m in Sources */,
-				C215A75F15539B7C001BF379 /* GridViewCell.m in Sources */,
 				CE62B3671551842D0017AA88 /* SelectCategoryViewController.m in Sources */,
 				C215A7A21553EABF001BF379 /* WaresItem.m in Sources */,
 				CEEF7B20155549B5001ABCEC /* ForwardCommentListViewController.m in Sources */,
@@ -2947,6 +2974,7 @@
 				CEE9B0921577335D00761201 /* WaitOverlay.m in Sources */,
 				CEE9B095157738DB00761201 /* UIImage+Scale.m in Sources */,
 				CEE9B09815776E1600761201 /* iToast.m in Sources */,
+				C21526B01577842200F044B5 /* GridViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

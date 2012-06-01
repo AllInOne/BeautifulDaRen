@@ -41,9 +41,8 @@
     // Configure the view for the selected state
 }
 
-- (IBAction)buttonPressed:(id)sender
+- (IBAction)buttonPressed:(UIButton*)sender
 {
-    NSAssert([sender isKindOfClass:[UIButton class]], @"sender is not a ");
     [self.delegate didButtonPressed:sender inView:self];
 }
 

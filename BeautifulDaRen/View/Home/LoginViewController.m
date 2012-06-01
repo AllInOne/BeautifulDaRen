@@ -199,7 +199,7 @@
     CGFloat height = 3;
     if(section == 0)
     {
-        height = 20;
+        height = 10;
     }
     else if (section == 3 ) {
         height = 25;

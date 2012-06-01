@@ -190,12 +190,6 @@
                 ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"my_composed"];
                 break;
             }
-//            case 1:
-//            {
-//                ((ButtonViewCell*)cell).buttonText.text = NSLocalizedString(@"private_letter", @"");
-//                ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"my_private_letter"];
-//                break;
-//            }
             case 1:
             {
                 ((ButtonViewCell*)cell).buttonText.text = NSLocalizedString(@"at_me", @"");
