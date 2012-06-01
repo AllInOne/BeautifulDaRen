@@ -15,6 +15,7 @@
 #import "FindPasswordViewController.h"
 
 #import "ViewHelper.h"
+#import "iToast.h"
 
 @interface LoginViewController()
 
@@ -253,7 +254,24 @@
 {
     if(button ==  self.loginWithSinaWeiboButton)
     {
-        NSLog(@"loginWithSinaWeiboButton");
+        if (![[SinaSDKManager sharedManager] isLogin])
+        {
+            [[SinaSDKManager sharedManager] setRootviewController:self.navigationController];
+            [[SinaSDKManager sharedManager] loginWithDoneCallback:^(LOGIN_STATUS status) {
+                NSLog(@"Sina SDK login done, status:%d", status);
+                if (status == LOGIN_STATUS_SUCCESS) {
+                    [[iToast makeText:@"亲，认证成功过了！"] show];
+                }
+                else
+                {
+                    [[iToast makeText:@"亲，认证失败了！"] show];
+                }
+            }];   
+        }
+        else
+        {
+            [[iToast makeText:@"亲，已经认证过了！"] show];
+        }
     }
     else if(button == self.loginWithQQButton)
     {
