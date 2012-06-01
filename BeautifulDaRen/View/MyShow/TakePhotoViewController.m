@@ -138,7 +138,7 @@
 - (void)setupImagePicker:(UIImagePickerControllerSourceType)sourceType
 {
     [self.imagePickerController setSourceType:sourceType];
-    self.currentSourceType = UIImagePickerControllerSourceTypeCamera;
+    self.currentSourceType = sourceType;
     
     if (sourceType == UIImagePickerControllerSourceTypeCamera) {
         self.imagePickerController.showsCameraControls = NO;
