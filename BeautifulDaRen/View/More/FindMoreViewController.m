@@ -150,6 +150,19 @@
 {
     static NSString * cellViewIdentifier = @"ContactItemCell";
     NSInteger scrollWidth = 0;
+    NSArray * nameArray = [NSArray arrayWithObjects:
+                           @"我是谁知道",
+                           @"飞越板凳", 
+                           @"优乐美",
+                           @"东东",
+                           @"你是我唯一", 
+                           @"天府广场",
+                           @"奥斯卡", 
+                           @"天之骄子",
+                           @"醉在黄鹤楼", 
+                           @"半个火枪手",
+                           @"影子爱人", 
+                           nil];
     NSArray * avatars = [NSArray arrayWithObjects:
                          @"search_avatar_sample1",
                          @"search_avatar_sample2",
@@ -175,7 +188,7 @@
     
         BorderImageView * borderImageView = [[[BorderImageView alloc] initWithFrame:cell.contactImageView.frame andImage:[UIImage imageNamed:[avatars objectAtIndex:i]]] autorelease];
         [cell addSubview:borderImageView];
-        cell.contactLabel.text = @"宇多田光";
+        cell.contactLabel.text = [nameArray objectAtIndex:i];
     }
     [_sameCityDaRenView setContentSize:CGSizeMake(scrollWidth, 0)];
 }
@@ -184,6 +197,19 @@
 {
     static NSString * cellViewIdentifier = @"ContactItemCell";
     NSInteger scrollWidth = 0;
+    NSArray * nameArray = [NSArray arrayWithObjects:
+                           @"天之骄子",
+                           @"醉在黄鹤楼", 
+                           @"半个火枪手",
+                           @"影子爱人", 
+                           @"我是谁知道",
+                           @"飞越板凳", 
+                           @"我的优乐美",
+                           @"东东",
+                           @"你是我唯一", 
+                           @"天府广场",
+                           @"奥斯卡", 
+                           nil];
     NSArray * avatars = [NSArray arrayWithObjects:
                          @"search_avatar_sample5",
                          @"search_avatar_sample6",
@@ -208,7 +234,7 @@
         
         BorderImageView * borderImageView = [[[BorderImageView alloc] initWithFrame:cell.contactImageView.frame andImage:[UIImage imageNamed:[avatars objectAtIndex:i]]] autorelease];
         [cell addSubview:borderImageView];
-        cell.contactLabel.text = @"美丽达人";
+        cell.contactLabel.text = [nameArray objectAtIndex:i];
     }
     [_youMayInterestinView setContentSize:CGSizeMake(scrollWidth, 0)];
 }
@@ -216,6 +242,19 @@
 - (void) refreshHotDaRenView
 {
     static NSString * cellViewIdentifier = @"ContactItemCell";
+    NSArray * nameArray = [NSArray arrayWithObjects:
+                           @"东东",
+                           @"你是我唯一", 
+                           @"天府广场",
+                           @"奥斯卡", 
+                           @"天之骄子",
+                           @"醉在黄鹤楼", 
+                           @"半个火枪手",
+                           @"影子爱人", 
+                           @"我是谁知道",
+                           @"飞越板凳", 
+                           @"我的优乐美",
+                           nil];
     NSInteger scrollWidth = 0;
     NSArray * avatars = [NSArray arrayWithObjects:
                          @"search_avatar_sample9",
@@ -241,7 +280,7 @@
         
         BorderImageView * borderImageView = [[[BorderImageView alloc] initWithFrame:cell.contactImageView.frame andImage:[UIImage imageNamed:[avatars objectAtIndex:i]]] autorelease];
         [cell addSubview:borderImageView];
-        cell.contactLabel.text = @"小清新";
+        cell.contactLabel.text = [nameArray objectAtIndex:i];
     }
     [_hotDaRenView setContentSize:CGSizeMake(scrollWidth, 0)];
 }
@@ -409,5 +448,16 @@
 {
     _isFindWeibo = (selectedScope ==0) ? YES : NO;
     [_friendViewController reloadData];
+}
+
+- (void)onItemSelected:(int)index
+{
+    FriendDetailViewController *weiboDetailController = 
+    [[[FriendDetailViewController alloc] init] autorelease];
+    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: weiboDetailController];
+    
+    [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
+    
+    [navController release];
 }
 @end

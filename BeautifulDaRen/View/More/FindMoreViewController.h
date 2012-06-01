@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CommonScrollView.h"
 
-@interface FindMoreViewController : UIViewController <UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UITextFieldDelegate>
+@interface FindMoreViewController : UIViewController <UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UITextFieldDelegate, CommonScrollViewProtocol>
 
 
 @end

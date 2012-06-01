@@ -16,6 +16,7 @@
 #import "CommentOrForwardViewController.h"
 #import "ViewHelper.h"
 #import "PrivateLetterViewController.h"
+#import "CommonViewController.h"
 #import "NSAttributedString+Attributes.h"
 #import "OHAttributedLabel.h"
 
@@ -245,10 +246,10 @@
     return height;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-{
-    return 3;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+//{
+//    return 3;
+//}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -301,11 +302,23 @@
 {
     if(button == _followButton)
     {
-        NSLog(@"followButton pressed");
+        CommonViewController * followViewController = [[[CommonViewController alloc] initWithNibName:@"CommonViewController" bundle:nil] autorelease];
+        
+        UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: followViewController];
+        
+        [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
+        
+        [navController release];
     }
     else if (button == _fansButton)
     {
-        NSLog(@"fansButton pressed");
+        CommonViewController * followViewController = [[[CommonViewController alloc] initWithNibName:@"CommonViewController" bundle:nil] autorelease];
+        
+        UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: followViewController];
+        
+        [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
+        
+        [navController release];
     }
     else if (button == _collectionButton)
     {
