@@ -66,6 +66,10 @@
 		C27F8656156CCFF70094402B /* FindFriendViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C27F8655156CCFF70094402B /* FindFriendViewCell.xib */; };
 		C27F865B156CF4C10094402B /* FindWeiboViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C27F865A156CF4C10094402B /* FindWeiboViewCell.m */; };
 		C27F865D156CF4D70094402B /* FindWeiboViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C27F865C156CF4D70094402B /* FindWeiboViewCell.xib */; };
+		C284B7D31577DD5B007D85CC /* CommonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C284B7D11577DD5B007D85CC /* CommonViewController.m */; };
+		C284B7D41577DD5B007D85CC /* CommonViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C284B7D21577DD5B007D85CC /* CommonViewController.xib */; };
+		C284B7D91577DFC1007D85CC /* FriendListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C284B7D81577DFC1007D85CC /* FriendListViewCell.m */; };
+		C284B7DB1577DFD9007D85CC /* FriendListViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C284B7DA1577DFD9007D85CC /* FriendListViewCell.xib */; };
 		C28A93521548364A008C8AFC /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C28A93501548364A008C8AFC /* LoginViewController.m */; };
 		C28A93531548364A008C8AFC /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C28A93511548364A008C8AFC /* LoginViewController.xib */; };
 		C28A935B15484442008C8AFC /* ButtonViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C28A935A15484442008C8AFC /* ButtonViewCell.m */; };
@@ -676,6 +680,12 @@
 		C27F8659156CF4C10094402B /* FindWeiboViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindWeiboViewCell.h; sourceTree = "<group>"; };
 		C27F865A156CF4C10094402B /* FindWeiboViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindWeiboViewCell.m; sourceTree = "<group>"; };
 		C27F865C156CF4D70094402B /* FindWeiboViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FindWeiboViewCell.xib; sourceTree = "<group>"; };
+		C284B7D01577DD5B007D85CC /* CommonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonViewController.h; sourceTree = "<group>"; };
+		C284B7D11577DD5B007D85CC /* CommonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonViewController.m; sourceTree = "<group>"; };
+		C284B7D21577DD5B007D85CC /* CommonViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommonViewController.xib; sourceTree = "<group>"; };
+		C284B7D71577DFC1007D85CC /* FriendListViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendListViewCell.h; sourceTree = "<group>"; };
+		C284B7D81577DFC1007D85CC /* FriendListViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendListViewCell.m; sourceTree = "<group>"; };
+		C284B7DA1577DFD9007D85CC /* FriendListViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendListViewCell.xib; sourceTree = "<group>"; };
 		C28A934F1548364A008C8AFC /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		C28A93501548364A008C8AFC /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		C28A93511548364A008C8AFC /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
@@ -1290,6 +1300,35 @@
 				C2A810C21566230A008FF2B7 /* PrivateLetterViewCell.xib */,
 			);
 			name = SubView;
+			sourceTree = "<group>";
+		};
+		C284B7D51577DEDF007D85CC /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				C25022391575E34C00C0561F /* BorderImageView.h */,
+				C250223A1575E34C00C0561F /* BorderImageView.m */,
+				C24B11A71549A5B6004F6F8E /* ViewHelper.h */,
+				C24B11A81549A5B6004F6F8E /* ViewHelper.m */,
+				CEE9B09615776E1400761201 /* iToast.h */,
+				CEE9B09715776E1500761201 /* iToast.m */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
+		C284B7D61577DF39007D85CC /* CommonCell */ = {
+			isa = PBXGroup;
+			children = (
+				C28A935915484442008C8AFC /* ButtonViewCell.h */,
+				C28A935A15484442008C8AFC /* ButtonViewCell.m */,
+				C28A935C1548445B008C8AFC /* ButtonViewCell.xib */,
+				C21526AD1577842200F044B5 /* GridViewCell.h */,
+				C21526AE1577842200F044B5 /* GridViewCell.m */,
+				C21526AF1577842200F044B5 /* GridViewCell.xib */,
+				C284B7D71577DFC1007D85CC /* FriendListViewCell.h */,
+				C284B7D81577DFC1007D85CC /* FriendListViewCell.m */,
+				C284B7DA1577DFD9007D85CC /* FriendListViewCell.xib */,
+			);
+			name = CommonCell;
 			sourceTree = "<group>";
 		};
 		C28A4B8915413AB2008A806D /* SubView */ = {
@@ -2290,23 +2329,15 @@
 		CEDC918C153FDBCA00BA6C35 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				CEE9B09615776E1400761201 /* iToast.h */,
-				CEE9B09715776E1500761201 /* iToast.m */,
+				C284B7D61577DF39007D85CC /* CommonCell */,
+				C284B7D51577DEDF007D85CC /* Utilities */,
 				CEDC918F153FDC7700BA6C35 /* AdsPageView.h */,
 				CEDC9190153FDC7700BA6C35 /* AdsPageView.m */,
 				CEDC918D153FDC5700BA6C35 /* AdsPageView.xib */,
-				C25022391575E34C00C0561F /* BorderImageView.h */,
-				C250223A1575E34C00C0561F /* BorderImageView.m */,
-				C28A935915484442008C8AFC /* ButtonViewCell.h */,
-				C28A935A15484442008C8AFC /* ButtonViewCell.m */,
-				C28A935C1548445B008C8AFC /* ButtonViewCell.xib */,
 				CE5B741E1574C461009C9669 /* FullImageViewController.h */,
 				CE5B741F1574C461009C9669 /* FullImageViewController.m */,
 				CE5B74201574C461009C9669 /* FullImageViewController.xib */,
 				C20B53D5154701320014812B /* MapViewController.h */,
-				C21526AD1577842200F044B5 /* GridViewCell.h */,
-				C21526AE1577842200F044B5 /* GridViewCell.m */,
-				C21526AF1577842200F044B5 /* GridViewCell.xib */,
 				C20B53D6154701320014812B /* MapViewController.m */,
 				C20B53D7154701320014812B /* MapViewController.xib */,
 				C2F68D03157340E7006ED8AE /* NSAttributedString+Attributes.h */,
@@ -2320,8 +2351,6 @@
 				CE62B3601551790A0017AA88 /* SelectCityViewController.m */,
 				CE62B3611551790A0017AA88 /* SelectCityViewController.xib */,
 				CE7C9D1715400ED000F3812F /* ViewConstants.h */,
-				C24B11A71549A5B6004F6F8E /* ViewHelper.h */,
-				C24B11A81549A5B6004F6F8E /* ViewHelper.m */,
 				C2519F991564E36E0040EBC5 /* WaterFlowView.h */,
 				C2519F9A1564E36E0040EBC5 /* WaterFlowView.m */,
 				C250224C1576204F00C0561F /* SegmentControl.h */,
@@ -2330,6 +2359,9 @@
 				CEE9B094157738DB00761201 /* UIImage+Scale.m */,
 				CE51516115786A8300F96D1B /* LocationHelper.h */,
 				CE51516215786A8300F96D1B /* LocationHelper.m */,
+				C284B7D01577DD5B007D85CC /* CommonViewController.h */,
+				C284B7D11577DD5B007D85CC /* CommonViewController.m */,
+				C284B7D21577DD5B007D85CC /* CommonViewController.xib */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -2883,6 +2915,8 @@
 				C21526B11577842200F044B5 /* GridViewCell.xib in Resources */,
 				CE07F4291578B79C00DF3BE0 /* app_icon.png in Resources */,
 				CE07F42A1578B79C00DF3BE0 /* app_icon@2x.png in Resources */,
+				C284B7D41577DD5B007D85CC /* CommonViewController.xib in Resources */,
+				C284B7DB1577DFD9007D85CC /* FriendListViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2997,6 +3031,8 @@
 				CEE9B09815776E1600761201 /* iToast.m in Sources */,
 				C21526B01577842200F044B5 /* GridViewCell.m in Sources */,
 				CE51516315786A8300F96D1B /* LocationHelper.m in Sources */,
+				C284B7D31577DD5B007D85CC /* CommonViewController.m in Sources */,
+				C284B7D91577DFC1007D85CC /* FriendListViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

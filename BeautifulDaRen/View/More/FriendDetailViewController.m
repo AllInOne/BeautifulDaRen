@@ -11,15 +11,16 @@
 #import "GridViewCell.h"
 #import "ViewHelper.h"
 #import "ViewConstants.h"
+#import "CommonViewController.h"
 #import "iToast.h"
 
 @interface FriendDetailViewController()
+@property (retain, nonatomic) IBOutlet UIButton * weiboButton;
+@property (retain, nonatomic) IBOutlet UIButton * topicButton;
 @property (retain, nonatomic) IBOutlet UIButton * followButton;
 @property (retain, nonatomic) IBOutlet UIButton * fansButton;
 @property (retain, nonatomic) IBOutlet UIButton * collectionButton;
-@property (retain, nonatomic) IBOutlet UIButton * blackListButton;
-@property (retain, nonatomic) IBOutlet UIButton * buyedButton;
-@property (retain, nonatomic) IBOutlet UIButton * topicButton;
+@property (retain, nonatomic) IBOutlet UIButton * publishedButton;
 
 @property (retain, nonatomic) IBOutlet UITableView * friendDetailView;
 @property (assign, nonatomic) BOOL isIdentification;
@@ -34,8 +35,8 @@
 @synthesize followButton = _followButton;
 @synthesize fansButton = _fansButton;
 @synthesize collectionButton = _collectionButton;
-@synthesize blackListButton = _blackListButton;
-@synthesize buyedButton = _buyedButton;
+@synthesize weiboButton = _weiboButton;
+@synthesize publishedButton = _publishedButton;
 @synthesize topicButton = _topicButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -90,6 +91,7 @@
 }
 - (void)onBackButtonClicked {
     [self dismissModalViewControllerAnimated:YES];
+//    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void) onHomePageButtonClicked
@@ -243,17 +245,24 @@
         ((GridViewCell*)cell).sixthLabel.attributedText = attrStr;
         ((GridViewCell*)cell).sixthLabel.textAlignment = UITextAlignmentCenter;
         
-        _followButton = ((GridViewCell*)cell).firstButton;
-        _fansButton = ((GridViewCell*)cell).secondButton;
-        _collectionButton = ((GridViewCell*)cell).thirdButton;
-        _buyedButton = ((GridViewCell*)cell).fourthButton;
-        _topicButton = ((GridViewCell*)cell).fifthButton;
-        _blackListButton = ((GridViewCell*)cell).sixthButton;
+        _weiboButton = ((GridViewCell*)cell).firstButton;
+        _topicButton = ((GridViewCell*)cell).secondButton;
+
+        _followButton = ((GridViewCell*)cell).thirdButton;
+        _fansButton = ((GridViewCell*)cell).fourthButton;
+        
+        _collectionButton = ((GridViewCell*)cell).fifthButton;
+        _publishedButton = ((GridViewCell*)cell).sixthButton;
+        ((GridViewCell*)cell).delegate = self;
     }
     
     return cell;
 }
 
+-(void)onWeiboButton
+{
+    
+}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -328,30 +337,33 @@
 
 - (void) didButtonPressed:(UIButton*)button inView:(UIView *)view
 {
-    [self onActionButtonClicked:button];
     if(button == _followButton)
     {
-        NSLog(@"followButton pressed");
+        CommonViewController * followViewController = [[[CommonViewController alloc] initWithNibName:@"CommonViewController" bundle:nil] autorelease];
+        
+        [self.navigationController pushViewController:followViewController animated:YES];
     }
     else if (button == _fansButton)
     {
-        NSLog(@"fansButton pressed");
+        CommonViewController * followViewController = [[[CommonViewController alloc] initWithNibName:@"CommonViewController" bundle:nil] autorelease];
+        
+        [self.navigationController pushViewController:followViewController animated:YES];
     }
     else if (button == _collectionButton)
     {
-        NSLog(@"collectionButton pressed");
+        [[iToast makeText:@"收藏"] show];
     }
-    else if (button == _blackListButton)
+    else if (button == _weiboButton)
     {
-        NSLog(@"blackListButton pressed");
+        [[iToast makeText:@"微博"] show];
     }
-    else if(button == _buyedButton)
+    else if(button == _publishedButton)
     {
-        NSLog(@"buyed button pressed");
+        [[iToast makeText:@"已发布"] show];
     }
     else if(button == _topicButton)
     {
-        NSLog(@"topic button pressed");
+        [[iToast makeText:@"话题"] show];
     }
     else
     {
