@@ -414,12 +414,11 @@
 - (void)didTakePicture:(UIImage *)picture
 {
     [self dismissModalViewControllerAnimated:YES];
-    self.attachedImageView.image = picture;
     self.selectedImage = nil;
     self.selectedImage = picture;
-    if (self.attachedImageView.image)
+    if (self.selectedImage)
     {
-        [self.attachedImageBgButton setBackgroundImage:self.attachedImageView.image forState:UIControlStateNormal];
+        [self.attachedImageBgButton setImage:self.selectedImage forState:UIControlStateNormal];
     }
 }
 
@@ -440,10 +439,8 @@
     
     [self.takePhotoViewController setDelegate: self];
     [self.takePhotoViewController setupImagePicker:UIImagePickerControllerSourceTypePhotoLibrary];
-
-    [self dismissViewControllerAnimated:NO completion:^{
-
-        [self presentModalViewController:self.takePhotoViewController.imagePickerController animated:YES];
-    }];
+    
+    [self dismissModalViewControllerAnimated:NO];
+    [self presentModalViewController:self.takePhotoViewController.imagePickerController animated:YES];
 }
 @end

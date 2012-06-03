@@ -59,6 +59,20 @@
          landmarkName = "-viewWillAppear:"
          landmarkType = "5">
       </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "BeautifulDaRen/View/Weibo/WeiboComposerViewController.m"
+         timestampString = "360427197.421574"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "392"
+         endingLineNumber = "392"
+         landmarkName = "-imagePickerController:didFinishPickingMediaWithInfo:"
+         landmarkType = "5">
+      </FileBreakpoint>
    </FileBreakpoints>
    <SymbolicBreakpoints>
       <SymbolicBreakpoint
@@ -67,6 +81,14 @@
          continueAfterRunningActions = "No"
          symbolName = "raise"
          moduleName = "">
+         <Locations>
+            <Location
+               shouldBeEnabled = "Yes"
+               ignoreCount = "0"
+               continueAfterRunningActions = "No"
+               symbolName = "-[NSException raise]">
+            </Location>
+         </Locations>
       </SymbolicBreakpoint>
    </SymbolicBreakpoints>
    <ExceptionBreakpoints>
