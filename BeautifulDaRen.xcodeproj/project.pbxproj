@@ -437,7 +437,7 @@
 		CED6956C156BE13B00F8F54C /* v_mark_small.png in Resources */ = {isa = PBXBuildFile; fileRef = CED6952A156BE13B00F8F54C /* v_mark_small.png */; };
 		CED6956D156BE13B00F8F54C /* weibo_comment_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CED6952B156BE13B00F8F54C /* weibo_comment_icon.png */; };
 		CED6956E156BE13B00F8F54C /* weibo_detail_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = CED6952C156BE13B00F8F54C /* weibo_detail_btn.png */; };
-		CED6956F156BE13B00F8F54C /* weibo_favourate.png in Resources */ = {isa = PBXBuildFile; fileRef = CED6952D156BE13B00F8F54C /* weibo_favourate.png */; };
+		CED6956F156BE13B00F8F54C /* weibo_favourate_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CED6952D156BE13B00F8F54C /* weibo_favourate_icon.png */; };
 		CED69570156BE13B00F8F54C /* weibo_forward_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CED6952E156BE13B00F8F54C /* weibo_forward_icon.png */; };
 		CED69571156BE13B00F8F54C /* weibo_pay_button.png in Resources */ = {isa = PBXBuildFile; fileRef = CED6952F156BE13B00F8F54C /* weibo_pay_button.png */; };
 		CED69572156BE13B00F8F54C /* weibo_price_background.png in Resources */ = {isa = PBXBuildFile; fileRef = CED69530156BE13B00F8F54C /* weibo_price_background.png */; };
@@ -1132,7 +1132,7 @@
 		CED6952A156BE13B00F8F54C /* v_mark_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = v_mark_small.png; sourceTree = "<group>"; };
 		CED6952B156BE13B00F8F54C /* weibo_comment_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weibo_comment_icon.png; sourceTree = "<group>"; };
 		CED6952C156BE13B00F8F54C /* weibo_detail_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weibo_detail_btn.png; sourceTree = "<group>"; };
-		CED6952D156BE13B00F8F54C /* weibo_favourate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weibo_favourate.png; sourceTree = "<group>"; };
+		CED6952D156BE13B00F8F54C /* weibo_favourate_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weibo_favourate_icon.png; sourceTree = "<group>"; };
 		CED6952E156BE13B00F8F54C /* weibo_forward_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weibo_forward_icon.png; sourceTree = "<group>"; };
 		CED6952F156BE13B00F8F54C /* weibo_pay_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weibo_pay_button.png; sourceTree = "<group>"; };
 		CED69530156BE13B00F8F54C /* weibo_price_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weibo_price_background.png; sourceTree = "<group>"; };
@@ -2163,7 +2163,7 @@
 				CED69533156BE13B00F8F54C /* weibo.png */,
 				CED6952B156BE13B00F8F54C /* weibo_comment_icon.png */,
 				CED6952C156BE13B00F8F54C /* weibo_detail_btn.png */,
-				CED6952D156BE13B00F8F54C /* weibo_favourate.png */,
+				CED6952D156BE13B00F8F54C /* weibo_favourate_icon.png */,
 				CED6952E156BE13B00F8F54C /* weibo_forward_icon.png */,
 				CED6952F156BE13B00F8F54C /* weibo_pay_button.png */,
 				CE20C3EF156752930031997B /* weibo_picture_frame.png */,
@@ -2724,7 +2724,7 @@
 				CED6956C156BE13B00F8F54C /* v_mark_small.png in Resources */,
 				CED6956D156BE13B00F8F54C /* weibo_comment_icon.png in Resources */,
 				CED6956E156BE13B00F8F54C /* weibo_detail_btn.png in Resources */,
-				CED6956F156BE13B00F8F54C /* weibo_favourate.png in Resources */,
+				CED6956F156BE13B00F8F54C /* weibo_favourate_icon.png in Resources */,
 				CED69570156BE13B00F8F54C /* weibo_forward_icon.png in Resources */,
 				CED69571156BE13B00F8F54C /* weibo_pay_button.png in Resources */,
 				CED69572156BE13B00F8F54C /* weibo_price_background.png in Resources */,
