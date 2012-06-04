@@ -13,10 +13,10 @@
 #import "ButtonViewCell.h"
 #import "ViewConstants.h"
 #import "DataManager.h"
-#import "CommentOrForwardViewController.h"
+#import "WeiboListViewController.h"
 #import "ViewHelper.h"
 #import "PrivateLetterViewController.h"
-#import "CommonViewController.h"
+#import "FriendListViewController.h"
 #import "NSAttributedString+Attributes.h"
 #import "OHAttributedLabel.h"
 #import "iToast.h"
@@ -276,22 +276,23 @@
         switch ([indexPath row]) {
             case 0:
             {
-                // TODO
-                NSLog(@"To handle press my publish");
+                WeiboListViewController * forwadMeViewController = [[[WeiboListViewController alloc] initWithNibName:@"WeiboListViewController" bundle:nil type:WeiboListViewControllerType_MY_PUBLISH] autorelease];
+                
+                [self.navigationController pushViewController:forwadMeViewController animated:YES];
                 break;
             }
             case 1:
             {
-                CommentOrForwardViewController * forwardViewController = [[[CommentOrForwardViewController alloc] initWithNibName:@"CommentOrForwardViewController" bundle:nil type:CommentOrForwardViewControllerType_FORWARD] autorelease];
+                WeiboListViewController * forwadMeViewController = [[[WeiboListViewController alloc] initWithNibName:@"WeiboListViewController" bundle:nil type:WeiboListViewControllerType_FORWARD_ME] autorelease];
                 
-                [self.navigationController pushViewController:forwardViewController animated:YES];
+                [self.navigationController pushViewController:forwadMeViewController animated:YES];
                 break;
             }
             case 2:
             {
-                CommentOrForwardViewController * forwardViewController = [[[CommentOrForwardViewController alloc] initWithNibName:@"CommentOrForwardViewController" bundle:nil type:CommentOrForwardViewControllerType_COMMENT] autorelease];
+                WeiboListViewController * commentMeViewController = [[[WeiboListViewController alloc] initWithNibName:@"WeiboListViewController" bundle:nil type:WeiboListViewControllerType_COMMENT_ME] autorelease];
                 
-                [self.navigationController pushViewController:forwardViewController animated:YES];
+                [self.navigationController pushViewController:commentMeViewController animated:YES];
                 break;
             }
         }
@@ -303,35 +304,33 @@
 {
     if(button == _followButton)
     {
-        CommonViewController * followViewController = [[[CommonViewController alloc] initWithNibName:@"CommonViewController" bundle:nil] autorelease];
+        FriendListViewController * followViewController = [[[FriendListViewController alloc] initWithNibName:@"FriendListViewController" bundle:nil type:FriendListViewController_TYPE_MY_FOLLOW] autorelease];
         
-        UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: followViewController];
-        
-        [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
-        
-        [navController release];
+        [self.navigationController pushViewController:followViewController animated:YES];
     }
     else if (button == _fansButton)
     {
-        CommonViewController * followViewController = [[[CommonViewController alloc] initWithNibName:@"CommonViewController" bundle:nil] autorelease];
+        FriendListViewController * fansViewController = [[[FriendListViewController alloc] initWithNibName:@"FriendListViewController" bundle:nil type:FriendListViewController_TYPE_MY_FANS] autorelease];
         
-        UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: followViewController];
-        
-        [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
-        
-        [navController release];
+        [self.navigationController pushViewController:fansViewController animated:YES];
     }
     else if (button == _collectionButton)
     {
-        NSLog(@"collectionButton pressed");
+        WeiboListViewController * commentMeViewController = [[[WeiboListViewController alloc] initWithNibName:@"WeiboListViewController" bundle:nil type:WeiboListViewControllerType_MY_COLLECTION] autorelease];
+        
+        [self.navigationController pushViewController:commentMeViewController animated:YES];
     }
     else if (button == _blackListButton)
     {
-        NSLog(@"blackListButton pressed");
+        FriendListViewController * followViewController = [[[FriendListViewController alloc] initWithNibName:@"FriendListViewController" bundle:nil type:FriendListViewController_TYPE_MY_BLACKLIST] autorelease];
+        
+        [self.navigationController pushViewController:followViewController animated:YES];
     }
     else if(button == _buyedButton)
     {
-        NSLog(@"buyed button pressed");
+        WeiboListViewController * commentMeViewController = [[[WeiboListViewController alloc] initWithNibName:@"WeiboListViewController" bundle:nil type:WeiboListViewControllerType_MY_BUYED] autorelease];
+        
+        [self.navigationController pushViewController:commentMeViewController animated:YES];
     }
     else if(button == _topicButton)
     {

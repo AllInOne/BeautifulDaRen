@@ -11,7 +11,9 @@
 #import "GridViewCell.h"
 #import "ViewHelper.h"
 #import "ViewConstants.h"
-#import "CommonViewController.h"
+#import "FriendListViewController.h"
+#import "WeiboListViewController.h"
+#import "EdittingViewController.h"
 #import "iToast.h"
 
 @interface FriendDetailViewController()
@@ -89,9 +91,12 @@
     
     // Release any cached data, images, etc that aren't in use.
 }
+
 - (void)onBackButtonClicked {
-    [self dismissModalViewControllerAnimated:YES];
-//    [self.navigationController popViewControllerAnimated:YES];
+    if (![self.navigationController popViewControllerAnimated:YES])
+    {
+        [self dismissModalViewControllerAnimated:YES];
+    }
 }
 
 -(void) onHomePageButtonClicked
@@ -290,14 +295,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
+    if([indexPath section] == 0 && [indexPath row] == 0)
+    {
+        EdittingViewController * edittingViewController = [[[EdittingViewController alloc] initWithNibName:@"EdittingViewController" bundle:nil type:EdittingViewController_type0] autorelease];
+        [self.navigationController pushViewController:edittingViewController animated:YES];
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -331,31 +333,27 @@
 {
     if(button == _followButton)
     {
-        CommonViewController * followViewController = [[[CommonViewController alloc] initWithNibName:@"CommonViewController" bundle:nil] autorelease];
+        FriendListViewController * followViewController = [[[FriendListViewController alloc] initWithNibName:@"FriendListViewController" bundle:nil type:FriendListViewController_TYPE_FRIEND_FOLLOW] autorelease];
         
         [self.navigationController pushViewController:followViewController animated:YES];
     }
     else if (button == _fansButton)
     {
-        CommonViewController * followViewController = [[[CommonViewController alloc] initWithNibName:@"CommonViewController" bundle:nil] autorelease];
+        FriendListViewController * followViewController = [[[FriendListViewController alloc] initWithNibName:@"FriendListViewController" bundle:nil type:FriendListViewController_TYPE_FRIEND_FANS] autorelease];
         
         [self.navigationController pushViewController:followViewController animated:YES];
     }
     else if (button == _collectionButton)
     {
-        [[iToast makeText:@"收藏"] show];
+        WeiboListViewController * weiboViewController = [[[WeiboListViewController alloc] initWithNibName:@"WeiboListViewController" bundle:nil type:WeiboListViewControllerType_FRIEND_COLLECTION] autorelease];
+        
+        [self.navigationController pushViewController:weiboViewController animated:YES];
     }
     else if (button == _weiboButton)
     {
-        [[iToast makeText:@"微博"] show];
-    }
-    else if(button == _followButton)
-    {
-        [[iToast makeText:@"已发布"] show];
-    }
-    else if(button == _fansButton)
-    {
-        [[iToast makeText:@"话题"] show];
+        WeiboListViewController * weiboViewController = [[[WeiboListViewController alloc] initWithNibName:@"WeiboListViewController" bundle:nil type:WeiboListViewControllerType_FRIEND_WEIBO] autorelease];
+        
+        [self.navigationController pushViewController:weiboViewController animated:YES];
     }
     else
     {

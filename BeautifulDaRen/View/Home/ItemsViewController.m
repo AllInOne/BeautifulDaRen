@@ -162,7 +162,6 @@
 
 - (void)flowView:(WaterFlowView *)flowView didSelectAtCell:(WaterFlowCell *)cell ForIndex:(int)index
 {
-    NSLog(@"cell %d selected",index);
     WeiboDetailViewController *weiboDetailController = 
     [[[WeiboDetailViewController alloc] init] autorelease];
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: weiboDetailController];

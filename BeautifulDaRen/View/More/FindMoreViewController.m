@@ -291,9 +291,9 @@
 {
     if(_isFindWeibo == NO)
     {
-        FriendDetailViewController *weiboDetailController = 
+        FriendDetailViewController *friendDetailController = 
         [[[FriendDetailViewController alloc] init] autorelease];
-        UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: weiboDetailController];
+        UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: friendDetailController];
         
         [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
         
