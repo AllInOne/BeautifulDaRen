@@ -99,7 +99,6 @@
     [[iToast makeText:@"主页"] show];
 }
 
-
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
@@ -150,7 +149,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -158,13 +157,9 @@
     NSInteger number = 0;
     if(section == 0)
     {
-        number = 1;
+        number = _isIdentification ? 3 : 2;
     }
     else if(section == 1)
-    {
-        number = _isIdentification ? 2 : 1;
-    }
-    else if(section == 2)
     {
         number = 1;
     }
@@ -187,32 +182,25 @@
             cell = [[[NSBundle mainBundle] loadNibNamed:buttonViewCellIdentifier owner:self options:nil] objectAtIndex:3];
         }
         ButtonViewCell * buttonViewCell = (ButtonViewCell*)cell;
-        buttonViewCell.leftLabel.text = NSLocalizedString(@"notes", @"notes");
-        buttonViewCell.buttonText.text = NSLocalizedString(@"set_notes", @"set_notes");
-    }
-    else if(section == 1)
-    {
-        cell = [tableView dequeueReusableCellWithIdentifier:buttonViewCellIdentifier];
-        if(!cell)
-        {
-            cell = [[[NSBundle mainBundle] loadNibNamed:buttonViewCellIdentifier owner:self options:nil] objectAtIndex:3];
-        }
         if(_isIdentification && [indexPath row] == 0)
         {
-            ButtonViewCell * buttonViewCell = (ButtonViewCell*)cell;
+            buttonViewCell.leftLabel.text = NSLocalizedString(@"notes", @"notes");
+            buttonViewCell.buttonText.text = NSLocalizedString(@"set_notes", @"set_notes");
+        }
+        else if(_isIdentification && [indexPath row] == 1)
+        {
             buttonViewCell.leftLabel.text = NSLocalizedString(@"authentication", @"authentication");
             buttonViewCell.buttonText.text = @"仁和春天人东店官方账号";
             buttonViewCell.buttonRightIcon.hidden = YES;
         }
         else
         {
-            ButtonViewCell * buttonViewCell = (ButtonViewCell*)cell;
             buttonViewCell.leftLabel.text = NSLocalizedString(@"brief", @"brief");
             buttonViewCell.buttonText.text = @"成都仁和春天百货店人东店！";
             buttonViewCell.buttonRightIcon.hidden = YES;
         }
     }
-    else if(section == 2)
+    else if(section == 1)
     {
         cell = [tableView dequeueReusableCellWithIdentifier:gridViewCellIdentifier];
         if(!cell) {
@@ -225,7 +213,7 @@
         ((GridViewCell*)cell).firstLabel.attributedText = attrStr;
         ((GridViewCell*)cell).firstLabel.textAlignment = UITextAlignmentCenter;
         
-        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"topic", @"") detail:@"(1)"];
+        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"collection", @"") detail:@"(1)"];
         ((GridViewCell*)cell).secondLabel.attributedText = attrStr;
         ((GridViewCell*)cell).secondLabel.textAlignment = UITextAlignmentCenter;
         
@@ -237,7 +225,7 @@
         ((GridViewCell*)cell).fourthLabel.attributedText = attrStr;
         ((GridViewCell*)cell).fourthLabel.textAlignment = UITextAlignmentCenter;
         
-        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"collection", @"") detail:@"(33)"];
+        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"topic", @"") detail:@"(33)"];
         ((GridViewCell*)cell).fifthLabel.attributedText = attrStr;
         ((GridViewCell*)cell).fifthLabel.textAlignment = UITextAlignmentCenter;
         
@@ -246,12 +234,12 @@
         ((GridViewCell*)cell).sixthLabel.textAlignment = UITextAlignmentCenter;
         
         _weiboButton = ((GridViewCell*)cell).firstButton;
-        _topicButton = ((GridViewCell*)cell).secondButton;
+        _collectionButton= ((GridViewCell*)cell).secondButton;
 
         _followButton = ((GridViewCell*)cell).thirdButton;
         _fansButton = ((GridViewCell*)cell).fourthButton;
         
-        _collectionButton = ((GridViewCell*)cell).fifthButton;
+        _topicButton = ((GridViewCell*)cell).fifthButton;
         _publishedButton = ((GridViewCell*)cell).sixthButton;
         ((GridViewCell*)cell).delegate = self;
     }
@@ -322,11 +310,7 @@
     }
     else if (section == 1)
     {
-        height = 40.0f;
-    }
-    else if (section == 2)
-    {
-        height = 107.0f;
+        height = 71.0f;
     }
     return height;
 }
@@ -365,11 +349,11 @@
     {
         [[iToast makeText:@"微博"] show];
     }
-    else if(button == _publishedButton)
+    else if(button == _followButton)
     {
         [[iToast makeText:@"已发布"] show];
     }
-    else if(button == _topicButton)
+    else if(button == _fansButton)
     {
         [[iToast makeText:@"话题"] show];
     }

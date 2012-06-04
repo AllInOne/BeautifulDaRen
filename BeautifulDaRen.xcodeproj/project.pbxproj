@@ -1311,15 +1311,51 @@
 			name = SubView;
 			sourceTree = "<group>";
 		};
+		C26A0EC9157C9C8F0063982F /* CommonView */ = {
+			isa = PBXGroup;
+			children = (
+				CEDC918F153FDC7700BA6C35 /* AdsPageView.h */,
+				CEDC9190153FDC7700BA6C35 /* AdsPageView.m */,
+				CEDC918D153FDC5700BA6C35 /* AdsPageView.xib */,
+				C25022391575E34C00C0561F /* BorderImageView.h */,
+				C250223A1575E34C00C0561F /* BorderImageView.m */,
+				C284B7D01577DD5B007D85CC /* CommonViewController.h */,
+				C284B7D11577DD5B007D85CC /* CommonViewController.m */,
+				C284B7D21577DD5B007D85CC /* CommonViewController.xib */,
+				CE5B741E1574C461009C9669 /* FullImageViewController.h */,
+				CE5B741F1574C461009C9669 /* FullImageViewController.m */,
+				CE5B74201574C461009C9669 /* FullImageViewController.xib */,
+				C20B53D5154701320014812B /* MapViewController.h */,
+				C20B53D6154701320014812B /* MapViewController.m */,
+				C20B53D7154701320014812B /* MapViewController.xib */,
+				C21C26B2156BA872000F8E3C /* RadioButton.h */,
+				C21C26B3156BA874000F8E3C /* RadioButton.m */,
+				C250224C1576204F00C0561F /* SegmentControl.h */,
+				C250224D1576205000C0561F /* SegmentControl.m */,
+				CE62B35F1551790A0017AA88 /* SelectCityViewController.h */,
+				CE62B3601551790A0017AA88 /* SelectCityViewController.m */,
+				CE62B3611551790A0017AA88 /* SelectCityViewController.xib */,
+				CEE9B093157738DA00761201 /* UIImage+Scale.h */,
+				CEE9B094157738DB00761201 /* UIImage+Scale.m */,
+				C2519F991564E36E0040EBC5 /* WaterFlowView.h */,
+				C2519F9A1564E36E0040EBC5 /* WaterFlowView.m */,
+			);
+			name = CommonView;
+			sourceTree = "<group>";
+		};
 		C284B7D51577DEDF007D85CC /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				C25022391575E34C00C0561F /* BorderImageView.h */,
-				C250223A1575E34C00C0561F /* BorderImageView.m */,
-				C24B11A71549A5B6004F6F8E /* ViewHelper.h */,
-				C24B11A81549A5B6004F6F8E /* ViewHelper.m */,
 				CEE9B09615776E1400761201 /* iToast.h */,
 				CEE9B09715776E1500761201 /* iToast.m */,
+				CE51516115786A8300F96D1B /* LocationHelper.h */,
+				CE51516215786A8300F96D1B /* LocationHelper.m */,
+				C2F68D03157340E7006ED8AE /* NSAttributedString+Attributes.h */,
+				C2F68D04157340E7006ED8AE /* NSAttributedString+Attributes.m */,
+				C2F68D05157340E7006ED8AE /* OHAttributedLabel.h */,
+				C2F68D06157340E7006ED8AE /* OHAttributedLabel.m */,
+				C24B11A71549A5B6004F6F8E /* ViewHelper.h */,
+				C24B11A81549A5B6004F6F8E /* ViewHelper.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -2360,39 +2396,11 @@
 		CEDC918C153FDBCA00BA6C35 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				C26A0EC9157C9C8F0063982F /* CommonView */,
 				C284B7D61577DF39007D85CC /* CommonCell */,
 				C284B7D51577DEDF007D85CC /* Utilities */,
-				CEDC918F153FDC7700BA6C35 /* AdsPageView.h */,
-				CEDC9190153FDC7700BA6C35 /* AdsPageView.m */,
-				CEDC918D153FDC5700BA6C35 /* AdsPageView.xib */,
-				CE5B741E1574C461009C9669 /* FullImageViewController.h */,
-				CE5B741F1574C461009C9669 /* FullImageViewController.m */,
-				CE5B74201574C461009C9669 /* FullImageViewController.xib */,
-				C20B53D5154701320014812B /* MapViewController.h */,
-				C20B53D6154701320014812B /* MapViewController.m */,
-				C20B53D7154701320014812B /* MapViewController.xib */,
-				C2F68D03157340E7006ED8AE /* NSAttributedString+Attributes.h */,
-				C2F68D04157340E7006ED8AE /* NSAttributedString+Attributes.m */,
-				C2F68D05157340E7006ED8AE /* OHAttributedLabel.h */,
-				C2F68D06157340E7006ED8AE /* OHAttributedLabel.m */,
-				C21C26B2156BA872000F8E3C /* RadioButton.h */,
-				C21C26B3156BA874000F8E3C /* RadioButton.m */,
 				CE266ADE155C12EF000AC072 /* ScrollView */,
-				CE62B35F1551790A0017AA88 /* SelectCityViewController.h */,
-				CE62B3601551790A0017AA88 /* SelectCityViewController.m */,
-				CE62B3611551790A0017AA88 /* SelectCityViewController.xib */,
 				CE7C9D1715400ED000F3812F /* ViewConstants.h */,
-				C2519F991564E36E0040EBC5 /* WaterFlowView.h */,
-				C2519F9A1564E36E0040EBC5 /* WaterFlowView.m */,
-				C250224C1576204F00C0561F /* SegmentControl.h */,
-				C250224D1576205000C0561F /* SegmentControl.m */,
-				CEE9B093157738DA00761201 /* UIImage+Scale.h */,
-				CEE9B094157738DB00761201 /* UIImage+Scale.m */,
-				CE51516115786A8300F96D1B /* LocationHelper.h */,
-				CE51516215786A8300F96D1B /* LocationHelper.m */,
-				C284B7D01577DD5B007D85CC /* CommonViewController.h */,
-				C284B7D11577DD5B007D85CC /* CommonViewController.m */,
-				C284B7D21577DD5B007D85CC /* CommonViewController.xib */,
 			);
 			path = Common;
 			sourceTree = "<group>";

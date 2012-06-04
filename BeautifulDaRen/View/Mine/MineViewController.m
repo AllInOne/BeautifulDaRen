@@ -142,7 +142,7 @@
     else if(section == 1) {
         cell = [tableView dequeueReusableCellWithIdentifier:gridViewIndentifier];
         if(!cell) {
-            cell = [[[NSBundle mainBundle] loadNibNamed:gridViewIndentifier owner:self options:nil] objectAtIndex:0];
+            cell = [[[NSBundle mainBundle] loadNibNamed:gridViewIndentifier owner:self options:nil] objectAtIndex:2];
         }
         UserIdentity * userIdentity = [[DataManager sharedManager] getCurrentLocalIdentityInContext:nil];
         ((GridViewCell*)cell).delegate = self;
@@ -238,7 +238,7 @@
     }
     else if (section == 1)
     {
-        height = 35.0f;
+        height = 107.0f;
     }
     else if (section == 2)
     {
