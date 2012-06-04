@@ -12,6 +12,7 @@
 #import "ButtonViewCell.h"
 #import "EdittingViewController.h"
 #import "SegmentControl.h"
+#import "iToast.h"
 
 @interface MineEditingViewController()
 
@@ -45,7 +46,7 @@
 
 -(void)onSaveButtonClicked
 {
-    [ViewHelper showSimpleMessage:@"保存" withTitle:nil withButtonText:@"好的"];
+    [[iToast makeText:@"保存"] show];
 }
 
 #pragma mark - View lifecycle

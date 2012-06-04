@@ -13,6 +13,7 @@
 #import "SinaSDKManager.h"
 #import "QZoneSDKManager.h"
 #import "FindPasswordViewController.h"
+#import "iToast.h"
 
 #import "ViewHelper.h"
 #import "iToast.h"
@@ -22,8 +23,6 @@
 @property (retain, nonatomic) IBOutlet UITableView * tableView;
 @property (retain, nonatomic) IBOutlet UIButton * loginWithQQButton;
 @property (retain, nonatomic) IBOutlet UIButton * loginWithSinaWeiboButton;
-
-- (IBAction)loginButtonSelected:(id)sender;
 
 @end
 
@@ -189,7 +188,10 @@
 #pragma mark UITableViewDelegate
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if([indexPath section] == 2)
+    if ([indexPath section] == 1) {
+        [[iToast makeText:@"登陆"] show];
+    }
+    else if([indexPath section] == 2)
     {
         RegisterViewController * registerController = [[[RegisterViewController alloc] initWithNibName:@"RegisterViewController" bundle:nil] autorelease];
         [self.navigationController pushViewController:registerController animated:YES];
@@ -235,13 +237,6 @@
     return [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
 }
 
-
-#pragma mark LoginViewController
-- (IBAction)loginButtonSelected:(id)sender
-{
-    NSLog(@"TODO loginButtonSelected IN LoginViewController.m");
-}
-
 #pragma mark UITextFieldDelegate
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
@@ -254,6 +249,7 @@
 {
     if(button ==  self.loginWithSinaWeiboButton)
     {
+        [[iToast makeText:@"新浪微博登陆"] show];
         if (![[SinaSDKManager sharedManager] isLogin])
         {
             [[SinaSDKManager sharedManager] setRootviewController:self.navigationController];

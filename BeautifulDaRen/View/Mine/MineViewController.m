@@ -19,6 +19,7 @@
 #import "CommonViewController.h"
 #import "NSAttributedString+Attributes.h"
 #import "OHAttributedLabel.h"
+#import "iToast.h"
 
 @interface MineViewController()
 
@@ -104,7 +105,7 @@
 
 - (void) onRefreshButtonClick
 {
-    [ViewHelper showSimpleMessage:@"refresh button clicked" withTitle:nil withButtonText:@"ok"];
+    [[iToast makeText:@"刷新"] show];
 }
 
 #pragma mark UITableViewDataSource

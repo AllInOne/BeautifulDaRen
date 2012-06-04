@@ -3138,6 +3138,7 @@
 		CE029AE7153E682100886227 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BeautifulDaRen/BeautifulDaRen-Prefix.pch";
 				INFOPLIST_FILE = "BeautifulDaRen/BeautifulDaRen-Info.plist";
@@ -3149,6 +3150,7 @@
 		CE029AE8153E682100886227 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BeautifulDaRen/BeautifulDaRen-Prefix.pch";
 				INFOPLIST_FILE = "BeautifulDaRen/BeautifulDaRen-Info.plist";
