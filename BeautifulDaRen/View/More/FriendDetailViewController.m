@@ -96,7 +96,7 @@
 
 -(void) onHomePageButtonClicked
 {
-    [ViewHelper showSimpleMessage:@"主页" withTitle:nil withButtonText:@"好的"];
+    [[iToast makeText:@"主页"] show];
 }
 
 
@@ -259,10 +259,6 @@
     return cell;
 }
 
--(void)onWeiboButton
-{
-    
-}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -335,6 +331,18 @@
     return height;
 }
 
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 5;
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 10;
+}
+
+
 - (void) didButtonPressed:(UIButton*)button inView:(UIView *)view
 {
     if(button == _followButton)
@@ -387,12 +395,12 @@
 
 - (void)onAt
 {
-    [[iToast makeText:@"at！"] show];
+    [[iToast makeText:@"@他"] show];
 }
 
 - (void)onRemove
 {
-    [[iToast makeText:@"remove！"] show];
+    [[iToast makeText:@"移除"] show];
 }
 
 @end

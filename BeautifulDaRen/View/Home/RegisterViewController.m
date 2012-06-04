@@ -11,7 +11,7 @@
 #import "ButtonViewCell.h"
 #import "QZoneSDKManager.h"
 #import "SelectCityViewController.h"
-
+#import "iToast.h"
 #import "ViewHelper.h"
 #import "ViewConstants.h"
 
@@ -88,19 +88,6 @@ enum
     // TODO 
     NSLog(@"TO handle register button.");
 }
-
--(IBAction)noticeForUseSelected:(id)sender
-{
-    // TODO
-    NSLog(@"TO handle notice for use button.");
-}
-
--(void) genderChooserAction: (UISegmentedControl*)seg
-{
-    // TODO
-    NSLog(@"TO handle segmented control");
-}
-#pragma mark UITableViewDelegate
 
 #pragma mark UITableViewDataSource
 - (UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -245,6 +232,10 @@ enum
             }
         }
     }
+    else if(section == 1)
+    {
+        [[iToast makeText:@"注册"] show];
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -299,7 +290,7 @@ enum
 {
     if(button ==  self.loginWithSinaWeiboButton)
     {
-        NSLog(@"loginWithSinaWeiboButton");
+        [[iToast makeText:@"新浪微博登陆"] show];
     }
     else if(button == self.loginWithQQButton)
     {

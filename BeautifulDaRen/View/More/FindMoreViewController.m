@@ -15,6 +15,7 @@
 #import "FriendDetailViewController.h"
 #import "FindWeiboViewController.h"
 #import "BorderImageView.h"
+#import "iToast.h"
 
 #define X_OFFSET 7
 #define CONTENT_VIEW_HEIGHT_OFFSET 50
@@ -71,7 +72,7 @@
 
 - (void)onRefreshButtonClicked
 {
-    [ViewHelper showSimpleMessage:@"刷新" withTitle:nil withButtonText:@"关闭"];
+    [[iToast makeText:@"刷新"] show];
 }
 #pragma mark - View lifecycle
 -(void)dealloc
