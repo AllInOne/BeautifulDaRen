@@ -173,35 +173,42 @@
 {
     // Step 1.
     // Check if the user has been logged in.
-	if (![self isLoggedIn])
-	{
-        if ([delegate respondsToSelector:@selector(engineNotAuthorized:)])
-        {
-            [delegate engineNotAuthorized:self];
-        }
-        return;
-	}
-    
-	// Step 2.
-    // Check if the access token is expired.
-    if ([self isAuthorizeExpired])
-    {
-        if ([delegate respondsToSelector:@selector(engineAuthorizeExpired:)])
-        {
-            [delegate engineAuthorizeExpired:self];
-        }
-        return;
-    }
+//	if (![self isLoggedIn])
+//	{
+//        if ([delegate respondsToSelector:@selector(engineNotAuthorized:)])
+//        {
+//            [delegate engineNotAuthorized:self];
+//        }
+//        return;
+//	}
+//    
+//	// Step 2.
+//    // Check if the access token is expired.
+//    if ([self isAuthorizeExpired])
+//    {
+//        if ([delegate respondsToSelector:@selector(engineAuthorizeExpired:)])
+//        {
+//            [delegate engineAuthorizeExpired:self];
+//        }
+//        return;
+//    }
     
     [request disconnect];
     
-    self.request = [BSDKRequest requestWithAccessToken:accessToken
-                                                 url:[NSString stringWithFormat:@"%@%@", kWBSDKAPIDomain, methodName]
-                                          httpMethod:httpMethod
-                                              params:params
-                                        postDataType:postDataType
-                                    httpHeaderFields:httpHeaderFields
-                                            delegate:self];
+//    self.request = [BSDKRequest requestWithAccessToken:accessToken
+//                                                 url:[NSString stringWithFormat:@"%@%@", kWBSDKAPIDomain, methodName]
+//                                          httpMethod:httpMethod
+//                                              params:params
+//                                        postDataType:postDataType
+//                                    httpHeaderFields:httpHeaderFields
+//                                            delegate:self];
+    self.request = [BSDKRequest requestWithAccessToken:@"JKLERKEJRK"
+                                                   url:@"http://122.112.33.56:9001/api/t2.php"
+                                            httpMethod:httpMethod
+                                                params:params
+                                          postDataType:postDataType
+                                      httpHeaderFields:httpHeaderFields
+                                              delegate:self];
 	
 	[request connect];
 }
