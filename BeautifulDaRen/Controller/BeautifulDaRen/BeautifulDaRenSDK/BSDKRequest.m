@@ -110,9 +110,14 @@
 				
 				if ([dataParam isKindOfClass:[UIImage class]]) 
 				{
-					NSData* imageData = UIImagePNGRepresentation((UIImage *)dataParam);
-					[BSDKRequest appendUTF8Body:body dataString:[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"file.png\"\r\n", key]];
-					[BSDKRequest appendUTF8Body:body dataString:[NSString stringWithString:@"Content-Type: image/png\r\nContent-Transfer-Encoding: binary\r\n\r\n"]];
+//					NSData* imageData = UIImagePNGRepresentation((UIImage *)dataParam);
+//					[BSDKRequest appendUTF8Body:body dataString:[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"file.png\"\r\n", key]];
+//					[BSDKRequest appendUTF8Body:body dataString:[NSString stringWithString:@"Content-Type: image/png\r\nContent-Transfer-Encoding: binary\r\n\r\n"]];
+//					[body appendData:imageData];
+
+					NSData* imageData = UIImageJPEGRepresentation((UIImage *)dataParam, 1.0);
+					[BSDKRequest appendUTF8Body:body dataString:[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"file.jpg\"\r\n", key]];
+					[BSDKRequest appendUTF8Body:body dataString:[NSString stringWithString:@"Content-Type: image/jpeg\r\nContent-Transfer-Encoding: binary\r\n\r\n"]];
 					[body appendData:imageData];
 				} 
 				else if ([dataParam isKindOfClass:[NSData class]]) 

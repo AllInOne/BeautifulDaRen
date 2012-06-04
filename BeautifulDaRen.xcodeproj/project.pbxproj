@@ -225,6 +225,7 @@
 		CE417871157C8A1200A7155D /* BSDKManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE417870157C8A1200A7155D /* BSDKManager.m */; };
 		CE417876157C8AA300A7155D /* BSDKEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = CE417873157C8AA200A7155D /* BSDKEngine.m */; };
 		CE417877157C8AA300A7155D /* BSDKRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE417875157C8AA300A7155D /* BSDKRequest.m */; };
+		CE41787A157C91E200A7155D /* BSDKWeiboRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE417879157C91E200A7155D /* BSDKWeiboRequest.m */; };
 		CE51516315786A8300F96D1B /* LocationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CE51516215786A8300F96D1B /* LocationHelper.m */; };
 		CE5B73C715749B69009C9669 /* hot_clothes_sample1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE5B73AF15749B69009C9669 /* hot_clothes_sample1@2x.png */; };
 		CE5B73C815749B69009C9669 /* hot_clothes_sample2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE5B73B015749B69009C9669 /* hot_clothes_sample2@2x.png */; };
@@ -910,6 +911,8 @@
 		CE417873157C8AA200A7155D /* BSDKEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSDKEngine.m; sourceTree = "<group>"; };
 		CE417874157C8AA300A7155D /* BSDKRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSDKRequest.h; sourceTree = "<group>"; };
 		CE417875157C8AA300A7155D /* BSDKRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSDKRequest.m; sourceTree = "<group>"; };
+		CE417878157C91E200A7155D /* BSDKWeiboRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSDKWeiboRequest.h; sourceTree = "<group>"; };
+		CE417879157C91E200A7155D /* BSDKWeiboRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSDKWeiboRequest.m; sourceTree = "<group>"; };
 		CE51516115786A8300F96D1B /* LocationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationHelper.h; sourceTree = "<group>"; };
 		CE51516215786A8300F96D1B /* LocationHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationHelper.m; sourceTree = "<group>"; };
 		CE5B73AF15749B69009C9669 /* hot_clothes_sample1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hot_clothes_sample1@2x.png"; sourceTree = "<group>"; };
@@ -1801,6 +1804,8 @@
 			isa = PBXGroup;
 			children = (
 				CE41786E157C8A1200A7155D /* BeautifulDaRenSDK */,
+				CE417878157C91E200A7155D /* BSDKWeiboRequest.h */,
+				CE417879157C91E200A7155D /* BSDKWeiboRequest.m */,
 				CE41786F157C8A1200A7155D /* BSDKManager.h */,
 				CE417870157C8A1200A7155D /* BSDKManager.m */,
 			);
@@ -3067,6 +3072,7 @@
 				CE417871157C8A1200A7155D /* BSDKManager.m in Sources */,
 				CE417876157C8AA300A7155D /* BSDKEngine.m in Sources */,
 				CE417877157C8AA300A7155D /* BSDKRequest.m in Sources */,
+				CE41787A157C91E200A7155D /* BSDKWeiboRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
