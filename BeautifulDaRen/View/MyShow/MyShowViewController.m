@@ -106,10 +106,10 @@
 
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: weiboComposerViewControlller];
     
-    [self dismissViewControllerAnimated:NO completion:^{
-        [self.navigationController presentModalViewController:navController animated:YES];
-        [navController release];
-    }];
+    [self dismissModalViewControllerAnimated:NO];
+    
+    [self.navigationController presentModalViewController:navController animated:YES];
+    [navController release];
     
     [self.tabBarController setSelectedIndex:0];
     self.currentType = UIImagePickerControllerSourceTypeCamera;
@@ -135,9 +135,10 @@
         
         [self.selectPhotoViewController setDelegate:self];
     }
-    [self dismissViewControllerAnimated:NO completion:^{
-        [self.selectPhotoViewController setupImagePicker:self.currentType];
-        [self.parentViewController presentModalViewController:self.selectPhotoViewController.imagePickerController animated:YES];
-    }];
+    
+    [self dismissModalViewControllerAnimated:NO];
+    
+    [self.selectPhotoViewController setupImagePicker:self.currentType];
+    [self.parentViewController presentModalViewController:self.selectPhotoViewController.imagePickerController animated:YES];
 }
 @end

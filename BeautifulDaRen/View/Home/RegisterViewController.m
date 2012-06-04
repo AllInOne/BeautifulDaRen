@@ -9,9 +9,10 @@
 #import "RegisterViewController.h"
 #import "AccountInfoInputCell.h"
 #import "ButtonViewCell.h"
-#import "QZoneSDKManager.h"
+#import "SinaSDKManager.h"
 #import "SelectCityViewController.h"
 #import "iToast.h"
+
 #import "ViewHelper.h"
 #import "ViewConstants.h"
 
@@ -291,12 +292,30 @@ enum
     if(button ==  self.loginWithSinaWeiboButton)
     {
         [[iToast makeText:@"新浪微博登陆"] show];
+        if (![[SinaSDKManager sharedManager] isLogin])
+        {
+            [[SinaSDKManager sharedManager] setRootviewController:self.navigationController];
+            [[SinaSDKManager sharedManager] loginWithDoneCallback:^(LOGIN_STATUS status) {
+                NSLog(@"Sina SDK login done, status:%d", status);
+                if (status == LOGIN_STATUS_SUCCESS) {
+                    [[iToast makeText:@"亲，认证成功过了！"] show];
+                }
+                else
+                {
+                    [[iToast makeText:@"亲，认证失败了！"] show];
+                }
+            }];   
+        }
+        else
+        {
+            [[iToast makeText:@"亲，已经认证过了！"] show];
+        }
     }
     else if(button == self.loginWithQQButton)
     {
-        [[QZoneSDKManager sharedManager] loginWithDoneCallback:^(LOGIN_STATUS status) {
-            NSLog(@"QZone login done, status:%d", status);
-        }];
+//        [[QZoneSDKManager sharedManager] loginWithDoneCallback:^(LOGIN_STATUS status) {
+//            NSLog(@"QZone login done, status:%d", status);
+//        }];
     }
 }
 
