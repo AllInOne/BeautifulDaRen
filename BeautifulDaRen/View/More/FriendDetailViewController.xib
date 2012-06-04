@@ -44,7 +44,6 @@
 						<string key="NSFrame">{{0, 96}, {320, 364}}</string>
 						<reference key="NSSuperview" ref="423715162"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:418</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
@@ -269,7 +268,7 @@
 										<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 									</object>
 								</array>
-								<string key="NSFrame">{{89, 40}, {38, 16}}</string>
+								<string key="NSFrame">{{89, 61}, {38, 16}}</string>
 								<reference key="NSSuperview" ref="1005247890"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="6094866"/>
@@ -326,7 +325,7 @@
 										<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 									</object>
 								</array>
-								<string key="NSFrame">{{131, 40}, {53, 16}}</string>
+								<string key="NSFrame">{{131, 61}, {53, 16}}</string>
 								<reference key="NSSuperview" ref="1005247890"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="48497086"/>
@@ -338,7 +337,7 @@
 							<object class="IBUILabel" id="977440762">
 								<reference key="NSNextResponder" ref="1005247890"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{87, 58}, {33, 21}}</string>
+								<string key="NSFrame">{{89, 38}, {33, 21}}</string>
 								<reference key="NSSuperview" ref="1005247890"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="914645186"/>
@@ -360,7 +359,7 @@
 							<object class="IBUILabel" id="914645186">
 								<reference key="NSNextResponder" ref="1005247890"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{120, 58}, {85, 21}}</string>
+								<string key="NSFrame">{{122, 38}, {85, 21}}</string>
 								<reference key="NSSuperview" ref="1005247890"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="79307026"/>
@@ -465,8 +464,8 @@
 						<reference key="object" ref="423715162"/>
 						<array class="NSMutableArray" key="children">
 							<reference ref="1064494079"/>
-							<reference ref="1005247890"/>
 							<reference ref="386647099"/>
+							<reference ref="1005247890"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -607,23 +606,15 @@
 					<string key="className">FriendDetailViewController</string>
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="blackListButton">UIButton</string>
-						<string key="buyedButton">UIButton</string>
 						<string key="collectionButton">UIButton</string>
 						<string key="fansButton">UIButton</string>
 						<string key="followButton">UIButton</string>
 						<string key="friendDetailView">UITableView</string>
+						<string key="publishedButton">UIButton</string>
 						<string key="topicButton">UIButton</string>
+						<string key="weiboButton">UIButton</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="blackListButton">
-							<string key="name">blackListButton</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="buyedButton">
-							<string key="name">buyedButton</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
 						<object class="IBToOneOutletInfo" key="collectionButton">
 							<string key="name">collectionButton</string>
 							<string key="candidateClassName">UIButton</string>
@@ -640,8 +631,16 @@
 							<string key="name">friendDetailView</string>
 							<string key="candidateClassName">UITableView</string>
 						</object>
+						<object class="IBToOneOutletInfo" key="publishedButton">
+							<string key="name">publishedButton</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="topicButton">
 							<string key="name">topicButton</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="weiboButton">
+							<string key="name">weiboButton</string>
 							<string key="candidateClassName">UIButton</string>
 						</object>
 					</dictionary>
