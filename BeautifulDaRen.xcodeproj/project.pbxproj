@@ -222,6 +222,9 @@
 		CE20C435156776D30031997B /* beautifuldaren_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE20C434156776D20031997B /* beautifuldaren_logo@2x.png */; };
 		CE20C437156776E60031997B /* beautifuldaren_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = CE20C436156776E60031997B /* beautifuldaren_logo.png */; };
 		CE38B7EE15483CB10080DD99 /* QZoneSDKManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE38B7ED15483CB10080DD99 /* QZoneSDKManager.m */; };
+		CE417871157C8A1200A7155D /* BSDKManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE417870157C8A1200A7155D /* BSDKManager.m */; };
+		CE417876157C8AA300A7155D /* BSDKEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = CE417873157C8AA200A7155D /* BSDKEngine.m */; };
+		CE417877157C8AA300A7155D /* BSDKRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE417875157C8AA300A7155D /* BSDKRequest.m */; };
 		CE51516315786A8300F96D1B /* LocationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CE51516215786A8300F96D1B /* LocationHelper.m */; };
 		CE5B73C715749B69009C9669 /* hot_clothes_sample1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE5B73AF15749B69009C9669 /* hot_clothes_sample1@2x.png */; };
 		CE5B73C815749B69009C9669 /* hot_clothes_sample2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE5B73B015749B69009C9669 /* hot_clothes_sample2@2x.png */; };
@@ -901,6 +904,12 @@
 		CE20C436156776E60031997B /* beautifuldaren_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = beautifuldaren_logo.png; sourceTree = "<group>"; };
 		CE38B7EC15483CB10080DD99 /* QZoneSDKManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QZoneSDKManager.h; path = Tencent/QZoneSDKManager.h; sourceTree = "<group>"; };
 		CE38B7ED15483CB10080DD99 /* QZoneSDKManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QZoneSDKManager.m; path = Tencent/QZoneSDKManager.m; sourceTree = "<group>"; };
+		CE41786F157C8A1200A7155D /* BSDKManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSDKManager.h; sourceTree = "<group>"; };
+		CE417870157C8A1200A7155D /* BSDKManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSDKManager.m; sourceTree = "<group>"; };
+		CE417872157C8AA200A7155D /* BSDKEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSDKEngine.h; sourceTree = "<group>"; };
+		CE417873157C8AA200A7155D /* BSDKEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSDKEngine.m; sourceTree = "<group>"; };
+		CE417874157C8AA300A7155D /* BSDKRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSDKRequest.h; sourceTree = "<group>"; };
+		CE417875157C8AA300A7155D /* BSDKRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSDKRequest.m; sourceTree = "<group>"; };
 		CE51516115786A8300F96D1B /* LocationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationHelper.h; sourceTree = "<group>"; };
 		CE51516215786A8300F96D1B /* LocationHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationHelper.m; sourceTree = "<group>"; };
 		CE5B73AF15749B69009C9669 /* hot_clothes_sample1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hot_clothes_sample1@2x.png"; sourceTree = "<group>"; };
@@ -1437,6 +1446,7 @@
 		CE029AF2153E68CD00886227 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				CE41786D157C8A1100A7155D /* BeautifulDaRen */,
 				CEBCD054154FF3A6000D41E1 /* DataManager.h */,
 				CEBCD055154FF3A6000D41E1 /* DataManager.m */,
 				CEBCD04F154FF361000D41E1 /* Common */,
@@ -1785,6 +1795,27 @@
 				CEEF7B6315556430001ABCEC /* ForwardCommentTableViewCell.xib */,
 			);
 			path = Weibo;
+			sourceTree = "<group>";
+		};
+		CE41786D157C8A1100A7155D /* BeautifulDaRen */ = {
+			isa = PBXGroup;
+			children = (
+				CE41786E157C8A1200A7155D /* BeautifulDaRenSDK */,
+				CE41786F157C8A1200A7155D /* BSDKManager.h */,
+				CE417870157C8A1200A7155D /* BSDKManager.m */,
+			);
+			path = BeautifulDaRen;
+			sourceTree = "<group>";
+		};
+		CE41786E157C8A1200A7155D /* BeautifulDaRenSDK */ = {
+			isa = PBXGroup;
+			children = (
+				CE417872157C8AA200A7155D /* BSDKEngine.h */,
+				CE417873157C8AA200A7155D /* BSDKEngine.m */,
+				CE417874157C8AA300A7155D /* BSDKRequest.h */,
+				CE417875157C8AA300A7155D /* BSDKRequest.m */,
+			);
+			path = BeautifulDaRenSDK;
 			sourceTree = "<group>";
 		};
 		CE5B740F15749B90009C9669 /* samples */ = {
@@ -3033,6 +3064,9 @@
 				CE51516315786A8300F96D1B /* LocationHelper.m in Sources */,
 				C284B7D31577DD5B007D85CC /* CommonViewController.m in Sources */,
 				C284B7D91577DFC1007D85CC /* FriendListViewCell.m in Sources */,
+				CE417871157C8A1200A7155D /* BSDKManager.m in Sources */,
+				CE417876157C8AA300A7155D /* BSDKEngine.m in Sources */,
+				CE417877157C8AA300A7155D /* BSDKRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
