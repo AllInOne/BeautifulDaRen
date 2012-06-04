@@ -12,8 +12,6 @@
 		C20B53EC154706340014812B /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C20B53EB154706340014812B /* MapKit.framework */; };
 		C20BD4B215591F72006BEEC8 /* FindMoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C20BD4B015591F71006BEEC8 /* FindMoreViewController.m */; };
 		C20BD4B315591F72006BEEC8 /* FindMoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C20BD4B115591F71006BEEC8 /* FindMoreViewController.xib */; };
-		C20FAB0E1559539400895272 /* ContactItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C20FAB0D1559539400895272 /* ContactItemCell.m */; };
-		C20FAB10155953A600895272 /* ContactItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C20FAB0F155953A600895272 /* ContactItemCell.xib */; };
 		C2118B7515692D56006F4551 /* WeiboListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2118B7315692D56006F4551 /* WeiboListViewController.m */; };
 		C2118B7615692D56006F4551 /* WeiboListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2118B7415692D56006F4551 /* WeiboListViewController.xib */; };
 		C2139A6A1564087600C3922D /* PrivateLetterViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C2139A691564087600C3922D /* PrivateLetterViewCell.m */; };
@@ -60,6 +58,8 @@
 		C26717BD1542BF2200DC40D8 /* CategoryItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C26717B91542BF2200DC40D8 /* CategoryItemCell.xib */; };
 		C26798EC155E9F7C001E1D2E /* FindPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C26798EA155E9F7B001E1D2E /* FindPasswordViewController.m */; };
 		C26798ED155E9F7C001E1D2E /* FindPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C26798EB155E9F7C001E1D2E /* FindPasswordViewController.xib */; };
+		C26A0EEB157D0FB80063982F /* FriendHorizontalScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = C26A0EE9157D0FB80063982F /* FriendHorizontalScrollView.m */; };
+		C26A0EEC157D0FB80063982F /* FriendHorizontalScrollView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C26A0EEA157D0FB80063982F /* FriendHorizontalScrollView.xib */; };
 		C274DCBE155EB7BA0098EE22 /* UserIdentity.m in Sources */ = {isa = PBXBuildFile; fileRef = C274DCBD155EB7BA0098EE22 /* UserIdentity.m */; };
 		C274DCC1155EB99B0098EE22 /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C274DCC0155EB99B0098EE22 /* CoreDataManager.m */; };
 		C27F8654156CCFE40094402B /* FindFriendViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C27F8653156CCFE30094402B /* FindFriendViewCell.m */; };
@@ -595,9 +595,6 @@
 		C20BD4AF15591F70006BEEC8 /* FindMoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindMoreViewController.h; sourceTree = "<group>"; };
 		C20BD4B015591F71006BEEC8 /* FindMoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindMoreViewController.m; sourceTree = "<group>"; };
 		C20BD4B115591F71006BEEC8 /* FindMoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FindMoreViewController.xib; sourceTree = "<group>"; };
-		C20FAB0C1559539400895272 /* ContactItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactItemCell.h; sourceTree = "<group>"; };
-		C20FAB0D1559539400895272 /* ContactItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactItemCell.m; sourceTree = "<group>"; };
-		C20FAB0F155953A600895272 /* ContactItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactItemCell.xib; sourceTree = "<group>"; };
 		C2118B7215692D56006F4551 /* WeiboListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboListViewController.h; sourceTree = "<group>"; };
 		C2118B7315692D56006F4551 /* WeiboListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboListViewController.m; sourceTree = "<group>"; };
 		C2118B7415692D56006F4551 /* WeiboListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeiboListViewController.xib; sourceTree = "<group>"; };
@@ -671,6 +668,9 @@
 		C26798E9155E9F7B001E1D2E /* FindPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindPasswordViewController.h; sourceTree = "<group>"; };
 		C26798EA155E9F7B001E1D2E /* FindPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindPasswordViewController.m; sourceTree = "<group>"; };
 		C26798EB155E9F7C001E1D2E /* FindPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FindPasswordViewController.xib; sourceTree = "<group>"; };
+		C26A0EE8157D0FB80063982F /* FriendHorizontalScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendHorizontalScrollView.h; sourceTree = "<group>"; };
+		C26A0EE9157D0FB80063982F /* FriendHorizontalScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendHorizontalScrollView.m; sourceTree = "<group>"; };
+		C26A0EEA157D0FB80063982F /* FriendHorizontalScrollView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendHorizontalScrollView.xib; sourceTree = "<group>"; };
 		C274DCBC155EB7BA0098EE22 /* UserIdentity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserIdentity.h; sourceTree = "<group>"; };
 		C274DCBD155EB7BA0098EE22 /* UserIdentity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserIdentity.m; sourceTree = "<group>"; };
 		C274DCBF155EB99B0098EE22 /* CoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreDataManager.h; path = Common/CoreDataManager.h; sourceTree = "<group>"; };
@@ -1405,15 +1405,15 @@
 		C2E9898F156A130900ACFEA4 /* subview */ = {
 			isa = PBXGroup;
 			children = (
-				C20FAB0C1559539400895272 /* ContactItemCell.h */,
-				C20FAB0D1559539400895272 /* ContactItemCell.m */,
-				C20FAB0F155953A600895272 /* ContactItemCell.xib */,
 				C27F8652156CCFE30094402B /* FindFriendViewCell.h */,
 				C27F8653156CCFE30094402B /* FindFriendViewCell.m */,
 				C27F8655156CCFF70094402B /* FindFriendViewCell.xib */,
 				C27F8659156CF4C10094402B /* FindWeiboViewCell.h */,
 				C27F865A156CF4C10094402B /* FindWeiboViewCell.m */,
 				C27F865C156CF4D70094402B /* FindWeiboViewCell.xib */,
+				C26A0EE8157D0FB80063982F /* FriendHorizontalScrollView.h */,
+				C26A0EE9157D0FB80063982F /* FriendHorizontalScrollView.m */,
+				C26A0EEA157D0FB80063982F /* FriendHorizontalScrollView.xib */,
 			);
 			name = subview;
 			sourceTree = "<group>";
@@ -2588,7 +2588,6 @@
 				CEF432441556AB5D004D47BA /* TakePhotoViewController.xib in Resources */,
 				CEC29FE61556C56600052A14 /* MyShowViewController.xib in Resources */,
 				C20BD4B315591F72006BEEC8 /* FindMoreViewController.xib in Resources */,
-				C20FAB10155953A600895272 /* ContactItemCell.xib in Resources */,
 				C24B1009155BDB1100918530 /* MineEditingViewController.xib in Resources */,
 				C26798ED155E9F7C001E1D2E /* FindPasswordViewController.xib in Resources */,
 				CEF1FE28155F655B005DFDC8 /* PhotoConfirmViewController.xib in Resources */,
@@ -2961,6 +2960,7 @@
 				CE07F42A1578B79C00DF3BE0 /* app_icon@2x.png in Resources */,
 				C284B7D41577DD5B007D85CC /* FriendListViewController.xib in Resources */,
 				C284B7DB1577DFD9007D85CC /* FriendListViewCell.xib in Resources */,
+				C26A0EEC157D0FB80063982F /* FriendHorizontalScrollView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3043,7 +3043,6 @@
 				CEF432431556AB5D004D47BA /* TakePhotoViewController.m in Sources */,
 				CEC29FE51556C56600052A14 /* MyShowViewController.m in Sources */,
 				C20BD4B215591F72006BEEC8 /* FindMoreViewController.m in Sources */,
-				C20FAB0E1559539400895272 /* ContactItemCell.m in Sources */,
 				C24B1008155BDB1100918530 /* MineEditingViewController.m in Sources */,
 				C213AB9A155C1BCD00667556 /* BeautifulDaRen.xcdatamodeld in Sources */,
 				C26798EC155E9F7C001E1D2E /* FindPasswordViewController.m in Sources */,
@@ -3081,6 +3080,7 @@
 				CE417876157C8AA300A7155D /* BSDKEngine.m in Sources */,
 				CE417877157C8AA300A7155D /* BSDKRequest.m in Sources */,
 				CE41787A157C91E200A7155D /* BSDKWeiboRequest.m in Sources */,
+				C26A0EEB157D0FB80063982F /* FriendHorizontalScrollView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
