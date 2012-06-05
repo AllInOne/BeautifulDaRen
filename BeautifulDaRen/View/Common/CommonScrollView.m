@@ -33,7 +33,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         int index = 0;
-        self.scrollItems = [[NSMutableArray alloc] initWithCapacity:[data count]];
+        _scrollItems = [[NSMutableArray alloc] initWithCapacity:[data count]];
         while (index < data.count) {
             CommonScrollViewItem * item = [[[NSBundle mainBundle] loadNibNamed:@"CommonScrollViewItem" owner:self options:nil] objectAtIndex:0];
             item.button.tag = index;
@@ -71,8 +71,8 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+    _scrollView = nil;
+    _scrollItems = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

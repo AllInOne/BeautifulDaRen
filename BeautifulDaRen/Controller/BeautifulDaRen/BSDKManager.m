@@ -182,13 +182,15 @@ static BSDKManager *sharedInstance;
                  httpHeaderFields:(NSDictionary *)httpHeaderFields
                      doneCallback:(processDoneWithDictBlock)callback
 {
-    [self addRequest:[[BSDKWeiboRequest alloc] initWithEngine: self.BSDKWeiboEngine
-                                              methodName:methodName
-                                              httpMethod:httpMethod
-                                                  params:params
-                                            postDataType:postDataType
-                                        httpHeaderFields:httpHeaderFields
-                                            doneCallback:callback]];
+    BSDKWeiboRequest * bSDKWeiboRequest = [[BSDKWeiboRequest alloc] initWithEngine: self.BSDKWeiboEngine
+                                                                        methodName:methodName
+                                                                        httpMethod:httpMethod
+                                                                            params:params
+                                                                      postDataType:postDataType
+                                                                  httpHeaderFields:httpHeaderFields
+                                                                      doneCallback:callback];
+    [self addRequest:bSDKWeiboRequest];
+    [bSDKWeiboRequest release];
 }
 
 - (void)sendWeiBoWithText:(NSString *)text image:(UIImage *)image doneCallback:(processDoneWithDictBlock)callback

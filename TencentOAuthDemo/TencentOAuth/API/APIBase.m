@@ -94,12 +94,9 @@
 
 	
 	if (!response.message) {
-		response.message=[[NSString alloc]initWithData:data encoding:enc];
+		response.message=[[[NSString alloc]initWithData:data encoding:enc] autorelease];
 	}
-	
-	
-	
-	
+
 	if ([result isKindOfClass:[NSDictionary class]]) {
 		NSDictionary *root = (NSDictionary *)result;
 		if ([[root allKeys] count] == 0) {

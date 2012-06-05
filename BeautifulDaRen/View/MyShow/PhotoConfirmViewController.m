@@ -15,8 +15,8 @@
 
 
 - (void)dealloc {
-    [self.photoImageView release];
-    [self.photoImageData release];
+    [_photoImageView release];
+    [_photoImageData release];
     [super dealloc];
 }
 
@@ -52,8 +52,8 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
-    self.photoImageData = nil;
-    self.photoImageView = nil;
+    _photoImageData = nil;
+    _photoImageView = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

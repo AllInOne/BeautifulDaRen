@@ -79,6 +79,8 @@
         }
         [self.view addSubview: tempToolbar];
         [flexible release]; 
+        [tabBarBg release];
+        [barItems release];
 
     }
     return self;

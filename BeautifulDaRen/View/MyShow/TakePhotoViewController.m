@@ -20,8 +20,8 @@
 
 @implementation TakePhotoViewController
 
-@synthesize delegate;
-@synthesize imagePickerController;
+@synthesize delegate = _delegate;
+@synthesize imagePickerController = _imagePickerController;
 @synthesize galleryPhotoViewController = _galleryPhotoViewController;
 @synthesize currentSourceType = _currentSourceType;
 @synthesize toolbarView = _toolbarView;
@@ -31,9 +31,9 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.imagePickerController = [[[UIImagePickerController alloc] init] autorelease];
-        self.imagePickerController.delegate = self;
-        self.currentSourceType = UIImagePickerControllerSourceTypeCamera;
+        _imagePickerController = [[[UIImagePickerController alloc] init] autorelease];
+        _imagePickerController.delegate = self;
+        _currentSourceType = UIImagePickerControllerSourceTypeCamera;
     }
     return self;
 }
@@ -54,16 +54,19 @@
 
 - (void)viewDidUnload
 {
-    self.imagePickerController = nil;
-    self.toolbarView = nil;
-    
     [super viewDidUnload];
+    
+    _imagePickerController = nil;
+    _toolbarView = nil;
+    _galleryPhotoViewController = nil;
+    
 }
 
 - (void)dealloc
 {
-    [self.imagePickerController release];
-    [self.toolbarView release];
+    [_imagePickerController release];
+    [_toolbarView release];
+    [_galleryPhotoViewController release];
     
     [super dealloc];
 }
@@ -132,6 +135,7 @@
     
     self.toolbarView.items= barItems;
     
+    [barItems release];
     [flexible release];
 }
 

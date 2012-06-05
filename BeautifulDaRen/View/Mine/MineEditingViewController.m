@@ -150,7 +150,7 @@
         [seg release];
         cell.backgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
     }
-    else if(section == 2)
+    else
     {
         cell = [tableView dequeueReusableCellWithIdentifier:buttonViewCellIdentifier];
         if (cell == nil) {

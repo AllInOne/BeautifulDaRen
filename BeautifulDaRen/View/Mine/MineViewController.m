@@ -298,11 +298,13 @@
             }
             case 2:
             {
-                WeiboListViewController * commentMeViewController = [[[WeiboListViewController alloc] initWithNibName:@"WeiboListViewController" bundle:nil type:WeiboListViewControllerType_COMMENT_ME] autorelease];
+                WeiboListViewController * commentMeViewController = [[WeiboListViewController alloc] initWithNibName:@"WeiboListViewController" bundle:nil type:WeiboListViewControllerType_COMMENT_ME];
                 
                 UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: commentMeViewController];
                 
                 [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
+                [navController release];
+                [commentMeViewController release];
                 break;
             }
         }
@@ -312,62 +314,61 @@
 #pragma mark ButtonPressDelegate
 - (void) didButtonPressed:(UIButton*)button inView:(UIView *)view
 {
+    UIViewController * viewController = nil;
     if(button == _followButton)
     {
-        FriendListViewController * followViewController = [[[FriendListViewController alloc] initWithNibName:@"FriendListViewController" bundle:nil type:FriendListViewController_TYPE_MY_FOLLOW] autorelease];
-        
-        UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: followViewController];
-        
-        [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
+        viewController = [[FriendListViewController alloc]
+                          initWithNibName:@"FriendListViewController"
+                          bundle:nil
+                          type:FriendListViewController_TYPE_MY_FOLLOW];
     }
     else if (button == _fansButton)
     {
-        FriendListViewController * fansViewController = [[[FriendListViewController alloc] initWithNibName:@"FriendListViewController" bundle:nil type:FriendListViewController_TYPE_MY_FANS] autorelease];
-        
-        UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: fansViewController];
-        
-        [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
+        viewController = [[FriendListViewController alloc]
+                          initWithNibName:@"FriendListViewController"
+                          bundle:nil
+                          type:FriendListViewController_TYPE_MY_FANS];
     }
     else if (button == _collectionButton)
     {
-        WeiboListViewController * commentMeViewController = [[[WeiboListViewController alloc] initWithNibName:@"WeiboListViewController" bundle:nil type:WeiboListViewControllerType_MY_COLLECTION] autorelease];
-        
-        UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: commentMeViewController];
-        
-        [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
+        viewController = [[WeiboListViewController alloc]
+                          initWithNibName:@"WeiboListViewController"
+                          bundle:nil
+                          type:WeiboListViewControllerType_MY_COLLECTION];
     }
     else if (button == _blackListButton)
     {
-        FriendListViewController * followViewController = [[[FriendListViewController alloc] initWithNibName:@"FriendListViewController" bundle:nil type:FriendListViewController_TYPE_MY_BLACKLIST] autorelease];
-        
-        UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: followViewController];
-        
-        [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
+        viewController = [[FriendListViewController alloc]
+                          initWithNibName:@"FriendListViewController"
+                          bundle:nil
+                          type:FriendListViewController_TYPE_MY_BLACKLIST];
     }
     else if(button == _buyedButton)
     {
-        WeiboListViewController * commentMeViewController = [[[WeiboListViewController alloc] initWithNibName:@"WeiboListViewController" bundle:nil type:WeiboListViewControllerType_MY_BUYED] autorelease];
-        
-        [self.navigationController pushViewController:commentMeViewController animated:YES];
+        viewController = [[WeiboListViewController alloc]
+                          initWithNibName:@"WeiboListViewController"
+                          bundle:nil
+                          type:WeiboListViewControllerType_MY_BUYED];
     }
     else if(button == _topicButton)
     {
-        NSLog(@"topic button pressed");
+        viewController = [[WeiboListViewController alloc]
+                          initWithNibName:@"WeiboListViewController"
+                          bundle:nil
+                          type:WeiboListViewControllerType_MY_BUYED];
     }
     else if(button == _editButton)
     {
-        MineEditingViewController * editingViewController = [[[MineEditingViewController alloc] initWithNibName:@"MineEditingViewController" bundle:nil] autorelease];
-        
-        UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: editingViewController];
-        
-        [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
-        
-        [navController release];
+        viewController = [[MineEditingViewController alloc]
+                          initWithNibName:@"MineEditingViewController"
+                          bundle:nil];
+
     }
-    else
-    {
-        NSAssert(NO, @"There is not any other button should be pressed!");
-    }
+    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: viewController];
+    
+    [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
+    [navController release];
+    [viewController release];
 }
 
 @end

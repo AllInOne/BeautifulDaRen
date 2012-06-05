@@ -12,7 +12,6 @@
 @private
     id<UpdateViewControllerProtocol> delegate;
 
-    NSError *errorDataRetrieval; // SDK failed
 }
 
 @property (nonatomic, assign) id<UpdateViewControllerProtocol> delegate;

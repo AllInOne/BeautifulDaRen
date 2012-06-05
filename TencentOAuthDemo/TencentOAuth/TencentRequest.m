@@ -206,7 +206,10 @@ responseText = _responseText;
 	if (!responseString) {
 		responseString=[[NSString alloc]initWithData:data encoding:enc];
 	}
-	NSLog(@"%@",[[NSString alloc]initWithData:data encoding:enc]);
+    // TO delete
+    NSString * logString = [[NSString alloc]initWithData:data encoding:enc];
+	NSLog(@"%@",logString);
+    [logString release];
 	
 	NSLog(@"%@",responseString);
 	SBJSON *jsonParser = [[SBJSON new] autorelease];

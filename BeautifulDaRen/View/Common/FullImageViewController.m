@@ -87,12 +87,12 @@
     
     [self setImage:self.imageData];
     
-    self.singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
-    [self.scrollView addGestureRecognizer:self.singleTap];
+    _singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
+    [self.scrollView addGestureRecognizer:_singleTap];
     
-    self.doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
+    _doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
     self.doubleTap.numberOfTapsRequired = 2;
-    [self.scrollView addGestureRecognizer:self.doubleTap];
+    [self.scrollView addGestureRecognizer:_doubleTap];
     [self.singleTap requireGestureRecognizerToFail:self.doubleTap];
 
 }
@@ -147,7 +147,7 @@
 
 - (void)handleDoubleTap:(UIGestureRecognizer *)gestureRecognizer {
     [UIView animateWithDuration:0.5 animations:^{
-        float newScale = self.scrollView.zoomScale;
+        float newScale = 0.0f;
         if (self.scrollView.zoomScale > self.scrollView.minimumZoomScale) {
             newScale = self.scrollView.minimumZoomScale;
         }

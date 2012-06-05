@@ -78,13 +78,15 @@ static SinaSDKManager *sharedInstance;
                  httpHeaderFields:(NSDictionary *)httpHeaderFields
                      doneCallback:(processDoneWithDictBlock)callback
 {
-    [self addRequest:[[SinaRequest alloc] initWithEngine: self.sinaWeiboEngine
-                                               methodName:methodName
-                                               httpMethod:httpMethod
-                                                   params:params
-                                             postDataType:postDataType
-                                         httpHeaderFields:httpHeaderFields
-                                             doneCallback:callback]];
+    SinaRequest * sinaRequest = [[SinaRequest alloc] initWithEngine: self.sinaWeiboEngine
+                                                         methodName:methodName
+                                                         httpMethod:httpMethod
+                                                             params:params
+                                                       postDataType:postDataType
+                                                   httpHeaderFields:httpHeaderFields
+                                                       doneCallback:callback];
+    [self addRequest:sinaRequest];
+    [sinaRequest release];
 }
 
 - (void)sendWeiBoWithText:(NSString *)text image:(UIImage *)image doneCallback:(processDoneWithDictBlock)callback
