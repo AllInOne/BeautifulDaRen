@@ -561,6 +561,7 @@
 		CEF432431556AB5D004D47BA /* TakePhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF432411556AB5D004D47BA /* TakePhotoViewController.m */; };
 		CEF432441556AB5D004D47BA /* TakePhotoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF432421556AB5D004D47BA /* TakePhotoViewController.xib */; };
 		CEF432461556B749004D47BA /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEF432451556B748004D47BA /* AudioToolbox.framework */; };
+		CEFABBE4157DDD3900A0518E /* CustomUITabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFABBE3157DDD3900A0518E /* CustomUITabBarItem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1277,6 +1278,8 @@
 		CEF432411556AB5D004D47BA /* TakePhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TakePhotoViewController.m; path = BeautifulDaRen/View/MyShow/TakePhotoViewController.m; sourceTree = SOURCE_ROOT; };
 		CEF432421556AB5D004D47BA /* TakePhotoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TakePhotoViewController.xib; path = BeautifulDaRen/View/MyShow/TakePhotoViewController.xib; sourceTree = SOURCE_ROOT; };
 		CEF432451556B748004D47BA /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		CEFABBE2157DDD3900A0518E /* CustomUITabBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomUITabBarItem.h; sourceTree = "<group>"; };
+		CEFABBE3157DDD3900A0518E /* CustomUITabBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomUITabBarItem.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2403,6 +2406,7 @@
 		CEDC918C153FDBCA00BA6C35 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				CEFABBE5157DDDAA00A0518E /* CommonItem */,
 				C26A0EC9157C9C8F0063982F /* CommonView */,
 				C284B7D61577DF39007D85CC /* CommonCell */,
 				C284B7D51577DEDF007D85CC /* Utilities */,
@@ -2436,6 +2440,15 @@
 				CEBCD04B154FD253000D41E1 /* ChineseToPinyin.m */,
 			);
 			name = Utility;
+			sourceTree = "<group>";
+		};
+		CEFABBE5157DDDAA00A0518E /* CommonItem */ = {
+			isa = PBXGroup;
+			children = (
+				CEFABBE2157DDD3900A0518E /* CustomUITabBarItem.h */,
+				CEFABBE3157DDD3900A0518E /* CustomUITabBarItem.m */,
+			);
+			name = CommonItem;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -3083,6 +3096,7 @@
 				CE417876157C8AA300A7155D /* BSDKEngine.m in Sources */,
 				CE417877157C8AA300A7155D /* BSDKRequest.m in Sources */,
 				CE41787A157C91E200A7155D /* BSDKWeiboRequest.m in Sources */,
+				CEFABBE4157DDD3900A0518E /* CustomUITabBarItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3107,6 +3121,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: XIAO FENG (7ZJCBASW4H)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -3122,6 +3137,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				PROVISIONING_PROFILE = "DDA45B85-3077-4EB2-B96F-F964176EB1A8";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -3131,6 +3147,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: XIAO FENG (7ZJCBASW4H)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -3140,6 +3157,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "DDA45B85-3077-4EB2-B96F-F964176EB1A8";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
