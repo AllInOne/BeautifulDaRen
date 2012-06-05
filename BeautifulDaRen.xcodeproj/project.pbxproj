@@ -1272,6 +1272,7 @@
 		CEF1FE24155F655B005DFDC8 /* PhotoConfirmViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhotoConfirmViewController.h; path = BeautifulDaRen/View/MyShow/PhotoConfirmViewController.h; sourceTree = SOURCE_ROOT; };
 		CEF1FE25155F655B005DFDC8 /* PhotoConfirmViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoConfirmViewController.m; path = BeautifulDaRen/View/MyShow/PhotoConfirmViewController.m; sourceTree = SOURCE_ROOT; };
 		CEF1FE26155F655B005DFDC8 /* PhotoConfirmViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PhotoConfirmViewController.xib; path = BeautifulDaRen/View/MyShow/PhotoConfirmViewController.xib; sourceTree = SOURCE_ROOT; };
+		CEF30583157CBF1400A955EE /* BSDKDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSDKDefines.h; sourceTree = "<group>"; };
 		CEF432401556AB5D004D47BA /* TakePhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TakePhotoViewController.h; path = BeautifulDaRen/View/MyShow/TakePhotoViewController.h; sourceTree = SOURCE_ROOT; };
 		CEF432411556AB5D004D47BA /* TakePhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TakePhotoViewController.m; path = BeautifulDaRen/View/MyShow/TakePhotoViewController.m; sourceTree = SOURCE_ROOT; };
 		CEF432421556AB5D004D47BA /* TakePhotoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TakePhotoViewController.xib; path = BeautifulDaRen/View/MyShow/TakePhotoViewController.xib; sourceTree = SOURCE_ROOT; };
@@ -1815,6 +1816,7 @@
 		CE41786E157C8A1200A7155D /* BeautifulDaRenSDK */ = {
 			isa = PBXGroup;
 			children = (
+				CEF30583157CBF1400A955EE /* BSDKDefines.h */,
 				CE417872157C8AA200A7155D /* BSDKEngine.h */,
 				CE417873157C8AA200A7155D /* BSDKEngine.m */,
 				CE417874157C8AA300A7155D /* BSDKRequest.h */,
@@ -3138,11 +3140,12 @@
 		CE029AE7153E682100886227 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: XIAO FENG (7ZJCBASW4H)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BeautifulDaRen/BeautifulDaRen-Prefix.pch";
 				INFOPLIST_FILE = "BeautifulDaRen/BeautifulDaRen-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "DDA45B85-3077-4EB2-B96F-F964176EB1A8";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -3150,11 +3153,12 @@
 		CE029AE8153E682100886227 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: XIAO FENG (7ZJCBASW4H)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BeautifulDaRen/BeautifulDaRen-Prefix.pch";
 				INFOPLIST_FILE = "BeautifulDaRen/BeautifulDaRen-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "DDA45B85-3077-4EB2-B96F-F964176EB1A8";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
