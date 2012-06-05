@@ -7,7 +7,7 @@
 //
 
 #import "FindMoreViewController.h"
-#import "ContactItemCell.h"
+#import "FriendItemCell.h"
 #import "ViewConstants.h"
 #import "ViewHelper.h"
 #import "FindFriendViewCell.h"
@@ -119,10 +119,18 @@
     _searchBar.scopeButtonTitles = [NSArray arrayWithObjects:
                                     NSLocalizedString(@"weibo", @""),
                                     NSLocalizedString(@"user", @""), nil];
+    
+
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(cellSelected:)
+                                                 name:@"borderImageViewSelected"
+                                               object:nil];
+    
     [_contentScrollView setContentSize:CGSizeMake(0, 360)];
     [_contentScrollView setFrame:CGRectMake(0, CONTENT_VIEW_HEIGHT_OFFSET, _contentScrollView.frame.size.width, _contentScrollView.frame.size.height)];
     
@@ -132,6 +140,11 @@
     [self.view addSubview:_friendViewController];
     [_friendViewController setHidden:YES];
     [self refreshView];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewDidUnload
@@ -147,9 +160,21 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+
+- (void)cellSelected:(NSNotification *)notification
+{
+    FriendDetailViewController *friendDetailController = 
+    [[[FriendDetailViewController alloc] init] autorelease];
+    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: friendDetailController];
+    
+    [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
+    
+    [navController release];
+}
+
 - (void)refreshSameCityDaRenView
 {
-    static NSString * cellViewIdentifier = @"ContactItemCell";
+    static NSString * cellViewIdentifier = @"FriendItemCell";
     NSInteger scrollWidth = 0;
     NSArray * nameArray = [NSArray arrayWithObjects:
                            @"我是谁知道",
@@ -178,7 +203,7 @@
                          @"search_avatar_sample11",
                          nil];
     for (int i = 0; i < [avatars count]; i++) {
-        ContactItemCell * cell = [[[NSBundle mainBundle] loadNibNamed:cellViewIdentifier owner:self options:nil] objectAtIndex:0];
+        FriendItemCell * cell = [[[NSBundle mainBundle] loadNibNamed:cellViewIdentifier owner:self options:nil] objectAtIndex:0];
         
         cell.frame = CGRectMake(i * (cell.frame.size.width + X_OFFSET), 0,
                                 cell.frame.size.width,
@@ -187,16 +212,16 @@
         
         [_sameCityDaRenView addSubview:cell];
     
-        BorderImageView * borderImageView = [[[BorderImageView alloc] initWithFrame:cell.contactImageView.frame andImage:[UIImage imageNamed:[avatars objectAtIndex:i]]] autorelease];
-        [cell addSubview:borderImageView];
-        cell.contactLabel.text = [nameArray objectAtIndex:i];
+        [cell.friendImageView addSubview:[[[BorderImageView alloc] initWithFrame:cell.friendImageView.frame andImage:[UIImage imageNamed:[avatars objectAtIndex:i]]] autorelease]];
+        cell.friendNameLabel.text = [nameArray objectAtIndex:i];
     }
+    _sameCityDaRenView.delegate = self;
     [_sameCityDaRenView setContentSize:CGSizeMake(scrollWidth, 0)];
 }
 
 -(void) refreshYouMayInterestinView
 {
-    static NSString * cellViewIdentifier = @"ContactItemCell";
+    static NSString * cellViewIdentifier = @"FriendItemCell";
     NSInteger scrollWidth = 0;
     NSArray * nameArray = [NSArray arrayWithObjects:
                            @"天之骄子",
@@ -225,7 +250,7 @@
                          @"search_avatar_sample4",
                          nil];
     for (int i = 0; i < [avatars count]; i++) {
-        ContactItemCell * cell = [[[NSBundle mainBundle] loadNibNamed:cellViewIdentifier owner:self options:nil] objectAtIndex:0];
+        FriendItemCell * cell = [[[NSBundle mainBundle] loadNibNamed:cellViewIdentifier owner:self options:nil] objectAtIndex:0];
         cell.frame = CGRectMake(i * (cell.frame.size.width + X_OFFSET), 0,
                                 cell.frame.size.width,
                                 cell.frame.size.height);
@@ -233,16 +258,16 @@
         
         [_youMayInterestinView addSubview:cell];
         
-        BorderImageView * borderImageView = [[[BorderImageView alloc] initWithFrame:cell.contactImageView.frame andImage:[UIImage imageNamed:[avatars objectAtIndex:i]]] autorelease];
-        [cell addSubview:borderImageView];
-        cell.contactLabel.text = [nameArray objectAtIndex:i];
+        [cell.friendImageView addSubview:[[[BorderImageView alloc] initWithFrame:cell.friendImageView.frame andImage:[UIImage imageNamed:[avatars objectAtIndex:i]]] autorelease]];
+        cell.friendNameLabel.text = [nameArray objectAtIndex:i];
     }
+    _youMayInterestinView.delegate = self;
     [_youMayInterestinView setContentSize:CGSizeMake(scrollWidth, 0)];
 }
 
 - (void) refreshHotDaRenView
 {
-    static NSString * cellViewIdentifier = @"ContactItemCell";
+    static NSString * cellViewIdentifier = @"FriendItemCell";
     NSArray * nameArray = [NSArray arrayWithObjects:
                            @"东东",
                            @"你是我唯一", 
@@ -271,18 +296,18 @@
                          @"search_avatar_sample8",
                          nil];
     for (int i = 0; i < [avatars count]; i++) {
-        ContactItemCell * cell = [[[NSBundle mainBundle] loadNibNamed:cellViewIdentifier owner:self options:nil] objectAtIndex:0];
+        FriendItemCell * cell = [[[NSBundle mainBundle] loadNibNamed:cellViewIdentifier owner:self options:nil] objectAtIndex:0];
         cell.frame = CGRectMake(i * (cell.frame.size.width + X_OFFSET), 0,
                                 cell.frame.size.width,
                                 cell.frame.size.height);
         scrollWidth += (cell.frame.size.width + X_OFFSET);
         
-        [_hotDaRenView addSubview:cell];
+        [cell.friendImageView addSubview:[[[BorderImageView alloc] initWithFrame:cell.friendImageView.frame andImage:[UIImage imageNamed:[avatars objectAtIndex:i]]] autorelease]];
+        cell.friendNameLabel.text = [nameArray objectAtIndex:i];
         
-        BorderImageView * borderImageView = [[[BorderImageView alloc] initWithFrame:cell.contactImageView.frame andImage:[UIImage imageNamed:[avatars objectAtIndex:i]]] autorelease];
-        [cell addSubview:borderImageView];
-        cell.contactLabel.text = [nameArray objectAtIndex:i];
+        [_hotDaRenView addSubview:cell];
     }
+    _hotDaRenView.delegate = self;
     [_hotDaRenView setContentSize:CGSizeMake(scrollWidth, 0)];
 }
 #pragma mark UITableViewDelegate
@@ -291,9 +316,9 @@
 {
     if(_isFindWeibo == NO)
     {
-        FriendDetailViewController *weiboDetailController = 
+        FriendDetailViewController *friendDetailController = 
         [[[FriendDetailViewController alloc] init] autorelease];
-        UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: weiboDetailController];
+        UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: friendDetailController];
         
         [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
         

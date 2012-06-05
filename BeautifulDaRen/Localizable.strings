@@ -69,6 +69,10 @@
 "commentme" = "评论我";
 "comment_me" = "评论我的";
 "published" = "已发布商品";
+"her_weibo" = "她的微博";
+"my_collection" = "我的收藏";
+"her_collection" = "她的收藏";
+"my_buyed" = "我购买的";
 
 "nickname" = "昵称";
 "city" = "城市";

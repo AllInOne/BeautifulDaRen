@@ -11,7 +11,9 @@
 #import "GridViewCell.h"
 #import "ViewHelper.h"
 #import "ViewConstants.h"
-#import "CommonViewController.h"
+#import "FriendListViewController.h"
+#import "WeiboListViewController.h"
+#import "EdittingViewController.h"
 #import "iToast.h"
 
 @interface FriendDetailViewController()
@@ -89,16 +91,18 @@
     
     // Release any cached data, images, etc that aren't in use.
 }
+
 - (void)onBackButtonClicked {
-    [self dismissModalViewControllerAnimated:YES];
-//    [self.navigationController popViewControllerAnimated:YES];
+    if (![self.navigationController popViewControllerAnimated:YES])
+    {
+        [self dismissModalViewControllerAnimated:YES];
+    }
 }
 
 -(void) onHomePageButtonClicked
 {
     [[iToast makeText:@"主页"] show];
 }
-
 
 #pragma mark - View lifecycle
 
@@ -150,7 +154,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -158,13 +162,9 @@
     NSInteger number = 0;
     if(section == 0)
     {
-        number = 1;
+        number = _isIdentification ? 3 : 2;
     }
     else if(section == 1)
-    {
-        number = _isIdentification ? 2 : 1;
-    }
-    else if(section == 2)
     {
         number = 1;
     }
@@ -187,32 +187,25 @@
             cell = [[[NSBundle mainBundle] loadNibNamed:buttonViewCellIdentifier owner:self options:nil] objectAtIndex:3];
         }
         ButtonViewCell * buttonViewCell = (ButtonViewCell*)cell;
-        buttonViewCell.leftLabel.text = NSLocalizedString(@"notes", @"notes");
-        buttonViewCell.buttonText.text = NSLocalizedString(@"set_notes", @"set_notes");
-    }
-    else if(section == 1)
-    {
-        cell = [tableView dequeueReusableCellWithIdentifier:buttonViewCellIdentifier];
-        if(!cell)
-        {
-            cell = [[[NSBundle mainBundle] loadNibNamed:buttonViewCellIdentifier owner:self options:nil] objectAtIndex:3];
-        }
         if(_isIdentification && [indexPath row] == 0)
         {
-            ButtonViewCell * buttonViewCell = (ButtonViewCell*)cell;
+            buttonViewCell.leftLabel.text = NSLocalizedString(@"notes", @"notes");
+            buttonViewCell.buttonText.text = NSLocalizedString(@"set_notes", @"set_notes");
+        }
+        else if(_isIdentification && [indexPath row] == 1)
+        {
             buttonViewCell.leftLabel.text = NSLocalizedString(@"authentication", @"authentication");
             buttonViewCell.buttonText.text = @"仁和春天人东店官方账号";
             buttonViewCell.buttonRightIcon.hidden = YES;
         }
         else
         {
-            ButtonViewCell * buttonViewCell = (ButtonViewCell*)cell;
             buttonViewCell.leftLabel.text = NSLocalizedString(@"brief", @"brief");
             buttonViewCell.buttonText.text = @"成都仁和春天百货店人东店！";
             buttonViewCell.buttonRightIcon.hidden = YES;
         }
     }
-    else if(section == 2)
+    else if(section == 1)
     {
         cell = [tableView dequeueReusableCellWithIdentifier:gridViewCellIdentifier];
         if(!cell) {
@@ -225,7 +218,7 @@
         ((GridViewCell*)cell).firstLabel.attributedText = attrStr;
         ((GridViewCell*)cell).firstLabel.textAlignment = UITextAlignmentCenter;
         
-        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"topic", @"") detail:@"(1)"];
+        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"collection", @"") detail:@"(1)"];
         ((GridViewCell*)cell).secondLabel.attributedText = attrStr;
         ((GridViewCell*)cell).secondLabel.textAlignment = UITextAlignmentCenter;
         
@@ -237,7 +230,7 @@
         ((GridViewCell*)cell).fourthLabel.attributedText = attrStr;
         ((GridViewCell*)cell).fourthLabel.textAlignment = UITextAlignmentCenter;
         
-        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"collection", @"") detail:@"(33)"];
+        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"topic", @"") detail:@"(33)"];
         ((GridViewCell*)cell).fifthLabel.attributedText = attrStr;
         ((GridViewCell*)cell).fifthLabel.textAlignment = UITextAlignmentCenter;
         
@@ -246,12 +239,12 @@
         ((GridViewCell*)cell).sixthLabel.textAlignment = UITextAlignmentCenter;
         
         _weiboButton = ((GridViewCell*)cell).firstButton;
-        _topicButton = ((GridViewCell*)cell).secondButton;
+        _collectionButton= ((GridViewCell*)cell).secondButton;
 
         _followButton = ((GridViewCell*)cell).thirdButton;
         _fansButton = ((GridViewCell*)cell).fourthButton;
         
-        _collectionButton = ((GridViewCell*)cell).fifthButton;
+        _topicButton = ((GridViewCell*)cell).fifthButton;
         _publishedButton = ((GridViewCell*)cell).sixthButton;
         ((GridViewCell*)cell).delegate = self;
     }
@@ -302,14 +295,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
+    if([indexPath section] == 0 && [indexPath row] == 0)
+    {
+        EdittingViewController * edittingViewController = [[[EdittingViewController alloc] initWithNibName:@"EdittingViewController" bundle:nil type:EdittingViewController_type0] autorelease];
+        [self.navigationController pushViewController:edittingViewController animated:YES];
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -322,11 +312,7 @@
     }
     else if (section == 1)
     {
-        height = 40.0f;
-    }
-    else if (section == 2)
-    {
-        height = 107.0f;
+        height = 71.0f;
     }
     return height;
 }
@@ -347,31 +333,27 @@
 {
     if(button == _followButton)
     {
-        CommonViewController * followViewController = [[[CommonViewController alloc] initWithNibName:@"CommonViewController" bundle:nil] autorelease];
+        FriendListViewController * followViewController = [[[FriendListViewController alloc] initWithNibName:@"FriendListViewController" bundle:nil type:FriendListViewController_TYPE_FRIEND_FOLLOW] autorelease];
         
         [self.navigationController pushViewController:followViewController animated:YES];
     }
     else if (button == _fansButton)
     {
-        CommonViewController * followViewController = [[[CommonViewController alloc] initWithNibName:@"CommonViewController" bundle:nil] autorelease];
+        FriendListViewController * followViewController = [[[FriendListViewController alloc] initWithNibName:@"FriendListViewController" bundle:nil type:FriendListViewController_TYPE_FRIEND_FANS] autorelease];
         
         [self.navigationController pushViewController:followViewController animated:YES];
     }
     else if (button == _collectionButton)
     {
-        [[iToast makeText:@"收藏"] show];
+        WeiboListViewController * weiboViewController = [[[WeiboListViewController alloc] initWithNibName:@"WeiboListViewController" bundle:nil type:WeiboListViewControllerType_FRIEND_COLLECTION] autorelease];
+        
+        [self.navigationController pushViewController:weiboViewController animated:YES];
     }
     else if (button == _weiboButton)
     {
-        [[iToast makeText:@"微博"] show];
-    }
-    else if(button == _publishedButton)
-    {
-        [[iToast makeText:@"已发布"] show];
-    }
-    else if(button == _topicButton)
-    {
-        [[iToast makeText:@"话题"] show];
+        WeiboListViewController * weiboViewController = [[[WeiboListViewController alloc] initWithNibName:@"WeiboListViewController" bundle:nil type:WeiboListViewControllerType_FRIEND_WEIBO] autorelease];
+        
+        [self.navigationController pushViewController:weiboViewController animated:YES];
     }
     else
     {

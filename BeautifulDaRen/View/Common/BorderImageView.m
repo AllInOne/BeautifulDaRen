@@ -13,7 +13,11 @@
         imageView.frame = CGRectMake(2, 2, frame.size.width - 4, frame.size.height - 4);
         self.layer.borderColor = [[UIColor lightGrayColor] CGColor];
         self.layer.borderWidth = 1;
-        [self addSubview:imageView];
+        [self addSubview:imageView];        
+        UIButton * actionButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [actionButton setFrame:frame];
+        [actionButton addTarget:self action:@selector(onButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:actionButton];
     }
     return self;
 }
@@ -27,9 +31,20 @@
         self.layer.borderColor = [[UIColor lightGrayColor] CGColor];
         self.layer.borderWidth = 1;
         [self addSubview:view];
+        
+        UIButton * actionButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [actionButton setFrame:frame];
+        [actionButton addTarget:self action:@selector(onButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:actionButton];
     }
     return self;
 }
 
+-(void)onButtonClicked:(UIButton*)sender
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"borderImageViewSelected"
+                                                        object:self
+                                                      userInfo:nil];
+}
 
 @end

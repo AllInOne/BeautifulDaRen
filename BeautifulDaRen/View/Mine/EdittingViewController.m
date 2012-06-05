@@ -50,7 +50,8 @@
 
 -(void)onBackButtonClicked
 {
-    [self dismissModalViewControllerAnimated:YES];
+//    [self dismissModalViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)onSaveButtonClicked

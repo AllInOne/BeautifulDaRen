@@ -11,6 +11,7 @@
 #import "ViewHelper.h"
 #import "ButtonViewCell.h"
 #import "EdittingViewController.h"
+#import "SelectCityViewController.h"
 #import "SegmentControl.h"
 #import "iToast.h"
 
@@ -269,17 +270,29 @@
     {
         NSInteger type = 0;
         NSInteger row = [indexPath row];
-        if(row == 4)
+        if(row == 1)
         {
-            type = EdittingViewController_type1;
+            SelectCityViewController *citySelectionController = 
+            [[[SelectCityViewController alloc] initWithNibName:nil bundle:nil] autorelease];
+            
+            UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: citySelectionController];
+            
+            [self.navigationController presentModalViewController:navController animated:YES];
+            
+            [navController release];
         }
-        else
-        {
-            type = EdittingViewController_type0;
+        else {
+            if(row == 4)
+            {
+                type = EdittingViewController_type1;
+            }
+            else
+            {
+                type = EdittingViewController_type0;
+            }
+            EdittingViewController * edittingViewController = [[[EdittingViewController alloc] initWithNibName:@"EdittingViewController" bundle:nil type:type] autorelease];
+            [self.navigationController pushViewController:edittingViewController animated:YES];
         }
-        
-        EdittingViewController * edittingViewController = [[[EdittingViewController alloc] initWithNibName:@"EdittingViewController" bundle:nil type:type] autorelease];
-        [self.navigationController pushViewController:edittingViewController animated:YES];
     }
 }
 

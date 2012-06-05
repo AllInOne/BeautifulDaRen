@@ -112,10 +112,33 @@
     [super viewDidUnload];
 }
 
+- (void) viewWillAppear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(cellSelected:)
+                                                 name:@"borderImageViewSelected"
+                                               object:nil];
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (void)cellSelected:(NSNotification *)notification
+{
+    WeiboDetailViewController *weiboDetailController = 
+    [[[WeiboDetailViewController alloc] init] autorelease];
+    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: weiboDetailController];
+    
+    [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
+    
+    [navController release];
 }
 
 #pragma mark- WaterflowDataSource
@@ -162,7 +185,6 @@
 
 - (void)flowView:(WaterFlowView *)flowView didSelectAtCell:(WaterFlowCell *)cell ForIndex:(int)index
 {
-    NSLog(@"cell %d selected",index);
     WeiboDetailViewController *weiboDetailController = 
     [[[WeiboDetailViewController alloc] init] autorelease];
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: weiboDetailController];
