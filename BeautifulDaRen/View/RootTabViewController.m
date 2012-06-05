@@ -76,7 +76,7 @@
 
 - (void)initLocalizedString
 {
-    NSArray* homeArray = [NSArray arrayWithObjects:@"首页",@"首页",nil];
+    NSArray* homeArray = [NSArray arrayWithObjects:@"",@"首页",nil];
     NSArray* mineArray = [NSArray arrayWithObjects:@"我的",@"我的",nil];
     NSArray* cameraShareArray = [NSArray arrayWithObjects:@"我秀",@"我秀",nil];
     NSArray* categoryArray = [NSArray arrayWithObjects:@"热门",@"热门",nil];

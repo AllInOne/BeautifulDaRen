@@ -119,7 +119,7 @@
 - (void)didFinishWithCamera
 {
     [self.tabBarController setSelectedIndex:0];
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissModalViewControllerAnimated:NO];
     self.currentType = UIImagePickerControllerSourceTypeCamera;
     self.shouldShowSelf = YES;
 }

@@ -183,10 +183,10 @@
 {
     NSLog(@"Ads Pressed, current ads index = %d", currentPage);
     
-    [[BSDKManager sharedManager] loginWithUsername:@"121asdfasdf" password:@"1212121212" andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-         NSLog(@"sign in done = %d", status);
-        [[iToast makeText:[NSString stringWithFormat:@"%@", [data objectForKey:@"msg"]]] show];
-    }];
+//    [[BSDKManager sharedManager] loginWithUsername:@"121asdfasdf" password:@"1212121212" andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+//         NSLog(@"sign in done = %d", status);
+//        [[iToast makeText:[NSString stringWithFormat:@"%@", [data objectForKey:@"msg"]]] show];
+//    }];
 //    [[BSDKManager sharedManager] getUserInforByUsername:@"121asdfasdf" andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
 //         NSLog(@"sign in done = %d", status);
 //        [[iToast makeText:[NSString stringWithFormat:@"%@", [data objectForKey:@"msg"]]] show];
@@ -196,6 +196,10 @@
 //         NSLog(@"sign in done = %d", status);
 //        [[iToast makeText:[NSString stringWithFormat:@"%@", [data objectForKey:@"msg"]]] show];
 //    }];
+    [[BSDKManager sharedManager] getWeiboListByUsername:@"121asdfasdf" pageSize:20 pageIndex:1 andDoneCallback:^(AIO_STATUS status, NSArray *data) {
+        NSLog(@"sign in done = %d", status);
+        [[iToast makeText:[NSString stringWithFormat:@"%@", [data description]]] show];
+    }];
 }
 
 -(IBAction)onAdsPageClosedPressed:(id)sender

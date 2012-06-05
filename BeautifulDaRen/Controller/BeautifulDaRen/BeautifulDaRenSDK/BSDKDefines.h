@@ -19,7 +19,7 @@
 #define K_BSDK_ACTION_GETINFO @"GetInfo"
 #define K_BSDK_ACTION_CHANGEPASSWORD @"ChangePassWord"
 #define K_BSDK_ACTION_SEARCH @"Search"
-#define K_BSDK_ACTION_GETLIST @"Getlist"
+#define K_BSDK_ACTION_GETLIST @"GetList"
 #define K_BSDK_ACTION_VERIFY @"Verify"
 #define K_BSDK_ACTION_DELETE @"Del"
 #define K_BSDK_ACTION_PERIPHERAL @"Peripheral"
@@ -36,12 +36,25 @@
 
 #define K_BSDK_City @"City"
 
+#define K_BSDK_SHOPMERCHANT @"ShopMerchant"
+#define K_BSDK_BRANDSERVICE @"BrandService"
+#define K_BSDK_PRICE @"Price"
+#define K_BSDK_CONTENT @"Content"
+#define K_BSDK_PICTURE @"Picture"
+#define K_BSDK_LATITUDE @"PosX"
+#define K_BSDK_LONGITUDE @"PoxY"
+
+#define K_BSDK_CREATETIME @"CreateTime"
+
+#define K_BSDK_UID @"id"
 
 #define K_BSDK_RESPONSE_STATUS @"status"
 #define K_BSDK_RESPONSE_STATUS_OK @"y"
 #define K_BSDK_RESPONSE_STATUS_FAILED @"n"
 
 #define K_BSDK_RESPONSE_MESSAGE @"msg"
+
+#define K_BSDK_RESPONSE_BLOGLIST @"BlogList"
 
 #define K_BSDK_IS_RESPONSE_OK(res) ([[res objectForKey:K_BSDK_RESPONSE_STATUS] isEqual:K_BSDK_RESPONSE_STATUS_OK])
 #define K_BSDK_GET_RESPONSE_MESSAGE(res) ([res objectForKey:K_BSDK_RESPONSE_MESSAGE])

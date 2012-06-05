@@ -13,6 +13,7 @@
 #import "TakePhotoViewController.h"
 #import "SinaSDKManager.h"
 #import "UIImage+Scale.h"
+#import "BSDKManager.h"
 
 #define WEIBO_CONTENT_TEXTVIEW_Y_OFFSET (90.0)
 #define WEIBO_CONTENT_TEXTVIEW_MARGIN   (2.0)
@@ -48,6 +49,10 @@
 @synthesize takePhotoViewController = _takePhotoViewController;
 @synthesize sinaButton = _sinaButton;
 @synthesize sinaShareImageView = _sinaShareImageView;
+@synthesize priceTextView = _priceTextView;
+@synthesize locationButton = _locationButton;
+@synthesize atButton = _atButton;
+@synthesize categoryButton = _categoryButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -89,6 +94,8 @@
     
     [_contentScrollView setContentSize:CGSizeMake(_weiboContentTextView.frame.size.width, WEIBO_CONTENT_TEXTVIEW_Y_OFFSET + _weiboContentTextView.frame.size.height + WEIBO_CONTENT_SCROLL_BOUNCE_SIZE)];
     
+    [_weiboContentTextView setDelegate:self];
+    
     if (self.selectedImage != nil)
     {
         [self.attachedImageBgButton setImage:self.selectedImage forState:UIControlStateNormal];
@@ -111,6 +118,10 @@
     }
     
     _attachedImageView.hidden = YES;
+    
+    [self.atButton setEnabled:NO];
+    [self.locationButton setEnabled:NO];
+    [self.categoryButton setEnabled:NO];
 }
 
 - (void)viewDidUnload
@@ -125,6 +136,10 @@
     [self setTakePhotoViewController:nil];
     [self setSinaButton:nil];
     [self setSinaShareImageView:nil];
+    [self setPriceTextView:nil];
+    [self setLocationButton:nil];
+    [self setAtButton:nil];
+    [self setCategoryButton:nil];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
@@ -140,6 +155,10 @@
     [_takePhotoViewController release];
     [_sinaButton release];
     [_sinaShareImageView release];
+    [_priceTextView release];
+    [_atButton release];
+    [_locationButton release];
+    [_categoryButton release];
     
     [super dealloc];
 }
@@ -159,6 +178,22 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark UITextView delegate for content view
+
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    [self.atButton setEnabled:YES];
+    [self.locationButton setEnabled:YES];
+    [self.categoryButton setEnabled:YES];
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    [self.atButton setEnabled:NO];
+    [self.locationButton setEnabled:NO];
+    [self.categoryButton setEnabled:NO];
 }
 
 - (void)keyboardWillShow:(NSNotification *)note 
@@ -229,10 +264,15 @@
 
 - (void)onSendButtonClicked {
     [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_SHOWWAITOVERLAY object:self];
-    if ([[SinaSDKManager sharedManager] isLogin])
-    {
-        [[SinaSDKManager sharedManager] sendWeiBoWithText:self.weiboContentTextView.text image:[self.selectedImage scaleToSize:CGSizeMake(320.0, self.selectedImage.size.height * 320.0/self.selectedImage.size.width)] doneCallback:^(AIO_STATUS status, NSDictionary *data) {
-            NSLog(@"Send done: %d", status);
+    
+    __block NSInteger doneCount = 0;
+    __block NSInteger doneCountExpected = 1;
+    
+    processDoneWithDictBlock doneBlock = ^(AIO_STATUS status, NSDictionary * data){
+        NSLog(@"Send done: %d", status);
+
+        doneCount++;
+        if (doneCount == doneCountExpected) {
             [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_HIDEWAITOVERLAY object:self];
             
             if (status == 0)
@@ -244,8 +284,25 @@
                 [ViewHelper showSimpleMessage:@"发送失败" withTitle:nil withButtonText:@"好的"];
             }
             [self dismissModalViewControllerAnimated:YES];
-        }];
-    }
+        }
+
+    };
+    
+    
+    if ([[SinaSDKManager sharedManager] isLogin])
+    {
+        [[SinaSDKManager sharedManager] sendWeiBoWithText:self.weiboContentTextView.text image:[self.selectedImage scaleToSize:CGSizeMake(320.0, self.selectedImage.size.height * 320.0/self.selectedImage.size.width)] doneCallback:doneBlock];
+        doneCountExpected++;
+    };
+    
+    [[BSDKManager sharedManager] sendWeiBoWithText:self.weiboContentTextView.text 
+                                            image:[self.selectedImage scaleToSize:CGSizeMake(320.0, self.selectedImage.size.height * 320.0/self.selectedImage.size.width)]
+                                             shop:self.maketTextView.text 
+                                            brand:self.brandTextView.text 
+                                            price:[self.priceTextView.text intValue]
+                                      poslatitude:0.0 
+                                     posLongitude:0.0 
+                                     doneCallback:doneBlock];
 }
 
 - (IBAction)onPickedImagePressed:(id)sender

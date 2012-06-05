@@ -191,34 +191,6 @@ static BSDKManager *sharedInstance;
                                             doneCallback:callback]];
 }
 
-- (void)sendWeiBoWithText:(NSString *)text image:(UIImage *)image doneCallback:(processDoneWithDictBlock)callback
-{
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:2];
-    
-	[params setObject:(text ? text : @"") forKey:@"status"];
-	
-    if (image)
-    {
-		[params setObject:image forKey:@"pic"];
-        
-        [self sendRequestWithMethodName:@"statuses/upload.json" 
-                             httpMethod:@"POST" 
-                                 params:params 
-                           postDataType:kBSDKRequestPostDataTypeMultipart
-                       httpHeaderFields:nil
-                           doneCallback:callback];
-    }
-    else
-    {
-        [self sendRequestWithMethodName:@"statuses/update.json" 
-                             httpMethod:@"POST" 
-                                 params:params 
-                           postDataType:kBSDKRequestPostDataTypeNormal
-                       httpHeaderFields:nil
-                           doneCallback:callback];
-    }
-    
-}
 
 #pragma mark SINA engine delegates
 
@@ -279,6 +251,86 @@ static BSDKManager *sharedInstance;
     NSLog(@"requestDidFailWithError: %@", error);
     
     [self doNotifyProcessStatus:error.code andData:nil];
+}
+
+#pragma mark Weibo related APIs
+
+- (void)getWeiboListByUsername:(NSString*)username
+                      pageSize:(NSInteger)pageSize 
+                     pageIndex:(NSInteger)pageIndex 
+               andDoneCallback:(processDoneWithArrayBlock)callback
+{
+    //    if (!self.isLogin) {
+    //        callback(AIO_STATUS_NOT_SIGNED_IN, nil);
+    //        return;
+    //    }
+    
+    processDoneWithDictBlock loginCallbackShim = ^(AIO_STATUS status, NSDictionary * data)
+    {
+        callback(status, [data objectForKey:K_BSDK_RESPONSE_BLOGLIST]);
+    };
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
+    
+    [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
+    [params setObject:K_BSDK_ACTION_GETLIST forKey:K_BSDK_ACTION];
+    [params setObject:username forKey:K_BSDK_USERNAME];
+    
+    [self sendRequestWithMethodName:nil
+                         httpMethod:@"POST" 
+                             params:params 
+                       postDataType:kBSDKRequestPostDataTypeNormal
+                   httpHeaderFields:nil
+                       doneCallback:loginCallbackShim];
+    
+}
+
+
+- (void)sendWeiBoWithText:(NSString *)text 
+                    image:(UIImage *)image 
+                     shop:(NSString*)shop
+                    brand:(NSString*)branch
+                    price:(NSInteger)price
+              poslatitude:(float)latitude
+             posLongitude:(float)longitude
+             doneCallback:(processDoneWithDictBlock)callback
+{
+    //    if (!self.isLogin) {
+    //        callback(AIO_STATUS_NOT_SIGNED_IN, nil);
+    //        return;
+    //    }
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
+    
+    [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
+    [params setObject:K_BSDK_ACTION_ADD forKey:K_BSDK_ACTION];
+    [params setObject:text forKey:K_BSDK_CONTENT];
+    [params setObject:shop forKey:K_BSDK_SHOPMERCHANT];
+    [params setObject:branch forKey:K_BSDK_BRANDSERVICE];
+    [params setObject:[NSNumber numberWithInt:price] forKey:K_BSDK_PRICE];
+    [params setObject:[NSNumber numberWithFloat:latitude] forKey:K_BSDK_LATITUDE];
+    [params setObject:[NSNumber numberWithFloat:longitude] forKey:K_BSDK_LONGITUDE];
+    
+    if (image)
+    {
+		[params setObject:image forKey:K_BSDK_PICTURE];
+        
+        [self sendRequestWithMethodName:@"statuses/upload.json" 
+                             httpMethod:@"POST" 
+                                 params:params 
+                           postDataType:kBSDKRequestPostDataTypeMultipart
+                       httpHeaderFields:nil
+                           doneCallback:callback];
+    }
+    else
+    {
+        [self sendRequestWithMethodName:@"statuses/update.json" 
+                             httpMethod:@"POST" 
+                                 params:params 
+                           postDataType:kBSDKRequestPostDataTypeNormal
+                       httpHeaderFields:nil
+                           doneCallback:callback];
+    }
 }
 
 @end

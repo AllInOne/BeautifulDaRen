@@ -23,12 +23,14 @@ typedef enum
     AIO_STATUS_OUT_OF_MEMORY,
     AIO_STATUS_BAD_STATE,
     AIO_STATUS_INVALID_PARAMETOR,
+    AIO_STATUS_NOT_SIGNED_IN,
     AIO_STATUS_NOT_FOUND
 }AIO_STATUS;
 
 typedef void(^loginDoneBlock)(LOGIN_STATUS status);
 typedef void(^processDoneBlock)(AIO_STATUS status);
 typedef void(^processDoneWithDictBlock)(AIO_STATUS status, NSDictionary * data);
+typedef void(^processDoneWithArrayBlock)(AIO_STATUS status, NSArray * data);
 
 @protocol RequestProtocol <NSObject>
 @required
