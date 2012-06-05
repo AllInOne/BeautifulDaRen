@@ -25,7 +25,8 @@
 
 - (void)dealloc
 {
-    [self.takePhotoViewController release];
+    [_takePhotoViewController release];
+    [_selectPhotoViewController release];
     [super dealloc];
 }
 
@@ -83,9 +84,8 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-    self.takePhotoViewController = nil;
+    _takePhotoViewController = nil;
+    _selectPhotoViewController = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

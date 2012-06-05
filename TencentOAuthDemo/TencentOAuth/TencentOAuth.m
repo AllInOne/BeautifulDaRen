@@ -371,6 +371,8 @@ redirectURI = _redirectURI;
 	NSString * fullURL = [kRestserverBaseURL stringByAppendingString:@"user/get_user_info"];
 	[apiRequest openUrl:fullURL token:_accessToken openid:_openId appid:_appId params:params];
 	[_apiRequests setObject:apiRequest forKey:[NSString stringWithFormat:@"%d", apiRequest.seq]];
+    [apiRequest release];
+    [params release];
 	return YES;
 }
 
@@ -387,6 +389,8 @@ redirectURI = _redirectURI;
 	NSString * fullURL = [kRestserverBaseURL stringByAppendingString:@"photo/list_album"];
 	[apiRequest openUrl:fullURL token:_accessToken openid:_openId appid:_appId params:params];
 	[_apiRequests setObject:apiRequest forKey:[NSString stringWithFormat:@"%d", apiRequest.seq]];
+    [apiRequest release];
+    [params release];
 	return YES;
 }
 
@@ -403,6 +407,7 @@ redirectURI = _redirectURI;
 	NSString * fullURL = [kRestserverBaseURL stringByAppendingString:@"photo/list_photo"];
 	[apiRequest openUrl:fullURL token:_accessToken openid:_openId appid:_appId params:params];
 	[_apiRequests setObject:apiRequest forKey:[NSString stringWithFormat:@"%d", apiRequest.seq]];
+    [apiRequest release];
 	return YES;
 }
 
@@ -419,6 +424,7 @@ redirectURI = _redirectURI;
 	NSString * fullURL = [kRestserverBaseURL stringByAppendingString:@"share/add_share"];
 	[apiRequest openUrl:fullURL token:_accessToken openid:_openId appid:_appId params:params];
 	[_apiRequests setObject:apiRequest forKey:[NSString stringWithFormat:@"%d", apiRequest.seq]];
+    [apiRequest release];
 	return YES;
 }
 
@@ -435,6 +441,7 @@ redirectURI = _redirectURI;
 	NSString * fullURL = [kRestserverBaseURL stringByAppendingString:@"photo/upload_pic"];
 	[apiRequest openUrl:fullURL token:_accessToken openid:_openId appid:_appId params:params];
 	[_apiRequests setObject:apiRequest forKey:[NSString stringWithFormat:@"%d", apiRequest.seq]];
+    [apiRequest release];
 	return YES;
 }
 
@@ -467,6 +474,7 @@ redirectURI = _redirectURI;
 	NSString * fullURL = [kRestserverBaseURL stringByAppendingString:@"blog/add_one_blog"];
 	[apiRequest openUrl:fullURL token:_accessToken openid:_openId appid:_appId params:params];
 	[_apiRequests setObject:apiRequest forKey:[NSString stringWithFormat:@"%d", apiRequest.seq]];
+    [apiRequest release];
 	return YES;
 }
 /**
@@ -482,6 +490,7 @@ redirectURI = _redirectURI;
 	NSString * fullURL = [kRestserverBaseURL stringByAppendingString:@"user/check_page_fans"];
 	[apiRequest openUrl:fullURL token:_accessToken openid:_openId appid:_appId params:params];
 	[_apiRequests setObject:apiRequest forKey:[NSString stringWithFormat:@"%d", apiRequest.seq]];
+    [apiRequest release];
 	return YES;
 }
 
@@ -499,6 +508,7 @@ redirectURI = _redirectURI;
 	NSString * fullURL = [kRestserverBaseURL stringByAppendingString:@"shuoshuo/add_topic"];
 	[apiRequest openUrl:fullURL token:_accessToken openid:_openId appid:_appId params:params];
 	[_apiRequests setObject:apiRequest forKey:[NSString stringWithFormat:@"%d", apiRequest.seq]];
+    [apiRequest release];
 	return YES;
 }
 
@@ -704,7 +714,7 @@ redirectURI = _redirectURI;
  *      didReceiveResponse:(NSURLResponse *)response
  */
 - (void)request:(TencentRequest *)request didLoad:(id)result dat:(NSData *)data {
-	NSString *responseString = [[NSString alloc] initWithData:(NSData*)result encoding:NSUTF8StringEncoding];
+	NSString *responseString = [[[NSString alloc] initWithData:(NSData*)result encoding:NSUTF8StringEncoding] autorelease];
 	if ([[responseString substringToIndex:8] isEqualToString:@"callback"]) {
 		responseString = [responseString substringWithRange:NSMakeRange(10, [responseString length]-13)];
 	}

@@ -71,9 +71,9 @@
                           @"NO.030",@"NO.031",@"NO.032", @"NO.033", nil];
 
     NSInteger count = [imageNames count];
-    self.fakeData = [[NSMutableArray alloc] initWithCapacity:count];
+    _fakeData = [[NSMutableArray alloc] initWithCapacity:count];
     for (int i = 0; i < count; i++) {
-        WaresItem * item = [[[WaresItem alloc] init] autorelease];
+        WaresItem * item = [[WaresItem alloc] init];
         item.itemId = [imageIds objectAtIndex:i];
         UIImage * image = [UIImage imageNamed:[imageNames objectAtIndex:i]];
         item.itemImageData = UIImagePNGRepresentation(image);
@@ -83,6 +83,8 @@
         CGFloat frameHeight = [ViewHelper getRatioHeightOfImage:imageView.image ratioWidth:frameWidth];
         [_itemsHeight addObject:[NSNumber numberWithFloat:(frameHeight+4)]];
         [self.fakeData addObject:item];
+        [imageView release];
+        [item release];
     }
 }
 
@@ -92,6 +94,7 @@
 {
     [_waterFlowView release];
     [_itemsHeight release];
+    [_fakeData release];
     [super dealloc];
 }
 
@@ -110,6 +113,9 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+    _waterFlowView = nil;
+    _itemsHeight = nil;
+    _fakeData = nil;
 }
 
 - (void) viewWillAppear:(BOOL)animated

@@ -102,6 +102,7 @@
         tabBarBg.contentMode = UIViewContentModeScaleToFill;
         
         [self.tabBar insertSubview:tabBarBg atIndex:0];
+        [tabBarBg release];
     }
     else
     {

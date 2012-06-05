@@ -50,6 +50,7 @@
             height += ([categoryCell getHeight] + CONTENT_MARGIN);
             
             [self.categoryListView addSubview: categoryCell.view];
+            [categoryCell release];
             index++;
         }
         

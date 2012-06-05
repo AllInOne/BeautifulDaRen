@@ -55,11 +55,11 @@
 
 - (void)dealloc
 {
-    [self.methodUrl release];
-    [self.httpMethod release];
-    [self.params release];
-    [self.httpHeaderFields release];
-    Block_release(self.doneCallback);
+    [_methodUrl release];
+    [_httpMethod release];
+    [_params release];
+    [_httpHeaderFields release];
+    Block_release(_doneCallback);
     [super dealloc];
 }
 

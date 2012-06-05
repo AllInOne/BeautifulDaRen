@@ -16,10 +16,6 @@
 @end
 
 @interface TakePhotoViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
-{
-@private
-    UIImagePickerController *imagePickerController;
-}
 
 @property (nonatomic, assign) id <TakePhotoControllerDelegate> delegate;
 @property (nonatomic, retain) UIImagePickerController *imagePickerController;
