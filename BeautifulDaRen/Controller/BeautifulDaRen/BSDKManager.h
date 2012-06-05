@@ -21,7 +21,15 @@
 
 - (void)setRootviewController:(UIViewController*)rootViewController;
 
-- (void)loginWithDoneCallback:(loginDoneBlock)doneBlock;
+- (void)signUpWithUsername:(NSString*) username password:(NSString*)password email:(NSString*)email city:(NSString*)city andDoneCallback:(processDoneWithDictBlock)doneBlock;
+
+- (void)loginWithUsername:(NSString*) username password:(NSString*)password andDoneCallback:(processDoneWithDictBlock)doneBlock;
+
+- (void)changePasswordByUsername:(NSString*) username toNewPassword:(NSString*)newpassword andDoneCallback:(processDoneWithDictBlock)doneBlock;
+
+- (void)getUserInforByUsername:(NSString*) username andDoneCallback:(processDoneWithDictBlock)doneBlock;
+
+- (void)searchUsersByUsername:(NSString*) username andDoneCallback:(processDoneWithDictBlock)doneBlock;
 
 - (void)sendRequestWithMethodName:(NSString *)methodName
                        httpMethod:(NSString *)httpMethod

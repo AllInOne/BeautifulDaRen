@@ -9,6 +9,9 @@
 #import "AdsPageView.h"
 #import "ViewConstants.h"
 
+#import "iToast.h"
+#import "BSDKManager.h"
+
 #define ADS_EXCHANGE_TIME_OUT_SECONDS   (5.0)
 #define ADS_ANIMATION_DURATION          (0.5)
 #define MAX_ADS_PAGES                   (4)
@@ -179,6 +182,20 @@
 -(IBAction)onAdsPressed:(id)sender
 {
     NSLog(@"Ads Pressed, current ads index = %d", currentPage);
+    
+    [[BSDKManager sharedManager] loginWithUsername:@"121asdfasdf" password:@"1212121212" andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+         NSLog(@"sign in done = %d", status);
+        [[iToast makeText:[NSString stringWithFormat:@"%@", [data objectForKey:@"msg"]]] show];
+    }];
+//    [[BSDKManager sharedManager] getUserInforByUsername:@"121asdfasdf" andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+//         NSLog(@"sign in done = %d", status);
+//        [[iToast makeText:[NSString stringWithFormat:@"%@", [data objectForKey:@"msg"]]] show];
+//    }];
+    
+//    [[BSDKManager sharedManager] searchUsersByUsername:@"121asdfasdf" andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+//         NSLog(@"sign in done = %d", status);
+//        [[iToast makeText:[NSString stringWithFormat:@"%@", [data objectForKey:@"msg"]]] show];
+//    }];
 }
 
 -(IBAction)onAdsPageClosedPressed:(id)sender

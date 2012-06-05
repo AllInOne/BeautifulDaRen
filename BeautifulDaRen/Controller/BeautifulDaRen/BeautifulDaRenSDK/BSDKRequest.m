@@ -238,7 +238,7 @@
 {
     // add the access token field
     NSMutableDictionary *mutableParams = [NSMutableDictionary dictionaryWithDictionary:params];
-    [mutableParams setObject:accessToken forKey:@"access_token"];
+    [mutableParams setObject:accessToken forKey:@"checkCode"];
     return [BSDKRequest requestWithURL:url
                           httpMethod:httpMethod
                               params:mutableParams

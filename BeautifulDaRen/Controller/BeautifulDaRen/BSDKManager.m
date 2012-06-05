@@ -10,13 +10,22 @@
 #import "AppDelegate.h"
 #import "BSDKWeiboRequest.h"
 #import "BSDKEngine.h"
+#import "BSDKDefines.h"
 
 
 static BSDKManager *sharedInstance;
 
+@interface BSDKManager ()
+// callback of user
+@property (nonatomic, assign) processDoneWithDictBlock loginCallback;
+@property (nonatomic, assign) BOOL isAlreadyLogin;
+@end
+
 @implementation BSDKManager
 
 @synthesize BSDKWeiboEngine;
+@synthesize loginCallback = _loginCallback;
+@synthesize isAlreadyLogin = _isAlreadyLogin;
 
 + (BSDKManager*) sharedManager {
     @synchronized([BSDKManager class]) {
@@ -38,6 +47,7 @@ static BSDKManager *sharedInstance;
         [BSDKWeiboEngine setRootViewController:((AppDelegate*)[UIApplication sharedApplication].delegate).rootViewController];
         [BSDKWeiboEngine setDelegate:self];
         [BSDKWeiboEngine setIsUserExclusive:NO];
+        self.isAlreadyLogin = NO;
     }
     
     return self;
@@ -46,12 +56,13 @@ static BSDKManager *sharedInstance;
 - (void)dealloc
 {
     [BSDKWeiboEngine release];
+    Block_release(_loginCallback);
     [super dealloc];
 }
 
 - (BOOL)isLogin
 {
-    return [BSDKWeiboEngine isLoggedIn];
+    return [self isAlreadyLogin];
 }
 
 - (void)setRootviewController:(UIViewController*)rootViewController
@@ -59,15 +70,109 @@ static BSDKManager *sharedInstance;
     [BSDKWeiboEngine setRootViewController:rootViewController];   
 }
 
-- (void)loginWithDoneCallback:(loginDoneBlock)doneBlock
+- (void)signUpWithUsername:(NSString*) username password:(NSString*)password email:(NSString*)email city:(NSString*)city andDoneCallback:(processDoneWithDictBlock)doneBlock
 {
-    Block_release(self.loginCallback);
-    self.loginCallback = nil;
-    if (!BSDKWeiboEngine.isLoggedIn) {
-        [BSDKWeiboEngine logOut];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:8];
+    
+    [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
+    [params setObject:K_BSDK_ACTION_ADD forKey:K_BSDK_ACTION];
+    [params setObject:username forKey:K_BSDK_USERNAME];
+    [params setObject:password forKey:K_BSDK_PASSWORD];
+    [params setObject:password forKey:K_BSDK_REPASSWORD];
+    [params setObject:email forKey:K_BSDK_EMAIL];
+    [params setObject:city forKey:K_BSDK_City];
+    
+    [self sendRequestWithMethodName:nil
+                         httpMethod:@"POST" 
+                             params:params 
+                       postDataType:kBSDKRequestPostDataTypeNormal
+                   httpHeaderFields:nil
+                       doneCallback:doneBlock];
+}
+
+- (void)loginWithUsername:(NSString*) username password:(NSString*)password andDoneCallback:(processDoneWithDictBlock)doneBlock;
+{
+    if (self.isLogin) {
+        NSDictionary * data = [NSDictionary dictionaryWithObjectsAndKeys:@"已经登陆！",K_BSDK_RESPONSE_MESSAGE, nil];
+        doneBlock(AIO_STATUS_BAD_STATE, data);
+        
+        return;
     }
-    [BSDKWeiboEngine logIn];
-    self.loginCallback = Block_copy(doneBlock);
+    
+    
+    processDoneWithDictBlock loginCallbackShim = ^(AIO_STATUS status, NSDictionary * data)
+    {
+        if ((status == AIO_STATUS_SUCCESS) && K_BSDK_IS_RESPONSE_OK(data))
+        {
+            self.isAlreadyLogin = YES;
+        }
+        
+        doneBlock(status, data);
+    };
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
+    
+    [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
+    [params setObject:K_BSDK_ACTION_LOGIN forKey:K_BSDK_ACTION];
+    [params setObject:username forKey:K_BSDK_USERNAME];
+    [params setObject:password forKey:K_BSDK_PASSWORD];
+
+    
+    [self sendRequestWithMethodName:nil
+                         httpMethod:@"POST" 
+                             params:params 
+                       postDataType:kBSDKRequestPostDataTypeNormal
+                   httpHeaderFields:nil
+                       doneCallback:loginCallbackShim];
+}
+
+- (void)searchUsersByUsername:(NSString*) username andDoneCallback:(processDoneWithDictBlock)doneBlock
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
+    
+    [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
+    [params setObject:K_BSDK_ACTION_SEARCH forKey:K_BSDK_ACTION];
+    [params setObject:username forKey:K_BSDK_USERNAME];
+    
+    [self sendRequestWithMethodName:nil
+                         httpMethod:@"POST" 
+                             params:params 
+                       postDataType:kBSDKRequestPostDataTypeNormal
+                   httpHeaderFields:nil
+                       doneCallback:doneBlock];
+}
+
+- (void)changePasswordByUsername:(NSString*) username toNewPassword:(NSString*)newpassword andDoneCallback:(processDoneWithDictBlock)doneBlock
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
+    
+    [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
+    [params setObject:K_BSDK_ACTION_CHANGEPASSWORD forKey:K_BSDK_ACTION];
+    [params setObject:username forKey:K_BSDK_USERNAME];
+    [params setObject:newpassword forKey:K_BSDK_PASSWORD];
+    
+    [self sendRequestWithMethodName:nil
+                         httpMethod:@"POST" 
+                             params:params 
+                       postDataType:kBSDKRequestPostDataTypeNormal
+                   httpHeaderFields:nil
+                       doneCallback:doneBlock];
+}
+
+- (void)getUserInforByUsername:(NSString*) username andDoneCallback:(processDoneWithDictBlock)doneBlock
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
+    
+    [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
+    [params setObject:K_BSDK_ACTION_GETINFO forKey:K_BSDK_ACTION];
+    [params setObject:username forKey:K_BSDK_USERNAME];
+    
+    [self sendRequestWithMethodName:nil
+                         httpMethod:@"POST" 
+                             params:params 
+                       postDataType:kBSDKRequestPostDataTypeNormal
+                   httpHeaderFields:nil
+                       doneCallback:doneBlock];
 }
 
 - (void)sendRequestWithMethodName:(NSString *)methodName
@@ -157,8 +262,8 @@ static BSDKManager *sharedInstance;
 
 - (void)engine:(BSDKEngine *)engine requestDidSucceedWithResult:(id)result
 {
-    NSLog(@"SINA requestDidSucceed!");
-    NSLog(@"SINA data: %@!", result);
+    NSLog(@"WSDK requestDidSucceed!");
+    NSLog(@"WSDK data: %@!", result);
     
     NSDictionary *dict = nil;
     if ([result isKindOfClass:[NSDictionary class]])
