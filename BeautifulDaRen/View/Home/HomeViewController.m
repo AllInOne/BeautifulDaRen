@@ -87,6 +87,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [_itemsViewController viewWillAppear:animated];
 }
 
 - (void)viewDidAppear:(BOOL)animated
