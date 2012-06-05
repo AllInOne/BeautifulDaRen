@@ -70,8 +70,9 @@
 
 -(void) onFindPasswordButtonClicked
 {
-    FindPasswordViewController * findPasswordViewController = [[[FindPasswordViewController alloc] initWithNibName:@"FindPasswordViewController" bundle:nil] autorelease];
+    FindPasswordViewController * findPasswordViewController = [[FindPasswordViewController alloc] initWithNibName:@"FindPasswordViewController" bundle:nil];
     [self.navigationController pushViewController:findPasswordViewController animated:YES];
+    [findPasswordViewController release];
 }
 
 #pragma mark - View lifecycle
@@ -164,7 +165,9 @@
         ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"common_button"];
         ((ButtonViewCell*)cell).leftLabel.text = NSLocalizedString(@"login", @"login");
         
-        cell.backgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+        UIView * view = [[UIView alloc] initWithFrame:CGRectZero];
+        cell.backgroundView = view;
+        [view release];
     }
     else if (section == 2)
     {
@@ -193,8 +196,9 @@
     }
     else if([indexPath section] == 2)
     {
-        RegisterViewController * registerController = [[[RegisterViewController alloc] initWithNibName:@"RegisterViewController" bundle:nil] autorelease];
+        RegisterViewController * registerController = [[RegisterViewController alloc] initWithNibName:@"RegisterViewController" bundle:nil];
         [self.navigationController pushViewController:registerController animated:YES];
+        [registerController release];
     }
 }
 
@@ -222,7 +226,9 @@
     }
     else
     {
-        view = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+        UIView * tempView = [[UIView alloc] initWithFrame:CGRectZero];
+        view = tempView;
+        [tempView release];
     }
     return view;
 }

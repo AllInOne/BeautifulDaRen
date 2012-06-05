@@ -50,7 +50,7 @@
         [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onHomePageButtonClicked) title:NSLocalizedString(@"home_page", @"home_page")]];
         _isIdentification = YES;
         
-        UIToolbar *tempToolbar = [[[UIToolbar alloc]initWithFrame:CGRectMake(0,372, 320,44)] autorelease];
+        UIToolbar *tempToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0,372, 320,44)];
         
         UIBarButtonItem *flexible = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
         
@@ -81,7 +81,7 @@
         [flexible release]; 
         [tabBarBg release];
         [barItems release];
-
+        [tempToolbar release];
     }
     return self;
 }
@@ -299,8 +299,9 @@
 {
     if([indexPath section] == 0 && [indexPath row] == 0)
     {
-        EdittingViewController * edittingViewController = [[[EdittingViewController alloc] initWithNibName:@"EdittingViewController" bundle:nil type:EdittingViewController_type0] autorelease];
+        EdittingViewController * edittingViewController = [[EdittingViewController alloc] initWithNibName:@"EdittingViewController" bundle:nil type:EdittingViewController_type0];
         [self.navigationController pushViewController:edittingViewController animated:YES];
+        [edittingViewController release];
     }
 }
 
@@ -333,48 +334,43 @@
 
 - (void) didButtonPressed:(UIButton*)button inView:(UIView *)view
 {
+    UIViewController * viewController = nil;
     if(button == _followButton)
     {
-        FriendListViewController * followViewController = [[[FriendListViewController alloc] initWithNibName:@"FriendListViewController" bundle:nil type:FriendListViewController_TYPE_FRIEND_FOLLOW] autorelease];
-        
-        [self.navigationController pushViewController:followViewController animated:YES];
+        viewController = [[FriendListViewController alloc] initWithNibName:@"FriendListViewController" bundle:nil type:FriendListViewController_TYPE_FRIEND_FOLLOW];
     }
     else if (button == _fansButton)
     {
-        FriendListViewController * followViewController = [[[FriendListViewController alloc] initWithNibName:@"FriendListViewController" bundle:nil type:FriendListViewController_TYPE_FRIEND_FANS] autorelease];
-        
-        [self.navigationController pushViewController:followViewController animated:YES];
+        viewController = [[FriendListViewController alloc]
+                           initWithNibName:@"FriendListViewController"
+                           bundle:nil
+                           type:FriendListViewController_TYPE_FRIEND_FANS];
     }
     else if (button == _collectionButton)
     {
-        WeiboListViewController * weiboViewController = [[[WeiboListViewController alloc] initWithNibName:@"WeiboListViewController" bundle:nil type:WeiboListViewControllerType_FRIEND_COLLECTION] autorelease];
-        
-        [self.navigationController pushViewController:weiboViewController animated:YES];
+        viewController = [[WeiboListViewController alloc] initWithNibName:@"WeiboListViewController" bundle:nil type:WeiboListViewControllerType_FRIEND_COLLECTION];
     }
     else if (button == _weiboButton)
     {
-        WeiboListViewController * weiboViewController = [[[WeiboListViewController alloc] initWithNibName:@"WeiboListViewController" bundle:nil type:WeiboListViewControllerType_FRIEND_WEIBO] autorelease];
-        
-        [self.navigationController pushViewController:weiboViewController animated:YES];
+        viewController = [[WeiboListViewController alloc] initWithNibName:@"WeiboListViewController" bundle:nil type:WeiboListViewControllerType_FRIEND_WEIBO];
     }
-    else
-    {
-        NSAssert(NO, @"There is not any other button should be pressed!");
-    }
+    [self.navigationController pushViewController:viewController animated:YES];
+    [viewController release];
 }
 
 - (void) onActionButtonClicked: (UIButton*)sender
 {
-    UIActionSheet * actionSheet = [[[UIActionSheet alloc] initWithTitle:@""
+    UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle:@""
                                                               delegate:self
                                                      cancelButtonTitle:nil
                                                 destructiveButtonTitle:nil
-                                                     otherButtonTitles:nil, nil] autorelease];
+                                                     otherButtonTitles:nil, nil];
     [actionSheet addButtonWithTitle:NSLocalizedString(@"add_to_black_list", @"add_to_black_list")];
     [actionSheet addButtonWithTitle:NSLocalizedString(@"impeach", "impeach")];
     [actionSheet setDestructiveButtonIndex:[actionSheet addButtonWithTitle:NSLocalizedString(@"cancel", @"cancel")]];
     
     [actionSheet showInView:sender.superview.superview];
+    [actionSheet release];
 }
 
 - (void)onAt

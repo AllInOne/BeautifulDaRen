@@ -180,7 +180,7 @@
 
 //- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section 
 //{
-//    UIView *headerView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 30)] autorelease];
+//    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 30)];
 //
 ////    [headerView setBackgroundColor:[UIColor purpleColor]];
 //    

@@ -16,9 +16,12 @@
 
 @interface CategoryContentViewController ()
 
+@property (retain, nonatomic) NSMutableArray * contentItems;
+
 @end
 
 @implementation CategoryContentViewController
+@synthesize contentItems = _contentItems;
 
 @synthesize categoryListView = _categoryListView;
 
@@ -42,6 +45,7 @@
         
         NSArray * samples = [NSArray arrayWithObjects:samples1, samples2, samples3, samples4, nil];
         
+        _contentItems = [[NSMutableArray alloc] initWithCapacity:[titles count]];
         while (index < [titles count]) {
             CategoryItemCell * categoryCell = [[CategoryItemCell alloc] initWithNibName:nil bundle:nil title:[titles objectAtIndex:index] andData:[samples objectAtIndex:index]];
 
@@ -50,8 +54,9 @@
             height += ([categoryCell getHeight] + CONTENT_MARGIN);
             
             [self.categoryListView addSubview: categoryCell.view];
-            [categoryCell release];
+            [_contentItems addObject:categoryCell];
             index++;
+            [categoryCell release];
         }
         
         [self.categoryListView setContentSize:CGSizeMake(SCREEN_WIDTH, height)];
@@ -69,6 +74,12 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+-(void)dealloc
+{
+    [super dealloc];
+    [_contentItems release];
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
@@ -80,8 +91,7 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+    _contentItems  = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

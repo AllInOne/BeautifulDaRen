@@ -9,11 +9,13 @@
     self = [super initWithFrame:frame];
     if(self)
     {
-        UIImageView * imageView = [[[UIImageView alloc] initWithImage:image] autorelease];
+        UIImageView * imageView = [[UIImageView alloc] initWithImage:image];
         imageView.frame = CGRectMake(2, 2, frame.size.width - 4, frame.size.height - 4);
         self.layer.borderColor = [[UIColor lightGrayColor] CGColor];
         self.layer.borderWidth = 1;
-        [self addSubview:imageView];        
+        [self addSubview:imageView];  
+        [imageView release];
+
         UIButton * actionButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [actionButton setFrame:frame];
         [actionButton addTarget:self action:@selector(onButtonClicked:) forControlEvents:UIControlEventTouchUpInside];

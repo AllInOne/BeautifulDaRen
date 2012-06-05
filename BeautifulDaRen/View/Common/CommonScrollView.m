@@ -21,12 +21,6 @@
 @synthesize scrollItems = _scrollItems;
 @synthesize delegate = _delegate;
 
-- (void)dealloc
-{
-    [_scrollView release];
-    [_scrollItems release];
-    [super dealloc];
-}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil data: (NSArray *)data andDelegate:(id<CommonScrollViewProtocol>) delegate
 {
@@ -40,11 +34,12 @@
 
             [item.image setImage:[UIImage imageNamed:[data objectAtIndex:index]]];
             
-            BorderImageView * borderImageView = [[[BorderImageView alloc] initWithFrame:CGRectMake(SCROLL_ITEM_MARGIN + index * (SCROLL_ITEM_WIDTH + SCROLL_ITEM_MARGIN), 0, SCROLL_ITEM_WIDTH, SCROLL_ITEM_HEIGHT) andView:item]  autorelease];
+            BorderImageView * borderImageView = [[BorderImageView alloc] initWithFrame:CGRectMake(SCROLL_ITEM_MARGIN + index * (SCROLL_ITEM_WIDTH + SCROLL_ITEM_MARGIN), 0, SCROLL_ITEM_WIDTH, SCROLL_ITEM_HEIGHT) andView:item];
             
             [self.view addSubview:borderImageView];
             [self.scrollItems insertObject:borderImageView atIndex:index++];
             [self.scrollView addSubview:borderImageView];
+            [borderImageView release];
         }
         [self.scrollView setContentSize:CGSizeMake(index * (SCROLL_ITEM_WIDTH + SCROLL_ITEM_MARGIN), SCROLL_ITEM_HEIGHT)];
         self.delegate = delegate;
@@ -60,6 +55,12 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+- (void)dealloc
+{
+    [_scrollView release];
+    [_scrollItems release];
+    [super dealloc];
+}
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad

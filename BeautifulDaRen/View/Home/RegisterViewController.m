@@ -163,7 +163,9 @@ enum
         ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"common_button"];
         ((ButtonViewCell*)cell).leftLabel.text = NSLocalizedString(@"register", @"register");
         
-        cell.backgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+        UIView * view = [[UIView alloc] initWithFrame:CGRectZero];
+        cell.backgroundView = view;
+        [view release];
     }
     else if (section == 2)
     {
@@ -222,13 +224,14 @@ enum
             case ACCOUNT_SETTING_CITY:
             {
                 SelectCityViewController *citySelectionController = 
-                [[[SelectCityViewController alloc] initWithNibName:nil bundle:nil] autorelease];
+                [[SelectCityViewController alloc] initWithNibName:nil bundle:nil];
 
                 UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: citySelectionController];
                 
                 [self.navigationController presentModalViewController:navController animated:YES];
                 
                 [navController release];
+                [citySelectionController release];
                 break;
             }
         }
@@ -263,7 +266,9 @@ enum
     }
     else
     {
-        view = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+        UIView * tempView = [[UIView alloc] initWithFrame:CGRectZero];
+        view = tempView;
+        [tempView release];
     }
     return view;
 }

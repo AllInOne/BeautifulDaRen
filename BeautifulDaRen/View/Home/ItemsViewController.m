@@ -139,12 +139,13 @@
 - (void)cellSelected:(NSNotification *)notification
 {
     WeiboDetailViewController *weiboDetailController = 
-    [[[WeiboDetailViewController alloc] init] autorelease];
+    [[WeiboDetailViewController alloc] init];
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: weiboDetailController];
     
     [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
     
     [navController release];
+    [weiboDetailController release];
 }
 
 #pragma mark- WaterflowDataSource
@@ -192,12 +193,13 @@
 - (void)flowView:(WaterFlowView *)flowView didSelectAtCell:(WaterFlowCell *)cell ForIndex:(int)index
 {
     WeiboDetailViewController *weiboDetailController = 
-    [[[WeiboDetailViewController alloc] init] autorelease];
+    [[WeiboDetailViewController alloc] init];
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: weiboDetailController];
     
     [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
     
     [navController release];
+    [weiboDetailController release];
 }
 
 - (void)flowView:(WaterFlowView *)flowView willLoadData:(int)page

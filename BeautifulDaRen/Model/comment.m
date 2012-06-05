@@ -33,9 +33,9 @@
 + (Comment*)commentWithDictionary:(NSDictionary *)dict insideObjectContext:(NSManagedObjectContext*) objectContext
 {
     NSEntityDescription *commentDescription = [NSEntityDescription entityForName:@"Comment" inManagedObjectContext:objectContext];
-    Comment * comment = [[[Comment alloc] initWithEntity:commentDescription insertIntoManagedObjectContext:objectContext] autorelease];
+    Comment * comment = [[Comment alloc] initWithEntity:commentDescription insertIntoManagedObjectContext:objectContext];
     comment.uniqueId = [dict objectForKey:COMMENT_UNIQUE_ID];
     [comment updateCommentWithDictionary:dict insideObjectContext:objectContext];
-    return comment;
+    return [comment autorelease];
 }
 @end

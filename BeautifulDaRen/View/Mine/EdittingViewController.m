@@ -89,8 +89,8 @@
         
         NSString * radioButtonGroupId = @"RadioButtonInEdittingView";
 
-        RadioButton * radioButton1 = [[[RadioButton alloc] initWithGroupId:radioButtonGroupId text:NSLocalizedString(@"only_to_my_followed", @"") index:0] autorelease];
-        RadioButton * radioButton2 = [[[RadioButton alloc] initWithGroupId:radioButtonGroupId text:NSLocalizedString(@"not_to_anyone", @"") index:1] autorelease];
+        RadioButton * radioButton1 = [[RadioButton alloc] initWithGroupId:radioButtonGroupId text:NSLocalizedString(@"only_to_my_followed", @"") index:0];
+        RadioButton * radioButton2 = [[RadioButton alloc] initWithGroupId:radioButtonGroupId text:NSLocalizedString(@"not_to_anyone", @"") index:1];
         
         radioButton1.frame = CGRectMake(15, 210, 240, 30);
         radioButton2.frame = CGRectMake(15, 250, 240, 30);
@@ -102,6 +102,9 @@
         [_editPrivaceView addSubview:radioButton2];
         
         [self.view addSubview:_editPrivaceView];
+        
+        [radioButton1 release];
+        [radioButton2 release];
     }
 }
 

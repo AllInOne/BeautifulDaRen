@@ -148,7 +148,9 @@
         SegmentControl * seg = [[SegmentControl alloc] initWithFrame:CGRectMake(65, 8, 112, 29) leftText:NSLocalizedString(@"female", @"gender") rightText:NSLocalizedString(@"male", @"gender")];
         [buttonViewCell addSubview:seg];
         [seg release];
-        cell.backgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+        UIView * view = [[UIView alloc] initWithFrame:CGRectZero];
+        cell.backgroundView = view;
+        [view release];
     }
     else
     {
@@ -273,13 +275,14 @@
         if(row == 1)
         {
             SelectCityViewController *citySelectionController = 
-            [[[SelectCityViewController alloc] initWithNibName:nil bundle:nil] autorelease];
+            [[SelectCityViewController alloc] initWithNibName:nil bundle:nil];
             
             UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: citySelectionController];
             
             [self.navigationController presentModalViewController:navController animated:YES];
             
             [navController release];
+            [citySelectionController release];
         }
         else {
             if(row == 4)
@@ -290,8 +293,9 @@
             {
                 type = EdittingViewController_type0;
             }
-            EdittingViewController * edittingViewController = [[[EdittingViewController alloc] initWithNibName:@"EdittingViewController" bundle:nil type:type] autorelease];
+            EdittingViewController * edittingViewController = [[EdittingViewController alloc] initWithNibName:@"EdittingViewController" bundle:nil type:type];
             [self.navigationController pushViewController:edittingViewController animated:YES];
+            [edittingViewController release];
         }
     }
 }

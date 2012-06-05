@@ -276,24 +276,26 @@
         switch ([indexPath row]) {
             case 0:
             {
-                WeiboListViewController * myPublishViewController = [[[WeiboListViewController alloc] initWithNibName:@"WeiboListViewController" bundle:nil type:WeiboListViewControllerType_MY_PUBLISH] autorelease];
+                WeiboListViewController * myPublishViewController = [[WeiboListViewController alloc] initWithNibName:@"WeiboListViewController" bundle:nil type:WeiboListViewControllerType_MY_PUBLISH];
                 
                 UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: myPublishViewController];
                 
                 [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
                 
                 [navController release];
+                [myPublishViewController release];
                 break;
             }
             case 1:
             {
-                WeiboListViewController * forwadMeViewController = [[[WeiboListViewController alloc] initWithNibName:@"WeiboListViewController" bundle:nil type:WeiboListViewControllerType_FORWARD_ME] autorelease];
+                WeiboListViewController * forwadMeViewController = [[WeiboListViewController alloc] initWithNibName:@"WeiboListViewController" bundle:nil type:WeiboListViewControllerType_FORWARD_ME];
                 
                 UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: forwadMeViewController];
                 
                 [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
                 
                 [navController release];
+                [forwadMeViewController release];
                 break;
             }
             case 2:

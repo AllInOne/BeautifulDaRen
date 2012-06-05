@@ -82,11 +82,12 @@
         region.span.longitudeDelta = 0.01;
         [_mapView setRegion:region animated:YES];
         
-        Annotation * anno = [[[Annotation alloc] init] autorelease];
+        Annotation * anno = [[Annotation alloc] init];
         anno.title = [NSString stringWithFormat:@"Name:%@", name];
         anno.subtitle = [NSString stringWithFormat:@"%@", description];
         anno.coordinate = region.center;
         [_mapView addAnnotation:anno];
+        [anno release];
     }
     return self;
 }

@@ -164,12 +164,13 @@
 - (void)cellSelected:(NSNotification *)notification
 {
     FriendDetailViewController *friendDetailController = 
-    [[[FriendDetailViewController alloc] init] autorelease];
+    [[FriendDetailViewController alloc] init];
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: friendDetailController];
     
     [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
     
     [navController release];
+    [friendDetailController release];
 }
 
 - (void)refreshSameCityDaRenView
@@ -212,8 +213,11 @@
         
         [_sameCityDaRenView addSubview:cell];
     
-        [cell.friendImageView addSubview:[[[BorderImageView alloc] initWithFrame:cell.friendImageView.frame andImage:[UIImage imageNamed:[avatars objectAtIndex:i]]] autorelease]];
+        BorderImageView * tempBorderView = [[BorderImageView alloc] initWithFrame:cell.friendImageView.frame andImage:[UIImage imageNamed:[avatars objectAtIndex:i]]];
+        [cell.friendImageView addSubview:tempBorderView];
         cell.friendNameLabel.text = [nameArray objectAtIndex:i];
+        
+        [tempBorderView release];
     }
     _sameCityDaRenView.delegate = self;
     [_sameCityDaRenView setContentSize:CGSizeMake(scrollWidth, 0)];
@@ -258,8 +262,11 @@
         
         [_youMayInterestinView addSubview:cell];
         
-        [cell.friendImageView addSubview:[[[BorderImageView alloc] initWithFrame:cell.friendImageView.frame andImage:[UIImage imageNamed:[avatars objectAtIndex:i]]] autorelease]];
+        BorderImageView * tempBorderView = [[BorderImageView alloc] initWithFrame:cell.friendImageView.frame andImage:[UIImage imageNamed:[avatars objectAtIndex:i]]];
+        [cell.friendImageView addSubview:tempBorderView];
         cell.friendNameLabel.text = [nameArray objectAtIndex:i];
+        
+        [tempBorderView release];
     }
     _youMayInterestinView.delegate = self;
     [_youMayInterestinView setContentSize:CGSizeMake(scrollWidth, 0)];
@@ -302,10 +309,12 @@
                                 cell.frame.size.height);
         scrollWidth += (cell.frame.size.width + X_OFFSET);
         
-        [cell.friendImageView addSubview:[[[BorderImageView alloc] initWithFrame:cell.friendImageView.frame andImage:[UIImage imageNamed:[avatars objectAtIndex:i]]] autorelease]];
+        BorderImageView * tempBorderView = [[BorderImageView alloc] initWithFrame:cell.friendImageView.frame andImage:[UIImage imageNamed:[avatars objectAtIndex:i]]];
+        [cell.friendImageView addSubview:tempBorderView];
         cell.friendNameLabel.text = [nameArray objectAtIndex:i];
         
         [_hotDaRenView addSubview:cell];
+        [tempBorderView release];
     }
     _hotDaRenView.delegate = self;
     [_hotDaRenView setContentSize:CGSizeMake(scrollWidth, 0)];
@@ -314,26 +323,21 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    UIViewController * viewController = nil;
     if(_isFindWeibo == NO)
     {
-        FriendDetailViewController *friendDetailController = 
-        [[[FriendDetailViewController alloc] init] autorelease];
-        UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: friendDetailController];
-        
-        [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
-        
-        [navController release];
+        viewController = [[FriendDetailViewController alloc] init];
     }
     else
     {
-        FindWeiboViewController *weiboDetailController = 
-        [[[FindWeiboViewController alloc] init] autorelease];
-        UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: weiboDetailController];
-        
-        [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
-        
-        [navController release];
+        viewController = [[FindWeiboViewController alloc] init];
     }
+    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: viewController];
+    
+    [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
+    
+    [navController release];
+    [viewController release];
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -478,12 +482,12 @@
 
 - (void)onItemSelected:(int)index
 {
-    FriendDetailViewController *weiboDetailController = 
-    [[[FriendDetailViewController alloc] init] autorelease];
+    FriendDetailViewController *weiboDetailController = [[FriendDetailViewController alloc] init];
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: weiboDetailController];
     
     [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
     
     [navController release];
+    [weiboDetailController release];
 }
 @end

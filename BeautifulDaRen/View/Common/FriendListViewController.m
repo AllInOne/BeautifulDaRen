@@ -102,8 +102,9 @@
     {
         cell = [[[NSBundle mainBundle] loadNibNamed:friendListViewCellIdentifier owner:self options:nil] objectAtIndex:0];
         FriendListViewCell * friendListViewCell = (FriendListViewCell*)cell;
-        BorderImageView * borderImageView = [[[BorderImageView alloc] initWithFrame:friendListViewCell.avatarImageView.frame andImage:[UIImage imageNamed:[NSString  stringWithFormat:@"search_avatar_sample%d",section+1]]] autorelease];
+        BorderImageView * borderImageView = [[BorderImageView alloc] initWithFrame:friendListViewCell.avatarImageView.frame andImage:[UIImage imageNamed:[NSString  stringWithFormat:@"search_avatar_sample%d",section+1]]];
         [friendListViewCell.avatarImageView addSubview:borderImageView];
+        [borderImageView release];
         
         friendListViewCell.friendNameLabel.text = [nameArray objectAtIndex:section];
         friendListViewCell.friendWeiboLabel.text = @"我今天在天府广场附近买了一款很好看的衣服。";
@@ -129,8 +130,9 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     FriendDetailViewController * friendDetailController = 
-    [[[FriendDetailViewController alloc] init] autorelease];
+    [[FriendDetailViewController alloc] init];
     [self.navigationController pushViewController:friendDetailController animated:YES];
+    [friendDetailController release];
 }
 
 @end

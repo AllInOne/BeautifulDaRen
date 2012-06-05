@@ -36,7 +36,6 @@
         _categoryScrollItem.view.frame = CGRectMake(0, CATEGORY_TITLE_FONT_HEIGHT + CONTENT_MARGIN, self.view.frame.size.width, CATEGORY_ITEM_HEIGHT);
         
         self.categoryTitle.text = title;
-
     }
     return self;
 }
@@ -46,16 +45,24 @@
     [super viewDidLoad];
 }
 
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    _categoryScrollItem = nil;
+    _categoryTitle = nil;
+}
+
 - (void)onItemSelected:(int)index
 {
     NSLog(@"Category %d selected", index);
     WeiboDetailViewController *weiboDetailController = 
-    [[[WeiboDetailViewController alloc] init] autorelease];
+    [[WeiboDetailViewController alloc] init];
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: weiboDetailController];
     
     [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
     
     [navController release];
+    [weiboDetailController release];
 }
 
 - (CGFloat)getHeight

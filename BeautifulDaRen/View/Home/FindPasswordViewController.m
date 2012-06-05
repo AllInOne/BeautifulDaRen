@@ -79,8 +79,9 @@
 
 - (void)onHelpButtonClicked
 {
-    HelpViewController * helpViewController = [[[HelpViewController alloc] initWithNibName:@"HelpViewController" bundle:nil] autorelease];
+    HelpViewController * helpViewController = [[HelpViewController alloc] initWithNibName:@"HelpViewController" bundle:nil];
     [self.navigationController pushViewController:helpViewController animated:YES];
+    [helpViewController release];
 }
 
 #pragma mark - Table view data source
@@ -103,9 +104,10 @@
     if(section == 0)
     {
         cell = [[[UITableViewCell alloc] init] autorelease];
-        UITextField * textFiled = [[[UITextField alloc] initWithFrame:CGRectMake(20, 10, 300, 40)] autorelease];
+        UITextField * textFiled = [[UITextField alloc] initWithFrame:CGRectMake(20, 10, 300, 40)];
         textFiled.placeholder = NSLocalizedString(@"please_input_email_or_account_name", @"please_input_email_or_account_name");
         [cell addSubview:textFiled];
+        [textFiled release];
     }
     else if (section == 1)
     {
@@ -117,7 +119,9 @@
         ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"common_button"];
         ((ButtonViewCell*)cell).leftLabel.text = NSLocalizedString(@"enter", @"enter");
         
-        cell.backgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+        UIView * tempView = [[UIView alloc] initWithFrame:CGRectZero];
+        cell.backgroundView = tempView;
+        [tempView release];
     }
     return cell;
 }

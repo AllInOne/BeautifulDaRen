@@ -42,12 +42,14 @@
 
 + (void)showImage:(UIImage* )image inNavigationController:(UINavigationController* )parentNav {
     
-    FullImageViewController* fullImageViewController = [[[FullImageViewController alloc] initWithNibName:nil bundle:nil] autorelease];
+    FullImageViewController* fullImageViewController = [[FullImageViewController alloc] initWithNibName:nil bundle:nil];
 
     [fullImageViewController setImageData:image];
     
-    UINavigationController * navController= [[[UINavigationController alloc] initWithRootViewController:fullImageViewController] autorelease];
+    UINavigationController * navController= [[UINavigationController alloc] initWithRootViewController:fullImageViewController];
     [parentNav presentModalViewController:navController animated:YES];
+    [navController release];
+    [fullImageViewController release];
 }
 
 - (void)dealloc
