@@ -91,8 +91,9 @@
         NSArray* textArray = [localizedStringsArray objectAtIndex:index];
         [navigationItem setTitle:[textArray objectAtIndex:0]];
         
-        navigation.tabBarItem = [[[CustomUITabBarItem alloc] initWithTitle:[textArray objectAtIndex:1] normalImage:[UIImage imageNamed:[tabbarIconNamesArray objectAtIndex:index]] highlightedImage:[UIImage imageNamed:[tabbarIconNamesArray objectAtIndex:index]] tag:index] autorelease];
-        
+        CustomUITabBarItem * tempTabBarItem = [[CustomUITabBarItem alloc] initWithTitle:[textArray objectAtIndex:1] normalImage:[UIImage imageNamed:[tabbarIconNamesArray objectAtIndex:index]] highlightedImage:[UIImage imageNamed:[tabbarIconNamesArray objectAtIndex:index]] tag:index];
+        navigation.tabBarItem = tempTabBarItem;
+        [tempTabBarItem release];
         index++;
     }
 

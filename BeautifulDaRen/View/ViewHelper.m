@@ -136,11 +136,13 @@
     
     button2.frame = CGRectMake(60, 0, 50, 30);
     
-    UIView * view = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 110, 30)] autorelease];
+    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 110, 30)];
     [view addSubview:button1];
     [view addSubview:button2];
     
-    return [[[UIBarButtonItem alloc] initWithCustomView:view] autorelease];
+    UIBarButtonItem* barButtonItem = [[UIBarButtonItem alloc] initWithCustomView:view];
+    [view release];
+    return [barButtonItem autorelease];
 }
 
 + (UIBarButtonItem*)getToolBarItemOfImageName:(NSString*)imageName target:(id)target action:(SEL)action
