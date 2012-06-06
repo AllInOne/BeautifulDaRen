@@ -169,13 +169,14 @@
 - (IBAction)onAtFriendPressed:(id)sender
 {
     FriendsSelectionViewController *friendSelectionController = 
-    [[[FriendsSelectionViewController alloc] initWithNibName:nil bundle:nil] autorelease];
+    [[FriendsSelectionViewController alloc] initWithNibName:nil bundle:nil];
     friendSelectionController.delegate = self;
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: friendSelectionController];
     
     [self.navigationController presentModalViewController:navController animated:YES];
     
     [navController release];
+    [friendSelectionController release];
 }
 
 - (IBAction)onLocationPressed:(id)sender

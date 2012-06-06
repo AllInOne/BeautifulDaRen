@@ -63,7 +63,7 @@
         //Content for test
         _weiboContent = [[NSString alloc] initWithString:@"我最近买了一双鞋子，很漂亮，你看看吧!"];
         
-        UIToolbar *tempToolbar = [[[UIToolbar alloc]initWithFrame:CGRectMake(0,372, 320,44)] autorelease];
+        UIToolbar *tempToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0,372, 320,44)];
   
         UIBarButtonItem *flexible = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
 
@@ -104,6 +104,7 @@
         [flexible release];
         [tabBarBg release];
         [barItems release];
+        [tempToolbar release];
     }
     return self;
 }
@@ -124,25 +125,27 @@
 - (void)onForward
 {
     WeiboForwardCommentViewController *forwardViewContoller = 
-    [[[WeiboForwardCommentViewController alloc] initWithNibName:nil bundle:nil] autorelease];
+    [[WeiboForwardCommentViewController alloc] initWithNibName:nil bundle:nil];
     forwardViewContoller.forwardMode = YES;
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: forwardViewContoller];
  
     [self.navigationController presentModalViewController:navController animated:YES];
 
     [navController release];
+    [forwardViewContoller release];
 }
 
 - (void)onComment
 {
     WeiboForwardCommentViewController *forwardViewContoller = 
-    [[[WeiboForwardCommentViewController alloc] initWithNibName:nil bundle:nil] autorelease];
+    [[WeiboForwardCommentViewController alloc] initWithNibName:nil bundle:nil];
     forwardViewContoller.forwardMode = NO;
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: forwardViewContoller];
     
     [self.navigationController presentModalViewController:navController animated:YES];
     
     [navController release];
+    [forwardViewContoller release];
 }
 
 - (void)onFavourate
@@ -158,12 +161,13 @@
 -(IBAction)onCommentListButtonPressed:(id)sender
 {
     ForwardCommentListViewController *commentListViewContoller = 
-    [[[ForwardCommentListViewController alloc] initWithNibName:nil bundle:nil] autorelease];
+    [[ForwardCommentListViewController alloc] initWithNibName:nil bundle:nil];
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: commentListViewContoller];
     
     [self.navigationController presentModalViewController:navController animated:YES];
     
     [navController release];
+    [commentListViewContoller release];
 }
 
 -(IBAction)onForwardButtonPressed:(id)sender
@@ -244,13 +248,15 @@
 
 -(IBAction)onBrandButtonPressed:(id)sender
 {
-    FriendDetailViewController * friendDetailViewController = [[[FriendDetailViewController alloc] initWithNibName:@"FriendDetailViewController" bundle:nil] autorelease];
+    FriendDetailViewController * friendDetailViewController = [[FriendDetailViewController alloc] initWithNibName:@"FriendDetailViewController" bundle:nil];
     [self.navigationController pushViewController:friendDetailViewController animated:YES];
+    [friendDetailViewController release];
 }
 
 -(IBAction)onBusinessButtonPressed:(id)sender
 {
-    FriendDetailViewController * friendDetailViewController = [[[FriendDetailViewController alloc] initWithNibName:@"FriendDetailViewController" bundle:nil] autorelease];
+    FriendDetailViewController * friendDetailViewController = [[FriendDetailViewController alloc] initWithNibName:@"FriendDetailViewController" bundle:nil];
     [self.navigationController pushViewController:friendDetailViewController animated:YES];
+    [friendDetailViewController release];
 }
 @end
