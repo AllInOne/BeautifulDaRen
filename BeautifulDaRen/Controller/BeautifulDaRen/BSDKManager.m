@@ -306,6 +306,10 @@ static BSDKManager *sharedInstance;
     
     [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_ADD forKey:K_BSDK_ACTION];
+    
+    // SEND WEIBO DO NOT NEED USERNAME, ONLY FOR TEST, TOBE REMOVED.
+    [params setObject:K_BSDK_TEST_USERNAME forKey:K_BSDK_USERNAME];
+    
     [params setObject:text forKey:K_BSDK_CONTENT];
     [params setObject:shop forKey:K_BSDK_SHOPMERCHANT];
     [params setObject:branch forKey:K_BSDK_BRANDSERVICE];

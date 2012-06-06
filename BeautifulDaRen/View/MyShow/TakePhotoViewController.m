@@ -10,11 +10,13 @@
 #import "ViewConstants.h"
 #import "ViewHelper.h"
 #import "WeiboForwardCommentViewController.h"
+#import <AVFoundation/AVFoundation.h>
+#import "iToast.h"
 
 @interface TakePhotoViewController ()
 @property (nonatomic, retain)  TakePhotoViewController * galleryPhotoViewController;
 @property (nonatomic, assign)  UIImagePickerControllerSourceType currentSourceType; 
-
+@property (nonatomic, assign)  BOOL isCameraReady;
 - (void)setToolbar;
 @end
 
@@ -25,15 +27,17 @@
 @synthesize galleryPhotoViewController = _galleryPhotoViewController;
 @synthesize currentSourceType = _currentSourceType;
 @synthesize toolbarView = _toolbarView;
+@synthesize isCameraReady = _isCameraReady;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        _imagePickerController = [[[UIImagePickerController alloc] init] autorelease];
+        _imagePickerController = [[UIImagePickerController alloc] init];
         _imagePickerController.delegate = self;
         _currentSourceType = UIImagePickerControllerSourceTypeCamera;
+        _isCameraReady = NO;
     }
     return self;
 }
@@ -55,11 +59,10 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    
+
     _imagePickerController = nil;
     _toolbarView = nil;
     _galleryPhotoViewController = nil;
-    
 }
 
 - (void)dealloc
@@ -104,12 +107,22 @@
 
 - (void)onGalleryBartButtonPressed {
     [self.delegate didChangeToGalleryMode];
-    self.imagePickerController.cameraOverlayView = nil;
+//    self.imagePickerController.cameraOverlayView = nil;
 }
 
 - (void)onCameraBarButtonPressed {
-    [self.imagePickerController takePicture]; 
+    if (self.isCameraReady) {
+        [self.imagePickerController performSelector:@selector(takePicture) withObject:nil afterDelay:0.5];
+    }
+    else
+    {
+        [[iToast makeText:@"照相机还没准备好!"] show];
+    }
 }
+
+//- (void)takePicture {
+//    [self.imagePickerController takePicture];  
+//}
 
 - (void)onAvatarBartButtonPressed {
     
@@ -173,8 +186,28 @@
             [self.imagePickerController.cameraOverlayView addSubview:self.toolbarView];
         }
     }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(cameraIsReady:)
+                                                 name:AVCaptureSessionDidStartRunningNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(cameraIsNotReady:)
+                                                 name:AVCaptureSessionDidStopRunningNotification object:nil];
 }
 
+- (void)cameraIsReady:(NSNotification *)notification
+{   
+    NSLog(@"Camera is ready...");
+    // Whatever
+    _isCameraReady = YES;
+}
+
+- (void)cameraIsNotReady:(NSNotification *)notification
+{   
+    NSLog(@"Camera is NOT ready...");
+    // Whatever
+    _isCameraReady = NO;
+}
 #pragma mark -
 #pragma mark UIImagePickerControllerDelegate
 
