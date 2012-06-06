@@ -82,6 +82,8 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+    _adsPageView = nil;
+    _itemsViewController = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated

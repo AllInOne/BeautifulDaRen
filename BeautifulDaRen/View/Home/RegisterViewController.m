@@ -267,10 +267,10 @@ enum
     else
     {
         UIView * tempView = [[UIView alloc] initWithFrame:CGRectZero];
-        view = tempView;
+        view = [tempView retain];
         [tempView release];
     }
-    return view;
+    return [view autorelease];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section

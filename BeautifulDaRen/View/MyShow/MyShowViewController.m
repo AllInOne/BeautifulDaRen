@@ -10,6 +10,7 @@
 #import "ViewConstants.h"
 #import "PhotoConfirmViewController.h"
 #import "WeiboComposerViewController.h"
+#import "UIImage+Scale.h"
 
 @interface MyShowViewController ()
 @property (nonatomic, assign) UIImagePickerControllerSourceType currentType;
@@ -72,6 +73,7 @@
         if (self.currentType == UIImagePickerControllerSourceTypeCamera) {
             [self.takePhotoViewController setupImagePicker:self.currentType];
             [self presentModalViewController:self.takePhotoViewController.imagePickerController animated:YES];
+            //[self.takePhotoViewController.imagePickerController release];
         }
     }
 }
@@ -100,9 +102,9 @@
 {
     self.shouldShowSelf = NO;
     WeiboComposerViewController *weiboComposerViewControlller = 
-    [[[WeiboComposerViewController alloc] initWithNibName:nil bundle:nil] autorelease];
+    [[WeiboComposerViewController alloc] initWithNibName:nil bundle:nil];
     
-    weiboComposerViewControlller.selectedImage = picture;
+    weiboComposerViewControlller.selectedImage = [picture scaleToSize:CGSizeMake(320.0, picture.size.height * 320.0/picture.size.width)];
 
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: weiboComposerViewControlller];
     
@@ -110,6 +112,7 @@
     
     [self.navigationController presentModalViewController:navController animated:YES];
     [navController release];
+    [weiboComposerViewControlller release];
     
     [self.tabBarController setSelectedIndex:0];
     self.currentType = UIImagePickerControllerSourceTypeCamera;
@@ -119,7 +122,6 @@
 - (void)didFinishWithCamera
 {
     [self.tabBarController setSelectedIndex:0];
-    [self dismissModalViewControllerAnimated:NO];
     self.currentType = UIImagePickerControllerSourceTypeCamera;
     self.shouldShowSelf = YES;
 }
@@ -140,5 +142,6 @@
     
     [self.selectPhotoViewController setupImagePicker:self.currentType];
     [self.parentViewController presentModalViewController:self.selectPhotoViewController.imagePickerController animated:YES];
+    //[self.takePhotoViewController.imagePickerController release];
 }
 @end

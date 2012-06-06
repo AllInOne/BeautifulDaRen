@@ -78,16 +78,32 @@
 
 - (void)dealloc {
     [super dealloc];
+    
+    [_adsImageNames release];
+    [_adsPageController release];
+    if ([_adsExchangeTimer isValid]) {
+        [_adsExchangeTimer invalidate];
+    }
+    _adsExchangeTimer = nil;
+    [_firstImageView release];
+    [_secondImageView release];
+    [_adsButton release];
 }
 
 #pragma mark - View lifecycle
 - (void)viewDidUnload
 {
+    [super viewDidUnload];
+    
     self.adsImageNames = nil;
     self.adsPageController = nil;
+    self.firstImageView  = nil;
+    self.secondImageView = nil;
+    self.adsPageController = nil;
+    self.adsButton = nil;
+    
     [_adsExchangeTimer invalidate];
-    [_adsExchangeTimer release];
-    [super viewDidUnload];
+    _adsExchangeTimer = nil;
 }
 
 
