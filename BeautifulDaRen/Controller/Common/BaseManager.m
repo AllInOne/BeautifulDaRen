@@ -13,7 +13,7 @@
 - (void)addRequest: (id<RequestProtocol>) request;
 
 @property (nonatomic, assign) NSMutableArray * requests;
-@property (nonatomic, assign) id<RequestProtocol> currentRequest;
+@property (nonatomic, retain) id<RequestProtocol> currentRequest;
 
 - (void)doNotifyLoginStatus:(LOGIN_STATUS)status;
 - (void)doNotifyProcessStatus:(AIO_STATUS)status andData:(NSDictionary *)dict;
@@ -42,6 +42,11 @@
 {
     Block_release(self.loginCallback);
     self.loginCallback = nil;
+    
+    if (self.currentRequest) {
+        [self.currentRequest release];
+    }
+
     [super dealloc];
 }
 

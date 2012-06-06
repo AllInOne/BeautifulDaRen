@@ -14,6 +14,7 @@
 #import "SinaSDKManager.h"
 #import "UIImage+Scale.h"
 #import "BSDKManager.h"
+#import "BSDKDefines.h"
 
 #define WEIBO_CONTENT_TEXTVIEW_Y_OFFSET (90.0)
 #define WEIBO_CONTENT_TEXTVIEW_MARGIN   (2.0)
@@ -267,6 +268,7 @@
     
     __block NSInteger doneCount = 0;
     __block NSInteger doneCountExpected = 1;
+    __block NSString * errorMsg = nil;
     
     processDoneWithDictBlock doneBlock = ^(AIO_STATUS status, NSDictionary * data){
         NSLog(@"Send done: %d", status);
@@ -274,14 +276,17 @@
         doneCount++;
         if (doneCount == doneCountExpected) {
             [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_HIDEWAITOVERLAY object:self];
+            if ([data objectForKey:K_BSDK_RESPONSE_STATUS] && !K_BSDK_IS_RESPONSE_OK(data)) {
+                errorMsg = K_BSDK_GET_RESPONSE_MESSAGE(data);
+            }
             
-            if (status == 0)
+            if (errorMsg == nil)
             {
                 [ViewHelper showSimpleMessage:@"发送成功" withTitle:nil withButtonText:@"好的"];
             }
             else
             {
-                [ViewHelper showSimpleMessage:@"发送失败" withTitle:nil withButtonText:@"好的"];
+                [ViewHelper showSimpleMessage:errorMsg withTitle:nil withButtonText:@"好的"];
             }
             [self dismissModalViewControllerAnimated:YES];
         }
@@ -289,7 +294,7 @@
     };
     
     
-    if ([[SinaSDKManager sharedManager] isLogin])
+    if (!self.sinaShareImageView.hidden && [[SinaSDKManager sharedManager] isLogin])
     {
         [[SinaSDKManager sharedManager] sendWeiBoWithText:self.weiboContentTextView.text image:[self.selectedImage scaleToSize:CGSizeMake(320.0, self.selectedImage.size.height * 320.0/self.selectedImage.size.width)] doneCallback:doneBlock];
         doneCountExpected++;

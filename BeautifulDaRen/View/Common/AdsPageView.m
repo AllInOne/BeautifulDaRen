@@ -11,6 +11,7 @@
 
 #import "iToast.h"
 #import "BSDKManager.h"
+#import "BSDKDefines.h"
 
 #define ADS_EXCHANGE_TIME_OUT_SECONDS   (5.0)
 #define ADS_ANIMATION_DURATION          (0.5)
@@ -196,10 +197,10 @@
 //         NSLog(@"sign in done = %d", status);
 //        [[iToast makeText:[NSString stringWithFormat:@"%@", [data objectForKey:@"msg"]]] show];
 //    }];
-    [[BSDKManager sharedManager] getWeiboListByUsername:@"121asdfasdf" pageSize:20 pageIndex:1 andDoneCallback:^(AIO_STATUS status, NSArray *data) {
-        NSLog(@"sign in done = %d", status);
-        [[iToast makeText:[NSString stringWithFormat:@"%@", [data description]]] show];
-    }];
+//    [[BSDKManager sharedManager] getWeiboListByUsername:K_BSDK_TEST_USERNAME pageSize:20 pageIndex:1 andDoneCallback:^(AIO_STATUS status, NSArray *data) {
+//        NSLog(@"sign in done = %d", status);
+//        [[iToast makeText:[NSString stringWithFormat:@"%@", [data description]]] show];
+//    }];
 }
 
 -(IBAction)onAdsPageClosedPressed:(id)sender

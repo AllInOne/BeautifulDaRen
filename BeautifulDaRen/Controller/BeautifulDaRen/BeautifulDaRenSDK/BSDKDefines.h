@@ -9,6 +9,9 @@
 #ifndef BeautifulDaRen_BSDKDefines_h
 #define BeautifulDaRen_BSDKDefines_h
 
+//TEST USERNAME TO BE REMOVED!!!!!!!
+#define K_BSDK_TEST_USERNAME @"121asdfasdf"
+
 #define K_BSDK_CATEGORY @"cat"
 #define K_BSDK_CATEGORY_USER @"user"
 #define K_BSDK_CATEGORY_BLOG @"blog"
