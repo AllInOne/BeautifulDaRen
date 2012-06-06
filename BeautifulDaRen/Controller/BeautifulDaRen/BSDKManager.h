@@ -39,5 +39,19 @@
                      doneCallback:(processDoneWithDictBlock)callback;
 
 // Send a Weibo, to which you can attach an image.
-- (void)sendWeiBoWithText:(NSString *)text image:(UIImage *)image doneCallback:(processDoneWithDictBlock)callback;
+- (void)sendWeiBoWithText:(NSString *)text 
+                    image:(UIImage *)image 
+                     shop:(NSString*)shop
+                    brand:(NSString*)branch
+                    price:(NSInteger)price
+              poslatitude:(float)latitude
+             posLongitude:(float)longitude
+             doneCallback:(processDoneWithDictBlock)callback;
+
+// If username is specified, then it will retrieve the weibos which is sent by this user, or it will retrieve the neweset weibos.
+- (void)getWeiboListByUsername:(NSString*)username
+                      pageSize:(NSInteger)pageSize 
+                     pageIndex:(NSInteger)pageIndex 
+               andDoneCallback:(processDoneWithArrayBlock)callback;
+
 @end
