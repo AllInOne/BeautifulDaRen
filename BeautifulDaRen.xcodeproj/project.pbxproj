@@ -1428,7 +1428,6 @@
 		CE029AAF153E682100886227 = {
 			isa = PBXGroup;
 			children = (
-				CEE21594157F149C00E4F167 /* AVFoundation.framework */,
 				CE029AC4153E682100886227 /* BeautifulDaRen */,
 				CE029ABD153E682100886227 /* Frameworks */,
 				CE029ABB153E682100886227 /* Products */,
@@ -1449,6 +1448,7 @@
 		CE029ABD153E682100886227 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CEE21594157F149C00E4F167 /* AVFoundation.framework */,
 				CEF432451556B748004D47BA /* AudioToolbox.framework */,
 				C213AB9E155C1CD800667556 /* CoreData.framework */,
 				CE029AC2153E682100886227 /* CoreGraphics.framework */,
