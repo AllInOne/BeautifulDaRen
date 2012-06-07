@@ -271,14 +271,13 @@
 {
     if(button ==  self.loginWithSinaWeiboButton)
     {
-        [[iToast makeText:@"新浪微博登陆"] show];
         if (![[SinaSDKManager sharedManager] isLogin])
         {
             [[SinaSDKManager sharedManager] setRootviewController:self.navigationController];
             [[SinaSDKManager sharedManager] loginWithDoneCallback:^(LOGIN_STATUS status) {
                 NSLog(@"Sina SDK login done, status:%d", status);
                 if (status == LOGIN_STATUS_SUCCESS) {
-                    [[iToast makeText:@"亲，认证成功过了！"] show];
+                    [[iToast makeText:@"亲，认证成功了！"] show];
                 }
                 else
                 {
