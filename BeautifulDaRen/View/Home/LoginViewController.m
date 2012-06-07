@@ -244,9 +244,9 @@
     }
     else
     {
-        view= [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+        view = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
     }
-    return [view autorelease];
+    return view;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
