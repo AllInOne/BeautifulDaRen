@@ -39,10 +39,10 @@
 	// Do any additional setup after loading the view, typically from a nib.    
 
     if (self.adsPageView == nil) {
-        _adsPageView = [[AdsPageView alloc] initWithNibName:@"AdsPageView" bundle:nil];
-        _adsPageView.view.frame = CGRectMake(0, 0, self.view.frame.size.width, ADS_CELL_HEIGHT);
-        [_adsPageView setDelegate:self];
-        [self.view addSubview:_adsPageView.view];
+        self.adsPageView = [[AdsPageView alloc] initWithNibName:@"AdsPageView" bundle:nil];
+        self.adsPageView.view.frame = CGRectMake(0, 0, ADS_CELL_WIDTH, ADS_CELL_HEIGHT);
+        [self.adsPageView setDelegate:self];
+        [self.view addSubview:self.adsPageView.view];
     }
     
     if (self.categoryContentView == nil) {
@@ -55,9 +55,9 @@
 }
 
 - (void)dealloc {
+    [super dealloc];
     [_adsPageView release];
     [_categoryContentView release];
-    [super dealloc];
 }
 
 - (void)viewDidUnload

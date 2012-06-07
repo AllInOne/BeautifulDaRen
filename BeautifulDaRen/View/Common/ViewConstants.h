@@ -11,6 +11,7 @@
 #ifndef BeautifulDaRen_ViewConstants_Header_h
 #define BeautifulDaRen_ViewConstants_Header_h
 
+#define ADS_CELL_WIDTH              (320)
 #define ADS_CELL_HEIGHT             (67)
 #define USER_INFOR_CELL_HEIGHT      (80)
 

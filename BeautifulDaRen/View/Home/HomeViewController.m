@@ -20,13 +20,15 @@
 //@property (retain, nonatomic) AdsPageView * adsPageView;
 @property (retain, nonatomic) ItemsViewController* itemsViewController;
 @property (retain, nonatomic) AdsPageView * adsPageView;
-
+@property (retain, nonatomic) id observer;
 
 @end
 
 @implementation HomeViewController
 @synthesize itemsViewController = _itemsViewController;
 @synthesize adsPageView = _adsPageView;
+@synthesize observer = _observer;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -42,11 +44,14 @@
 {
     [super viewDidLoad];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(loginSuccess:)
-                                                 name:K_NOTIFICATION_LOGIN_SUCCESS
-                                               object:nil];
-
+    self.observer = [[NSNotificationCenter defaultCenter]
+                 addObserverForName:K_NOTIFICATION_LOGIN_SUCCESS
+                 object:nil
+                 queue:nil
+                 usingBlock:^(NSNotification *note) {
+                     NSLog(@"notification:%@",[[note valueForKey:@"userInfo"] valueForKey:@"msg"]);
+                     [self refreshView];
+                 }];
     if([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0)
     {
         UIBarButtonItem* loginButton = [ViewHelper getBarItemOfTarget:self action:@selector(onLoginBtnSelected:) title:NSLocalizedString(@"login", @"login button on navigation")];
@@ -63,12 +68,12 @@
     }
     [self.navigationItem setLeftBarButtonItem:[ViewHelper getLeftBarItemOfImageName:@"beautifuldaren_logo" rectSize:CGRectMake(0, 0, NAVIGATION_LEFT_LOGO_WIDTH, NAVIGATION_LEFT_LOGO_HEIGHT)]];
     
-    if(_adsPageView == nil)
+    if(self.adsPageView == nil)
     {
-        _adsPageView = [[AdsPageView alloc] initWithNibName:@"AdsPageView" bundle:nil];
-        _adsPageView.view.frame = CGRectMake(0, 0, self.view.frame.size.width, ADS_CELL_HEIGHT);
-        [self.view addSubview:_adsPageView.view];
-        _adsPageView.delegate = self;
+        self.adsPageView = [[AdsPageView alloc] initWithNibName:@"AdsPageView" bundle:nil];
+        self.adsPageView.view.frame = CGRectMake(0, 0, self.view.frame.size.width, ADS_CELL_HEIGHT);
+        [self.view addSubview:self.adsPageView.view];
+        self.adsPageView.delegate = self;
     }
 
     if(_itemsViewController == nil)
@@ -91,16 +96,17 @@
 {
     [_adsPageView release];
     [_itemsViewController release];
+    [_observer release];
     [super dealloc];
 }
 
 - (void)viewDidUnload
 {
-    [super viewDidUnload];
-    [[NSNotificationCenter defaultCenter] removeObject:self];
-    
+    [[NSNotificationCenter defaultCenter] removeObserver:_observer];
     self.adsPageView = nil;
     self.itemsViewController = nil;
+    self.observer = nil;
+    [super viewDidUnload];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -163,7 +169,5 @@
 
 -(void) loginSuccess:(NSNotification*)notification
 {
-    NSLog(@"notification:%@",[[notification valueForKey:@"userInfo"] valueForKey:@"msg"]);
-    [self refreshView];
 }
 @end
