@@ -82,12 +82,22 @@ static BSDKManager *sharedInstance;
     [params setObject:email forKey:K_BSDK_EMAIL];
     [params setObject:city forKey:K_BSDK_City];
     
+    processDoneWithDictBlock signupCallbackShim = ^(AIO_STATUS status, NSDictionary * data)
+    {
+        if ((status == AIO_STATUS_SUCCESS) && K_BSDK_IS_RESPONSE_OK(data))
+        {
+            self.isAlreadyLogin = YES;
+        }
+        
+        doneBlock(status, data);
+    };
+    
     [self sendRequestWithMethodName:nil
                          httpMethod:@"POST" 
                              params:params 
                        postDataType:kBSDKRequestPostDataTypeNormal
                    httpHeaderFields:nil
-                       doneCallback:doneBlock];
+                       doneCallback:signupCallbackShim];
 }
 
 - (void)loginWithUsername:(NSString*) username password:(NSString*)password andDoneCallback:(processDoneWithDictBlock)doneBlock;

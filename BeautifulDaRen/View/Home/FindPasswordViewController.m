@@ -119,9 +119,7 @@
         ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"common_button"];
         ((ButtonViewCell*)cell).leftLabel.text = NSLocalizedString(@"enter", @"enter");
         
-        UIView * tempView = [[UIView alloc] initWithFrame:CGRectZero];
-        cell.backgroundView = tempView;
-        [tempView release];
+        cell.backgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
     }
     return cell;
 }

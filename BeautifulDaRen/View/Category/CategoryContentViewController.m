@@ -78,6 +78,7 @@
 {
     [super dealloc];
     [_contentItems release];
+    [_categoryListView release];
 }
 
 #pragma mark - View lifecycle
@@ -91,7 +92,8 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    _contentItems  = nil;
+    self.contentItems  = nil;
+    self.categoryListView = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

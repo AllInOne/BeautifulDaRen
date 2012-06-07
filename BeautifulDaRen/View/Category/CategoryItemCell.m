@@ -48,8 +48,8 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    _categoryScrollItem = nil;
-    _categoryTitle = nil;
+    self.categoryScrollItem = nil;
+    self.categoryTitle = nil;
 }
 
 - (void)onItemSelected:(int)index

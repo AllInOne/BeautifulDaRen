@@ -12,6 +12,38 @@
 #import "NSAttributedString+Attributes.h"
 
 #define BACK_BUTTON_LABEL_X_OFFSET  (5.0)
+@interface BUIFont : NSObject
+
+@property (retain, nonatomic) UIFont* font14;
+
++(BUIFont*)sharedFont;
+
+@end
+
+static BUIFont * instance;
+
+@implementation BUIFont
+@synthesize font14 = _font14;
+-(UIFont*)font14
+{
+    if (_font14 == nil) {
+        _font14 = [UIFont systemFontOfSize:14];
+    }
+    return _font14;
+}
+
+
++(BUIFont*)sharedFont
+{
+    @synchronized([BUIFont class]) {
+        if (!instance) {
+            instance = [[BUIFont alloc] init];
+        }
+    }
+    return instance;
+}
+
+@end
 
 @implementation ViewHelper
 
@@ -74,7 +106,7 @@
     [button setTitle:title forState:UIControlStateNormal];
     [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     
-    [button.titleLabel setFont:[UIFont systemFontOfSize:14]];
+    [button.titleLabel setFont:[[BUIFont sharedFont] font14]];
     
     CGFloat width = [ViewHelper getWidthOfText:title ByFontSize:14];
 
@@ -91,7 +123,7 @@
     button.titleLabel.frame = CGRectMake(button.titleLabel.frame.origin.x + 10, button.titleLabel.frame.origin.y, CGRectGetWidth(button.titleLabel.frame), CGRectGetHeight(button.titleLabel.frame));
     [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     
-    [button.titleLabel setFont:[UIFont systemFontOfSize:14]];
+    [button.titleLabel setFont:[[BUIFont sharedFont] font14]];
     
     button.frame = CGRectMake(0, 0, 50, 30);
     return [[[UIBarButtonItem alloc] initWithCustomView:button] autorelease];

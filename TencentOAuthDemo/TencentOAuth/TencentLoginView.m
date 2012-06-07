@@ -339,11 +339,13 @@ params   = _params;
 		_titleLabel.autoresizingMask = UIViewAutoresizingFlexibleRightMargin
 		| UIViewAutoresizingFlexibleBottomMargin;
 		[self addSubview:_titleLabel];
+        [_titleLabel release];
 		
 		_webView = [[UIWebView alloc] initWithFrame:CGRectMake(kPadding, kPadding, 480, 480)];
 		_webView.delegate = self;
 		_webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 		[self addSubview:_webView];
+        [_webView release];
 		
 		_spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:
 					UIActivityIndicatorViewStyleWhiteLarge];
@@ -351,6 +353,7 @@ params   = _params;
 		UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin
 		| UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
 		[self addSubview:_spinner];
+        [_spinner release];
 	}
 	return self;
 }

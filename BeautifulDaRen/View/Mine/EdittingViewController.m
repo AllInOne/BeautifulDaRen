@@ -31,6 +31,7 @@
 @synthesize privateLetterMeSegmentControl = _privateLetterMeSegmentControl;
 @synthesize type = _type;
 
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil type:(NSInteger)type
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -108,9 +109,26 @@
     }
 }
 
+-(void)dealloc
+{
+    [super dealloc];
+    [_inputTextView release];
+    [_editNormalView release];
+    [_editPrivaceView release];
+    [_commentMeSegmentControl release];
+    [_atMeSegmentControl release];
+    [_privateLetterMeSegmentControl release];
+}
+
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+    self.inputTextView = nil;
+    self.editNormalView = nil;
+    self.editPrivaceView = nil;
+    self.commentMeSegmentControl = nil;
+    self.atMeSegmentControl = nil;
+    self.privateLetterMeSegmentControl = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

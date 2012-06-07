@@ -16,11 +16,6 @@
 @synthesize adsPageView = _adsPageView;
 @synthesize categoryContentView = _categoryContentView;
 
-- (void)dealloc {
-    [_adsPageView release];
-    [_categoryContentView release];
-    [super dealloc];
-}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -59,11 +54,17 @@
     [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClicked) title:@"刷新"]]; 
 }
 
+- (void)dealloc {
+    [_adsPageView release];
+    [_categoryContentView release];
+    [super dealloc];
+}
+
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+    self.categoryContentView = nil;
+    self.adsPageView = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated

@@ -51,6 +51,11 @@
 }
 
 #pragma mark - View lifecycle
+-(void)dealloc
+{
+    [super dealloc];
+    [_updateAvatarButton release];
+}
 
 - (void)viewDidLoad
 {
@@ -63,8 +68,8 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+    
+    self.updateAvatarButton = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -148,9 +153,7 @@
         SegmentControl * seg = [[SegmentControl alloc] initWithFrame:CGRectMake(65, 8, 112, 29) leftText:NSLocalizedString(@"female", @"gender") rightText:NSLocalizedString(@"male", @"gender")];
         [buttonViewCell addSubview:seg];
         [seg release];
-        UIView * view = [[UIView alloc] initWithFrame:CGRectZero];
-        cell.backgroundView = view;
-        [view release];
+        cell.backgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
     }
     else
     {

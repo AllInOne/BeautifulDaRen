@@ -14,6 +14,8 @@
 #import "QZoneSDKManager.h"
 #import "FindPasswordViewController.h"
 #import "iToast.h"
+#import "BSDKManager.h"
+#import "ViewConstants.h"
 
 #import "ViewHelper.h"
 #import "iToast.h"
@@ -77,6 +79,14 @@
 
 #pragma mark - View lifecycle
 
+-(void)dealloc
+{
+    [super dealloc];
+    [_tableView release];
+    [_loginWithQQButton release];
+    [_loginWithSinaWeiboButton release];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -86,8 +96,9 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+    self.loginWithQQButton = nil;
+    self.loginWithSinaWeiboButton = nil;
+    self.tableView = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -165,9 +176,7 @@
         ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"common_button"];
         ((ButtonViewCell*)cell).leftLabel.text = NSLocalizedString(@"login", @"login");
         
-        UIView * view = [[UIView alloc] initWithFrame:CGRectZero];
-        cell.backgroundView = view;
-        [view release];
+        cell.backgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
     }
     else if (section == 2)
     {
@@ -192,7 +201,16 @@
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([indexPath section] == 1) {
-        [[iToast makeText:@"登陆"] show];
+        NSString* userName = @"tankliu002";
+        [[BSDKManager sharedManager] loginWithUsername:userName password:@"abc123456" andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+            if(AIO_STATUS_SUCCESS == status)
+            {
+                [[NSUserDefaults standardUserDefaults] setObject:userName forKey:USERDEFAULT_LOGIN_ACCOUNT_USERNAME];
+                [self.navigationController popToRootViewControllerAnimated:YES];
+                [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_LOGIN_SUCCESS object:self userInfo:data];
+            }
+            NSLog(@"log status: %d  data:%@",status,data);
+        }];
     }
     else if([indexPath section] == 2)
     {
@@ -226,9 +244,7 @@
     }
     else
     {
-        UIView * tempView = [[UIView alloc] initWithFrame:CGRectZero];
-        view = tempView;
-        [tempView release];
+        view= [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
     }
     return view;
 }

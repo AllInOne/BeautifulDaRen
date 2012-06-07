@@ -53,6 +53,7 @@
 @synthesize allItems = _allItems;
 @synthesize searchResults = _searchResults;
 
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -75,13 +76,6 @@
     [[iToast makeText:@"刷新"] show];
 }
 #pragma mark - View lifecycle
--(void)dealloc
-{
-    [_sameCityDaRenView release];
-    [_hotDaRenView release];
-    [_youMayInterestinView release];
-    [super dealloc];
-}
 
 -(void)refreshView
 {
@@ -89,7 +83,32 @@
     [self refreshHotDaRenView];
     [self refreshYouMayInterestinView];
 }
-
+-(void)dealloc
+{
+    [_sameCityDaRenView release];
+    [_hotDaRenView release];
+    [_youMayInterestinView release];
+    [_contentScrollView release];
+    [_friendViewController release];
+    [_searchBar release];
+    [_allItems release];
+    [_searchResults release];
+    [_followOrInviteSinaWeiboFriendButton release];
+    [super dealloc];
+}
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    self.sameCityDaRenView = nil;
+    self.youMayInterestinView = nil;
+    self.hotDaRenView = nil;
+    self.contentScrollView = nil;
+    self.friendViewController = nil;
+    self.searchBar = nil;
+    self.followOrInviteSinaWeiboFriendButton = nil;
+    self.allItems = nil;
+    self.searchResults = nil;
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -147,12 +166,6 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {

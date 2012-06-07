@@ -83,11 +83,16 @@
     // Do any additional setup after loading the view from its nib.
 }
 
+-(void)dealloc
+{
+    [super dealloc];
+    [_tableView release];
+}
+
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+    self.tableView = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

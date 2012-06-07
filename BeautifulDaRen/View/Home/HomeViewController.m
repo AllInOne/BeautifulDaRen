@@ -10,13 +10,16 @@
 #import "AdsPageView.h"
 #import "ViewConstants.h"
 #import "ViewHelper.h"
+#import "BSDKManager.h"
 #import "LoginViewController.h"
 #import "RegisterViewController.h"
 #import "ForgetPasswordViewController.h"
 
 @interface HomeViewController()
 
-@property (retain, nonatomic) AdsPageView * adsPageView; 
+//@property (retain, nonatomic) AdsPageView * adsPageView;
+@property (retain, nonatomic) ItemsViewController* itemsViewController;
+@property (retain, nonatomic) AdsPageView * adsPageView;
 
 
 @end
@@ -34,16 +37,15 @@
 
 #pragma mark - View lifecycle
 
--(void) dealloc
-{
-    [_adsPageView release];
-    [_itemsViewController release];
-    [super dealloc];
-}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(loginSuccess:)
+                                                 name:K_NOTIFICATION_LOGIN_SUCCESS
+                                               object:nil];
 
     if([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0)
     {
@@ -66,22 +68,40 @@
         _adsPageView = [[AdsPageView alloc] initWithNibName:@"AdsPageView" bundle:nil];
         _adsPageView.view.frame = CGRectMake(0, 0, self.view.frame.size.width, ADS_CELL_HEIGHT);
         [self.view addSubview:_adsPageView.view];
+        _adsPageView.delegate = self;
     }
 
     if(_itemsViewController == nil)
     {
         _itemsViewController = [[ItemsViewController alloc] initWithNibName:@"ItemsViewController" bundle:nil];
-        
         _itemsViewController.view.frame = CGRectMake(0, ADS_CELL_HEIGHT + CONTENT_MARGIN, self.view.frame.size.width, USER_WINDOW_HEIGHT - ADS_CELL_HEIGHT - CONTENT_MARGIN);
         [self.view addSubview:_itemsViewController.view];
     }
     
-    _adsPageView.delegate = self;
+}
+
+- (void)refreshView
+{
+    if ([[BSDKManager sharedManager] isLogin]) {
+        [self.navigationItem setTitle:[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOGIN_ACCOUNT_USERNAME]];
+    }
+}
+
+-(void) dealloc
+{
+    [_adsPageView release];
+    [_itemsViewController release];
+    [super dealloc];
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+    
+    [[NSNotificationCenter defaultCenter] removeObject:self];
+    
+    self.adsPageView = nil;
+    self.itemsViewController = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -140,5 +160,11 @@
     [_itemsViewController.view setFrame:CGRectMake(0, 0, CGRectGetWidth(_itemsViewController.view.frame), USER_WINDOW_HEIGHT)];
     
     [UIView commitAnimations];
+}
+
+-(void) loginSuccess:(NSNotification*)notification
+{
+    NSLog(@"notification:%@",[[notification valueForKey:@"userInfo"] valueForKey:@"msg"]);
+    [self refreshView];
 }
 @end
