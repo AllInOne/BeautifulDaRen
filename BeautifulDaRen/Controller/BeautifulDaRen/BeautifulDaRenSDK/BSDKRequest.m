@@ -8,6 +8,8 @@
 #define kWBRequestTimeOutInterval   180.0
 #define kWBRequestStringBoundary    @"293iosfksdfkiowjksdf31jsiuwq003s02dsaffafass3qw"
 
+static NSMutableString *logBody;
+
 @interface BSDKRequest (Private)
 
 + (NSString *)stringFromDictionary:(NSDictionary *)dict;
@@ -71,10 +73,17 @@
 + (void)appendUTF8Body:(NSMutableData *)body dataString:(NSString *)dataString
 {
     [body appendData:[dataString dataUsingEncoding:NSUTF8StringEncoding]];
+    [logBody appendString:dataString];
 }
 
 - (NSMutableData *)postBody
 {
+    if (logBody == nil) {
+        logBody = [[NSMutableString stringWithCapacity:256] retain];
+    }
+    
+    [logBody setString:@""];
+    
     NSMutableData *body = [NSMutableData data];
     
     if (postDataType == kBSDKRequestPostDataTypeNormal)
@@ -130,6 +139,8 @@
 			}
 		}
     }
+    
+    NSLog(@"BSDK request body: %@", logBody);
     
     return body;
 }

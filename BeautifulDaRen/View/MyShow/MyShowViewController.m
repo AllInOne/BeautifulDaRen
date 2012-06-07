@@ -73,6 +73,7 @@
         if (self.currentType == UIImagePickerControllerSourceTypeCamera) {
             [self.takePhotoViewController setupImagePicker:self.currentType];
             [self presentModalViewController:self.takePhotoViewController.imagePickerController animated:YES];
+            self.shouldShowSelf = NO;
             //[self.takePhotoViewController.imagePickerController release];
         }
     }

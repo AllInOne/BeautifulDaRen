@@ -20,7 +20,7 @@
 @property (nonatomic, assign) id <TakePhotoControllerDelegate> delegate;
 @property (nonatomic, retain) UIImagePickerController *imagePickerController;
 
-@property (nonatomic, retain) IBOutlet UIToolbar * toolbarView;
+@property (nonatomic, retain) UIToolbar * toolbarView;
 
 - (void)setupImagePicker:(UIImagePickerControllerSourceType)sourceType;
 

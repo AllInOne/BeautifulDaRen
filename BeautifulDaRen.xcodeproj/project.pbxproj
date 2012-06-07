@@ -222,6 +222,12 @@
 		CE20C435156776D30031997B /* beautifuldaren_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE20C434156776D20031997B /* beautifuldaren_logo@2x.png */; };
 		CE20C437156776E60031997B /* beautifuldaren_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = CE20C436156776E60031997B /* beautifuldaren_logo.png */; };
 		CE38B7EE15483CB10080DD99 /* QZoneSDKManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE38B7ED15483CB10080DD99 /* QZoneSDKManager.m */; };
+		CE3D5CD71580E49A0065AC2F /* home_banner3@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE3D5CD41580E4930065AC2F /* home_banner3@2x.jpg */; };
+		CE3D5CD81580E49A0065AC2F /* home_banner4@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE3D5CD51580E4950065AC2F /* home_banner4@2x.jpg */; };
+		CE3D5CD91580E49A0065AC2F /* splash@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE3D5CD61580E4970065AC2F /* splash@2x.jpg */; };
+		CE3D5CDD1580E4B60065AC2F /* home_banner3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE3D5CDA1580E4B60065AC2F /* home_banner3.jpg */; };
+		CE3D5CDE1580E4B60065AC2F /* home_banner4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE3D5CDB1580E4B60065AC2F /* home_banner4.jpg */; };
+		CE3D5CDF1580E4B60065AC2F /* splash.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE3D5CDC1580E4B60065AC2F /* splash.jpg */; };
 		CE417871157C8A1200A7155D /* BSDKManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE417870157C8A1200A7155D /* BSDKManager.m */; };
 		CE417876157C8AA300A7155D /* BSDKEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = CE417873157C8AA200A7155D /* BSDKEngine.m */; };
 		CE417877157C8AA300A7155D /* BSDKRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE417875157C8AA300A7155D /* BSDKRequest.m */; };
@@ -907,6 +913,12 @@
 		CE20C436156776E60031997B /* beautifuldaren_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = beautifuldaren_logo.png; sourceTree = "<group>"; };
 		CE38B7EC15483CB10080DD99 /* QZoneSDKManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QZoneSDKManager.h; path = Tencent/QZoneSDKManager.h; sourceTree = "<group>"; };
 		CE38B7ED15483CB10080DD99 /* QZoneSDKManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QZoneSDKManager.m; path = Tencent/QZoneSDKManager.m; sourceTree = "<group>"; };
+		CE3D5CD41580E4930065AC2F /* home_banner3@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "home_banner3@2x.jpg"; sourceTree = "<group>"; };
+		CE3D5CD51580E4950065AC2F /* home_banner4@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "home_banner4@2x.jpg"; sourceTree = "<group>"; };
+		CE3D5CD61580E4970065AC2F /* splash@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "splash@2x.jpg"; sourceTree = "<group>"; };
+		CE3D5CDA1580E4B60065AC2F /* home_banner3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_banner3.jpg; sourceTree = "<group>"; };
+		CE3D5CDB1580E4B60065AC2F /* home_banner4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_banner4.jpg; sourceTree = "<group>"; };
+		CE3D5CDC1580E4B60065AC2F /* splash.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = splash.jpg; sourceTree = "<group>"; };
 		CE41786F157C8A1200A7155D /* BSDKManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSDKManager.h; sourceTree = "<group>"; };
 		CE417870157C8A1200A7155D /* BSDKManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSDKManager.m; sourceTree = "<group>"; };
 		CE417872157C8AA200A7155D /* BSDKEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSDKEngine.h; sourceTree = "<group>"; };
@@ -1428,7 +1440,6 @@
 		CE029AAF153E682100886227 = {
 			isa = PBXGroup;
 			children = (
-				CEE21594157F149C00E4F167 /* AVFoundation.framework */,
 				CE029AC4153E682100886227 /* BeautifulDaRen */,
 				CE029ABD153E682100886227 /* Frameworks */,
 				CE029ABB153E682100886227 /* Products */,
@@ -1449,6 +1460,7 @@
 		CE029ABD153E682100886227 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CEE21594157F149C00E4F167 /* AVFoundation.framework */,
 				CEF432451556B748004D47BA /* AudioToolbox.framework */,
 				C213AB9E155C1CD800667556 /* CoreData.framework */,
 				CE029AC2153E682100886227 /* CoreGraphics.framework */,
@@ -2085,6 +2097,9 @@
 			isa = PBXGroup;
 			children = (
 				CE5B741015749BA5009C9669 /* samples */,
+				CE3D5CDA1580E4B60065AC2F /* home_banner3.jpg */,
+				CE3D5CDB1580E4B60065AC2F /* home_banner4.jpg */,
+				CE3D5CDC1580E4B60065AC2F /* splash.jpg */,
 				CEE9B0CA1577743F00761201 /* myshow_category_background.png */,
 				CEE9B0CB1577743F00761201 /* myshow_category_checked.png */,
 				CEE9B0CC1577743F00761201 /* myshow_category_unchekced.png */,
@@ -2262,6 +2277,9 @@
 			isa = PBXGroup;
 			children = (
 				CE5B740F15749B90009C9669 /* samples */,
+				CE3D5CD41580E4930065AC2F /* home_banner3@2x.jpg */,
+				CE3D5CD51580E4950065AC2F /* home_banner4@2x.jpg */,
+				CE3D5CD61580E4970065AC2F /* splash@2x.jpg */,
 				CECAA7CA156A96F700B343A3 /* action_background@2x.png */,
 				CECAA7CB156A96F700B343A3 /* action_btn@2x.png */,
 				CED69576156BE14700F8F54C /* at_others_icon@2x.png */,
@@ -2980,6 +2998,12 @@
 				CE07F42A1578B79C00DF3BE0 /* app_icon@2x.png in Resources */,
 				C284B7D41577DD5B007D85CC /* FriendListViewController.xib in Resources */,
 				C284B7DB1577DFD9007D85CC /* FriendListViewCell.xib in Resources */,
+				CE3D5CD71580E49A0065AC2F /* home_banner3@2x.jpg in Resources */,
+				CE3D5CD81580E49A0065AC2F /* home_banner4@2x.jpg in Resources */,
+				CE3D5CD91580E49A0065AC2F /* splash@2x.jpg in Resources */,
+				CE3D5CDD1580E4B60065AC2F /* home_banner3.jpg in Resources */,
+				CE3D5CDE1580E4B60065AC2F /* home_banner4.jpg in Resources */,
+				CE3D5CDF1580E4B60065AC2F /* splash.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3124,9 +3148,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = (
+					armv7,
+					armv6,
+				);
 				CODE_SIGN_IDENTITY = "iPhone Developer: XIAO FENG (7ZJCBASW4H)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: XIAO FENG (7ZJCBASW4H)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -3141,7 +3168,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
-				PROVISIONING_PROFILE = "DDA45B85-3077-4EB2-B96F-F964176EB1A8";
+				PROVISIONING_PROFILE = "585860BC-A146-4069-972E-E34E9907515D";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "585860BC-A146-4069-972E-E34E9907515D";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -3150,9 +3178,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = (
+					armv7,
+					armv6,
+				);
 				CODE_SIGN_IDENTITY = "iPhone Developer: XIAO FENG (7ZJCBASW4H)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: XIAO FENG (7ZJCBASW4H)";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -3161,7 +3192,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "DDA45B85-3077-4EB2-B96F-F964176EB1A8";
+				PROVISIONING_PROFILE = "585860BC-A146-4069-972E-E34E9907515D";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "585860BC-A146-4069-972E-E34E9907515D";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -3175,9 +3207,11 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BeautifulDaRen/BeautifulDaRen-Prefix.pch";
 				INFOPLIST_FILE = "BeautifulDaRen/BeautifulDaRen-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "DDA45B85-3077-4EB2-B96F-F964176EB1A8";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DDA45B85-3077-4EB2-B96F-F964176EB1A8";
+				PROVISIONING_PROFILE = "585860BC-A146-4069-972E-E34E9907515D";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "585860BC-A146-4069-972E-E34E9907515D";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -3189,8 +3223,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BeautifulDaRen/BeautifulDaRen-Prefix.pch";
 				INFOPLIST_FILE = "BeautifulDaRen/BeautifulDaRen-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "DDA45B85-3077-4EB2-B96F-F964176EB1A8";
+				PROVISIONING_PROFILE = "585860BC-A146-4069-972E-E34E9907515D";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

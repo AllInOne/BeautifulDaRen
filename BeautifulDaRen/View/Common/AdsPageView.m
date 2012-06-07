@@ -55,6 +55,23 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, ADS_CELL_HEIGHT);
+        // TODO: get it from server
+        _adsImageNames = [[NSMutableArray alloc] initWithObjects:@"home_banner3.jpg",
+                                                                 @"home_banner4.jpg",
+                                                                 @"banner",
+                                                                 @"home_banner2",
+                                                                 nil];
+        _firstImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"home_banner3.jpg"]];
+        _firstImageView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+        [self.view insertSubview:_firstImageView belowSubview:self.adsPageController];
+        
+        _secondImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"home_banner4.jpg"]];
+        _secondImageView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+        [self.view insertSubview:_secondImageView belowSubview:self.adsPageController];
+        [_secondImageView setHidden:YES];
+        
+        self.adsPageController.frame = CGRectMake(self.adsPageController.frame.origin.x, ADS_CELL_HEIGHT - 30, self.adsPageController.frame.size.width, self.adsPageController.frame.size.height);
     }
     return self;  
 }
@@ -200,11 +217,27 @@
 {
     NSLog(@"Ads Pressed, current ads index = %d", currentPage);
     
-//    [[BSDKManager sharedManager] loginWithUsername:@"121asdfasdf" password:@"1212121212" andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-//         NSLog(@"sign in done = %d", status);
+//    [[BSDKManager sharedManager] signUpWithUsername:K_BSDK_TEST_USERNAME password:@"1212121212" email:@"sdfsdf@121.com" city:@"成都" andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+//         NSLog(@"operation done = %d", status);
 //        [[iToast makeText:[NSString stringWithFormat:@"%@", [data objectForKey:@"msg"]]] show];
 //    }];
-//    [[BSDKManager sharedManager] getUserInforByUsername:@"121asdfasdf" andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+    
+    if (![[BSDKManager sharedManager] isLogin])
+    {
+        [[BSDKManager sharedManager] loginWithUsername:K_BSDK_TEST_USERNAME password:@"1212121212" andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+            NSLog(@"sign in done = %d", status);
+            [[iToast makeText:[NSString stringWithFormat:@"%@", [data objectForKey:@"msg"]]] show];
+        }];
+    }
+    else
+    {
+        [[BSDKManager sharedManager] logoutWithDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+            NSLog(@"sign in done = %d", status);
+            [[iToast makeText:[NSString stringWithFormat:@"%@", [data objectForKey:@"msg"]]] show];
+        }];
+    }
+
+//    [[BSDKManager sharedManager] getUserInforByUsername:K_BSDK_TEST_USERNAME andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
 //         NSLog(@"sign in done = %d", status);
 //        [[iToast makeText:[NSString stringWithFormat:@"%@", [data objectForKey:@"msg"]]] show];
 //    }];

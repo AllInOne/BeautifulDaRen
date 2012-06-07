@@ -19,6 +19,7 @@
 #define K_BSDK_ACTION @"action"
 #define K_BSDK_ACTION_ADD @"Add"
 #define K_BSDK_ACTION_LOGIN @"LoginCheck"
+#define K_BSDK_ACTION_LOGOUT @"LogOut"
 #define K_BSDK_ACTION_GETINFO @"GetInfo"
 #define K_BSDK_ACTION_CHANGEPASSWORD @"ChangePassWord"
 #define K_BSDK_ACTION_SEARCH @"Search"

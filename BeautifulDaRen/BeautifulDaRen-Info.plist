@@ -45,5 +45,7 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 	</array>
+	<key>UILaunchImageFile</key>
+	<string>splash.jpg</string>
 </dict>
 </plist>
