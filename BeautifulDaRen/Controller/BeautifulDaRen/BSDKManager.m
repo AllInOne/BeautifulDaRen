@@ -126,6 +126,31 @@ static BSDKManager *sharedInstance;
                        doneCallback:loginCallbackShim];
 }
 
+- (void)logoutWithDoneCallback:(processDoneWithDictBlock)doneBlock
+{
+    processDoneWithDictBlock logoutCallbackShim = ^(AIO_STATUS status, NSDictionary * data)
+    {
+        if ((status == AIO_STATUS_SUCCESS) && K_BSDK_IS_RESPONSE_OK(data))
+        {
+            self.isAlreadyLogin = NO;
+        }
+        
+        doneBlock(status, data);
+    };
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
+    
+    [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
+    [params setObject:K_BSDK_ACTION_LOGOUT forKey:K_BSDK_ACTION];
+    
+    [self sendRequestWithMethodName:nil
+                         httpMethod:@"POST" 
+                             params:params 
+                       postDataType:kBSDKRequestPostDataTypeNormal
+                   httpHeaderFields:nil
+                       doneCallback:logoutCallbackShim];
+}
+
 - (void)searchUsersByUsername:(NSString*) username andDoneCallback:(processDoneWithDictBlock)doneBlock
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
@@ -308,7 +333,7 @@ static BSDKManager *sharedInstance;
     [params setObject:K_BSDK_ACTION_ADD forKey:K_BSDK_ACTION];
     
     // SEND WEIBO DO NOT NEED USERNAME, ONLY FOR TEST, TOBE REMOVED.
-    [params setObject:K_BSDK_TEST_USERNAME forKey:K_BSDK_USERNAME];
+//    [params setObject:K_BSDK_TEST_USERNAME forKey:K_BSDK_USERNAME];
     
     [params setObject:text forKey:K_BSDK_CONTENT];
     [params setObject:shop forKey:K_BSDK_SHOPMERCHANT];

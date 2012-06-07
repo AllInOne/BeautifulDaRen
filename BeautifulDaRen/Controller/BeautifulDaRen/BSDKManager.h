@@ -25,6 +25,8 @@
 
 - (void)loginWithUsername:(NSString*) username password:(NSString*)password andDoneCallback:(processDoneWithDictBlock)doneBlock;
 
+- (void)logoutWithDoneCallback:(processDoneWithDictBlock)doneBlock;
+
 - (void)changePasswordByUsername:(NSString*) username toNewPassword:(NSString*)newpassword andDoneCallback:(processDoneWithDictBlock)doneBlock;
 
 - (void)getUserInforByUsername:(NSString*) username andDoneCallback:(processDoneWithDictBlock)doneBlock;

@@ -17,6 +17,7 @@
 @property (nonatomic, retain)  TakePhotoViewController * galleryPhotoViewController;
 @property (nonatomic, assign)  UIImagePickerControllerSourceType currentSourceType; 
 @property (nonatomic, assign)  BOOL isCameraReady;
+@property (nonatomic, assign)  BOOL isNotificationAdded;
 - (void)setToolbar;
 @end
 
@@ -28,6 +29,7 @@
 @synthesize currentSourceType = _currentSourceType;
 @synthesize toolbarView = _toolbarView;
 @synthesize isCameraReady = _isCameraReady;
+@synthesize isNotificationAdded =_isNotificationAdded;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -36,6 +38,7 @@
     if (self) {
         _currentSourceType = UIImagePickerControllerSourceTypeCamera;
         _isCameraReady = NO;
+        _isNotificationAdded = NO;
     }
     return self;
 }
@@ -152,10 +155,16 @@
 
 - (void)setupImagePicker:(UIImagePickerControllerSourceType)sourceType
 {
-    _imagePickerController = [[UIImagePickerController alloc] init];
-    _imagePickerController.delegate = self;
+    if (_imagePickerController == nil) {
+        _imagePickerController = [[UIImagePickerController alloc] init];
+        _imagePickerController.delegate = self;
+    }
+
     [self.imagePickerController setSourceType:sourceType];
     self.currentSourceType = sourceType;
+    
+    _toolbarView = nil;
+    _toolbarView = [[UIToolbar alloc] init];
     
     if (sourceType == UIImagePickerControllerSourceTypeCamera) {
         self.imagePickerController.showsCameraControls = NO;
@@ -170,6 +179,11 @@
         
         if ([[self.imagePickerController.cameraOverlayView subviews] count] == 0)
         {
+            for (UIView * subView in [self.toolbarView subviews]) {
+                if ([subView isKindOfClass:[UIImageView class]]) {
+                    [subView removeFromSuperview];
+                }
+            }
             self.toolbarView.frame = newFrame;
             UIImageView * tabBarBg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"camera_toolbar_background"]];
             tabBarBg.frame = CGRectMake(0, 0, 320, 55);
@@ -187,12 +201,16 @@
         }
     }
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(cameraIsReady:)
-                                                 name:AVCaptureSessionDidStartRunningNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(cameraIsNotReady:)
-                                                 name:AVCaptureSessionDidStopRunningNotification object:nil];
+    if (!self.isNotificationAdded)
+    {    [[NSNotificationCenter defaultCenter] addObserver:self
+                                                  selector:@selector(cameraIsReady:)
+                                                      name:AVCaptureSessionDidStartRunningNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(cameraIsNotReady:)
+                                                     name:AVCaptureSessionDidStopRunningNotification object:nil];
+        self.isNotificationAdded = YES;
+    }
+
 }
 
 - (void)cameraIsReady:(NSNotification *)notification
@@ -229,7 +247,7 @@
     }
     
     // give the taken picture to our delegate
-    [picker release];
+//    [picker release];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
@@ -238,7 +256,7 @@
 
     [self.delegate didFinishWithCamera];
     
-    [picker release];
+//    [picker release];
 }
 
 @end

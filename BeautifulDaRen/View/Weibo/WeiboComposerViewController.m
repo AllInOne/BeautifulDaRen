@@ -15,6 +15,7 @@
 #import "UIImage+Scale.h"
 #import "BSDKManager.h"
 #import "BSDKDefines.h"
+#import "iToast.h"
 
 #define WEIBO_CONTENT_TEXTVIEW_Y_OFFSET (90.0)
 #define WEIBO_CONTENT_TEXTVIEW_MARGIN   (2.0)
@@ -266,6 +267,26 @@
 }
 
 - (void)onSendButtonClicked {
+    if ([self.weiboContentTextView.text length] == 0) {
+        [ViewHelper showSimpleMessage:@"亲, 请输入内容哦!" withTitle:nil withButtonText:@"好的"];
+        return;
+    }
+    
+    if ([self.maketTextView.text length] == 0) {
+        [ViewHelper showSimpleMessage:@"亲, 请输入商家哦!" withTitle:nil withButtonText:@"好的"];
+        return;
+    }
+    
+    if ([self.brandTextView.text length] == 0) {
+        [ViewHelper showSimpleMessage:@"亲, 请输入品牌哦!" withTitle:nil withButtonText:@"好的"];
+        return;
+    }
+    
+    if ([self.priceTextView.text length] == 0) {
+        [ViewHelper showSimpleMessage:@"亲, 请输入价格哦!" withTitle:nil withButtonText:@"好的"];
+        return;
+    }
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_SHOWWAITOVERLAY object:self];
     
     __block NSInteger doneCount = 0;
@@ -273,7 +294,7 @@
     __block NSString * errorMsg = nil;
     
     processDoneWithDictBlock doneBlock = ^(AIO_STATUS status, NSDictionary * data){
-        NSLog(@"Send done: %d", status);
+        NSLog(@"Send done: %d, %@", status, data);
 
         doneCount++;
         if (doneCount == doneCountExpected) {

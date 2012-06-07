@@ -260,7 +260,7 @@ static iToastSettings *sharedSettings = nil;
 	if (!sharedSettings) {
 		sharedSettings = [iToastSettings new];
 		sharedSettings.gravity = iToastGravityCenter;
-		sharedSettings.duration = iToastDurationShort;
+		sharedSettings.duration = iToastDurationNormal;
 	}
 	
 	return sharedSettings;

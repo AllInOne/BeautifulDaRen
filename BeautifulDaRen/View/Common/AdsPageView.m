@@ -200,11 +200,27 @@
 {
     NSLog(@"Ads Pressed, current ads index = %d", currentPage);
     
-//    [[BSDKManager sharedManager] loginWithUsername:@"121asdfasdf" password:@"1212121212" andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-//         NSLog(@"sign in done = %d", status);
+//    [[BSDKManager sharedManager] signUpWithUsername:K_BSDK_TEST_USERNAME password:@"1212121212" email:@"sdfsdf@121.com" city:@"成都" andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+//         NSLog(@"operation done = %d", status);
 //        [[iToast makeText:[NSString stringWithFormat:@"%@", [data objectForKey:@"msg"]]] show];
 //    }];
-//    [[BSDKManager sharedManager] getUserInforByUsername:@"121asdfasdf" andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+    
+    if (![[BSDKManager sharedManager] isLogin])
+    {
+        [[BSDKManager sharedManager] loginWithUsername:K_BSDK_TEST_USERNAME password:@"1212121212" andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+            NSLog(@"sign in done = %d", status);
+            [[iToast makeText:[NSString stringWithFormat:@"%@", [data objectForKey:@"msg"]]] show];
+        }];
+    }
+    else
+    {
+        [[BSDKManager sharedManager] logoutWithDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+            NSLog(@"sign in done = %d", status);
+            [[iToast makeText:[NSString stringWithFormat:@"%@", [data objectForKey:@"msg"]]] show];
+        }];
+    }
+
+//    [[BSDKManager sharedManager] getUserInforByUsername:K_BSDK_TEST_USERNAME andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
 //         NSLog(@"sign in done = %d", status);
 //        [[iToast makeText:[NSString stringWithFormat:@"%@", [data objectForKey:@"msg"]]] show];
 //    }];
