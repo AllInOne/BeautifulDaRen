@@ -22,6 +22,7 @@
 @property (retain, nonatomic) AdsPageView * adsPageView;
 @property (retain, nonatomic) id observer;
 
+- (void)refreshView;
 @end
 
 @implementation HomeViewController
