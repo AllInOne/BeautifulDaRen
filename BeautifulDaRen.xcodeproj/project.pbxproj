@@ -222,6 +222,12 @@
 		CE20C435156776D30031997B /* beautifuldaren_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE20C434156776D20031997B /* beautifuldaren_logo@2x.png */; };
 		CE20C437156776E60031997B /* beautifuldaren_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = CE20C436156776E60031997B /* beautifuldaren_logo.png */; };
 		CE38B7EE15483CB10080DD99 /* QZoneSDKManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE38B7ED15483CB10080DD99 /* QZoneSDKManager.m */; };
+		CE3D5CD71580E49A0065AC2F /* home_banner3@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE3D5CD41580E4930065AC2F /* home_banner3@2x.jpg */; };
+		CE3D5CD81580E49A0065AC2F /* home_banner4@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE3D5CD51580E4950065AC2F /* home_banner4@2x.jpg */; };
+		CE3D5CD91580E49A0065AC2F /* splash@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE3D5CD61580E4970065AC2F /* splash@2x.jpg */; };
+		CE3D5CDD1580E4B60065AC2F /* home_banner3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE3D5CDA1580E4B60065AC2F /* home_banner3.jpg */; };
+		CE3D5CDE1580E4B60065AC2F /* home_banner4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE3D5CDB1580E4B60065AC2F /* home_banner4.jpg */; };
+		CE3D5CDF1580E4B60065AC2F /* splash.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE3D5CDC1580E4B60065AC2F /* splash.jpg */; };
 		CE417871157C8A1200A7155D /* BSDKManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE417870157C8A1200A7155D /* BSDKManager.m */; };
 		CE417876157C8AA300A7155D /* BSDKEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = CE417873157C8AA200A7155D /* BSDKEngine.m */; };
 		CE417877157C8AA300A7155D /* BSDKRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE417875157C8AA300A7155D /* BSDKRequest.m */; };
@@ -907,6 +913,12 @@
 		CE20C436156776E60031997B /* beautifuldaren_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = beautifuldaren_logo.png; sourceTree = "<group>"; };
 		CE38B7EC15483CB10080DD99 /* QZoneSDKManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QZoneSDKManager.h; path = Tencent/QZoneSDKManager.h; sourceTree = "<group>"; };
 		CE38B7ED15483CB10080DD99 /* QZoneSDKManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QZoneSDKManager.m; path = Tencent/QZoneSDKManager.m; sourceTree = "<group>"; };
+		CE3D5CD41580E4930065AC2F /* home_banner3@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "home_banner3@2x.jpg"; sourceTree = "<group>"; };
+		CE3D5CD51580E4950065AC2F /* home_banner4@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "home_banner4@2x.jpg"; sourceTree = "<group>"; };
+		CE3D5CD61580E4970065AC2F /* splash@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "splash@2x.jpg"; sourceTree = "<group>"; };
+		CE3D5CDA1580E4B60065AC2F /* home_banner3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_banner3.jpg; sourceTree = "<group>"; };
+		CE3D5CDB1580E4B60065AC2F /* home_banner4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_banner4.jpg; sourceTree = "<group>"; };
+		CE3D5CDC1580E4B60065AC2F /* splash.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = splash.jpg; sourceTree = "<group>"; };
 		CE41786F157C8A1200A7155D /* BSDKManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSDKManager.h; sourceTree = "<group>"; };
 		CE417870157C8A1200A7155D /* BSDKManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSDKManager.m; sourceTree = "<group>"; };
 		CE417872157C8AA200A7155D /* BSDKEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSDKEngine.h; sourceTree = "<group>"; };
@@ -2085,6 +2097,9 @@
 			isa = PBXGroup;
 			children = (
 				CE5B741015749BA5009C9669 /* samples */,
+				CE3D5CDA1580E4B60065AC2F /* home_banner3.jpg */,
+				CE3D5CDB1580E4B60065AC2F /* home_banner4.jpg */,
+				CE3D5CDC1580E4B60065AC2F /* splash.jpg */,
 				CEE9B0CA1577743F00761201 /* myshow_category_background.png */,
 				CEE9B0CB1577743F00761201 /* myshow_category_checked.png */,
 				CEE9B0CC1577743F00761201 /* myshow_category_unchekced.png */,
@@ -2262,6 +2277,9 @@
 			isa = PBXGroup;
 			children = (
 				CE5B740F15749B90009C9669 /* samples */,
+				CE3D5CD41580E4930065AC2F /* home_banner3@2x.jpg */,
+				CE3D5CD51580E4950065AC2F /* home_banner4@2x.jpg */,
+				CE3D5CD61580E4970065AC2F /* splash@2x.jpg */,
 				CECAA7CA156A96F700B343A3 /* action_background@2x.png */,
 				CECAA7CB156A96F700B343A3 /* action_btn@2x.png */,
 				CED69576156BE14700F8F54C /* at_others_icon@2x.png */,
@@ -2980,6 +2998,12 @@
 				CE07F42A1578B79C00DF3BE0 /* app_icon@2x.png in Resources */,
 				C284B7D41577DD5B007D85CC /* FriendListViewController.xib in Resources */,
 				C284B7DB1577DFD9007D85CC /* FriendListViewCell.xib in Resources */,
+				CE3D5CD71580E49A0065AC2F /* home_banner3@2x.jpg in Resources */,
+				CE3D5CD81580E49A0065AC2F /* home_banner4@2x.jpg in Resources */,
+				CE3D5CD91580E49A0065AC2F /* splash@2x.jpg in Resources */,
+				CE3D5CDD1580E4B60065AC2F /* home_banner3.jpg in Resources */,
+				CE3D5CDE1580E4B60065AC2F /* home_banner4.jpg in Resources */,
+				CE3D5CDF1580E4B60065AC2F /* splash.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
