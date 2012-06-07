@@ -28,6 +28,7 @@
 @property (retain, nonatomic) IBOutlet UIButton * collectionButton;
 @property (retain, nonatomic) IBOutlet UIButton * blackListButton;
 @property (retain, nonatomic) IBOutlet UIButton * buyedButton;
+@property (retain, nonatomic) IBOutlet UIButton * mypublishButton;
 @property (retain, nonatomic) IBOutlet UIButton * topicButton;
 @property (retain, nonatomic) IBOutlet UIButton * editButton;
 
@@ -41,6 +42,8 @@
 @synthesize buyedButton = _buyedButton;
 @synthesize topicButton = _topicButton;
 @synthesize editButton = _editButton;
+@synthesize mypublishButton = _mypublishButton;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -79,6 +82,18 @@
     }];
 }
 #pragma mark - View lifecycle
+-(void)dealloc
+{
+    [super dealloc];
+    [_followButton release];
+    [_fansButton release];
+    [_collectionButton release];
+    [_blackListButton release];
+    [_buyedButton release];
+    [_topicButton release];
+    [_editButton release];
+    [_mypublishButton release];
+}
 
 - (void)viewDidLoad
 {
@@ -93,8 +108,14 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+    self.followButton = nil;
+    self.fansButton = nil;
+    self.collectionButton = nil;
+    self.blackListButton = nil;
+    self.buyedButton = nil;
+    self.topicButton = nil;
+    self.editButton = nil;
+    self.mypublishButton = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -142,7 +163,7 @@
     else if(section == 1) {
         cell = [tableView dequeueReusableCellWithIdentifier:gridViewIndentifier];
         if(!cell) {
-            cell = [[[NSBundle mainBundle] loadNibNamed:gridViewIndentifier owner:self options:nil] objectAtIndex:2];
+            cell = [[[NSBundle mainBundle] loadNibNamed:gridViewIndentifier owner:self options:nil] objectAtIndex:1];
         }
         UserIdentity * userIdentity = [[DataManager sharedManager] getCurrentLocalIdentityInContext:nil];
         ((GridViewCell*)cell).delegate = self;
@@ -161,24 +182,29 @@
         ((GridViewCell*)cell).thirdLabel.attributedText = attrStr;
         ((GridViewCell*)cell).thirdLabel.textAlignment = UITextAlignmentCenter;
         
-        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"buyed", @"") detail:[NSString stringWithFormat:@"(%d)",[userIdentity.buyedCount intValue]]];
+        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"my_publish", @"") detail:[NSString stringWithFormat:@"(%d)",[userIdentity.buyedCount intValue]]];
         ((GridViewCell*)cell).fourthLabel.attributedText = attrStr;
         ((GridViewCell*)cell).fourthLabel.textAlignment = UITextAlignmentCenter;
         
-        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"topic", @"") detail:[NSString stringWithFormat:@"(%d)",[userIdentity.topicCount intValue]]];
-        ((GridViewCell*)cell).fifthLabel.attributedText = attrStr;
-        ((GridViewCell*)cell).fifthLabel.textAlignment = UITextAlignmentCenter;
+//        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"buyed", @"") detail:[NSString stringWithFormat:@"(%d)",[userIdentity.buyedCount intValue]]];
+//        ((GridViewCell*)cell).fourthLabel.attributedText = attrStr;
+//        ((GridViewCell*)cell).fourthLabel.textAlignment = UITextAlignmentCenter;
         
-         attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"black_list", @"") detail:[NSString stringWithFormat:@"(%d)",[userIdentity.blackListCount intValue]]];
-        ((GridViewCell*)cell).sixthLabel.attributedText = attrStr;
-        ((GridViewCell*)cell).sixthLabel.textAlignment = UITextAlignmentCenter;
+//        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"topic", @"") detail:[NSString stringWithFormat:@"(%d)",[userIdentity.topicCount intValue]]];
+//        ((GridViewCell*)cell).fifthLabel.attributedText = attrStr;
+//        ((GridViewCell*)cell).fifthLabel.textAlignment = UITextAlignmentCenter;
+//        
+//         attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"black_list", @"") detail:[NSString stringWithFormat:@"(%d)",[userIdentity.blackListCount intValue]]];
+//        ((GridViewCell*)cell).sixthLabel.attributedText = attrStr;
+//        ((GridViewCell*)cell).sixthLabel.textAlignment = UITextAlignmentCenter;
         
         _followButton = ((GridViewCell*)cell).firstButton;
         _fansButton = ((GridViewCell*)cell).secondButton;
         _collectionButton = ((GridViewCell*)cell).thirdButton;
-        _buyedButton = ((GridViewCell*)cell).fourthButton;
-        _topicButton = ((GridViewCell*)cell).fifthButton;
-        _blackListButton = ((GridViewCell*)cell).sixthButton;
+        _mypublishButton = ((GridViewCell*)cell).fourthButton;
+//        _buyedButton = ((GridViewCell*)cell).fourthButton;
+//        _topicButton = ((GridViewCell*)cell).fifthButton;
+//        _blackListButton = ((GridViewCell*)cell).sixthButton;
     }
     else if (section == 2) {
         cell = [tableView dequeueReusableCellWithIdentifier:buttonViewCellIdentifier];
@@ -186,19 +212,19 @@
             cell = [[[NSBundle mainBundle] loadNibNamed:buttonViewCellIdentifier owner:self options:nil] objectAtIndex:0];
         }
         switch ([indexPath row]) {
+//            case 0:
+//            {
+//                ((ButtonViewCell*)cell).buttonText.text = NSLocalizedString(@"my_publish", @"");
+//                ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"my_composed"];
+//                break;
+//            }
             case 0:
-            {
-                ((ButtonViewCell*)cell).buttonText.text = NSLocalizedString(@"my_publish", @"");
-                ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"my_composed"];
-                break;
-            }
-            case 1:
             {
                 ((ButtonViewCell*)cell).buttonText.text = NSLocalizedString(@"at_me", @"");
                 ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"my_at"];
                 break;
             }
-            case 2:
+            case 1:
             {
                 ((ButtonViewCell*)cell).buttonText.text = NSLocalizedString(@"comment_me", @"");
                 ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"comment_icon"];
@@ -221,7 +247,7 @@
             numberOfRows = 1;
             break;
         case 2:
-            numberOfRows = 3;
+            numberOfRows = 2;
             break;
     }
     return numberOfRows;
@@ -238,7 +264,7 @@
     }
     else if (section == 1)
     {
-        height = 107.0f;
+        height = 71.0f;
     }
     else if (section == 2)
     {
@@ -274,19 +300,19 @@
     if(section == 2)
     {
         switch ([indexPath row]) {
+//            case 0:
+//            {
+//                WeiboListViewController * myPublishViewController = [[WeiboListViewController alloc] initWithNibName:@"WeiboListViewController" bundle:nil type:WeiboListViewControllerType_MY_PUBLISH];
+//                
+//                UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: myPublishViewController];
+//                
+//                [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
+//                
+//                [navController release];
+//                [myPublishViewController release];
+//                break;
+//            }
             case 0:
-            {
-                WeiboListViewController * myPublishViewController = [[WeiboListViewController alloc] initWithNibName:@"WeiboListViewController" bundle:nil type:WeiboListViewControllerType_MY_PUBLISH];
-                
-                UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: myPublishViewController];
-                
-                [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
-                
-                [navController release];
-                [myPublishViewController release];
-                break;
-            }
-            case 1:
             {
                 WeiboListViewController * forwadMeViewController = [[WeiboListViewController alloc] initWithNibName:@"WeiboListViewController" bundle:nil type:WeiboListViewControllerType_FORWARD_ME];
                 
@@ -298,7 +324,7 @@
                 [forwadMeViewController release];
                 break;
             }
-            case 2:
+            case 1:
             {
                 WeiboListViewController * commentMeViewController = [[WeiboListViewController alloc] initWithNibName:@"WeiboListViewController" bundle:nil type:WeiboListViewControllerType_COMMENT_ME];
                 
@@ -365,6 +391,13 @@
                           initWithNibName:@"MineEditingViewController"
                           bundle:nil];
 
+    }
+    else if(button == _mypublishButton)
+    {
+        viewController = [[WeiboListViewController alloc]
+                          initWithNibName:@"WeiboListViewController"
+                          bundle:nil
+                          type:WeiboListViewControllerType_MY_PUBLISH];
     }
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: viewController];
     

@@ -113,9 +113,9 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    _waterFlowView = nil;
-    _itemsHeight = nil;
-    _fakeData = nil;
+    self.waterFlowView = nil;
+    self.itemsHeight = nil;
+    self.fakeData = nil;
 }
 
 - (void) viewWillAppear:(BOOL)animated

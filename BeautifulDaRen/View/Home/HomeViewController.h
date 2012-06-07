@@ -13,8 +13,6 @@
 
 @interface HomeViewController : UIViewController<AdsPageViewProtocol>
 
-@property (retain, nonatomic) ItemsViewController* itemsViewController;
-
 - (IBAction)onLoginBtnSelected:(UIButton*)sender;
 - (IBAction)onRegisterBtnSelected:(UIButton*)sender;
 

@@ -21,11 +21,6 @@
 @synthesize categoryListData = _categoryListData;
 @synthesize delegate;
 
-- (void)dealloc
-{
-    [_categoryListData release];
-    [super dealloc];
-}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -56,6 +51,12 @@
 }
 
 #pragma mark - View lifecycle
+- (void)dealloc
+{
+    [super dealloc];
+    [_categoryListData release];
+    [_categoryListTableView release];
+}
 
 - (void)viewDidLoad
 {
@@ -68,8 +69,8 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+    self.categoryListData = nil;
+    self.categoryListTableView = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

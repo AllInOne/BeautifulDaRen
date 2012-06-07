@@ -44,6 +44,17 @@
 }
 
 #pragma mark - View lifecycle
+- (void)dealloc
+{
+    [super dealloc];
+    [_itemsViewController release];
+}
+
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    self.itemsViewController = nil;
+}
 
 - (void)viewDidLoad
 {
@@ -59,13 +70,6 @@
         _itemsViewController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
         [self.view addSubview:_itemsViewController.view];
     }
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

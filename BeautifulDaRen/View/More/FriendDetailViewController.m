@@ -41,6 +41,7 @@
 @synthesize publishedButton = _publishedButton;
 @synthesize topicButton = _topicButton;
 
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -107,7 +108,28 @@
 }
 
 #pragma mark - View lifecycle
-
+- (void)dealloc
+{
+    [super dealloc];
+    [_friendDetailView release];
+    [_fansButton release];
+    [_followButton release];
+    [_collectionButton release];
+    [_weiboButton release];
+    [_publishedButton release];
+    [_topicButton release];
+}
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    self.friendDetailView = nil;
+    self.followButton = nil;
+    self.fansButton = nil;
+    self.collectionButton = nil;
+    self.weiboButton = nil;
+    self.publishedButton = nil;
+    self.topicButton = nil;
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -117,13 +139,6 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated

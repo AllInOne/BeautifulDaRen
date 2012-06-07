@@ -12,6 +12,7 @@
 #import "SinaSDKManager.h"
 #import "SelectCityViewController.h"
 #import "iToast.h"
+#import "BSDKManager.h"
 
 #import "ViewHelper.h"
 #import "ViewConstants.h"
@@ -63,6 +64,13 @@ enum
 }
 
 #pragma mark - View lifecycle
+-(void)dealloc
+{
+    [super dealloc];
+    [_tableView release];
+    [_loginWithQQButton release];
+    [_loginWithSinaWeiboButton release];
+}
 
 - (void)viewDidLoad
 {
@@ -72,8 +80,9 @@ enum
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+    self.loginWithQQButton = nil;
+    self.loginWithSinaWeiboButton = nil;
+    self.tableView = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -163,9 +172,7 @@ enum
         ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"common_button"];
         ((ButtonViewCell*)cell).leftLabel.text = NSLocalizedString(@"register", @"register");
         
-        UIView * view = [[UIView alloc] initWithFrame:CGRectZero];
-        cell.backgroundView = view;
-        [view release];
+        cell.backgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
     }
     else if (section == 2)
     {
@@ -238,7 +245,17 @@ enum
     }
     else if(section == 1)
     {
-        [[iToast makeText:@"注册"] show];
+        NSString * userName = @"tankliu002";
+       [[BSDKManager sharedManager]
+        signUpWithUsername:userName
+        password:@"abc123456"
+        email:@"23775517@qq.com"
+        city:@"成都"
+        andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+            [[NSUserDefaults standardUserDefaults] setObject:userName forKey:USERDEFAULT_LOGIN_ACCOUNT_USERNAME];
+           [self.navigationController popToRootViewControllerAnimated:YES];
+           [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_LOGIN_SUCCESS object:self userInfo:data];
+        }];
     }
 }
 
@@ -266,9 +283,7 @@ enum
     }
     else
     {
-        UIView * tempView = [[UIView alloc] initWithFrame:CGRectZero];
-        view = [tempView retain];
-        [tempView release];
+        view = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
     }
     return [view autorelease];
 }
