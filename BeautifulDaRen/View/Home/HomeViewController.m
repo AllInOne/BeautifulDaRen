@@ -97,7 +97,6 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    
     [[NSNotificationCenter defaultCenter] removeObject:self];
     
     self.adsPageView = nil;

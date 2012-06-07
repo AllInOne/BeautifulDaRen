@@ -141,6 +141,7 @@
     [self setLocationButton:nil];
     [self setAtButton:nil];
     [self setCategoryButton:nil];
+    [self setAttachedImageBgButton:nil];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
@@ -160,6 +161,7 @@
     [_atButton release];
     [_locationButton release];
     [_categoryButton release];
+    [_attachedImageBgButton release];
     
     [super dealloc];
 }
@@ -488,7 +490,7 @@
 
 - (void)didFinishWithCamera
 {
-    [self dismissModalViewControllerAnimated:YES];
+//    [self dismissModalViewControllerAnimated:YES];
 }
 
 - (void)didChangeToGalleryMode

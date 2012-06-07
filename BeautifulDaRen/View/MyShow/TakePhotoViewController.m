@@ -34,8 +34,6 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        _imagePickerController = [[UIImagePickerController alloc] init];
-        _imagePickerController.delegate = self;
         _currentSourceType = UIImagePickerControllerSourceTypeCamera;
         _isCameraReady = NO;
     }
@@ -112,7 +110,7 @@
 
 - (void)onCameraBarButtonPressed {
     if (self.isCameraReady) {
-        [self.imagePickerController performSelector:@selector(takePicture) withObject:nil afterDelay:0.5];
+        [self.imagePickerController takePicture];
     }
     else
     {
@@ -154,6 +152,8 @@
 
 - (void)setupImagePicker:(UIImagePickerControllerSourceType)sourceType
 {
+    _imagePickerController = [[UIImagePickerController alloc] init];
+    _imagePickerController.delegate = self;
     [self.imagePickerController setSourceType:sourceType];
     self.currentSourceType = sourceType;
     
@@ -216,25 +216,29 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
+    [picker dismissModalViewControllerAnimated:NO];
     
-    // give the taken picture to our delegate
     if (self.delegate)
         [self.delegate didTakePicture:image];
-
+    
     if (self.currentSourceType == UIImagePickerControllerSourceTypePhotoLibrary)
     {
         [self.galleryPhotoViewController dismissModalViewControllerAnimated:NO];
         self.galleryPhotoViewController = nil;
         self.currentSourceType = UIImagePickerControllerSourceTypeCamera;
     }
+    
+    // give the taken picture to our delegate
+    [picker release];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
 
-    if (self.currentSourceType == UIImagePickerControllerSourceTypePhotoLibrary) {
-        [self dismissModalViewControllerAnimated:YES];
-    }
-    [self.delegate didFinishWithCamera]; 
+    [picker dismissModalViewControllerAnimated:YES];
+
+    [self.delegate didFinishWithCamera];
+    
+    [picker release];
 }
 
 @end

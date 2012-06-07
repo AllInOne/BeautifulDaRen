@@ -285,7 +285,7 @@ enum
     {
         view = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
     }
-    return view;
+    return [view autorelease];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
