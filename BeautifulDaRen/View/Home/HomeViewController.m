@@ -53,21 +53,6 @@
                      NSLog(@"notification:%@",[[note valueForKey:@"userInfo"] valueForKey:@"msg"]);
                      [self refreshView];
                  }];
-    if([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0)
-    {
-        UIBarButtonItem* loginButton = [ViewHelper getBarItemOfTarget:self action:@selector(onLoginBtnSelected:) title:NSLocalizedString(@"login", @"login button on navigation")];
-        
-        UIBarButtonItem* registerButton =[ViewHelper getBarItemOfTarget:self action:@selector(onRegisterBtnSelected:) title:NSLocalizedString(@"register", @"register button on navigation")];
-        
-        NSArray * navigationBtns = [NSArray arrayWithObjects:registerButton, loginButton, nil];
-        // setRightBarButtonItems only availability on ios 5.0 and later.
-        [self.navigationItem setRightBarButtonItems:navigationBtns animated:YES];
-    }
-    else
-    {
-        [self.navigationItem setRightBarButtonItem:[ViewHelper getRightBarItemOfTarget1:self action1:@selector(onLoginBtnSelected:) title1:NSLocalizedString(@"login", @"login button on navigation") target2:self action2:@selector(onRegisterBtnSelected:) title2:NSLocalizedString(@"register", @"register button on navigation")]];
-    }
-    [self.navigationItem setLeftBarButtonItem:[ViewHelper getLeftBarItemOfImageName:@"beautifuldaren_logo" rectSize:CGRectMake(0, 0, NAVIGATION_LEFT_LOGO_WIDTH, NAVIGATION_LEFT_LOGO_HEIGHT)]];
     
     if(self.adsPageView == nil)
     {
@@ -83,13 +68,45 @@
         _itemsViewController.view.frame = CGRectMake(0, ADS_CELL_HEIGHT + CONTENT_MARGIN, self.view.frame.size.width, USER_WINDOW_HEIGHT - ADS_CELL_HEIGHT - CONTENT_MARGIN);
         [self.view addSubview:_itemsViewController.view];
     }
-    
+    [self refreshView];
 }
 
 - (void)refreshView
 {
     if ([[BSDKManager sharedManager] isLogin]) {
         [self.navigationItem setTitle:[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOGIN_ACCOUNT_USERNAME]];
+        
+        if([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0)
+        {
+            [self.navigationItem setRightBarButtonItems:nil];
+        }
+        else {
+            [self.navigationItem setRightBarButtonItem:nil];
+        }
+//        UIBarButtonItem* detailModeButton = [ViewHelper getBarItemOfTarget:self action:@selector(onDetailModeBtnSelected:) title:NSLocalizedString(@"detail_mode", @"detail_mode")];
+        UIBarButtonItem* refreshButton = [ViewHelper getBarItemOfTarget:self action:@selector(onRefreshBtnSelected:) title:NSLocalizedString(@"refresh", @"refresh")];
+//        [self.navigationItem setRightBarButtonItem:detailModeButton];
+        [self.navigationItem setLeftBarButtonItem:refreshButton];
+    }
+    else {
+        if([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0)
+        {
+            if(![[BSDKManager sharedManager] isLogin])
+            {
+                UIBarButtonItem* loginButton = [ViewHelper getBarItemOfTarget:self action:@selector(onLoginBtnSelected:) title:NSLocalizedString(@"login", @"login button on navigation")];
+                
+                UIBarButtonItem* registerButton =[ViewHelper getBarItemOfTarget:self action:@selector(onRegisterBtnSelected:) title:NSLocalizedString(@"register", @"register button on navigation")];
+                
+                NSArray * navigationBtns = [NSArray arrayWithObjects:registerButton, loginButton, nil];
+                // setRightBarButtonItems only availability on ios 5.0 and later.
+                [self.navigationItem setRightBarButtonItems:navigationBtns animated:YES];
+            }
+        }
+        else
+        {
+            [self.navigationItem setRightBarButtonItem:[ViewHelper getRightBarItemOfTarget1:self action1:@selector(onLoginBtnSelected:) title1:NSLocalizedString(@"login", @"login button on navigation") target2:self action2:@selector(onRegisterBtnSelected:) title2:NSLocalizedString(@"register", @"register button on navigation")]];
+        }
+        [self.navigationItem setLeftBarButtonItem:[ViewHelper getLeftBarItemOfImageName:@"beautifuldaren_logo" rectSize:CGRectMake(0, 0, NAVIGATION_LEFT_LOGO_WIDTH, NAVIGATION_LEFT_LOGO_HEIGHT)]];
     }
 }
 
@@ -143,6 +160,11 @@
     LoginViewController * loginContorller = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
     [self.navigationController pushViewController:loginContorller animated:YES];
     [loginContorller release];
+}
+
+-(IBAction)onRefreshBtnSelected:(UIButton*)sender
+{
+    NSLog(@"refresh");
 }
 
 - (IBAction)onRegisterBtnSelected:(UIButton*)sender
