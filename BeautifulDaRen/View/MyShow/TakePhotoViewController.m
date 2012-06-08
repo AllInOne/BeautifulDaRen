@@ -108,22 +108,18 @@
 
 - (void)onGalleryBartButtonPressed {
     [self.delegate didChangeToGalleryMode];
-//    self.imagePickerController.cameraOverlayView = nil;
 }
 
 - (void)onCameraBarButtonPressed {
-    if (self.isCameraReady) {
-        [self.imagePickerController takePicture];
-    }
-    else
-    {
-        [[iToast makeText:@"照相机还没准备好!"] show];
-    }
+    [self.imagePickerController takePicture];
+//    if (self.isCameraReady) {
+//        [self.imagePickerController takePicture];
+//    }
+//    else
+//    {
+//        [[iToast makeText:@"照相机还没准备好!"] show];
+//    }
 }
-
-//- (void)takePicture {
-//    [self.imagePickerController takePicture];  
-//}
 
 - (void)onAvatarBartButtonPressed {
     

@@ -17,7 +17,6 @@
 
 @property (nonatomic, retain) UIImage * selectedImage;
 
-@property (nonatomic, retain) IBOutlet UIButton * cameraButton;
 @property (nonatomic, retain) IBOutlet UITextView * weiboContentTextView;
 @property (nonatomic, retain) IBOutlet UITextField * maketTextView;
 @property (nonatomic, retain) IBOutlet UITextField * brandTextView;
@@ -25,7 +24,6 @@
 @property (nonatomic, retain) IBOutlet UITextField * weiboContentBgTextFiled;
 @property (nonatomic, retain) IBOutlet UIView * footerView;
 
-@property (nonatomic, retain) IBOutlet UIImageView * attachedImageView;
 @property (nonatomic, retain) IBOutlet UIButton * attachedImageBgButton;
 
 @property (nonatomic, retain) IBOutlet UIButton * locationButton;

@@ -109,11 +109,9 @@
 
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: weiboComposerViewControlller];
     
-    [self dismissModalViewControllerAnimated:NO];
-    
     [self.navigationController presentModalViewController:navController animated:YES];
-    [navController release];
     [weiboComposerViewControlller release];
+    [navController release];
     
     [self.tabBarController setSelectedIndex:0];
     self.currentType = UIImagePickerControllerSourceTypeCamera;

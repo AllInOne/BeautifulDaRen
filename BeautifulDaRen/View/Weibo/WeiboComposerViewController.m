@@ -46,14 +46,12 @@
 
 @implementation WeiboComposerViewController
 
-@synthesize cameraButton = _cameraButton;
 @synthesize footerView = _footerView;
 @synthesize weiboContentTextView = _weiboContentTextView;
 @synthesize maketTextView = _maketTextView;
 @synthesize brandTextView = _brandTextView;
 @synthesize weiboContentBgTextFiled = _weiboContentBgTextFiled;
 @synthesize contentScrollView = _contentScrollView;
-@synthesize attachedImageView = _attachedImageView;
 @synthesize attachedImageBgButton = _attachedImageBgButton;
 @synthesize selectedImage = _selectedImage;
 @synthesize isKeypadShow = _isKeypadShow;
@@ -73,7 +71,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        _cameraButton.enabled = YES;
         _attachedImageBgButton.enabled = NO;
 
         [_weiboContentTextView setDelegate:self];
@@ -131,8 +128,6 @@
         [self.sinaShareImageView setHidden:YES];
     }
     
-    _attachedImageView.hidden = YES;
-    
     _locationLoadingView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [_locationLoadingView setHidden:YES];
     
@@ -146,10 +141,11 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    [self setCameraButton:nil];
     [self setFooterView:nil];
     [self setBrandTextView:nil];
     [self setWeiboContentTextView:nil];
+    [self setWeiboContentBgTextFiled:nil];
+    [self setContentScrollView:nil];
     [self setMaketTextView:nil];
     [self setSelectedImage: nil];
     [self setTakePhotoViewController:nil];
@@ -169,11 +165,14 @@
 
 - (void)dealloc
 {
-    [_cameraButton release];
     [_footerView release];
     [_weiboContentTextView release];
     [_maketTextView release];
     [_brandTextView release];
+    
+    [_weiboContentBgTextFiled release];
+    [_contentScrollView release];
+    
     [_selectedImage release];
     [_takePhotoViewController release];
     [_sinaButton release];
@@ -310,6 +309,8 @@
         return;
     }
     
+    [self dismissModalViewControllerAnimated:YES];
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_SHOWWAITOVERLAY object:self];
     
     __block NSInteger doneCount = 0;
@@ -334,7 +335,6 @@
             {
                 [ViewHelper showSimpleMessage:errorMsg withTitle:nil withButtonText:NSLocalizedString(@"ok", @"ok")];
             }
-            [self dismissModalViewControllerAnimated:YES];
         }
 
     };
@@ -554,10 +554,10 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    self.attachedImageView.image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
-    if (self.attachedImageView.image)
+    self.selectedImage = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+    if (self.selectedImage)
     {
-        [self.attachedImageBgButton setBackgroundImage:self.attachedImageView.image forState:UIControlStateNormal];
+        [self.attachedImageBgButton setBackgroundImage:self.selectedImage forState:UIControlStateNormal];
     }
 
     [self dismissModalViewControllerAnimated:YES];

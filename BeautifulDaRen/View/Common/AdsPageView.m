@@ -19,7 +19,7 @@
 
 @interface AdsPageView ()
 @property (nonatomic, assign) int currentPage;
-@property (nonatomic, assign) NSMutableArray * adsImageNames;
+@property (nonatomic, retain) NSArray * adsImageNames;
 @property (nonatomic, retain) UIImageView * firstImageView;
 @property (nonatomic, retain) UIImageView * secondImageView;
 
@@ -56,21 +56,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, ADS_CELL_HEIGHT);
-        // TODO: get it from server
-        _adsImageNames = [[NSMutableArray alloc] initWithObjects:@"home_banner3.jpg",
-                                                                 @"home_banner4.jpg",
-                                                                 @"banner",
-                                                                 @"home_banner2",
-                                                                 nil];
-        _firstImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"home_banner3.jpg"]];
-        _firstImageView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-        [self.view insertSubview:_firstImageView belowSubview:self.adsPageController];
-        
-        _secondImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"home_banner4.jpg"]];
-        _secondImageView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-        [self.view insertSubview:_secondImageView belowSubview:self.adsPageController];
-        [_secondImageView setHidden:YES];
-        
         self.adsPageController.frame = CGRectMake(self.adsPageController.frame.origin.x, ADS_CELL_HEIGHT - 30, self.adsPageController.frame.size.width, self.adsPageController.frame.size.height);
     }
     return self;  
@@ -95,7 +80,7 @@
 {
     [super viewDidUnload];
     
-    self.adsImageNames = nil;
+    [self setAdsImageNames:nil];
     self.adsPageController = nil;
     self.firstImageView  = nil;
     self.secondImageView = nil;
