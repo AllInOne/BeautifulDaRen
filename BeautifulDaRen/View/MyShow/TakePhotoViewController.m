@@ -133,11 +133,11 @@
 {
     UIBarButtonItem *flexible = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
-    UIBarButtonItem *galleryBarButton = [ViewHelper getBarItemOfTarget:self action:@selector(onGalleryBartButtonPressed) title:@"相册"];
+    UIBarButtonItem *galleryBarButton = [ViewHelper getBarItemOfTarget:self action:@selector(onGalleryBartButtonPressed) title:NSLocalizedString(@"album", @"album")];
     
     UIBarButtonItem *cameraBarButton = [ViewHelper getCameraBarItemOftarget:self action:@selector(onCameraBarButtonPressed)];
     
-    UIBarButtonItem *avatarBarButton = [ViewHelper getBarItemOfTarget:self action:@selector(onAvatarBartButtonPressed) title:@"头像"];
+    UIBarButtonItem *avatarBarButton = [ViewHelper getBarItemOfTarget:self action:@selector(onAvatarBartButtonPressed) title:NSLocalizedString(@"avatar", @"avatar")];
 
     
     NSArray *barItems = [[NSArray alloc]initWithObjects:galleryBarButton, 

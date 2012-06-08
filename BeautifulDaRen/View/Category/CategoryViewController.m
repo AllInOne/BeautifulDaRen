@@ -51,7 +51,7 @@
         [self.view addSubview:_categoryContentView.view];
     }
     
-    [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClicked) title:@"刷新"]]; 
+    [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClicked) title:NSLocalizedString(@"refresh", @"refresh")]]; 
 }
 
 - (void)dealloc {

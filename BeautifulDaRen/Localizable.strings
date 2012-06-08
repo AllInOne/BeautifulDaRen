@@ -6,6 +6,9 @@
   Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 */
 
+
+"app_name" = "秀魅丽";
+
 "tab_home" = "首页";
 "tab_mine" = "我的";
 "tab_camerashare" = "拍照/分享";
@@ -21,6 +24,8 @@
 "title_more" = "更多";
 "title_help" = "帮助";
 "find" = "发现";
+
+"done" = "完成";
 
 "account" = "账户";
 "account_user_account" = "用户账号";
@@ -47,6 +52,7 @@
 
 "local_city" = "所在城市";
 "my_gender" = "我的性别";
+"avatar" = "头像";
 "add_avatar" = "添加头像";
 "set_avatar" = "设置头像";
 "gender" = "性别";
@@ -115,3 +121,22 @@
 "get_location_falied" = "亲，获取位置信息失败";
 "clear" = "删除";
 "i_am_here" = "我在这里";
+
+"weibo_detail" = "微博详情";
+
+"picture" = "图片";
+
+"please_enter_content" = "亲, 请输入内容哦!";
+"please_enter_merchant" = "亲, 请输入商家哦!";
+"please_enter_brand" = "亲, 请输入品牌哦!";
+"please_enter_price" = "亲, 请输入价格哦!";
+
+"take_photo" = "照相";
+"album" = "相册";
+"delete_selected_photos" = "删除已选择照片";
+
+"send" = "发送";
+"send_succeed" = "发送成功!";
+"send_failed" = "发送失败!";
+
+"ok" = "好的";

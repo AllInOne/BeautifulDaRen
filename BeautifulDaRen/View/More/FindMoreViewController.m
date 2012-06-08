@@ -73,7 +73,7 @@
 
 - (void)onRefreshButtonClicked
 {
-    [[iToast makeText:@"刷新"] show];
+    [[iToast makeText:NSLocalizedString(@"refresh", @"refresh")] show];
 }
 #pragma mark - View lifecycle
 

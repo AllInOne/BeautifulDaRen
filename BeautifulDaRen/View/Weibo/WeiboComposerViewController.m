@@ -27,9 +27,9 @@
 
 #define ACTIONSHEET_IMAGE_PICKER 1
 
-#define IMAGE_PICKER_CAMERA       NSLocalizedString(@"照相", @"Label for Action Sheet to take a photo using rear camera")
-#define IMAGE_PICKER_LIBRARY      NSLocalizedString(@"相册", @"Label for Action Sheet to take a photo from library")
-#define IMAGE_PICKER_DELETE       NSLocalizedString(@"删除已选择相片", @"Label for Action Sheet to delete current photo")
+#define IMAGE_PICKER_CAMERA       NSLocalizedString(@"take_photo", @"take_photo")
+#define IMAGE_PICKER_LIBRARY      NSLocalizedString(@"album", @"album")
+#define IMAGE_PICKER_DELETE       NSLocalizedString(@"delete_selected_photos", @"delete_selected_photos")
 
 
 #define TAG_ALERTVIEW_CLEAR_LOCATION    0
@@ -78,9 +78,9 @@
 
         [_weiboContentTextView setDelegate:self];
 
-        [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onBackButtonClicked) title:@"返回"]];
+        [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
 
-        [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onSendButtonClicked) title:@"发送"]];
+        [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onSendButtonClicked) title:NSLocalizedString(@"send", @"send")]];
     }
     return self;
 }
@@ -291,22 +291,22 @@
 
 - (void)onSendButtonClicked {
     if ([self.weiboContentTextView.text length] == 0) {
-        [ViewHelper showSimpleMessage:@"亲, 请输入内容哦!" withTitle:nil withButtonText:@"好的"];
+        [ViewHelper showSimpleMessage:NSLocalizedString(@"please_enter_content", @"please_enter_content") withTitle:nil withButtonText:NSLocalizedString(@"ok", @"ok")];
         return;
     }
     
     if ([self.maketTextView.text length] == 0) {
-        [ViewHelper showSimpleMessage:@"亲, 请输入商家哦!" withTitle:nil withButtonText:@"好的"];
+        [ViewHelper showSimpleMessage:NSLocalizedString(@"please_enter_merchant", @"please_enter_merchant") withTitle:nil withButtonText:NSLocalizedString(@"ok", @"ok")];
         return;
     }
     
     if ([self.brandTextView.text length] == 0) {
-        [ViewHelper showSimpleMessage:@"亲, 请输入品牌哦!" withTitle:nil withButtonText:@"好的"];
+        [ViewHelper showSimpleMessage:NSLocalizedString(@"please_enter_brand", @"please_enter_brand") withTitle:nil withButtonText:NSLocalizedString(@"ok", @"ok")];
         return;
     }
     
     if ([self.priceTextView.text length] == 0) {
-        [ViewHelper showSimpleMessage:@"亲, 请输入价格哦!" withTitle:nil withButtonText:@"好的"];
+        [ViewHelper showSimpleMessage:NSLocalizedString(@"please_enter_price", @"please_enter_price") withTitle:nil withButtonText:NSLocalizedString(@"ok", @"ok")];
         return;
     }
     
@@ -328,11 +328,11 @@
             
             if (errorMsg == nil)
             {
-                [ViewHelper showSimpleMessage:@"发送成功" withTitle:nil withButtonText:@"好的"];
+                [ViewHelper showSimpleMessage:NSLocalizedString(@"send_succeed", @"send_succeed") withTitle:nil withButtonText:NSLocalizedString(@"ok", @"ok")];
             }
             else
             {
-                [ViewHelper showSimpleMessage:errorMsg withTitle:nil withButtonText:@"好的"];
+                [ViewHelper showSimpleMessage:errorMsg withTitle:nil withButtonText:NSLocalizedString(@"ok", @"ok")];
             }
             [self dismissModalViewControllerAnimated:YES];
         }
@@ -497,6 +497,7 @@
             case 1:
                 self.weiboContentTextView.text = [self.weiboContentTextView.text stringByReplacingOccurrencesOfString:_locationString withString:@""];
                 self.currentLocation = nil;
+                self.locationString = nil;
                 break;               
             default:
                 break;

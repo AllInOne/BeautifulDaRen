@@ -55,10 +55,10 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onBackButtonClicked) title:@"返回"]];
+        [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
         
-        [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClicked) title:@"刷新"]];       
-        self.navigationItem.title = @"微博详情";
+        [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClicked) title:NSLocalizedString(@"refresh", @"refresh")]];       
+        self.navigationItem.title = NSLocalizedString(@"weibo_detail", @"weibo_detail");
         
         //Content for test
         _weiboContent = [[NSString alloc] initWithString:@"我最近买了一双鞋子，很漂亮，你看看吧!"];
@@ -150,12 +150,12 @@
 
 - (void)onFavourate
 {
-    [[iToast makeText:@"收藏成功！"] show];
+    [[iToast makeText:NSLocalizedString(@"refresh", @"refresh")] show];
 }
 
 - (void)onRefresh
 {
-    [[iToast makeText:@"刷新成功！"] show];
+    [[iToast makeText:NSLocalizedString(@"refresh", @"refresh")] show];
 }
 
 -(IBAction)onCommentListButtonPressed:(id)sender

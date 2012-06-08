@@ -79,11 +79,11 @@
 {
     [super viewWillAppear:animated];
     
-    self.navigationItem.title = @"图片";
+    self.navigationItem.title = NSLocalizedString(@"picture", @"picture");
     
-    [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onClickReturnButton:) title:@"返回"]];
+    [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onClickReturnButton:) title:NSLocalizedString(@"go_back", @"go_back")]];
     
-    [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onClickSaveButton:) title:@"保存"]];   
+    [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onClickSaveButton:) title:NSLocalizedString(@"save", @"save")]];   
     
     self.frozenSingleTap = NO;
     

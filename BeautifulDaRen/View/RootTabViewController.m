@@ -83,11 +83,11 @@
 
 - (void)initLocalizedString
 {
-    NSArray* homeArray = [NSArray arrayWithObjects:@"",@"首页",nil];
-    NSArray* mineArray = [NSArray arrayWithObjects:@"我的",@"我的",nil];
-    NSArray* cameraShareArray = [NSArray arrayWithObjects:@"我秀",@"我秀",nil];
-    NSArray* categoryArray = [NSArray arrayWithObjects:@"热门",@"热门",nil];
-    NSArray* moreArray = [NSArray arrayWithObjects:@"发现", @"发现",nil];
+    NSArray* homeArray = [NSArray arrayWithObjects:@"",NSLocalizedString(@"tab_home", @"tab_home"),nil];
+    NSArray* mineArray = [NSArray arrayWithObjects:NSLocalizedString(@"tab_mine", @"tab_mine"),NSLocalizedString(@"tab_mine", @"tab_mine"),nil];
+    NSArray* cameraShareArray = [NSArray arrayWithObjects:NSLocalizedString(@"tab_camerashare", @"tab_camerashare"),NSLocalizedString(@"tab_camerashare", @"tab_camerashare"),nil];
+    NSArray* categoryArray = [NSArray arrayWithObjects:NSLocalizedString(@"tab_category", @"tab_category"),NSLocalizedString(@"tab_category", @"tab_category"),nil];
+    NSArray* moreArray = [NSArray arrayWithObjects:NSLocalizedString(@"tab_more", @"tab_more"), NSLocalizedString(@"tab_more", @"tab_more"),nil];
     NSArray* localizedStringsArray = [NSArray arrayWithObjects:homeArray, mineArray, cameraShareArray, categoryArray, moreArray, nil];
     
     NSArray* tabbarIconNamesArray = [NSArray arrayWithObjects:@"tabbar_home_icon", @"tabbar_mine_icon", @"tabbar_show_icon", @"tabbar_hot_icon", @"tabbar_search_icon", nil];

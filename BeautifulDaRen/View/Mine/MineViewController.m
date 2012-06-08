@@ -126,7 +126,7 @@
 
 - (void) onRefreshButtonClick
 {
-    [[iToast makeText:@"刷新"] show];
+    [[iToast makeText:NSLocalizedString(@"refresh", @"refresh")] show];
 }
 
 #pragma mark UITableViewDataSource
