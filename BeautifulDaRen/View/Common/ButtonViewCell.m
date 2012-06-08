@@ -17,6 +17,7 @@
 @synthesize leftButton;
 @synthesize rightButton;
 @synthesize segmentedControl;
+@synthesize buttonLeftIconPressed;
 
 @synthesize delegate;
 
@@ -34,6 +35,10 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+    if (selected && buttonLeftIconPressed) {
+        self.buttonLeftIcon.image = buttonLeftIconPressed;
+    }
+
 }
 
 -(IBAction)buttonPressed:(UIButton*)sender

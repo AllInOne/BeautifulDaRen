@@ -173,7 +173,8 @@
         {
             cell = [[[NSBundle mainBundle] loadNibNamed:button_view_identifier owner:self options:nil] objectAtIndex:4];
         }
-        ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"common_button"];
+        ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"login_button"];
+        ((ButtonViewCell*)cell).buttonLeftIconPressed = [UIImage imageNamed:@"login_button_pressed"];
         ((ButtonViewCell*)cell).leftLabel.text = NSLocalizedString(@"login", @"login");
         
         cell.backgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];

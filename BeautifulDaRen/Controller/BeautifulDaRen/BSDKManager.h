@@ -54,6 +54,11 @@
 - (void)getWeiboListByUsername:(NSString*)username
                       pageSize:(NSInteger)pageSize 
                      pageIndex:(NSInteger)pageIndex 
-               andDoneCallback:(processDoneWithArrayBlock)callback;
+               andDoneCallback:(processDoneWithDictBlock)callback;
+
+- (void)searchWeiboByKeyword:(NSString*)key
+                      pageSize:(NSInteger)pageSize 
+                     pageIndex:(NSInteger)pageIndex 
+               andDoneCallback:(processDoneWithDictBlock)callback;
 
 @end

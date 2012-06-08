@@ -295,17 +295,17 @@ static BSDKManager *sharedInstance;
 - (void)getWeiboListByUsername:(NSString*)username
                       pageSize:(NSInteger)pageSize 
                      pageIndex:(NSInteger)pageIndex 
-               andDoneCallback:(processDoneWithArrayBlock)callback
+               andDoneCallback:(processDoneWithDictBlock)callback
 {
     //    if (!self.isLogin) {
     //        callback(AIO_STATUS_NOT_SIGNED_IN, nil);
     //        return;
     //    }
     
-    processDoneWithDictBlock loginCallbackShim = ^(AIO_STATUS status, NSDictionary * data)
-    {
-        callback(status, [data objectForKey:K_BSDK_RESPONSE_BLOGLIST]);
-    };
+//    processDoneWithDictBlock loginCallbackShim = ^(AIO_STATUS status, NSDictionary * data)
+//    {
+//        callback(status, [data objectForKey:K_BSDK_RESPONSE_BLOGLIST]);
+//    };
     
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
     
@@ -318,10 +318,37 @@ static BSDKManager *sharedInstance;
                              params:params 
                        postDataType:kBSDKRequestPostDataTypeNormal
                    httpHeaderFields:nil
-                       doneCallback:loginCallbackShim];
+                       doneCallback:callback];
     
 }
-
+- (void)searchWeiboByKeyword:(NSString*)key
+                    pageSize:(NSInteger)pageSize 
+                   pageIndex:(NSInteger)pageIndex 
+             andDoneCallback:(processDoneWithDictBlock)callback
+{
+    //    if (!self.isLogin) {
+    //        callback(AIO_STATUS_NOT_SIGNED_IN, nil);
+    //        return;
+    //    }
+    
+//    processDoneWithDictBlock loginCallbackShim = ^(AIO_STATUS status, NSDictionary * data)
+//    {
+//        callback(status, [data objectForKey:K_BSDK_RESPONSE_BLOGLIST]);
+//    };
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
+    
+    [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
+    [params setObject:K_BSDK_ACTION_SEARCH forKey:K_BSDK_ACTION];
+    [params setObject:key forKey:K_BSDK_KEYWORD];
+    
+    [self sendRequestWithMethodName:nil
+                         httpMethod:@"POST" 
+                             params:params 
+                       postDataType:kBSDKRequestPostDataTypeNormal
+                   httpHeaderFields:nil
+                       doneCallback:callback];
+}
 
 - (void)sendWeiBoWithText:(NSString *)text 
                     image:(UIImage *)image 

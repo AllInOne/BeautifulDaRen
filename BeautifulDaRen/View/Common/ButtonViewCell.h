@@ -12,6 +12,7 @@
 @interface ButtonViewCell : UITableViewCell
 
 @property (retain, nonatomic) IBOutlet UIImageView * buttonLeftIcon;
+@property (retain, nonatomic) UIImage * buttonLeftIconPressed;
 @property (retain, nonatomic) IBOutlet UILabel * buttonText;
 @property (retain, nonatomic) IBOutlet UIImageView * buttonRightIcon;
 @property (retain, nonatomic) IBOutlet UILabel * buttonRightText;

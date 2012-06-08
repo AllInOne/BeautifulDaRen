@@ -231,7 +231,11 @@
     }
     else
     {
-        [[BSDKManager sharedManager] logoutWithDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+//        [[BSDKManager sharedManager] logoutWithDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+//            NSLog(@"sign in done = %d", status);
+//            [[iToast makeText:[NSString stringWithFormat:@"%@", [data objectForKey:@"msg"]]] show];
+//        }];
+        [[BSDKManager sharedManager] searchWeiboByKeyword:@"k" pageSize:20 pageIndex:0 andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
             NSLog(@"sign in done = %d", status);
             [[iToast makeText:[NSString stringWithFormat:@"%@", [data objectForKey:@"msg"]]] show];
         }];
