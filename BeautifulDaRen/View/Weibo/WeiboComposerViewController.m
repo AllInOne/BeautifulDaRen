@@ -16,10 +16,14 @@
 #import "BSDKManager.h"
 #import "BSDKDefines.h"
 #import "iToast.h"
+#import "LocationHelper.h"
 
 #define WEIBO_CONTENT_TEXTVIEW_Y_OFFSET (90.0)
 #define WEIBO_CONTENT_TEXTVIEW_MARGIN   (2.0)
 #define WEIBO_CONTENT_SCROLL_BOUNCE_SIZE   (30.0)
+
+#define LOCATION_ACTIVITY_Y_OFFSET     (25.0)
+#define LOCATION_ACTIVITY_X_OFFSET     (10.0)
 
 #define ACTIONSHEET_IMAGE_PICKER 1
 
@@ -28,9 +32,14 @@
 #define IMAGE_PICKER_DELETE       NSLocalizedString(@"删除已选择相片", @"Label for Action Sheet to delete current photo")
 
 
+#define TAG_ALERTVIEW_CLEAR_LOCATION    0
+
+
 @interface WeiboComposerViewController ()
 @property (nonatomic, assign) BOOL isKeypadShow;
-@property (nonatomic, assign) TakePhotoViewController * takePhotoViewController;
+@property (nonatomic, retain) TakePhotoViewController * takePhotoViewController;
+@property (nonatomic, retain) CLLocation * currentLocation;
+@property (nonatomic, retain) NSString * locationString;
 
 - (void)setContentFrame:(CGRect)frame;
 @end
@@ -55,6 +64,9 @@
 @synthesize locationButton = _locationButton;
 @synthesize atButton = _atButton;
 @synthesize categoryButton = _categoryButton;
+@synthesize locationLoadingView =_locationLoadingView;
+@synthesize currentLocation = _currentLocation;
+@synthesize locationString = _locationString;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -121,6 +133,11 @@
     
     _attachedImageView.hidden = YES;
     
+    _locationLoadingView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [_locationLoadingView setHidden:YES];
+    
+    [self.view addSubview:_locationLoadingView];
+    
     [self.atButton setEnabled:NO];
     [self.locationButton setEnabled:NO];
     [self.categoryButton setEnabled:NO];
@@ -143,6 +160,9 @@
     [self setAtButton:nil];
     [self setCategoryButton:nil];
     [self setAttachedImageBgButton:nil];
+    [self setLocationLoadingView:nil];
+    [self setCurrentLocation:nil];
+    [self setLocationString:nil];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
@@ -163,6 +183,9 @@
     [_locationButton release];
     [_categoryButton release];
     [_attachedImageBgButton release];
+    [_locationLoadingView release];
+    [_currentLocation release];
+    [_locationString release];
     
     [super dealloc];
 }
@@ -363,7 +386,7 @@
     
     if ([imagePickerActionSheet numberOfButtons] > 0)
     {
-        [imagePickerActionSheet setDestructiveButtonIndex:[imagePickerActionSheet addButtonWithTitle:@"取消"]];
+        [imagePickerActionSheet setDestructiveButtonIndex:[imagePickerActionSheet addButtonWithTitle:NSLocalizedString(@"cancel", @"cancel")]];
         [imagePickerActionSheet showInView:self.view];
     }
     
@@ -385,8 +408,47 @@
 
 - (IBAction)onLocationPressed:(id)sender
 {
-    self.weiboContentTextView.text = [self.weiboContentTextView.text stringByAppendingString: [NSString stringWithFormat:@"我在这里#成都市＃ "]];
+    if (self.currentLocation) {
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"prompt", @"prompt")
+                                                        message:NSLocalizedString(@"clear_location", @"clear_location")
+                                                       delegate:self
+                                              cancelButtonTitle:NSLocalizedString(@"cancel", @"cancel")
+                                              otherButtonTitles:NSLocalizedString(@"clear", @"clear"), nil];
+        alert.tag = TAG_ALERTVIEW_CLEAR_LOCATION;
+        
+        [alert show];
+        [alert release];
+        
+        return;
+    } 
+    
+
+    
+    [self.locationLoadingView setHidden:NO];
+    [self.locationLoadingView setFrame:CGRectMake(LOCATION_ACTIVITY_X_OFFSET, self.footerView.frame.origin.y - LOCATION_ACTIVITY_Y_OFFSET, CGRectGetWidth(self.locationLoadingView.frame), CGRectGetHeight(self.locationLoadingView.frame))];
+    [self.locationLoadingView startAnimating];
+    
+    [[LocationHelper sharedManager] getCurrentLocationWithDoneCallbck:^(NSError *error, CLLocation *location, MKPlacemark *placeMark) {
+        NSLog(@"%@, %@, %@", error, location, placeMark);
+        if (error == nil) {
+            _locationString = nil;
+            self.locationString = [NSString stringWithFormat:@"%@#%@,%@＃ ", NSLocalizedString(@"i_am_here", @"i_am_here"), placeMark.locality, placeMark.thoroughfare];
+            self.weiboContentTextView.text = [self.weiboContentTextView.text stringByAppendingString: _locationString];
+            _currentLocation = nil;
+            self.currentLocation = location;
+        }
+        else
+        {
+            [ViewHelper showSimpleMessage:NSLocalizedString(@"get_location_failed", @"get_location_failed") withTitle:NSLocalizedString(@"prompt", @"prompt") withButtonText:NSLocalizedString(@"cancel", @"cancel")];
+        }
+
+        [self.locationLoadingView stopAnimating];
+        [self.locationButton setEnabled:YES];
+        [self.locationLoadingView setHidden:YES];
+    }];
+    [self.locationButton setEnabled:NO];
 }
+
 - (IBAction)onTraderPressed:(id)sender
 {
     //TODO:
@@ -425,6 +487,21 @@
 - (void)didFinishContactSelectionWithContacts:(NSString *)friendId
 {
     self.weiboContentTextView.text = [self.weiboContentTextView.text stringByAppendingString: [NSString stringWithFormat:@"@%@ ", friendId]];
+}
+
+#pragma mark - UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == TAG_ALERTVIEW_CLEAR_LOCATION) {
+        switch (buttonIndex) {
+            case 1:
+                self.weiboContentTextView.text = [self.weiboContentTextView.text stringByReplacingOccurrencesOfString:_locationString withString:@""];
+                self.currentLocation = nil;
+                break;               
+            default:
+                break;
+        }
+    }
 }
 
 #pragma mark - UIActionSheetDelegate

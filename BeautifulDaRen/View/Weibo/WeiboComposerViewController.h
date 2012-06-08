@@ -13,7 +13,7 @@
 
 @interface WeiboComposerViewController : UIViewController <UIActionSheetDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate,
     FriendsSelectionViewControllerDelegate,
-    SelectCategoryProtocol,TakePhotoControllerDelegate>
+    SelectCategoryProtocol,TakePhotoControllerDelegate, UIAlertViewDelegate>
 
 @property (nonatomic, retain) UIImage * selectedImage;
 
@@ -29,6 +29,7 @@
 @property (nonatomic, retain) IBOutlet UIButton * attachedImageBgButton;
 
 @property (nonatomic, retain) IBOutlet UIButton * locationButton;
+@property (nonatomic, retain) UIActivityIndicatorView * locationLoadingView;
 @property (nonatomic, retain) IBOutlet UIButton * atButton;
 @property (nonatomic, retain) IBOutlet UIButton * categoryButton;
 

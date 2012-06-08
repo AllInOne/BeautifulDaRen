@@ -68,7 +68,8 @@ static LocationHelper *sharedInstance;
 {  
     self.locationStr = [NSString stringWithFormat:@"%f,%f",newLocation.coordinate.latitude, newLocation.coordinate.longitude];
     self.location = newLocation;
-    [self startedReverseGeoderWithLatitude:newLocation.coordinate.latitude longitude:newLocation.coordinate.longitude];  
+    [self startedReverseGeoderWithLatitude:newLocation.coordinate.latitude longitude:newLocation.coordinate.longitude];
+    [gps stopUpdatingLocation];
 }  
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {  
@@ -94,7 +95,10 @@ static LocationHelper *sharedInstance;
     NSString *subthroung=placemark.thoroughfare;  
     NSString *local=placemark.locality;  
     NSLog(@"您当前所在位置:%@,%@", local, subthroung);
-    _doneCallback(self.error, self.location, placemark);
+    
+    if (_doneCallback) {
+        _doneCallback(self.error, self.location, placemark);
+    }
     
     Block_release(_doneCallback);
     _doneCallback = nil;

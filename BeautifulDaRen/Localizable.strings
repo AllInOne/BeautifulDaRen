@@ -110,3 +110,8 @@
 
 "allow" = "允许";
 "not_allow" = "不允许";
+
+"clear_location" = "亲，你要清除位置信息吗？";
+"get_location_falied" = "亲，获取位置信息失败";
+"clear" = "删除";
+"i_am_here" = "我在这里";
