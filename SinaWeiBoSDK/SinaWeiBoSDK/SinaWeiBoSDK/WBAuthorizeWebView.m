@@ -35,9 +35,9 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization.
-        self.navigationItem.title = @"认证";
+        self.navigationItem.title = NSLocalizedString(@"app_name", @"app_name");
 
-        [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onDoneButtonClicked:) title:@"完成"]];
+        [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onDoneButtonClicked:) title:NSLocalizedString(@"done", @"done")]];
     }
     return self;
 }
