@@ -139,9 +139,9 @@ static NSMutableString *logBody;
 			}
 		}
     }
-    
-    NSLog(@"BSDK request body: %@", logBody);
-    
+    NSLog(@"========================================================");
+    NSLog(@"\r\n \r\nBSDK REQUEST: %@ \r\n \r\n", logBody);
+    NSLog(@"========================================================");
     return body;
 }
 
@@ -172,6 +172,10 @@ static NSMutableString *logBody;
 {
 	
 	NSString *dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    
+    NSLog(@"========================================================");
+    NSLog(@"\r\n \r\n BSDK RESPONSE: %@\r\n \r\n", dataString);
+    NSLog(@"========================================================");
 	SBJSON *jsonParser = [[SBJSON alloc]init];
 	
 	NSError *parseError = nil;

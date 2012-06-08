@@ -15,6 +15,7 @@
 #define K_BSDK_CATEGORY @"cat"
 #define K_BSDK_CATEGORY_USER @"user"
 #define K_BSDK_CATEGORY_BLOG @"blog"
+#define K_BSDK_CATEGORY_SNS @"sns"
 
 #define K_BSDK_ACTION @"action"
 #define K_BSDK_ACTION_ADD @"Add"
@@ -28,7 +29,24 @@
 #define K_BSDK_ACTION_DELETE @"Del"
 #define K_BSDK_ACTION_PERIPHERAL @"Peripheral"
 
+#define K_BSDK_ACTION_FOLLOW @"PayAttention"
+#define K_BSDK_ACTION_UNFOLLOW @"CancelAttention"
+#define K_BSDK_ACTION_GETFOLLOWLIST @"GetAttentionList"
+
+#define K_BSDK_ACTION_GETFANLIST @"GetFansList"
+#define K_BSDK_ACTION_SENDPRIVATEMSG @"SendPrivateMsg"
+#define K_BSDK_ACTION_GETSENDEDPRIVATEMSG @"GetSendedPrivateMsg"
+
+#define K_BSDK_ACTION_SENDCOMMENT @"SendComment"
+
+#define K_BSDK_ACTION_GETCOMMENTLIST @"GetCommentList"
+
+#define K_BSDK_PAGEINDEX @"Page"
+#define K_BSDK_PAGESIZE @"PageSize"
+
 #define K_BSDK_USERNAME @"UserName"
+#define K_BSDK_USERCOUNT @"UserCount"
+#define K_BSDK_FANSUSERNAME @"FansUserName"
 
 #define K_BSDK_PASSWORD @"PassWord"
 
@@ -54,6 +72,8 @@
 
 #define K_BSDK_UID @"id"
 
+#define K_BSDK_BLOGUID @"BlogId"
+
 #define K_BSDK_RESPONSE_STATUS @"status"
 #define K_BSDK_RESPONSE_STATUS_OK @"y"
 #define K_BSDK_RESPONSE_STATUS_FAILED @"n"
@@ -61,6 +81,7 @@
 #define K_BSDK_RESPONSE_MESSAGE @"msg"
 
 #define K_BSDK_RESPONSE_BLOGLIST @"BlogList"
+#define K_BSDK_RESPONSE_USERLIST @"UserList"
 
 #define K_BSDK_IS_RESPONSE_OK(res) ([[res objectForKey:K_BSDK_RESPONSE_STATUS] isEqual:K_BSDK_RESPONSE_STATUS_OK])
 #define K_BSDK_GET_RESPONSE_MESSAGE(res) ([res objectForKey:K_BSDK_RESPONSE_MESSAGE])

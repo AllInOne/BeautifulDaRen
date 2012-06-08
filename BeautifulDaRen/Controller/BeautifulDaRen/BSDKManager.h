@@ -61,4 +61,19 @@
                      pageIndex:(NSInteger)pageIndex 
                andDoneCallback:(processDoneWithDictBlock)callback;
 
+- (void)followUser:(NSString*)username
+   andDoneCallback:(processDoneWithDictBlock)callback;
+
+- (void)unFollowUser:(NSString*)username
+   andDoneCallback:(processDoneWithDictBlock)callback;
+
+//- (void)getFollowList:(NSString*)username
+//     andDoneCallback:(processDoneWithDictBlock)callback;
+
+- (void)sendComment:(NSString*)comment
+            toWeibo:(NSString*)blogId
+     andDoneCallback:(processDoneWithDictBlock)callback;
+
+
+
 @end
