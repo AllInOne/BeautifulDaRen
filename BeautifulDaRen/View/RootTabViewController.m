@@ -85,9 +85,9 @@
 {
     NSArray* homeArray = [NSArray arrayWithObjects:@"",NSLocalizedString(@"tab_home", @"tab_home"),nil];
     NSArray* mineArray = [NSArray arrayWithObjects:NSLocalizedString(@"tab_mine", @"tab_mine"),NSLocalizedString(@"tab_mine", @"tab_mine"),nil];
-    NSArray* cameraShareArray = [NSArray arrayWithObjects:NSLocalizedString(@"tab_camerashare", @"tab_camerashare"),NSLocalizedString(@"tab_camerashare", @"tab_camerashare"),nil];
-    NSArray* categoryArray = [NSArray arrayWithObjects:NSLocalizedString(@"tab_category", @"tab_category"),NSLocalizedString(@"tab_category", @"tab_category"),nil];
-    NSArray* moreArray = [NSArray arrayWithObjects:NSLocalizedString(@"tab_more", @"tab_more"), NSLocalizedString(@"tab_more", @"tab_more"),nil];
+    NSArray* cameraShareArray = [NSArray arrayWithObjects:NSLocalizedString(@"tab_myshow", @"tab_myshow"),NSLocalizedString(@"tab_myshow", @"tab_myshow"),nil];
+    NSArray* categoryArray = [NSArray arrayWithObjects:NSLocalizedString(@"tab_hot", @"tab_hot"),NSLocalizedString(@"tab_hot", @"tab_hot"),nil];
+    NSArray* moreArray = [NSArray arrayWithObjects:NSLocalizedString(@"tab_search", @"tab_search"), NSLocalizedString(@"tab_search", @"tab_search"),nil];
     NSArray* localizedStringsArray = [NSArray arrayWithObjects:homeArray, mineArray, cameraShareArray, categoryArray, moreArray, nil];
     
     NSArray* tabbarIconNamesArray = [NSArray arrayWithObjects:@"tabbar_home_icon", @"tabbar_mine_icon", @"tabbar_show_icon", @"tabbar_hot_icon", @"tabbar_search_icon", nil];

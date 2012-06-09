@@ -108,8 +108,7 @@ static BSDKManager *sharedInstance;
         
         return;
     }
-    
-    
+
     processDoneWithDictBlock loginCallbackShim = ^(AIO_STATUS status, NSDictionary * data)
     {
         if ((status == AIO_STATUS_SUCCESS) && K_BSDK_IS_RESPONSE_OK(data))
