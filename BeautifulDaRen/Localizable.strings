@@ -140,3 +140,5 @@
 "send_failed" = "发送失败!";
 
 "ok" = "好的";
+
+"detail_mode" = "详情模式";

@@ -246,11 +246,11 @@ enum
     }
     else if(section == 1)
     {
-        NSString * userName = @"tankliu002";
+        NSString * userName = @"tankliu004";
        [[BSDKManager sharedManager]
         signUpWithUsername:userName
         password:@"abc123456"
-        email:@"23775517@qq.com"
+        email:@"2377517@qq.com"
         city:@"成都"
         andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
             [[NSUserDefaults standardUserDefaults] setObject:userName forKey:USERDEFAULT_LOGIN_ACCOUNT_USERNAME];
