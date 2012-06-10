@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 
+typedef void(^EditDoneBlock)(NSString * text);
+
 enum
 {
     EdittingViewController_type0 = 0,
@@ -19,5 +21,5 @@ enum
 
 @property (retain, nonatomic) IBOutlet UITextView * inputTextView;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil type:(NSInteger)type;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil type:(NSInteger)type block:(EditDoneBlock)callback;
 @end

@@ -24,6 +24,7 @@
 
 @interface MineViewController()
 
+@property (retain, nonatomic) IBOutlet UITableView * tableView;
 @property (retain, nonatomic) IBOutlet UIButton * followButton;
 @property (retain, nonatomic) IBOutlet UIButton * fansButton;
 @property (retain, nonatomic) IBOutlet UIButton * collectionButton;
@@ -36,6 +37,7 @@
 @end
 
 @implementation MineViewController
+@synthesize tableView = _tableView;
 @synthesize followButton = _followButton;
 @synthesize fansButton = _fansButton;
 @synthesize collectionButton = _collectionButton;
@@ -53,7 +55,7 @@
     }
     return self;
 }
-							
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -104,30 +106,30 @@
     [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClick) title:NSLocalizedString(@"refresh", @"refresh")]];
     NSString * accountName = [[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] valueForKey:USERDEFAULT_ACCOUNT_USERNAME];
     [[BSDKManager sharedManager] getUserInforByUsername:accountName andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-       /* {
-            AtNum = 0;
-            AttentionNum = 0;
-            BlackListNum = 0;
-            BlogNum = 0;
-            BuyNum = 0;
-            City = "\U6210\U90fd";
-            CommentNum = 0;
-            CreateTime = "2012-06-09 00:03:59";
-            Email = "dddd@11.c2om";
-            FansNum = 0;
-            FavNum = 0;
-            Intro = 0;
-            IsVerify = 0;
-            Levels = 0;
-            Points = 0;
-            PrivateMsgNum = 0;
-            Prov = "";
-            SmallPic = "";
-            TopicNum = 0;
-            UserName = tankliu013;
-            UserType = 0;
-            id = 12;
-        }  */
+        /* {
+         AtNum = 0;
+         AttentionNum = 0;
+         BlackListNum = 0;
+         BlogNum = 0;
+         BuyNum = 0;
+         City = "\U6210\U90fd";
+         CommentNum = 0;
+         CreateTime = "2012-06-09 00:03:59";
+         Email = "dddd@11.c2om";
+         FansNum = 0;
+         FavNum = 0;
+         Intro = 0;
+         IsVerify = 0;
+         Levels = 0;
+         Points = 0;
+         PrivateMsgNum = 0;
+         Prov = "";
+         SmallPic = "";
+         TopicNum = 0;
+         UserName = tankliu013;
+         UserType = 0;
+         id = 12;
+         }  */
         NSString * s = [data valueForKey:@"City"];
         s = s;
         NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -154,8 +156,8 @@
                                [data valueForKey:@"TopicNum"],      USERDEFAULT_ACCOUNT_TOPIC_COUNT,
                                nil];
         [[NSUserDefaults standardUserDefaults] setObject:dict forKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
+        [self.tableView reloadData];
     }];
-    [self loadFakeData];
 }
 
 - (void)viewDidUnload
@@ -201,20 +203,18 @@
             cell = [[[NSBundle mainBundle] loadNibNamed:myInfoTopViewIdentifier owner:self options:nil] objectAtIndex:0];
         }
         
-//        UserIdentity * userIdentity = [[DataManager sharedManager] getCurrentLocalIdentityInContext:nil];
+        //        UserIdentity * userIdentity = [[DataManager sharedManager] getCurrentLocalIdentityInContext:nil];
         
         NSDictionary * userDict = [[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
         ((MyInfoTopViewCell*)cell).avatarImageView.image = [UIImage imageNamed:@"avatar_big"];
         ((MyInfoTopViewCell*)cell).levelLabel.text = [NSString stringWithFormat:@"LV%d",
-                                                      [userDict valueForKey:USERDEFAULT_ACCOUNT_LEVEL]];
+                                                      [[userDict valueForKey:USERDEFAULT_ACCOUNT_LEVEL] intValue]];
         ((MyInfoTopViewCell*)cell).levelLabelTitle.text = [NSString stringWithFormat:@"%@%d",
                                                            NSLocalizedString(@"point", @"point"),
-                                                           [userDict valueForKey:USERDEFAULT_ACCOUNT_POINT]];
+                                                           [[userDict valueForKey:USERDEFAULT_ACCOUNT_POINT] intValue]];
         ((MyInfoTopViewCell*)cell).beautifulIdLabel.text = [userDict valueForKey:USERDEFAULT_ACCOUNT_USERNAME];
         ((MyInfoTopViewCell*)cell).rightImageView.image = [UIImage imageNamed:@"gender_female"];
         ((MyInfoTopViewCell*)cell).editImageView.image = [UIImage imageNamed:@"my_edit"];
-        NSString * s = [userDict valueForKey:USERDEFAULT_ACCOUNT_CITY];
-        s= s;
         ((MyInfoTopViewCell*)cell).cityLabel.text = [NSString stringWithFormat:@"%@ 锦江区南街", [userDict valueForKey:USERDEFAULT_ACCOUNT_CITY]];
         _editButton = ((MyInfoTopViewCell*)cell).editButton;
         ((MyInfoTopViewCell*)cell).delegate = self;
@@ -224,47 +224,47 @@
         if(!cell) {
             cell = [[[NSBundle mainBundle] loadNibNamed:gridViewIndentifier owner:self options:nil] objectAtIndex:1];
         }
-//        UserIdentity * userIdentity = [[DataManager sharedManager] getCurrentLocalIdentityInContext:nil];
+        //        UserIdentity * userIdentity = [[DataManager sharedManager] getCurrentLocalIdentityInContext:nil];
         ((GridViewCell*)cell).delegate = self;
         
         NSDictionary * userDict = [[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
         NSMutableAttributedString * attrStr = nil;
-
-        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"follow", @"") detail:[NSString stringWithFormat:@"(%d)", [userDict valueForKey:USERDEFAULT_ACCOUNT_FOLLOW_COUNT]]];
+        
+        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"follow", @"") detail:[NSString stringWithFormat:@"(%d)", [[userDict valueForKey:USERDEFAULT_ACCOUNT_FOLLOW_COUNT] intValue]]];
         ((GridViewCell*)cell).firstLabel.attributedText = attrStr;
         ((GridViewCell*)cell).firstLabel.textAlignment = UITextAlignmentCenter;
-
-        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"fans", @"") detail:[NSString stringWithFormat:@"(%d)", [userDict valueForKey:USERDEFAULT_ACCOUNT_FANS_COUNT]]];
+        
+        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"fans", @"") detail:[NSString stringWithFormat:@"(%d)", [[userDict valueForKey:USERDEFAULT_ACCOUNT_FANS_COUNT] intValue]]];
         ((GridViewCell*)cell).secondLabel.attributedText = attrStr;
         ((GridViewCell*)cell).secondLabel.textAlignment = UITextAlignmentCenter;
         
-        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"collection", @"") detail:[NSString stringWithFormat:@"(%d)", [userDict valueForKey:USERDEFAULT_ACCOUNT_FAVORITE_COUNT]]];
+        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"collection", @"") detail:[NSString stringWithFormat:@"(%d)", [[userDict valueForKey:USERDEFAULT_ACCOUNT_FAVORITE_COUNT] intValue]]];
         ((GridViewCell*)cell).thirdLabel.attributedText = attrStr;
         ((GridViewCell*)cell).thirdLabel.textAlignment = UITextAlignmentCenter;
         
-        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"my_publish", @"") detail:[NSString stringWithFormat:@"(%d)", [userDict valueForKey:USERDEFAULT_ACCOUNT_WEIBO_COUNT]]];
+        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"my_publish", @"") detail:[NSString stringWithFormat:@"(%d)", [[userDict valueForKey:USERDEFAULT_ACCOUNT_WEIBO_COUNT] intValue]]];
         ((GridViewCell*)cell).fourthLabel.attributedText = attrStr;
         ((GridViewCell*)cell).fourthLabel.textAlignment = UITextAlignmentCenter;
         
-//        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"buyed", @"") detail:[NSString stringWithFormat:@"(%d)",[userIdentity.buyedCount intValue]]];
-//        ((GridViewCell*)cell).fourthLabel.attributedText = attrStr;
-//        ((GridViewCell*)cell).fourthLabel.textAlignment = UITextAlignmentCenter;
+        //        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"buyed", @"") detail:[NSString stringWithFormat:@"(%d)",[userIdentity.buyedCount intValue]]];
+        //        ((GridViewCell*)cell).fourthLabel.attributedText = attrStr;
+        //        ((GridViewCell*)cell).fourthLabel.textAlignment = UITextAlignmentCenter;
         
-//        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"topic", @"") detail:[NSString stringWithFormat:@"(%d)",[userIdentity.topicCount intValue]]];
-//        ((GridViewCell*)cell).fifthLabel.attributedText = attrStr;
-//        ((GridViewCell*)cell).fifthLabel.textAlignment = UITextAlignmentCenter;
-//        
-//         attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"black_list", @"") detail:[NSString stringWithFormat:@"(%d)",[userIdentity.blackListCount intValue]]];
-//        ((GridViewCell*)cell).sixthLabel.attributedText = attrStr;
-//        ((GridViewCell*)cell).sixthLabel.textAlignment = UITextAlignmentCenter;
+        //        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"topic", @"") detail:[NSString stringWithFormat:@"(%d)",[userIdentity.topicCount intValue]]];
+        //        ((GridViewCell*)cell).fifthLabel.attributedText = attrStr;
+        //        ((GridViewCell*)cell).fifthLabel.textAlignment = UITextAlignmentCenter;
+        //        
+        //         attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"black_list", @"") detail:[NSString stringWithFormat:@"(%d)",[userIdentity.blackListCount intValue]]];
+        //        ((GridViewCell*)cell).sixthLabel.attributedText = attrStr;
+        //        ((GridViewCell*)cell).sixthLabel.textAlignment = UITextAlignmentCenter;
         
         _followButton = ((GridViewCell*)cell).firstButton;
         _fansButton = ((GridViewCell*)cell).secondButton;
         _collectionButton = ((GridViewCell*)cell).thirdButton;
         _mypublishButton = ((GridViewCell*)cell).fourthButton;
-//        _buyedButton = ((GridViewCell*)cell).fourthButton;
-//        _topicButton = ((GridViewCell*)cell).fifthButton;
-//        _blackListButton = ((GridViewCell*)cell).sixthButton;
+        //        _buyedButton = ((GridViewCell*)cell).fourthButton;
+        //        _topicButton = ((GridViewCell*)cell).fifthButton;
+        //        _blackListButton = ((GridViewCell*)cell).sixthButton;
     }
     else if (section == 2) {
         cell = [tableView dequeueReusableCellWithIdentifier:buttonViewCellIdentifier];
@@ -272,12 +272,12 @@
             cell = [[[NSBundle mainBundle] loadNibNamed:buttonViewCellIdentifier owner:self options:nil] objectAtIndex:0];
         }
         switch ([indexPath row]) {
-//            case 0:
-//            {
-//                ((ButtonViewCell*)cell).buttonText.text = NSLocalizedString(@"my_publish", @"");
-//                ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"my_composed"];
-//                break;
-//            }
+                //            case 0:
+                //            {
+                //                ((ButtonViewCell*)cell).buttonText.text = NSLocalizedString(@"my_publish", @"");
+                //                ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"my_composed"];
+                //                break;
+                //            }
             case 0:
             {
                 ((ButtonViewCell*)cell).buttonText.text = NSLocalizedString(@"at_me", @"");
@@ -360,18 +360,18 @@
     if(section == 2)
     {
         switch ([indexPath row]) {
-//            case 0:
-//            {
-//                WeiboListViewController * myPublishViewController = [[WeiboListViewController alloc] initWithNibName:@"WeiboListViewController" bundle:nil type:WeiboListViewControllerType_MY_PUBLISH];
-//                
-//                UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: myPublishViewController];
-//                
-//                [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
-//                
-//                [navController release];
-//                [myPublishViewController release];
-//                break;
-//            }
+                //            case 0:
+                //            {
+                //                WeiboListViewController * myPublishViewController = [[WeiboListViewController alloc] initWithNibName:@"WeiboListViewController" bundle:nil type:WeiboListViewControllerType_MY_PUBLISH];
+                //                
+                //                UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: myPublishViewController];
+                //                
+                //                [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
+                //                
+                //                [navController release];
+                //                [myPublishViewController release];
+                //                break;
+                //            }
             case 0:
             {
                 WeiboListViewController * forwadMeViewController = [[WeiboListViewController alloc] initWithNibName:@"WeiboListViewController" bundle:nil type:WeiboListViewControllerType_FORWARD_ME];
@@ -450,7 +450,7 @@
         viewController = [[MineEditingViewController alloc]
                           initWithNibName:@"MineEditingViewController"
                           bundle:nil];
-
+        
     }
     else if(button == _mypublishButton)
     {

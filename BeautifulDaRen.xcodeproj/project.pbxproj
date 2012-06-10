@@ -50,6 +50,8 @@
 		C250223B1575E34C00C0561F /* BorderImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = C250223A1575E34C00C0561F /* BorderImageView.m */; };
 		C250224E1576205000C0561F /* SegmentControl.m in Sources */ = {isa = PBXBuildFile; fileRef = C250224D1576205000C0561F /* SegmentControl.m */; };
 		C2519F9B1564E36E0040EBC5 /* WaterFlowView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2519F9A1564E36E0040EBC5 /* WaterFlowView.m */; };
+		C25BDE1A1584E5030006153B /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C25BDE181584E5030006153B /* MineViewController.m */; };
+		C25BDE1B1584E5030006153B /* MineViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C25BDE191584E5030006153B /* MineViewController.xib */; };
 		C26717AE1542BF0000DC40D8 /* CommonScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = C26717A61542BF0000DC40D8 /* CommonScrollView.m */; };
 		C26717AF1542BF0000DC40D8 /* CommonScrollView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C26717A71542BF0000DC40D8 /* CommonScrollView.xib */; };
 		C26717B01542BF0000DC40D8 /* CommonScrollViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C26717A91542BF0000DC40D8 /* CommonScrollViewItem.m */; };
@@ -331,8 +333,6 @@
 		CEC0B58A153EFBE800F20DC0 /* CategoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC0B588153EFBE800F20DC0 /* CategoryViewController.xib */; };
 		CEC0B58F153EFBF600F20DC0 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC0B58D153EFBF600F20DC0 /* HomeViewController.m */; };
 		CEC0B590153EFBF600F20DC0 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC0B58E153EFBF600F20DC0 /* HomeViewController.xib */; };
-		CEC0B595153EFBFE00F20DC0 /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC0B593153EFBFE00F20DC0 /* MineViewController.m */; };
-		CEC0B596153EFBFE00F20DC0 /* MineViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC0B594153EFBFE00F20DC0 /* MineViewController.xib */; };
 		CEC29FE51556C56600052A14 /* MyShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC29FE31556C56600052A14 /* MyShowViewController.m */; };
 		CEC29FE61556C56600052A14 /* MyShowViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC29FE41556C56600052A14 /* MyShowViewController.xib */; };
 		CECAA7E4156A96F700B343A3 /* action_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CECAA7CA156A96F700B343A3 /* action_background@2x.png */; };
@@ -667,6 +667,9 @@
 		C250224F1576208300C0561F /* SegmentDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SegmentDelegate.h; path = Common/SegmentDelegate.h; sourceTree = "<group>"; };
 		C2519F991564E36E0040EBC5 /* WaterFlowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaterFlowView.h; sourceTree = "<group>"; };
 		C2519F9A1564E36E0040EBC5 /* WaterFlowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaterFlowView.m; sourceTree = "<group>"; };
+		C25BDE171584E5030006153B /* MineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineViewController.h; sourceTree = "<group>"; };
+		C25BDE181584E5030006153B /* MineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineViewController.m; sourceTree = "<group>"; };
+		C25BDE191584E5030006153B /* MineViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MineViewController.xib; sourceTree = "<group>"; };
 		C26717A51542BF0000DC40D8 /* CommonScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonScrollView.h; sourceTree = "<group>"; };
 		C26717A61542BF0000DC40D8 /* CommonScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonScrollView.m; sourceTree = "<group>"; };
 		C26717A71542BF0000DC40D8 /* CommonScrollView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommonScrollView.xib; sourceTree = "<group>"; };
@@ -1043,9 +1046,6 @@
 		CEC0B58C153EFBF600F20DC0 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		CEC0B58D153EFBF600F20DC0 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		CEC0B58E153EFBF600F20DC0 /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
-		CEC0B592153EFBFE00F20DC0 /* MineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineViewController.h; sourceTree = "<group>"; };
-		CEC0B593153EFBFE00F20DC0 /* MineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineViewController.m; sourceTree = "<group>"; };
-		CEC0B594153EFBFE00F20DC0 /* MineViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MineViewController.xib; sourceTree = "<group>"; };
 		CEC29FE21556C56600052A14 /* MyShowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyShowViewController.h; path = BeautifulDaRen/View/MyShow/MyShowViewController.h; sourceTree = SOURCE_ROOT; };
 		CEC29FE31556C56600052A14 /* MyShowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyShowViewController.m; path = BeautifulDaRen/View/MyShow/MyShowViewController.m; sourceTree = SOURCE_ROOT; };
 		CEC29FE41556C56600052A14 /* MyShowViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MyShowViewController.xib; path = BeautifulDaRen/View/MyShow/MyShowViewController.xib; sourceTree = SOURCE_ROOT; };
@@ -2065,9 +2065,6 @@
 			isa = PBXGroup;
 			children = (
 				C216EDBA1551882F00CA8CE8 /* SubView */,
-				CEC0B592153EFBFE00F20DC0 /* MineViewController.h */,
-				CEC0B593153EFBFE00F20DC0 /* MineViewController.m */,
-				CEC0B594153EFBFE00F20DC0 /* MineViewController.xib */,
 				C24B1005155BDB0F00918530 /* MineEditingViewController.h */,
 				C24B1006155BDB1000918530 /* MineEditingViewController.m */,
 				C24B1007155BDB1100918530 /* MineEditingViewController.xib */,
@@ -2080,6 +2077,9 @@
 				C21C26A5156B7E33000F8E3C /* EdittingViewController.h */,
 				C21C26A6156B7E33000F8E3C /* EdittingViewController.m */,
 				C21C26A7156B7E34000F8E3C /* EdittingViewController.xib */,
+				C25BDE171584E5030006153B /* MineViewController.h */,
+				C25BDE181584E5030006153B /* MineViewController.m */,
+				C25BDE191584E5030006153B /* MineViewController.xib */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -2595,7 +2595,6 @@
 				CE029B99153E6A4000886227 /* RootTabViewController.xib in Resources */,
 				CEC0B58A153EFBE800F20DC0 /* CategoryViewController.xib in Resources */,
 				CEC0B590153EFBF600F20DC0 /* HomeViewController.xib in Resources */,
-				CEC0B596153EFBFE00F20DC0 /* MineViewController.xib in Resources */,
 				CE74544E153F1D3D00CB751A /* Localizable.strings in Resources */,
 				CEDC918E153FDC5700BA6C35 /* AdsPageView.xib in Resources */,
 				C26717AF1542BF0000DC40D8 /* CommonScrollView.xib in Resources */,
@@ -3016,6 +3015,7 @@
 				CEF3DFA915819EBE00D63425 /* login_button_pressed@2x.png in Resources */,
 				CEF3DFAB15819EF000D63425 /* login_button_pressed.png in Resources */,
 				CEF3DFAD15819FEB00D63425 /* login_button.png in Resources */,
+				C25BDE1B1584E5030006153B /* MineViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3054,7 +3054,6 @@
 				CE029B98153E6A4000886227 /* RootTabViewController.m in Sources */,
 				CEC0B589153EFBE800F20DC0 /* CategoryViewController.m in Sources */,
 				CEC0B58F153EFBF600F20DC0 /* HomeViewController.m in Sources */,
-				CEC0B595153EFBFE00F20DC0 /* MineViewController.m in Sources */,
 				CEDC9191153FDC7700BA6C35 /* AdsPageView.m in Sources */,
 				C26717AE1542BF0000DC40D8 /* CommonScrollView.m in Sources */,
 				C26717B01542BF0000DC40D8 /* CommonScrollViewItem.m in Sources */,
@@ -3137,6 +3136,7 @@
 				CE417877157C8AA300A7155D /* BSDKRequest.m in Sources */,
 				CE41787A157C91E200A7155D /* BSDKWeiboRequest.m in Sources */,
 				CEFABBE4157DDD3900A0518E /* CustomUITabBarItem.m in Sources */,
+				C25BDE1A1584E5030006153B /* MineViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

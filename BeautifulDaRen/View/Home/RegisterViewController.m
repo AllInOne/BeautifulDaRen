@@ -60,7 +60,10 @@ enum
 }
 
 - (void)onBackButtonClicked {
-    [self.navigationController popViewControllerAnimated:YES];
+    if (![self.navigationController popViewControllerAnimated:YES])
+    {
+        [self dismissModalViewControllerAnimated:YES];
+    }
 }
 
 #pragma mark - View lifecycle

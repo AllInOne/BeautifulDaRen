@@ -19,6 +19,7 @@
 @property (retain, nonatomic) IBOutlet SegmentControl * commentMeSegmentControl;
 @property (retain, nonatomic) IBOutlet SegmentControl * atMeSegmentControl;
 @property (retain, nonatomic) IBOutlet SegmentControl * privateLetterMeSegmentControl;
+@property (copy, nonatomic) EditDoneBlock callBack;
 
 @end
 
@@ -30,13 +31,14 @@
 @synthesize atMeSegmentControl = _atMeSegmentControl;
 @synthesize privateLetterMeSegmentControl = _privateLetterMeSegmentControl;
 @synthesize type = _type;
+@synthesize callBack = _callBack;
 
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil type:(NSInteger)type
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil type:(NSInteger)type  block:(EditDoneBlock)callback
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         _type = type;
+        _callBack = callback;
     }
     return self;
 }
@@ -51,13 +53,19 @@
 
 -(void)onBackButtonClicked
 {
-//    [self dismissModalViewControllerAnimated:YES];
-    [self.navigationController popViewControllerAnimated:YES];
+    if (![self.navigationController popViewControllerAnimated:YES])
+    {
+        [self dismissModalViewControllerAnimated:YES];
+    }
 }
 
 -(void)onSaveButtonClicked
 {
-    [ViewHelper showSimpleMessage:@"保存" withTitle:nil withButtonText:@"好的"];
+    if (![self.navigationController popViewControllerAnimated:YES])
+    {
+        [self dismissModalViewControllerAnimated:YES];
+    }
+    _callBack(self.inputTextView.text);
 }
 
 #pragma mark - View lifecycle
