@@ -37,11 +37,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "BeautifulDaRen/View/Mine/MineViewController.m"
-         timestampString = "360746939.59541"
+         timestampString = "360862488.595664"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "50"
-         endingLineNumber = "50"
+         startingLineNumber = "51"
+         endingLineNumber = "51"
          landmarkName = "-initWithNibName:bundle:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -159,26 +159,26 @@
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "BeautifulDaRen/Controller/BeautifulDaRen/BSDKManager.m"
-         timestampString = "360741255.794262"
+         filePath = "BeautifulDaRen/View/Mine/MineViewController.m"
+         timestampString = "360906981.790467"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "117"
-         endingLineNumber = "117"
-         landmarkName = "-loginWithUsername:password:andDoneCallback:"
+         startingLineNumber = "218"
+         endingLineNumber = "218"
+         landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "BeautifulDaRen/View/Home/RegisterViewController.m"
-         timestampString = "360746939.59541"
+         filePath = "BeautifulDaRen/View/Mine/MineViewController.m"
+         timestampString = "360906979.580031"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "255"
-         endingLineNumber = "255"
-         landmarkName = "-tableView:didSelectRowAtIndexPath:"
+         startingLineNumber = "133"
+         endingLineNumber = "133"
+         landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

@@ -430,16 +430,20 @@
     
     [[LocationHelper sharedManager] getCurrentLocationWithDoneCallbck:^(NSError *error, CLLocation *location, MKPlacemark *placeMark) {
         NSLog(@"%@, %@, %@", error, location, placeMark);
-        if (error == nil) {
+        if ((error == nil) || (location != nil)) {
             _locationString = nil;
-            self.locationString = [NSString stringWithFormat:@"%@#%@,%@＃ ", NSLocalizedString(@"i_am_here", @"i_am_here"), placeMark.locality, placeMark.thoroughfare];
-            self.weiboContentTextView.text = [self.weiboContentTextView.text stringByAppendingString: _locationString];
+            if (placeMark)
+            {
+                self.locationString = [NSString stringWithFormat:@"%@#%@,%@＃ ", NSLocalizedString(@"i_am_here", @"i_am_here"), placeMark.locality, placeMark.thoroughfare];
+                self.weiboContentTextView.text = [self.weiboContentTextView.text stringByAppendingString: _locationString];            
+            }
+
             _currentLocation = nil;
             self.currentLocation = location;
         }
         else
         {
-            [ViewHelper showSimpleMessage:NSLocalizedString(@"get_location_failed", @"get_location_failed") withTitle:NSLocalizedString(@"prompt", @"prompt") withButtonText:NSLocalizedString(@"cancel", @"cancel")];
+            [ViewHelper showSimpleMessage:NSLocalizedString(@"get_location_falied", @"get_location_falied") withTitle:NSLocalizedString(@"prompt", @"prompt") withButtonText:NSLocalizedString(@"cancel", @"cancel")];
         }
 
         [self.locationLoadingView stopAnimating];

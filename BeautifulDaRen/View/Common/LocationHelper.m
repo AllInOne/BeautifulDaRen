@@ -8,6 +8,8 @@
 
 #import "LocationHelper.h"
 
+#define LOCATION_RETRY_COUNT_LIMITATION   (100)
+
 static LocationHelper *sharedInstance;
 
 @interface LocationHelper ()
@@ -15,6 +17,7 @@ static LocationHelper *sharedInstance;
 @property (nonatomic, retain) NSString * locationStr;
 @property (nonatomic, retain) CLLocation * location;
 @property (nonatomic, retain) NSError * error;
+@property (nonatomic, assign) NSInteger retryCount;
 -(void) startedReverseGeoderWithLatitude:(double)latitude longitude:(double)longitude;
 -(void) start;
 @end
@@ -25,6 +28,7 @@ static LocationHelper *sharedInstance;
 @synthesize location = _location;
 @synthesize doneCallback = _doneCallback;
 @synthesize error = _error;
+@synthesize retryCount = _retryCount;
 
 + (LocationHelper*) sharedManager {
     @synchronized([LocationHelper class]) {
@@ -107,10 +111,26 @@ static LocationHelper *sharedInstance;
 {
     _error = nil;
     self.error = error;
+    
+    _retryCount++;
+    
+    if (self.retryCount < LOCATION_RETRY_COUNT_LIMITATION) {
+        [gps startUpdatingLocation];
+    }
+    else
+    {
+        if (_doneCallback) {
+            _doneCallback(self.error, self.location, nil);
+        }
+        
+        Block_release(_doneCallback);
+        _doneCallback = nil;    
+    }
 }  
 
 -(void) start
 {
+    _retryCount = 0;
     [gps startUpdatingLocation];
 }
 

@@ -11,9 +11,9 @@
 
 "tab_home" = "首页";
 "tab_mine" = "我的";
-"tab_camerashare" = "拍照/分享";
-"tab_category" = "分类";
-"tab_more" = "更多";
+"tab_myshow" = "我秀";
+"tab_hot" = "热门";
+"tab_search" = "发现";
 "enter" = "确认";
 "go_back" = "返回";
 
@@ -131,6 +131,8 @@
 "please_enter_brand" = "亲, 请输入品牌哦!";
 "please_enter_price" = "亲, 请输入价格哦!";
 
+"prompt_category_max" = "亲, 最多选%d个分类哦!";
+
 "take_photo" = "照相";
 "album" = "相册";
 "delete_selected_photos" = "删除已选择照片";
@@ -142,4 +144,7 @@
 "ok" = "好的";
 
 "detail_mode" = "详情模式";
+<<<<<<< HEAD
 "point" = "积分";
+=======
+>>>>>>> e0c6d5aac24c98c0e86c1e8e7caa7c9c8b7f14d5
