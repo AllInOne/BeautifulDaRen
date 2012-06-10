@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @protocol SelectCategoryProtocol <NSObject>
-- (void)onCategorySelected:(NSString*)category;
+- (void)onCategorySelected:(NSArray*)categories;
 @end
 
 @interface SelectCategoryViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, retain) IBOutlet UITableView * categoryListTableView;
 @property (nonatomic, assign) id<SelectCategoryProtocol> delegate;
+
+-(IBAction)onCheckBoxPressed:(UIButton*)sender;
 @end

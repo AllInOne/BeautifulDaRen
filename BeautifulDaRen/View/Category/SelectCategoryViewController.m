@@ -9,16 +9,23 @@
 #import "SelectCategoryViewController.h"
 #import "ViewConstants.h"
 #import "ViewHelper.h"
+#import "iToast.h"
+
+#define MAX_CHECK_CATEGOROIES_COUNT 2
 
 @interface SelectCategoryViewController ()
 
 @property (nonatomic, retain) NSArray * categoryListData;
+@property (nonatomic, retain) NSMutableArray * categorySelectState;
+
+-(NSInteger)getCheckedCategoriesCount;
 @end
 
 @implementation SelectCategoryViewController
 
 @synthesize categoryListTableView = _categoryListTableView;
 @synthesize categoryListData = _categoryListData;
+@synthesize categorySelectState = _categorySelectState;
 @synthesize delegate;
 
 
@@ -28,6 +35,8 @@
     if (self) {
         // Custom initialization
         [self.navigationItem setLeftBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
+
+        [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onConfirmButtonClicked) title:NSLocalizedString(@"enter", @"enter")]];
         
         _categoryListData = [[NSArray alloc] initWithObjects:@"鞋子", 
                                                          @"裙子",
@@ -38,6 +47,17 @@
                                                          @"眼睛",
                                                          @"手表",
                                                         nil];
+        
+        _categorySelectState = [[NSMutableArray alloc] initWithObjects:[NSNumber numberWithInt:0],         
+                                                                [NSNumber numberWithInt:0],
+                                                                [NSNumber numberWithInt:0],
+                                                                [NSNumber numberWithInt:0],
+                                                                [NSNumber numberWithInt:0],
+                                                                [NSNumber numberWithInt:0],
+                                                                [NSNumber numberWithInt:0],
+                                                                [NSNumber numberWithInt:0],
+                                                                [NSNumber numberWithInt:0],
+                                                                nil];
     }
     return self;
 }
@@ -56,6 +76,7 @@
     [super dealloc];
     [_categoryListData release];
     [_categoryListTableView release];
+    [_categorySelectState release];
 }
 
 - (void)viewDidLoad
@@ -69,8 +90,9 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    self.categoryListData = nil;
-    self.categoryListTableView = nil;
+    [self setCategoryListData:nil];
+    [self setCategoryListTableView:nil];
+    [self setCategorySelectState:nil];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -114,5 +136,47 @@
 
 - (void)onBackButtonClicked {
     [self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)onConfirmButtonClicked {
+    if (self.delegate) {
+        [self.delegate onCategorySelected:nil];
+    }
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+-(IBAction)onCheckBoxPressed:(UIButton*)sender
+{
+    switch ([[self.categorySelectState objectAtIndex:sender.tag] intValue]) {
+        case 0:
+            if ([self getCheckedCategoriesCount] < 2) {
+                [sender setImage:[UIImage imageNamed:@"myshow_category_checked"] forState:UIControlStateNormal];
+                [self.categorySelectState replaceObjectAtIndex:sender.tag withObject:[NSNumber numberWithInt:1]];
+                break;
+            }
+            else
+            {
+                [[iToast makeText:[NSString stringWithFormat:NSLocalizedString(@"prompt_category_max", @"prompt_category_max"), MAX_CHECK_CATEGOROIES_COUNT]] show];
+            }
+        case 1:
+            [sender setImage:[UIImage imageNamed:@"myshow_category_unchecked"] forState:UIControlStateNormal];
+            [self.categorySelectState replaceObjectAtIndex:sender.tag withObject:[NSNumber numberWithInt:0]];
+            break;
+            
+        default:
+            break;
+    }
+}
+
+-(NSInteger)getCheckedCategoriesCount
+{
+    NSInteger checkedCategoriesCount = 0;
+    for (NSNumber * checkValue in self.categorySelectState) {
+        if ([checkValue intValue] == 1) {
+            checkedCategoriesCount++;
+        }
+    }
+    
+    return checkedCategoriesCount;
 }
 @end

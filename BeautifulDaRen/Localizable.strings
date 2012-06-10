@@ -131,6 +131,8 @@
 "please_enter_brand" = "亲, 请输入品牌哦!";
 "please_enter_price" = "亲, 请输入价格哦!";
 
+"prompt_category_max" = "亲, 最多选%d个分类哦!";
+
 "take_photo" = "照相";
 "album" = "相册";
 "delete_selected_photos" = "删除已选择照片";
