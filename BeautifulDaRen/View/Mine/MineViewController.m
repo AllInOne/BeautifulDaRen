@@ -19,6 +19,7 @@
 #import "FriendListViewController.h"
 #import "NSAttributedString+Attributes.h"
 #import "OHAttributedLabel.h"
+#import "BSDKManager.h"
 #import "iToast.h"
 
 @interface MineViewController()
@@ -101,7 +102,59 @@
     
     [self.navigationItem setTitle:NSLocalizedString(@"title_mine", @"title_mine")];
     [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClick) title:NSLocalizedString(@"refresh", @"refresh")]];
-
+    NSString * accountName = [[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] valueForKey:USERDEFAULT_ACCOUNT_USERNAME];
+    [[BSDKManager sharedManager] getUserInforByUsername:accountName andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+       /* {
+            AtNum = 0;
+            AttentionNum = 0;
+            BlackListNum = 0;
+            BlogNum = 0;
+            BuyNum = 0;
+            City = "\U6210\U90fd";
+            CommentNum = 0;
+            CreateTime = "2012-06-09 00:03:59";
+            Email = "dddd@11.c2om";
+            FansNum = 0;
+            FavNum = 0;
+            Intro = 0;
+            IsVerify = 0;
+            Levels = 0;
+            Points = 0;
+            PrivateMsgNum = 0;
+            Prov = "";
+            SmallPic = "";
+            TopicNum = 0;
+            UserName = tankliu013;
+            UserType = 0;
+            id = 12;
+        }  */
+        NSString * s = [data valueForKey:@"City"];
+        s = s;
+        NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                               [data valueForKey:@"UserName"],      USERDEFAULT_ACCOUNT_USERNAME,
+                               [data valueForKey:@"UserType"],      USERDEFAULT_ACCOUNT_EMAIL,
+                               [data valueForKey:@"id"],            USERDEFAULT_ACCOUNT_ID,
+                               [data valueForKey:@"Email"],         USERDEFAULT_ACCOUNT_EMAIL,
+                               [data valueForKey:@"City"],          USERDEFAULT_ACCOUNT_CITY,
+                               [data valueForKey:@"IsVerify"],      USERDEFAULT_ACCOUNT_IS_VERIFY,
+                               [data valueForKey:@"Levels"],        USERDEFAULT_ACCOUNT_LEVEL,
+                               [data valueForKey:@"Points"],        USERDEFAULT_ACCOUNT_POINT,
+                               [data valueForKey:@"Intro"],         USERDEFAULT_ACCOUNT_INTRO,
+                               [data valueForKey:@"Prov"],          USERDEFAULT_ACCOUNT_PROV,
+                               [data valueForKey:@"CreateTime"],    USERDEFAULT_ACCOUNT_CREATE_TIME,
+                               [data valueForKey:@"AtNum"],         USERDEFAULT_ACCOUNT_FORWARD_COUNT,
+                               [data valueForKey:@"AttentionNum"],  USERDEFAULT_ACCOUNT_FOLLOW_COUNT,
+                               [data valueForKey:@"BlackListNum"],  USERDEFAULT_ACCOUNT_BLACK_LIST_COUNT,
+                               [data valueForKey:@"BlogNum"],       USERDEFAULT_ACCOUNT_WEIBO_COUNT,
+                               [data valueForKey:@"BuyNum"],        USERDEFAULT_ACCOUNT_BUYED_COUNT,
+                               [data valueForKey:@"CommentNum"],    USERDEFAULT_ACCOUNT_COMMENT_COUNT,
+                               [data valueForKey:@"FansNum"],       USERDEFAULT_ACCOUNT_FANS_COUNT,
+                               [data valueForKey:@"FavNum"],        USERDEFAULT_ACCOUNT_FAVORITE_COUNT,
+                               [data valueForKey:@"PrivateMsgNum"], USERDEFAULT_ACCOUNT_PRIVATE_MSG_COUNT,
+                               [data valueForKey:@"TopicNum"],      USERDEFAULT_ACCOUNT_TOPIC_COUNT,
+                               nil];
+        [[NSUserDefaults standardUserDefaults] setObject:dict forKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
+    }];
     [self loadFakeData];
 }
 
@@ -148,15 +201,21 @@
             cell = [[[NSBundle mainBundle] loadNibNamed:myInfoTopViewIdentifier owner:self options:nil] objectAtIndex:0];
         }
         
-        UserIdentity * userIdentity = [[DataManager sharedManager] getCurrentLocalIdentityInContext:nil];
+//        UserIdentity * userIdentity = [[DataManager sharedManager] getCurrentLocalIdentityInContext:nil];
         
+        NSDictionary * userDict = [[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
         ((MyInfoTopViewCell*)cell).avatarImageView.image = [UIImage imageNamed:@"avatar_big"];
-        ((MyInfoTopViewCell*)cell).levelLabel.text = [NSString stringWithFormat:@"LV%d", [userIdentity.level intValue]];
-        ((MyInfoTopViewCell*)cell).levelLabelTitle.text = @"积分120";
-        ((MyInfoTopViewCell*)cell).beautifulIdLabel.text = userIdentity.uniqueId;
+        ((MyInfoTopViewCell*)cell).levelLabel.text = [NSString stringWithFormat:@"LV%d",
+                                                      [userDict valueForKey:USERDEFAULT_ACCOUNT_LEVEL]];
+        ((MyInfoTopViewCell*)cell).levelLabelTitle.text = [NSString stringWithFormat:@"%@%d",
+                                                           NSLocalizedString(@"point", @"point"),
+                                                           [userDict valueForKey:USERDEFAULT_ACCOUNT_POINT]];
+        ((MyInfoTopViewCell*)cell).beautifulIdLabel.text = [userDict valueForKey:USERDEFAULT_ACCOUNT_USERNAME];
         ((MyInfoTopViewCell*)cell).rightImageView.image = [UIImage imageNamed:@"gender_female"];
         ((MyInfoTopViewCell*)cell).editImageView.image = [UIImage imageNamed:@"my_edit"];
-        ((MyInfoTopViewCell*)cell).cityLabel.text = [NSString stringWithFormat:@"%@ 锦江区南街",userIdentity.localCity];
+        NSString * s = [userDict valueForKey:USERDEFAULT_ACCOUNT_CITY];
+        s= s;
+        ((MyInfoTopViewCell*)cell).cityLabel.text = [NSString stringWithFormat:@"%@ 锦江区南街", [userDict valueForKey:USERDEFAULT_ACCOUNT_CITY]];
         _editButton = ((MyInfoTopViewCell*)cell).editButton;
         ((MyInfoTopViewCell*)cell).delegate = self;
     }
@@ -165,24 +224,25 @@
         if(!cell) {
             cell = [[[NSBundle mainBundle] loadNibNamed:gridViewIndentifier owner:self options:nil] objectAtIndex:1];
         }
-        UserIdentity * userIdentity = [[DataManager sharedManager] getCurrentLocalIdentityInContext:nil];
+//        UserIdentity * userIdentity = [[DataManager sharedManager] getCurrentLocalIdentityInContext:nil];
         ((GridViewCell*)cell).delegate = self;
-
+        
+        NSDictionary * userDict = [[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
         NSMutableAttributedString * attrStr = nil;
 
-        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"follow", @"") detail:[NSString stringWithFormat:@"(%d)",[userIdentity.followCount intValue]]];
+        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"follow", @"") detail:[NSString stringWithFormat:@"(%d)", [userDict valueForKey:USERDEFAULT_ACCOUNT_FOLLOW_COUNT]]];
         ((GridViewCell*)cell).firstLabel.attributedText = attrStr;
         ((GridViewCell*)cell).firstLabel.textAlignment = UITextAlignmentCenter;
 
-        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"fans", @"") detail:[NSString stringWithFormat:@"(%d)",[userIdentity.fansCount intValue]]];
+        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"fans", @"") detail:[NSString stringWithFormat:@"(%d)", [userDict valueForKey:USERDEFAULT_ACCOUNT_FANS_COUNT]]];
         ((GridViewCell*)cell).secondLabel.attributedText = attrStr;
         ((GridViewCell*)cell).secondLabel.textAlignment = UITextAlignmentCenter;
         
-        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"collection", @"") detail:[NSString stringWithFormat:@"(%d)",[userIdentity.collectionCount intValue]]];
+        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"collection", @"") detail:[NSString stringWithFormat:@"(%d)", [userDict valueForKey:USERDEFAULT_ACCOUNT_FAVORITE_COUNT]]];
         ((GridViewCell*)cell).thirdLabel.attributedText = attrStr;
         ((GridViewCell*)cell).thirdLabel.textAlignment = UITextAlignmentCenter;
         
-        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"my_publish", @"") detail:[NSString stringWithFormat:@"(%d)",[userIdentity.buyedCount intValue]]];
+        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"my_publish", @"") detail:[NSString stringWithFormat:@"(%d)", [userDict valueForKey:USERDEFAULT_ACCOUNT_WEIBO_COUNT]]];
         ((GridViewCell*)cell).fourthLabel.attributedText = attrStr;
         ((GridViewCell*)cell).fourthLabel.textAlignment = UITextAlignmentCenter;
         

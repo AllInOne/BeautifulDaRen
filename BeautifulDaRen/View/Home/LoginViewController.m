@@ -206,7 +206,11 @@
         [[BSDKManager sharedManager] loginWithUsername:userName password:@"abc123456" andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
             if(AIO_STATUS_SUCCESS == status)
             {
-                [[NSUserDefaults standardUserDefaults] setObject:userName forKey:USERDEFAULT_LOGIN_ACCOUNT_USERNAME];
+                
+                NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                                       userName, USERDEFAULT_ACCOUNT_USERNAME,
+                                       nil];
+                [[NSUserDefaults standardUserDefaults] setObject:dict forKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
                 [self.navigationController popToRootViewControllerAnimated:YES];
                 [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_LOGIN_SUCCESS object:self userInfo:data];
             }

@@ -246,14 +246,22 @@ enum
     }
     else if(section == 1)
     {
-        NSString * userName = @"tankliu004";
+        NSString * userName = @"tankliu013";
+        NSString * email = @"dddd@11.c2om";
+        NSString * city = @"成都";
        [[BSDKManager sharedManager]
         signUpWithUsername:userName
         password:@"abc123456"
-        email:@"2377517@qq.com"
-        city:@"成都"
+        email:email
+        city:city
         andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-            [[NSUserDefaults standardUserDefaults] setObject:userName forKey:USERDEFAULT_LOGIN_ACCOUNT_USERNAME];
+            NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                                   userName, USERDEFAULT_ACCOUNT_USERNAME,
+                                   email, USERDEFAULT_ACCOUNT_EMAIL,
+                                   city, USERDEFAULT_ACCOUNT_CITY,
+                                   nil];
+            [[NSUserDefaults standardUserDefaults] setObject:dict forKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
+            
            [self.navigationController popToRootViewControllerAnimated:YES];
            [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_LOGIN_SUCCESS object:self userInfo:data];
         }];
