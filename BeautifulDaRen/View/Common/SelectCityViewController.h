@@ -16,4 +16,5 @@
 @interface SelectCityViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, retain) IBOutlet UITableView * cityListTableView;
+@property (retain, nonatomic) id<SelectCityProtocol> delegate;
 @end

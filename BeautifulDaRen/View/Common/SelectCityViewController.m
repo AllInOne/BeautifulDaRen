@@ -13,14 +13,13 @@
 @interface SelectCityViewController ()
 
 @property (nonatomic, retain) NSArray * cityListData;
-@property (nonatomic, assign) id<SelectCityProtocol> delegate;
 @end
 
 @implementation SelectCityViewController
 
 @synthesize cityListTableView = _cityListTableView;
 @synthesize cityListData = _cityListData;
-@synthesize delegate;
+@synthesize delegate = _delegate;
 
 - (void)dealloc
 {
@@ -92,8 +91,11 @@
 #pragma mark - UITableView delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self dismissModalViewControllerAnimated:YES];
+
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self.delegate onCitySelected:[self.cityListData objectAtIndex:[indexPath row]]];
+
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
