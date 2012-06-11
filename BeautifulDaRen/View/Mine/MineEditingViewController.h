@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "ButtonPressDelegate.h"
+#import "SegmentDelegate.h"
 
-@interface MineEditingViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource, ButtonPressDelegate>
+@interface MineEditingViewController
+: UITableViewController <UITableViewDelegate, UITableViewDataSource, ButtonPressDelegate, SegmentDelegate>
 
 @end

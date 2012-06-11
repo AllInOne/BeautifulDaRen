@@ -13,6 +13,6 @@
 
 @property (retain, nonatomic) id<SegmentDelegate> delegate;
 
-- (id) initWithFrame:(CGRect)frame leftText:(NSString *)leftText rightText:(NSString*)rightText;
+- (id) initWithFrame:(CGRect)frame leftText:(NSString *)leftText rightText:(NSString*)rightText selectedIndex:(NSInteger)index;
 
 @end

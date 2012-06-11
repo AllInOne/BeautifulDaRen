@@ -20,20 +20,23 @@
 @synthesize secondButton = _secondButton;
 
 -(void)onButtonClicked:(UIButton*)button{
+    NSInteger index = 0;
     if(button == _firstButton)
     {
         [_firstButton setSelected:YES];
         [_secondButton setSelected:NO];
+        index = 0;
     }
     else if (button == _secondButton)
     {
         [_firstButton setSelected:NO];
         [_secondButton setSelected:YES];
+        index = 1;
     }
-    // TODO delegate
+    [_delegate segmentChooseAtIndex:index];
 }
 
-- (id) initWithFrame:(CGRect)frame leftText:(NSString *)leftText rightText:(NSString*)rightText
+- (id) initWithFrame:(CGRect)frame leftText:(NSString *)leftText rightText:(NSString*)rightText selectedIndex:(NSInteger)index
 {
     self = [super initWithFrame:frame];
     if(self)
@@ -61,7 +64,12 @@
         [_secondButton setBackgroundImage:[UIImage imageNamed:@"segement_btn_right_selected"] forState:UIControlStateSelected];
         [_secondButton addTarget:self action:@selector(onButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
 
-        [_firstButton setSelected:YES];
+        if (index == 0) {
+            [_firstButton setSelected:YES];
+        }
+        else {
+            [_secondButton setSelected:YES];
+        }
         [self addSubview:_firstButton];
         [self addSubview:_secondButton];
     }

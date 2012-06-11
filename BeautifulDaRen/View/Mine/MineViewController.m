@@ -135,8 +135,11 @@
         NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:
                                [data valueForKey:@"UserName"],      USERDEFAULT_ACCOUNT_USERNAME,
                                [data valueForKey:@"UserType"],      USERDEFAULT_ACCOUNT_EMAIL,
+                               [data valueForKey:@"Sex"],           USERDEFAULT_ACCOUNT_GENDER,
                                [data valueForKey:@"id"],            USERDEFAULT_ACCOUNT_ID,
                                [data valueForKey:@"Email"],         USERDEFAULT_ACCOUNT_EMAIL,
+                               [data valueForKey:@"Address"],       USERDEFAULT_ACCOUNT_ADDRESS,
+                               @"13901234567",                      USERDEFAULT_ACCOUNT_PHONE_NUMBER,
                                [data valueForKey:@"City"],          USERDEFAULT_ACCOUNT_CITY,
                                [data valueForKey:@"IsVerify"],      USERDEFAULT_ACCOUNT_IS_VERIFY,
                                [data valueForKey:@"Levels"],        USERDEFAULT_ACCOUNT_LEVEL,

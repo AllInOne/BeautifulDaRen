@@ -314,7 +314,11 @@
 {
     if([indexPath section] == 0 && [indexPath row] == 0)
     {
-        EdittingViewController * edittingViewController = [[EdittingViewController alloc] initWithNibName:@"EdittingViewController" bundle:nil type:EdittingViewController_type0];
+        EdittingViewController * edittingViewController = [[EdittingViewController alloc]
+                                                           initWithNibName:@"EdittingViewController"
+                                                           bundle:nil
+                                                           type:EdittingViewController_type0
+                                                           block:nil];
         [self.navigationController pushViewController:edittingViewController animated:YES];
         [edittingViewController release];
     }

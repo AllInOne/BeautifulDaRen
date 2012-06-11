@@ -10,5 +10,6 @@
 
 @protocol SegmentDelegate <NSObject>
 
+-(void)segmentChooseAtIndex:(NSInteger)index;
 
 @end

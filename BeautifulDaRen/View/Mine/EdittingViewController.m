@@ -33,12 +33,13 @@
 @synthesize type = _type;
 @synthesize callBack = _callBack;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil type:(NSInteger)type  block:(EditDoneBlock)callback
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil type:(NSInteger)type block:(EditDoneBlock)callback
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         _type = type;
-        _callBack = callback;
+        [_inputTextView setKeyboardType:UIKeyboardTypeNumberPad];
+        _callBack = Block_copy(callback);
     }
     return self;
 }
@@ -65,7 +66,7 @@
     {
         [self dismissModalViewControllerAnimated:YES];
     }
-    _callBack(self.inputTextView.text);
+    self.callBack(self.inputTextView.text);
 }
 
 #pragma mark - View lifecycle
@@ -88,9 +89,9 @@
     else
     {
         [self.navigationItem setTitle:NSLocalizedString(@"privacy", @"privacy")];
-        _commentMeSegmentControl = [_commentMeSegmentControl initWithFrame:_commentMeSegmentControl.frame leftText:NSLocalizedString(@"allow", @"allow") rightText:NSLocalizedString(@"not_allow", @"not_allow")];
-        _atMeSegmentControl = [_atMeSegmentControl initWithFrame:_atMeSegmentControl.frame leftText:NSLocalizedString(@"allow", @"allow") rightText:NSLocalizedString(@"not_allow", @"not_allow")];
-        _privateLetterMeSegmentControl = [_privateLetterMeSegmentControl initWithFrame:_privateLetterMeSegmentControl.frame leftText:NSLocalizedString(@"allow", @"allow") rightText:NSLocalizedString(@"not_allow", @"not_allow")];
+        _commentMeSegmentControl = [_commentMeSegmentControl initWithFrame:_commentMeSegmentControl.frame leftText:NSLocalizedString(@"allow", @"allow") rightText:NSLocalizedString(@"not_allow", @"not_allow") selectedIndex:0];
+        _atMeSegmentControl = [_atMeSegmentControl initWithFrame:_atMeSegmentControl.frame leftText:NSLocalizedString(@"allow", @"allow") rightText:NSLocalizedString(@"not_allow", @"not_allow") selectedIndex:0];
+        _privateLetterMeSegmentControl = [_privateLetterMeSegmentControl initWithFrame:_privateLetterMeSegmentControl.frame leftText:NSLocalizedString(@"allow", @"allow") rightText:NSLocalizedString(@"not_allow", @"not_allow") selectedIndex:0];
 //
 //        [ViewHelper setSegmentControlWithSegment:_commentMeSegmentControl LeftText:NSLocalizedString(@"allow", @"") rightText:NSLocalizedString(@"not_allow", @"")];
 //        [ViewHelper setSegmentControlWithSegment:_atMeSegmentControl LeftText:NSLocalizedString(@"allow", @"") rightText:NSLocalizedString(@"not_allow", @"")];
@@ -126,6 +127,7 @@
     [_commentMeSegmentControl release];
     [_atMeSegmentControl release];
     [_privateLetterMeSegmentControl release];
+    Block_release(_callBack);
 }
 
 - (void)viewDidUnload
@@ -137,6 +139,7 @@
     self.commentMeSegmentControl = nil;
     self.atMeSegmentControl = nil;
     self.privateLetterMeSegmentControl = nil;
+    self.callBack = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

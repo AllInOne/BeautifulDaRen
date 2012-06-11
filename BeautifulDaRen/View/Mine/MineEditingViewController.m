@@ -158,11 +158,15 @@
         ButtonViewCell * buttonViewCell = (ButtonViewCell*)cell;
         buttonViewCell.leftLabel.text = NSLocalizedString(@"gender", @"gender");
 
+        NSInteger index = [[_tableViewDict valueForKey:USERDEFAULT_ACCOUNT_GENDER] isEqualToString:@"male"] ? 1 : 0;
         SegmentControl * seg = [[SegmentControl alloc]
                                 initWithFrame:CGRectMake(65, 8, 112, 29)
                                 leftText:NSLocalizedString(@"female", @"gender")
-                                rightText:NSLocalizedString(@"male", @"gender")];
+                                rightText:NSLocalizedString(@"male", @"gender")
+                                selectedIndex:index];
+        
         [buttonViewCell addSubview:seg];
+        seg.delegate = self;
         [seg release];
         cell.backgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
     }
@@ -189,13 +193,13 @@
             case 2:
             {
                 buttonViewCell.leftLabel.text = NSLocalizedString(@"address", @"");
-                buttonViewCell.buttonText.text = @"锦江区";
+                buttonViewCell.buttonText.text = [_tableViewDict valueForKey:USERDEFAULT_ACCOUNT_ADDRESS];
                 break;
             }
             case 3:
             {
                 buttonViewCell.leftLabel.text = NSLocalizedString(@"phone", @"");
-                buttonViewCell.buttonText.text = @"+8612345678901";
+                buttonViewCell.buttonText.text = [_tableViewDict valueForKey:USERDEFAULT_ACCOUNT_PHONE_NUMBER];
                 break;
             }
             case 4:
@@ -319,28 +323,43 @@
                         };
                         break;
                     }
-                    case 1:
+                    case 2:
                     {
                         block = ^(NSString * text)
                         {
-                            
+                            [_tableViewDict setValue:text
+                                              forKey:USERDEFAULT_ACCOUNT_ADDRESS];
+                            [self.tableView reloadData];
                         };
                         break;
                     }
-                    case 2:
-                        
-                        break;
                     case 3:
+                    {
+                        block = ^(NSString * text)
+                        {
+                            [_tableViewDict setValue:text
+                                              forKey:USERDEFAULT_ACCOUNT_PHONE_NUMBER];
+                            [self.tableView reloadData];
+                        };
                         break;
+                    }
+                    case 5:
+                    {
+                        block = ^(NSString * text)
+                        {
+                            [_tableViewDict setValue:text
+                                              forKey:USERDEFAULT_ACCOUNT_INTRO];
+                            [self.tableView reloadData];
+                        };
+                        break;
+                    }
                 }
             }
             EdittingViewController * edittingViewController = [[EdittingViewController alloc]
                                                                initWithNibName:@"EdittingViewController" 
                                                                bundle:nil
                                                                type:type
-                                                               block:^(NSString *text) {
-                                                                   
-                                                               }];
+                                                               block:block];
             [self.navigationController pushViewController:edittingViewController animated:YES];
             [edittingViewController release];
         }
@@ -381,6 +400,14 @@
     {
         NSLog(@"_updateAvatarButton pressed");
     }
+}
+
+#pragma mark SegmentDelegate
+-(void)segmentChooseAtIndex:(NSInteger)index
+{
+    NSString * gender = (index == 0) ? @"female" : @"male";
+    [_tableViewDict setValue:gender
+                      forKey:USERDEFAULT_ACCOUNT_GENDER];
 }
 
 @end
