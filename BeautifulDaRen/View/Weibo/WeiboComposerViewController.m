@@ -42,6 +42,7 @@
 @property (nonatomic, retain) NSString * locationString;
 
 - (void)setContentFrame:(CGRect)frame;
+- (void)startSelectCategoryViewWithData:(NSArray*)categories;
 @end
 
 @implementation WeiboComposerViewController
@@ -458,10 +459,11 @@
     //TODO:
 }
 
-- (IBAction)onCategoryPressed:(id)sender
+- (void)startSelectCategoryViewWithData:(NSArray*)categories
 {
     SelectCategoryViewController *categorySelectionController = 
     [[SelectCategoryViewController alloc] initWithNibName:nil bundle:nil];
+    categorySelectionController.categoryListData = categories;
     categorySelectionController.delegate = self;
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: categorySelectionController];
     
@@ -469,6 +471,23 @@
     
     [navController release];
     [categorySelectionController release];
+}
+
+- (IBAction)onCategoryPressed:(id)sender
+{
+    
+    NSArray * categories = [[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_CATEGORY];
+    if (categories) {
+        [self startSelectCategoryViewWithData:categories];
+    }
+    else
+    {
+        [[BSDKManager sharedManager] getWeiboClassesWithDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+            // TODO: set to defautls
+        }];
+    }
+    
+
 }
 
 - (IBAction)onSinaPressed:(id)sender

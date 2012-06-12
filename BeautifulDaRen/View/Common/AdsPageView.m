@@ -107,16 +107,16 @@
     [adsDragGesture release];
     
     // TODO: get it from server
-    _adsImageNames = [[NSMutableArray alloc] initWithObjects:@"home_banner3.jpg",
-                      @"home_banner4.jpg",
+    _adsImageNames = [[NSMutableArray alloc] initWithObjects:@"home_banner3",
+                      @"home_banner4",
                       @"banner",
                       @"home_banner2",
                       nil];
-    _firstImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"home_banner3.jpg"]];
+    _firstImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"home_banner3"]];
     _firstImageView.frame = CGRectMake(0, 0, ADS_CELL_WIDTH, ADS_CELL_HEIGHT);
     [self.view insertSubview:_firstImageView belowSubview:self.adsPageController];
     
-    _secondImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"home_banner4.jpg"]];
+    _secondImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"home_banner4"]];
     _secondImageView.frame = CGRectMake(0, 0, ADS_CELL_WIDTH, ADS_CELL_HEIGHT);
     [self.view insertSubview:_secondImageView belowSubview:self.adsPageController];
     [_secondImageView setHidden:YES];
@@ -228,10 +228,14 @@
 //            NSLog(@"sign in done = %d", status);
 //            [[iToast makeText:[NSString stringWithFormat:@"%@", [data objectForKey:@"msg"]]] show];
 //        }];
-    [[BSDKManager sharedManager] getWeiboListByUsername:nil pageSize:20 pageIndex:1 andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-        NSLog(@"sign in done = %d", status);
-        [[iToast makeText:[NSString stringWithFormat:@"%@", [data description]]] show];
-    }];
+//    [[BSDKManager sharedManager] getWeiboListByUsername:nil pageSize:20 pageIndex:1 andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+//        NSLog(@"sign in done = %d", status);
+//        [[iToast makeText:[NSString stringWithFormat:@"%@", [data description]]] show];
+//    }];
+        [[BSDKManager sharedManager] getWeiboClassesWithDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+            NSLog(@"sign in done = %d", status);
+            [[iToast makeText:[NSString stringWithFormat:@"%@", [data description]]] show];
+        }];
     }
 
 //    [[BSDKManager sharedManager] getUserInforByUsername:K_BSDK_TEST_USERNAME andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
