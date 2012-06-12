@@ -14,8 +14,6 @@
 #define MAX_CHECK_CATEGOROIES_COUNT 2
 
 @interface SelectCategoryViewController ()
-
-@property (nonatomic, retain) NSArray * categoryListData;
 @property (nonatomic, retain) NSMutableArray * categorySelectState;
 
 -(NSInteger)getCheckedCategoriesCount;
@@ -28,7 +26,14 @@
 @synthesize categoryListData = _categoryListData;
 @synthesize categorySelectState = _categorySelectState;
 @synthesize delegate;
-
+@synthesize category1 = _category1;
+@synthesize category2 = _category2;
+@synthesize category3 = _category3;
+@synthesize category4 = _category4;
+@synthesize category5 = _category5;
+@synthesize category6 = _category6;
+@synthesize category7 = _category7;
+@synthesize category8 = _category8;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -78,6 +83,15 @@
     [_categoryListData release];
     [_categoryListTableView release];
     [_categorySelectState release];
+    
+    [_category1 release];
+    [_category2 release];
+    [_category3 release];
+    [_category4 release];
+    [_category5 release];
+    [_category6 release];
+    [_category7 release];
+    [_category8 release];
 }
 
 - (void)viewDidLoad
@@ -94,6 +108,15 @@
     [self setCategoryListData:nil];
     [self setCategoryListTableView:nil];
     [self setCategorySelectState:nil];
+    
+    [self setCategory1:nil];
+    [self setCategory2:nil];
+    [self setCategory3:nil];
+    [self setCategory4:nil];
+    [self setCategory5:nil];
+    [self setCategory6:nil];
+    [self setCategory7:nil];
+    [self setCategory8:nil];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

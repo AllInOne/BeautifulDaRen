@@ -29,6 +29,9 @@
 #define K_BSDK_ACTION_DELETE @"Del"
 #define K_BSDK_ACTION_PERIPHERAL @"Peripheral"
 
+#define K_BSDK_ACTION_GETCLASSLIST @"GetClassList"
+#define K_BSDK_ACTION_GETCLASSBYID @"GetClassById"
+
 #define K_BSDK_ACTION_FOLLOW @"PayAttention"
 #define K_BSDK_ACTION_UNFOLLOW @"CancelAttention"
 #define K_BSDK_ACTION_GETFOLLOWLIST @"GetAttentionList"

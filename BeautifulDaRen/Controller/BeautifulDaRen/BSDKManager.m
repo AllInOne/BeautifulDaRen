@@ -291,6 +291,22 @@ static BSDKManager *sharedInstance;
 
 #pragma mark Weibo related APIs
 
+- (void)getWeiboClassesWithDoneCallback:(processDoneWithDictBlock)callback
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
+    
+    [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
+    [params setObject:K_BSDK_ACTION_GETCLASSLIST forKey:K_BSDK_ACTION];
+
+    [self sendRequestWithMethodName:nil
+                         httpMethod:@"POST" 
+                             params:params 
+                       postDataType:kBSDKRequestPostDataTypeNormal
+                   httpHeaderFields:nil
+                       doneCallback:callback];
+    
+}
+
 - (void)getWeiboListByUsername:(NSString*)username
                       pageSize:(NSInteger)pageSize 
                      pageIndex:(NSInteger)pageIndex 
