@@ -62,7 +62,7 @@
 #define K_BSDK_BRANDSERVICE @"BrandService"
 #define K_BSDK_PRICE @"Price"
 #define K_BSDK_CONTENT @"Content"
-#define K_BSDK_PICTURE @"Picture"
+#define K_BSDK_PICTURE @"Pic"
 #define K_BSDK_LATITUDE @"PosX"
 #define K_BSDK_LONGITUDE @"PoxY"
 

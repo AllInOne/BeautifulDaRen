@@ -125,7 +125,7 @@ static NSMutableString *logBody;
 //					[body appendData:imageData];
 
 					NSData* imageData = UIImageJPEGRepresentation((UIImage *)dataParam, 1.0);
-					[BSDKRequest appendUTF8Body:body dataString:[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"file.jpg\"\r\n", key]];
+					[BSDKRequest appendUTF8Body:body dataString:[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"Pic.jpg\"\r\n", key]];
 					[BSDKRequest appendUTF8Body:body dataString:[NSString stringWithString:@"Content-Type: image/jpeg\r\nContent-Transfer-Encoding: binary\r\n\r\n"]];
 					[body appendData:imageData];
 				} 

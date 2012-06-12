@@ -10,8 +10,9 @@
 #import "ButtonPressDelegate.h"
 #import "SegmentDelegate.h"
 #import "SelectCityViewController.h"
+#import "TakePhotoViewController.h"
 
 @interface MineEditingViewController
-: UITableViewController <UITableViewDelegate, UITableViewDataSource, ButtonPressDelegate, SegmentDelegate, SelectCityProtocol>
+: UITableViewController <UITableViewDelegate, UITableViewDataSource, ButtonPressDelegate, SegmentDelegate, SelectCityProtocol, TakePhotoControllerDelegate>
 
 @end

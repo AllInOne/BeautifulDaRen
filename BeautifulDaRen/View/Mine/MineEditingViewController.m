@@ -15,16 +15,21 @@
 #import "SegmentControl.h"
 #import "iToast.h"
 #import "ViewConstants.h"
+#import "TakePhotoViewController.h"
 
 @interface MineEditingViewController()
 
 @property (retain, nonatomic) IBOutlet UIButton * updateAvatarButton;
 @property (retain, nonatomic) NSMutableDictionary * tableViewDict;
+@property (retain, nonatomic) TakePhotoViewController * takePhotoViewController;
+@property (retain, nonatomic) UIImage * avatarImage;
 @end
-
+ 
 @implementation MineEditingViewController
 @synthesize updateAvatarButton = _updateAvatarButton;
 @synthesize tableViewDict = _tableViewDict;
+@synthesize avatarImage = _avatarImage;
+@synthesize takePhotoViewController = _takePhotoViewController;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -58,6 +63,8 @@
     [super dealloc];
     [_updateAvatarButton release];
     [_tableViewDict release];
+    [_avatarImage release];
+    [_takePhotoViewController release];
 }
 
 - (void)viewDidLoad
@@ -67,6 +74,7 @@
     [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
     [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onSaveButtonClicked) title:NSLocalizedString(@"save", @"save")]];
     _tableViewDict = [[NSMutableDictionary alloc] init];
+    self.avatarImage = [UIImage imageNamed:@"avatar_big"];
 }
 
 - (void)viewDidUnload
@@ -75,6 +83,8 @@
     
     self.updateAvatarButton = nil;
     self.tableViewDict = nil;
+    self.avatarImage = nil;
+    self.takePhotoViewController = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -144,7 +154,7 @@
         cell = [tableView dequeueReusableCellWithIdentifier:infoTopViewIdentifier];
         if (cell == nil) {
             cell = [[[NSBundle mainBundle] loadNibNamed:infoTopViewIdentifier owner:self options:nil] objectAtIndex:1];
-            ((MyInfoTopViewCell*)cell).avatarImageView.image = [UIImage imageNamed:@"avatar_big"];
+            ((MyInfoTopViewCell*)cell).avatarImageView.image = self.avatarImage;
             _updateAvatarButton =  ((MyInfoTopViewCell*)cell).updateAvatarButton;
             ((MyInfoTopViewCell*)cell).delegate = self;
         }
@@ -362,7 +372,31 @@
     if(button == _updateAvatarButton)
     {
         NSLog(@"_updateAvatarButton pressed");
+        
+        self.takePhotoViewController = [[TakePhotoViewController alloc] init];
+        
+        [self.takePhotoViewController setDelegate:self];
+        [self.takePhotoViewController setupImagePicker:UIImagePickerControllerSourceTypeCamera];
+            [self presentModalViewController:self.takePhotoViewController.imagePickerController animated:YES];
+
     }
+}
+
+- (void)didTakePicture:(UIImage *)picture
+{
+    self.avatarImage = picture;
+    [(UITableView*)self.view reloadData];
+    self.takePhotoViewController = nil;
+}
+
+- (void)didChangeToGalleryMode
+{
+    self.takePhotoViewController = nil;
+}
+
+- (void)didFinishWithCamera
+{
+    self.takePhotoViewController = nil;
 }
 
 #pragma mark SegmentDelegate

@@ -310,7 +310,11 @@ static BSDKManager *sharedInstance;
     
     [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETLIST forKey:K_BSDK_ACTION];
-    [params setObject:username forKey:K_BSDK_USERNAME];
+    if (username)
+    {
+        [params setObject:username forKey:K_BSDK_USERNAME];
+    }
+
     
     [self sendRequestWithMethodName:nil
                          httpMethod:@"POST" 

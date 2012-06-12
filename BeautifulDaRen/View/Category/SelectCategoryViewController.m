@@ -19,6 +19,7 @@
 @property (nonatomic, retain) NSMutableArray * categorySelectState;
 
 -(NSInteger)getCheckedCategoriesCount;
+-(NSArray*)getCheckedCategories;
 @end
 
 @implementation SelectCategoryViewController
@@ -140,7 +141,7 @@
 
 - (void)onConfirmButtonClicked {
     if (self.delegate) {
-        [self.delegate onCategorySelected:nil];
+        [self.delegate onCategorySelected:[self getCheckedCategories]];
     }
     [self dismissModalViewControllerAnimated:YES];
 }
@@ -178,5 +179,20 @@
     }
     
     return checkedCategoriesCount;
+}
+
+-(NSArray*)getCheckedCategories
+{
+    NSMutableArray * ret = [NSMutableArray arrayWithCapacity:10];
+    NSInteger index = 0;
+
+    for (NSNumber * checkValue in self.categorySelectState) {
+        if ([checkValue intValue] == 1) {
+           [ret addObject:[self.categoryListData objectAtIndex:index]];
+        }
+        index++;
+    }
+    
+    return ret;
 }
 @end
