@@ -14,13 +14,15 @@
 #import "LoginViewController.h"
 #import "RegisterViewController.h"
 #import "ForgetPasswordViewController.h"
+#import "iToast.h"
 
 @interface HomeViewController()
 
 //@property (retain, nonatomic) AdsPageView * adsPageView;
 @property (retain, nonatomic) ItemsViewController* itemsViewController;
 @property (retain, nonatomic) AdsPageView * adsPageView;
-@property (retain, nonatomic) id observer;
+@property (retain, nonatomic) id observerForLoginSuccess;
+@property (retain, nonatomic) id observerForShouldLogin;
 
 - (void)refreshView;
 @end
@@ -28,7 +30,8 @@
 @implementation HomeViewController
 @synthesize itemsViewController = _itemsViewController;
 @synthesize adsPageView = _adsPageView;
-@synthesize observer = _observer;
+@synthesize observerForLoginSuccess = _observerForLoginSuccess;
+@synthesize observerForShouldLogin = _observerForShouldLogin;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -45,7 +48,7 @@
 {
     [super viewDidLoad];
     
-    self.observer = [[NSNotificationCenter defaultCenter]
+    self.observerForLoginSuccess = [[NSNotificationCenter defaultCenter]
                  addObserverForName:K_NOTIFICATION_LOGIN_SUCCESS
                  object:nil
                  queue:nil
@@ -53,6 +56,17 @@
                      NSLog(@"notification:%@",[[note valueForKey:@"userInfo"] valueForKey:@"msg"]);
                      [self refreshView];
                  }];
+    
+    self.observerForShouldLogin = [[NSNotificationCenter defaultCenter]
+                                    addObserverForName:K_NOTIFICATION_SHOULD_LOGIN
+                                    object:nil
+                                    queue:nil
+                                   usingBlock:^(NSNotification *note) {
+                                       [[iToast makeText:@"您还没登陆，请先登录！"] show];
+                                        LoginViewController * loginContorller = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+                                        [self.navigationController pushViewController:loginContorller animated:YES];
+                                        [loginContorller release];
+                                    }];
     
     if(self.adsPageView == nil)
     {
@@ -114,16 +128,18 @@
 {
     [_adsPageView release];
     [_itemsViewController release];
-    [_observer release];
+    [_observerForLoginSuccess release];
+    [_observerForShouldLogin release];
     [super dealloc];
 }
 
 - (void)viewDidUnload
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:_observer];
+    [[NSNotificationCenter defaultCenter] removeObserver:_observerForLoginSuccess];
     self.adsPageView = nil;
     self.itemsViewController = nil;
-    self.observer = nil;
+    self.observerForLoginSuccess = nil;
+    self.observerForShouldLogin = nil;
     [super viewDidUnload];
 }
 
@@ -190,7 +206,4 @@
     [UIView commitAnimations];
 }
 
--(void) loginSuccess:(NSNotification*)notification
-{
-}
 @end

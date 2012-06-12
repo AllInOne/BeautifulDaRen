@@ -9,6 +9,8 @@
 #import "RootTabViewController.h"
 #import "ViewConstants.h"
 #import "CustomUITabBarItem.h"
+#import "BSDKManager.h"
+#import "ViewConstants.h"
 
 @interface RootTabViewController()
 - (void)initLocalizedString;
@@ -78,6 +80,10 @@
 
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
 {
+    if (![[BSDKManager sharedManager] isLogin]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_SHOULD_LOGIN object:self];
+        return NO;
+    }
     return YES;
 }
 
