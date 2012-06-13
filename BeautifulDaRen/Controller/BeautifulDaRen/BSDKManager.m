@@ -199,7 +199,9 @@ static BSDKManager *sharedInstance;
     
     [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETINFO forKey:K_BSDK_ACTION];
-    [params setObject:username forKey:K_BSDK_USERNAME];
+    if (username) {
+        [params setObject:username forKey:K_BSDK_USERNAME];
+    }
     
     [self sendRequestWithMethodName:nil
                          httpMethod:@"POST" 
@@ -367,6 +369,26 @@ static BSDKManager *sharedInstance;
                        postDataType:kBSDKRequestPostDataTypeNormal
                    httpHeaderFields:nil
                        doneCallback:callback];
+}
+
+- (void)getWeiboListByClassId:(NSString*)classId
+                      pageSize:(NSInteger)pageSize 
+                     pageIndex:(NSInteger)pageIndex 
+               andDoneCallback:(processDoneWithDictBlock)callback
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
+    
+    [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
+    [params setObject:K_BSDK_ACTION_GETLIST forKey:K_BSDK_ACTION];
+    [params setObject:classId forKey:K_BSDK_UID];
+    
+    [self sendRequestWithMethodName:nil
+                         httpMethod:@"POST" 
+                             params:params 
+                       postDataType:kBSDKRequestPostDataTypeNormal
+                   httpHeaderFields:nil
+                       doneCallback:callback];
+    
 }
 
 - (void)sendWeiBoWithText:(NSString *)text 

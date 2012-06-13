@@ -347,13 +347,19 @@
         doneCountExpected++;
     };
     
+    CGFloat latitude = 0.0;
+    CGFloat longitude = 0.0;
+    if (self.currentLocation) {
+        latitude = self.currentLocation.coordinate.latitude;
+        longitude = self.currentLocation.coordinate.longitude;
+    }
     [[BSDKManager sharedManager] sendWeiBoWithText:self.weiboContentTextView.text 
                                             image:[self.selectedImage scaleToSize:CGSizeMake(320.0, self.selectedImage.size.height * 320.0/self.selectedImage.size.width)]
                                              shop:self.maketTextView.text 
                                             brand:self.brandTextView.text 
                                             price:[self.priceTextView.text intValue]
-                                      poslatitude:0.0 
-                                     posLongitude:0.0 
+                                      poslatitude:latitude
+                                     posLongitude:longitude 
                                      doneCallback:doneBlock];
 }
 

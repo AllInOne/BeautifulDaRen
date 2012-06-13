@@ -61,6 +61,11 @@
                      pageIndex:(NSInteger)pageIndex 
                andDoneCallback:(processDoneWithDictBlock)callback;
 
+- (void)getWeiboListByClassId:(NSString*)classId
+                    pageSize:(NSInteger)pageSize 
+                   pageIndex:(NSInteger)pageIndex 
+             andDoneCallback:(processDoneWithDictBlock)callback;
+
 - (void)getWeiboClassesWithDoneCallback:(processDoneWithDictBlock)callback;
 
 - (void)followUser:(NSString*)username
