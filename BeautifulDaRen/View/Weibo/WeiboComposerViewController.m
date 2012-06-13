@@ -484,6 +484,10 @@
     {
         [[BSDKManager sharedManager] getWeiboClassesWithDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
             // TODO: set to defautls
+            NSArray * categories = [data objectForKey:K_BSDK_CLASSLIST];
+            [[NSUserDefaults standardUserDefaults] setObject:categories forKey:USERDEFAULT_CATEGORY];
+            
+            [self startSelectCategoryViewWithData:categories];
         }];
     }
     

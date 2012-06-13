@@ -17,14 +17,14 @@
 @property (nonatomic, assign) id<SelectCategoryProtocol> delegate;
 @property (nonatomic, retain) NSArray * categoryListData;
 
-@property (nonatomic, retain) UILabel * category1;
-@property (nonatomic, retain) UILabel * category2;
-@property (nonatomic, retain) UILabel * category3;
-@property (nonatomic, retain) UILabel * category4;
-@property (nonatomic, retain) UILabel * category5;
-@property (nonatomic, retain) UILabel * category6;
-@property (nonatomic, retain) UILabel * category7;
-@property (nonatomic, retain) UILabel * category8;
+@property (nonatomic, retain) IBOutlet UILabel * category1;
+@property (nonatomic, retain) IBOutlet UILabel * category2;
+@property (nonatomic, retain) IBOutlet UILabel * category3;
+@property (nonatomic, retain) IBOutlet UILabel * category4;
+@property (nonatomic, retain) IBOutlet UILabel * category5;
+@property (nonatomic, retain) IBOutlet UILabel * category6;
+@property (nonatomic, retain) IBOutlet UILabel * category7;
+@property (nonatomic, retain) IBOutlet UILabel * category8;
 
 -(IBAction)onCheckBoxPressed:(UIButton*)sender;
 @end

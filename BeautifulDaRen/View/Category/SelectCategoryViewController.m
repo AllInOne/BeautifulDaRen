@@ -10,6 +10,7 @@
 #import "ViewConstants.h"
 #import "ViewHelper.h"
 #import "iToast.h"
+#import "BSDKDefines.h"
 
 #define MAX_CHECK_CATEGOROIES_COUNT 2
 
@@ -100,6 +101,15 @@
     // Do any additional setup after loading the view from its nib.
     [self.categoryListTableView setDataSource:self];
     [self.categoryListTableView setDelegate:self];
+    
+    self.category8.text = [[self.categoryListData objectAtIndex:0] objectForKey:K_BSDK_CLASSNAME];
+    self.category7.text = [[self.categoryListData objectAtIndex:1] objectForKey:K_BSDK_CLASSNAME];
+    self.category6.text = [[self.categoryListData objectAtIndex:2] objectForKey:K_BSDK_CLASSNAME];
+    self.category5.text = [[self.categoryListData objectAtIndex:3] objectForKey:K_BSDK_CLASSNAME];
+    self.category4.text = [[self.categoryListData objectAtIndex:4] objectForKey:K_BSDK_CLASSNAME];
+    self.category3.text = [[self.categoryListData objectAtIndex:5] objectForKey:K_BSDK_CLASSNAME];
+    self.category2.text = [[self.categoryListData objectAtIndex:6] objectForKey:K_BSDK_CLASSNAME];
+    self.category1.text = [[self.categoryListData objectAtIndex:7] objectForKey:K_BSDK_CLASSNAME];
 }
 
 - (void)viewDidUnload
