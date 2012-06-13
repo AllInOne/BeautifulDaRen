@@ -11,8 +11,14 @@
 #import "ViewHelper.h"
 #import "iToast.h"
 #import "BSDKDefines.h"
+#import "SelectCategoryCell.h"
 
 #define MAX_CHECK_CATEGOROIES_COUNT 2
+
+#define CATEGORY_CELL_X_OFFSET  (10.0)
+#define CATEGORY_CELL_X_MARGIN  (10.0)
+#define CATEGORY_CELL_Y_OFFSET  (70.0)
+#define CATEGORY_CELL_Y_MARGIN  (10.0)
 
 @interface SelectCategoryViewController ()
 @property (nonatomic, retain) NSMutableArray * categorySelectState;
@@ -22,19 +28,10 @@
 @end
 
 @implementation SelectCategoryViewController
-
-@synthesize categoryListTableView = _categoryListTableView;
 @synthesize categoryListData = _categoryListData;
 @synthesize categorySelectState = _categorySelectState;
 @synthesize delegate;
-@synthesize category1 = _category1;
-@synthesize category2 = _category2;
-@synthesize category3 = _category3;
-@synthesize category4 = _category4;
-@synthesize category5 = _category5;
-@synthesize category6 = _category6;
-@synthesize category7 = _category7;
-@synthesize category8 = _category8;
+@synthesize contentScrollView = _contentScrollView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -44,27 +41,6 @@
         [self.navigationItem setLeftBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
 
         [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onConfirmButtonClicked) title:NSLocalizedString(@"enter", @"enter")]];
-        
-        _categoryListData = [[NSArray alloc] initWithObjects:@"鞋子", 
-                                                         @"裙子",
-                                                         @"裤子",
-                                                         @"衣服",
-                                                         @"包包",
-                                                         @"首饰",
-                                                         @"眼睛",
-                                                         @"手表",
-                                                        nil];
-        
-        _categorySelectState = [[NSMutableArray alloc] initWithObjects:[NSNumber numberWithInt:0],         
-                                                                [NSNumber numberWithInt:0],
-                                                                [NSNumber numberWithInt:0],
-                                                                [NSNumber numberWithInt:0],
-                                                                [NSNumber numberWithInt:0],
-                                                                [NSNumber numberWithInt:0],
-                                                                [NSNumber numberWithInt:0],
-                                                                [NSNumber numberWithInt:0],
-                                                                [NSNumber numberWithInt:0],
-                                                                nil];
     }
     return self;
 }
@@ -82,90 +58,49 @@
 {
     [super dealloc];
     [_categoryListData release];
-    [_categoryListTableView release];
     [_categorySelectState release];
-    
-    [_category1 release];
-    [_category2 release];
-    [_category3 release];
-    [_category4 release];
-    [_category5 release];
-    [_category6 release];
-    [_category7 release];
-    [_category8 release];
+    [_contentScrollView release];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [self.categoryListTableView setDataSource:self];
-    [self.categoryListTableView setDelegate:self];
     
-    self.category8.text = [[self.categoryListData objectAtIndex:0] objectForKey:K_BSDK_CLASSNAME];
-    self.category7.text = [[self.categoryListData objectAtIndex:1] objectForKey:K_BSDK_CLASSNAME];
-    self.category6.text = [[self.categoryListData objectAtIndex:2] objectForKey:K_BSDK_CLASSNAME];
-    self.category5.text = [[self.categoryListData objectAtIndex:3] objectForKey:K_BSDK_CLASSNAME];
-    self.category4.text = [[self.categoryListData objectAtIndex:4] objectForKey:K_BSDK_CLASSNAME];
-    self.category3.text = [[self.categoryListData objectAtIndex:5] objectForKey:K_BSDK_CLASSNAME];
-    self.category2.text = [[self.categoryListData objectAtIndex:6] objectForKey:K_BSDK_CLASSNAME];
-    self.category1.text = [[self.categoryListData objectAtIndex:7] objectForKey:K_BSDK_CLASSNAME];
+    self.categorySelectState = [NSMutableArray arrayWithCapacity:[self.categoryListData count]];
+    
+    CGFloat contentHeight = 0.0;
+    for (NSInteger index = 0; index < [self.categoryListData count]; index++) {
+        SelectCategoryCell* cell = [[[NSBundle mainBundle] loadNibNamed:@"SelectCategoryCell" owner:self options:nil] objectAtIndex:0];
+        
+        cell.textLable.text = [[self.categoryListData objectAtIndex:index] objectForKey:K_BSDK_CLASSNAME];
+        
+        cell.frame = CGRectMake(CATEGORY_CELL_X_OFFSET + (CGRectGetWidth(cell.frame) + CATEGORY_CELL_X_MARGIN) * (index % 2), 
+                                CATEGORY_CELL_Y_OFFSET + (CGRectGetHeight(cell.frame) + CATEGORY_CELL_Y_MARGIN) * (index/2), CGRectGetWidth(cell.frame), 
+                                CGRectGetHeight(cell.frame));
+        
+        contentHeight = CATEGORY_CELL_Y_OFFSET + (CGRectGetHeight(cell.frame) + CATEGORY_CELL_Y_MARGIN) * (index/2 + 1), CGRectGetWidth(cell.frame);
+        
+        [self.contentScrollView addSubview:cell];
+
+        [self.categorySelectState addObject:[NSNumber numberWithInt:0]];
+    }
+    
+    [self.contentScrollView setContentSize:CGSizeMake(SCREEN_WIDTH, contentHeight)];
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
     [self setCategoryListData:nil];
-    [self setCategoryListTableView:nil];
     [self setCategorySelectState:nil];
-    
-    [self setCategory1:nil];
-    [self setCategory2:nil];
-    [self setCategory3:nil];
-    [self setCategory4:nil];
-    [self setCategory5:nil];
-    [self setCategory6:nil];
-    [self setCategory7:nil];
-    [self setCategory8:nil];
+    [self setContentScrollView:nil];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-#pragma mark - UITableView delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [self.delegate onCategorySelected:[self.categoryListData objectAtIndex:[indexPath row]]];
-    [self dismissModalViewControllerAnimated:YES];
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 50;
-}
-
-#pragma mark - UITableViewDataSource delegate
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.categoryListData count];
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    static NSString *CellIdentifier = @"Cell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-    }
-    
-    // Configure the cell...
-    cell.textLabel.text = [self.categoryListData objectAtIndex:[indexPath row]];
-    
-    return cell;
 }
 
 - (void)onBackButtonClicked {

@@ -12,19 +12,11 @@
 - (void)onCategorySelected:(NSArray*)categories;
 @end
 
-@interface SelectCategoryViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
-@property (nonatomic, retain) IBOutlet UITableView * categoryListTableView;
+@interface SelectCategoryViewController : UIViewController
 @property (nonatomic, assign) id<SelectCategoryProtocol> delegate;
 @property (nonatomic, retain) NSArray * categoryListData;
 
-@property (nonatomic, retain) IBOutlet UILabel * category1;
-@property (nonatomic, retain) IBOutlet UILabel * category2;
-@property (nonatomic, retain) IBOutlet UILabel * category3;
-@property (nonatomic, retain) IBOutlet UILabel * category4;
-@property (nonatomic, retain) IBOutlet UILabel * category5;
-@property (nonatomic, retain) IBOutlet UILabel * category6;
-@property (nonatomic, retain) IBOutlet UILabel * category7;
-@property (nonatomic, retain) IBOutlet UILabel * category8;
+@property (nonatomic, retain) IBOutlet UIScrollView * contentScrollView;
 
 -(IBAction)onCheckBoxPressed:(UIButton*)sender;
 @end

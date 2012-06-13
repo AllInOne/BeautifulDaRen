@@ -476,11 +476,11 @@
 - (IBAction)onCategoryPressed:(id)sender
 {
     
-    NSArray * categories = [[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_CATEGORY];
-    if (categories) {
-        [self startSelectCategoryViewWithData:categories];
-    }
-    else
+//    NSArray * categories = [[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_CATEGORY];
+////    if (categories) {
+////        [self startSelectCategoryViewWithData:categories];
+////    }
+////    else
     {
         [[BSDKManager sharedManager] getWeiboClassesWithDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
             // TODO: set to defautls
