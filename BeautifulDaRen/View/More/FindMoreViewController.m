@@ -15,6 +15,7 @@
 #import "FriendDetailViewController.h"
 #import "FindWeiboViewController.h"
 #import "BorderImageView.h"
+#import "BSDKManager.h"
 #import "iToast.h"
 
 #define X_OFFSET 7
@@ -36,6 +37,7 @@
 - (void) refreshSameCityDaRenView;
 - (void) refreshYouMayInterestinView;
 - (void) refreshHotDaRenView;
+- (void) doSearch;
 
 @end
 
@@ -466,6 +468,8 @@
     [_contentScrollView setHidden:YES];
     [_friendViewController setHidden:NO];
     [searchBar endEditing:YES];
+    
+    [self doSearch];
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar
@@ -490,6 +494,7 @@
 - (void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 {
     _isFindWeibo = (selectedScope ==0) ? YES : NO;
+    [self doSearch];
     [_friendViewController reloadData];
 }
 
@@ -502,5 +507,22 @@
     
     [navController release];
     [weiboDetailController release];
+}
+
+- (void) doSearch
+{
+    if (self.isFindWeibo == NO) {
+        [[BSDKManager sharedManager] searchUsersByUsername:@"tank" andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+            
+        }];
+    }
+    else {
+        [[BSDKManager sharedManager] searchWeiboByKeyword:@""
+                                                 pageSize:1
+                                                pageIndex:3
+                                          andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+                                              
+                                          }];
+    }
 }
 @end
