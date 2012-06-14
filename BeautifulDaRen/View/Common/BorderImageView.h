@@ -11,4 +11,5 @@
 @interface BorderImageView : UIView
 - (id)initWithFrame:(CGRect)frame andImage:(UIImage *)image;
 - (id)initWithFrame:(CGRect)frame andView:(UIView*)view;
+- (id)initWithFrame:(CGRect)frame andView:(UIView*)view needNotification:(BOOL)isNeed;
 @end
