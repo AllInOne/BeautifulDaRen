@@ -12,12 +12,9 @@
 -(void)radioButtonSelectedAtIndex:(NSUInteger)index inGroup:(NSString*)groupId;
 @end
 
-@interface RadioButton : UIView {
-    NSString *_groupId;
-    NSUInteger _index;
-    UIButton *_button;
-    UILabel * _textLabel;
-}
+@interface RadioButton : UIView
+@property (retain, nonatomic) IBOutlet UIButton * button;
+@property (retain, nonatomic) IBOutlet UILabel * textLabel;
 @property(nonatomic,retain)NSString *groupId;
 @property(nonatomic,assign)NSUInteger index;
 

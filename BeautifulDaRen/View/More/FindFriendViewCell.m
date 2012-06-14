@@ -9,6 +9,12 @@
 #import "FindFriendViewCell.h"
 
 @implementation FindFriendViewCell
+@synthesize avatarImageView;
+@synthesize nameLabel;
+@synthesize levelLabel;
+@synthesize followButton;
+@synthesize delegate;
+
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -24,6 +30,11 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+-(IBAction)onButtonClicked:(UIButton*)sender
+{
+    [self.delegate didButtonPressed:sender inView:self];
 }
 
 @end

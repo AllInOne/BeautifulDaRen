@@ -22,13 +22,12 @@
 #define CONTENT_VIEW_HEIGHT_OFFSET 50
 @interface FindMoreViewController()
 
-@property (retain, nonatomic) IBOutlet UIButton * followOrInviteSinaWeiboFriendButton;
 @property (retain, nonatomic) IBOutlet UIScrollView * contentScrollView;
 @property (retain, nonatomic) IBOutlet UIScrollView * sameCityDaRenView;
 @property (retain, nonatomic) IBOutlet UIScrollView * youMayInterestinView;
 @property (retain, nonatomic) IBOutlet UIScrollView * hotDaRenView;
 
-@property (retain, nonatomic) IBOutlet UITableView * friendViewController;
+@property (retain, nonatomic) IBOutlet UITableView * searchResultViewController;
 @property (retain, nonatomic) IBOutlet UISearchBar * searchBar;
 @property (nonatomic, copy) NSArray *allItems;
 @property (nonatomic, copy) NSArray *searchResults;
@@ -46,11 +45,9 @@
 @synthesize youMayInterestinView = _youMayInterestinView;
 @synthesize hotDaRenView = _hotDaRenView;
 @synthesize contentScrollView = _contentScrollView;
-@synthesize friendViewController = _friendViewController;
+@synthesize searchResultViewController = _searchResultViewController;
 @synthesize searchBar = _searchBar;
 @synthesize isFindWeibo = _isFindWeibo;
-
-@synthesize followOrInviteSinaWeiboFriendButton = _followOrInviteSinaWeiboFriendButton;
 
 @synthesize allItems = _allItems;
 @synthesize searchResults = _searchResults;
@@ -91,11 +88,10 @@
     [_hotDaRenView release];
     [_youMayInterestinView release];
     [_contentScrollView release];
-    [_friendViewController release];
+    [_searchResultViewController release];
     [_searchBar release];
     [_allItems release];
     [_searchResults release];
-    [_followOrInviteSinaWeiboFriendButton release];
     [super dealloc];
 }
 - (void)viewDidUnload
@@ -105,9 +101,8 @@
     self.youMayInterestinView = nil;
     self.hotDaRenView = nil;
     self.contentScrollView = nil;
-    self.friendViewController = nil;
+    self.searchResultViewController = nil;
     self.searchBar = nil;
-    self.followOrInviteSinaWeiboFriendButton = nil;
     self.allItems = nil;
     self.searchResults = nil;
 }
@@ -157,9 +152,9 @@
     
     [self.view addSubview:_contentScrollView];
     
-    [_friendViewController setFrame:CGRectMake(0, CONTENT_VIEW_HEIGHT_OFFSET + 44.0f, _friendViewController.frame.size.width,270)];
-    [self.view addSubview:_friendViewController];
-    [_friendViewController setHidden:YES];
+    [_searchResultViewController setFrame:CGRectMake(0, CONTENT_VIEW_HEIGHT_OFFSET + 44.0f, _searchResultViewController.frame.size.width,270)];
+    [self.view addSubview:_searchResultViewController];
+    [_searchResultViewController setHidden:YES];
     [self refreshView];
 }
 
@@ -341,7 +336,7 @@
     UIViewController * viewController = nil;
     if(_isFindWeibo == NO)
     {
-        viewController = [[FriendDetailViewController alloc] init];
+        viewController = [[FriendDetailViewController alloc] initWithDictionary:[self.searchResults objectAtIndex:[indexPath row]]];
     }
     else
     {
@@ -374,7 +369,7 @@
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     NSInteger rows = 0;
-    if ([tableView isEqual:self.searchDisplayController.searchResultsTableView]) {
+    if ([tableView isEqual:self.searchResultViewController]) {
         rows = [_searchResults count];
     }
     else
@@ -396,6 +391,12 @@
         {
             cell = [[[NSBundle mainBundle] loadNibNamed:findFriendViewCell owner:self options:nil] objectAtIndex:0];
         }
+        FindFriendViewCell * friendCell = (FindFriendViewCell*)cell;
+        NSDictionary * friendDict = [self.searchResults objectAtIndex:[indexPath row]];
+        friendCell.nameLabel.text = [friendDict valueForKey:KEY_ACCOUNT_USER_NAME];
+        friendCell.levelLabel.text = [NSString stringWithFormat:@"LV%d",[[friendDict valueForKey:KEY_ACCOUNT_LEVEL] intValue]];
+        friendCell.followButton.tag = [indexPath row];
+        friendCell.delegate = self;
     }
     else
     {
@@ -466,7 +467,7 @@
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     [_contentScrollView setHidden:YES];
-    [_friendViewController setHidden:NO];
+    [_searchResultViewController setHidden:NO];
     [searchBar endEditing:YES];
     
     [self doSearch];
@@ -474,7 +475,7 @@
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar
 {
-    [_friendViewController setHidden:YES];
+    [_searchResultViewController setHidden:YES];
     [_contentScrollView setHidden:NO];
 
     searchBar.text = @"";
@@ -495,7 +496,6 @@
 {
     _isFindWeibo = (selectedScope ==0) ? YES : NO;
     [self doSearch];
-    [_friendViewController reloadData];
 }
 
 - (void)onItemSelected:(int)index
@@ -512,8 +512,16 @@
 - (void) doSearch
 {
     if (self.isFindWeibo == NO) {
-        [[BSDKManager sharedManager] searchUsersByUsername:@"tank" andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-            
+        [[BSDKManager sharedManager] searchUsersByUsername:@"tank"
+                                           andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+                                               if (status == AIO_STATUS_SUCCESS) {
+                                                   self.searchResults = [data valueForKey:@"userlist"];
+                                               }
+                                               else {
+                                                   [[iToast makeText:[NSString stringWithFormat:@"search status error: %d", status]] show];
+                                               }
+                                               [_searchResultViewController reloadData];
+
         }];
     }
     else {
@@ -521,8 +529,19 @@
                                                  pageSize:1
                                                 pageIndex:3
                                           andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-                                              
+                                              [_searchResultViewController reloadData];
                                           }];
-    }
+    }}
+
+#pragma mark ButtonPressDelegate
+- (void) didButtonPressed:(UIButton*)button  inView:(UIView *) view
+{
+    NSInteger index = button.tag;
+    NSDictionary * userDict = [self.searchResults objectAtIndex:index];
+    [[BSDKManager sharedManager] followUser:[userDict valueForKey:KEY_ACCOUNT_USER_NAME]
+                            andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+                                
+                            }];
+    
 }
 @end

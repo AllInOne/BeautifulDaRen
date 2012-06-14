@@ -10,5 +10,5 @@
 #import "ButtonPressDelegate.h"
 
 @interface FriendDetailViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, ButtonPressDelegate, UIActionSheetDelegate>
-
+-(id)initWithDictionary:(NSDictionary*)dictionary;
 @end
