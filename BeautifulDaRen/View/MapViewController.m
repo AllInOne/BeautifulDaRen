@@ -48,7 +48,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.mapView.showsUserLocation = YES;
 }
 
 - (void)viewDidUnload
@@ -66,13 +65,15 @@
        description: (NSString*)description
           latitude: (double_t)latitude
          longitude: (double_t)longitude
+          showSelf: (BOOL)shouldShowSelf
 {
     self = [self initWithNibName:nil bundle:nil];
     if(self)
     {
         [_mapView setMapType: MKMapTypeStandard];
         _mapView.delegate=self;
-        _mapView.showsUserLocation = YES;
+        _mapView.showsUserLocation = shouldShowSelf;
+
         [self.view addSubview:_mapView];
         
         MKCoordinateRegion region;

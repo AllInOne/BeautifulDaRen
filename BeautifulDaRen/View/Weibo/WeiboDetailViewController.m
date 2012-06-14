@@ -15,15 +15,22 @@
 #import "FullImageViewController.h"
 #import "FriendDetailViewController.h"
 #import "iToast.h"
+#import "MapViewController.h"
 
 #define FONT_SIZE 14.0f
 #define CELL_CONTENT_WIDTH 280.0f
 #define CELL_CONTENT_MARGIN 5.0f
 
+#define MAP_VIEW_WIDTH      (280.0f)
+#define MAP_VIEW_HEIGHT     (60.0f)
+#define MAP_VIEW_X_OFFSET   ((SCREEN_WIDTH - MAP_VIEW_WIDTH)/2)
+
+
 @interface WeiboDetailViewController ()
 
+@property (nonatomic, retain) MapViewController * mapViewController;
 @property (nonatomic, retain) NSString * weiboContent;
-
+- (void)refreshView;
 @end
 
 @implementation WeiboDetailViewController
@@ -37,6 +44,7 @@
 @synthesize weiboAttachedImageView = _weiboAttachedImageView;
 @synthesize timestampLabel = _timestampLabel;
 @synthesize weiboAttachedImageButton = _weiboAttachedImageButton;
+@synthesize mapViewController = _mapViewController;
 
 - (void)dealloc
 {
@@ -47,6 +55,7 @@
     [_weiboAttachedImageView release];
     [_timestampLabel release];
     [_weiboAttachedImageButton release];
+    [_mapViewController release];
     
     [super dealloc];
 }
@@ -59,9 +68,6 @@
         
         [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClicked) title:NSLocalizedString(@"refresh", @"refresh")]];       
         self.navigationItem.title = NSLocalizedString(@"weibo_detail", @"weibo_detail");
-        
-        //Content for test
-        _weiboContent = [[NSString alloc] initWithString:@"我最近买了一双鞋子，很漂亮，你看看吧!"];
         
         UIToolbar *tempToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0,372, 320,44)];
   
@@ -181,28 +187,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
-    self.favourateButton.frame = CGRectMake(self.favourateButton.frame.origin.x, self.weiboAttachedImageView.frame.origin.y + CGRectGetHeight(self.weiboAttachedImageView.frame) + CELL_CONTENT_MARGIN, self.favourateButton.frame.size.width, self.favourateButton.frame.size.height);
-
-    self.forwardedButton.frame = CGRectMake(self.forwardedButton.frame.origin.x, self.favourateButton.frame.origin.y, self.forwardedButton.frame.size.width, self.forwardedButton.frame.size.height);
-
-    self.commentButton.frame = CGRectMake(self.commentButton.frame.origin.x, self.favourateButton.frame.origin.y, self.commentButton.frame.size.width, self.commentButton.frame.size.height);
-    
-    self.contentLabel.text = self.weiboContent;
-    
-    self.contentLabel.frame = CGRectMake(self.contentLabel.frame.origin.x, self.favourateButton.frame.origin.y + CGRectGetHeight(self.favourateButton.frame) + CELL_CONTENT_MARGIN, self.contentLabel.frame.size.width, [ViewHelper getHeightOfText:self.weiboContent ByFontSize:FONT_SIZE contentWidth:CELL_CONTENT_WIDTH]);
-    
-    // Custom initialization
-    [_detailScrollView setContentSize:CGSizeMake(SCREEN_WIDTH, self.contentLabel.frame.origin.y + CGRectGetHeight(self.contentLabel.frame) + 150)];
-    
-    [self.avatarImageView setImage:[UIImage imageNamed:@"weibo_sample3"]];
-    [self.weiboAttachedImageView setImage:[UIImage imageNamed:@"weibo_sample2"]];
-    
-    self.weiboAttachedImageButton.frame = self.weiboAttachedImageView.frame;
-    
-    self.timestampLabel.text = @"一小时前";
-    [self.timestampLabel setTextColor:[UIColor purpleColor]];
-
+    [self refreshView];
 }
 
 - (void)viewDidUnload
@@ -218,6 +203,7 @@
     self.favourateButton = nil;
     self.timestampLabel = nil;
     self.weiboAttachedImageButton = nil;
+    self.mapViewController = nil;
 
     [super viewDidUnload];
     // Release any retained subviews of the main view.
@@ -228,6 +214,43 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (void)refreshView
+{
+    //Content for test
+    _weiboContent = [[NSString alloc] initWithString:@"我最近买了一双鞋子，很漂亮，你看看吧!"];
+    
+    self.favourateButton.frame = CGRectMake(self.favourateButton.frame.origin.x, self.weiboAttachedImageView.frame.origin.y + CGRectGetHeight(self.weiboAttachedImageView.frame) + CELL_CONTENT_MARGIN, self.favourateButton.frame.size.width, self.favourateButton.frame.size.height);
+    
+    self.forwardedButton.frame = CGRectMake(self.forwardedButton.frame.origin.x, self.favourateButton.frame.origin.y, self.forwardedButton.frame.size.width, self.forwardedButton.frame.size.height);
+    
+    self.commentButton.frame = CGRectMake(self.commentButton.frame.origin.x, self.favourateButton.frame.origin.y, self.commentButton.frame.size.width, self.commentButton.frame.size.height);
+    
+    NSInteger yOffset = self.favourateButton.frame.origin.y + CGRectGetHeight(self.favourateButton.frame) + CELL_CONTENT_MARGIN;
+    
+    _mapViewController = [[MapViewController alloc] initWithName:@"test map name" description:nil latitude:30.61448473 longitude:104.08960181 showSelf:NO];
+    
+    _mapViewController.view.frame = CGRectMake(MAP_VIEW_X_OFFSET, yOffset, MAP_VIEW_WIDTH, MAP_VIEW_HEIGHT);
+    _mapViewController.navigationController.toolbarHidden = YES;
+    
+    [self.detailScrollView addSubview:_mapViewController.view];
+    
+    yOffset = _mapViewController.view.frame.origin.y + MAP_VIEW_HEIGHT * 2;
+    
+    self.contentLabel.text = self.weiboContent;
+    self.contentLabel.frame = CGRectMake(self.contentLabel.frame.origin.x, yOffset, self.contentLabel.frame.size.width, [ViewHelper getHeightOfText:self.weiboContent ByFontSize:FONT_SIZE contentWidth:CELL_CONTENT_WIDTH]);
+    
+    // Custom initialization
+    [_detailScrollView setContentSize:CGSizeMake(SCREEN_WIDTH, self.contentLabel.frame.origin.y + CGRectGetHeight(self.contentLabel.frame) + 150)];
+    
+    [self.avatarImageView setImage:[UIImage imageNamed:@"avatar_big"]];
+    [self.weiboAttachedImageView setImage:[UIImage imageNamed:@"weibo_sample2"]];
+    
+    self.weiboAttachedImageButton.frame = self.weiboAttachedImageView.frame;
+    
+    self.timestampLabel.text = @"一小时前";
+    [self.timestampLabel setTextColor:[UIColor purpleColor]];
 }
 
 - (void)onBackButtonClicked {

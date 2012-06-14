@@ -18,5 +18,6 @@
 - (id)initWithName: (NSString*)name
        description: (NSString*)description
           latitude: (double_t)latitude
-         longitude: (double_t)longitude;
+         longitude: (double_t)longitude
+          showSelf:(BOOL)shouldShowSelf;
 @end
