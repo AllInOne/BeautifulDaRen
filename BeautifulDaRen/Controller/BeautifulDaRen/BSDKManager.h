@@ -56,6 +56,12 @@
                      pageIndex:(NSInteger)pageIndex 
                andDoneCallback:(processDoneWithDictBlock)callback;
 
+// get the users which you are followed's weibo
+- (void)getFriendsWeiboListByUsername:(NSString*)username
+                      pageSize:(NSInteger)pageSize 
+                     pageIndex:(NSInteger)pageIndex 
+               andDoneCallback:(processDoneWithDictBlock)callback;
+
 - (void)searchWeiboByKeyword:(NSString*)key
                       pageSize:(NSInteger)pageSize 
                      pageIndex:(NSInteger)pageIndex 

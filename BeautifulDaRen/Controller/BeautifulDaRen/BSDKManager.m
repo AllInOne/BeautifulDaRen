@@ -309,6 +309,29 @@ static BSDKManager *sharedInstance;
     
 }
 
+- (void)getFriendsWeiboListByUsername:(NSString*)username
+                             pageSize:(NSInteger)pageSize 
+                            pageIndex:(NSInteger)pageIndex 
+                      andDoneCallback:(processDoneWithDictBlock)callback
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
+    
+    [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
+    [params setObject:K_BSDK_ACTION_GETLIST forKey:K_BSDK_ACTION];
+    if (username)
+    {
+        [params setObject:username forKey:K_BSDK_FOLLOWUSERNAME];
+    }
+    
+    
+    [self sendRequestWithMethodName:nil
+                         httpMethod:@"POST" 
+                             params:params 
+                       postDataType:kBSDKRequestPostDataTypeNormal
+                   httpHeaderFields:nil
+                       doneCallback:callback];
+}
+
 - (void)getWeiboListByUsername:(NSString*)username
                       pageSize:(NSInteger)pageSize 
                      pageIndex:(NSInteger)pageIndex 
