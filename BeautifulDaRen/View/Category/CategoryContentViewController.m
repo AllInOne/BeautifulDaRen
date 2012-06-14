@@ -10,6 +10,8 @@
 #import "CommonScrollView.h"
 #import "CategoryItemCell.h"
 #import "ViewConstants.h"
+#import "BSDKManager.h"
+#import "BSDKDefines.h"
 
 
 #define CATEGORY_CONTENT_Y_OFFSET   (70.0)
@@ -17,6 +19,8 @@
 @interface CategoryContentViewController ()
 
 @property (retain, nonatomic) NSMutableArray * contentItems;
+
+-(void)getCategoryWeiboList;
 
 @end
 
@@ -63,6 +67,9 @@
         [self.categoryListView setFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame))];
         
     }
+    
+    [self getCategoryWeiboList];
+    
     return self;
 }
 
@@ -102,4 +109,17 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+-(void)getCategoryWeiboList
+{
+    [[BSDKManager sharedManager] getWeiboClassesWithDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+        NSArray * categoryList = [data objectForKey:K_BSDK_CLASSLIST];
+        if (categoryList) {
+            for (NSDictionary * data in categoryList) {
+                [[BSDKManager sharedManager] getWeiboListByClassId:[data objectForKey:K_BSDK_UID] pageSize:20 pageIndex:0 andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+                    NSLog(@"retrieved weibo classes :%@", data);
+                }];
+            }
+        }
+    }];
+}
 @end

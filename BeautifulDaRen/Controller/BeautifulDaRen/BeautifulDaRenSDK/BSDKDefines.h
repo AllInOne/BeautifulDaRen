@@ -47,6 +47,7 @@
 #define K_BSDK_PAGEINDEX @"Page"
 #define K_BSDK_PAGESIZE @"PageSize"
 
+#define K_BSDK_FOLLOWUSERNAME @"AttentionUserName"
 #define K_BSDK_USERNAME @"UserName"
 #define K_BSDK_USERCOUNT @"UserCount"
 #define K_BSDK_FANSUSERNAME @"FansUserName"
@@ -67,7 +68,7 @@
 #define K_BSDK_CONTENT @"Content"
 #define K_BSDK_PICTURE @"Pic"
 #define K_BSDK_LATITUDE @"PosX"
-#define K_BSDK_LONGITUDE @"PoxY"
+#define K_BSDK_LONGITUDE @"PosY"
 
 #define K_BSDK_CREATETIME @"CreateTime"
 
