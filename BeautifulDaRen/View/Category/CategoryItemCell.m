@@ -14,7 +14,7 @@
 #import "BSDKDefines.h"
 
 @interface CategoryItemCell ()
-@property (nonatomic, retain) NSArray * itemData;
+@property (nonatomic, retain) NSDictionary * itemData;
 @end
 
 @implementation CategoryItemCell
@@ -29,15 +29,13 @@
     [super dealloc];
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil title: (NSString*)title andData: (NSArray *)data
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil category:(NSDictionary*)category
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Initialization code
         // TODO: test code
-        
-        self.categoryTitle.text = title;
-        self.itemData = data;
+        self.itemData = category;
     }
     return self;
 }
@@ -45,6 +43,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.categoryTitle.text = [self.itemData objectForKey:K_BSDK_CLASSNAME];
     
     UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     
@@ -54,14 +54,15 @@
     
     [activityIndicator startAnimating];
     
-    [[BSDKManager sharedManager] getWeiboListByClassId:@"54" pageSize:20 pageIndex:0 andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+    [[BSDKManager sharedManager] getWeiboListByClassId:[self.itemData objectForKey:K_BSDK_UID] pageSize:20 pageIndex:0 andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
         
         [activityIndicator stopAnimating];
-        
         [activityIndicator removeFromSuperview];
         [activityIndicator release];
         
-        _categoryScrollItem = [[CommonScrollView alloc] initWithNibName:nil bundle:nil data:self.itemData andDelegate:self];
+        NSArray * samples4 = [NSArray arrayWithObjects:@"http://tp2.sinaimg.cn/2788997993/50/0/0", @""@"http://tp2.sinaimg.cn/2788997993/50/0/0", @"http://tp2.sinaimg.cn/2788997993/50/0/0", @"http://tp2.sinaimg.cn/2788997993/50/0/0", nil];
+        
+        _categoryScrollItem = [[CommonScrollView alloc] initWithNibName:nil bundle:nil data:samples4 andDelegate:self];
         
         [self.view addSubview:_categoryScrollItem.view];
         
