@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "CommonScrollView.h"
+#import "ButtonPressDelegate.h"
 
-@interface FindMoreViewController : UIViewController <UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UITextFieldDelegate, CommonScrollViewProtocol>
+@interface FindMoreViewController : UIViewController <UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UITextFieldDelegate, CommonScrollViewProtocol, ButtonPressDelegate>
 
 
 @end

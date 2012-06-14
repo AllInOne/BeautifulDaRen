@@ -26,13 +26,27 @@
 
 @property (retain, nonatomic) IBOutlet UITableView * friendDetailView;
 @property (assign, nonatomic) BOOL isIdentification;
+@property (retain, nonatomic) NSDictionary * friendDictionary;
+
+@property (retain, nonatomic) IBOutlet UILabel * nameLabel;
+@property (retain, nonatomic) IBOutlet UILabel * cityLabel;
+@property (retain, nonatomic) IBOutlet UILabel * detailAddressLabel;
+@property (retain, nonatomic) IBOutlet UILabel * levelLabel;
+@property (retain, nonatomic) IBOutlet UILabel * pointLabel;
+@property (retain, nonatomic) IBOutlet UIImageView * genderImageView;
 
 - (void) onActionButtonClicked: (UIButton*)sender;
 @end
 
 @implementation FriendDetailViewController
+@synthesize nameLabel = _nameLabel;
+@synthesize cityLabel = _cityLabel;
+@synthesize detailAddressLabel = _detailAddressLabel;
+@synthesize levelLabel = _levelLabel;
+@synthesize pointLabel = _pointLabel;
 @synthesize friendDetailView = _friendDetailView;
 @synthesize isIdentification = _isIdentification;
+@synthesize genderImageView = _genderImageView;
 
 @synthesize followButton = _followButton;
 @synthesize fansButton = _fansButton;
@@ -40,12 +54,13 @@
 @synthesize weiboButton = _weiboButton;
 @synthesize publishedButton = _publishedButton;
 @synthesize topicButton = _topicButton;
+@synthesize friendDictionary = _friendDictionary;
 
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+-(id)initWithDictionary:(NSDictionary*)dictionary
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super init];
     if (self) {
+        self.friendDictionary = [NSDictionary dictionaryWithDictionary:dictionary];
         [self.navigationItem setTitle:NSLocalizedString(@"her_home_page", @"her_home_page")];
         [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
         [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onHomePageButtonClicked) title:NSLocalizedString(@"home_page", @"home_page")]];
@@ -134,11 +149,16 @@
 {
     [super viewDidLoad];
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.nameLabel.text = [self.friendDictionary valueForKey:KEY_ACCOUNT_USER_NAME];
+    self.cityLabel.text = [self.friendDictionary valueForKey:KEY_ACCOUNT_CITY];
+    self.detailAddressLabel.text = [self.friendDictionary valueForKey:KEY_ACCOUNT_Address];
+    self.levelLabel.text = [NSString stringWithFormat:@"LV%d",
+                            [[self.friendDictionary valueForKey:KEY_ACCOUNT_LEVEL] intValue]];
+    self.pointLabel.text = [NSString stringWithFormat:@"%@%d",
+                            NSLocalizedString(@"point", @"point"),
+                            [[self.friendDictionary valueForKey:KEY_ACCOUNT_POINT] intValue]];
+    NSString * genderImageName = [[self.friendDictionary valueForKey:KEY_ACCOUNT_GENDER] intValue] == 1 ? @"gender_female" : @"gender_male";
+    self.genderImageView.image = [UIImage imageNamed:genderImageName];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -218,7 +238,7 @@
         else
         {
             buttonViewCell.leftLabel.text = NSLocalizedString(@"brief", @"brief");
-            buttonViewCell.buttonText.text = @"成都仁和春天百货店人东店！";
+            buttonViewCell.buttonText.text = [self.friendDictionary valueForKey:KEY_ACCOUNT_INTRO];
             buttonViewCell.buttonRightIcon.hidden = YES;
         }
     }
@@ -231,29 +251,37 @@
         
         NSMutableAttributedString * attrStr = nil;
         
-        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"weibo", @"") detail:@"(12)"];
+        attrStr = [ViewHelper
+                   getGridViewCellForContactInformationWithName:NSLocalizedString(@"weibo", @"")
+                   detail:[NSString stringWithFormat:@"(%d)",[[self.friendDictionary valueForKey:KEY_ACCOUNT_BLOG_COUNT] intValue]]];
         ((GridViewCell*)cell).firstLabel.attributedText = attrStr;
         ((GridViewCell*)cell).firstLabel.textAlignment = UITextAlignmentCenter;
         
-        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"collection", @"") detail:@"(1)"];
+        attrStr = [ViewHelper
+                   getGridViewCellForContactInformationWithName:NSLocalizedString(@"collection", @"")
+                   detail:[NSString stringWithFormat:@"(%d)",[[self.friendDictionary valueForKey:KEY_ACCOUNT_FAVORITE_COUNT] intValue]]];
         ((GridViewCell*)cell).secondLabel.attributedText = attrStr;
         ((GridViewCell*)cell).secondLabel.textAlignment = UITextAlignmentCenter;
         
-        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"follow", @"") detail:@"(99)"];
+        attrStr = [ViewHelper
+                   getGridViewCellForContactInformationWithName:NSLocalizedString(@"follow", @"")
+                   detail:[NSString stringWithFormat:@"(%d)",[[self.friendDictionary valueForKey:KEY_ACCOUNT_FOLLOW_COUNT] intValue]]];
         ((GridViewCell*)cell).thirdLabel.attributedText = attrStr;
         ((GridViewCell*)cell).thirdLabel.textAlignment = UITextAlignmentCenter;
         
-        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"fans", @"") detail:@"(100)"];
+        attrStr = [ViewHelper
+                   getGridViewCellForContactInformationWithName:NSLocalizedString(@"fans", @"")
+                   detail:[NSString stringWithFormat:@"(%d)",[[self.friendDictionary valueForKey:KEY_ACCOUNT_FANS_COUNT] intValue]]];
         ((GridViewCell*)cell).fourthLabel.attributedText = attrStr;
         ((GridViewCell*)cell).fourthLabel.textAlignment = UITextAlignmentCenter;
         
-        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"topic", @"") detail:@"(33)"];
-        ((GridViewCell*)cell).fifthLabel.attributedText = attrStr;
-        ((GridViewCell*)cell).fifthLabel.textAlignment = UITextAlignmentCenter;
-        
-        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"published", @"") detail:@"(12)"];
-        ((GridViewCell*)cell).sixthLabel.attributedText = attrStr;
-        ((GridViewCell*)cell).sixthLabel.textAlignment = UITextAlignmentCenter;
+//        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"topic", @"") detail:@"(33)"];
+//        ((GridViewCell*)cell).fifthLabel.attributedText = attrStr;
+//        ((GridViewCell*)cell).fifthLabel.textAlignment = UITextAlignmentCenter;
+//        
+//        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"published", @"") detail:@"(12)"];
+//        ((GridViewCell*)cell).sixthLabel.attributedText = attrStr;
+//        ((GridViewCell*)cell).sixthLabel.textAlignment = UITextAlignmentCenter;
         
         _weiboButton = ((GridViewCell*)cell).firstButton;
         _collectionButton= ((GridViewCell*)cell).secondButton;

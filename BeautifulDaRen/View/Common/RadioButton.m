@@ -9,13 +9,15 @@
 #import "RadioButton.h"
 
 @interface RadioButton()
+
 -(void)defaultInit;
 -(void)otherButtonSelected:(id)sender;
 -(void)handleButtonTap:(id)sender;
 @end
 
 @implementation RadioButton
-
+@synthesize button = _button;
+@synthesize textLabel = _textLabel;
 @synthesize groupId=_groupId;
 @synthesize index=_index;
 
@@ -81,9 +83,9 @@ static NSMutableDictionary *rb_observers=nil;
 -(id)initWithGroupId:(NSString*)groupId text:(NSString*)text index:(NSUInteger)index{
     self = [self init];
     if (self) {
-        _groupId = groupId;
-        _index = index;
-        _textLabel.text = text;
+        self.groupId = groupId;
+        self.index = index;
+        self.textLabel.text = text;
     }
     return  self;
 }
@@ -107,14 +109,14 @@ static NSMutableDictionary *rb_observers=nil;
 #pragma mark - Tap handling
 
 -(void)handleButtonTap:(id)sender{
-    [_button setSelected:YES];
+    [self.button setSelected:YES];
     [RadioButton buttonSelected:self];
 }
 
 -(void)otherButtonSelected:(id)sender{
     // Called when other radio button instance got selected
-    if(_button.selected){
-        [_button setSelected:NO];        
+    if(self.button.selected){
+        [self.button setSelected:NO];        
     }
 }
 
@@ -125,19 +127,19 @@ static NSMutableDictionary *rb_observers=nil;
     self.frame = CGRectMake(0, 0, kWidth, kRadioButtonHeight);
     
     // Customize UIButton
-    _button = [UIButton buttonWithType:UIButtonTypeCustom];
-    _button.frame = CGRectMake(0, 0,kRadioButtonWidth, kRadioButtonHeight);
-    _button.adjustsImageWhenHighlighted = NO; 
+    self.button = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.button.frame = CGRectMake(0, 0,kRadioButtonWidth, kRadioButtonHeight);
+    self.button.adjustsImageWhenHighlighted = NO; 
     
-    [_button setImage:[UIImage imageNamed:@"radio_btn_unselected"] forState:UIControlStateNormal];
-    [_button setImage:[UIImage imageNamed:@"radio_btn_selected"] forState:UIControlStateSelected];
+    [self.button setImage:[UIImage imageNamed:@"radio_btn_unselected"] forState:UIControlStateNormal];
+    [self.button setImage:[UIImage imageNamed:@"radio_btn_selected"] forState:UIControlStateSelected];
     
-    [_button addTarget:self action:@selector(handleButtonTap:) forControlEvents:UIControlEventTouchUpInside];
+    [self.button addTarget:self action:@selector(handleButtonTap:) forControlEvents:UIControlEventTouchUpInside];
     
-    _textLabel = [[UILabel alloc] initWithFrame:CGRectMake(kRadioButtonWidth + 5, 0, kWidth - kRadioButtonWidth - 5, kRadioButtonHeight)];
-    _textLabel.textColor = [UIColor darkGrayColor];
-    [self addSubview:_button];
-    [self addSubview:_textLabel];
+    self.textLabel = [[UILabel alloc] initWithFrame:CGRectMake(kRadioButtonWidth + 5, 0, kWidth - kRadioButtonWidth - 5, kRadioButtonHeight)];
+    self.textLabel.textColor = [UIColor darkGrayColor];
+    [self addSubview:self.button];
+    [self addSubview:self.textLabel];
     
     [RadioButton registerInstance:self];
 }

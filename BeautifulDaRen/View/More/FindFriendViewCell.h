@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ButtonPressDelegate.h"
 
 @interface FindFriendViewCell : UITableViewCell
 
+@property (retain, nonatomic) IBOutlet UILabel * nameLabel;
+@property (retain, nonatomic) IBOutlet UIImageView * avatarImageView;
+@property (retain, nonatomic) IBOutlet UILabel * levelLabel;
+@property (retain, nonatomic) IBOutlet UIButton * followButton;
+
+@property (assign, nonatomic) id<ButtonPressDelegate> delegate;
 @end

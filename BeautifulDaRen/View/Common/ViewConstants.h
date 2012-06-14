@@ -84,4 +84,18 @@
 
 #define USERDEFAULT_CATEGORY @"USERDEFAULT_CATEGORY"
 
+
+
+#define KEY_ACCOUNT_USER_NAME           @"UserName"
+#define KEY_ACCOUNT_LEVEL               @"Levels"
+#define KEY_ACCOUNT_POINT               @"Points"
+#define KEY_ACCOUNT_CITY                @"City"
+#define KEY_ACCOUNT_Address             @"Address"
+#define KEY_ACCOUNT_GENDER              @"Sex"
+#define KEY_ACCOUNT_INTRO               @"Intro"
+#define KEY_ACCOUNT_BLOG_COUNT          @"BlogNum"
+#define KEY_ACCOUNT_FAVORITE_COUNT      @"FavNum"
+#define KEY_ACCOUNT_FANS_COUNT          @"FansNum"
+#define KEY_ACCOUNT_FOLLOW_COUNT        @"AttentionNum"
+
 #endif
