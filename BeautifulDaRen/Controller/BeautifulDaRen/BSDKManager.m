@@ -19,6 +19,13 @@ static BSDKManager *sharedInstance;
 // callback of user
 @property (nonatomic, assign) processDoneWithDictBlock loginCallback;
 @property (nonatomic, assign) BOOL isAlreadyLogin;
+
+- (void)sendRequestWithMethodName:(NSString *)methodName
+                       httpMethod:(NSString *)httpMethod
+                           params:(NSDictionary *)params
+                     postDataType:(BSDKRequestPostDataType)postDataType
+                 httpHeaderFields:(NSDictionary *)httpHeaderFields
+                     doneCallback:(processDoneWithDictBlock)callback;
 @end
 
 @implementation BSDKManager
@@ -351,6 +358,8 @@ static BSDKManager *sharedInstance;
     
     [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETLIST forKey:K_BSDK_ACTION];
+    [params setObject:[NSString stringWithFormat:@"%d", pageIndex] forKey:K_BSDK_PAGEINDEX];
+    [params setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:K_BSDK_PAGESIZE];
     if (username)
     {
         [params setObject:username forKey:K_BSDK_USERNAME];
@@ -384,6 +393,8 @@ static BSDKManager *sharedInstance;
     
     [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_SEARCH forKey:K_BSDK_ACTION];
+    [params setObject:[NSString stringWithFormat:@"%d", pageIndex] forKey:K_BSDK_PAGEINDEX];
+    [params setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:K_BSDK_PAGESIZE];
     [params setObject:key forKey:K_BSDK_KEYWORD];
     
     [self sendRequestWithMethodName:nil
@@ -403,6 +414,8 @@ static BSDKManager *sharedInstance;
     
     [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETLIST forKey:K_BSDK_ACTION];
+    [params setObject:[NSString stringWithFormat:@"%d", pageIndex] forKey:K_BSDK_PAGEINDEX];
+    [params setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:K_BSDK_PAGESIZE];
     [params setObject:classId forKey:K_BSDK_UID];
     
     [self sendRequestWithMethodName:nil
@@ -521,4 +534,51 @@ static BSDKManager *sharedInstance;
                    httpHeaderFields:nil
                        doneCallback:callback];
 }
+
+#pragma mark Social related API
+
+- (void)getFollowList:(NSString*)username
+             pageSize:(NSInteger)pageSize 
+            pageIndex:(NSInteger)pageIndex 
+      andDoneCallback:(processDoneWithDictBlock)callback;
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
+    
+    [params setObject:K_BSDK_CATEGORY_SNS forKey:K_BSDK_CATEGORY];
+    [params setObject:K_BSDK_ACTION_GETFOLLOWLIST forKey:K_BSDK_ACTION];
+    [params setObject:[NSString stringWithFormat:@"%d", pageIndex] forKey:K_BSDK_PAGEINDEX];
+    [params setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:K_BSDK_PAGESIZE];
+    [params setObject:username forKey:K_BSDK_USERNAME];
+    
+    [self sendRequestWithMethodName:nil
+                         httpMethod:@"POST" 
+                             params:params 
+                       postDataType:kBSDKRequestPostDataTypeNormal
+                   httpHeaderFields:nil
+                       doneCallback:callback];
+    
+}
+
+- (void)getFollowerList:(NSString*)username
+               pageSize:(NSInteger)pageSize 
+              pageIndex:(NSInteger)pageIndex 
+        andDoneCallback:(processDoneWithDictBlock)callback
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
+    
+    [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
+    [params setObject:K_BSDK_ACTION_GETFANLIST forKey:K_BSDK_ACTION];
+    [params setObject:[NSString stringWithFormat:@"%d", pageIndex] forKey:K_BSDK_PAGEINDEX];
+    [params setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:K_BSDK_PAGESIZE];
+    [params setObject:username forKey:K_BSDK_USERNAME];
+    
+    [self sendRequestWithMethodName:nil
+                         httpMethod:@"POST" 
+                             params:params 
+                       postDataType:kBSDKRequestPostDataTypeNormal
+                   httpHeaderFields:nil
+                       doneCallback:callback];
+    
+}
+
 @end

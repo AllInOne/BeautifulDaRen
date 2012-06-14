@@ -29,16 +29,13 @@
 
 - (void)changePasswordByUsername:(NSString*) username toNewPassword:(NSString*)newpassword andDoneCallback:(processDoneWithDictBlock)doneBlock;
 
+#pragma mark user releated API
 - (void)getUserInforByUsername:(NSString*) username andDoneCallback:(processDoneWithDictBlock)doneBlock;
 
 - (void)searchUsersByUsername:(NSString*) username andDoneCallback:(processDoneWithDictBlock)doneBlock;
 
-- (void)sendRequestWithMethodName:(NSString *)methodName
-                       httpMethod:(NSString *)httpMethod
-                           params:(NSDictionary *)params
-                     postDataType:(BSDKRequestPostDataType)postDataType
-                 httpHeaderFields:(NSDictionary *)httpHeaderFields
-                     doneCallback:(processDoneWithDictBlock)callback;
+
+#pragma mark Weibo releated API
 
 // Send a Weibo, to which you can attach an image.
 - (void)sendWeiBoWithText:(NSString *)text 
@@ -74,19 +71,26 @@
 
 - (void)getWeiboClassesWithDoneCallback:(processDoneWithDictBlock)callback;
 
+#pragma mark Social related API
 - (void)followUser:(NSString*)username
    andDoneCallback:(processDoneWithDictBlock)callback;
 
 - (void)unFollowUser:(NSString*)username
    andDoneCallback:(processDoneWithDictBlock)callback;
 
-//- (void)getFollowList:(NSString*)username
-//     andDoneCallback:(processDoneWithDictBlock)callback;
+- (void)getFollowList:(NSString*)username
+             pageSize:(NSInteger)pageSize 
+            pageIndex:(NSInteger)pageIndex 
+     andDoneCallback:(processDoneWithDictBlock)callback;
+
+- (void)getFollowerList:(NSString*)username
+               pageSize:(NSInteger)pageSize 
+              pageIndex:(NSInteger)pageIndex 
+        andDoneCallback:(processDoneWithDictBlock)callback;
 
 - (void)sendComment:(NSString*)comment
             toWeibo:(NSString*)blogId
      andDoneCallback:(processDoneWithDictBlock)callback;
-
 
 
 @end

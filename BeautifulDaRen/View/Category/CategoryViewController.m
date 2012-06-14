@@ -11,6 +11,10 @@
 #import "ViewHelper.h"
 #import "CommonScrollView.h"
 
+@interface CategoryViewController ()
+- (void)refreshView;
+@end
+
 @implementation CategoryViewController
 
 @synthesize adsPageView = _adsPageView;
@@ -36,22 +40,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.    
-
-    if (self.adsPageView == nil) {
-        self.adsPageView = [[AdsPageView alloc] initWithNibName:@"AdsPageView" bundle:nil];
-        self.adsPageView.view.frame = CGRectMake(0, 0, ADS_CELL_WIDTH, ADS_CELL_HEIGHT);
-        [self.adsPageView setDelegate:self];
-        [self.view addSubview:self.adsPageView.view];
-    }
-    
-    if (self.categoryContentView == nil) {
-        _categoryContentView = [[CategoryContentViewController  alloc] initWithNibName:@"CategoryContentViewController" bundle:nil];
-        _categoryContentView.view.frame = CGRectMake(0, ADS_CELL_HEIGHT + CONTENT_MARGIN, self.view.frame.size.width, USER_WINDOW_HEIGHT - ADS_CELL_HEIGHT - CONTENT_MARGIN);
-        [self.view addSubview:_categoryContentView.view];
-    }
-    
-    [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClicked) title:NSLocalizedString(@"refresh", @"refresh")]]; 
+	// Do any additional setup after loading the view, typically from a nib. 
+    [self refreshView];
 }
 
 - (void)dealloc {
@@ -93,6 +83,26 @@
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
+- (void)refreshView
+{
+    if (self.adsPageView == nil) {
+        self.adsPageView = [[AdsPageView alloc] initWithNibName:@"AdsPageView" bundle:nil];
+        self.adsPageView.view.frame = CGRectMake(0, 0, ADS_CELL_WIDTH, ADS_CELL_HEIGHT);
+        [self.adsPageView setDelegate:self];
+        [self.view addSubview:self.adsPageView.view];
+    }
+    
+    [self.adsPageView.view setHidden:NO];
+    
+    if (self.categoryContentView == nil) {
+        _categoryContentView = [[CategoryContentViewController  alloc] initWithNibName:@"CategoryContentViewController" bundle:nil];
+        _categoryContentView.view.frame = CGRectMake(0, ADS_CELL_HEIGHT + CONTENT_MARGIN, self.view.frame.size.width, USER_WINDOW_HEIGHT - ADS_CELL_HEIGHT - CONTENT_MARGIN);
+        [self.view addSubview:_categoryContentView.view];
+    }
+    
+    [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClicked) title:NSLocalizedString(@"refresh", @"refresh")]]; 
+}
+
 - (void)onAdsPageViewClosed
 {
     [UIView beginAnimations:nil context:nil];
@@ -102,9 +112,19 @@
     [self.categoryContentView.view setFrame:CGRectMake(0, 0, CGRectGetWidth(self.categoryContentView.view.frame), USER_WINDOW_HEIGHT)];
     
     [UIView commitAnimations];
+    
+    [self.adsPageView removeFromParentViewController];
+    [self setAdsPageView:nil];
 }
 
 - (void)onRefreshButtonClicked {
+    [self.categoryContentView removeFromParentViewController];
+    [self setCategoryContentView:nil];
+    if (self.adsPageView) {
+        [self.adsPageView removeFromParentViewController];
+        [self setAdsPageView:nil];
+    }
     
+    [self refreshView];
 }
 @end
