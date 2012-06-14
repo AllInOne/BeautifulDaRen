@@ -36,7 +36,7 @@
             //[item.image setImage:[UIImage imageNamed:[data objectAtIndex:index]]];
             [item.image setImageWithURL:[NSURL URLWithString:[data objectAtIndex:index]]];
             
-            BorderImageView * borderImageView = [[BorderImageView alloc] initWithFrame:CGRectMake(SCROLL_ITEM_MARGIN + index * (SCROLL_ITEM_WIDTH + SCROLL_ITEM_MARGIN), 0, SCROLL_ITEM_WIDTH, SCROLL_ITEM_HEIGHT) andView:item];
+            BorderImageView * borderImageView = [[BorderImageView alloc] initWithFrame:CGRectMake(SCROLL_ITEM_MARGIN + index * (SCROLL_ITEM_WIDTH + SCROLL_ITEM_MARGIN), 0, SCROLL_ITEM_WIDTH, SCROLL_ITEM_HEIGHT) andView:item needNotification:NO];
             
             [self.view addSubview:borderImageView];
             [self.scrollItems insertObject:borderImageView atIndex:index++];
