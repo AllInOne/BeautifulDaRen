@@ -11,6 +11,7 @@
 #import "CustomUITabBarItem.h"
 #import "BSDKManager.h"
 #import "ViewConstants.h"
+#import "HomeViewController.h"
 
 @interface RootTabViewController()
 - (void)initLocalizedString;
@@ -80,7 +81,11 @@
 
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
 {
-    if (![[BSDKManager sharedManager] isLogin]) {
+    NSAssert([viewController isKindOfClass:[UINavigationController class]],@"viewController should be UINavigationController");
+    UINavigationController * navController = (UINavigationController*)viewController;
+    [navController popToRootViewControllerAnimated:NO];
+    // when clicked HomeView, it should be turn to home view.
+    if (![[BSDKManager sharedManager] isLogin] && ![navController.topViewController isKindOfClass:[HomeViewController class]]) {
         [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_SHOULD_LOGIN object:self];
         return NO;
     }
