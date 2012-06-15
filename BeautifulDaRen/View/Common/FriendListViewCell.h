@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "BorderImageView.h"
+#import "ButtonPressDelegate.h"
 
 @interface FriendListViewCell : UITableViewCell
 
@@ -15,5 +16,7 @@
 @property (retain, nonatomic) IBOutlet UILabel * friendNameLabel;
 @property (retain, nonatomic) IBOutlet UILabel * friendWeiboLabel;
 @property (retain, nonatomic) IBOutlet UIButton * actionButton;
+
+@property (assign, nonatomic) id<ButtonPressDelegate> delegate;
 
 @end

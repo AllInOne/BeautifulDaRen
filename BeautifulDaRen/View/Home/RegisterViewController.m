@@ -249,8 +249,8 @@ enum
     }
     else if(section == 1)
     {
-        NSString * userName = @"tankliu013";
-        NSString * email = @"dddd@11.c2om";
+        NSString * userName = @"tankliu002";
+        NSString * email = @"dddd1@11.c2om";
         NSString * city = @"成都";
        [[BSDKManager sharedManager]
         signUpWithUsername:userName

@@ -14,6 +14,7 @@
 #import "FriendListViewController.h"
 #import "WeiboListViewController.h"
 #import "EdittingViewController.h"
+#import "BSDKManager.h"
 #import "iToast.h"
 
 @interface FriendDetailViewController()
@@ -26,7 +27,7 @@
 
 @property (retain, nonatomic) IBOutlet UITableView * friendDetailView;
 @property (assign, nonatomic) BOOL isIdentification;
-@property (retain, nonatomic) NSDictionary * friendDictionary;
+@property (retain, nonatomic) NSMutableDictionary * friendDictionary;
 
 @property (retain, nonatomic) IBOutlet UILabel * nameLabel;
 @property (retain, nonatomic) IBOutlet UILabel * cityLabel;
@@ -60,7 +61,7 @@
 {
     self = [super init];
     if (self) {
-        self.friendDictionary = [NSDictionary dictionaryWithDictionary:dictionary];
+        self.friendDictionary = [NSMutableDictionary dictionaryWithDictionary:dictionary];
         [self.navigationItem setTitle:NSLocalizedString(@"her_home_page", @"her_home_page")];
         [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
         [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onHomePageButtonClicked) title:NSLocalizedString(@"home_page", @"home_page")]];
@@ -159,6 +160,12 @@
                             [[self.friendDictionary valueForKey:KEY_ACCOUNT_POINT] intValue]];
     NSString * genderImageName = [[self.friendDictionary valueForKey:KEY_ACCOUNT_GENDER] intValue] == 1 ? @"gender_female" : @"gender_male";
     self.genderImageView.image = [UIImage imageNamed:genderImageName];
+    
+    [[BSDKManager sharedManager] getUserInforByUsername:[self.friendDictionary valueForKey:KEY_ACCOUNT_USER_NAME]
+                                        andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+                                            [self.friendDictionary setValuesForKeysWithDictionary:data];
+                                            [self.friendDetailView reloadData];
+                                        }];
 }
 
 - (void)viewWillAppear:(BOOL)animated
