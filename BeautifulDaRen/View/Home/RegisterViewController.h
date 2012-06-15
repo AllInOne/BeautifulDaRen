@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "ButtonPressDelegate.h"
+#import "SelectCityViewController.h"
 
-@interface RegisterViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate,ButtonPressDelegate>
+@interface RegisterViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate,ButtonPressDelegate,SelectCityProtocol>
 
 @end
