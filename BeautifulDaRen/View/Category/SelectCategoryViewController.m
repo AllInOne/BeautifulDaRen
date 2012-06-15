@@ -22,8 +22,9 @@
 
 @interface SelectCategoryViewController ()
 @property (nonatomic, retain) NSMutableArray * categorySelectState;
+@property (nonatomic, retain) NSMutableArray * categorySelectCells;
 
--(NSInteger)getCheckedCategoriesCount;
+-(void)clearCheckedCategories;
 -(NSArray*)getCheckedCategories;
 @end
 
@@ -32,6 +33,7 @@
 @synthesize categorySelectState = _categorySelectState;
 @synthesize delegate;
 @synthesize contentScrollView = _contentScrollView;
+@synthesize categorySelectCells = _categorySelectCells;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -60,6 +62,7 @@
     [_categoryListData release];
     [_categorySelectState release];
     [_contentScrollView release];
+    [_categorySelectCells release];
 }
 
 - (void)viewDidLoad
@@ -68,12 +71,14 @@
     // Do any additional setup after loading the view from its nib.
     
     self.categorySelectState = [NSMutableArray arrayWithCapacity:[self.categoryListData count]];
+    self.categorySelectCells = [NSMutableArray arrayWithCapacity:[self.categoryListData count]];
     
     CGFloat contentHeight = 0.0;
     for (NSInteger index = 0; index < [self.categoryListData count]; index++) {
         SelectCategoryCell* cell = [[[NSBundle mainBundle] loadNibNamed:@"SelectCategoryCell" owner:self options:nil] objectAtIndex:0];
         
         cell.textLable.text = [[self.categoryListData objectAtIndex:index] objectForKey:K_BSDK_CLASSNAME];
+        cell.checkBox.tag = index;
         
         cell.frame = CGRectMake(CATEGORY_CELL_X_OFFSET + (CGRectGetWidth(cell.frame) + CATEGORY_CELL_X_MARGIN) * (index % 2), 
                                 CATEGORY_CELL_Y_OFFSET + (CGRectGetHeight(cell.frame) + CATEGORY_CELL_Y_MARGIN) * (index/2), CGRectGetWidth(cell.frame), 
@@ -82,6 +87,8 @@
         contentHeight = CATEGORY_CELL_Y_OFFSET + (CGRectGetHeight(cell.frame) + CATEGORY_CELL_Y_MARGIN) * (index/2 + 1), CGRectGetWidth(cell.frame);
         
         [self.contentScrollView addSubview:cell];
+        
+        [self.categorySelectCells addObject:cell];
 
         [self.categorySelectState addObject:[NSNumber numberWithInt:0]];
     }
@@ -95,6 +102,7 @@
     [self setCategoryListData:nil];
     [self setCategorySelectState:nil];
     [self setContentScrollView:nil];
+    [self setCategorySelectCells:nil];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -116,37 +124,22 @@
 
 -(IBAction)onCheckBoxPressed:(UIButton*)sender
 {
-    switch ([[self.categorySelectState objectAtIndex:sender.tag] intValue]) {
-        case 0:
-            if ([self getCheckedCategoriesCount] < 2) {
-                [sender setImage:[UIImage imageNamed:@"myshow_category_checked"] forState:UIControlStateNormal];
-                [self.categorySelectState replaceObjectAtIndex:sender.tag withObject:[NSNumber numberWithInt:1]];
-                break;
-            }
-            else
-            {
-                [[iToast makeText:[NSString stringWithFormat:NSLocalizedString(@"prompt_category_max", @"prompt_category_max"), MAX_CHECK_CATEGOROIES_COUNT]] show];
-            }
-        case 1:
-            [sender setImage:[UIImage imageNamed:@"myshow_category_unchecked"] forState:UIControlStateNormal];
-            [self.categorySelectState replaceObjectAtIndex:sender.tag withObject:[NSNumber numberWithInt:0]];
-            break;
-            
-        default:
-            break;
-    }
+    [self clearCheckedCategories];
+    [sender setImage:[UIImage imageNamed:@"myshow_category_checked"] forState:UIControlStateNormal];
+    [self.categorySelectState replaceObjectAtIndex:sender.tag withObject:[NSNumber numberWithInt:1]];
+
 }
 
--(NSInteger)getCheckedCategoriesCount
+-(void)clearCheckedCategories
 {
-    NSInteger checkedCategoriesCount = 0;
-    for (NSNumber * checkValue in self.categorySelectState) {
+    
+    for (NSInteger index = 0; index < [self.categorySelectState count]; index++) {
+        NSNumber * checkValue = [self.categorySelectState objectAtIndex:index];
         if ([checkValue intValue] == 1) {
-            checkedCategoriesCount++;
+            [self.categorySelectState replaceObjectAtIndex:index withObject:[NSNumber numberWithInt:0]];
+            [((SelectCategoryCell*)[self.categorySelectCells objectAtIndex:index]).checkBox setImage:[UIImage imageNamed:@"myshow_category_unchecked"] forState:UIControlStateNormal];
         }
     }
-    
-    return checkedCategoriesCount;
 }
 
 -(NSArray*)getCheckedCategories

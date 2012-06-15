@@ -13,13 +13,11 @@
 #import "UIImageView+WebCache.h"
 
 @interface CommonScrollView ()
-@property (nonatomic, retain) NSMutableArray * scrollItems;
 @end
 
 @implementation CommonScrollView
 
 @synthesize scrollView = _scrollView;
-@synthesize scrollItems = _scrollItems;
 @synthesize delegate = _delegate;
 
 
@@ -28,20 +26,18 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         int index = 0;
-        _scrollItems = [[NSMutableArray alloc] initWithCapacity:[data count]];
         while (index < data.count) {
             CommonScrollViewItem * item = [[[NSBundle mainBundle] loadNibNamed:@"CommonScrollViewItem" owner:self options:nil] objectAtIndex:0];
             item.button.tag = index;
 
-            //[item.image setImage:[UIImage imageNamed:[data objectAtIndex:index]]];
             [item.image setImageWithURL:[NSURL URLWithString:[data objectAtIndex:index]]];
             
             BorderImageView * borderImageView = [[BorderImageView alloc] initWithFrame:CGRectMake(SCROLL_ITEM_MARGIN + index * (SCROLL_ITEM_WIDTH + SCROLL_ITEM_MARGIN), 0, SCROLL_ITEM_WIDTH, SCROLL_ITEM_HEIGHT) andView:item needNotification:NO];
             
             [self.view addSubview:borderImageView];
-            [self.scrollItems insertObject:borderImageView atIndex:index++];
             [self.scrollView addSubview:borderImageView];
             [borderImageView release];
+            index++;
         }
         [self.scrollView setContentSize:CGSizeMake(index * (SCROLL_ITEM_WIDTH + SCROLL_ITEM_MARGIN), SCROLL_ITEM_HEIGHT)];
         self.delegate = delegate;
@@ -60,7 +56,6 @@
 - (void)dealloc
 {
     [_scrollView release];
-    [_scrollItems release];
     [super dealloc];
 }
 #pragma mark - View lifecycle
@@ -74,8 +69,7 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    _scrollView = nil;
-    _scrollItems = nil;
+    [self setScrollView:nil];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
