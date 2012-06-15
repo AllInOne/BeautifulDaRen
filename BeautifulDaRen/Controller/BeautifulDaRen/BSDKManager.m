@@ -566,7 +566,7 @@ static BSDKManager *sharedInstance;
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
     
-    [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
+    [params setObject:K_BSDK_CATEGORY_SNS forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETFANLIST forKey:K_BSDK_ACTION];
     [params setObject:[NSString stringWithFormat:@"%d", pageIndex] forKey:K_BSDK_PAGEINDEX];
     [params setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:K_BSDK_PAGESIZE];

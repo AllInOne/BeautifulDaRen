@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ButtonPressDelegate.h"
 
 enum
 {
@@ -17,7 +18,7 @@ enum
     FriendListViewController_TYPE_FRIEND_FANS
 };
 
-@interface FriendListViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
+@interface FriendListViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, ButtonPressDelegate>
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil type:(NSInteger)type;
 @end

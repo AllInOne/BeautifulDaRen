@@ -21,6 +21,6 @@
 @property (retain, nonatomic) IBOutlet UIButton * rightButton;
 @property (retain, nonatomic) IBOutlet UISegmentedControl * segmentedControl;
 
-@property (retain, nonatomic) id<ButtonPressDelegate> delegate;
+@property (assign, nonatomic) id<ButtonPressDelegate> delegate;
 
 @end

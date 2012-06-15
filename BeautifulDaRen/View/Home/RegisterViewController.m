@@ -29,6 +29,11 @@ enum
 @interface RegisterViewController()
 
 @property (retain, nonatomic) IBOutlet UITableView * tableView;
+@property (retain, nonatomic) IBOutlet UITextField * userNameTextField;
+@property (retain, nonatomic) IBOutlet UITextField * userEmailTextField;
+@property (retain, nonatomic) IBOutlet UITextField * userPwdTextField;
+@property (retain, nonatomic) IBOutlet UITextField * userRePwdTextField;
+@property (retain, nonatomic) NSString * userCity;
 
 @property (retain, nonatomic) IBOutlet UIButton * loginWithSinaWeiboButton;
 @property (retain, nonatomic) IBOutlet UIButton * loginWithQQButton;
@@ -36,7 +41,11 @@ enum
 @end
 
 @implementation RegisterViewController
-
+@synthesize userEmailTextField = _userEmailTextField;
+@synthesize userPwdTextField = _userPwdTextField;
+@synthesize userRePwdTextField = _userRePwdTextField;
+@synthesize userCity = _userCity;
+@synthesize userNameTextField = _userNameTextField;
 @synthesize tableView = _tableView;
 @synthesize loginWithQQButton = _loginWithQQButton;
 @synthesize loginWithSinaWeiboButton = _loginWithSinaWeiboButton;
@@ -135,6 +144,7 @@ enum
                 accountInfoInputCell.inputLabel.text = NSLocalizedString(@"account_register_email", @"");
                 accountInfoInputCell.inputTextField.delegate = self;
                 accountInfoInputCell.inputTextField.placeholder = NSLocalizedString(@"please_input_your_common_email", @"");
+                self.userEmailTextField = accountInfoInputCell.inputTextField;
                 break;
             }
             case ACCOUNT_SETTING_USER_ID:
@@ -143,24 +153,34 @@ enum
                 accountInfoInputCell.inputTextField.delegate = self;
                 
                 accountInfoInputCell.inputTextField.placeholder = NSLocalizedString(@"please_input_a_beautifu_daren_name", @"");
+                self.userNameTextField = accountInfoInputCell.inputTextField;
                 break;
             }
             case ACCOUNT_SETTING_PASSWORD:
             {
                 accountInfoInputCell.inputLabel.text = NSLocalizedString(@"type_password", @"");
                 accountInfoInputCell.inputTextField.delegate = self;
+                [accountInfoInputCell.inputTextField setSecureTextEntry:YES];
+                self.userPwdTextField = accountInfoInputCell.inputTextField;
                 break;
             }
             case ACCOUNT_SETTING_PASSWORD_AGAIN:
             {
                 accountInfoInputCell.inputLabel.text = NSLocalizedString(@"type_password_again", @"");
                 accountInfoInputCell.inputTextField.delegate = self;
+                [accountInfoInputCell.inputTextField setSecureTextEntry:YES];
+                self.userRePwdTextField = accountInfoInputCell.inputTextField;
                 break;
             }
             case ACCOUNT_SETTING_CITY:
             {
                 accountInfoInputCell.inputLabel.text = NSLocalizedString(@"local_city", @"");
-                accountInfoInputCell.secondLabel.text = NSLocalizedString(@"to_select", @"");
+                NSString * cityLabelText = self.userCity;
+                if([self.userCity length] <= 0)
+                {
+                    cityLabelText = NSLocalizedString(@"to_select", @"");
+                }
+                accountInfoInputCell.secondLabel.text = cityLabelText;
                 break;
             }
         }
@@ -216,26 +236,11 @@ enum
     if(section == 0)
     {
         switch ([indexPath row]) {
-            case ACCOUNT_SETTING_USER_ID:
-            {
-                break;
-            }
-            case ACCOUNT_SETTING_EMAIL:
-            {
-                break;
-            }
-            case ACCOUNT_SETTING_PASSWORD:
-            {
-                break;
-            }
-            case ACCOUNT_SETTING_PASSWORD_AGAIN:
-            {
-                break;
-            }
             case ACCOUNT_SETTING_CITY:
             {
                 SelectCityViewController *citySelectionController = 
                 [[SelectCityViewController alloc] initWithNibName:nil bundle:nil];
+                citySelectionController.delegate = self;
 
                 UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: citySelectionController];
                 
@@ -249,19 +254,52 @@ enum
     }
     else if(section == 1)
     {
-        NSString * userName = @"tankliu013";
-        NSString * email = @"dddd@11.c2om";
-        NSString * city = @"成都";
+//        NSString * userName = self.userNameTextField.text;
+//        NSString * email = self.userEmailTextField.text;
+//        NSString * pwd = self.userPwdTextField.text;
+//        NSString * rePwd = self.userRePwdTextField.text;
+        NSString * userName = @"tankliu101";
+        NSString * email = @"aaaa@ss.com";
+        NSString * pwd = @"abc123456";
+        NSString * rePwd = @"abc123456";
+        self.userCity = @"成都";
+        
+        NSString * iToastString = @"";
+        if ([userName isEqualToString:@""])
+        {
+            iToastString = @"用户名不能为空!";
+        }
+        else if ([email isEqualToString:@""])
+        {
+            iToastString = @"邮箱不能为空!";
+        }
+        else if ([pwd isEqualToString:@""])
+        {
+            iToastString = @"密码不能为空!";
+        }
+        else if(![pwd isEqualToString:rePwd])
+        {
+            iToastString = @"两次密码输入不一致!";
+        }
+        else if(!self.userCity || [self.userCity isEqualToString:@""])
+        {
+            iToastString = @"请选择城市!";
+        }
+        if(![iToastString isEqualToString:@""])
+        {
+            [[iToast makeText:iToastString] show];
+            return;
+        }
        [[BSDKManager sharedManager]
         signUpWithUsername:userName
-        password:@"abc123456"
+        password:pwd
         email:email
-        city:city
+        city:self.userCity
         andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
             NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:
                                    userName, USERDEFAULT_ACCOUNT_USERNAME,
                                    email, USERDEFAULT_ACCOUNT_EMAIL,
-                                   city, USERDEFAULT_ACCOUNT_CITY,
+                                   self.userCity, USERDEFAULT_ACCOUNT_CITY,
                                    nil];
             [[NSUserDefaults standardUserDefaults] setObject:dict forKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
             
@@ -348,6 +386,13 @@ enum
 //            NSLog(@"QZone login done, status:%d", status);
 //        }];
     }
+}
+
+#pragma mark SelectCityProtocol
+- (void)onCitySelected:(NSString*)city
+{
+    self.userCity = city;
+    [self.tableView reloadData];
 }
 
 @end

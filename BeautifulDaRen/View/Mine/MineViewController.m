@@ -34,6 +34,8 @@
 @property (retain, nonatomic) IBOutlet UIButton * topicButton;
 @property (retain, nonatomic) IBOutlet UIButton * editButton;
 
+-(void)refreshUserInfo;
+
 @end
 
 @implementation MineViewController
@@ -62,28 +64,6 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
-#pragma mark FAKE
-- (void) loadFakeData
-{
-    NSDictionary * userIdentityDict = [NSDictionary dictionaryWithObjectsAndKeys:
-                                       @"LOCAL_IDENTITY_001", USERIDENTITY_UNIQUE_ID,
-                                       @"user name", USERIDENTITY_DISPLAY_NAME,
-                                       @"12", USERIDENTITY_LEVEL,
-                                       @"成都", USERIDENTITY_LOCAL_CITY,
-                                       @"9", USERIDENTITY_FOLLOW_COUNT,
-                                       @"10", USERIDENTITY_FANS_COUNT,
-                                       @"11", USERIDENTITY_BUYED_COUNT,
-                                       @"12", USERIDENTITY_COLLECTION_COUNT,
-                                       @"13", USERIDENTITY_TOPIC_COUNT,
-                                       @"14", USERIDENTITY_BLACK_LIST_COUNT,
-                                       @"0", USERIDENTITY_IS_MALE,
-                                       @"I am super.", USERIDENTITY_PERSONAL_BRIEF,
-                                       @"成都，天府软件园", USERIDENTITY_DETAILED_ADDRESS,
-                                       nil];
-    [[DataManager sharedManager] saveLocalIdentityWithDictionary:userIdentityDict finishBlock:^(NSError *error) {
-        NSLog(@"Save local identity successful");
-    }];
-}
 #pragma mark - View lifecycle
 -(void)dealloc
 {
@@ -104,66 +84,7 @@
     
     [self.navigationItem setTitle:NSLocalizedString(@"title_mine", @"title_mine")];
     [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClick) title:NSLocalizedString(@"refresh", @"refresh")]];
-    NSString * accountName = [[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] valueForKey:USERDEFAULT_ACCOUNT_USERNAME];
-    if([[BSDKManager sharedManager] isLogin])
-    {
-        [[BSDKManager sharedManager] getUserInforByUsername:accountName andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-            /* {
-             AtNum = 0;
-             AttentionNum = 0;
-             BlackListNum = 0;
-             BlogNum = 0;
-             BuyNum = 0;
-             City = "\U6210\U90fd";
-             CommentNum = 0;
-             CreateTime = "2012-06-09 00:03:59";
-             Email = "dddd@11.c2om";
-             FansNum = 0;
-             FavNum = 0;
-             Intro = 0;
-             IsVerify = 0;
-             Levels = 0;
-             Points = 0;
-             PrivateMsgNum = 0;
-             Prov = "";
-             SmallPic = "";
-             TopicNum = 0;
-             UserName = tankliu013;
-             UserType = 0;
-             id = 12;
-             }  */
-            NSString * s = [data valueForKey:@"City"];
-            s = s;
-            NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:
-                                   [data valueForKey:@"UserName"],      USERDEFAULT_ACCOUNT_USERNAME,
-                                   [data valueForKey:@"UserType"],      USERDEFAULT_ACCOUNT_EMAIL,
-                                   [data valueForKey:@"Sex"],           USERDEFAULT_ACCOUNT_GENDER,
-                                   [data valueForKey:@"id"],            USERDEFAULT_ACCOUNT_ID,
-                                   [data valueForKey:@"Email"],         USERDEFAULT_ACCOUNT_EMAIL,
-                                   [data valueForKey:@"Address"],       USERDEFAULT_ACCOUNT_ADDRESS,
-                                   @"13901234567",                      USERDEFAULT_ACCOUNT_PHONE_NUMBER,
-                                   [data valueForKey:@"City"],          USERDEFAULT_ACCOUNT_CITY,
-                                   [data valueForKey:@"IsVerify"],      USERDEFAULT_ACCOUNT_IS_VERIFY,
-                                   [data valueForKey:@"Levels"],        USERDEFAULT_ACCOUNT_LEVEL,
-                                   [data valueForKey:@"Points"],        USERDEFAULT_ACCOUNT_POINT,
-                                   [data valueForKey:@"Intro"],         USERDEFAULT_ACCOUNT_INTRO,
-                                   [data valueForKey:@"Prov"],          USERDEFAULT_ACCOUNT_PROV,
-                                   [data valueForKey:@"CreateTime"],    USERDEFAULT_ACCOUNT_CREATE_TIME,
-                                   [data valueForKey:@"AtNum"],         USERDEFAULT_ACCOUNT_FORWARD_COUNT,
-                                   [data valueForKey:@"AttentionNum"],  USERDEFAULT_ACCOUNT_FOLLOW_COUNT,
-                                   [data valueForKey:@"BlackListNum"],  USERDEFAULT_ACCOUNT_BLACK_LIST_COUNT,
-                                   [data valueForKey:@"BlogNum"],       USERDEFAULT_ACCOUNT_WEIBO_COUNT,
-                                   [data valueForKey:@"BuyNum"],        USERDEFAULT_ACCOUNT_BUYED_COUNT,
-                                   [data valueForKey:@"CommentNum"],    USERDEFAULT_ACCOUNT_COMMENT_COUNT,
-                                   [data valueForKey:@"FansNum"],       USERDEFAULT_ACCOUNT_FANS_COUNT,
-                                   [data valueForKey:@"FavNum"],        USERDEFAULT_ACCOUNT_FAVORITE_COUNT,
-                                   [data valueForKey:@"PrivateMsgNum"], USERDEFAULT_ACCOUNT_PRIVATE_MSG_COUNT,
-                                   [data valueForKey:@"TopicNum"],      USERDEFAULT_ACCOUNT_TOPIC_COUNT,
-                                   nil];
-            [[NSUserDefaults standardUserDefaults] setObject:dict forKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
-            [self.tableView reloadData];
-        }];
-    }
+    [self refreshUserInfo];
 }
 
 - (void)viewDidUnload
@@ -187,7 +108,7 @@
 
 - (void) onRefreshButtonClick
 {
-    [[iToast makeText:NSLocalizedString(@"refresh", @"refresh")] show];
+    [self refreshUserInfo];
 }
 
 #pragma mark UITableViewDataSource
@@ -278,12 +199,6 @@
             cell = [[[NSBundle mainBundle] loadNibNamed:buttonViewCellIdentifier owner:self options:nil] objectAtIndex:0];
         }
         switch ([indexPath row]) {
-                //            case 0:
-                //            {
-                //                ((ButtonViewCell*)cell).buttonText.text = NSLocalizedString(@"my_publish", @"");
-                //                ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"my_composed"];
-                //                break;
-                //            }
             case 0:
             {
                 ((ButtonViewCell*)cell).buttonText.text = NSLocalizedString(@"at_me", @"");
@@ -346,18 +261,6 @@
     if(section == 2)
     {
         switch ([indexPath row]) {
-                //            case 0:
-                //            {
-                //                WeiboListViewController * myPublishViewController = [[WeiboListViewController alloc] initWithNibName:@"WeiboListViewController" bundle:nil type:WeiboListViewControllerType_MY_PUBLISH];
-                //                
-                //                UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: myPublishViewController];
-                //                
-                //                [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
-                //                
-                //                [navController release];
-                //                [myPublishViewController release];
-                //                break;
-                //            }
             case 0:
             {
                 WeiboListViewController * forwadMeViewController = [[WeiboListViewController alloc] initWithNibName:@"WeiboListViewController" bundle:nil type:WeiboListViewControllerType_FORWARD_ME];
@@ -451,5 +354,67 @@
     [navController release];
     [viewController release];
 }
-
+-(void)refreshUserInfo
+{
+    NSString * accountName = [[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] valueForKey:USERDEFAULT_ACCOUNT_USERNAME];
+    if([[BSDKManager sharedManager] isLogin])
+    {
+        [[BSDKManager sharedManager] getUserInforByUsername:accountName andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+            /* {
+             AtNum = 0;
+             AttentionNum = 0;
+             BlackListNum = 0;
+             BlogNum = 0;
+             BuyNum = 0;
+             City = "\U6210\U90fd";
+             CommentNum = 0;
+             CreateTime = "2012-06-09 00:03:59";
+             Email = "dddd@11.c2om";
+             FansNum = 0;
+             FavNum = 0;
+             Intro = 0;
+             IsVerify = 0;
+             Levels = 0;
+             Points = 0;
+             PrivateMsgNum = 0;
+             Prov = "";
+             SmallPic = "";
+             TopicNum = 0;
+             UserName = tankliu013;
+             UserType = 0;
+             id = 12;
+             }  */
+            NSString * s = [data valueForKey:@"City"];
+            s = s;
+            NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                                   [data valueForKey:@"UserName"],      USERDEFAULT_ACCOUNT_USERNAME,
+                                   [data valueForKey:@"UserType"],      USERDEFAULT_ACCOUNT_EMAIL,
+                                   [data valueForKey:@"Sex"],           USERDEFAULT_ACCOUNT_GENDER,
+                                   [data valueForKey:@"id"],            USERDEFAULT_ACCOUNT_ID,
+                                   [data valueForKey:@"Email"],         USERDEFAULT_ACCOUNT_EMAIL,
+                                   [data valueForKey:@"Address"],       USERDEFAULT_ACCOUNT_ADDRESS,
+                                   @"13901234567",                      USERDEFAULT_ACCOUNT_PHONE_NUMBER,
+                                   [data valueForKey:@"City"],          USERDEFAULT_ACCOUNT_CITY,
+                                   [data valueForKey:@"IsVerify"],      USERDEFAULT_ACCOUNT_IS_VERIFY,
+                                   [data valueForKey:@"Levels"],        USERDEFAULT_ACCOUNT_LEVEL,
+                                   [data valueForKey:@"Points"],        USERDEFAULT_ACCOUNT_POINT,
+                                   [data valueForKey:@"Intro"],         USERDEFAULT_ACCOUNT_INTRO,
+                                   [data valueForKey:@"Prov"],          USERDEFAULT_ACCOUNT_PROV,
+                                   [data valueForKey:@"CreateTime"],    USERDEFAULT_ACCOUNT_CREATE_TIME,
+                                   [data valueForKey:@"AtNum"],         USERDEFAULT_ACCOUNT_FORWARD_COUNT,
+                                   [data valueForKey:@"AttentionNum"],  USERDEFAULT_ACCOUNT_FOLLOW_COUNT,
+                                   [data valueForKey:@"BlackListNum"],  USERDEFAULT_ACCOUNT_BLACK_LIST_COUNT,
+                                   [data valueForKey:@"BlogNum"],       USERDEFAULT_ACCOUNT_WEIBO_COUNT,
+                                   [data valueForKey:@"BuyNum"],        USERDEFAULT_ACCOUNT_BUYED_COUNT,
+                                   [data valueForKey:@"CommentNum"],    USERDEFAULT_ACCOUNT_COMMENT_COUNT,
+                                   [data valueForKey:@"FansNum"],       USERDEFAULT_ACCOUNT_FANS_COUNT,
+                                   [data valueForKey:@"FavNum"],        USERDEFAULT_ACCOUNT_FAVORITE_COUNT,
+                                   [data valueForKey:@"PrivateMsgNum"], USERDEFAULT_ACCOUNT_PRIVATE_MSG_COUNT,
+                                   [data valueForKey:@"TopicNum"],      USERDEFAULT_ACCOUNT_TOPIC_COUNT,
+                                   nil];
+            [[NSUserDefaults standardUserDefaults] setObject:dict forKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
+            [self.tableView reloadData];
+        }];
+    }
+}
 @end

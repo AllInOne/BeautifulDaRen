@@ -13,6 +13,7 @@
 @synthesize friendWeiboLabel;
 @synthesize avatarImageView;
 @synthesize actionButton;
+@synthesize delegate;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -29,5 +30,8 @@
 
     // Configure the view for the selected state
 }
-
+-(IBAction)buttonClicked:(UIButton*)sender
+{
+    [self.delegate didButtonPressed:sender inView:self];
+}
 @end
