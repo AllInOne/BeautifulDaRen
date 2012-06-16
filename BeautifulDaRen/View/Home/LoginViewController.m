@@ -205,7 +205,7 @@
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([indexPath section] == 1) {
-        NSString* userName = @"tankliu002";
+        NSString* userName = @"tankliu102";
         [[BSDKManager sharedManager] loginWithUsername:userName password:@"abc123456" andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
             if(AIO_STATUS_SUCCESS == status)
             {

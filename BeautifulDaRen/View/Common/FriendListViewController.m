@@ -58,11 +58,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSString * userName = [[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] valueForKey:USERDEFAULT_ACCOUNT_USERNAME];
+    NSInteger userId = [[[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] valueForKey:USERDEFAULT_ACCOUNT_ID] intValue];
     switch (_type) {
         case FriendListViewController_TYPE_MY_FOLLOW:
         {
-            [[BSDKManager sharedManager] getFollowList:userName
+            [[BSDKManager sharedManager] getFollowList:userId
                                               pageSize:20
                                              pageIndex:1
                                        andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
@@ -73,7 +73,7 @@
         }
         case FriendListViewController_TYPE_MY_FANS:
         {
-            [[BSDKManager sharedManager] getFollowerList:userName
+            [[BSDKManager sharedManager] getFollowerList:userId
                                                 pageSize:20
                                                pageIndex:1
                                          andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {

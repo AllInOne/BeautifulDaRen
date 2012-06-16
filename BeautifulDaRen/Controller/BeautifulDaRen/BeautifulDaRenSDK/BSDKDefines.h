@@ -75,6 +75,7 @@
 #define K_BSDK_KEYWORD @"KeyWords"
 
 #define K_BSDK_UID @"id"
+#define K_BSDK_USER_ID @"UserId"
 
 #define K_BSDK_BLOGUID @"BlogId"
 

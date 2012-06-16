@@ -73,18 +73,18 @@
 - (void)getWeiboClassesWithDoneCallback:(processDoneWithDictBlock)callback;
 
 #pragma mark Social related API
-- (void)followUser:(NSString*)username
+- (void)followUser:(NSInteger)userId
    andDoneCallback:(processDoneWithDictBlock)callback;
 
-- (void)unFollowUser:(NSString*)username
+- (void)unFollowUser:(NSInteger)userId
    andDoneCallback:(processDoneWithDictBlock)callback;
 
-- (void)getFollowList:(NSString*)username
+- (void)getFollowList:(NSInteger)userId
              pageSize:(NSInteger)pageSize 
             pageIndex:(NSInteger)pageIndex 
      andDoneCallback:(processDoneWithDictBlock)callback;
 
-- (void)getFollowerList:(NSString*)username
+- (void)getFollowerList:(NSInteger)userId
                pageSize:(NSInteger)pageSize 
               pageIndex:(NSInteger)pageIndex 
         andDoneCallback:(processDoneWithDictBlock)callback;
