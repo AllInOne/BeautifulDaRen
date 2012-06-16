@@ -26,6 +26,7 @@
 - (void)dealloc {
     [_categoryScrollItem release];
     [_categoryTitle release];
+    [_itemData release];
     [super dealloc];
 }
 
@@ -73,8 +74,9 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    self.categoryScrollItem = nil;
-    self.categoryTitle = nil;
+    [self setCategoryTitle:nil];
+    [self setCategoryScrollItem:nil];
+    [self setItemData:nil];
 }
 
 - (void)onItemSelected:(int)index

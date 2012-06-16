@@ -118,10 +118,16 @@
 }
 
 - (void)onRefreshButtonClicked {
-    [self.categoryContentView removeFromParentViewController];
+    for (UIView * view in self.view.subviews)
+    {
+        [view removeFromSuperview];
+    }
+//    [self.categoryContentView.view setHidden:YES];
+//    [self.categoryContentView removeFromParentViewController];
+
     [self setCategoryContentView:nil];
     if (self.adsPageView) {
-        [self.adsPageView removeFromParentViewController];
+//        [self.adsPageView removeFromParentViewController];
         [self setAdsPageView:nil];
     }
     
