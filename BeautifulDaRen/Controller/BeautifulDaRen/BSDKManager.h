@@ -43,6 +43,7 @@
                      shop:(NSString*)shop
                     brand:(NSString*)branch
                     price:(NSInteger)price
+                 category:(NSString*)category
               poslatitude:(float)latitude
              posLongitude:(float)longitude
              doneCallback:(processDoneWithDictBlock)callback;

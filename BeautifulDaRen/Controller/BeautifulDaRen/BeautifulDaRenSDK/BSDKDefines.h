@@ -79,7 +79,7 @@
 #define K_BSDK_BLOGUID @"BlogId"
 
 #define K_BSDK_CLASSLIST @"ClassList"
-
+#define K_BSDK_CLASSID @"ClassId"
 #define K_BSDK_CLASSNAME @"classname"
 
 #define K_BSDK_RESPONSE_STATUS @"status"

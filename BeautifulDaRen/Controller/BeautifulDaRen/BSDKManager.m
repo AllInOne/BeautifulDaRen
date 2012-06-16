@@ -416,7 +416,7 @@ static BSDKManager *sharedInstance;
     [params setObject:K_BSDK_ACTION_GETLIST forKey:K_BSDK_ACTION];
     [params setObject:[NSString stringWithFormat:@"%d", pageIndex] forKey:K_BSDK_PAGEINDEX];
     [params setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:K_BSDK_PAGESIZE];
-    [params setObject:classId forKey:K_BSDK_UID];
+    [params setObject:classId forKey:K_BSDK_CLASSID];
     
     [self sendRequestWithMethodName:nil
                          httpMethod:@"POST" 
@@ -432,6 +432,7 @@ static BSDKManager *sharedInstance;
                      shop:(NSString*)shop
                     brand:(NSString*)branch
                     price:(NSInteger)price
+                 category:(NSString*)category
               poslatitude:(float)latitude
              posLongitude:(float)longitude
              doneCallback:(processDoneWithDictBlock)callback
@@ -453,6 +454,7 @@ static BSDKManager *sharedInstance;
     [params setObject:shop forKey:K_BSDK_SHOPMERCHANT];
     [params setObject:branch forKey:K_BSDK_BRANDSERVICE];
     [params setObject:[NSNumber numberWithInt:price] forKey:K_BSDK_PRICE];
+    [params setObject:category forKey:K_BSDK_CLASSID];
     [params setObject:[NSNumber numberWithFloat:latitude] forKey:K_BSDK_LATITUDE];
     [params setObject:[NSNumber numberWithFloat:longitude] forKey:K_BSDK_LONGITUDE];
     

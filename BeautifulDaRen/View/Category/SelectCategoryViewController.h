@@ -16,6 +16,8 @@
 @property (nonatomic, assign) id<SelectCategoryProtocol> delegate;
 @property (nonatomic, retain) NSArray * categoryListData;
 
+@property (nonatomic, retain) NSString * initialSelectedCategoryId;
+
 @property (nonatomic, retain) IBOutlet UIScrollView * contentScrollView;
 
 -(IBAction)onCheckBoxPressed:(UIButton*)sender;
