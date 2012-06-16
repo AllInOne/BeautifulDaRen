@@ -480,14 +480,14 @@ static BSDKManager *sharedInstance;
 
 
 #pragma mark User related methods
-- (void)followUser:(NSString*)username
+- (void)followUser:(NSInteger)userId
    andDoneCallback:(processDoneWithDictBlock)callback
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
     
     [params setObject:K_BSDK_CATEGORY_SNS forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_FOLLOW forKey:K_BSDK_ACTION];
-    [params setObject:username forKey:K_BSDK_USERNAME];
+    [params setObject:[NSString stringWithFormat:@"%d", userId] forKey:K_BSDK_USER_ID];
     
     [self sendRequestWithMethodName:nil
                          httpMethod:@"POST" 
@@ -498,14 +498,14 @@ static BSDKManager *sharedInstance;
 
 }
 
-- (void)unFollowUser:(NSString*)username
+- (void)unFollowUser:(NSInteger)userId
      andDoneCallback:(processDoneWithDictBlock)callback
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
     
     [params setObject:K_BSDK_CATEGORY_SNS forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_UNFOLLOW forKey:K_BSDK_ACTION];
-    [params setObject:username forKey:K_BSDK_USERNAME];
+    [params setObject:[NSString stringWithFormat:@"%d", userId] forKey:K_BSDK_USER_ID];
     
     [self sendRequestWithMethodName:nil
                          httpMethod:@"POST" 
@@ -537,7 +537,7 @@ static BSDKManager *sharedInstance;
 
 #pragma mark Social related API
 
-- (void)getFollowList:(NSString*)username
+- (void)getFollowList:(NSInteger)userId
              pageSize:(NSInteger)pageSize 
             pageIndex:(NSInteger)pageIndex 
       andDoneCallback:(processDoneWithDictBlock)callback;
@@ -548,7 +548,7 @@ static BSDKManager *sharedInstance;
     [params setObject:K_BSDK_ACTION_GETFOLLOWLIST forKey:K_BSDK_ACTION];
     [params setObject:[NSString stringWithFormat:@"%d", pageIndex] forKey:K_BSDK_PAGEINDEX];
     [params setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:K_BSDK_PAGESIZE];
-    [params setObject:username forKey:K_BSDK_USERNAME];
+    [params setObject:[NSString stringWithFormat:@"%d", userId] forKey:K_BSDK_USER_ID];
     
     [self sendRequestWithMethodName:nil
                          httpMethod:@"POST" 
@@ -559,7 +559,7 @@ static BSDKManager *sharedInstance;
     
 }
 
-- (void)getFollowerList:(NSString*)username
+- (void)getFollowerList:(NSInteger)userId
                pageSize:(NSInteger)pageSize 
               pageIndex:(NSInteger)pageIndex 
         andDoneCallback:(processDoneWithDictBlock)callback
@@ -570,7 +570,7 @@ static BSDKManager *sharedInstance;
     [params setObject:K_BSDK_ACTION_GETFANLIST forKey:K_BSDK_ACTION];
     [params setObject:[NSString stringWithFormat:@"%d", pageIndex] forKey:K_BSDK_PAGEINDEX];
     [params setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:K_BSDK_PAGESIZE];
-    [params setObject:username forKey:K_BSDK_USERNAME];
+    [params setObject:[NSString stringWithFormat:@"%d", userId] forKey:K_BSDK_USER_ID];
     
     [self sendRequestWithMethodName:nil
                          httpMethod:@"POST" 
