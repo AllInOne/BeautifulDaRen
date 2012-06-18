@@ -256,21 +256,38 @@
             userName = @"tankliu002";
             password = @"abc123456";
         }
-        [[BSDKManager sharedManager] loginWithUsername:userName password:password andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-            if(AIO_STATUS_SUCCESS == status && [[data valueForKey:@"status"] isEqualToString:@"y"])
-            {
-                NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:
-                                       userName, USERDEFAULT_ACCOUNT_USERNAME,
-                                       nil];
-                [[NSUserDefaults standardUserDefaults] setObject:dict forKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
-                [self.navigationController popToRootViewControllerAnimated:YES];
-                [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_LOGIN_SUCCESS object:self userInfo:data];
-            }
-            else
-            {
-                [[iToast makeText:[NSString stringWithFormat:@"%@", [data objectForKey:@"msg"]]] show];
-            }
-        }];
+        NSString * iToastString = @"";
+        if ([userName isEqualToString:@""])
+        {
+            iToastString = @"用户名不能为空!";
+        }
+        else if ([password isEqualToString:@""])
+        {
+            iToastString = @"密码不能为空!";
+        }
+        if(![iToastString isEqualToString:@""])
+        {
+            [[iToast makeText:iToastString] show];
+            return;
+        }
+        [[BSDKManager sharedManager] loginWithUsername:userName
+                                              password:password
+                                       andDoneCallback:^(AIO_STATUS status, NSDictionary *data)
+         {
+             if(AIO_STATUS_SUCCESS == status && [[data valueForKey:@"status"] isEqualToString:@"y"])
+             {
+                 NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                                        userName, USERDEFAULT_ACCOUNT_USERNAME,
+                                        nil];
+                 [[NSUserDefaults standardUserDefaults] setObject:dict forKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
+                 [self.navigationController popToRootViewControllerAnimated:YES];
+                 [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_LOGIN_SUCCESS object:self userInfo:data];
+             }
+             else
+             {
+                 [[iToast makeText:[NSString stringWithFormat:@"%@", [data objectForKey:@"msg"]]] show];
+             }
+         }];
     }
     else if([indexPath section] == 2)
     {
