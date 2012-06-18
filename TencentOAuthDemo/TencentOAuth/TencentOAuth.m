@@ -53,7 +53,8 @@ redirectURI = _redirectURI;
 - (id)initWithAppId:(NSString *)appId
 				andDelegate:(id<TencentSessionDelegate>)delegate
 {
-	if ([super init]) 
+    self = [self init];
+	if (self) 
 	{
 		[_appId release];
 		_appId = [appId copy];
