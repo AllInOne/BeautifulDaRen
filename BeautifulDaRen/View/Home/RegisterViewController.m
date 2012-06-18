@@ -296,11 +296,11 @@ enum
         NSString * rePwd = self.userRePwdTextField.text;
 
         if (DEVELOPER_ENABLE) {
-            userName = @"tankliu101";
-            email = @"aaaa@ss.com";
+            userName = @"tankliu114";
+            email = @"aa11aa41@11.com";
             pwd = @"abc123456";
             rePwd = @"abc123456";
-            self.userCity = @"成都"; 
+            self.userCity = @"重庆"; 
         }
 
         NSString * iToastString = @"";
@@ -335,7 +335,7 @@ enum
         email:email
         city:self.userCity
         andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-            if (status == AIO_STATUS_SUCCESS && ![[data objectForKey:@"status"] isEqualToString:@"n"]) {
+            if (status == AIO_STATUS_SUCCESS && [[data valueForKey:@"status"]isEqualToString:@"y"]) {
                 NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:
                                        userName, USERDEFAULT_ACCOUNT_USERNAME,
                                        email, USERDEFAULT_ACCOUNT_EMAIL,

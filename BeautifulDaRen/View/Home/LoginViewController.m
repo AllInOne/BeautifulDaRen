@@ -254,10 +254,10 @@
         if (DEVELOPER_ENABLE)
         {
             userName = @"tankliu002";
-            password = @"abc1234561";
+            password = @"abc123456";
         }
         [[BSDKManager sharedManager] loginWithUsername:userName password:password andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-            if(AIO_STATUS_SUCCESS == status && ![[data objectForKey:@"status"] isEqualToString:@"n"])
+            if(AIO_STATUS_SUCCESS == status && [[data valueForKey:@"status"] isEqualToString:@"y"])
             {
                 NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:
                                        userName, USERDEFAULT_ACCOUNT_USERNAME,
