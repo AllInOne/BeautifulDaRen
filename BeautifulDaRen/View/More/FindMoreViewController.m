@@ -29,7 +29,6 @@
 
 @property (retain, nonatomic) IBOutlet UITableView * searchResultViewController;
 @property (retain, nonatomic) IBOutlet UISearchBar * searchBar;
-@property (nonatomic, copy) NSArray *allItems;
 @property (nonatomic, copy) NSArray *searchResults;
 
 @property (nonatomic, assign) BOOL isFindWeibo;
@@ -48,8 +47,6 @@
 @synthesize searchResultViewController = _searchResultViewController;
 @synthesize searchBar = _searchBar;
 @synthesize isFindWeibo = _isFindWeibo;
-
-@synthesize allItems = _allItems;
 @synthesize searchResults = _searchResults;
 
 
@@ -90,7 +87,6 @@
     [_contentScrollView release];
     [_searchResultViewController release];
     [_searchBar release];
-    [_allItems release];
     [_searchResults release];
     [super dealloc];
 }
@@ -103,20 +99,12 @@
     self.contentScrollView = nil;
     self.searchResultViewController = nil;
     self.searchBar = nil;
-    self.allItems = nil;
     self.searchResults = nil;
 }
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    _allItems = [[NSArray alloc] initWithObjects:
-     @"西西110",
-     @"雅力士",
-     @"Voltes V",
-     @"葫芦娃",
-     @"Daimos",
-     nil];
     _isFindWeibo = NO;
     [self.navigationItem setTitle:NSLocalizedString(@"find_weibo_or_friend", @"find_weibo_or_friend")];
     [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClicked) title:NSLocalizedString(@"refresh", @"refresh")]];
@@ -374,7 +362,8 @@
     }
     else
     {
-        rows = [_allItems count];
+        // TODO
+        rows = [_searchResults count];;
     }
     return  rows;
 }
@@ -409,16 +398,6 @@
     return cell;
 }
 
-#pragma mark COMMON
-- (void)filterContentForSearchText:(NSString*)searchText 
-                             scope:(NSString*)scope
-{
-    NSPredicate *resultPredicate = [NSPredicate 
-                                    predicateWithFormat:@"SELF contains[cd] %@",
-                                    searchText];
-    
-    self.searchResults = [self.allItems filteredArrayUsingPredicate:resultPredicate];
-}
 #pragma mark - UISearchBarDelegate delegate methods
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
@@ -511,8 +490,11 @@
 
 - (void) doSearch
 {
+    if ([self.searchBar.text length] <= 0) {
+        return;
+    }
     if (self.isFindWeibo == NO) {
-        [[BSDKManager sharedManager] searchUsersByUsername:@"tank"
+        [[BSDKManager sharedManager] searchUsersByUsername:self.searchBar.text
                                            andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
                                                if (status == AIO_STATUS_SUCCESS) {
                                                    self.searchResults = [data valueForKey:@"userlist"];
@@ -525,7 +507,7 @@
         }];
     }
     else {
-        [[BSDKManager sharedManager] searchWeiboByKeyword:@""
+        [[BSDKManager sharedManager] searchWeiboByKeyword:self.searchBar.text
                                                  pageSize:1
                                                 pageIndex:3
                                           andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
@@ -538,7 +520,7 @@
 {
     NSInteger index = button.tag;
     NSDictionary * userDict = [self.searchResults objectAtIndex:index];
-    [[BSDKManager sharedManager] followUser:[userDict valueForKey:KEY_ACCOUNT_USER_NAME]
+    [[BSDKManager sharedManager] followUser:[[userDict valueForKey:KEY_ACCOUNT_ID] intValue]
                             andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
                                 
                             }];

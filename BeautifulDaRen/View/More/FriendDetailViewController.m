@@ -34,9 +34,12 @@
 @property (retain, nonatomic) IBOutlet UILabel * detailAddressLabel;
 @property (retain, nonatomic) IBOutlet UILabel * levelLabel;
 @property (retain, nonatomic) IBOutlet UILabel * pointLabel;
+@property (retain, nonatomic) IBOutlet UILabel * phoneLabel;
 @property (retain, nonatomic) IBOutlet UIImageView * genderImageView;
+@property (retain, nonatomic) IBOutlet UIButton * actionButton;
 
 - (void) onActionButtonClicked: (UIButton*)sender;
+- (void) refreshTopView;
 @end
 
 @implementation FriendDetailViewController
@@ -48,7 +51,7 @@
 @synthesize friendDetailView = _friendDetailView;
 @synthesize isIdentification = _isIdentification;
 @synthesize genderImageView = _genderImageView;
-
+@synthesize phoneLabel = _phoneLabel;
 @synthesize followButton = _followButton;
 @synthesize fansButton = _fansButton;
 @synthesize collectionButton = _collectionButton;
@@ -56,6 +59,7 @@
 @synthesize publishedButton = _publishedButton;
 @synthesize topicButton = _topicButton;
 @synthesize friendDictionary = _friendDictionary;
+@synthesize actionButton = _actionButton;
 
 -(id)initWithDictionary:(NSDictionary*)dictionary
 {
@@ -134,6 +138,7 @@
     [_weiboButton release];
     [_publishedButton release];
     [_topicButton release];
+    [_actionButton release];
 }
 - (void)viewDidUnload
 {
@@ -145,25 +150,18 @@
     self.weiboButton = nil;
     self.publishedButton = nil;
     self.topicButton = nil;
+    self.actionButton = nil;
 }
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    self.nameLabel.text = [self.friendDictionary valueForKey:KEY_ACCOUNT_USER_NAME];
-    self.cityLabel.text = [self.friendDictionary valueForKey:KEY_ACCOUNT_CITY];
-    self.detailAddressLabel.text = [self.friendDictionary valueForKey:KEY_ACCOUNT_Address];
-    self.levelLabel.text = [NSString stringWithFormat:@"LV%d",
-                            [[self.friendDictionary valueForKey:KEY_ACCOUNT_LEVEL] intValue]];
-    self.pointLabel.text = [NSString stringWithFormat:@"%@%d",
-                            NSLocalizedString(@"point", @"point"),
-                            [[self.friendDictionary valueForKey:KEY_ACCOUNT_POINT] intValue]];
-    NSString * genderImageName = [[self.friendDictionary valueForKey:KEY_ACCOUNT_GENDER] intValue] == 1 ? @"gender_female" : @"gender_male";
-    self.genderImageView.image = [UIImage imageNamed:genderImageName];
+    [self refreshTopView];
     
     [[BSDKManager sharedManager] getUserInforByUsername:[self.friendDictionary valueForKey:KEY_ACCOUNT_USER_NAME]
                                         andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
                                             [self.friendDictionary setValuesForKeysWithDictionary:data];
+                                            
+                                            [self refreshTopView];
                                             [self.friendDetailView reloadData];
                                         }];
 }
@@ -194,6 +192,25 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+-(IBAction)actionButtonClicked:(UIButton*)sender
+{
+    NSInteger relationShip = [[self.friendDictionary valueForKey:KEY_ACCOUNT_RELATIONSHIP] intValue];
+    NSInteger userId = [[self.friendDictionary valueForKey:KEY_ACCOUNT_USER_ID] intValue];
+    if (relationShip == FRIEND_RELATIONSHIP_MY_FOLLOW || relationShip == FRIEND_RELATIONSHIP_INTER_FOLLOW)
+    {
+        [[BSDKManager sharedManager] unFollowUser:userId
+                                  andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+                                      
+                                  }];
+    }
+    else
+    {
+        [[BSDKManager sharedManager] followUser:userId
+                                andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+                                    
+                                }];
+    }
+}
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -296,52 +313,13 @@
         _followButton = ((GridViewCell*)cell).thirdButton;
         _fansButton = ((GridViewCell*)cell).fourthButton;
         
-        _topicButton = ((GridViewCell*)cell).fifthButton;
-        _publishedButton = ((GridViewCell*)cell).sixthButton;
+//        _topicButton = ((GridViewCell*)cell).fifthButton;
+//        _publishedButton = ((GridViewCell*)cell).sixthButton;
         ((GridViewCell*)cell).delegate = self;
     }
     
     return cell;
 }
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 
@@ -391,14 +369,19 @@
     UIViewController * viewController = nil;
     if(button == _followButton)
     {
-        viewController = [[FriendListViewController alloc] initWithNibName:@"FriendListViewController" bundle:nil type:FriendListViewController_TYPE_FRIEND_FOLLOW];
+        viewController = [[FriendListViewController alloc]
+                          initWithNibName:@"FriendListViewController"
+                          bundle:nil
+                          type:FriendListViewController_TYPE_FRIEND_FOLLOW
+                          dictionary:self.friendDictionary];
     }
     else if (button == _fansButton)
     {
         viewController = [[FriendListViewController alloc]
-                           initWithNibName:@"FriendListViewController"
-                           bundle:nil
-                           type:FriendListViewController_TYPE_FRIEND_FANS];
+                          initWithNibName:@"FriendListViewController"
+                          bundle:nil
+                          type:FriendListViewController_TYPE_FRIEND_FANS
+                          dictionary:self.friendDictionary];
     }
     else if (button == _collectionButton)
     {
@@ -435,6 +418,21 @@
 - (void)onRemove
 {
     [[iToast makeText:@"移除"] show];
+}
+
+- (void) refreshTopView
+{
+    self.nameLabel.text = [self.friendDictionary valueForKey:KEY_ACCOUNT_USER_NAME];
+    self.cityLabel.text = [self.friendDictionary valueForKey:KEY_ACCOUNT_CITY];
+    self.detailAddressLabel.text = [self.friendDictionary valueForKey:KEY_ACCOUNT_Address];
+    self.levelLabel.text = [NSString stringWithFormat:@"LV%d",
+                            [[self.friendDictionary valueForKey:KEY_ACCOUNT_LEVEL] intValue]];
+    self.pointLabel.text = [NSString stringWithFormat:@"%@%d",
+                            NSLocalizedString(@"point", @"point"),
+                            [[self.friendDictionary valueForKey:KEY_ACCOUNT_POINT] intValue]];
+    self.phoneLabel.text = [self.friendDictionary valueForKey:KEY_ACCOUNT_PHONE];
+    NSString * genderImageName = [[self.friendDictionary valueForKey:KEY_ACCOUNT_GENDER] intValue] == 1 ? @"gender_female" : @"gender_male";
+    self.genderImageView.image = [UIImage imageNamed:genderImageName];
 }
 
 @end

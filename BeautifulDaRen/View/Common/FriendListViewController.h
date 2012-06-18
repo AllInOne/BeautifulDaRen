@@ -20,5 +20,8 @@ enum
 
 @interface FriendListViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, ButtonPressDelegate>
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil type:(NSInteger)type;
+- (id)initWithNibName:(NSString *)nibNameOrNil
+               bundle:(NSBundle *)nibBundleOrNil
+                 type:(NSInteger)type
+           dictionary:(NSDictionary*)dictionary;
 @end
