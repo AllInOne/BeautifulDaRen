@@ -136,7 +136,7 @@ static NSMutableDictionary *rb_observers=nil;
     
     [self.button addTarget:self action:@selector(handleButtonTap:) forControlEvents:UIControlEventTouchUpInside];
     
-    self.textLabel = [[UILabel alloc] initWithFrame:CGRectMake(kRadioButtonWidth + 5, 0, kWidth - kRadioButtonWidth - 5, kRadioButtonHeight)];
+    _textLabel = [[UILabel alloc] initWithFrame:CGRectMake(kRadioButtonWidth + 5, 0, kWidth - kRadioButtonWidth - 5, kRadioButtonHeight)];
     self.textLabel.textColor = [UIColor darkGrayColor];
     [self addSubview:self.button];
     [self addSubview:self.textLabel];

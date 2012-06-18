@@ -15,6 +15,9 @@
 
 @interface CategoryItemCell ()
 @property (nonatomic, retain) NSDictionary * itemData;
+@property (nonatomic, retain) NSArray * weiboList;
+
+-(NSArray*)getPicturesFromWeiboList;
 @end
 
 @implementation CategoryItemCell
@@ -22,11 +25,14 @@
 @synthesize categoryScrollItem = _categoryScrollItem;
 @synthesize categoryTitle = _categoryTitle;
 @synthesize itemData = _itemData;
+@synthesize weiboList = _weiboList;
 
 - (void)dealloc {
     [_categoryScrollItem release];
     [_categoryTitle release];
     [_itemData release];
+    [_weiboList release];
+    
     [super dealloc];
 }
 
@@ -55,15 +61,15 @@
     
     [activityIndicator startAnimating];
     
-    [[BSDKManager sharedManager] getWeiboListByClassId:[self.itemData objectForKey:K_BSDK_UID] pageSize:20 pageIndex:0 andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+    [[BSDKManager sharedManager] getWeiboListByClassId:[self.itemData objectForKey:K_BSDK_UID] pageSize:20 pageIndex:1 andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
         
         [activityIndicator stopAnimating];
         [activityIndicator removeFromSuperview];
         [activityIndicator release];
         
-        NSArray * samples4 = [NSArray arrayWithObjects:@"http://tp2.sinaimg.cn/2788997993/50/0/0", @""@"http://tp2.sinaimg.cn/2788997993/50/0/0", @"http://tp2.sinaimg.cn/2788997993/50/0/0", @"http://tp2.sinaimg.cn/2788997993/50/0/0", nil];
+        self.weiboList = [data objectForKey:K_BSDK_BLOGLIST];
         
-        _categoryScrollItem = [[CommonScrollView alloc] initWithNibName:nil bundle:nil data:samples4 andDelegate:self];
+        _categoryScrollItem = [[CommonScrollView alloc] initWithNibName:nil bundle:nil data:[self getPicturesFromWeiboList] andDelegate:self];
         
         [self.view addSubview:_categoryScrollItem.view];
         
@@ -77,6 +83,7 @@
     [self setCategoryTitle:nil];
     [self setCategoryScrollItem:nil];
     [self setItemData:nil];
+    [self setWeiboList:nil];
 }
 
 - (void)onItemSelected:(int)index
@@ -95,5 +102,16 @@
 - (CGFloat)getHeight
 {
     return CATEGORY_ITEM_HEIGHT;
+}
+
+-(NSArray*)getPicturesFromWeiboList
+{
+    NSMutableArray * ret = [NSMutableArray arrayWithCapacity:[self.weiboList count]];
+    
+    for (NSDictionary * weiboData in self.weiboList) {
+        [ret addObject:[weiboData objectForKey:K_BSDK_PICTURE_102]];
+    }
+    
+    return ret;
 }
 @end

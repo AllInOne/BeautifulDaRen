@@ -17,12 +17,15 @@
         normalImage:(UIImage *)normalImage 
    highlightedImage:(UIImage *)highlightedImage 
                 tag:(NSInteger)tag{
-    
-    [self initWithTitle:title
-                  image:nil
-                    tag:tag];
-    [self setCustomNormalImage:normalImage];
-    [self setCustomHighlightedImage:highlightedImage];
+    self = [super init];
+    if (self) {
+        [self initWithTitle:title
+                      image:nil
+                        tag:tag];
+        [self setCustomNormalImage:normalImage];
+        [self setCustomHighlightedImage:highlightedImage];
+    }
+
     return self;
 }
 

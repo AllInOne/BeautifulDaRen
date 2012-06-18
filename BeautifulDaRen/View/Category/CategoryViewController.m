@@ -86,7 +86,7 @@
 - (void)refreshView
 {
     if (self.adsPageView == nil) {
-        self.adsPageView = [[AdsPageView alloc] initWithNibName:@"AdsPageView" bundle:nil];
+        _adsPageView = [[AdsPageView alloc] initWithNibName:@"AdsPageView" bundle:nil];
         self.adsPageView.view.frame = CGRectMake(0, 0, ADS_CELL_WIDTH, ADS_CELL_HEIGHT);
         [self.adsPageView setDelegate:self];
         [self.view addSubview:self.adsPageView.view];
@@ -123,11 +123,11 @@
         [view removeFromSuperview];
     }
 //    [self.categoryContentView.view setHidden:YES];
-//    [self.categoryContentView removeFromParentViewController];
+//    [self.categoryContentView.view removeFromSuperview];
 
     [self setCategoryContentView:nil];
     if (self.adsPageView) {
-//        [self.adsPageView removeFromParentViewController];
+//        [self.adsPageView.view removeFromSuperview];
         [self setAdsPageView:nil];
     }
     

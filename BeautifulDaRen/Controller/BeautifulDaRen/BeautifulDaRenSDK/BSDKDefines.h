@@ -78,6 +78,13 @@
 #define K_BSDK_USER_ID @"UserId"
 
 #define K_BSDK_BLOGUID @"BlogId"
+#define K_BSDK_BLOGLIST @"BlogList"
+
+#define K_BSDK_PICTURE_ORIGINAL @"Picture"
+#define K_BSDK_PICTURE_102 @"pic_102"
+#define K_BSDK_PICTURE_320 @"pic_320"
+#define K_BSDK_PICTURE_HEIGHT @"Picture_height"
+#define K_BSDK_PICTURE_WIDTH @"Picture_width"
 
 #define K_BSDK_CLASSLIST @"ClassList"
 #define K_BSDK_CLASSID @"ClassId"

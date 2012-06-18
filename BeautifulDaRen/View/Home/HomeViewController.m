@@ -72,7 +72,7 @@
     
     if(self.adsPageView == nil)
     {
-        self.adsPageView = [[AdsPageView alloc] initWithNibName:@"AdsPageView" bundle:nil];
+        _adsPageView = [[AdsPageView alloc] initWithNibName:@"AdsPageView" bundle:nil];
         self.adsPageView.view.frame = CGRectMake(0, 0, self.view.frame.size.width, ADS_CELL_HEIGHT);
         [self.view addSubview:self.adsPageView.view];
         self.adsPageView.delegate = self;
