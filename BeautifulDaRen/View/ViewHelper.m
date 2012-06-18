@@ -221,4 +221,38 @@ static BUIFont * instance;
     return ratio * image.size.height;
 }
 
++ (void) handleKeyboardDidShow:(NSNotification*)aNotification
+                      rootView:(UIView*)rootView
+                     inputView:(UIView *)inputView
+                    scrollView:(UIScrollView*)scrollView {
+    NSDictionary* info = [aNotification userInfo];
+    CGSize keyboardSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0);
+    scrollView.contentInset = contentInsets;
+    scrollView.scrollIndicatorInsets = contentInsets;
+    
+    CGRect contentRect = rootView.frame;
+    contentRect.size.height -= keyboardSize.height;
+    CGPoint inputViewLeftTopPoint = [inputView convertPoint:inputView.frame.origin toView:rootView];
+    CGPoint inputViewLeftBottomPoint = CGPointMake(inputViewLeftTopPoint.x, inputViewLeftTopPoint.y + inputView.frame.size.height);
+    
+    // If active text field is hidden by keyboard, scroll it so it's visible
+    if (!CGRectContainsPoint(contentRect, inputViewLeftBottomPoint)) {
+        // get the height to bottom of the input view.
+        CGFloat inputViewHeightToBottom = rootView.frame.size.height - inputViewLeftBottomPoint.y;
+        // get the scroll height, and when scroll this height will make the input view visible.
+        CGFloat scrollHeight = keyboardSize.height - inputViewHeightToBottom + scrollView.contentOffset.y;
+        CGPoint scrollPoint = CGPointMake(0.0, scrollHeight);
+        [scrollView setContentOffset:scrollPoint animated:YES];
+    }
+}
+
++ (void) handleKeyboardWillBeHidden:(UIScrollView*)scrollView {
+    // set the tableview normal.
+    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+    scrollView.contentInset = contentInsets;
+    scrollView.scrollIndicatorInsets = contentInsets;
+}
+
 @end

@@ -33,10 +33,10 @@ enum
 @property (retain, nonatomic) IBOutlet UITextField * userEmailTextField;
 @property (retain, nonatomic) IBOutlet UITextField * userPwdTextField;
 @property (retain, nonatomic) IBOutlet UITextField * userRePwdTextField;
-@property (retain, nonatomic) NSString * userCity;
-
 @property (retain, nonatomic) IBOutlet UIButton * loginWithSinaWeiboButton;
 @property (retain, nonatomic) IBOutlet UIButton * loginWithQQButton;
+@property (retain, nonatomic) NSString * userCity;
+@property (retain, nonatomic)  NSMutableArray* observers;
 
 @end
 
@@ -49,6 +49,7 @@ enum
 @synthesize tableView = _tableView;
 @synthesize loginWithQQButton = _loginWithQQButton;
 @synthesize loginWithSinaWeiboButton = _loginWithSinaWeiboButton;
+@synthesize observers = _observers;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -82,6 +83,7 @@ enum
     [_tableView release];
     [_loginWithQQButton release];
     [_loginWithSinaWeiboButton release];
+    [_observers release];
 }
 
 - (void)viewDidLoad
@@ -95,6 +97,40 @@ enum
     self.loginWithQQButton = nil;
     self.loginWithSinaWeiboButton = nil;
     self.tableView = nil;
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    
+    self.observers = [NSMutableArray arrayWithCapacity:2];
+    id observer = [[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardDidShowNotification
+                                                                    object:nil
+                                                                     queue:nil
+                                                                usingBlock:^(NSNotification * notification){
+                                                                    [ViewHelper handleKeyboardDidShow:notification
+                                                                                             rootView:self.view
+                                                                                            inputView:self.inputView
+                                                                                           scrollView:self.tableView];
+                                                                }];
+    [self.observers addObject:observer];
+    
+    observer = [[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardWillHideNotification
+                                                                 object:nil
+                                                                  queue:nil
+                                                             usingBlock:^(NSNotification * notification){
+                                                                 [ViewHelper handleKeyboardWillBeHidden:self.tableView];
+                                                             }];
+    [self.observers addObject:observer];
+    
+    [super viewWillAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    for (id observer in self.observers) {
+        [[NSNotificationCenter defaultCenter] removeObserver:observer];
+    }
+    self.observers = nil;
+    [super viewWillDisappear:animated];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -254,16 +290,19 @@ enum
     }
     else if(section == 1)
     {
-//        NSString * userName = self.userNameTextField.text;
-//        NSString * email = self.userEmailTextField.text;
-//        NSString * pwd = self.userPwdTextField.text;
-//        NSString * rePwd = self.userRePwdTextField.text;
-        NSString * userName = @"tankliu101";
-        NSString * email = @"aaaa@ss.com";
-        NSString * pwd = @"abc123456";
-        NSString * rePwd = @"abc123456";
-        self.userCity = @"成都";
-        
+        NSString * userName = self.userNameTextField.text;
+        NSString * email = self.userEmailTextField.text;
+        NSString * pwd = self.userPwdTextField.text;
+        NSString * rePwd = self.userRePwdTextField.text;
+
+        if (DEVELOPER_ENABLE) {
+            userName = @"tankliu101";
+            email = @"aaaa@ss.com";
+            pwd = @"abc123456";
+            rePwd = @"abc123456";
+            self.userCity = @"成都"; 
+        }
+
         NSString * iToastString = @"";
         if ([userName isEqualToString:@""])
         {

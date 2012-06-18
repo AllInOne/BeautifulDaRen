@@ -36,4 +36,11 @@
 
 + (CGFloat)getRatioHeightOfImage:(UIImage*)image ratioWidth:(CGFloat)ratioWidth;
 
++ (void) handleKeyboardDidShow:(NSNotification*)aNotification
+                      rootView:(UIView*)rootView
+                     inputView:(UIView*)inputView
+                    scrollView:(UIScrollView*)scrollView;
+
++ (void) handleKeyboardWillBeHidden:(UIScrollView*)scrollView;
+
 @end

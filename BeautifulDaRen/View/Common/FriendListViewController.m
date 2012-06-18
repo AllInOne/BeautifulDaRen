@@ -16,7 +16,7 @@
 
 @interface FriendListViewController ()
 @property (assign, nonatomic) NSInteger type;
-
+@property (retain, nonatomic) NSDictionary * friendDictionary;
 @property (retain, nonatomic) IBOutlet UITableView * commonTableView;
 @property (retain, nonatomic) NSMutableArray * friendsList;
 
@@ -26,8 +26,13 @@
 @synthesize type = _type;
 @synthesize commonTableView = _commonTableView;
 @synthesize friendsList = _friendsList;
+@synthesize friendDictionary = _friendDictionary;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil type:(NSInteger)type{
+- (id)initWithNibName:(NSString *)nibNameOrNil
+               bundle:(NSBundle *)nibBundleOrNil
+                 type:(NSInteger)type
+           dictionary:(NSDictionary*)dictionary
+{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         NSString* title = nil;
@@ -35,18 +40,23 @@
         switch (_type) {
             case FriendListViewController_TYPE_MY_FOLLOW:
                 title = @"我的关注";
+                self.friendDictionary = nil;
                 break;
             case FriendListViewController_TYPE_MY_FANS:
                 title = @"我的粉丝";
+                self.friendDictionary = nil;
                 break;
             case FriendListViewController_TYPE_MY_BLACKLIST:
                 title = @"黑名单";
+                self.friendDictionary = nil;
                 break;
             case FriendListViewController_TYPE_FRIEND_FOLLOW:
                 title = @"她的关注";
+                self.friendDictionary = dictionary;
                 break;
             case FriendListViewController_TYPE_FRIEND_FANS:
                 title = @"她的粉丝";
+                self.friendDictionary = dictionary;
                 break;
         }
         [self.navigationItem setTitle:title];
@@ -58,10 +68,22 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSInteger userId = [[[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] valueForKey:USERDEFAULT_ACCOUNT_ID] intValue];
     switch (_type) {
         case FriendListViewController_TYPE_MY_FOLLOW:
         {
+            NSInteger userId = [[[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] valueForKey:USERDEFAULT_ACCOUNT_ID] intValue];
+            [[BSDKManager sharedManager] getFollowList:userId
+                                              pageSize:20
+                                             pageIndex:1
+                                       andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+                                           self.friendsList = [NSMutableArray arrayWithArray:[data valueForKey:@"UserList"]];
+                                           [self.commonTableView reloadData];
+                                       }];
+            break;
+        }
+        case FriendListViewController_TYPE_FRIEND_FOLLOW:
+        {
+            NSInteger userId = [[self.friendDictionary valueForKey:KEY_ACCOUNT_USER_ID] intValue];
             [[BSDKManager sharedManager] getFollowList:userId
                                               pageSize:20
                                              pageIndex:1
@@ -73,6 +95,19 @@
         }
         case FriendListViewController_TYPE_MY_FANS:
         {
+            NSInteger userId = [[[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] valueForKey:USERDEFAULT_ACCOUNT_ID] intValue];
+            [[BSDKManager sharedManager] getFollowerList:userId
+                                                pageSize:20
+                                               pageIndex:1
+                                         andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+                                             self.friendsList = [NSMutableArray arrayWithArray:[data valueForKey:@"UserList"]];
+                                             [self.commonTableView reloadData];
+                                         }];
+            break;
+        }
+        case FriendListViewController_TYPE_FRIEND_FANS:
+        {
+            NSInteger userId = [[self.friendDictionary valueForKey:KEY_ACCOUNT_USER_ID] intValue];
             [[BSDKManager sharedManager] getFollowerList:userId
                                                 pageSize:20
                                                pageIndex:1
@@ -82,12 +117,6 @@
                                                }];
             break;
         }
-        case FriendListViewController_TYPE_MY_BLACKLIST:
-            break;
-        case FriendListViewController_TYPE_FRIEND_FOLLOW:
-            break;
-        case FriendListViewController_TYPE_FRIEND_FANS:
-            break;
     }
     
 }
@@ -95,8 +124,13 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+    self.friendDictionary = nil;
+}
+
+- (void)dealloc
+{
+    [_friendDictionary release];
+    [super dealloc];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -154,7 +188,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     FriendDetailViewController * friendDetailController = 
-    [[FriendDetailViewController alloc] init];
+    [[FriendDetailViewController alloc] initWithDictionary:[self.friendsList objectAtIndex:[indexPath section]]];
     [self.navigationController pushViewController:friendDetailController animated:YES];
     [friendDetailController release];
 }
@@ -162,8 +196,8 @@
 #pragma mark ButtonPressDelegate
 -(void)didButtonPressed:(UIButton *)button inView:(UIView *)view
 {
-    NSString * userName = [[self.friendsList objectAtIndex:button.tag] valueForKey:KEY_ACCOUNT_USER_NAME];
-    [[BSDKManager sharedManager] unFollowUser:userName
+    NSInteger userId = [[[self.friendsList objectAtIndex:button.tag] valueForKey:KEY_ACCOUNT_USER_ID] intValue];
+    [[BSDKManager sharedManager] unFollowUser:userId
                               andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
                                   if(status == AIO_STATUS_SUCCESS)
                                   {

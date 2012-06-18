@@ -25,6 +25,9 @@
 @property (retain, nonatomic) IBOutlet UITableView * tableView;
 @property (retain, nonatomic) IBOutlet UIButton * loginWithQQButton;
 @property (retain, nonatomic) IBOutlet UIButton * loginWithSinaWeiboButton;
+@property (retain, nonatomic) IBOutlet UITextField * accountNameField;
+@property (retain, nonatomic) IBOutlet UITextField * accountPwdField;
+@property (retain, nonatomic)  NSMutableArray* observers;
 
 @end
 
@@ -32,6 +35,9 @@
 @synthesize tableView = _tableView;
 @synthesize loginWithQQButton =_loginWithQQButton;
 @synthesize loginWithSinaWeiboButton = _loginWithSinaWeiboButton;
+@synthesize accountNameField = _accountNameField;
+@synthesize accountPwdField = _accountPwdField;
+@synthesize observers = _observers;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -88,6 +94,7 @@
     [_tableView release];
     [_loginWithQQButton release];
     [_loginWithSinaWeiboButton release];
+    [_observers release];
 }
 
 - (void)viewDidLoad
@@ -102,6 +109,40 @@
     self.loginWithQQButton = nil;
     self.loginWithSinaWeiboButton = nil;
     self.tableView = nil;
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    
+    self.observers = [NSMutableArray arrayWithCapacity:2];
+    id observer = [[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardDidShowNotification
+                                                                    object:nil
+                                                                     queue:nil
+                                                                usingBlock:^(NSNotification * notification){
+                                                                    [ViewHelper handleKeyboardDidShow:notification
+                                                                                             rootView:self.view
+                                                                                            inputView:self.inputView
+                                                                                           scrollView:self.tableView];
+                                                                }];
+    [self.observers addObject:observer];
+    
+    observer = [[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardWillHideNotification
+                                                                 object:nil
+                                                                  queue:nil
+                                                             usingBlock:^(NSNotification * notification){
+                                                                 [ViewHelper handleKeyboardWillBeHidden:self.tableView];
+                                                             }];
+    [self.observers addObject:observer];
+    
+    [super viewWillAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    for (id observer in self.observers) {
+        [[NSNotificationCenter defaultCenter] removeObserver:observer];
+    }
+    self.observers = nil;
+    [super viewWillDisappear:animated];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -158,13 +199,16 @@
                 accountInfoInputCell.inputLabel.text = [NSString stringWithFormat:@"%@：", NSLocalizedString(@"account", @"account")];
                 accountInfoInputCell.inputTextField.delegate = self;
                 [accountInfoInputCell.inputTextField setPlaceholder:NSLocalizedString(@"email_or_nickname", @"email_or_nickname")];
+                self.accountNameField = accountInfoInputCell.inputTextField;
                 break;
             }
             case 1:
             {
                 // "password"
                 accountInfoInputCell.inputLabel.text =[NSString stringWithFormat:@"%@：", NSLocalizedString(@"password", @"password")];
-               accountInfoInputCell.inputTextField.delegate = self;
+                [accountInfoInputCell.inputTextField setSecureTextEntry:YES];
+                accountInfoInputCell.inputTextField.delegate = self;
+                self.accountPwdField = accountInfoInputCell.inputTextField;
                 break;
             }
         }
@@ -205,8 +249,14 @@
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([indexPath section] == 1) {
-        NSString* userName = @"tankliu102";
-        [[BSDKManager sharedManager] loginWithUsername:userName password:@"abc123456" andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+        NSString* userName = self.accountNameField.text;
+        NSString* password = self.accountPwdField.text;
+        if (DEVELOPER_ENABLE)
+        {
+            userName = @"tankliu002";
+            password = @"abc123456";
+        }
+        [[BSDKManager sharedManager] loginWithUsername:userName password:password andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
             if(AIO_STATUS_SUCCESS == status)
             {
                 

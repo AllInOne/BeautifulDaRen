@@ -142,7 +142,7 @@
         ((MyInfoTopViewCell*)cell).beautifulIdLabel.text = [userDict valueForKey:USERDEFAULT_ACCOUNT_USERNAME];
         ((MyInfoTopViewCell*)cell).rightImageView.image = [UIImage imageNamed:@"gender_female"];
         ((MyInfoTopViewCell*)cell).editImageView.image = [UIImage imageNamed:@"my_edit"];
-        ((MyInfoTopViewCell*)cell).cityLabel.text = [NSString stringWithFormat:@"%@ 锦江区南街", [userDict valueForKey:USERDEFAULT_ACCOUNT_CITY]];
+        ((MyInfoTopViewCell*)cell).cityLabel.text = [NSString stringWithFormat:@"%@ %@", [userDict valueForKey:USERDEFAULT_ACCOUNT_CITY], [userDict valueForKey:USERDEFAULT_ACCOUNT_ADDRESS]];
         _editButton = ((MyInfoTopViewCell*)cell).editButton;
         ((MyInfoTopViewCell*)cell).delegate = self;
     }
@@ -297,14 +297,16 @@
         viewController = [[FriendListViewController alloc]
                           initWithNibName:@"FriendListViewController"
                           bundle:nil
-                          type:FriendListViewController_TYPE_MY_FOLLOW];
+                          type:FriendListViewController_TYPE_MY_FOLLOW
+                          dictionary:nil];
     }
     else if (button == _fansButton)
     {
         viewController = [[FriendListViewController alloc]
                           initWithNibName:@"FriendListViewController"
                           bundle:nil
-                          type:FriendListViewController_TYPE_MY_FANS];
+                          type:FriendListViewController_TYPE_MY_FANS
+                          dictionary:nil];
     }
     else if (button == _collectionButton)
     {
@@ -318,7 +320,8 @@
         viewController = [[FriendListViewController alloc]
                           initWithNibName:@"FriendListViewController"
                           bundle:nil
-                          type:FriendListViewController_TYPE_MY_BLACKLIST];
+                          type:FriendListViewController_TYPE_MY_BLACKLIST
+                          dictionary:nil];
     }
     else if(button == _buyedButton)
     {
@@ -388,12 +391,12 @@
             s = s;
             NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:
                                    [data valueForKey:@"UserName"],      USERDEFAULT_ACCOUNT_USERNAME,
-                                   [data valueForKey:@"UserType"],      USERDEFAULT_ACCOUNT_EMAIL,
+                                   [data valueForKey:@"UserType"],      USERDEFAULT_ACCOUNT_USER_TYPE,
                                    [data valueForKey:@"Sex"],           USERDEFAULT_ACCOUNT_GENDER,
                                    [data valueForKey:@"id"],            USERDEFAULT_ACCOUNT_ID,
                                    [data valueForKey:@"Email"],         USERDEFAULT_ACCOUNT_EMAIL,
                                    [data valueForKey:@"Address"],       USERDEFAULT_ACCOUNT_ADDRESS,
-                                   @"13901234567",                      USERDEFAULT_ACCOUNT_PHONE_NUMBER,
+                                   [data valueForKey:@"Tel"],           USERDEFAULT_ACCOUNT_PHONE_NUMBER,
                                    [data valueForKey:@"City"],          USERDEFAULT_ACCOUNT_CITY,
                                    [data valueForKey:@"IsVerify"],      USERDEFAULT_ACCOUNT_IS_VERIFY,
                                    [data valueForKey:@"Levels"],        USERDEFAULT_ACCOUNT_LEVEL,
