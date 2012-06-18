@@ -138,14 +138,15 @@
 
 - (void)cellSelected:(NSNotification *)notification
 {
-    WeiboDetailViewController *weiboDetailController = 
-    [[WeiboDetailViewController alloc] init];
-    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: weiboDetailController];
-    
-    [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
-    
-    [navController release];
-    [weiboDetailController release];
+// TODO: [Jerry] need to set the weiboData of WeiboDetailViewController
+//    WeiboDetailViewController *weiboDetailController = 
+//    [[WeiboDetailViewController alloc] init];
+//    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: weiboDetailController];
+//    
+//    [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
+//    
+//    [navController release];
+//    [weiboDetailController release];
 }
 
 #pragma mark- WaterflowDataSource

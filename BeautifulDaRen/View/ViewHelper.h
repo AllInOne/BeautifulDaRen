@@ -43,4 +43,5 @@
 
 + (void) handleKeyboardWillBeHidden:(UIScrollView*)scrollView;
 
++ (NSString *)intervalSinceNow: (NSString *) theDate;
 @end

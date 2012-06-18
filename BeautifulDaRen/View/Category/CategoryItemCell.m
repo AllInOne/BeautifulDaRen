@@ -91,6 +91,7 @@
     NSLog(@"Category %d selected", index);
     WeiboDetailViewController *weiboDetailController = 
     [[WeiboDetailViewController alloc] init];
+    weiboDetailController.weiboData = [self.weiboList objectAtIndex:index];
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: weiboDetailController];
     
     [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];

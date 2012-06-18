@@ -22,7 +22,7 @@
 @property (nonatomic) BOOL frozenSingleTap;
 @property (nonatomic, retain) NSTimer* timerHideNavBar;
 @property (nonatomic, retain) UIImage * imageData;
-
+@property (nonatomic, retain) NSString * imageUrl;
 /**
  * @brief Download and display the image with original size.
  *
@@ -33,5 +33,7 @@
  * @return nil
  */
 + (void)showImage:(UIImage* )image inNavigationController:(UINavigationController* )parentNav;
+
++ (void)showImageUrl:(NSString* )imageUrl size:(CGSize)size inNavigationController:(UINavigationController* )parentNav;
 
 @end
