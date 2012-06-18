@@ -20,7 +20,10 @@ enum
 };
 
 @interface WeiboListViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil type:(NSInteger)type;
+- (id)initWithNibName:(NSString *)nibNameOrNil
+               bundle:(NSBundle *)nibBundleOrNil
+                 type:(NSInteger)type
+           dictionary:(NSDictionary*)dictionary;
 
 
 @end
