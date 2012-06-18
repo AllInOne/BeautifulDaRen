@@ -254,12 +254,11 @@
         if (DEVELOPER_ENABLE)
         {
             userName = @"tankliu002";
-            password = @"abc123456";
+            password = @"abc1234561";
         }
         [[BSDKManager sharedManager] loginWithUsername:userName password:password andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-            if(AIO_STATUS_SUCCESS == status)
+            if(AIO_STATUS_SUCCESS == status && ![[data objectForKey:@"status"] isEqualToString:@"n"])
             {
-                
                 NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:
                                        userName, USERDEFAULT_ACCOUNT_USERNAME,
                                        nil];
@@ -267,7 +266,10 @@
                 [self.navigationController popToRootViewControllerAnimated:YES];
                 [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_LOGIN_SUCCESS object:self userInfo:data];
             }
-            NSLog(@"log status: %d  data:%@",status,data);
+            else
+            {
+                [[iToast makeText:[NSString stringWithFormat:@"%@", [data objectForKey:@"msg"]]] show];
+            }
         }];
     }
     else if([indexPath section] == 2)
