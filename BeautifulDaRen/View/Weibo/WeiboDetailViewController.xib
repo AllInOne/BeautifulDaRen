@@ -279,10 +279,6 @@
 								<string key="NSReuseIdentifierKey">_NS:567</string>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<object class="NSCustomResource" key="IBUIImage" id="1051043358">
-									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">avatar_icon.png</string>
-								</object>
 							</object>
 							<object class="IBUIButton" id="981995516">
 								<reference key="NSNextResponder" ref="362104111"/>
@@ -430,7 +426,6 @@
 						<string key="NSReuseIdentifierKey">_NS:567</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<reference key="IBUIImage" ref="1051043358"/>
 					</object>
 					<object class="IBUILabel" id="915666673">
 						<reference key="NSNextResponder" ref="191373211"/>
@@ -583,6 +578,30 @@
 						<reference key="destination" ref="564808930"/>
 					</object>
 					<int key="connectionID">62</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">brandLable</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="352868968"/>
+					</object>
+					<int key="connectionID">68</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">priceButton</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="297656590"/>
+					</object>
+					<int key="connectionID">69</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">merchantLable</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="408847860"/>
+					</object>
+					<int key="connectionID">70</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -798,7 +817,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">67</int>
+			<int key="maxID">70</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -826,11 +845,14 @@
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="avatarImageView">UIImageView</string>
+						<string key="brandLable">UILabel</string>
 						<string key="commentButton">UIButton</string>
 						<string key="contentLabel">UILabel</string>
 						<string key="detailScrollView">UIScrollView</string>
 						<string key="favourateButton">UIButton</string>
 						<string key="forwardedButton">UIButton</string>
+						<string key="merchantLable">UILabel</string>
+						<string key="priceButton">UIButton</string>
 						<string key="timestampLabel">UILabel</string>
 						<string key="weiboAttachedImageButton">UIButton</string>
 						<string key="weiboAttachedImageView">UIImageView</string>
@@ -839,6 +861,10 @@
 						<object class="IBToOneOutletInfo" key="avatarImageView">
 							<string key="name">avatarImageView</string>
 							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="brandLable">
+							<string key="name">brandLable</string>
+							<string key="candidateClassName">UILabel</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="commentButton">
 							<string key="name">commentButton</string>
@@ -858,6 +884,14 @@
 						</object>
 						<object class="IBToOneOutletInfo" key="forwardedButton">
 							<string key="name">forwardedButton</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="merchantLable">
+							<string key="name">merchantLable</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="priceButton">
+							<string key="name">priceButton</string>
 							<string key="candidateClassName">UIButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="timestampLabel">
@@ -885,7 +919,6 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="avatar_icon.png">{38, 38}</string>
 			<string key="weibo_comment_icon.png">{14, 14}</string>
 			<string key="weibo_detail_btn.png">{58, 23}</string>
 			<string key="weibo_favourate_icon.png">{14, 14}</string>

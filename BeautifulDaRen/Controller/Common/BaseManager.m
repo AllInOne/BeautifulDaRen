@@ -44,7 +44,7 @@
     self.loginCallback = nil;
     
     if (self.currentRequest) {
-        [self.currentRequest release];
+        [_currentRequest release];
     }
 
     [super dealloc];

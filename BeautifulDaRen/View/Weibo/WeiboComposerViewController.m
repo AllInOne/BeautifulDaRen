@@ -40,6 +40,7 @@
 @property (nonatomic, retain) TakePhotoViewController * takePhotoViewController;
 @property (nonatomic, retain) CLLocation * currentLocation;
 @property (nonatomic, retain) NSString * locationString;
+@property (nonatomic, retain) NSString * category;
 
 - (void)setContentFrame:(CGRect)frame;
 - (void)startSelectCategoryViewWithData:(NSArray*)categories;
@@ -66,6 +67,7 @@
 @synthesize locationLoadingView =_locationLoadingView;
 @synthesize currentLocation = _currentLocation;
 @synthesize locationString = _locationString;
+@synthesize category = _category;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -160,6 +162,7 @@
     [self setLocationLoadingView:nil];
     [self setCurrentLocation:nil];
     [self setLocationString:nil];
+    [self setCategory:nil];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
@@ -186,6 +189,7 @@
     [_locationLoadingView release];
     [_currentLocation release];
     [_locationString release];
+    [_category release];
     
     [super dealloc];
 }
@@ -358,6 +362,7 @@
                                              shop:self.maketTextView.text 
                                             brand:self.brandTextView.text 
                                             price:[self.priceTextView.text intValue]
+                                         category:self.category
                                       poslatitude:latitude
                                      posLongitude:longitude 
                                      doneCallback:doneBlock];
@@ -471,6 +476,7 @@
     [[SelectCategoryViewController alloc] initWithNibName:nil bundle:nil];
     categorySelectionController.categoryListData = categories;
     categorySelectionController.delegate = self;
+    categorySelectionController.initialSelectedCategoryId = self.category;
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: categorySelectionController];
     
     [self.navigationController presentModalViewController:navController animated:YES];
@@ -481,7 +487,7 @@
 
 - (IBAction)onCategoryPressed:(id)sender
 {
-    
+    [self.categoryButton setEnabled:NO];
 //    NSArray * categories = [[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_CATEGORY];
 ////    if (categories) {
 ////        [self startSelectCategoryViewWithData:categories];
@@ -490,6 +496,7 @@
     {
         [[BSDKManager sharedManager] getWeiboClassesWithDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
             // TODO: set to defautls
+            [self.categoryButton setEnabled:YES];
             NSArray * categories = [data objectForKey:K_BSDK_CLASSLIST];
             [[NSUserDefaults standardUserDefaults] setObject:categories forKey:USERDEFAULT_CATEGORY];
             
@@ -602,9 +609,10 @@
 }
 
 #pragma mark - select category delegate
-- (void)onCategorySelected:(NSString*)category
+- (void)onCategorySelected:(NSArray*)categories
 {
-    //TODO:
+    [self setCategory:nil];
+    self.category = [categories objectAtIndex:0];
 }
 
 #pragma mark TakePhotoControllerDelegate

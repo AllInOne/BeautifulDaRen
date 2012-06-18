@@ -11,6 +11,7 @@
 #import "DataManager.h"
 #import "ViewConstants.h"
 #import "ViewHelper.h"
+#import "UIImageView+WebCache.h"
 
 @interface FullImageViewController ()
 - (IBAction)onClickSaveButton:(id)sender;
@@ -23,6 +24,8 @@
 - (CGRect)zoomRectForScale:(float)scale withCenter:(CGPoint)center;
 - (void)resetHideNavBarTimer;
 - (void)setImage:(UIImage* )newImage;
+
+@property (nonatomic, assign) CGSize imageSize;
 @end
 
 @implementation FullImageViewController
@@ -39,6 +42,21 @@
 @synthesize frozenSingleTap;
 @synthesize timerHideNavBar = _timerHideNavBar;
 @synthesize imageData = _imageData;
+@synthesize imageUrl = _imageUrl;
+@synthesize imageSize = _imageSize;
+
++ (void)showImageUrl:(NSString* )imageUrl size:(CGSize)size inNavigationController:(UINavigationController* )parentNav
+{
+    FullImageViewController* fullImageViewController = [[FullImageViewController alloc] initWithNibName:nil bundle:nil];
+    
+    [fullImageViewController setImageUrl:imageUrl];
+    [fullImageViewController setImageSize:size];
+    
+    UINavigationController * navController= [[UINavigationController alloc] initWithRootViewController:fullImageViewController];
+    [parentNav presentModalViewController:navController animated:YES];
+    [navController release];
+    [fullImageViewController release];
+}
 
 + (void)showImage:(UIImage* )image inNavigationController:(UINavigationController* )parentNav {
     
@@ -213,11 +231,26 @@
 //
 - (void)setImage:(UIImage* )newImage {
 
-    self.imageView.image = newImage;
-    [self.imageView sizeToFit];
+    float widthScale = 0.0f;
+    float heightScale = 0.0f;
+    if (newImage) {
+        self.imageView.image = newImage;
+        [self.imageView sizeToFit];
+        widthScale = self.imageView.frame.size.width / self.scrollView.frame.size.width;
+        heightScale = self.imageView.frame.size.height / self.scrollView.frame.size.height;
+    }
+    else
+    {
+        [self.imageView setImageWithURL:[NSURL URLWithString:self.imageUrl]];
+        self.imageView.frame = CGRectMake(0.0f, 
+                                          0.0f, 
+                                          self.imageSize.width, 
+                                          self.imageSize.height);        
+        widthScale = self.imageSize.width / self.scrollView.frame.size.width;
+        heightScale = self.imageSize.height / self.scrollView.frame.size.height;
+    }
 
-    float widthScale = self.imageView.frame.size.width / self.scrollView.frame.size.width;
-    float heightScale = self.imageView.frame.size.height / self.scrollView.frame.size.height;
+
     float compressScale = fmaxf(widthScale, heightScale);
     self.imageView.frame = CGRectMake(self.imageView.frame.origin.x, 
                                       self.imageView.frame.origin.y, 

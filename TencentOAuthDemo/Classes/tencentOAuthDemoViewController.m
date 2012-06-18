@@ -434,9 +434,9 @@
 		
 	}
 	else {
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"操作失败" message:[NSString stringWithFormat:@"%", response.errorMsg]
+		UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"操作失败" message:[NSString stringWithFormat:@"%", response.errorMsg]
 							  
-													   delegate:self cancelButtonTitle:@"我知道啦" otherButtonTitles: nil];
+													   delegate:self cancelButtonTitle:@"我知道啦" otherButtonTitles: nil] autorelease];
 		[alert show];
 	}
 	_labelNickName.text=@"获取个人信息完成";

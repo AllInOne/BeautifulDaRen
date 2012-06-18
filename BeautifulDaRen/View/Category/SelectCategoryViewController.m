@@ -34,6 +34,7 @@
 @synthesize delegate;
 @synthesize contentScrollView = _contentScrollView;
 @synthesize categorySelectCells = _categorySelectCells;
+@synthesize initialSelectedCategoryId = _initialSelectedCategoryId;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -63,6 +64,7 @@
     [_categorySelectState release];
     [_contentScrollView release];
     [_categorySelectCells release];
+    [_initialSelectedCategoryId release];
 }
 
 - (void)viewDidLoad
@@ -86,11 +88,20 @@
         
         contentHeight = CATEGORY_CELL_Y_OFFSET + (CGRectGetHeight(cell.frame) + CATEGORY_CELL_Y_MARGIN) * (index/2 + 1), CGRectGetWidth(cell.frame);
         
+        if (self.initialSelectedCategoryId && [self.initialSelectedCategoryId isEqualToString:[[self.categoryListData objectAtIndex:index] objectForKey:K_BSDK_UID]]) {
+            [cell.checkBox setImage:[UIImage imageNamed:@"myshow_category_checked"] forState:UIControlStateNormal];
+            [self.categorySelectState addObject:[NSNumber numberWithInt:1]];
+        }
+        else
+        {
+            [self.categorySelectState addObject:[NSNumber numberWithInt:0]];
+        }
+        
         [self.contentScrollView addSubview:cell];
         
         [self.categorySelectCells addObject:cell];
 
-        [self.categorySelectState addObject:[NSNumber numberWithInt:0]];
+
     }
     
     [self.contentScrollView setContentSize:CGSizeMake(SCREEN_WIDTH, contentHeight)];
@@ -103,6 +114,7 @@
     [self setCategorySelectState:nil];
     [self setContentScrollView:nil];
     [self setCategorySelectCells:nil];
+    [self setInitialSelectedCategoryId:nil];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -149,7 +161,7 @@
 
     for (NSNumber * checkValue in self.categorySelectState) {
         if ([checkValue intValue] == 1) {
-           [ret addObject:[self.categoryListData objectAtIndex:index]];
+           [ret addObject:[[self.categoryListData objectAtIndex:index] objectForKey:K_BSDK_UID]];
         }
         index++;
     }

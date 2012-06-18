@@ -16,10 +16,16 @@
 #import "FriendDetailViewController.h"
 #import "iToast.h"
 #import "MapViewController.h"
+#import "BSDKDefines.h"
+#import "UIImageView+WebCache.h"
 
 #define FONT_SIZE 14.0f
 #define CELL_CONTENT_WIDTH 280.0f
 #define CELL_CONTENT_MARGIN 5.0f
+
+#define IMAGE_WIDTH     (210.0f)
+
+#define PRICE_BUTTON_Y_OFFSET     (100.0f)
 
 #define MAP_VIEW_WIDTH      (280.0f)
 #define MAP_VIEW_HEIGHT     (60.0f)
@@ -30,7 +36,9 @@
 
 @property (nonatomic, retain) MapViewController * mapViewController;
 @property (nonatomic, retain) NSString * weiboContent;
+@property (nonatomic, retain) UIToolbar * toolbar;
 - (void)refreshView;
+- (void)addToolbar;
 @end
 
 @implementation WeiboDetailViewController
@@ -45,6 +53,11 @@
 @synthesize timestampLabel = _timestampLabel;
 @synthesize weiboAttachedImageButton = _weiboAttachedImageButton;
 @synthesize mapViewController = _mapViewController;
+@synthesize weiboData = _weiboData;
+@synthesize toolbar = _toolbar;
+@synthesize merchantLable = _merchantLable;
+@synthesize priceButton = _priceButton;
+@synthesize brandLable = _brandLable;
 
 - (void)dealloc
 {
@@ -56,6 +69,15 @@
     [_timestampLabel release];
     [_weiboAttachedImageButton release];
     [_mapViewController release];
+    [_weiboData release];
+    [_toolbar release];
+    [favourateButton release];
+    [commentButton release];
+    [forwardedButton release];
+    [_contentLabel release];
+    [_brandLable release];
+    [_merchantLable release];
+    [_priceButton release];
     
     [super dealloc];
 }
@@ -68,49 +90,6 @@
         
         [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClicked) title:NSLocalizedString(@"refresh", @"refresh")]];       
         self.navigationItem.title = NSLocalizedString(@"weibo_detail", @"weibo_detail");
-        
-        UIToolbar *tempToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0,372, 320,44)];
-  
-        UIBarButtonItem *flexible = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-
-//        UIBarButtonItem *buyButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar购买22x22" target:self action:@selector(onBuy)];
-
-        UIBarButtonItem *refreshButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar_refresh_icon" target:self action:@selector(onRefresh)];
-        
-
-        UIBarButtonItem *forwardButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar_forward_icon" target:self action:@selector(onForward)];
-
-        UIBarButtonItem *commentButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar_comment_icon" target:self action:@selector(onComment)];
-
-        UIBarButtonItem *favourateButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar_favourate_icon" target:self action:@selector(onFavourate)];
-        
-        NSArray *barItems = [[NSArray alloc]initWithObjects:flexible, 
-                                                            refreshButtonItem, 
-                                                            flexible,
-                                                            forwardButtonItem,
-                                                            flexible,
-                                                            commentButtonItem, 
-                                                            flexible, 
-                                                            favourateButtonItem,
-                                                            flexible,
-                                                            nil];
-        
-        tempToolbar.items= barItems;
-        UIImageView * tabBarBg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"toolbar_background"]];
-        tabBarBg.frame = CGRectMake(0, 0, 320, 45);
-        tabBarBg.contentMode = UIViewContentModeScaleToFill;
-        if (SYSTEM_VERSION_LESS_THAN(@"5.0")) {
-            [tempToolbar  insertSubview:tabBarBg atIndex:0];
-        }
-        else
-        {
-            [tempToolbar  insertSubview:tabBarBg atIndex:1];            
-        }
-        [self.view addSubview: tempToolbar];
-        [flexible release];
-        [tabBarBg release];
-        [barItems release];
-        [tempToolbar release];
     }
     return self;
 }
@@ -188,6 +167,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self refreshView];
+    [self addToolbar];
 }
 
 - (void)viewDidUnload
@@ -204,6 +184,13 @@
     self.timestampLabel = nil;
     self.weiboAttachedImageButton = nil;
     self.mapViewController = nil;
+    self.weiboData = nil;
+    self.merchantLable = nil;
+    self.priceButton = nil;
+    self.brandLable = nil;
+    
+    [self.toolbar removeFromSuperview];
+    self.toolbar = nil;
 
     [super viewDidUnload];
     // Release any retained subviews of the main view.
@@ -216,41 +203,131 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (void)refreshView
+- (void)addToolbar
 {
-    //Content for test
-    _weiboContent = [[NSString alloc] initWithString:@"我最近买了一双鞋子，很漂亮，你看看吧!"];
+    UIToolbar *tempToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0,372, 320,44)];
     
+    UIBarButtonItem *flexible = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    
+    //        UIBarButtonItem *buyButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar购买22x22" target:self action:@selector(onBuy)];
+    
+    UIBarButtonItem *refreshButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar_refresh_icon" target:self action:@selector(onRefresh)];
+    
+    
+    UIBarButtonItem *forwardButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar_forward_icon" target:self action:@selector(onForward)];
+    
+    UIBarButtonItem *commentButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar_comment_icon" target:self action:@selector(onComment)];
+    
+    UIBarButtonItem *favourateButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar_favourate_icon" target:self action:@selector(onFavourate)];
+    
+    NSArray *barItems = [[NSArray alloc]initWithObjects:flexible, 
+                         refreshButtonItem, 
+                         flexible,
+                         forwardButtonItem,
+                         flexible,
+                         commentButtonItem, 
+                         flexible, 
+                         favourateButtonItem,
+                         flexible,
+                         nil];
+    
+    tempToolbar.items= barItems;
+    UIImageView * tabBarBg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"toolbar_background"]];
+    tabBarBg.frame = CGRectMake(0, 0, 320, 45);
+    tabBarBg.contentMode = UIViewContentModeScaleToFill;
+    if (SYSTEM_VERSION_LESS_THAN(@"5.0")) {
+        [tempToolbar  insertSubview:tabBarBg atIndex:0];
+    }
+    else
+    {
+        [tempToolbar  insertSubview:tabBarBg atIndex:1];            
+    }
+    [self.view addSubview: tempToolbar];
+    [flexible release];
+    [tabBarBg release];
+    [barItems release];
+    [tempToolbar release];
+}
+
+- (void)refreshView
+{    
+    // attach image
+    NSInteger picWidth = [[self.weiboData objectForKey:K_BSDK_PICTURE_WIDTH] intValue];
+    NSInteger picHeight = [[self.weiboData objectForKey:K_BSDK_PICTURE_HEIGHT] intValue];
+    [self.weiboAttachedImageView setImageWithURL:[NSURL URLWithString:[self.weiboData objectForKey:K_BSDK_PICTURE_320]]];
+    
+    self.weiboAttachedImageView.frame = CGRectMake((SCREEN_WIDTH - IMAGE_WIDTH)/2, 
+                                                   CGRectGetMinY(self.weiboAttachedImageView.frame), 
+                                                   IMAGE_WIDTH, 
+                                                   picHeight * IMAGE_WIDTH/picWidth);
+    //  buttons
     self.favourateButton.frame = CGRectMake(self.favourateButton.frame.origin.x, self.weiboAttachedImageView.frame.origin.y + CGRectGetHeight(self.weiboAttachedImageView.frame) + CELL_CONTENT_MARGIN, self.favourateButton.frame.size.width, self.favourateButton.frame.size.height);
+    
+    [self.favourateButton setTitle:@"    0" forState:UIControlStateNormal];
     
     self.forwardedButton.frame = CGRectMake(self.forwardedButton.frame.origin.x, self.favourateButton.frame.origin.y, self.forwardedButton.frame.size.width, self.forwardedButton.frame.size.height);
     
+    [self.forwardedButton setTitle:@"    1234" forState:UIControlStateNormal];
+    
     self.commentButton.frame = CGRectMake(self.commentButton.frame.origin.x, self.favourateButton.frame.origin.y, self.commentButton.frame.size.width, self.commentButton.frame.size.height);
+    
+    [self.commentButton setTitle:@"    0" forState:UIControlStateNormal];
     
     NSInteger yOffset = self.favourateButton.frame.origin.y + CGRectGetHeight(self.favourateButton.frame) + CELL_CONTENT_MARGIN;
     
-    _mapViewController = [[MapViewController alloc] initWithName:@"test map name" description:nil latitude:30.61448473 longitude:104.08960181 showSelf:NO];
+    if ([self.weiboData objectForKey:K_BSDK_LATITUDE] && [self.weiboData objectForKey:K_BSDK_LONGITUDE] && ([[self.weiboData objectForKey:K_BSDK_LATITUDE] intValue] != 0) && ([[self.weiboData objectForKey:K_BSDK_LONGITUDE] intValue] != 0)) {
+//        _mapViewController = [[MapViewController alloc] initWithName:@"test map name" description:nil latitude:[[self.weiboData objectForKey:K_BSDK_LATITUDE] floatValue] longitude:[[self.weiboData objectForKey:K_BSDK_LONGITUDE] floatValue] showSelf:NO];
+        _mapViewController = [[MapViewController alloc] initWithName:@"test map name" description:nil latitude:30.61510126 longitude:104.09182433 showSelf:NO];
+        
+        _mapViewController.view.frame = CGRectMake(MAP_VIEW_X_OFFSET, yOffset, MAP_VIEW_WIDTH, MAP_VIEW_HEIGHT);
+        _mapViewController.navigationController.toolbarHidden = YES;
+        
+        [self.detailScrollView addSubview:_mapViewController.view];
+        
+        yOffset = _mapViewController.view.frame.origin.y + MAP_VIEW_HEIGHT * 2;
+    }
     
-    _mapViewController.view.frame = CGRectMake(MAP_VIEW_X_OFFSET, yOffset, MAP_VIEW_WIDTH, MAP_VIEW_HEIGHT);
-    _mapViewController.navigationController.toolbarHidden = YES;
-    
-    [self.detailScrollView addSubview:_mapViewController.view];
-    
-    yOffset = _mapViewController.view.frame.origin.y + MAP_VIEW_HEIGHT * 2;
-    
-    self.contentLabel.text = self.weiboContent;
-    self.contentLabel.frame = CGRectMake(self.contentLabel.frame.origin.x, yOffset, self.contentLabel.frame.size.width, [ViewHelper getHeightOfText:self.weiboContent ByFontSize:FONT_SIZE contentWidth:CELL_CONTENT_WIDTH]);
-    
+    //Content
+    if ([self.weiboData objectForKey:K_BSDK_CONTENT]) {
+        _weiboContent = [[NSString alloc] initWithString:[self.weiboData objectForKey:K_BSDK_CONTENT]];
+        self.contentLabel.text = self.weiboContent;
+        self.contentLabel.frame = CGRectMake(self.contentLabel.frame.origin.x, yOffset, self.contentLabel.frame.size.width, [ViewHelper getHeightOfText:self.weiboContent ByFontSize:FONT_SIZE contentWidth:CELL_CONTENT_WIDTH]);
+    }
+
     // Custom initialization
     [_detailScrollView setContentSize:CGSizeMake(SCREEN_WIDTH, self.contentLabel.frame.origin.y + CGRectGetHeight(self.contentLabel.frame) + 150)];
     
     [self.avatarImageView setImage:[UIImage imageNamed:@"avatar_big"]];
-    [self.weiboAttachedImageView setImage:[UIImage imageNamed:@"weibo_sample2"]];
     
     self.weiboAttachedImageButton.frame = self.weiboAttachedImageView.frame;
     
-    self.timestampLabel.text = @"一小时前";
+    self.timestampLabel.text = [ViewHelper intervalSinceNow:[self.weiboData objectForKey:K_BSDK_CREATETIME]];
     [self.timestampLabel setTextColor:[UIColor purpleColor]];
+    
+    NSString * price = [self.weiboData objectForKey:K_BSDK_PRICE];
+    if (price && ([price intValue] != 0)) {
+        [self.priceButton setTitle:[NSString stringWithFormat:@"¥%d", [price intValue]] forState:UIControlStateNormal];
+        self.priceButton.frame = CGRectMake(CGRectGetMinX(self.priceButton.frame), 
+                                            CGRectGetMinY(self.favourateButton.frame) - PRICE_BUTTON_Y_OFFSET, 
+                                            CGRectGetWidth(self.priceButton.frame),
+                                            CGRectGetHeight(self.priceButton.frame));
+    }
+    else
+    {
+        [self.priceButton setHidden:YES];
+    }
+    
+    NSString * merchant = [self.weiboData objectForKey:K_BSDK_SHOPMERCHANT];
+    if  (merchant)
+    {
+        self.merchantLable.text = merchant;
+    }
+    
+    NSString * brand = [self.weiboData objectForKey:K_BSDK_BRANDSERVICE];
+    if  (brand)
+    {
+        self.brandLable.text = brand;
+    }
 }
 
 - (void)onBackButtonClicked {
@@ -266,7 +343,7 @@
 
 -(IBAction)onImageButtonPressed:(id)sender
 {
-    [FullImageViewController showImage:[UIImage imageNamed:@"weibo_sample2"]inNavigationController:self.navigationController];
+    [FullImageViewController showImageUrl:[self.weiboData objectForKey:K_BSDK_PICTURE_ORIGINAL] size:CGSizeMake([[self.weiboData objectForKey:K_BSDK_PICTURE_WIDTH] intValue], [[self.weiboData objectForKey:K_BSDK_PICTURE_HEIGHT] intValue]) inNavigationController:self.navigationController];
 }
 
 -(IBAction)onBrandButtonPressed:(id)sender

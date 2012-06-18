@@ -373,7 +373,7 @@
     {
         NSLog(@"_updateAvatarButton pressed");
         
-        self.takePhotoViewController = [[TakePhotoViewController alloc] init];
+        _takePhotoViewController = [[TakePhotoViewController alloc] init];
         
         [self.takePhotoViewController setDelegate:self];
         [self.takePhotoViewController setupImagePicker:UIImagePickerControllerSourceTypeCamera];
