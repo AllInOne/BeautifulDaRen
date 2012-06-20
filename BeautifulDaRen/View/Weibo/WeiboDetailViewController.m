@@ -17,6 +17,7 @@
 #import "iToast.h"
 #import "MapViewController.h"
 #import "BSDKDefines.h"
+#import "BSDKManager.h"
 #import "UIImageView+WebCache.h"
 
 #define FONT_SIZE 14.0f
@@ -112,6 +113,7 @@
     WeiboForwardCommentViewController *forwardViewContoller = 
     [[WeiboForwardCommentViewController alloc] initWithNibName:nil bundle:nil];
     forwardViewContoller.forwardMode = YES;
+    [forwardViewContoller setDelegate:self];
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: forwardViewContoller];
  
     [self.navigationController presentModalViewController:navController animated:YES];
@@ -125,12 +127,56 @@
     WeiboForwardCommentViewController *forwardViewContoller = 
     [[WeiboForwardCommentViewController alloc] initWithNibName:nil bundle:nil];
     forwardViewContoller.forwardMode = NO;
+    [forwardViewContoller setDelegate:self];
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: forwardViewContoller];
     
     [self.navigationController presentModalViewController:navController animated:YES];
     
     [navController release];
     [forwardViewContoller release];
+}
+
+-(void)onConfirmed:(WeiboForwardCommentViewController*)view
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_SHOWWAITOVERLAY object:self];
+    
+    __block NSInteger doneCount = 0;
+    __block NSInteger doneCountExpected = 1;
+    __block NSString * errorMsg = nil;
+    
+    processDoneWithDictBlock doneBlock = ^(AIO_STATUS status, NSDictionary * data){
+        NSLog(@"Send done: %d, %@", status, data);
+        
+        doneCount++;
+        if (doneCount == doneCountExpected) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_HIDEWAITOVERLAY object:self];
+            if ([data objectForKey:K_BSDK_RESPONSE_STATUS] && !K_BSDK_IS_RESPONSE_OK(data)) {
+                errorMsg = K_BSDK_GET_RESPONSE_MESSAGE(data);
+            }
+            
+            if (errorMsg == nil)
+            {
+                [ViewHelper showSimpleMessage:NSLocalizedString(@"send_succeed", @"send_succeed") withTitle:nil withButtonText:NSLocalizedString(@"ok", @"ok")];
+            }
+            else
+            {
+                [ViewHelper showSimpleMessage:errorMsg withTitle:nil withButtonText:NSLocalizedString(@"ok", @"ok")];
+            }
+        }
+        
+    };
+    
+    
+    if (view.forwardMode || (!view.forwardMode && view.isCheckBoxChecked))
+    {
+//        [[SinaSDKManager sharedManager] sendWeiBoWithText:self.weiboContentTextView.text image:[self.selectedImage scaleToSize:CGSizeMake(320.0, self.selectedImage.size.height * 320.0/self.selectedImage.size.width)] doneCallback:doneBlock];
+        
+//        doneCountExpected++;
+    };
+    
+    if (!view.forwardMode || (view.forwardMode && view.isCheckBoxChecked)) {
+        [[BSDKManager sharedManager] sendComment:view.weiboContentTextView.text toWeibo:[self.weiboData objectForKey:K_BSDK_UID] andDoneCallback:doneBlock];
+    }
 }
 
 - (void)onFavourate

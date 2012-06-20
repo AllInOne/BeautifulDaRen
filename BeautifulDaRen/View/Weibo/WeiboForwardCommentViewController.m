@@ -17,7 +17,6 @@
 
 @interface WeiboForwardCommentViewController ()
 @property (nonatomic, assign) BOOL isKeypadShow;
-@property (nonatomic, assign) BOOL isCheckBoxChecked;
 @end
 
 @implementation WeiboForwardCommentViewController
@@ -29,6 +28,7 @@
 @synthesize checkBoxText = _checkBoxText;
 @synthesize checkBoxButton = _checkBoxButton;
 @synthesize isCheckBoxChecked = _isCheckBoxChecked;
+@synthesize delegate = _delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -163,7 +163,10 @@
 }
 
 - (void)onSendButtonClicked {
-    // TODO:
+    if (self.delegate) {
+        [self.delegate onConfirmed:self];
+    }
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 - (IBAction)onAtFriendPressed:(id)sender

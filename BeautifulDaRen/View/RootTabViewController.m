@@ -12,9 +12,14 @@
 #import "BSDKManager.h"
 #import "ViewConstants.h"
 #import "HomeViewController.h"
+#import "UIImage+Scale.h"
+#import "WeiboComposerViewController.h"
+#import "MyShowViewController.h"
 
 @interface RootTabViewController()
+
 - (void)initLocalizedString;
+- (void)startMyshowAction;
 @end
 
 @implementation UINavigationBar (UINavigationBarCategory)
@@ -44,6 +49,11 @@
 }
 
 #pragma mark - View lifecycle
+
+-(void)dealloc
+{
+    [super dealloc];
+}
 
 - (void)viewDidLoad
 {
@@ -89,6 +99,12 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_SHOULD_LOGIN object:self];
         return NO;
     }
+    else if ( [navController.topViewController isKindOfClass:[MyShowViewController class]] )
+    {
+        [self startMyshowAction];
+        return NO;
+    }
+    
     return YES;
 }
 
@@ -127,6 +143,105 @@
     {
         [self.tabBar setBackgroundImage:[UIImage imageNamed:@"tabbar_background"]];
     }
+}
+
+#pragma mark - UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex != [actionSheet destructiveButtonIndex])
+    {
+        switch (actionSheet.tag)
+        {
+            case ACTIONSHEET_IMAGE_PICKER:
+            {
+                NSString *pressed = [actionSheet buttonTitleAtIndex:buttonIndex];
+                
+                if ([pressed isEqualToString:IMAGE_PICKER_CAMERA])
+                {
+                    UIImagePickerController * imagePicker = [APPDELEGATE getImagePicker];
+                    
+                    [imagePicker setDelegate: self];
+                    [imagePicker setSourceType: UIImagePickerControllerSourceTypeCamera];
+                     
+                    [self presentModalViewController:imagePicker animated:YES];
+
+                }
+                else if ([pressed isEqualToString:IMAGE_PICKER_LIBRARY])
+                {
+                    UIImagePickerController * imagePicker = [APPDELEGATE getImagePicker];
+                    
+                    [imagePicker setDelegate: self];
+                    [imagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+                     
+                     [self presentModalViewController:imagePicker animated:YES];
+                }
+                else if ([pressed isEqualToString:IMAGE_PICKER_DELETE])
+                {
+                    // TODO:
+                }
+            }
+            default:
+                break;
+        }
+    }
+}
+
+#pragma mark UIImagePickerControllerDelegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
+    [picker dismissModalViewControllerAnimated:NO];
+    
+    WeiboComposerViewController *weiboComposerViewControlller = 
+    [[WeiboComposerViewController alloc] initWithNibName:nil bundle:nil];
+    
+    weiboComposerViewControlller.selectedImage = [image scaleToSize:CGSizeMake(320.0, image.size.height * 320.0/image.size.width)];
+    
+    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: weiboComposerViewControlller];
+    
+    [self presentModalViewController:navController animated:YES];
+    [weiboComposerViewControlller release];
+    [navController release];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    
+    [picker dismissModalViewControllerAnimated:YES];
+}
+
+- (void)startMyshowAction
+{
+    UIActionSheet * imagePickerActionSheet = [[UIActionSheet alloc] initWithTitle:@""
+                                                                         delegate:self
+                                                                cancelButtonTitle:nil
+                                                           destructiveButtonTitle:nil
+                                                                otherButtonTitles:nil];
+    
+    imagePickerActionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+    imagePickerActionSheet.tag = ACTIONSHEET_IMAGE_PICKER;
+    
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+    {
+        if ([UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceRear])
+        {
+            [imagePickerActionSheet addButtonWithTitle:IMAGE_PICKER_CAMERA];        
+        }
+    }
+    
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
+    {
+        [imagePickerActionSheet addButtonWithTitle:IMAGE_PICKER_LIBRARY];
+    }
+    
+    if ([imagePickerActionSheet numberOfButtons] > 0)
+    {
+        [imagePickerActionSheet setDestructiveButtonIndex:[imagePickerActionSheet addButtonWithTitle:NSLocalizedString(@"cancel", @"cancel")]];
+        [imagePickerActionSheet showInView:self.view];
+    }
+    
+    [imagePickerActionSheet release];
 }
 
 @end

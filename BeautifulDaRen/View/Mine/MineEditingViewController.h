@@ -13,6 +13,6 @@
 #import "TakePhotoViewController.h"
 
 @interface MineEditingViewController
-: UITableViewController <UITableViewDelegate, UITableViewDataSource, ButtonPressDelegate, SegmentDelegate, SelectCityProtocol, TakePhotoControllerDelegate>
+: UITableViewController <UITableViewDelegate, UITableViewDataSource, ButtonPressDelegate, SegmentDelegate, SelectCityProtocol, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate>
 
 @end

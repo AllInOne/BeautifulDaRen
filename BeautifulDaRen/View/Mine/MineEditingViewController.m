@@ -15,21 +15,21 @@
 #import "SegmentControl.h"
 #import "iToast.h"
 #import "ViewConstants.h"
-#import "TakePhotoViewController.h"
+#import "UIImage+Scale.h"
 
 @interface MineEditingViewController()
 
 @property (retain, nonatomic) IBOutlet UIButton * updateAvatarButton;
 @property (retain, nonatomic) NSMutableDictionary * tableViewDict;
-@property (retain, nonatomic) TakePhotoViewController * takePhotoViewController;
 @property (retain, nonatomic) UIImage * avatarImage;
+
+- (void)startCameraAction;
 @end
  
 @implementation MineEditingViewController
 @synthesize updateAvatarButton = _updateAvatarButton;
 @synthesize tableViewDict = _tableViewDict;
 @synthesize avatarImage = _avatarImage;
-@synthesize takePhotoViewController = _takePhotoViewController;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -64,7 +64,6 @@
     [_updateAvatarButton release];
     [_tableViewDict release];
     [_avatarImage release];
-    [_takePhotoViewController release];
 }
 
 - (void)viewDidLoad
@@ -84,7 +83,6 @@
     self.updateAvatarButton = nil;
     self.tableViewDict = nil;
     self.avatarImage = nil;
-    self.takePhotoViewController = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -371,32 +369,8 @@
 {
     if(button == _updateAvatarButton)
     {
-        NSLog(@"_updateAvatarButton pressed");
-        
-        _takePhotoViewController = [[TakePhotoViewController alloc] init];
-        
-        [self.takePhotoViewController setDelegate:self];
-        [self.takePhotoViewController setupImagePicker:UIImagePickerControllerSourceTypeCamera];
-            [self presentModalViewController:self.takePhotoViewController.imagePickerController animated:YES];
-
+        [self startCameraAction];
     }
-}
-
-- (void)didTakePicture:(UIImage *)picture
-{
-    self.avatarImage = picture;
-    [(UITableView*)self.view reloadData];
-    self.takePhotoViewController = nil;
-}
-
-- (void)didChangeToGalleryMode
-{
-    self.takePhotoViewController = nil;
-}
-
-- (void)didFinishWithCamera
-{
-    self.takePhotoViewController = nil;
 }
 
 #pragma mark SegmentDelegate
@@ -413,6 +387,98 @@
     [_tableViewDict setValue:city
                       forKey:USERDEFAULT_ACCOUNT_CITY];
     [self.tableView reloadData];
+}
+
+#pragma mark - UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex != [actionSheet destructiveButtonIndex])
+    {
+        switch (actionSheet.tag)
+        {
+            case ACTIONSHEET_IMAGE_PICKER:
+            {
+                NSString *pressed = [actionSheet buttonTitleAtIndex:buttonIndex];
+                
+                if ([pressed isEqualToString:IMAGE_PICKER_CAMERA])
+                {
+                    UIImagePickerController * imagePicker = [APPDELEGATE getImagePicker];
+                    
+                    [imagePicker setDelegate: self];
+                    [imagePicker setSourceType: UIImagePickerControllerSourceTypeCamera];
+                    
+                    [self presentModalViewController:imagePicker animated:YES];
+                    
+                }
+                else if ([pressed isEqualToString:IMAGE_PICKER_LIBRARY])
+                {
+                    UIImagePickerController * imagePicker = [APPDELEGATE getImagePicker];
+                    
+                    [imagePicker setDelegate: self];
+                    [imagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+                    
+                    [self presentModalViewController:imagePicker animated:YES];
+                }
+                else if ([pressed isEqualToString:IMAGE_PICKER_DELETE])
+                {
+                    // TODO:
+                }
+            }
+            default:
+                break;
+        }
+    }
+}
+
+#pragma mark UIImagePickerControllerDelegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
+    [picker dismissModalViewControllerAnimated:NO];
+
+    self.avatarImage = [image scaleToSize:CGSizeMake(320.0, image.size.height * 320.0/image.size.width)];
+    [(UITableView*)self.view reloadData];
+
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    
+    [picker dismissModalViewControllerAnimated:YES];
+}
+
+- (void)startCameraAction
+{
+    UIActionSheet * imagePickerActionSheet = [[UIActionSheet alloc] initWithTitle:@""
+                                                                         delegate:self
+                                                                cancelButtonTitle:nil
+                                                           destructiveButtonTitle:nil
+                                                                otherButtonTitles:nil];
+    
+    imagePickerActionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+    imagePickerActionSheet.tag = ACTIONSHEET_IMAGE_PICKER;
+    
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+    {
+        if ([UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceRear])
+        {
+            [imagePickerActionSheet addButtonWithTitle:IMAGE_PICKER_CAMERA];        
+        }
+    }
+    
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
+    {
+        [imagePickerActionSheet addButtonWithTitle:IMAGE_PICKER_LIBRARY];
+    }
+    
+    if ([imagePickerActionSheet numberOfButtons] > 0)
+    {
+        [imagePickerActionSheet setDestructiveButtonIndex:[imagePickerActionSheet addButtonWithTitle:NSLocalizedString(@"cancel", @"cancel")]];
+        [imagePickerActionSheet showInView:self.view];
+    }
+    
+    [imagePickerActionSheet release];
 }
 
 @end

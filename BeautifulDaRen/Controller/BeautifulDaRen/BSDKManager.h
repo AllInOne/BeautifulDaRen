@@ -93,5 +93,9 @@
             toWeibo:(NSString*)blogId
      andDoneCallback:(processDoneWithDictBlock)callback;
 
+- (void)getCommentListOfWeibo:(NSString*)blogId
+                     pageSize:(NSInteger)pageSize 
+                    pageIndex:(NSInteger)pageIndex 
+    andDoneCallback:(processDoneWithDictBlock)callback;
 
 @end

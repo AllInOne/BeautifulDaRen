@@ -25,13 +25,6 @@
 #define LOCATION_ACTIVITY_Y_OFFSET     (25.0)
 #define LOCATION_ACTIVITY_X_OFFSET     (10.0)
 
-#define ACTIONSHEET_IMAGE_PICKER 1
-
-#define IMAGE_PICKER_CAMERA       NSLocalizedString(@"take_photo", @"take_photo")
-#define IMAGE_PICKER_LIBRARY      NSLocalizedString(@"album", @"album")
-#define IMAGE_PICKER_DELETE       NSLocalizedString(@"delete_selected_photos", @"delete_selected_photos")
-
-
 #define TAG_ALERTVIEW_CLEAR_LOCATION    0
 
 

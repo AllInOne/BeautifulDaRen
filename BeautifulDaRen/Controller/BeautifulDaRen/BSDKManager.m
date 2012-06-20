@@ -354,7 +354,7 @@ static BSDKManager *sharedInstance;
 //        callback(status, [data objectForKey:K_BSDK_RESPONSE_BLOGLIST]);
 //    };
     
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:5];
     
     [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETLIST forKey:K_BSDK_ACTION];
@@ -389,7 +389,7 @@ static BSDKManager *sharedInstance;
 //        callback(status, [data objectForKey:K_BSDK_RESPONSE_BLOGLIST]);
 //    };
     
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:5];
     
     [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_SEARCH forKey:K_BSDK_ACTION];
@@ -410,7 +410,7 @@ static BSDKManager *sharedInstance;
                      pageIndex:(NSInteger)pageIndex 
                andDoneCallback:(processDoneWithDictBlock)callback
 {
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:5];
     
     [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETLIST forKey:K_BSDK_ACTION];
@@ -535,6 +535,28 @@ static BSDKManager *sharedInstance;
                        postDataType:kBSDKRequestPostDataTypeNormal
                    httpHeaderFields:nil
                        doneCallback:callback];
+}
+
+- (void)getCommentListOfWeibo:(NSString*)blogId
+                     pageSize:(NSInteger)pageSize 
+                    pageIndex:(NSInteger)pageIndex 
+              andDoneCallback:(processDoneWithDictBlock)callback
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
+    
+    [params setObject:K_BSDK_CATEGORY_SNS forKey:K_BSDK_CATEGORY];
+    [params setObject:K_BSDK_ACTION_GETCOMMENTLIST forKey:K_BSDK_ACTION];
+    [params setObject:[NSString stringWithFormat:@"%d", pageIndex] forKey:K_BSDK_PAGEINDEX];
+    [params setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:K_BSDK_PAGESIZE];
+    [params setObject:blogId forKey:K_BSDK_BLOGUID];
+    
+    [self sendRequestWithMethodName:nil
+                         httpMethod:@"POST" 
+                             params:params 
+                       postDataType:kBSDKRequestPostDataTypeNormal
+                   httpHeaderFields:nil
+                       doneCallback:callback];
+
 }
 
 #pragma mark Social related API

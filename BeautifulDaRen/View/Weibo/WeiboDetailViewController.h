@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WeiboForwardCommentViewController.h"
 
-@interface WeiboDetailViewController : UIViewController
+@interface WeiboDetailViewController : UIViewController <ForwardCommentViewControllerProtocol>
 
 @property (nonatomic, retain) IBOutlet UIScrollView * detailScrollView;
 @property (nonatomic, retain) NSString * userId;
