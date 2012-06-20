@@ -77,9 +77,6 @@
                                              pageIndex:1
                                        andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
                                            self.friendsList = [NSMutableArray arrayWithArray:[data valueForKey:@"UserList"]];
-                                           // TO delete
-                                           NSDictionary * dict = [self.friendsList objectAtIndex:0];
-                                           [dict setValue:[NSNumber numberWithInt:FRIEND_RELATIONSHIP_INTER_FOLLOW] forKey:KEY_ACCOUNT_RELATION];
                                            [self.commonTableView reloadData];
                                        }];
             break;
@@ -104,9 +101,6 @@
                                                pageIndex:1
                                          andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
                                              self.friendsList = [NSMutableArray arrayWithArray:[data valueForKey:@"UserList"]];
-                                             // TO delete
-                                             NSDictionary * dict = [self.friendsList objectAtIndex:0];
-                                             [dict setValue:[NSNumber numberWithInt:FRIEND_RELATIONSHIP_NONE] forKey:KEY_ACCOUNT_RELATION];
                                              [self.commonTableView reloadData];
                                          }];
             break;

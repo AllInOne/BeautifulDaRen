@@ -41,6 +41,11 @@
 "register" = "注册";
 "to_select" = "选择";
 "email_or_nickname" = "邮箱/昵称";
+"old_passwrod" = "旧密码";
+"new_passwrod" = "新密码";
+"input_your_old_password" = "请输入您的旧密码";
+"input_your_new_password" = "请输入您的新密码";
+"repeat_your_old_password" = "请再次输入您的新密码";
 
 "not_user_to_register" = "还不是秀魅力用户？立即注册";
 "please_input_email_or_account_name" = "请输入注册邮箱/登录账户";

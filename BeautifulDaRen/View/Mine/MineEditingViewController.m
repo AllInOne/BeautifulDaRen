@@ -15,6 +15,7 @@
 #import "SegmentControl.h"
 #import "iToast.h"
 #import "ViewConstants.h"
+#import "ModifyPasswordViewController.h"
 #import "UIImage+Scale.h"
 
 @interface MineEditingViewController()
@@ -274,8 +275,15 @@
         
         if(row == 1)
         {
-            type = EdittingViewController_type1;
+            ModifyPasswordViewController *modifiyPasswordViewController = 
+            [[ModifyPasswordViewController alloc] initWithNibName:nil bundle:nil];
             
+            UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: modifiyPasswordViewController];
+            
+            [self.navigationController presentModalViewController:navController animated:YES];
+            
+            [navController release];
+            [modifiyPasswordViewController release];
         }
         else if(row == 2)
         {

@@ -294,10 +294,17 @@
     }
     else if(section == 3)
     {
-        // TODO to log out.
-//        LoginViewController * loginContorller = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
-//        [self.navigationController pushViewController:loginContorller animated:YES];
-//        [loginContorller release];
+        [[BSDKManager sharedManager] logoutWithDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+            if(status == AIO_STATUS_SUCCESS)
+            {
+                LoginViewController * loginContorller = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+                [self.navigationController pushViewController:loginContorller animated:YES];
+                [loginContorller release];
+            }
+            else {
+                [[iToast makeText:@"账户退出失败!"] show];
+            }
+        }];
 
     }
 }

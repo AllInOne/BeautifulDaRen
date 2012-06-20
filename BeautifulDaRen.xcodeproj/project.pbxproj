@@ -49,6 +49,8 @@
 		C24EABB215762F7100291778 /* segement_btn_right_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C24EABB015762F7100291778 /* segement_btn_right_selected@2x.png */; };
 		C250223B1575E34C00C0561F /* BorderImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = C250223A1575E34C00C0561F /* BorderImageView.m */; };
 		C250224E1576205000C0561F /* SegmentControl.m in Sources */ = {isa = PBXBuildFile; fileRef = C250224D1576205000C0561F /* SegmentControl.m */; };
+		C25123D91591C790004F987E /* ModifyPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C25123D71591C790004F987E /* ModifyPasswordViewController.m */; };
+		C25123DA1591C790004F987E /* ModifyPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C25123D81591C790004F987E /* ModifyPasswordViewController.xib */; };
 		C2519F9B1564E36E0040EBC5 /* WaterFlowView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2519F9A1564E36E0040EBC5 /* WaterFlowView.m */; };
 		C25BDE1A1584E5030006153B /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C25BDE181584E5030006153B /* MineViewController.m */; };
 		C25BDE1B1584E5030006153B /* MineViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C25BDE191584E5030006153B /* MineViewController.xib */; };
@@ -667,6 +669,9 @@
 		C250224C1576204F00C0561F /* SegmentControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentControl.h; sourceTree = "<group>"; };
 		C250224D1576205000C0561F /* SegmentControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentControl.m; sourceTree = "<group>"; };
 		C250224F1576208300C0561F /* SegmentDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SegmentDelegate.h; path = Common/SegmentDelegate.h; sourceTree = "<group>"; };
+		C25123D61591C790004F987E /* ModifyPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModifyPasswordViewController.h; sourceTree = "<group>"; };
+		C25123D71591C790004F987E /* ModifyPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModifyPasswordViewController.m; sourceTree = "<group>"; };
+		C25123D81591C790004F987E /* ModifyPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ModifyPasswordViewController.xib; sourceTree = "<group>"; };
 		C2519F991564E36E0040EBC5 /* WaterFlowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaterFlowView.h; sourceTree = "<group>"; };
 		C2519F9A1564E36E0040EBC5 /* WaterFlowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaterFlowView.m; sourceTree = "<group>"; };
 		C25BDE171584E5030006153B /* MineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineViewController.h; sourceTree = "<group>"; };
@@ -2088,6 +2093,9 @@
 				C25BDE171584E5030006153B /* MineViewController.h */,
 				C25BDE181584E5030006153B /* MineViewController.m */,
 				C25BDE191584E5030006153B /* MineViewController.xib */,
+				C25123D61591C790004F987E /* ModifyPasswordViewController.h */,
+				C25123D71591C790004F987E /* ModifyPasswordViewController.m */,
+				C25123D81591C790004F987E /* ModifyPasswordViewController.xib */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -3025,6 +3033,7 @@
 				CED2BEA11587440600E4A157 /* home_banner4@2x.png in Resources */,
 				CED2BEA21587440600E4A157 /* splash@2x.png in Resources */,
 				CEDCE09C1588314F00029D8D /* SelectCategoryCell.xib in Resources */,
+				C25123DA1591C790004F987E /* ModifyPasswordViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3147,6 +3156,7 @@
 				CEFABBE4157DDD3900A0518E /* CustomUITabBarItem.m in Sources */,
 				C25BDE1A1584E5030006153B /* MineViewController.m in Sources */,
 				CEDCE09B1588314F00029D8D /* SelectCategoryCell.m in Sources */,
+				C25123D91591C790004F987E /* ModifyPasswordViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
