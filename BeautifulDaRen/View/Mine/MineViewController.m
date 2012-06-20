@@ -263,7 +263,11 @@
         switch ([indexPath row]) {
             case 0:
             {
-                WeiboListViewController * forwadMeViewController = [[WeiboListViewController alloc] initWithNibName:@"WeiboListViewController" bundle:nil type:WeiboListViewControllerType_FORWARD_ME];
+                WeiboListViewController * forwadMeViewController = [[WeiboListViewController alloc]
+                                                                    initWithNibName:@"WeiboListViewController"
+                                                                    bundle:nil
+                                                                    type:WeiboListViewControllerType_FORWARD_ME
+                                                                    dictionary:nil];
                 
                 UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: forwadMeViewController];
                 
@@ -275,7 +279,11 @@
             }
             case 1:
             {
-                WeiboListViewController * commentMeViewController = [[WeiboListViewController alloc] initWithNibName:@"WeiboListViewController" bundle:nil type:WeiboListViewControllerType_COMMENT_ME];
+                WeiboListViewController * commentMeViewController = [[WeiboListViewController alloc]
+                                                                     initWithNibName:@"WeiboListViewController"
+                                                                     bundle:nil
+                                                                     type:WeiboListViewControllerType_COMMENT_ME
+                                                                     dictionary:nil];
                 
                 UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: commentMeViewController];
                 
@@ -313,7 +321,8 @@
         viewController = [[WeiboListViewController alloc]
                           initWithNibName:@"WeiboListViewController"
                           bundle:nil
-                          type:WeiboListViewControllerType_MY_COLLECTION];
+                          type:WeiboListViewControllerType_MY_COLLECTION
+                          dictionary:nil];
     }
     else if (button == _blackListButton)
     {
@@ -328,14 +337,16 @@
         viewController = [[WeiboListViewController alloc]
                           initWithNibName:@"WeiboListViewController"
                           bundle:nil
-                          type:WeiboListViewControllerType_MY_BUYED];
+                          type:WeiboListViewControllerType_MY_BUYED
+                          dictionary:nil];
     }
     else if(button == _topicButton)
     {
         viewController = [[WeiboListViewController alloc]
                           initWithNibName:@"WeiboListViewController"
                           bundle:nil
-                          type:WeiboListViewControllerType_MY_BUYED];
+                          type:WeiboListViewControllerType_MY_BUYED
+                          dictionary:nil];
     }
     else if(button == _editButton)
     {
@@ -349,7 +360,8 @@
         viewController = [[WeiboListViewController alloc]
                           initWithNibName:@"WeiboListViewController"
                           bundle:nil
-                          type:WeiboListViewControllerType_MY_PUBLISH];
+                          type:WeiboListViewControllerType_MY_PUBLISH
+                          dictionary:nil];
     }
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: viewController];
     

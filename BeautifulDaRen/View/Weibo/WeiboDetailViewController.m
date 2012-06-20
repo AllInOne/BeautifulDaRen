@@ -189,7 +189,7 @@
     [[iToast makeText:NSLocalizedString(@"refresh", @"refresh")] show];
 }
 
--(IBAction)onCommentListButtonPressed:(id)sender
+-(IBAction)onCommentListButtonPressed:(UIButton*)sender
 {
     ForwardCommentListViewController *commentListViewContoller = 
     [[ForwardCommentListViewController alloc] initWithNibName:nil bundle:nil];
@@ -201,7 +201,7 @@
     [commentListViewContoller release];
 }
 
--(IBAction)onForwardButtonPressed:(id)sender
+-(IBAction)onForwardButtonPressed:(UIButton*)sender
 {
     [self onForward];
 }

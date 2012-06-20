@@ -29,10 +29,11 @@
 @property (nonatomic, retain) IBOutlet UIImageView * weiboAttachedImageView;
 @property (nonatomic, retain) IBOutlet UIButton * weiboAttachedImageButton;
 
+-(IBAction)onCommentListButtonPressed:(UIButton*)sender;
+-(IBAction)onForwardButtonPressed:(UIButton*)sender;
+
 @property (nonatomic, retain) NSDictionary * weiboData;
 
--(void)onCommentListButtonPressed:(id)sender;
--(void)onForwardButtonPressed:(id)sender;
 -(IBAction)onImageButtonPressed:(id)sender;
 
 -(IBAction)onBrandButtonPressed:(id)sender;

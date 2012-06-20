@@ -37,13 +37,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "BeautifulDaRen/View/Mine/MineViewController.m"
-         timestampString = "360862488.595664"
+         timestampString = "361707397.052752"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "51"
-         endingLineNumber = "51"
-         landmarkName = "-initWithNibName:bundle:"
-         landmarkType = "5">
+         startingLineNumber = "442"
+         endingLineNumber = "442">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -116,20 +114,6 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "BeautifulDaRen/View/Mine/MineEditingViewController.m"
-         timestampString = "360746939.59541"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "313"
-         endingLineNumber = "313"
-         landmarkName = "-tableView:viewForHeaderInSection:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
@@ -147,11 +131,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "BeautifulDaRen/View/More/FindMoreViewController.m"
-         timestampString = "360746939.59541"
+         timestampString = "361510513.663047"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "61"
-         endingLineNumber = "61"
+         startingLineNumber = "57"
+         endingLineNumber = "57"
          landmarkName = "-initWithNibName:bundle:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -160,25 +144,60 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "BeautifulDaRen/View/Mine/MineViewController.m"
-         timestampString = "360906981.790467"
+         timestampString = "361707397.052752"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "218"
-         endingLineNumber = "218"
-         landmarkName = "-tableView:cellForRowAtIndexPath:"
-         landmarkType = "5">
+         startingLineNumber = "524"
+         endingLineNumber = "524">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "BeautifulDaRen/View/Mine/MineViewController.m"
-         timestampString = "360906979.580031"
+         timestampString = "361707397.052752"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "133"
-         endingLineNumber = "133"
-         landmarkName = "-viewDidLoad"
+         startingLineNumber = "609"
+         endingLineNumber = "609">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "BeautifulDaRen/View/Mine/MineEditingViewController.m"
+         timestampString = "361124136.318522"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "85"
+         endingLineNumber = "85"
+         landmarkName = "-viewDidUnload"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "BeautifulDaRen/View/Mine/MineEditingViewController.m"
+         timestampString = "361124139.622702"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "379"
+         endingLineNumber = "379"
+         landmarkName = "-didButtonPressed:inView:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "BeautifulDaRen/View/Common/FriendListViewController.m"
+         timestampString = "361710733.976762"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "231"
+         endingLineNumber = "231"
+         landmarkName = "-didButtonPressed:inView:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

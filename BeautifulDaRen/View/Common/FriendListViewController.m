@@ -77,6 +77,9 @@
                                              pageIndex:1
                                        andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
                                            self.friendsList = [NSMutableArray arrayWithArray:[data valueForKey:@"UserList"]];
+                                           // TO delete
+                                           NSDictionary * dict = [self.friendsList objectAtIndex:0];
+                                           [dict setValue:[NSNumber numberWithInt:FRIEND_RELATIONSHIP_INTER_FOLLOW] forKey:KEY_ACCOUNT_RELATION];
                                            [self.commonTableView reloadData];
                                        }];
             break;
@@ -101,6 +104,9 @@
                                                pageIndex:1
                                          andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
                                              self.friendsList = [NSMutableArray arrayWithArray:[data valueForKey:@"UserList"]];
+                                             // TO delete
+                                             NSDictionary * dict = [self.friendsList objectAtIndex:0];
+                                             [dict setValue:[NSNumber numberWithInt:FRIEND_RELATIONSHIP_NONE] forKey:KEY_ACCOUNT_RELATION];
                                              [self.commonTableView reloadData];
                                          }];
             break;
@@ -164,6 +170,30 @@
         NSDictionary * userDict = [self.friendsList objectAtIndex:section];
         friendListViewCell.friendNameLabel.text = [userDict valueForKey:KEY_ACCOUNT_USER_NAME];
         friendListViewCell.friendWeiboLabel.text = @"我今天在天府广场附近买了一款很好看的衣服。";
+        NSString * buttonTitle = nil;
+        NSInteger relation = [[[self.friendsList objectAtIndex:[indexPath section]] valueForKey:KEY_ACCOUNT_RELATION] intValue];
+        switch (self.type) {
+            case FriendListViewController_TYPE_MY_FOLLOW:
+                buttonTitle = @"取消关注";
+                break;
+            case FriendListViewController_TYPE_MY_FANS:
+                if(relation == FRIEND_RELATIONSHIP_INTER_FOLLOW)
+                {
+                    buttonTitle = @"取消关注";
+                }
+                else {
+                    buttonTitle = @"关注";
+                }
+                break;
+            case FriendListViewController_TYPE_MY_BLACKLIST:
+                break;
+            case FriendListViewController_TYPE_FRIEND_FOLLOW:
+                break;
+            case FriendListViewController_TYPE_FRIEND_FANS:
+                break;
+        }
+
+        [friendListViewCell.actionButton setTitle:buttonTitle forState:UIControlStateNormal];
         friendListViewCell.actionButton.tag = [indexPath section];
         friendListViewCell.delegate = self;
     }
@@ -196,15 +226,47 @@
 #pragma mark ButtonPressDelegate
 -(void)didButtonPressed:(UIButton *)button inView:(UIView *)view
 {
-    NSInteger userId = [[[self.friendsList objectAtIndex:button.tag] valueForKey:KEY_ACCOUNT_USER_ID] intValue];
-    [[BSDKManager sharedManager] unFollowUser:userId
-                              andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-                                  if(status == AIO_STATUS_SUCCESS)
-                                  {
-                                      [self.friendsList removeObjectAtIndex:button.tag];
-                                      [self.commonTableView reloadData];
-                                  }
-                              }];
+    BOOL isShouldFollow = YES;
+    NSDictionary * dict = [self.friendsList objectAtIndex:button.tag];
+    NSInteger relation = [[dict valueForKey:KEY_ACCOUNT_RELATION] intValue];
+    switch (self.type) {
+        case FriendListViewController_TYPE_MY_FOLLOW:
+        {
+            isShouldFollow = NO;
+            break;
+        }
+        case FriendListViewController_TYPE_MY_FANS:
+        {
+            isShouldFollow = (relation == FRIEND_RELATIONSHIP_INTER_FOLLOW) ? NO : YES;
+            break;
+        }
+        case FriendListViewController_TYPE_MY_BLACKLIST:
+            break;
+        case FriendListViewController_TYPE_FRIEND_FOLLOW:
+            break;
+        case FriendListViewController_TYPE_FRIEND_FANS:
+            break;
+    }
+    
+    NSInteger userId = [[dict valueForKey:KEY_ACCOUNT_USER_ID] intValue];
+    if (!isShouldFollow)
+    {
+        [[BSDKManager sharedManager] unFollowUser:userId
+                                  andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+                                      if(status == AIO_STATUS_SUCCESS)
+                                      {
+                                          [self.friendsList removeObjectAtIndex:button.tag];
+                                          [self.commonTableView reloadData];
+                                      }
+                                  }];
+    }
+    else
+    {
+        [[BSDKManager sharedManager] followUser:userId
+                                andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+                                    
+                                }];
+    }
 }
 
 @end

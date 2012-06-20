@@ -103,6 +103,12 @@
         [tabBarBg release];
         [barItems release];
         [tempToolbar release];
+
+        NSInteger relation = [[self.friendDictionary valueForKey:KEY_ACCOUNT_RELATION] intValue];
+        
+        NSString * buttonTitle = (relation == FRIEND_RELATIONSHIP_INTER_FOLLOW || relation == FRIEND_RELATIONSHIP_MY_FOLLOW) ? @"取消关注" : @"关注";
+        
+        [self.actionButton setTitle:buttonTitle forState:UIControlStateNormal];
     }
     return self;
 }
@@ -194,9 +200,9 @@
 
 -(IBAction)actionButtonClicked:(UIButton*)sender
 {
-    NSInteger relationShip = [[self.friendDictionary valueForKey:KEY_ACCOUNT_RELATIONSHIP] intValue];
+    NSInteger relation = [[self.friendDictionary valueForKey:KEY_ACCOUNT_RELATION] intValue];
     NSInteger userId = [[self.friendDictionary valueForKey:KEY_ACCOUNT_USER_ID] intValue];
-    if (relationShip == FRIEND_RELATIONSHIP_MY_FOLLOW || relationShip == FRIEND_RELATIONSHIP_INTER_FOLLOW)
+    if (relation == FRIEND_RELATIONSHIP_MY_FOLLOW || relation == FRIEND_RELATIONSHIP_INTER_FOLLOW)
     {
         [[BSDKManager sharedManager] unFollowUser:userId
                                   andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
@@ -385,11 +391,19 @@
     }
     else if (button == _collectionButton)
     {
-        viewController = [[WeiboListViewController alloc] initWithNibName:@"WeiboListViewController" bundle:nil type:WeiboListViewControllerType_FRIEND_COLLECTION];
+        viewController = [[WeiboListViewController alloc]
+                          initWithNibName:@"WeiboListViewController"
+                          bundle:nil
+                          type:WeiboListViewControllerType_FRIEND_COLLECTION
+                          dictionary:self.friendDictionary];
     }
     else if (button == _weiboButton)
     {
-        viewController = [[WeiboListViewController alloc] initWithNibName:@"WeiboListViewController" bundle:nil type:WeiboListViewControllerType_FRIEND_WEIBO];
+        viewController = [[WeiboListViewController alloc]
+                          initWithNibName:@"WeiboListViewController"
+                          bundle:nil
+                          type:WeiboListViewControllerType_FRIEND_WEIBO
+                          dictionary:self.friendDictionary];
     }
     [self.navigationController pushViewController:viewController animated:YES];
     [viewController release];
