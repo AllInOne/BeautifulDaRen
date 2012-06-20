@@ -36,6 +36,7 @@
 "type_password" = "输入密码";
 "type_password_again" = "确认密码";
 "find_password" = "找回密码";
+"modify_password" = "修改密码";
 "login" = "登录";
 "register" = "注册";
 "to_select" = "选择";
@@ -89,6 +90,7 @@
 "privacy" = "隐私";
 "notes" = "备注";
 "set_notes" = "设置备注";
+"switch_account" = "切换账号";
 
 "sent_password_to_email" = "密码已发至邮箱，请查收";
 "prompt" = "提示";

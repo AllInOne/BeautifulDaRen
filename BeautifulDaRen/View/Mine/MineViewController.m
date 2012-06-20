@@ -21,6 +21,7 @@
 #import "OHAttributedLabel.h"
 #import "BSDKManager.h"
 #import "iToast.h"
+#import "LoginViewController.h"
 
 @interface MineViewController()
 
@@ -114,7 +115,7 @@
 #pragma mark UITableViewDataSource
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    return 4;
 }
 
 - (UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -129,8 +130,6 @@
         if(!cell) {
             cell = [[[NSBundle mainBundle] loadNibNamed:myInfoTopViewIdentifier owner:self options:nil] objectAtIndex:0];
         }
-        
-        //        UserIdentity * userIdentity = [[DataManager sharedManager] getCurrentLocalIdentityInContext:nil];
         
         NSDictionary * userDict = [[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
         ((MyInfoTopViewCell*)cell).avatarImageView.image = [UIImage imageNamed:@"avatar_big"];
@@ -151,7 +150,6 @@
         if(!cell) {
             cell = [[[NSBundle mainBundle] loadNibNamed:gridViewIndentifier owner:self options:nil] objectAtIndex:1];
         }
-        //        UserIdentity * userIdentity = [[DataManager sharedManager] getCurrentLocalIdentityInContext:nil];
         ((GridViewCell*)cell).delegate = self;
         
         NSDictionary * userDict = [[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
@@ -172,26 +170,11 @@
         attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"my_publish", @"") detail:[NSString stringWithFormat:@"(%d)", [[userDict valueForKey:USERDEFAULT_ACCOUNT_WEIBO_COUNT] intValue]]];
         ((GridViewCell*)cell).fourthLabel.attributedText = attrStr;
         ((GridViewCell*)cell).fourthLabel.textAlignment = UITextAlignmentCenter;
-        
-        //        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"buyed", @"") detail:[NSString stringWithFormat:@"(%d)",[userIdentity.buyedCount intValue]]];
-        //        ((GridViewCell*)cell).fourthLabel.attributedText = attrStr;
-        //        ((GridViewCell*)cell).fourthLabel.textAlignment = UITextAlignmentCenter;
-        
-        //        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"topic", @"") detail:[NSString stringWithFormat:@"(%d)",[userIdentity.topicCount intValue]]];
-        //        ((GridViewCell*)cell).fifthLabel.attributedText = attrStr;
-        //        ((GridViewCell*)cell).fifthLabel.textAlignment = UITextAlignmentCenter;
-        //        
-        //         attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"black_list", @"") detail:[NSString stringWithFormat:@"(%d)",[userIdentity.blackListCount intValue]]];
-        //        ((GridViewCell*)cell).sixthLabel.attributedText = attrStr;
-        //        ((GridViewCell*)cell).sixthLabel.textAlignment = UITextAlignmentCenter;
-        
+
         _followButton = ((GridViewCell*)cell).firstButton;
         _fansButton = ((GridViewCell*)cell).secondButton;
         _collectionButton = ((GridViewCell*)cell).thirdButton;
         _mypublishButton = ((GridViewCell*)cell).fourthButton;
-        //        _buyedButton = ((GridViewCell*)cell).fourthButton;
-        //        _topicButton = ((GridViewCell*)cell).fifthButton;
-        //        _blackListButton = ((GridViewCell*)cell).sixthButton;
     }
     else if (section == 2) {
         cell = [tableView dequeueReusableCellWithIdentifier:buttonViewCellIdentifier];
@@ -212,23 +195,34 @@
                 break;
             }
         }
-    }    return cell;
+    }
+    else if (section == 3)
+    {
+        cell = [tableView dequeueReusableCellWithIdentifier:buttonViewCellIdentifier];
+        if(!cell) {
+            cell = [[[NSBundle mainBundle] loadNibNamed:buttonViewCellIdentifier owner:self options:nil] objectAtIndex:0];
+        }
+        ((ButtonViewCell*)cell).buttonText.text = NSLocalizedString(@"switch_account", @"");
+        ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"comment_icon"];
+    }
+    return cell;
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     NSInteger numberOfRows = 0;
     switch (section) {
-            // my info top view
         case 0:
             numberOfRows = 1;
             break;
-            // press button views.
         case 1:
             numberOfRows = 1;
             break;
         case 2:
             numberOfRows = 2;
+            break;
+        case 3:
+            numberOfRows = 1;
             break;
     }
     return numberOfRows;
@@ -248,6 +242,10 @@
         height = 71.0f;
     }
     else if (section == 2)
+    {
+        height = 40.0f;
+    }
+    else if (section == 3)
     {
         height = 40.0f;
     }
@@ -293,6 +291,14 @@
                 break;
             }
         }
+    }
+    else if(section == 3)
+    {
+        // TODO to log out.
+//        LoginViewController * loginContorller = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+//        [self.navigationController pushViewController:loginContorller animated:YES];
+//        [loginContorller release];
+
     }
 }
 

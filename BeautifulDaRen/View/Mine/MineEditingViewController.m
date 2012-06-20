@@ -133,7 +133,7 @@
         }
         case 2:
         {
-            number = 6;
+            number = 7;
             break;
         }
     }
@@ -194,29 +194,40 @@
             }
             case 1:
             {
+                buttonViewCell.leftLabel.text = NSLocalizedString(@"modify_password", @"");
+                buttonViewCell.leftLabel.frame = CGRectMake(buttonViewCell.leftLabel.frame.origin.x,
+                                                            buttonViewCell.leftLabel.frame.origin.y,
+                                                            [ViewHelper getWidthOfText:buttonViewCell.leftLabel.text ByFontSize:buttonViewCell.leftLabel.font.pointSize],
+                                                            buttonViewCell.leftLabel.frame.size.height);
+                buttonViewCell.buttonText.text =@"";
+                buttonViewCell.buttonText.frame = CGRectZero;
+                break;
+            }
+            case 2:
+            {
                 buttonViewCell.leftLabel.text = NSLocalizedString(@"city", @"");
                 buttonViewCell.buttonText.text = [_tableViewDict valueForKey:USERDEFAULT_ACCOUNT_CITY];
                 break;
             }
-            case 2:
+            case 3:
             {
                 buttonViewCell.leftLabel.text = NSLocalizedString(@"address", @"");
                 buttonViewCell.buttonText.text = [_tableViewDict valueForKey:USERDEFAULT_ACCOUNT_ADDRESS];
                 break;
             }
-            case 3:
+            case 4:
             {
                 buttonViewCell.leftLabel.text = NSLocalizedString(@"phone", @"");
                 buttonViewCell.buttonText.text = [_tableViewDict valueForKey:USERDEFAULT_ACCOUNT_PHONE_NUMBER];
                 break;
             }
-            case 4:
+            case 5:
             {
                 buttonViewCell.leftLabel.text = NSLocalizedString(@"senior", @"");
                 buttonViewCell.buttonText.text = @"高级内容";
                 break;
             } 
-            case 5:
+            case 6:
             {
                 buttonViewCell.leftLabel.text = NSLocalizedString(@"brief", @"");
                 buttonViewCell.buttonText.text = [_tableViewDict valueForKey:USERDEFAULT_ACCOUNT_INTRO];
@@ -260,7 +271,13 @@
     {
         NSInteger type = 0;
         NSInteger row = [indexPath row];
+        
         if(row == 1)
+        {
+            type = EdittingViewController_type1;
+            
+        }
+        else if(row == 2)
         {
             SelectCityViewController *citySelectionController = 
             [[SelectCityViewController alloc] initWithNibName:nil bundle:nil];
@@ -275,7 +292,8 @@
         }
         else {
             EditDoneBlock block = nil;
-            if(row == 4)
+            
+            if(row == 5)
             {
                 type = EdittingViewController_type1;
                 
@@ -294,7 +312,7 @@
                         };
                         break;
                     }
-                    case 2:
+                    case 3:
                     {
                         block = ^(NSString * text)
                         {
@@ -304,7 +322,7 @@
                         };
                         break;
                     }
-                    case 3:
+                    case 4:
                     {
                         block = ^(NSString * text)
                         {
@@ -314,7 +332,7 @@
                         };
                         break;
                     }
-                    case 5:
+                    case 6:
                     {
                         block = ^(NSString * text)
                         {
