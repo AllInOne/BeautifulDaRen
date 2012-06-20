@@ -30,7 +30,7 @@
 - (void)changePasswordByUsername:(NSString*) username toNewPassword:(NSString*)newpassword andDoneCallback:(processDoneWithDictBlock)doneBlock;
 
 #pragma mark user releated API
-- (void)getUserInforByUsername:(NSString*) username andDoneCallback:(processDoneWithDictBlock)doneBlock;
+- (void)getUserInforByUserId:(NSString*) userId andDoneCallback:(processDoneWithDictBlock)doneBlock;
 
 - (void)searchUsersByUsername:(NSString*) username andDoneCallback:(processDoneWithDictBlock)doneBlock;
 
@@ -93,5 +93,9 @@
             toWeibo:(NSString*)blogId
      andDoneCallback:(processDoneWithDictBlock)callback;
 
+- (void)getCommentListOfWeibo:(NSString*)blogId
+                     pageSize:(NSInteger)pageSize 
+                    pageIndex:(NSInteger)pageIndex 
+    andDoneCallback:(processDoneWithDictBlock)callback;
 
 @end

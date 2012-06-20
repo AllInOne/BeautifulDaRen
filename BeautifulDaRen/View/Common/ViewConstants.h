@@ -60,7 +60,7 @@ enum
     FRIEND_RELATIONSHIP_BALCK_LIST,
 } FRIEND_RELATIONSHIP_TYPE;
 
-#define DEVELOPER_ENABLE NO
+#define DEVELOPER_ENABLE YES
 
 #define K_NOTIFICATION_SHOWWAITOVERLAY @"K_NOTIFICATION_SHOWWAITOVERLAY"
 #define K_NOTIFICATION_HIDEWAITOVERLAY @"K_NOTIFICATION_HIDEWAITOVERLAY"
@@ -112,5 +112,12 @@ enum
 #define KEY_ACCOUNT_FANS_COUNT          @"FansNum"
 #define KEY_ACCOUNT_FOLLOW_COUNT        @"AttentionNum"
 #define KEY_ACCOUNT_RELATION            @"Relation"
+
+
+#define ACTIONSHEET_IMAGE_PICKER 1
+
+#define IMAGE_PICKER_CAMERA       NSLocalizedString(@"take_photo", @"take_photo")
+#define IMAGE_PICKER_LIBRARY      NSLocalizedString(@"album", @"album")
+#define IMAGE_PICKER_DELETE       NSLocalizedString(@"delete_selected_photos", @"delete_selected_photos")
 
 #endif

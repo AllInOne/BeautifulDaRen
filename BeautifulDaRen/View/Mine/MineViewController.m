@@ -371,10 +371,10 @@
 }
 -(void)refreshUserInfo
 {
-    NSString * accountName = [[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] valueForKey:USERDEFAULT_ACCOUNT_USERNAME];
+    NSString * accountId = [[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] valueForKey:USERDEFAULT_ACCOUNT_ID];
     if([[BSDKManager sharedManager] isLogin])
     {
-        [[BSDKManager sharedManager] getUserInforByUsername:accountName andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+        [[BSDKManager sharedManager] getUserInforByUserId:accountId andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
             /* {
              AtNum = 0;
              AttentionNum = 0;

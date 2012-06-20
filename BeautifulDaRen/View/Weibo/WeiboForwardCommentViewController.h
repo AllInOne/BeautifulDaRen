@@ -9,6 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "FriendsSelectionViewControllerDelegate.h"
 
+@class WeiboForwardCommentViewController;
+
+@protocol ForwardCommentViewControllerProtocol
+-(void)onConfirmed:(WeiboForwardCommentViewController*)view;
+@end
+
 @interface WeiboForwardCommentViewController : UIViewController <UIActionSheetDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate,
     FriendsSelectionViewControllerDelegate>
 
@@ -18,6 +24,9 @@
 @property (nonatomic, retain) IBOutlet UIButton * checkBoxButton;
 // The mode of the controller, YES == forward mode, NO = comment mode;
 @property (nonatomic, assign) BOOL forwardMode;
+@property (nonatomic, assign) BOOL isCheckBoxChecked;
+
+@property (nonatomic, assign) id<ForwardCommentViewControllerProtocol> delegate; 
 
 - (IBAction)onAtFriendPressed:(id)sender;
 - (IBAction)onCheckBoxPressed:(id)sender;

@@ -17,6 +17,7 @@
 #import "iToast.h"
 #import "MapViewController.h"
 #import "BSDKDefines.h"
+#import "BSDKManager.h"
 #import "UIImageView+WebCache.h"
 
 #define FONT_SIZE 14.0f
@@ -25,7 +26,7 @@
 
 #define IMAGE_WIDTH     (210.0f)
 
-#define PRICE_BUTTON_Y_OFFSET     (100.0f)
+#define PRICE_BUTTON_Y_OFFSET     (50.0f)
 
 #define MAP_VIEW_WIDTH      (280.0f)
 #define MAP_VIEW_HEIGHT     (60.0f)
@@ -112,6 +113,7 @@
     WeiboForwardCommentViewController *forwardViewContoller = 
     [[WeiboForwardCommentViewController alloc] initWithNibName:nil bundle:nil];
     forwardViewContoller.forwardMode = YES;
+    [forwardViewContoller setDelegate:self];
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: forwardViewContoller];
  
     [self.navigationController presentModalViewController:navController animated:YES];
@@ -125,12 +127,56 @@
     WeiboForwardCommentViewController *forwardViewContoller = 
     [[WeiboForwardCommentViewController alloc] initWithNibName:nil bundle:nil];
     forwardViewContoller.forwardMode = NO;
+    [forwardViewContoller setDelegate:self];
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: forwardViewContoller];
     
     [self.navigationController presentModalViewController:navController animated:YES];
     
     [navController release];
     [forwardViewContoller release];
+}
+
+-(void)onConfirmed:(WeiboForwardCommentViewController*)view
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_SHOWWAITOVERLAY object:self];
+    
+    __block NSInteger doneCount = 0;
+    __block NSInteger doneCountExpected = 1;
+    __block NSString * errorMsg = nil;
+    
+    processDoneWithDictBlock doneBlock = ^(AIO_STATUS status, NSDictionary * data){
+        NSLog(@"Send done: %d, %@", status, data);
+        
+        doneCount++;
+        if (doneCount == doneCountExpected) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_HIDEWAITOVERLAY object:self];
+            if ([data objectForKey:K_BSDK_RESPONSE_STATUS] && !K_BSDK_IS_RESPONSE_OK(data)) {
+                errorMsg = K_BSDK_GET_RESPONSE_MESSAGE(data);
+            }
+            
+            if (errorMsg == nil)
+            {
+                [ViewHelper showSimpleMessage:NSLocalizedString(@"send_succeed", @"send_succeed") withTitle:nil withButtonText:NSLocalizedString(@"ok", @"ok")];
+            }
+            else
+            {
+                [ViewHelper showSimpleMessage:errorMsg withTitle:nil withButtonText:NSLocalizedString(@"ok", @"ok")];
+            }
+        }
+        
+    };
+    
+    
+    if (view.forwardMode || (!view.forwardMode && view.isCheckBoxChecked))
+    {
+//        [[SinaSDKManager sharedManager] sendWeiBoWithText:self.weiboContentTextView.text image:[self.selectedImage scaleToSize:CGSizeMake(320.0, self.selectedImage.size.height * 320.0/self.selectedImage.size.width)] doneCallback:doneBlock];
+        
+//        doneCountExpected++;
+    };
+    
+    if (!view.forwardMode || (view.forwardMode && view.isCheckBoxChecked)) {
+        [[BSDKManager sharedManager] sendComment:view.weiboContentTextView.text toWeibo:[self.weiboData objectForKey:K_BSDK_UID] andDoneCallback:doneBlock];
+    }
 }
 
 - (void)onFavourate
@@ -254,7 +300,9 @@
     // attach image
     NSInteger picWidth = [[self.weiboData objectForKey:K_BSDK_PICTURE_WIDTH] intValue];
     NSInteger picHeight = [[self.weiboData objectForKey:K_BSDK_PICTURE_HEIGHT] intValue];
-    [self.weiboAttachedImageView setImageWithURL:[NSURL URLWithString:[self.weiboData objectForKey:K_BSDK_PICTURE_320]]];
+    UIImageView * placeholderImageView = [[UIImageView alloc] init];
+    [placeholderImageView setImageWithURL:[NSURL URLWithString:[self.weiboData objectForKey:K_BSDK_PICTURE_102]]];                                          
+    [self.weiboAttachedImageView setImageWithURL:[NSURL URLWithString:[self.weiboData objectForKey:K_BSDK_PICTURE_320]] placeholderImage:placeholderImageView.image];
     
     self.weiboAttachedImageView.frame = CGRectMake((SCREEN_WIDTH - IMAGE_WIDTH)/2, 
                                                    CGRectGetMinY(self.weiboAttachedImageView.frame), 
@@ -263,28 +311,34 @@
     //  buttons
     self.favourateButton.frame = CGRectMake(self.favourateButton.frame.origin.x, self.weiboAttachedImageView.frame.origin.y + CGRectGetHeight(self.weiboAttachedImageView.frame) + CELL_CONTENT_MARGIN, self.favourateButton.frame.size.width, self.favourateButton.frame.size.height);
     
-    [self.favourateButton setTitle:@"    0" forState:UIControlStateNormal];
+    [self.favourateButton setTitle:[NSString stringWithFormat:@"    %d", [[self.weiboData objectForKey:K_BSDK_FAVOURATE_NUM] intValue]] forState:UIControlStateNormal];
     
     self.forwardedButton.frame = CGRectMake(self.forwardedButton.frame.origin.x, self.favourateButton.frame.origin.y, self.forwardedButton.frame.size.width, self.forwardedButton.frame.size.height);
-    
-    [self.forwardedButton setTitle:@"    1234" forState:UIControlStateNormal];
+
+    [self.forwardedButton setTitle:[NSString stringWithFormat:@"    %d", [[self.weiboData objectForKey:K_BSDK_FORWARD_NUM] intValue]] forState:UIControlStateNormal];
     
     self.commentButton.frame = CGRectMake(self.commentButton.frame.origin.x, self.favourateButton.frame.origin.y, self.commentButton.frame.size.width, self.commentButton.frame.size.height);
     
-    [self.commentButton setTitle:@"    0" forState:UIControlStateNormal];
+    [self.commentButton setTitle:[NSString stringWithFormat:@"    %d", [[self.weiboData objectForKey:K_BSDK_COMMENT_NUM] intValue]] forState:UIControlStateNormal];
     
     NSInteger yOffset = self.favourateButton.frame.origin.y + CGRectGetHeight(self.favourateButton.frame) + CELL_CONTENT_MARGIN;
     
-    if ([self.weiboData objectForKey:K_BSDK_LATITUDE] && [self.weiboData objectForKey:K_BSDK_LONGITUDE] && ([[self.weiboData objectForKey:K_BSDK_LATITUDE] intValue] != 0) && ([[self.weiboData objectForKey:K_BSDK_LONGITUDE] intValue] != 0)) {
+    double longtitude = [[self.weiboData objectForKey:K_BSDK_LONGITUDE] doubleValue];
+    double latitude = [[self.weiboData objectForKey:K_BSDK_LATITUDE] doubleValue];
+    
+    if ([self.weiboData objectForKey:K_BSDK_LATITUDE] && [self.weiboData objectForKey:K_BSDK_LONGITUDE] && (longtitude != 0) && (latitude != 0)) {
 //        _mapViewController = [[MapViewController alloc] initWithName:@"test map name" description:nil latitude:[[self.weiboData objectForKey:K_BSDK_LATITUDE] floatValue] longitude:[[self.weiboData objectForKey:K_BSDK_LONGITUDE] floatValue] showSelf:NO];
-        _mapViewController = [[MapViewController alloc] initWithName:@"test map name" description:nil latitude:30.61510126 longitude:104.09182433 showSelf:NO];
-        
-        _mapViewController.view.frame = CGRectMake(MAP_VIEW_X_OFFSET, yOffset, MAP_VIEW_WIDTH, MAP_VIEW_HEIGHT);
-        _mapViewController.navigationController.toolbarHidden = YES;
-        
-        [self.detailScrollView addSubview:_mapViewController.view];
-        
-        yOffset = _mapViewController.view.frame.origin.y + MAP_VIEW_HEIGHT * 2;
+
+        if (CLLocationCoordinate2DIsValid(CLLocationCoordinate2DMake(latitude, longtitude)))
+        {
+            _mapViewController = [[MapViewController alloc] initWithName:@"test map name" description:nil latitude:30.61510126 longitude:104.09182433 showSelf:NO];
+            _mapViewController.view.frame = CGRectMake(MAP_VIEW_X_OFFSET, yOffset, MAP_VIEW_WIDTH, MAP_VIEW_HEIGHT);
+            _mapViewController.navigationController.toolbarHidden = YES;
+            
+            [self.detailScrollView addSubview:_mapViewController.view];
+            
+            yOffset = _mapViewController.view.frame.origin.y + MAP_VIEW_HEIGHT * 2;
+        }
     }
     
     //Content

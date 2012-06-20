@@ -163,7 +163,7 @@
     [super viewDidLoad];
     [self refreshTopView];
     
-    [[BSDKManager sharedManager] getUserInforByUsername:[self.friendDictionary valueForKey:KEY_ACCOUNT_USER_NAME]
+    [[BSDKManager sharedManager] getUserInforByUserId:[self.friendDictionary valueForKey:KEY_ACCOUNT_USER_ID]
                                         andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
                                             [self.friendDictionary setValuesForKeysWithDictionary:data];
                                             

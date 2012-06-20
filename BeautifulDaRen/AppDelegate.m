@@ -24,6 +24,7 @@
     [_window release];
     [_rootViewController release];
     [_waitOverlay release];
+    [_imagePickerController release];
     
     [super dealloc];
 }
@@ -94,5 +95,14 @@
 {
 }
 */
+
+- (UIImagePickerController *)getImagePicker
+{
+    if (_imagePickerController == nil) {
+        _imagePickerController = [[UIImagePickerController alloc] init];
+    }
+
+    return _imagePickerController;
+}
 
 @end

@@ -253,8 +253,8 @@
         NSString* password = self.accountPwdField.text;
         if (DEVELOPER_ENABLE)
         {
-            userName = @"tankliu002";
-            password = @"abc123456";
+            userName = @"jerry";
+            password = @"123456";
         }
         NSString * iToastString = @"";
         if ([userName isEqualToString:@""])

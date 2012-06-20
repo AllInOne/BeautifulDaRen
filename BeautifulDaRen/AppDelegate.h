@@ -14,10 +14,13 @@
 {
 @private
     WaitOverlay* _waitOverlay;
+    UIImagePickerController * _imagePickerController;
 }
 
 @property (strong, nonatomic) UIWindow *window;
 
 @property (strong, nonatomic) IBOutlet UITabBarController *rootViewController;
+
+- (UIImagePickerController *)getImagePicker;
 
 @end
