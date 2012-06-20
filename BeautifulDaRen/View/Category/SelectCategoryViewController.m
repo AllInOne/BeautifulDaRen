@@ -89,7 +89,7 @@
         contentHeight = CATEGORY_CELL_Y_OFFSET + (CGRectGetHeight(cell.frame) + CATEGORY_CELL_Y_MARGIN) * (index/2 + 1), CGRectGetWidth(cell.frame);
         
         if (self.initialSelectedCategoryId && [self.initialSelectedCategoryId isEqualToString:[[self.categoryListData objectAtIndex:index] objectForKey:K_BSDK_UID]]) {
-            [cell.checkBox setImage:[UIImage imageNamed:@"myshow_category_checked"] forState:UIControlStateNormal];
+            [cell.checkBox setImage:[UIImage imageNamed:@"radio_btn_selected"] forState:UIControlStateNormal];
             [self.categorySelectState addObject:[NSNumber numberWithInt:1]];
         }
         else
@@ -137,7 +137,7 @@
 -(IBAction)onCheckBoxPressed:(UIButton*)sender
 {
     [self clearCheckedCategories];
-    [sender setImage:[UIImage imageNamed:@"myshow_category_checked"] forState:UIControlStateNormal];
+    [sender setImage:[UIImage imageNamed:@"radio_btn_selected"] forState:UIControlStateNormal];
     [self.categorySelectState replaceObjectAtIndex:sender.tag withObject:[NSNumber numberWithInt:1]];
 
 }
@@ -149,7 +149,7 @@
         NSNumber * checkValue = [self.categorySelectState objectAtIndex:index];
         if ([checkValue intValue] == 1) {
             [self.categorySelectState replaceObjectAtIndex:index withObject:[NSNumber numberWithInt:0]];
-            [((SelectCategoryCell*)[self.categorySelectCells objectAtIndex:index]).checkBox setImage:[UIImage imageNamed:@"myshow_category_unchecked"] forState:UIControlStateNormal];
+            [((SelectCategoryCell*)[self.categorySelectCells objectAtIndex:index]).checkBox setImage:[UIImage imageNamed:@"radio_btn_unselected"] forState:UIControlStateNormal];
         }
     }
 }

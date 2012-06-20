@@ -86,7 +86,7 @@
 					<object class="IBUIButton" id="249808243">
 						<reference key="NSNextResponder" ref="371443769"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 15}, {16, 16}}</string>
+						<string key="NSFrame">{{20, 11}, {24, 24}}</string>
 						<reference key="NSSuperview" ref="371443769"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="506082252"/>
@@ -109,7 +109,7 @@
 						</object>
 						<object class="NSCustomResource" key="IBUINormalImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">myshow_category_unchecked.png</string>
+							<string key="NSResourceName">radio_btn_unselected.png</string>
 						</object>
 						<object class="IBUIFontDescription" key="IBUIFontDescription">
 							<int key="type">2</int>
@@ -284,7 +284,7 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="myshow_category_background.png">{141, 41}</string>
-			<string key="myshow_category_unchecked.png">{32, 32}</string>
+			<string key="radio_btn_unselected.png">{24, 24}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">933</string>
 	</data>

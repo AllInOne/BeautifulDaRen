@@ -86,6 +86,10 @@
 #define K_BSDK_PICTURE_HEIGHT @"Picture_height"
 #define K_BSDK_PICTURE_WIDTH @"Picture_width"
 
+#define K_BSDK_COMMENT_NUM @"CommentNum"
+#define K_BSDK_FAVOURATE_NUM @"FavNum"
+#define K_BSDK_FORWARD_NUM @"ForwardNum"
+
 #define K_BSDK_CLASSLIST @"ClassList"
 #define K_BSDK_CLASSID @"ClassId"
 #define K_BSDK_CLASSNAME @"classname"

@@ -200,14 +200,14 @@ static BSDKManager *sharedInstance;
                        doneCallback:doneBlock];
 }
 
-- (void)getUserInforByUsername:(NSString*) username andDoneCallback:(processDoneWithDictBlock)doneBlock
+- (void)getUserInforByUserId:(NSString*) userId andDoneCallback:(processDoneWithDictBlock)doneBlock
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
     
     [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETINFO forKey:K_BSDK_ACTION];
-    if (username) {
-        [params setObject:username forKey:K_BSDK_USERNAME];
+    if (userId) {
+        [params setObject:userId forKey:K_BSDK_USER_ID];
     }
     
     [self sendRequestWithMethodName:nil
@@ -527,7 +527,7 @@ static BSDKManager *sharedInstance;
     [params setObject:K_BSDK_CATEGORY_SNS forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_SENDCOMMENT forKey:K_BSDK_ACTION];
     [params setObject:comment forKey:K_BSDK_CONTENT];
-    [params setObject:blogId forKey:K_BSDK_BLOGUID];
+    [params setObject:blogId forKey:K_BSDK_UID];
     
     [self sendRequestWithMethodName:nil
                          httpMethod:@"POST" 
