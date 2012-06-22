@@ -11,5 +11,5 @@
 @interface ForwardCommentListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, retain) IBOutlet UITableView * forwardOrCommentListTableView;
-
+@property (nonatomic, retain) NSString * relatedBlogId;
 @end

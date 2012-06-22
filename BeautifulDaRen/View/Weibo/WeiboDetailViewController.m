@@ -193,6 +193,8 @@
 {
     ForwardCommentListViewController *commentListViewContoller = 
     [[ForwardCommentListViewController alloc] initWithNibName:nil bundle:nil];
+    
+    commentListViewContoller.relatedBlogId = [self.weiboData objectForKey:K_BSDK_UID];
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: commentListViewContoller];
     
     [self.navigationController presentModalViewController:navController animated:YES];

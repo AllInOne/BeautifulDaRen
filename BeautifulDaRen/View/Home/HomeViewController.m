@@ -128,6 +128,7 @@
 
 -(void) dealloc
 {
+    [self.adsPageView stop];
     [_adsPageView release];
     [_itemsViewController release];
     [_observerForLoginSuccess release];
@@ -138,6 +139,7 @@
 - (void)viewDidUnload
 {
     [[NSNotificationCenter defaultCenter] removeObserver:_observerForLoginSuccess];
+    [self.adsPageView stop];
     self.adsPageView = nil;
     self.itemsViewController = nil;
     self.observerForLoginSuccess = nil;

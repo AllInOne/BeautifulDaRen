@@ -12,16 +12,20 @@
 #import "DataConstants.h"
 #import "ForwardCommentTableViewCell.h"
 #import "DataManager.h"
+#import "BSDKManager.h"
+#import "BSDKDefines.h"
 
 #define FONT_SIZE           (14.0f)
 #define CELL_CONTENT_WIDTH  (240.0f)
 #define CELL_CONTENT_Y_OFFSET  (40.0f)
 #define CELL_MIN_HEIGHT     (60.0f)
 
+#define INITIAL_SIZE        (100)
+
 
 @interface ForwardCommentListViewController ()
 
-@property (nonatomic, retain) NSArray * forwardOrCommentList;
+@property (nonatomic, retain) NSMutableArray * forwardOrCommentList;
 
 -(void)refreshData;
 @end
@@ -30,10 +34,12 @@
 
 @synthesize forwardOrCommentListTableView = _forwardOrCommentListTableView;
 @synthesize forwardOrCommentList = _forwardOrCommentList;
+@synthesize relatedBlogId = _relatedBlogId;
 
 - (void)dealloc
 {
     [_forwardOrCommentList release];
+    [_relatedBlogId release];
     [super dealloc];
 }
 
@@ -61,14 +67,10 @@
 
 -(void)refreshData
 {
-    if(_forwardOrCommentList)
-    {
-        [_forwardOrCommentList release];
-    }
-    
-    _forwardOrCommentList = [[[DataManager sharedManager] getCommentOfLocalIdentityWithLimit:9 finishBlock:^(NSError *error) {
-        NSLog(@"get comment from DB with error:%@",error);
-    }] copy];
+    [[BSDKManager sharedManager] getCommentListOfWeibo:self.relatedBlogId pageSize:20 pageIndex:1 andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+        [self.forwardOrCommentList addObjectsFromArray:[data objectForKey:K_BSDK_RESPONSE_COMMENTLIST]];
+        [self.forwardOrCommentListTableView reloadData];
+    }];    
 }
 #pragma mark - View lifecycle
 
@@ -78,13 +80,12 @@
     [self.forwardOrCommentListTableView setDelegate:self];
     [self.forwardOrCommentListTableView setDataSource:self];
     // Do any additional setup after loading the view from its nib.
-    
+    self.forwardOrCommentList = [NSMutableArray arrayWithCapacity:INITIAL_SIZE];
     [self refreshData];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    [self refreshData];
 }
 
 - (void)viewDidUnload
@@ -92,6 +93,8 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    self.relatedBlogId = nil;
+    self.forwardOrCommentList = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -116,13 +119,17 @@
         cell = [[[NSBundle mainBundle] loadNibNamed:forwardCommentCellIdentifier owner:self options:nil] objectAtIndex:0];
     }
 
-    Comment * comment = [self.forwardOrCommentList objectAtIndex:[indexPath row]];
-    cell.username.text = comment.personName;
+    NSDictionary * comment = [self.forwardOrCommentList objectAtIndex:[indexPath row]];
+    NSDictionary * userInfoDict = [comment objectForKey:K_BSDK_USER_INFO];
+    if (userInfoDict) {
+        cell.username.text = [userInfoDict objectForKey:K_BSDK_USERNAME];
+    }
+
     [cell.userAvatar setImage:[UIImage imageNamed:@"avatar_icon"]];
     cell.timestamp.text = @"1分钟";
-    cell.content.text = comment.detail;
+    cell.content.text = [comment objectForKey:K_BSDK_CONTENT];
     
-    CGFloat contentHeight = [ViewHelper getHeightOfText:comment.detail ByFontSize:FONT_SIZE contentWidth:CELL_CONTENT_WIDTH];
+    CGFloat contentHeight = [ViewHelper getHeightOfText:[comment objectForKey:K_BSDK_CONTENT] ByFontSize:FONT_SIZE contentWidth:CELL_CONTENT_WIDTH];
     
     cell.content.frame = CGRectMake(cell.content.frame.origin.x, CELL_CONTENT_Y_OFFSET, cell.content.frame.size.width, contentHeight);
     
@@ -141,8 +148,8 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    Comment * comment = [self.forwardOrCommentList objectAtIndex:[indexPath row]];
-    CGFloat contentHeight = [ViewHelper getHeightOfText:comment.detail ByFontSize:FONT_SIZE contentWidth:CELL_CONTENT_WIDTH];
+    NSDictionary * comment = [self.forwardOrCommentList objectAtIndex:[indexPath row]];
+    CGFloat contentHeight = [ViewHelper getHeightOfText:[comment objectForKey:K_BSDK_CONTENT] ByFontSize:FONT_SIZE contentWidth:CELL_CONTENT_WIDTH];
     
     contentHeight += CELL_CONTENT_Y_OFFSET;
     
