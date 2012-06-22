@@ -389,31 +389,37 @@
     {
         [[BSDKManager sharedManager] getUserInforByUserId:accountId andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
             /* {
+             Address = "";
              AtNum = 0;
-             AttentionNum = 0;
+             AttentionNum = 1;
              BlackListNum = 0;
              BlogNum = 0;
              BuyNum = 0;
              City = "\U6210\U90fd";
              CommentNum = 0;
-             CreateTime = "2012-06-09 00:03:59";
-             Email = "dddd@11.c2om";
+             CreateTime = "2012-06-07 13:54:48";
+             Email = "23775517@qq.com";
              FansNum = 0;
              FavNum = 0;
              Intro = 0;
+             IsCheck = 0;
+             IsRecomm = 0;
              IsVerify = 0;
              Levels = 0;
+             Password = 0659c7992e268962384eb17fafe88364;
+             PicInfo = "";
+             Picture = "";
              Points = 0;
              PrivateMsgNum = 0;
              Prov = "";
-             SmallPic = "";
+             Sex = 0;
+             Tel = "";
              TopicNum = 0;
-             UserName = tankliu013;
+             UserName = tankliu002;
              UserType = 0;
-             id = 12;
+             id = 7;
+             "pic_65-65" = "";
              }  */
-            NSString * s = [data valueForKey:@"City"];
-            s = s;
             NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:
                                    [data valueForKey:@"UserName"],      USERDEFAULT_ACCOUNT_USERNAME,
                                    [data valueForKey:@"UserType"],      USERDEFAULT_ACCOUNT_USER_TYPE,
