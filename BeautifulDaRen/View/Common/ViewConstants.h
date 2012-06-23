@@ -120,4 +120,9 @@ enum
 #define IMAGE_PICKER_LIBRARY      NSLocalizedString(@"album", @"album")
 #define IMAGE_PICKER_DELETE       NSLocalizedString(@"delete_selected_photos", @"delete_selected_photos")
 
+#define ACTIONSHEET_COMMENT_LIST 2
+
+#define COMMENT_LIST_VIEW_PROFILE       NSLocalizedString(@"view_profile", @"view_profile")
+#define COMMENT_LIST_POST_COMMNET       NSLocalizedString(@"post_comment", @"post_comment")
+
 #endif
