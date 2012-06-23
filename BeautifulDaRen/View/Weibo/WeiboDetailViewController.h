@@ -16,6 +16,7 @@
 
 @property (nonatomic, retain) IBOutlet UILabel  * contentLabel;
 @property (nonatomic, retain) IBOutlet UILabel  * timestampLabel;
+@property (nonatomic, retain) IBOutlet UILabel  * usernameLabel;
 
 @property (nonatomic, retain) IBOutlet UIButton * forwardedButton;
 @property (nonatomic, retain) IBOutlet UIButton * commentButton;

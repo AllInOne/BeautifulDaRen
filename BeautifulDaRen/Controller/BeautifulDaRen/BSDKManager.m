@@ -483,6 +483,25 @@ static BSDKManager *sharedInstance;
     }
 }
 
+- (void)getWeiboById:(NSString*)classId
+     andDoneCallback:(processDoneWithDictBlock)callback
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
+    
+    [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
+    [params setObject:K_BSDK_ACTION_GETINFO forKey:K_BSDK_ACTION];
+    
+    [params setObject:classId forKey:K_BSDK_BLOGUID];
+    
+    [self sendRequestWithMethodName:nil
+                         httpMethod:@"POST" 
+                             params:params 
+                       postDataType:kBSDKRequestPostDataTypeNormal
+                   httpHeaderFields:nil
+                       doneCallback:callback];
+    
+}
+
 
 #pragma mark User related methods
 - (void)followUser:(NSInteger)userId
