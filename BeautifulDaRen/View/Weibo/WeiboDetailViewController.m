@@ -59,6 +59,7 @@
 @synthesize merchantLable = _merchantLable;
 @synthesize priceButton = _priceButton;
 @synthesize brandLable = _brandLable;
+@synthesize usernameLabel = _usernameLabel;
 
 - (void)dealloc
 {
@@ -79,6 +80,7 @@
     [_brandLable release];
     [_merchantLable release];
     [_priceButton release];
+    [_usernameLabel release];
     
     [super dealloc];
 }
@@ -193,6 +195,8 @@
 {
     ForwardCommentListViewController *commentListViewContoller = 
     [[ForwardCommentListViewController alloc] initWithNibName:nil bundle:nil];
+    
+    commentListViewContoller.relatedBlogId = [self.weiboData objectForKey:K_BSDK_UID];
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: commentListViewContoller];
     
     [self.navigationController presentModalViewController:navController animated:YES];
@@ -234,6 +238,7 @@
     self.merchantLable = nil;
     self.priceButton = nil;
     self.brandLable = nil;
+    self.usernameLabel = nil;
     
     [self.toolbar removeFromSuperview];
     self.toolbar = nil;
@@ -358,6 +363,8 @@
     self.timestampLabel.text = [ViewHelper intervalSinceNow:[self.weiboData objectForKey:K_BSDK_CREATETIME]];
     [self.timestampLabel setTextColor:[UIColor purpleColor]];
     
+    self.usernameLabel.text = [self.weiboData objectForKey:K_BSDK_USERNAME];
+    
     NSString * price = [self.weiboData objectForKey:K_BSDK_PRICE];
     if (price && ([price intValue] != 0)) {
         [self.priceButton setTitle:[NSString stringWithFormat:@"¥%d", [price intValue]] forState:UIControlStateNormal];
@@ -392,7 +399,9 @@
 }
 
 - (void)onRefreshButtonClicked {
-    [[iToast makeText:@"刷新成功！"] show];
+    [[BSDKManager sharedManager] getWeiboById:[self.weiboData objectForKey:K_BSDK_UID] andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+        
+    }];
 }
 
 -(IBAction)onImageButtonPressed:(id)sender

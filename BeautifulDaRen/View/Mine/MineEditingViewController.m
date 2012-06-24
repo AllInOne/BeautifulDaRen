@@ -483,7 +483,7 @@
                                                            destructiveButtonTitle:nil
                                                                 otherButtonTitles:nil];
     
-    imagePickerActionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+    imagePickerActionSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
     imagePickerActionSheet.tag = ACTIONSHEET_IMAGE_PICKER;
     
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])

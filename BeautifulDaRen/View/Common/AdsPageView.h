@@ -19,4 +19,6 @@
 
 -(IBAction)onAdsPressed:(id)sender;
 -(IBAction)onAdsPageClosedPressed:(id)sender;
+
+-(void)stop;
 @end

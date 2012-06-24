@@ -86,11 +86,15 @@
     self.secondImageView = nil;
     self.adsPageController = nil;
     self.adsButton = nil;
-    
-    [_adsExchangeTimer invalidate];
-    _adsExchangeTimer = nil;
 }
 
+-(void)stop
+{
+    if ([_adsExchangeTimer isValid]) {
+        [_adsExchangeTimer invalidate];
+        _adsExchangeTimer = nil;
+    }
+}
 
 - (void)viewDidLoad
 {
@@ -237,14 +241,16 @@
 //            [[iToast makeText:[NSString stringWithFormat:@"%@", [data description]]] show];
 //        }];
 
-            [[BSDKManager sharedManager] getUserInforByUserId:@"32" andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-                 NSLog(@"sign in done = %d", status);
-                [[iToast makeText:[NSString stringWithFormat:@"%@", [data objectForKey:@"msg"]]] show];
-                }];
+//            [[BSDKManager sharedManager] getUserInforByUserId:@"32" andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+//                 NSLog(@"sign in done = %d", status);
+//                [[iToast makeText:[NSString stringWithFormat:@"%@", [data objectForKey:@"msg"]]] show];
+//                }];
+
+        [[BSDKManager sharedManager] getFollowList:32 pageSize:20 pageIndex:1 andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+            NSLog(@"sign in done = %d", status);
+            [[iToast makeText:[NSString stringWithFormat:@"%@", [data objectForKey:@"msg"]]] show];
+        }];
     }
-
-
-
     
 //    [[BSDKManager sharedManager] searchUsersByUsername:@"121asdfasdf" andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
 //         NSLog(@"sign in done = %d", status);

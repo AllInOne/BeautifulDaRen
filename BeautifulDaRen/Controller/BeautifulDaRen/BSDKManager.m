@@ -454,7 +454,10 @@ static BSDKManager *sharedInstance;
     [params setObject:shop forKey:K_BSDK_SHOPMERCHANT];
     [params setObject:branch forKey:K_BSDK_BRANDSERVICE];
     [params setObject:[NSNumber numberWithInt:price] forKey:K_BSDK_PRICE];
-    [params setObject:category forKey:K_BSDK_CLASSID];
+    if (category) {
+        [params setObject:category forKey:K_BSDK_CLASSID];
+    }
+
     [params setObject:[NSNumber numberWithFloat:latitude] forKey:K_BSDK_LATITUDE];
     [params setObject:[NSNumber numberWithFloat:longitude] forKey:K_BSDK_LONGITUDE];
     
@@ -478,6 +481,25 @@ static BSDKManager *sharedInstance;
                        httpHeaderFields:nil
                            doneCallback:callback];
     }
+}
+
+- (void)getWeiboById:(NSString*)classId
+     andDoneCallback:(processDoneWithDictBlock)callback
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
+    
+    [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
+    [params setObject:K_BSDK_ACTION_GETINFO forKey:K_BSDK_ACTION];
+    
+    [params setObject:classId forKey:K_BSDK_BLOGUID];
+    
+    [self sendRequestWithMethodName:nil
+                         httpMethod:@"POST" 
+                             params:params 
+                       postDataType:kBSDKRequestPostDataTypeNormal
+                   httpHeaderFields:nil
+                       doneCallback:callback];
+    
 }
 
 
@@ -527,7 +549,7 @@ static BSDKManager *sharedInstance;
     [params setObject:K_BSDK_CATEGORY_SNS forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_SENDCOMMENT forKey:K_BSDK_ACTION];
     [params setObject:comment forKey:K_BSDK_CONTENT];
-    [params setObject:blogId forKey:K_BSDK_UID];
+    [params setObject:blogId forKey:K_BSDK_BLOGUID];
     
     [self sendRequestWithMethodName:nil
                          httpMethod:@"POST" 

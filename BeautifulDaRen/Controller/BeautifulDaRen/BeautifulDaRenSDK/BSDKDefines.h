@@ -76,6 +76,7 @@
 
 #define K_BSDK_UID @"id"
 #define K_BSDK_USER_ID @"UserId"
+#define K_BSDK_USER_INFO @"UserInfo"
 
 #define K_BSDK_BLOGUID @"BlogId"
 #define K_BSDK_BLOGLIST @"BlogList"
@@ -102,6 +103,7 @@
 
 #define K_BSDK_RESPONSE_BLOGLIST @"BlogList"
 #define K_BSDK_RESPONSE_USERLIST @"UserList"
+#define K_BSDK_RESPONSE_COMMENTLIST @"CommentList"
 
 #define K_BSDK_IS_RESPONSE_OK(res) ([[res objectForKey:K_BSDK_RESPONSE_STATUS] isEqual:K_BSDK_RESPONSE_STATUS_OK])
 #define K_BSDK_GET_RESPONSE_MESSAGE(res) ([res objectForKey:K_BSDK_RESPONSE_MESSAGE])

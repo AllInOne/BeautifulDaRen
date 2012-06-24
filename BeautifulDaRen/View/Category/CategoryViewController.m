@@ -46,6 +46,7 @@
 
 - (void)dealloc {
     [super dealloc];
+    [self.adsPageView stop];
     [_adsPageView release];
     [_categoryContentView release];
 }
@@ -54,6 +55,7 @@
 {
     [super viewDidUnload];
     self.categoryContentView = nil;
+    [self.adsPageView stop];
     self.adsPageView = nil;
 }
 
@@ -128,6 +130,7 @@
     [self setCategoryContentView:nil];
     if (self.adsPageView) {
 //        [self.adsPageView.view removeFromSuperview];
+        [self.adsPageView stop];
         [self setAdsPageView:nil];
     }
     

@@ -72,6 +72,9 @@
 
 - (void)getWeiboClassesWithDoneCallback:(processDoneWithDictBlock)callback;
 
+- (void)getWeiboById:(NSString*)classId
+     andDoneCallback:(processDoneWithDictBlock)callback;
+
 #pragma mark Social related API
 - (void)followUser:(NSInteger)userId
    andDoneCallback:(processDoneWithDictBlock)callback;
