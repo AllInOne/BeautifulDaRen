@@ -11,6 +11,7 @@
 #import "WaresItem.h"
 #import "WeiboDetailViewController.h"
 #import "ViewHelper.h"
+#import "UIImageView+WebCache.h"
 #import <QuartzCore/QuartzCore.h>
 #import "BorderImageView.h"
 
@@ -23,22 +24,22 @@
 
 @interface ItemsViewController()
 
-@property (retain, nonatomic) NSMutableArray * fakeData;
+@property (retain, nonatomic) NSMutableArray * itemDatas;
 @property (retain, nonatomic) NSMutableArray * itemsHeight;
--(void)loadFakeData;
+-(void)loadItemsHeight;
 
 @end
 
 @implementation ItemsViewController
 @synthesize waterFlowView = _waterFlowView;
-@synthesize fakeData = _fakeData;
+@synthesize itemDatas = _itemDatas;
 @synthesize itemsHeight = _itemsHeight;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+-(id)initWithArray:(NSArray*)array
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super initWithNibName:@"ItemsViewController" bundle:nil];
     if (self) {
-        
+        self.itemDatas = [NSMutableArray arrayWithArray:array];
     }
     return self;
 }
@@ -53,38 +54,16 @@
 
 #pragma mark View
 
-- (void) loadFakeData
+- (void) loadItemsHeight
 {
-    NSArray * imageNames = [NSArray arrayWithObjects:@"weibo_sample1",@"weibo_sample2",
-                            @"weibo_sample3",@"weibo_sample4",@"weibo_sample5",@"weibo_sample6",@"weibo_sample7",
-                            @"weibo_sample8",@"weibo_sample9",@"weibo_sample10",
-                            @"weibo_sample11",@"weibo_sample1",@"weibo_sample2",@"weibo_sample3",
-                            @"weibo_sample4",@"weibo_sample5",@"weibo_sample6",@"weibo_sample7",
-                            @"weibo_sample8",@"weibo_sample9",@"weibo_sample10",@"weibo_sample1",
-                            @"weibo_sample2",@"weibo_sample3", nil];
-    NSArray * imageIds = [NSArray arrayWithObjects:@"NO.001",@"NO.002",
-                          @"NO.003",@"NO.004",@"NO.005",@"NO.006",
-                          @"NO.007",@"NO.008",@"NO.009",@"NO.010",
-                          @"NO.011",@"NO.012", @"NO.013",@"NO.021",
-                          @"NO.022", @"NO.023",@"NO.024",@"NO.025",
-                          @"NO.026",@"NO.027",@"NO.028",@"NO.029",
-                          @"NO.030",@"NO.031",@"NO.032", @"NO.033", nil];
-
-    NSInteger count = [imageNames count];
-    _fakeData = [[NSMutableArray alloc] initWithCapacity:count];
-    for (int i = 0; i < count; i++) {
-        WaresItem * item = [[WaresItem alloc] init];
-        item.itemId = [imageIds objectAtIndex:i];
-        UIImage * image = [UIImage imageNamed:[imageNames objectAtIndex:i]];
-        item.itemImageData = UIImagePNGRepresentation(image);
-        UIImageView * imageView = [[UIImageView alloc] initWithImage:[UIImage imageWithData:item.itemImageData]];
-        
+    NSInteger count = [self.itemDatas count];
+    for (int i = 0; i < count; i++)
+    {
+        CGFloat picWidth = [[[self.itemDatas objectAtIndex:i] valueForKey:@"Picture_width"] floatValue];
+        CGFloat picHeight = [[[self.itemDatas objectAtIndex:i] valueForKey:@"Picture_height"] floatValue];
         CGFloat frameWidth = (self.view.frame.size.width - 14) / 3;
-        CGFloat frameHeight = [ViewHelper getRatioHeightOfImage:imageView.image ratioWidth:frameWidth];
+        CGFloat frameHeight = (frameWidth / picWidth) * picHeight;
         [_itemsHeight addObject:[NSNumber numberWithFloat:(frameHeight+4)]];
-        [self.fakeData addObject:item];
-        [imageView release];
-        [item release];
     }
 }
 
@@ -94,7 +73,7 @@
 {
     [_waterFlowView release];
     [_itemsHeight release];
-    [_fakeData release];
+    [_itemDatas release];
     [super dealloc];
 }
 
@@ -102,7 +81,7 @@
 {
     [super viewDidLoad];
     _itemsHeight = [[NSMutableArray alloc] init];
-    [self loadFakeData];
+    [self loadItemsHeight];
     
     _waterFlowView = [[WaterFlowView alloc] initWithFrame:self.view.frame];
     _waterFlowView.flowdelegate = self;
@@ -115,7 +94,7 @@
     [super viewDidUnload];
     self.waterFlowView = nil;
     self.itemsHeight = nil;
-    self.fakeData = nil;
+    self.itemDatas = nil;
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -158,7 +137,7 @@
 
 - (NSInteger)flowView:(WaterFlowView *)flowView numberOfRowsInColumn:(NSInteger)column
 {
-    return 8;
+    return [self.itemDatas count] / 3;
 }
 
 - (WaterFlowCell *)flowView:(WaterFlowView *)flowView cellForRowAtIndex:(NSInteger)index
@@ -171,14 +150,20 @@
 	{
 		cell  = [[[WaterFlowCell alloc] initWithReuseIdentifier:cellIdentifier] autorelease];
         
-        UIImage * image = [UIImage imageWithData:((WaresItem*)[self.fakeData objectAtIndex:index]).itemImageData];
-        
+        NSDictionary * dict = [self.itemDatas objectAtIndex:index];
+        CGFloat picWidth = [[dict valueForKey:@"Picture_width"] floatValue];
+        CGFloat picHeight = [[dict valueForKey:@"Picture_height"] floatValue];
         CGFloat frameWidth = (self.view.frame.size.width - 14) / 3;
-        CGFloat frameHeight = [ViewHelper getRatioHeightOfImage:image ratioWidth:frameWidth];
+        CGFloat frameHeight = (frameWidth / picWidth) * picHeight;
         
-        BorderImageView * borderImageView = [[BorderImageView alloc] initWithFrame:CGRectMake(2, 2, frameWidth + 2, frameHeight + 2) andImage:image];
+        UIImageView * imageView = [[UIImageView alloc] init];
+        NSString * url = [dict valueForKey:@"pic_102"];
+        [imageView setImageWithURL:[NSURL URLWithString:url]];
+        
+        BorderImageView * borderImageView = [[BorderImageView alloc] initWithFrame:CGRectMake(2, 2, frameWidth + 2, frameHeight + 2) andView:imageView];
         [cell addSubview:borderImageView];
         [borderImageView release];
+        [imageView release];
 	}
 	return cell;
 }
