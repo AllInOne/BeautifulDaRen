@@ -276,7 +276,7 @@
          {
              if(AIO_STATUS_SUCCESS == status && [[data valueForKey:@"status"] isEqualToString:@"y"])
              {
-                 NSDictionary * userInfo = [data valueForKey:@"userinfo"];
+                 NSDictionary * userInfo = [data valueForKey:@"UserInfo"];
                  NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:
                                         [userInfo valueForKey:@"UserName"],      USERDEFAULT_ACCOUNT_USERNAME,
                                         [userInfo valueForKey:@"UserType"],      USERDEFAULT_ACCOUNT_USER_TYPE,

@@ -171,7 +171,7 @@
                                                   oldPassword:self.oldPasswordField.text
                                                 toNewPassword:self.resetPasswordField.text
                                               andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-                                                  
+                                                  [[iToast makeText:[data valueForKey:@"msg"]] show];
                                               }];
     }
 }
