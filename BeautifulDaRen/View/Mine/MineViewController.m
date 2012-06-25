@@ -384,65 +384,35 @@
 }
 -(void)refreshUserInfo
 {
-    NSString * accountId = [[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] valueForKey:USERDEFAULT_ACCOUNT_ID];
-    if([[BSDKManager sharedManager] isLogin])
-    {
-        [[BSDKManager sharedManager] getUserInforByUserId:accountId andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-            /* {
-             AtNum = 0;
-             AttentionNum = 0;
-             BlackListNum = 0;
-             BlogNum = 0;
-             BuyNum = 0;
-             City = "\U6210\U90fd";
-             CommentNum = 0;
-             CreateTime = "2012-06-09 00:03:59";
-             Email = "dddd@11.c2om";
-             FansNum = 0;
-             FavNum = 0;
-             Intro = 0;
-             IsVerify = 0;
-             Levels = 0;
-             Points = 0;
-             PrivateMsgNum = 0;
-             Prov = "";
-             SmallPic = "";
-             TopicNum = 0;
-             UserName = tankliu013;
-             UserType = 0;
-             id = 12;
-             }  */
-            NSString * s = [data valueForKey:@"City"];
-            s = s;
-            NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:
-                                   [data valueForKey:@"UserName"],      USERDEFAULT_ACCOUNT_USERNAME,
-                                   [data valueForKey:@"UserType"],      USERDEFAULT_ACCOUNT_USER_TYPE,
-                                   [data valueForKey:@"Sex"],           USERDEFAULT_ACCOUNT_GENDER,
-                                   [data valueForKey:@"id"],            USERDEFAULT_ACCOUNT_ID,
-                                   [data valueForKey:@"Email"],         USERDEFAULT_ACCOUNT_EMAIL,
-                                   [data valueForKey:@"Address"],       USERDEFAULT_ACCOUNT_ADDRESS,
-                                   [data valueForKey:@"Tel"],           USERDEFAULT_ACCOUNT_PHONE_NUMBER,
-                                   [data valueForKey:@"City"],          USERDEFAULT_ACCOUNT_CITY,
-                                   [data valueForKey:@"IsVerify"],      USERDEFAULT_ACCOUNT_IS_VERIFY,
-                                   [data valueForKey:@"Levels"],        USERDEFAULT_ACCOUNT_LEVEL,
-                                   [data valueForKey:@"Points"],        USERDEFAULT_ACCOUNT_POINT,
-                                   [data valueForKey:@"Intro"],         USERDEFAULT_ACCOUNT_INTRO,
-                                   [data valueForKey:@"Prov"],          USERDEFAULT_ACCOUNT_PROV,
-                                   [data valueForKey:@"CreateTime"],    USERDEFAULT_ACCOUNT_CREATE_TIME,
-                                   [data valueForKey:@"AtNum"],         USERDEFAULT_ACCOUNT_FORWARD_COUNT,
-                                   [data valueForKey:@"AttentionNum"],  USERDEFAULT_ACCOUNT_FOLLOW_COUNT,
-                                   [data valueForKey:@"BlackListNum"],  USERDEFAULT_ACCOUNT_BLACK_LIST_COUNT,
-                                   [data valueForKey:@"BlogNum"],       USERDEFAULT_ACCOUNT_WEIBO_COUNT,
-                                   [data valueForKey:@"BuyNum"],        USERDEFAULT_ACCOUNT_BUYED_COUNT,
-                                   [data valueForKey:@"CommentNum"],    USERDEFAULT_ACCOUNT_COMMENT_COUNT,
-                                   [data valueForKey:@"FansNum"],       USERDEFAULT_ACCOUNT_FANS_COUNT,
-                                   [data valueForKey:@"FavNum"],        USERDEFAULT_ACCOUNT_FAVORITE_COUNT,
-                                   [data valueForKey:@"PrivateMsgNum"], USERDEFAULT_ACCOUNT_PRIVATE_MSG_COUNT,
-                                   [data valueForKey:@"TopicNum"],      USERDEFAULT_ACCOUNT_TOPIC_COUNT,
-                                   nil];
-            [[NSUserDefaults standardUserDefaults] setObject:dict forKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
-            [self.tableView reloadData];
-        }];
-    }
+    NSDictionary * accountInfo = [[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
+
+    NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:
+               [accountInfo valueForKey:@"UserName"],      USERDEFAULT_ACCOUNT_USERNAME,
+               [accountInfo valueForKey:@"UserType"],      USERDEFAULT_ACCOUNT_USER_TYPE,
+               [accountInfo valueForKey:@"Sex"],           USERDEFAULT_ACCOUNT_GENDER,
+               [accountInfo valueForKey:@"id"],            USERDEFAULT_ACCOUNT_ID,
+               [accountInfo valueForKey:@"Email"],         USERDEFAULT_ACCOUNT_EMAIL,
+               [accountInfo valueForKey:@"Address"],       USERDEFAULT_ACCOUNT_ADDRESS,
+               [accountInfo valueForKey:@"Tel"],           USERDEFAULT_ACCOUNT_PHONE_NUMBER,
+               [accountInfo valueForKey:@"City"],          USERDEFAULT_ACCOUNT_CITY,
+               [accountInfo valueForKey:@"IsVerify"],      USERDEFAULT_ACCOUNT_IS_VERIFY,
+               [accountInfo valueForKey:@"Levels"],        USERDEFAULT_ACCOUNT_LEVEL,
+               [accountInfo valueForKey:@"Points"],        USERDEFAULT_ACCOUNT_POINT,
+               [accountInfo valueForKey:@"Intro"],         USERDEFAULT_ACCOUNT_INTRO,
+               [accountInfo valueForKey:@"Prov"],          USERDEFAULT_ACCOUNT_PROV,
+               [accountInfo valueForKey:@"CreateTime"],    USERDEFAULT_ACCOUNT_CREATE_TIME,
+               [accountInfo valueForKey:@"AtNum"],         USERDEFAULT_ACCOUNT_FORWARD_COUNT,
+               [accountInfo valueForKey:@"AttentionNum"],  USERDEFAULT_ACCOUNT_FOLLOW_COUNT,
+               [accountInfo valueForKey:@"BlackListNum"],  USERDEFAULT_ACCOUNT_BLACK_LIST_COUNT,
+               [accountInfo valueForKey:@"BlogNum"],       USERDEFAULT_ACCOUNT_WEIBO_COUNT,
+               [accountInfo valueForKey:@"BuyNum"],        USERDEFAULT_ACCOUNT_BUYED_COUNT,
+               [accountInfo valueForKey:@"CommentNum"],    USERDEFAULT_ACCOUNT_COMMENT_COUNT,
+               [accountInfo valueForKey:@"FansNum"],       USERDEFAULT_ACCOUNT_FANS_COUNT,
+               [accountInfo valueForKey:@"FavNum"],        USERDEFAULT_ACCOUNT_FAVORITE_COUNT,
+               [accountInfo valueForKey:@"PrivateMsgNum"], USERDEFAULT_ACCOUNT_PRIVATE_MSG_COUNT,
+               [accountInfo valueForKey:@"TopicNum"],      USERDEFAULT_ACCOUNT_TOPIC_COUNT,
+               nil];
+    [[NSUserDefaults standardUserDefaults] setObject:dict forKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
+
 }
 @end

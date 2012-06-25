@@ -59,6 +59,7 @@
     [_httpMethod release];
     [_params release];
     [_httpHeaderFields release];
+    [_engine release];
     Block_release(_doneCallback);
     [super dealloc];
 }

@@ -194,6 +194,8 @@
 //    }
     
     [request disconnect];
+    [request release];
+    request = nil;
     
 //    self.request = [BSDKRequest requestWithAccessToken:accessToken
 //                                                 url:[NSString stringWithFormat:@"%@%@", kWBSDKAPIDomain, methodName]

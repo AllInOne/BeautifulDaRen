@@ -310,6 +310,8 @@
     [placeholderImageView setImageWithURL:[NSURL URLWithString:[self.weiboData objectForKey:K_BSDK_PICTURE_102]]];                                          
     [self.weiboAttachedImageView setImageWithURL:[NSURL URLWithString:[self.weiboData objectForKey:K_BSDK_PICTURE_320]] placeholderImage:placeholderImageView.image];
     
+    [placeholderImageView release];
+    
     self.weiboAttachedImageView.frame = CGRectMake((SCREEN_WIDTH - IMAGE_WIDTH)/2, 
                                                    CGRectGetMinY(self.weiboAttachedImageView.frame), 
                                                    IMAGE_WIDTH, 
@@ -337,7 +339,7 @@
 
         if (CLLocationCoordinate2DIsValid(CLLocationCoordinate2DMake(latitude, longtitude)))
         {
-            _mapViewController = [[MapViewController alloc] initWithName:@"test map name" description:nil latitude:30.61510126 longitude:104.09182433 showSelf:NO];
+            _mapViewController = [[MapViewController alloc] initWithName:@"test map name" description:nil latitude:latitude longitude:longtitude showSelf:NO];
             _mapViewController.view.frame = CGRectMake(MAP_VIEW_X_OFFSET, yOffset, MAP_VIEW_WIDTH, MAP_VIEW_HEIGHT);
             _mapViewController.navigationController.toolbarHidden = YES;
             

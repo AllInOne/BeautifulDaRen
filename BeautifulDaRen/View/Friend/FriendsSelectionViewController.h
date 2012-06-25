@@ -19,6 +19,7 @@
 @property(assign, nonatomic) id<FriendsSelectionViewControllerDelegate> delegate;
 - (void)preloadView;
 
+@property (nonatomic, retain) NSArray * friendsList;
 @end
 
 /** @} */

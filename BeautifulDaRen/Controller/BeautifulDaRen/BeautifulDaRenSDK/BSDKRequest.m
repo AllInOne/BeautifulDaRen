@@ -38,10 +38,14 @@ static NSMutableString *logBody;
 
 - (void)dealloc
 {
-    [url release], url = nil;
-    [httpMethod release], httpMethod = nil;
-    [params release], params = nil;
-    [httpHeaderFields release], httpHeaderFields = nil;
+    [url release];
+    url = nil;
+    [httpMethod release];
+    httpMethod = nil;
+    [params release];
+    params = nil;
+    [httpHeaderFields release];
+    httpHeaderFields = nil;
     
     [responseData release];
 	responseData = nil;
@@ -310,7 +314,8 @@ static NSMutableString *logBody;
 	responseData = nil;
     
     [connection cancel];
-    [connection release], connection = nil;
+    [connection release];
+    connection = nil;
 }
 
 #pragma mark - NSURLConnection Delegate Methods

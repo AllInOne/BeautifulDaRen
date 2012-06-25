@@ -296,8 +296,8 @@ enum
         NSString * rePwd = self.userRePwdTextField.text;
 
         if (DEVELOPER_ENABLE) {
-            userName = @"tankliu114";
-            email = @"aa11aa41@11.com";
+            userName = @"jerry100";
+            email = @"12121aa41@11.com";
             pwd = @"abc123456";
             rePwd = @"abc123456";
             self.userCity = @"重庆"; 

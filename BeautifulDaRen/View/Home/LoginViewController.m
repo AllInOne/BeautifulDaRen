@@ -15,6 +15,7 @@
 #import "FindPasswordViewController.h"
 #import "iToast.h"
 #import "BSDKManager.h"
+#import "BSDKDefines.h"
 #import "ViewConstants.h"
 
 #import "ViewHelper.h"
@@ -253,7 +254,7 @@
         NSString* password = self.accountPwdField.text;
         if (DEVELOPER_ENABLE)
         {
-            userName = @"tankliu002";
+            userName = @"jerry100";
             password = @"abc123456";
         }
         NSString * iToastString = @"";
@@ -274,11 +275,9 @@
                                               password:password
                                        andDoneCallback:^(AIO_STATUS status, NSDictionary *data)
          {
-             if(AIO_STATUS_SUCCESS == status && [[data valueForKey:@"status"] isEqualToString:@"y"])
+             if(AIO_STATUS_SUCCESS == status && K_BSDK_IS_RESPONSE_OK(data))
              {
-                 NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:
-                                        userName, USERDEFAULT_ACCOUNT_USERNAME,
-                                        nil];
+                 NSDictionary * dict = [data objectForKey:K_BSDK_USER_INFO];
                  [[NSUserDefaults standardUserDefaults] setObject:dict forKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
                  [self.navigationController popToRootViewControllerAnimated:YES];
                  [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_LOGIN_SUCCESS object:self userInfo:data];
