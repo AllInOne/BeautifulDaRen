@@ -95,7 +95,7 @@
 - (void)unFollowUser:(NSInteger)userId
    andDoneCallback:(processDoneWithDictBlock)callback;
 
-- (void)getFollowList:(NSInteger)userId
+- (void)getFollowList:(NSString*)userId
              pageSize:(NSInteger)pageSize 
             pageIndex:(NSInteger)pageIndex 
      andDoneCallback:(processDoneWithDictBlock)callback;

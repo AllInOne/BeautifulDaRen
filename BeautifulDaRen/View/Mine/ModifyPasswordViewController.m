@@ -166,7 +166,7 @@
             return;
         }
         
-        NSString * accountName = [[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] valueForKey:USERDEFAULT_ACCOUNT_USERNAME];
+        NSString * accountName = [[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] valueForKey:KEY_ACCOUNT_USER_NAME];
         [[BSDKManager sharedManager] changePasswordByUsername:accountName
                                                   oldPassword:self.oldPasswordField.text
                                                 toNewPassword:self.resetPasswordField.text

@@ -15,8 +15,8 @@
 #import "FindPasswordViewController.h"
 #import "iToast.h"
 #import "BSDKManager.h"
+#import "BSDKDefines.h"
 #import "ViewConstants.h"
-
 #import "ViewHelper.h"
 #import "iToast.h"
 
@@ -253,7 +253,7 @@
         NSString* password = self.accountPwdField.text;
         if (DEVELOPER_ENABLE)
         {
-            userName = @"tankliu002";
+            userName = @"jerry100";
             password = @"abc123456";
         }
         NSString * iToastString = @"";
@@ -274,36 +274,9 @@
                                               password:password
                                        andDoneCallback:^(AIO_STATUS status, NSDictionary *data)
          {
-             if(AIO_STATUS_SUCCESS == status && [[data valueForKey:@"status"] isEqualToString:@"y"])
+             if(AIO_STATUS_SUCCESS == status && K_BSDK_IS_RESPONSE_OK(data))
              {
-                 NSDictionary * userInfo = [data valueForKey:@"UserInfo"];
-                 NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:
-                                        [userInfo valueForKey:@"UserName"],      USERDEFAULT_ACCOUNT_USERNAME,
-                                        [userInfo valueForKey:@"UserType"],      USERDEFAULT_ACCOUNT_USER_TYPE,
-                                        [userInfo valueForKey:@"Sex"],           USERDEFAULT_ACCOUNT_GENDER,
-                                        [userInfo valueForKey:@"id"],            USERDEFAULT_ACCOUNT_ID,
-                                        [userInfo valueForKey:@"Email"],         USERDEFAULT_ACCOUNT_EMAIL,
-                                        [userInfo valueForKey:@"Address"],       USERDEFAULT_ACCOUNT_ADDRESS,
-                                        [userInfo valueForKey:@"Tel"],           USERDEFAULT_ACCOUNT_PHONE_NUMBER,
-                                        [userInfo valueForKey:@"City"],          USERDEFAULT_ACCOUNT_CITY,
-                                        [userInfo valueForKey:@"IsVerify"],      USERDEFAULT_ACCOUNT_IS_VERIFY,
-                                        [userInfo valueForKey:@"Levels"],        USERDEFAULT_ACCOUNT_LEVEL,
-                                        [userInfo valueForKey:@"Points"],        USERDEFAULT_ACCOUNT_POINT,
-                                        [userInfo valueForKey:@"Intro"],         USERDEFAULT_ACCOUNT_INTRO,
-                                        [userInfo valueForKey:@"Prov"],          USERDEFAULT_ACCOUNT_PROV,
-                                        [userInfo valueForKey:@"CreateTime"],    USERDEFAULT_ACCOUNT_CREATE_TIME,
-                                        [userInfo valueForKey:@"AtNum"],         USERDEFAULT_ACCOUNT_FORWARD_COUNT,
-                                        [userInfo valueForKey:@"AttentionNum"],  USERDEFAULT_ACCOUNT_FOLLOW_COUNT,
-                                        [userInfo valueForKey:@"BlackListNum"],  USERDEFAULT_ACCOUNT_BLACK_LIST_COUNT,
-                                        [userInfo valueForKey:@"BlogNum"],       USERDEFAULT_ACCOUNT_WEIBO_COUNT,
-                                        [userInfo valueForKey:@"BuyNum"],        USERDEFAULT_ACCOUNT_BUYED_COUNT,
-                                        [userInfo valueForKey:@"CommentNum"],    USERDEFAULT_ACCOUNT_COMMENT_COUNT,
-                                        [userInfo valueForKey:@"FansNum"],       USERDEFAULT_ACCOUNT_FANS_COUNT,
-                                        [userInfo valueForKey:@"FavNum"],        USERDEFAULT_ACCOUNT_FAVORITE_COUNT,
-                                        [userInfo valueForKey:@"PrivateMsgNum"], USERDEFAULT_ACCOUNT_PRIVATE_MSG_COUNT,
-                                        [userInfo valueForKey:@"TopicNum"],      USERDEFAULT_ACCOUNT_TOPIC_COUNT,
-                                        nil];
-
+                 NSDictionary * dict = [data objectForKey:K_BSDK_USER_INFO];
                  [[NSUserDefaults standardUserDefaults] setObject:dict forKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
                  [self.navigationController popToRootViewControllerAnimated:YES];
                  [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_LOGIN_SUCCESS object:self userInfo:data];

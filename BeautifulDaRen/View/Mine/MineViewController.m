@@ -21,6 +21,7 @@
 #import "OHAttributedLabel.h"
 #import "BSDKManager.h"
 #import "iToast.h"
+#import "BSDKDefines.h"
 #import "LoginViewController.h"
 
 @interface MineViewController()
@@ -134,14 +135,14 @@
         NSDictionary * userDict = [[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
         ((MyInfoTopViewCell*)cell).avatarImageView.image = [UIImage imageNamed:@"avatar_big"];
         ((MyInfoTopViewCell*)cell).levelLabel.text = [NSString stringWithFormat:@"LV%d",
-                                                      [[userDict valueForKey:USERDEFAULT_ACCOUNT_LEVEL] intValue]];
+                                                      [[userDict valueForKey:KEY_ACCOUNT_LEVEL] intValue]];
         ((MyInfoTopViewCell*)cell).levelLabelTitle.text = [NSString stringWithFormat:@"%@%d",
                                                            NSLocalizedString(@"point", @"point"),
-                                                           [[userDict valueForKey:USERDEFAULT_ACCOUNT_POINT] intValue]];
-        ((MyInfoTopViewCell*)cell).beautifulIdLabel.text = [userDict valueForKey:USERDEFAULT_ACCOUNT_USERNAME];
+                                                           [[userDict valueForKey:KEY_ACCOUNT_POINT] intValue]];
+        ((MyInfoTopViewCell*)cell).beautifulIdLabel.text = [userDict valueForKey:KEY_ACCOUNT_USER_NAME];
         ((MyInfoTopViewCell*)cell).rightImageView.image = [UIImage imageNamed:@"gender_female"];
         ((MyInfoTopViewCell*)cell).editImageView.image = [UIImage imageNamed:@"my_edit"];
-        ((MyInfoTopViewCell*)cell).cityLabel.text = [NSString stringWithFormat:@"%@ %@", [userDict valueForKey:USERDEFAULT_ACCOUNT_CITY], [userDict valueForKey:USERDEFAULT_ACCOUNT_ADDRESS]];
+        ((MyInfoTopViewCell*)cell).cityLabel.text = [NSString stringWithFormat:@"%@ %@", [userDict valueForKey:KEY_ACCOUNT_CITY], [userDict valueForKey:KEY_ACCOUNT_Address]];
         _editButton = ((MyInfoTopViewCell*)cell).editButton;
         ((MyInfoTopViewCell*)cell).delegate = self;
     }
@@ -155,19 +156,19 @@
         NSDictionary * userDict = [[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
         NSMutableAttributedString * attrStr = nil;
         
-        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"follow", @"") detail:[NSString stringWithFormat:@"(%d)", [[userDict valueForKey:USERDEFAULT_ACCOUNT_FOLLOW_COUNT] intValue]]];
+        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"follow", @"") detail:[NSString stringWithFormat:@"(%d)", [[userDict valueForKey:KEY_ACCOUNT_FOLLOW_COUNT] intValue]]];
         ((GridViewCell*)cell).firstLabel.attributedText = attrStr;
         ((GridViewCell*)cell).firstLabel.textAlignment = UITextAlignmentCenter;
         
-        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"fans", @"") detail:[NSString stringWithFormat:@"(%d)", [[userDict valueForKey:USERDEFAULT_ACCOUNT_FANS_COUNT] intValue]]];
+        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"fans", @"") detail:[NSString stringWithFormat:@"(%d)", [[userDict valueForKey:KEY_ACCOUNT_FANS_COUNT] intValue]]];
         ((GridViewCell*)cell).secondLabel.attributedText = attrStr;
         ((GridViewCell*)cell).secondLabel.textAlignment = UITextAlignmentCenter;
         
-        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"collection", @"") detail:[NSString stringWithFormat:@"(%d)", [[userDict valueForKey:USERDEFAULT_ACCOUNT_FAVORITE_COUNT] intValue]]];
+        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"collection", @"") detail:[NSString stringWithFormat:@"(%d)", [[userDict valueForKey:KEY_ACCOUNT_FAVORITE_COUNT] intValue]]];
         ((GridViewCell*)cell).thirdLabel.attributedText = attrStr;
         ((GridViewCell*)cell).thirdLabel.textAlignment = UITextAlignmentCenter;
         
-        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"my_publish", @"") detail:[NSString stringWithFormat:@"(%d)", [[userDict valueForKey:USERDEFAULT_ACCOUNT_WEIBO_COUNT] intValue]]];
+        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"my_publish", @"") detail:[NSString stringWithFormat:@"(%d)", [[userDict valueForKey:KEY_ACCOUNT_BLOG_COUNT] intValue]]];
         ((GridViewCell*)cell).fourthLabel.attributedText = attrStr;
         ((GridViewCell*)cell).fourthLabel.textAlignment = UITextAlignmentCenter;
 
@@ -384,69 +385,13 @@
 }
 -(void)refreshUserInfo
 {
-    NSString * accountId = [[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] valueForKey:USERDEFAULT_ACCOUNT_ID];
     if([[BSDKManager sharedManager] isLogin])
     {
-        [[BSDKManager sharedManager] getUserInforByUserId:accountId andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-            /* {
-             Address = "";
-             AtNum = 0;
-             AttentionNum = 1;
-             BlackListNum = 0;
-             BlogNum = 0;
-             BuyNum = 0;
-             City = "\U6210\U90fd";
-             CommentNum = 0;
-             CreateTime = "2012-06-07 13:54:48";
-             Email = "23775517@qq.com";
-             FansNum = 0;
-             FavNum = 0;
-             Intro = 0;
-             IsCheck = 0;
-             IsRecomm = 0;
-             IsVerify = 0;
-             Levels = 0;
-             Password = 0659c7992e268962384eb17fafe88364;
-             PicInfo = "";
-             Picture = "";
-             Points = 0;
-             PrivateMsgNum = 0;
-             Prov = "";
-             Sex = 0;
-             Tel = "";
-             TopicNum = 0;
-             UserName = tankliu002;
-             UserType = 0;
-             id = 7;
-             "pic_65-65" = "";
-             }  */
-            NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:
-                                   [data valueForKey:@"UserName"],      USERDEFAULT_ACCOUNT_USERNAME,
-                                   [data valueForKey:@"UserType"],      USERDEFAULT_ACCOUNT_USER_TYPE,
-                                   [data valueForKey:@"Sex"],           USERDEFAULT_ACCOUNT_GENDER,
-                                   [data valueForKey:@"id"],            USERDEFAULT_ACCOUNT_ID,
-                                   [data valueForKey:@"Email"],         USERDEFAULT_ACCOUNT_EMAIL,
-                                   [data valueForKey:@"Address"],       USERDEFAULT_ACCOUNT_ADDRESS,
-                                   [data valueForKey:@"Tel"],           USERDEFAULT_ACCOUNT_PHONE_NUMBER,
-                                   [data valueForKey:@"City"],          USERDEFAULT_ACCOUNT_CITY,
-                                   [data valueForKey:@"IsVerify"],      USERDEFAULT_ACCOUNT_IS_VERIFY,
-                                   [data valueForKey:@"Levels"],        USERDEFAULT_ACCOUNT_LEVEL,
-                                   [data valueForKey:@"Points"],        USERDEFAULT_ACCOUNT_POINT,
-                                   [data valueForKey:@"Intro"],         USERDEFAULT_ACCOUNT_INTRO,
-                                   [data valueForKey:@"Prov"],          USERDEFAULT_ACCOUNT_PROV,
-                                   [data valueForKey:@"CreateTime"],    USERDEFAULT_ACCOUNT_CREATE_TIME,
-                                   [data valueForKey:@"AtNum"],         USERDEFAULT_ACCOUNT_FORWARD_COUNT,
-                                   [data valueForKey:@"AttentionNum"],  USERDEFAULT_ACCOUNT_FOLLOW_COUNT,
-                                   [data valueForKey:@"BlackListNum"],  USERDEFAULT_ACCOUNT_BLACK_LIST_COUNT,
-                                   [data valueForKey:@"BlogNum"],       USERDEFAULT_ACCOUNT_WEIBO_COUNT,
-                                   [data valueForKey:@"BuyNum"],        USERDEFAULT_ACCOUNT_BUYED_COUNT,
-                                   [data valueForKey:@"CommentNum"],    USERDEFAULT_ACCOUNT_COMMENT_COUNT,
-                                   [data valueForKey:@"FansNum"],       USERDEFAULT_ACCOUNT_FANS_COUNT,
-                                   [data valueForKey:@"FavNum"],        USERDEFAULT_ACCOUNT_FAVORITE_COUNT,
-                                   [data valueForKey:@"PrivateMsgNum"], USERDEFAULT_ACCOUNT_PRIVATE_MSG_COUNT,
-                                   [data valueForKey:@"TopicNum"],      USERDEFAULT_ACCOUNT_TOPIC_COUNT,
-                                   nil];
-            [[NSUserDefaults standardUserDefaults] setObject:dict forKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
+        NSString * accountId = [[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] valueForKey:KEY_ACCOUNT_ID];
+        [[BSDKManager sharedManager] getUserInforByUserId:accountId
+                                          andDoneCallback:^(AIO_STATUS status, NSDictionary *data)
+        {
+            [[NSUserDefaults standardUserDefaults] setObject:data forKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
             [self.tableView reloadData];
         }];
     }

@@ -22,6 +22,7 @@
 @property(retain,nonatomic) NSMutableArray *filteredContacts;
 @property(retain,nonatomic) UISearchDisplayController *searchController;
 
+@property (nonatomic, retain) NSArray * friendsList;
 @end
 
 /** @} */

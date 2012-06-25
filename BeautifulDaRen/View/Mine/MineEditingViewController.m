@@ -168,7 +168,7 @@
         ButtonViewCell * buttonViewCell = (ButtonViewCell*)cell;
         buttonViewCell.leftLabel.text = NSLocalizedString(@"gender", @"gender");
 
-        NSInteger index = [[_tableViewDict valueForKey:USERDEFAULT_ACCOUNT_GENDER] isEqualToString:@"male"] ? 1 : 0;
+        NSInteger index = [[_tableViewDict valueForKey:KEY_ACCOUNT_GENDER] isEqualToString:@"male"] ? 1 : 0;
         SegmentControl * seg = [[SegmentControl alloc]
                                 initWithFrame:CGRectMake(65, 8, 112, 29)
                                 leftText:NSLocalizedString(@"female", @"gender")
@@ -191,7 +191,7 @@
             case 0:
             {
                 buttonViewCell.leftLabel.text = NSLocalizedString(@"nickname", @"");
-                buttonViewCell.buttonText.text = [_tableViewDict valueForKey:USERDEFAULT_ACCOUNT_USERNAME];
+                buttonViewCell.buttonText.text = [_tableViewDict valueForKey:KEY_ACCOUNT_USER_NAME];
                 break;
             }
             case 1:
@@ -208,19 +208,19 @@
             case 2:
             {
                 buttonViewCell.leftLabel.text = NSLocalizedString(@"city", @"");
-                buttonViewCell.buttonText.text = [_tableViewDict valueForKey:USERDEFAULT_ACCOUNT_CITY];
+                buttonViewCell.buttonText.text = [_tableViewDict valueForKey:KEY_ACCOUNT_CITY];
                 break;
             }
             case 3:
             {
                 buttonViewCell.leftLabel.text = NSLocalizedString(@"address", @"");
-                buttonViewCell.buttonText.text = [_tableViewDict valueForKey:USERDEFAULT_ACCOUNT_ADDRESS];
+                buttonViewCell.buttonText.text = [_tableViewDict valueForKey:KEY_ACCOUNT_Address];
                 break;
             }
             case 4:
             {
                 buttonViewCell.leftLabel.text = NSLocalizedString(@"phone", @"");
-                buttonViewCell.buttonText.text = [_tableViewDict valueForKey:USERDEFAULT_ACCOUNT_PHONE_NUMBER];
+                buttonViewCell.buttonText.text = [_tableViewDict valueForKey:KEY_ACCOUNT_PHONE];
                 break;
             }
             case 5:
@@ -232,7 +232,7 @@
             case 6:
             {
                 buttonViewCell.leftLabel.text = NSLocalizedString(@"brief", @"");
-                buttonViewCell.buttonText.text = [_tableViewDict valueForKey:USERDEFAULT_ACCOUNT_INTRO];
+                buttonViewCell.buttonText.text = [_tableViewDict valueForKey:KEY_ACCOUNT_INTRO];
                 break;
             } 
         }
@@ -316,7 +316,7 @@
                         block = ^(NSString * text)
                         {
                             [_tableViewDict setValue:text
-                                              forKey:USERDEFAULT_ACCOUNT_USERNAME];
+                                              forKey:KEY_ACCOUNT_USER_NAME];
                             [self.tableView reloadData];
                         };
                         break;
@@ -326,7 +326,7 @@
                         block = ^(NSString * text)
                         {
                             [_tableViewDict setValue:text
-                                              forKey:USERDEFAULT_ACCOUNT_ADDRESS];
+                                              forKey:KEY_ACCOUNT_Address];
                             [self.tableView reloadData];
                         };
                         break;
@@ -336,7 +336,7 @@
                         block = ^(NSString * text)
                         {
                             [_tableViewDict setValue:text
-                                              forKey:USERDEFAULT_ACCOUNT_PHONE_NUMBER];
+                                              forKey:KEY_ACCOUNT_PHONE];
                             [self.tableView reloadData];
                         };
                         break;
@@ -346,7 +346,7 @@
                         block = ^(NSString * text)
                         {
                             [_tableViewDict setValue:text
-                                              forKey:USERDEFAULT_ACCOUNT_INTRO];
+                                              forKey:KEY_ACCOUNT_INTRO];
                             [self.tableView reloadData];
                         };
                         break;
@@ -405,14 +405,14 @@
 {
     NSString * gender = (index == 0) ? @"female" : @"male";
     [_tableViewDict setValue:gender
-                      forKey:USERDEFAULT_ACCOUNT_GENDER];
+                      forKey:KEY_ACCOUNT_GENDER];
 }
 
 #pragma mark SelectCityProtocol
 - (void)onCitySelected:(NSString*)city
 {
     [_tableViewDict setValue:city
-                      forKey:USERDEFAULT_ACCOUNT_CITY];
+                      forKey:KEY_ACCOUNT_CITY];
     [self.tableView reloadData];
 }
 

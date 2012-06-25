@@ -24,6 +24,7 @@
 
 @synthesize selectedContacts=_selectedContacts;
 @synthesize friendsViewController = _friendsViewController;
+@synthesize friendsList = _friendsList;
 @synthesize delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -56,6 +57,7 @@
     if (_friendsViewController == nil) {
         _friendsViewController = [[FriendsViewController alloc] initWithNibName:@"FriendsViewController" bundle:nil];
         [_friendsViewController setDelegate:self];
+        _friendsViewController.friendsList = self.friendsList;
         _friendsViewController.view.frame = CGRectMake(0, 44, self.view.frame.size.width, 375);
         [self.view addSubview:_friendsViewController.view];
     }
@@ -80,12 +82,16 @@
 {
     [super viewDidUnload];
     [_friendsViewController.view removeFromSuperview];
+    self.selectedContacts = nil;
+    self.friendsViewController = nil;
+    self.friendsList = nil;
 }
 
 - (void)dealloc {
     [super dealloc];
     [_friendsViewController release];
     [_selectedContacts release];
+    [_friendsList release];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

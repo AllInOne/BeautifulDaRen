@@ -29,6 +29,7 @@
 
 @property(assign, nonatomic) BOOL scrolling;
 
+
 @end
 
 @implementation FriendsViewController
@@ -39,6 +40,7 @@
 @synthesize searchController=_searchController;
 @synthesize tableView=_tableView;
 @synthesize scrolling=_scrolling;
+@synthesize friendsList = _friendsList;
 @synthesize delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -70,12 +72,16 @@
 }
 
 - (void)viewDidUnload {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [self setTableView:nil];
-    [self setFilteredContacts:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self setTableView:nil];
+    [self setFilteredContacts:nil];
+    [self setSearchController:nil];
+    [self setSections:nil];
+    [self setSectionsArray:nil];
+    [self setFriendsList:nil];
 }
 
 - (void)dealloc {
@@ -84,6 +90,7 @@
     [_tableView release];
     [_sections release];
     [_sectionsArray release];
+    [_friendsList release];
     [super dealloc];
 }
 
@@ -273,9 +280,8 @@
 #pragma mark - BaseViewController subclass
 
 - (void)updateViewController {
-    NSArray* allContacts = [NSArray arrayWithObjects:@"Andrew", @"Breck", @"Cary", @"Hok", @"李蕾", @"韩梅梅", nil];
     [self.sections removeAllObjects];
-    [self createSectionsForContacts: allContacts];
+    [self createSectionsForContacts: self.friendsList];
     
     [self.tableView reloadData];
 }

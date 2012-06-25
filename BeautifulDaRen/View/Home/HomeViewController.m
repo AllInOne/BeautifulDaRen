@@ -90,7 +90,7 @@
 - (void)refreshView
 {
     if ([[BSDKManager sharedManager] isLogin]) {
-        [self.navigationItem setTitle:[[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] valueForKey:USERDEFAULT_ACCOUNT_USERNAME]];
+        [self.navigationItem setTitle:[[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] valueForKey:KEY_ACCOUNT_USER_NAME]];
         
         if([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0)
         {

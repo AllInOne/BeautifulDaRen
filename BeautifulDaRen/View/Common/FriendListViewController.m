@@ -71,7 +71,7 @@
     switch (_type) {
         case FriendListViewController_TYPE_MY_FOLLOW:
         {
-            NSInteger userId = [[[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] valueForKey:USERDEFAULT_ACCOUNT_ID] intValue];
+            NSString* userId = [[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] valueForKey:KEY_ACCOUNT_ID];
             [[BSDKManager sharedManager] getFollowList:userId
                                               pageSize:20
                                              pageIndex:1
@@ -83,7 +83,7 @@
         }
         case FriendListViewController_TYPE_FRIEND_FOLLOW:
         {
-            NSInteger userId = [[self.friendDictionary valueForKey:KEY_ACCOUNT_USER_ID] intValue];
+            NSString* userId = [self.friendDictionary valueForKey:KEY_ACCOUNT_USER_ID];
             [[BSDKManager sharedManager] getFollowList:userId
                                               pageSize:20
                                              pageIndex:1
@@ -95,7 +95,7 @@
         }
         case FriendListViewController_TYPE_MY_FANS:
         {
-            NSInteger userId = [[[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] valueForKey:USERDEFAULT_ACCOUNT_ID] intValue];
+            NSInteger userId = [[[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] valueForKey:KEY_ACCOUNT_USER_ID] intValue];
             [[BSDKManager sharedManager] getFollowerList:userId
                                                 pageSize:20
                                                pageIndex:1

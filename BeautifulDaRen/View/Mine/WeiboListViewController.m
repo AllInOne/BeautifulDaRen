@@ -87,7 +87,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSString * userName = self.friendDictionary ? [self.friendDictionary valueForKey:KEY_ACCOUNT_ID] : [[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] valueForKey:USERDEFAULT_ACCOUNT_ID]; 
+    NSString * userName = self.friendDictionary ? [self.friendDictionary valueForKey:KEY_ACCOUNT_ID] : [[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] valueForKey:KEY_ACCOUNT_ID]; 
     [[BSDKManager sharedManager] getWeiboListByUsername:userName
                                                pageSize:20
                                               pageIndex:1

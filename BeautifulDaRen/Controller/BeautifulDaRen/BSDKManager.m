@@ -666,7 +666,7 @@ static BSDKManager *sharedInstance;
 
 #pragma mark Social related API
 
-- (void)getFollowList:(NSInteger)userId
+- (void)getFollowList:(NSString*)userId
              pageSize:(NSInteger)pageSize 
             pageIndex:(NSInteger)pageIndex 
       andDoneCallback:(processDoneWithDictBlock)callback;
@@ -677,7 +677,7 @@ static BSDKManager *sharedInstance;
     [params setObject:K_BSDK_ACTION_GETFOLLOWLIST forKey:K_BSDK_ACTION];
     [params setObject:[NSString stringWithFormat:@"%d", pageIndex] forKey:K_BSDK_PAGEINDEX];
     [params setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:K_BSDK_PAGESIZE];
-    [params setObject:[NSString stringWithFormat:@"%d", userId] forKey:K_BSDK_USER_ID];
+    [params setObject:userId forKey:K_BSDK_USER_ID];
     
     [self sendRequestWithMethodName:nil
                          httpMethod:@"POST" 
