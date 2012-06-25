@@ -57,6 +57,7 @@
 #define K_BSDK_PASSWORD @"PassWord"
 
 #define K_BSDK_REPASSWORD @"RePassWord"
+#define K_BSDK_OLDPASSWORD @"OldPassWord"
 
 #define K_BSDK_CHECKCODE @"checkCode"
 

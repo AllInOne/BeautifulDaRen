@@ -183,7 +183,10 @@ static BSDKManager *sharedInstance;
                        doneCallback:doneBlock];
 }
 
-- (void)changePasswordByUsername:(NSString*) username toNewPassword:(NSString*)newpassword andDoneCallback:(processDoneWithDictBlock)doneBlock
+- (void)changePasswordByUsername:(NSString*)username
+                     oldPassword:(NSString*)oldPassword
+                   toNewPassword:(NSString*)newpassword
+                 andDoneCallback:(processDoneWithDictBlock)doneBlock
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
     
@@ -191,6 +194,8 @@ static BSDKManager *sharedInstance;
     [params setObject:K_BSDK_ACTION_CHANGEPASSWORD forKey:K_BSDK_ACTION];
     [params setObject:username forKey:K_BSDK_USERNAME];
     [params setObject:newpassword forKey:K_BSDK_PASSWORD];
+    [params setObject:newpassword forKey:K_BSDK_REPASSWORD];
+    [params setObject:oldPassword forKey:K_BSDK_OLDPASSWORD];
     
     [self sendRequestWithMethodName:nil
                          httpMethod:@"POST" 

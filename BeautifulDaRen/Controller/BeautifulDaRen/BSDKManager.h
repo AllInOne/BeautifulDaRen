@@ -27,7 +27,10 @@
 
 - (void)logoutWithDoneCallback:(processDoneWithDictBlock)doneBlock;
 
-- (void)changePasswordByUsername:(NSString*) username toNewPassword:(NSString*)newpassword andDoneCallback:(processDoneWithDictBlock)doneBlock;
+- (void)changePasswordByUsername:(NSString*)username
+                     oldPassword:(NSString*)oldPassword
+                   toNewPassword:(NSString*)newpassword
+                 andDoneCallback:(processDoneWithDictBlock)doneBlock;
 
 #pragma mark user releated API
 - (void)getUserInforByUserId:(NSString*) userId andDoneCallback:(processDoneWithDictBlock)doneBlock;
