@@ -75,6 +75,10 @@
     [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onSaveButtonClicked) title:NSLocalizedString(@"save", @"save")]];
     _tableViewDict = [[NSMutableDictionary alloc] init];
     self.avatarImage = [UIImage imageNamed:@"avatar_big"];
+    
+    [_tableViewDict removeAllObjects];
+    NSDictionary * dict = [[NSUserDefaults standardUserDefaults] objectForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
+    _tableViewDict = [dict mutableCopy];
 }
 
 - (void)viewDidUnload
@@ -89,9 +93,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [_tableViewDict removeAllObjects];
-    NSDictionary * dict = [[NSUserDefaults standardUserDefaults] objectForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
-    _tableViewDict = [dict mutableCopy];
 }
 
 - (void)viewDidAppear:(BOOL)animated
