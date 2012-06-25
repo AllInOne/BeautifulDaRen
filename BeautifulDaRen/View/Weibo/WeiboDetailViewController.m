@@ -143,7 +143,7 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_SHOWWAITOVERLAY object:self];
     
     __block NSInteger doneCount = 0;
-    __block NSInteger doneCountExpected = 1;
+    __block NSInteger doneCountExpected = 0;
     __block NSString * errorMsg = nil;
     
     processDoneWithDictBlock doneBlock = ^(AIO_STATUS status, NSDictionary * data){
@@ -171,13 +171,14 @@
     
     if (view.forwardMode || (!view.forwardMode && view.isCheckBoxChecked))
     {
-//        [[SinaSDKManager sharedManager] sendWeiBoWithText:self.weiboContentTextView.text image:[self.selectedImage scaleToSize:CGSizeMake(320.0, self.selectedImage.size.height * 320.0/self.selectedImage.size.width)] doneCallback:doneBlock];
+        [[BSDKManager sharedManager] rePostWeiboById:[self.weiboData objectForKey:K_BSDK_UID] WithText:view.weiboContentTextView.text andDoneCallback:doneBlock];
         
-//        doneCountExpected++;
+        doneCountExpected++;
     };
     
     if (!view.forwardMode || (view.forwardMode && view.isCheckBoxChecked)) {
         [[BSDKManager sharedManager] sendComment:view.weiboContentTextView.text toWeibo:[self.weiboData objectForKey:K_BSDK_UID] andDoneCallback:doneBlock];
+        doneCountExpected++;
     }
 }
 
@@ -363,7 +364,7 @@
     self.timestampLabel.text = [ViewHelper intervalSinceNow:[self.weiboData objectForKey:K_BSDK_CREATETIME]];
     [self.timestampLabel setTextColor:[UIColor purpleColor]];
     
-    self.usernameLabel.text = [self.weiboData objectForKey:K_BSDK_USERNAME];
+    self.usernameLabel.text = [[self.weiboData objectForKey:K_BSDK_USER_INFO] objectForKey:K_BSDK_USERNAME];
     
     NSString * price = [self.weiboData objectForKey:K_BSDK_PRICE];
     if (price && ([price intValue] != 0)) {

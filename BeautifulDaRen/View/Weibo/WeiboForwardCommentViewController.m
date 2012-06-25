@@ -79,7 +79,7 @@
     
     [toolbarBg release];
     
-    self.isCheckBoxChecked = YES;
+    self.isCheckBoxChecked = NO;
     
     [_weiboContentTextView becomeFirstResponder];
 }

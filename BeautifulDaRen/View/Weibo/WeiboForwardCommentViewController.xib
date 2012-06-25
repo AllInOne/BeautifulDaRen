@@ -67,7 +67,7 @@
 								</object>
 								<object class="NSCustomResource" key="IBUINormalImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">comment_forward_checked.png</string>
+									<string key="NSResourceName">comment_forward_unchecked.png</string>
 								</object>
 								<object class="IBUIFontDescription" key="IBUIFontDescription" id="836971484">
 									<int key="type">2</int>
@@ -400,7 +400,7 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="comment_forward_checked.png">{20, 20}</string>
+			<string key="comment_forward_unchecked.png">{20, 20}</string>
 			<string key="myshow_at.png">{20, 20}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">933</string>

@@ -374,6 +374,41 @@ static BSDKManager *sharedInstance;
                        doneCallback:callback];
     
 }
+
+- (void)getAtWeiboListByUserId:(NSString*)userId
+                      pageSize:(NSInteger)pageSize 
+                     pageIndex:(NSInteger)pageIndex 
+               andDoneCallback:(processDoneWithDictBlock)callback
+{
+    //    if (!self.isLogin) {
+    //        callback(AIO_STATUS_NOT_SIGNED_IN, nil);
+    //        return;
+    //    }
+    
+    //    processDoneWithDictBlock loginCallbackShim = ^(AIO_STATUS status, NSDictionary * data)
+    //    {
+    //        callback(status, [data objectForKey:K_BSDK_RESPONSE_BLOGLIST]);
+    //    };
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:5];
+    
+    [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
+    [params setObject:K_BSDK_ACTION_GETLIST forKey:K_BSDK_ACTION];
+    [params setObject:[NSString stringWithFormat:@"%d", pageIndex] forKey:K_BSDK_PAGEINDEX];
+    [params setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:K_BSDK_PAGESIZE];
+
+    [params setObject:userId forKey:K_BSDK_ATUSERID];
+    
+    
+    [self sendRequestWithMethodName:nil
+                         httpMethod:@"POST" 
+                             params:params 
+                       postDataType:kBSDKRequestPostDataTypeNormal
+                   httpHeaderFields:nil
+                       doneCallback:callback];
+    
+}
+
 - (void)searchWeiboByKeyword:(NSString*)key
                     pageSize:(NSInteger)pageSize 
                    pageIndex:(NSInteger)pageIndex 
@@ -427,7 +462,7 @@ static BSDKManager *sharedInstance;
     
 }
 
-- (void)sendWeiBoWithText:(NSString *)text 
+- (void)sendWeiboWithText:(NSString *)text 
                     image:(UIImage *)image 
                      shop:(NSString*)shop
                     brand:(NSString*)branch
@@ -481,6 +516,27 @@ static BSDKManager *sharedInstance;
                        httpHeaderFields:nil
                            doneCallback:callback];
     }
+}
+
+- (void)rePostWeiboById:(NSString*)blogId
+               WithText:(NSString*)content
+            andDoneCallback:(processDoneWithDictBlock)callback
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
+    
+    [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
+    [params setObject:K_BSDK_ACTION_ADD forKey:K_BSDK_ACTION];
+    
+    [params setObject:content forKey:K_BSDK_CONTENT];
+    [params setObject:blogId forKey:K_BSDK_FORWARDBLOGUID];
+    
+    [self sendRequestWithMethodName:nil
+                         httpMethod:@"POST" 
+                             params:params 
+                       postDataType:kBSDKRequestPostDataTypeNormal
+                   httpHeaderFields:nil
+                       doneCallback:callback];
+    
 }
 
 - (void)getWeiboById:(NSString*)classId
@@ -579,6 +635,28 @@ static BSDKManager *sharedInstance;
                    httpHeaderFields:nil
                        doneCallback:callback];
 
+}
+
+- (void)getCommentListOfUser:(NSString*)userId
+                     pageSize:(NSInteger)pageSize 
+                    pageIndex:(NSInteger)pageIndex 
+              andDoneCallback:(processDoneWithDictBlock)callback
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
+    
+    [params setObject:K_BSDK_CATEGORY_SNS forKey:K_BSDK_CATEGORY];
+    [params setObject:K_BSDK_ACTION_GETCOMMENTLIST forKey:K_BSDK_ACTION];
+    [params setObject:[NSString stringWithFormat:@"%d", pageIndex] forKey:K_BSDK_PAGEINDEX];
+    [params setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:K_BSDK_PAGESIZE];
+    [params setObject:userId forKey:K_BSDK_USERID];
+    
+    [self sendRequestWithMethodName:nil
+                         httpMethod:@"POST" 
+                             params:params 
+                       postDataType:kBSDKRequestPostDataTypeNormal
+                   httpHeaderFields:nil
+                       doneCallback:callback];
+    
 }
 
 #pragma mark Social related API

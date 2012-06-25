@@ -38,7 +38,7 @@
 #pragma mark Weibo releated API
 
 // Send a Weibo, to which you can attach an image.
-- (void)sendWeiBoWithText:(NSString *)text 
+- (void)sendWeiboWithText:(NSString *)text 
                     image:(UIImage *)image 
                      shop:(NSString*)shop
                     brand:(NSString*)branch
@@ -47,6 +47,11 @@
               poslatitude:(float)latitude
              posLongitude:(float)longitude
              doneCallback:(processDoneWithDictBlock)callback;
+
+// repost a weibo
+- (void)rePostWeiboById:(NSString*)blogId
+               WithText:(NSString *)text 
+        andDoneCallback:(processDoneWithDictBlock)callback;
 
 // If username is specified, then it will retrieve the weibos which is sent by this user, or it will retrieve the neweset weibos.
 - (void)getWeiboListByUsername:(NSString*)username
@@ -69,6 +74,11 @@
                     pageSize:(NSInteger)pageSize 
                    pageIndex:(NSInteger)pageIndex 
              andDoneCallback:(processDoneWithDictBlock)callback;
+
+- (void)getAtWeiboListByUserId:(NSString*)userId
+                     pageSize:(NSInteger)pageSize 
+                    pageIndex:(NSInteger)pageIndex 
+              andDoneCallback:(processDoneWithDictBlock)callback;
 
 - (void)getWeiboClassesWithDoneCallback:(processDoneWithDictBlock)callback;
 
@@ -100,5 +110,10 @@
                      pageSize:(NSInteger)pageSize 
                     pageIndex:(NSInteger)pageIndex 
     andDoneCallback:(processDoneWithDictBlock)callback;
+
+- (void)getCommentListOfUser:(NSString*)userId
+                     pageSize:(NSInteger)pageSize 
+                    pageIndex:(NSInteger)pageIndex 
+              andDoneCallback:(processDoneWithDictBlock)callback;
 
 @end

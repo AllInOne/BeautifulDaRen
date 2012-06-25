@@ -350,7 +350,7 @@
         latitude = self.currentLocation.coordinate.latitude;
         longitude = self.currentLocation.coordinate.longitude;
     }
-    [[BSDKManager sharedManager] sendWeiBoWithText:self.weiboContentTextView.text 
+    [[BSDKManager sharedManager] sendWeiboWithText:self.weiboContentTextView.text 
                                             image:[self.selectedImage scaleToSize:CGSizeMake(320.0, self.selectedImage.size.height * 320.0/self.selectedImage.size.width)]
                                              shop:self.maketTextView.text 
                                             brand:self.brandTextView.text 
