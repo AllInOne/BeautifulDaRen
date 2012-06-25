@@ -12,21 +12,22 @@
 #import "ViewHelper.h"
 #import "BSDKManager.h"
 #import "iToast.h"
+#import "ViewConstants.h"
 
 @interface ModifyPasswordViewController ()
 
 @property (retain, nonatomic) IBOutlet UITableView * tableView;
-@property (retain, nonatomic) IBOutlet UITextField * passwordField;
+@property (retain, nonatomic) IBOutlet UITextField * oldPasswordField;
 @property (retain, nonatomic) IBOutlet UITextField * resetPasswordField;
-@property (retain, nonatomic) IBOutlet UITextField * repeatResetPasswordField;
+@property (retain, nonatomic) IBOutlet UITextField * repeatNewPasswordField;
 
 @end
 
 @implementation ModifyPasswordViewController
 @synthesize tableView = _tableView;
-@synthesize passwordField = _passwordField;
-@synthesize repeatResetPasswordField = _repeatResetPasswordField;
+@synthesize oldPasswordField = _oldPasswordField;
 @synthesize resetPasswordField = _resetPasswordField;
+@synthesize repeatNewPasswordField = _repeatNewPasswordField;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -82,7 +83,7 @@
             accountInfoInputCell.inputTextField.delegate = self;
             [accountInfoInputCell.inputTextField setSecureTextEntry:YES];
             [accountInfoInputCell.inputTextField setPlaceholder:NSLocalizedString(@"input_your_old_password", @"input_your_old_password")];
-            self.passwordField = accountInfoInputCell.inputTextField;
+            self.oldPasswordField = accountInfoInputCell.inputTextField;
         }
         else if ([indexPath row] == 1)
         {
@@ -98,7 +99,7 @@
             accountInfoInputCell.inputTextField.delegate = self;
             [accountInfoInputCell.inputTextField setSecureTextEntry:YES];
             [accountInfoInputCell.inputTextField setPlaceholder:NSLocalizedString(@"repeat_your_old_password", @"repeat_your_old_password")];
-            self.repeatResetPasswordField = accountInfoInputCell.inputTextField;
+            self.repeatNewPasswordField = accountInfoInputCell.inputTextField;
         }
     }
     else {
@@ -143,7 +144,7 @@
     if ([indexPath section] == 1)
     {
         NSString * iToastString = @"";
-        if ([self.passwordField.text isEqualToString:@""])
+        if ([self.oldPasswordField.text isEqualToString:@""])
         {
             iToastString = @"旧密码不能为空!";
         }
@@ -151,11 +152,11 @@
         {
             iToastString = @"新密码不能为空!";
         }
-        else if ([self.repeatResetPasswordField.text isEqualToString:@""])
+        else if ([self.resetPasswordField.text isEqualToString:@""])
         {
             iToastString = @"请再次输入新密码!";
         }
-        else if (![self.repeatResetPasswordField.text isEqualToString:self.resetPasswordField.text])
+        else if (![self.repeatNewPasswordField.text isEqualToString:self.resetPasswordField.text])
         {
             iToastString = @"两次输入新密码不一致!";
         }
@@ -164,9 +165,10 @@
             [[iToast makeText:iToastString] show];
             return;
         }
-
-        // TODO
-        [[BSDKManager sharedManager] changePasswordByUsername:@""
+        
+        NSString * accountName = [[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] valueForKey:USERDEFAULT_ACCOUNT_USERNAME];
+        [[BSDKManager sharedManager] changePasswordByUsername:accountName
+                                                oldPassword:self.oldPasswordField.text
                                                 toNewPassword:self.resetPasswordField.text
                                               andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
                                                   
