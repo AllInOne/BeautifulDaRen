@@ -36,7 +36,7 @@
     [self.window addSubview:_rootViewController.view];
     [self.window makeKeyAndVisible];
     
-    [[LoadFakeData sharedLoadManager] load];
+//    [[LoadFakeData sharedLoadManager] load];
     
     [_waitOverlay release];
     _waitOverlay = [[WaitOverlay alloc]initWithFrame:self.window.frame];
