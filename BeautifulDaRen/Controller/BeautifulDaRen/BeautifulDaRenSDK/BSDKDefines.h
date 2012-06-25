@@ -49,6 +49,8 @@
 
 #define K_BSDK_FOLLOWUSERNAME @"AttentionUserName"
 #define K_BSDK_USERNAME @"UserName"
+#define K_BSDK_USERID @"UserId"
+#define K_BSDK_ATUSERID @"AtUserId"
 #define K_BSDK_USERCOUNT @"UserCount"
 #define K_BSDK_FANSUSERNAME @"FansUserName"
 
@@ -78,6 +80,7 @@
 #define K_BSDK_USER_ID @"UserId"
 #define K_BSDK_USER_INFO @"UserInfo"
 
+#define K_BSDK_FORWARDBLOGUID @"ForwardBlogId"
 #define K_BSDK_BLOGUID @"BlogId"
 #define K_BSDK_BLOGLIST @"BlogList"
 
