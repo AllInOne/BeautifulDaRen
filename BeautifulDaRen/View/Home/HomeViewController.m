@@ -102,7 +102,7 @@
 //        UIBarButtonItem* detailModeButton = [ViewHelper getBarItemOfTarget:self action:@selector(onDetailModeBtnSelected:) title:NSLocalizedString(@"detail_mode", @"detail_mode")];
         UIBarButtonItem* refreshButton = [ViewHelper getBarItemOfTarget:self action:@selector(onRefreshBtnSelected:) title:NSLocalizedString(@"refresh", @"refresh")];
 //        [self.navigationItem setRightBarButtonItem:detailModeButton];
-        [self.navigationItem setLeftBarButtonItem:refreshButton];
+        [self.navigationItem setRightBarButtonItem:refreshButton];
     }
     else {
         if([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0)
