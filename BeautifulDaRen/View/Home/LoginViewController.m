@@ -251,11 +251,10 @@
     if ([indexPath section] == 1) {
         NSString* userName = self.accountNameField.text;
         NSString* password = self.accountPwdField.text;
-        if (DEVELOPER_ENABLE)
-        {
-            userName = @"jerry100";
-            password = @"abc123456";
-        }
+#if TARGET_IPHONE_SIMULATOR
+        userName = @"jerry100";
+        password = @"abc123456";
+#endif
         NSString * iToastString = @"";
         if ([userName isEqualToString:@""])
         {
