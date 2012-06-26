@@ -33,6 +33,7 @@
 - (void)flowView:(WaterFlowView *)flowView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
 - (void)flowView:(WaterFlowView *)flowView didSelectAtCell:(WaterFlowCell*)cell ForIndex:(int)index;
 - (void)flowView:(WaterFlowView *)flowView willLoadData:(int)page;
+- (void)didScrollToBottom;
 @end
 
 ////Waterflow View
@@ -44,5 +45,4 @@
 //- (id)dequeueReusableCellWithIdentifier:(NSString *)identifier withIndex:(NSInteger)index;
 @property (nonatomic, assign) id <WaterFlowViewDelegate> flowdelegate;
 @property (nonatomic, assign) id <WaterFlowViewDatasource> flowdatasource;
-
 @end

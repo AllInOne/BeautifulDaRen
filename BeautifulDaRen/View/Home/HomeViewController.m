@@ -55,6 +55,7 @@
                  queue:nil
                  usingBlock:^(NSNotification *note) {
                      [self refreshNavigationView];
+                     [self refreshWeibosView];
                  }];
     
     self.observerForShouldLogin = [[NSNotificationCenter defaultCenter]
@@ -210,13 +211,6 @@
 
 - (void)refreshWeibosView
 {
-    NSString * userName = nil;
-    if ([[BSDKManager sharedManager] isLogin])
-    {
-        userName = [[[NSUserDefaults standardUserDefaults]
-                     valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO]
-                    valueForKey:KEY_ACCOUNT_USER_NAME];
-    }
     UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     
     activityIndicator.frame = CGRectMake(SCREEN_WIDTH/2, 2*ADS_CELL_HEIGHT + CONTENT_MARGIN, CGRectGetWidth(activityIndicator.frame), CGRectGetHeight(activityIndicator.frame));
@@ -224,37 +218,54 @@
     [self.view addSubview:activityIndicator];
     
     [activityIndicator startAnimating];
-    [[BSDKManager sharedManager] getWeiboListByUsername:userName
-                                               pageSize:20
-                                              pageIndex:1
-                                        andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-                                            [activityIndicator stopAnimating];
-                                            [activityIndicator removeFromSuperview];
-                                            [activityIndicator release];
-                                            
-                                            NSArray * array = [data valueForKey:@"BlogList"];
-                                            //TODO [felix] should to remove
-                                            NSMutableArray * mutableArray = [NSMutableArray array];
-                                            for (NSDictionary * dict in array) {
-                                                if ([[dict valueForKey:@"Picture_width"] floatValue] > 0)
-                                                {
-                                                    [mutableArray addObject:dict];
-                                                }
-                                            }
-                                            if(_itemsViewController == nil)
-                                            {
-                                                _itemsViewController = [[ItemsViewController alloc] initWithArray:mutableArray];
-                                                _itemsViewController.view.frame = CGRectMake(0,
-                                                                                             ADS_CELL_HEIGHT + CONTENT_MARGIN,
-                                                                                             self.view.frame.size.width,
-                                                                                             USER_WINDOW_HEIGHT - ADS_CELL_HEIGHT - CONTENT_MARGIN);
-                                                [self.view addSubview:_itemsViewController.view];
-                                            }
-                                            else
-                                            {
-                                                _itemsViewController.itemDatas = mutableArray;
-                                            }
-                                        }];
+    
+    processDoneWithDictBlock block = ^(AIO_STATUS status, NSDictionary *data)
+    {
+        [activityIndicator stopAnimating];
+        [activityIndicator removeFromSuperview];
+        [activityIndicator release];
+        
+        NSArray * array = [data valueForKey:@"BlogList"];
+        //TODO [felix] should to remove
+        NSMutableArray * mutableArray = [[NSMutableArray alloc] init];
+        for (NSDictionary * dict in array) {
+            if ([[dict valueForKey:@"Picture_width"] floatValue] > 0)
+            {
+                [mutableArray addObject:dict];
+            }
+        }
+        if(_itemsViewController == nil)
+        {
+            _itemsViewController = [[ItemsViewController alloc] initWithArray:mutableArray];
+            _itemsViewController.view.frame = CGRectMake(0,
+                                                         ADS_CELL_HEIGHT + CONTENT_MARGIN,
+                                                         self.view.frame.size.width,
+                                                         USER_WINDOW_HEIGHT - ADS_CELL_HEIGHT - CONTENT_MARGIN);
+            [self.view addSubview:_itemsViewController.view];
+        }
+        else
+        {
+            _itemsViewController.itemDatas = mutableArray;
+        }
+        [mutableArray release];
+    };
+    
+    if ([[BSDKManager sharedManager] isLogin])
+    {
+        NSString * userName = [[[NSUserDefaults standardUserDefaults]
+                                valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO]
+                               valueForKey:KEY_ACCOUNT_USER_NAME];
+        [[BSDKManager sharedManager] getFriendsWeiboListByUsername:userName
+                                                          pageSize:20
+                                                         pageIndex:1
+                                                   andDoneCallback:block];
+    }
+    else {
+        [[BSDKManager sharedManager] getWeiboListByUsername:nil
+                                                   pageSize:20
+                                                  pageIndex:1
+                                            andDoneCallback:block];
+    }
 }
 
 @end

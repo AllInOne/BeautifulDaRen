@@ -14,6 +14,7 @@
 #import "UIImageView+WebCache.h"
 #import <QuartzCore/QuartzCore.h>
 #import "BorderImageView.h"
+#import "BSDKManager.h"
 
 #define COLUMNS_PER_ROW 4
 #define GRID_X_OFFSET 3
@@ -25,12 +26,16 @@
 @interface ItemsViewController()
 
 @property (retain, nonatomic) NSMutableArray * itemsHeight;
+@property (assign, nonatomic) NSInteger pageIndex;
+@property (assign, atomic) BOOL isSyncSccuessed;
 -(void)loadItemsHeight;
 
 @end
 
 @implementation ItemsViewController
 @synthesize waterFlowView = _waterFlowView;
+@synthesize isSyncSccuessed = _isSyncSccuessed;
+@synthesize pageIndex = _pageIndex;
 @synthesize itemDatas = _itemDatas;
 @synthesize itemsHeight = _itemsHeight;
 
@@ -79,9 +84,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.pageIndex = 1;
+    self.isSyncSccuessed = YES;
+    
     _itemsHeight = [[NSMutableArray alloc] init];
     [self loadItemsHeight];
-    
+
     _waterFlowView = [[WaterFlowView alloc] initWithFrame:self.view.frame];
     _waterFlowView.flowdelegate = self;
     _waterFlowView.flowdatasource = self;
@@ -192,9 +201,61 @@
     [_waterFlowView reloadData];
 }
 
+- (void)didScrollToBottom
+{
+    if (self.isSyncSccuessed) {
+        self.isSyncSccuessed = NO;
+        self.pageIndex ++;
+        UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        
+        activityIndicator.frame = CGRectMake(SCREEN_WIDTH/2, 2*ADS_CELL_HEIGHT + CONTENT_MARGIN, CGRectGetWidth(activityIndicator.frame), CGRectGetHeight(activityIndicator.frame));
+        
+        [self.view addSubview:activityIndicator];
+        
+        [activityIndicator startAnimating];
+        
+        processDoneWithDictBlock block = ^(AIO_STATUS status, NSDictionary *data)
+        {
+            [activityIndicator stopAnimating];
+            [activityIndicator removeFromSuperview];
+            [activityIndicator release];
+            
+            NSArray * array = [data valueForKey:@"BlogList"];
+            //TODO [felix] should to remove
+            for (NSDictionary * dict in array) {
+                if ([[dict valueForKey:@"Picture_width"] floatValue] > 0)
+                {
+                    [self.itemDatas addObject:dict];
+                }
+            }
+            [_itemsHeight removeAllObjects];
+            
+            [self loadItemsHeight];
+            [_waterFlowView reloadData];
+            self.isSyncSccuessed = YES;
+        };
+        if ([[BSDKManager sharedManager] isLogin])
+        {
+            NSString * userName = [[[NSUserDefaults standardUserDefaults]
+                                    valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO]
+                                   valueForKey:KEY_ACCOUNT_USER_NAME];
+            [[BSDKManager sharedManager] getFriendsWeiboListByUsername:userName
+                                                              pageSize:20
+                                                             pageIndex:self.pageIndex
+                                                       andDoneCallback:block];
+        }
+        else {
+            [[BSDKManager sharedManager] getWeiboListByUsername:nil
+                                                       pageSize:20
+                                                      pageIndex:self.pageIndex
+                                                andDoneCallback:block];
+        }
+    }
+}
+
 -(void)setItemDatas:(NSMutableArray *)itemDatas
 {
-    _itemDatas = itemDatas;
+    _itemDatas = [itemDatas mutableCopy];
     [self loadItemsHeight];
     [_waterFlowView reloadData];
 }

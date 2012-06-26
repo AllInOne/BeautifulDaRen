@@ -192,7 +192,8 @@
         CGFloat columnHeight = [[[self.cellHeight objectAtIndex:j] lastObject] floatValue];
         scrollHeight = scrollHeight>columnHeight?scrollHeight:columnHeight;
     }
-    
+    self.bounces = YES;
+    self.alwaysBounceVertical = YES;
     self.contentSize = CGSizeMake(self.frame.size.width, scrollHeight + LOADINGVIEW_HEIGHT);
     
     [self pageScroll];
@@ -353,9 +354,15 @@
 
 #pragma mark-
 #pragma mark- UIScrollViewDelegate
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     [self pageScroll];
+    if (self.contentOffset.y + self.frame.size.height >= self.contentSize.height) {
+        if ([self.flowdelegate conformsToProtocol:@protocol(WaterFlowViewDelegate) ]) {
+            [self.flowdelegate didScrollToBottom];
+        }
+    }
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
