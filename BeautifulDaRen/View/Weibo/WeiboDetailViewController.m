@@ -186,7 +186,35 @@
 
 - (void)onFavourate
 {
-    [[iToast makeText:NSLocalizedString(@"refresh", @"refresh")] show];
+    if (K_BSDK_IS_BLOG_FAVOURATE(self.weiboData)) {
+        [[BSDKManager sharedManager] removeFavourateForWeibo:[self.weiboData objectForKey:K_BSDK_UID] andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+            
+            if (K_BSDK_IS_RESPONSE_OK(data)) {
+                [[iToast makeText:NSLocalizedString(@"cancel_favourate_succeed", @"cancel_favourate_succeed")] show];
+                [self refreshView];
+            }
+            else
+            {
+                [[iToast makeText:NSLocalizedString(@"cancel_favourate_failed", @"cancel_favourate_failed")] show];
+            }
+
+        }];
+    }
+    else
+    {
+        [[BSDKManager sharedManager] addFavourateForWeibo:[self.weiboData objectForKey:K_BSDK_UID] andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+            
+            if (K_BSDK_IS_RESPONSE_OK(data)) {
+                [[iToast makeText:NSLocalizedString(@"favourate_succeed", @"favourate_succeed")] show];
+                [self refreshView];
+            }
+            else
+            {
+                [[iToast makeText:NSLocalizedString(@"favourate_failed", @"favourate_failed")] show];
+            }
+            
+        }];
+    }
 }
 
 - (void)onRefresh

@@ -601,6 +601,40 @@ static BSDKManager *sharedInstance;
 }
 
 #pragma mark  message related API
+- (void)addFavourateForWeibo:(NSString*)blogId
+             andDoneCallback:(processDoneWithDictBlock)callback
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
+    
+    [params setObject:K_BSDK_CATEGORY_SNS forKey:K_BSDK_CATEGORY];
+    [params setObject:K_BSDK_ACTION_ADDFAV forKey:K_BSDK_ACTION];
+    [params setObject:blogId forKey:K_BSDK_BLOGUID];
+    
+    [self sendRequestWithMethodName:nil
+                         httpMethod:@"POST" 
+                             params:params 
+                       postDataType:kBSDKRequestPostDataTypeNormal
+                   httpHeaderFields:nil
+                       doneCallback:callback];
+}
+
+- (void)removeFavourateForWeibo:(NSString*)blogId
+             andDoneCallback:(processDoneWithDictBlock)callback
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
+    
+    [params setObject:K_BSDK_CATEGORY_SNS forKey:K_BSDK_CATEGORY];
+    [params setObject:K_BSDK_ACTION_REMOVEFAV forKey:K_BSDK_ACTION];
+    [params setObject:blogId forKey:K_BSDK_BLOGUID];
+    
+    [self sendRequestWithMethodName:nil
+                         httpMethod:@"POST" 
+                             params:params 
+                       postDataType:kBSDKRequestPostDataTypeNormal
+                   httpHeaderFields:nil
+                       doneCallback:callback];
+}
+
 - (void)sendComment:(NSString*)comment
             toWeibo:(NSString*)blogId
     andDoneCallback:(processDoneWithDictBlock)callback

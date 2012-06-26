@@ -109,6 +109,12 @@
             toWeibo:(NSString*)blogId
      andDoneCallback:(processDoneWithDictBlock)callback;
 
+- (void)addFavourateForWeibo:(NSString*)blogId
+    andDoneCallback:(processDoneWithDictBlock)callback;
+
+- (void)removeFavourateForWeibo:(NSString*)blogId
+                andDoneCallback:(processDoneWithDictBlock)callback;
+
 - (void)getCommentListOfWeibo:(NSString*)blogId
                      pageSize:(NSInteger)pageSize 
                     pageIndex:(NSInteger)pageIndex 

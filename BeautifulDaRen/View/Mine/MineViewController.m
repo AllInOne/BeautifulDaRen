@@ -86,7 +86,6 @@
     
     [self.navigationItem setTitle:NSLocalizedString(@"title_mine", @"title_mine")];
     [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClick) title:NSLocalizedString(@"refresh", @"refresh")]];
-    [self refreshUserInfo];
 }
 
 - (void)viewDidUnload

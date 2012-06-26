@@ -129,6 +129,11 @@
 "clear" = "删除";
 "i_am_here" = "我在这里";
 
+"favourate_succeed" = "收藏成功";
+"favourate_failed" = "收藏失败";
+"cancel_favourate_succeed" = "取消收藏成功";
+"cancel_favourate_failed" = "取消收藏失败";
+
 "weibo_detail" = "微博详情";
 "no_comment" = "没有评论";
 "more_comment" = "更多评论";
