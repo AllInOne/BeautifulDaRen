@@ -172,8 +172,8 @@ static BSDKManager *sharedInstance;
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
     
     [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
-    [params setObject:K_BSDK_ACTION_SEARCH forKey:K_BSDK_ACTION];
-    [params setObject:username forKey:K_BSDK_USERNAME];
+    [params setObject:K_BSDK_ACTION_GETLIST forKey:K_BSDK_ACTION];
+    [params setObject:username forKey:K_BSDK_USERNAMEKEYWORDS];
     
     [self sendRequestWithMethodName:nil
                          httpMethod:@"POST" 

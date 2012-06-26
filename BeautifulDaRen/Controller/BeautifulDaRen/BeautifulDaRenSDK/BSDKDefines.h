@@ -56,7 +56,7 @@
 #define K_BSDK_ATUSERID @"AtUserId"
 #define K_BSDK_USERCOUNT @"UserCount"
 #define K_BSDK_FANSUSERNAME @"FansUserName"
-
+#define K_BSDK_USERNAMEKEYWORDS @"UserNameKeyWords"
 #define K_BSDK_PASSWORD @"PassWord"
 
 #define K_BSDK_REPASSWORD @"RePassWord"

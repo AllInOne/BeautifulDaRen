@@ -155,7 +155,7 @@
 							<object class="IBUIButton" id="748702942">
 								<reference key="NSNextResponder" ref="637849438"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{239, 25}, {53, 24}}</string>
+								<string key="NSFrame">{{239, 25}, {61, 24}}</string>
 								<reference key="NSSuperview" ref="637849438"/>
 								<reference key="NSWindow"/>
 								<string key="NSReuseIdentifierKey">_NS:225</string>
@@ -164,7 +164,7 @@
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<int key="IBUIButtonType">1</int>
-								<string key="IBUINormalTitle">关注</string>
+								<string key="IBUINormalTitle">取消关注</string>
 								<reference key="IBUIHighlightedTitleColor" ref="294451054"/>
 								<reference key="IBUINormalTitleColor" ref="294451054"/>
 								<object class="NSColor" key="IBUINormalTitleShadowColor">
@@ -177,11 +177,11 @@
 								</object>
 								<object class="IBUIFontDescription" key="IBUIFontDescription">
 									<int key="type">2</int>
-									<double key="pointSize">15</double>
+									<double key="pointSize">13</double>
 								</object>
 								<object class="NSFont" key="IBUIFont">
 									<string key="NSName">Helvetica-Bold</string>
-									<double key="NSSize">15</double>
+									<double key="NSSize">13</double>
 									<int key="NSfFlags">16</int>
 								</object>
 							</object>

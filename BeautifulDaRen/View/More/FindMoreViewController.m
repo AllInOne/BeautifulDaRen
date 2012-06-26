@@ -17,6 +17,7 @@
 #import "BorderImageView.h"
 #import "BSDKManager.h"
 #import "iToast.h"
+#import "BSDKDefines.h"
 
 #define X_OFFSET 7
 #define CONTENT_VIEW_HEIGHT_OFFSET 50
@@ -29,7 +30,7 @@
 
 @property (retain, nonatomic) IBOutlet UITableView * searchResultViewController;
 @property (retain, nonatomic) IBOutlet UISearchBar * searchBar;
-@property (nonatomic, copy) NSArray *searchResults;
+@property (nonatomic, retain) NSMutableArray *searchResults;
 
 @property (nonatomic, assign) BOOL isFindWeibo;
 - (void) refreshSameCityDaRenView;
@@ -104,6 +105,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.searchResults = [[NSMutableArray alloc] init];
     
     _isFindWeibo = NO;
     [self.navigationItem setTitle:NSLocalizedString(@"find_weibo_or_friend", @"find_weibo_or_friend")];
@@ -384,6 +386,14 @@
         NSDictionary * friendDict = [self.searchResults objectAtIndex:[indexPath row]];
         friendCell.nameLabel.text = [friendDict valueForKey:KEY_ACCOUNT_USER_NAME];
         friendCell.levelLabel.text = [NSString stringWithFormat:@"LV%d",[[friendDict valueForKey:KEY_ACCOUNT_LEVEL] intValue]];
+        if ([[friendDict valueForKey:KEY_ACCOUNT_RELATION] intValue] == FRIEND_RELATIONSHIP_MY_FOLLOW
+            || [[friendDict valueForKey:KEY_ACCOUNT_RELATION] intValue] == FRIEND_RELATIONSHIP_INTER_FOLLOW) {
+            [friendCell.followButton setTitle:@"取消关注" forState:UIControlStateNormal];
+        }
+        else 
+        {
+            [friendCell.followButton setTitle:@"关注" forState:UIControlStateNormal];
+        }
         friendCell.followButton.tag = [indexPath row];
         friendCell.delegate = self;
     }
@@ -497,7 +507,12 @@
         [[BSDKManager sharedManager] searchUsersByUsername:self.searchBar.text
                                            andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
                                                if (status == AIO_STATUS_SUCCESS) {
-                                                   self.searchResults = [data valueForKey:@"userlist"];
+                                                   [self.searchResults removeAllObjects];
+                                                   NSArray * tempArray = [[data valueForKey:@"UserList"] copy];
+                                                   for (NSDictionary * dict in tempArray)
+                                                   {
+                                                       [self.searchResults addObject:[dict mutableCopy]];
+                                                   }
                                                }
                                                else {
                                                    [[iToast makeText:[NSString stringWithFormat:@"search status error: %d", status]] show];
@@ -519,11 +534,38 @@
 - (void) didButtonPressed:(UIButton*)button  inView:(UIView *) view
 {
     NSInteger index = button.tag;
-    NSDictionary * userDict = [self.searchResults objectAtIndex:index];
-    [[BSDKManager sharedManager] followUser:[[userDict valueForKey:KEY_ACCOUNT_ID] intValue]
-                            andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-                                
-                            }];
+    NSMutableDictionary * friendDict = [self.searchResults objectAtIndex:index];
+    if ([[friendDict valueForKey:KEY_ACCOUNT_RELATION] intValue] == FRIEND_RELATIONSHIP_MY_FOLLOW
+        || [[friendDict valueForKey:KEY_ACCOUNT_RELATION] intValue] == FRIEND_RELATIONSHIP_INTER_FOLLOW)
+    {
+        [[BSDKManager sharedManager] unFollowUser:[[friendDict valueForKey:KEY_ACCOUNT_ID] intValue]
+                                  andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+                                      if(AIO_STATUS_SUCCESS == status && K_BSDK_IS_RESPONSE_OK(data))
+                                      {
+                                          [friendDict setValue:[NSNumber numberWithInt:FRIEND_RELATIONSHIP_NONE] forKey:KEY_ACCOUNT_RELATION];
+                                          [self.searchResultViewController reloadData];
+                                      }
+                                      else
+                                      {
+                                          [[iToast makeText:@"取消关注失败!"] show];
+                                      }
+                                  }];
+    }
+    else 
+    {
+        [[BSDKManager sharedManager] followUser:[[friendDict valueForKey:KEY_ACCOUNT_ID] intValue]
+                                andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+                                    if(AIO_STATUS_SUCCESS == status && K_BSDK_IS_RESPONSE_OK(data))
+                                    {
+                                        [friendDict setValue:[NSNumber numberWithInt:FRIEND_RELATIONSHIP_MY_FOLLOW] forKey:KEY_ACCOUNT_RELATION];
+                                        [self.searchResultViewController reloadData];
+                                    }
+                                    else
+                                    {
+                                        [[iToast makeText:@"关注失败!"] show];
+                                    }
+                                }];
+    }
     
 }
 @end
