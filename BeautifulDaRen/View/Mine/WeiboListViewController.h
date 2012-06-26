@@ -20,6 +20,11 @@ enum
 };
 
 @interface WeiboListViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
+
+@property (nonatomic, retain) IBOutlet UIView * footerView;
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView * loadingActivityIndicator;
+@property (nonatomic, retain) IBOutlet UIButton * footerButton;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil
                bundle:(NSBundle *)nibBundleOrNil
                  type:(NSInteger)type

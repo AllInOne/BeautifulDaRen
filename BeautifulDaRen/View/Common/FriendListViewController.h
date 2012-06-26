@@ -20,6 +20,10 @@ enum
 
 @interface FriendListViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, ButtonPressDelegate>
 
+@property (nonatomic, retain) IBOutlet UIView * footerView;
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView * loadingActivityIndicator;
+@property (nonatomic, retain) IBOutlet UIButton * footerButton;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil
                bundle:(NSBundle *)nibBundleOrNil
                  type:(NSInteger)type

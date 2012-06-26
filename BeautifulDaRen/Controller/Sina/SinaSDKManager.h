@@ -19,6 +19,8 @@
 
 - (BOOL)isLogin;
 
+- (void)logout;
+
 - (void)setRootviewController:(UIViewController*)rootViewController;
 
 - (void)loginWithDoneCallback:(loginDoneBlock)doneBlock;

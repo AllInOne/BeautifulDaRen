@@ -9,6 +9,7 @@
 #import "AtMeViewCell.h"
 #import "BSDKDefines.h"
 #import "ViewHelper.h"
+#import "UIImageView+WebCache.h"
 
 @implementation AtMeViewCell
 @synthesize friendImageView;
@@ -19,8 +20,6 @@
 @synthesize brandLabel;
 @synthesize costButton;
 @synthesize descriptionLabel;
-@synthesize weiboView;
-@synthesize weiboImageView;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -45,6 +44,10 @@
     brandLabel.text = [data objectForKey:K_BSDK_BRANDSERVICE];
     
     descriptionLabel.text = [data objectForKey:K_BSDK_CONTENT];
+    
+    timeLabel.text = [ViewHelper intervalSinceNow:[data objectForKey:K_BSDK_CREATETIME]];
+    
+    [itemImageView setImageWithURL:[NSURL URLWithString:[data objectForKey:K_BSDK_PICTURE_102]]];
     
     NSString * title = [NSString stringWithFormat:@"¥ %@",[data objectForKey:K_BSDK_PRICE]];
     [self.costButton setTitle:title forState:UIControlStateNormal];

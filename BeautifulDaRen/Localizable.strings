@@ -129,6 +129,11 @@
 "clear" = "删除";
 "i_am_here" = "我在这里";
 
+"my_fans" = "我的粉丝";
+"my_follows" = "我的关注";
+"her_fans" = "她的粉丝";
+"her_follows" = "她的关注";
+
 "favourate_succeed" = "收藏成功";
 "favourate_failed" = "收藏失败";
 "cancel_favourate_succeed" = "取消收藏成功";
@@ -139,6 +144,10 @@
 "more_comment" = "更多评论";
 "post_comment" = "发表评论";
 "view_profile" = "查看此人资料";
+
+"loading_more" = "更多...";
+
+"no_message" = "没有相关信息";
 
 "picture" = "图片";
 

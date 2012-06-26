@@ -13,6 +13,7 @@
 #import "ButtonViewCell.h"
 #import "ViewConstants.h"
 #import "DataManager.h"
+#import "SinaSDKManager.h"
 #import "WeiboListViewController.h"
 #import "ViewHelper.h"
 #import "PrivateLetterViewController.h"
@@ -303,6 +304,9 @@
             }
             else {
                 [[iToast makeText:@"账户退出失败!"] show];
+            }
+            if ([[SinaSDKManager sharedManager] isLogin]) {
+                [[SinaSDKManager sharedManager] logout];
             }
         }];
 

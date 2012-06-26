@@ -7,18 +7,27 @@
 #import "ViewConstants.h"
 #import "CommentViewCell.h"
 
+#define AUTOLOAD_PAGE_SIZE (3)
+
 @interface WeiboListViewController()
 
 @property (retain, nonatomic) IBOutlet UITableView * tableView;
 @property (retain, nonatomic) NSDictionary * friendDictionary;
 @property (assign, nonatomic) NSInteger controllerType;
 
-@property (retain, nonatomic) NSArray * dataList;
+@property (assign, nonatomic) NSInteger currentPageIndex;
+@property (nonatomic, assign) BOOL isRefreshing;
+@property (nonatomic, assign) BOOL isAllRetrieved;
+
+@property (retain, nonatomic) NSMutableArray * dataList;
 
 -(NSString*)getCurrentBlogIdByData:(NSDictionary*)data;
 -(UITableViewCell*)getCellofTableView:(UITableView*)tableView ByWeiboData:(NSDictionary*)data;
 -(UITableViewCell*)getInitializedCellofTableView:(UITableView*)tableView ByWeiboData:(NSDictionary*)data;
 -(CGFloat)getCellHeightofTableView:(UITableView*)tableView ByWeiboData:(NSDictionary*)data;
+
+- (void)refreshData;
+- (void)onDataLoadDone;
 @end
 
 @implementation WeiboListViewController
@@ -26,6 +35,13 @@
 @synthesize controllerType = _controllerType;
 @synthesize friendDictionary = _friendDictionary;
 @synthesize dataList = _dataList;
+
+@synthesize footerView = _footerView;
+@synthesize footerButton = _footerButton;
+@synthesize loadingActivityIndicator = _loadingActivityIndicator;
+@synthesize currentPageIndex = _currentPageIndex;
+@synthesize isRefreshing = _isRefreshing;
+@synthesize isAllRetrieved = _isAllRetrieved;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil
                bundle:(NSBundle *)nibBundleOrNil
@@ -80,7 +96,11 @@
 
 - (void) onRefreshButtonClicked
 {
-    [ViewHelper showSimpleMessage:@"refresh button click" withTitle:nil withButtonText:@"ok"];
+    self.currentPageIndex = 1;
+    self.isAllRetrieved = NO;
+    [self.dataList removeAllObjects];
+    [self.tableView reloadData];
+    [self refreshData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -97,60 +117,82 @@
 {
     [super viewDidLoad];
     
-    UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    self.dataList = [NSMutableArray arrayWithCapacity:50];
+    self.tableView.tableFooterView = self.footerView;
+    _currentPageIndex = 1;
+
+    [self refreshData];
+}
+
+- (void)onDataLoadDone
+{
+    [self.loadingActivityIndicator stopAnimating];
     
-    activityIndicator.center = CGPointMake(SCREEN_WIDTH/2, 20);
-    [activityIndicator startAnimating];
+    self.isRefreshing = NO;
+    self.currentPageIndex++;
     
-    [self.view addSubview:activityIndicator];
+    if ((self.dataList == nil) || ([self.dataList count] == 0)) {
+        [self.footerButton setTitle:NSLocalizedString(@"no_message", @"no_message") forState:UIControlStateNormal];
+        [self.loadingActivityIndicator setHidden:YES];
+    }
+    else
+    {
+        [self.footerView setHidden:YES];
+        [self.tableView reloadData];
+    }
+}
+
+- (void)refreshData
+{
+    [self.footerView setHidden:NO];
+    [self.loadingActivityIndicator startAnimating];
+    [self.footerButton setTitle:NSLocalizedString(@"loading_more", @"loading_more") forState:UIControlStateNormal];
     
-    [self.tableView removeFromSuperview];
+    self.isRefreshing = YES;
     
     NSString * userId = self.friendDictionary ? [self.friendDictionary valueForKey:KEY_ACCOUNT_ID] : [[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] valueForKey:KEY_ACCOUNT_ID];
     
     if (self.controllerType == WeiboListViewControllerType_COMMENT_ME) {
         [[BSDKManager sharedManager] getCommentListOfUser:userId
-                                                   pageSize:20
-                                                  pageIndex:1
-                                            andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-                                                [activityIndicator stopAnimating];
-                                                [activityIndicator removeFromSuperview];
-                                                [activityIndicator release];
-                                                
-                                                self.dataList = [data objectForKey:K_BSDK_RESPONSE_COMMENTLIST];
-                                                [self.view addSubview:self.tableView];
-                                                [self.tableView reloadData];
-                                            }];
+                                                 pageSize:AUTOLOAD_PAGE_SIZE
+                                                pageIndex:_currentPageIndex
+                                          andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+                                              if ([[data objectForKey:K_BSDK_RESPONSE_COMMENTLIST] count] < AUTOLOAD_PAGE_SIZE) {
+                                                  self.isAllRetrieved = YES;
+                                              }
+                                              [self.dataList addObjectsFromArray:[data objectForKey:K_BSDK_RESPONSE_COMMENTLIST]];
+
+                                              [self onDataLoadDone];
+                                          }];
     }
     else if (self.controllerType == WeiboListViewControllerType_FORWARD_ME)
     {
         [[BSDKManager sharedManager] getAtWeiboListByUserId:userId
-                                                   pageSize:20
-                                                  pageIndex:1
+                                                   pageSize:AUTOLOAD_PAGE_SIZE
+                                                  pageIndex:_currentPageIndex
                                             andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-                                                [activityIndicator stopAnimating];
-                                                [activityIndicator release];
-                                                
-                                                self.dataList = [data objectForKey:K_BSDK_RESPONSE_BLOGLIST];
-                                                [self.view addSubview:self.tableView];
-                                                [self.tableView reloadData];
+                                                if ([[data objectForKey:K_BSDK_RESPONSE_BLOGLIST] count] < AUTOLOAD_PAGE_SIZE) {
+                                                    self.isAllRetrieved = YES;
+                                                }
+                                                [self.dataList addObjectsFromArray:[data objectForKey:K_BSDK_RESPONSE_BLOGLIST]];
+
+                                                [self onDataLoadDone];
                                             }];
     }
     else
     {
         [[BSDKManager sharedManager] getWeiboListByUserId:userId
-                                                   pageSize:20
-                                                  pageIndex:1
-                                            andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-                                                [activityIndicator stopAnimating];
-                                                [activityIndicator release];
-                                                
-                                                self.dataList = [data objectForKey:K_BSDK_RESPONSE_BLOGLIST];
-                                                [self.view addSubview:self.tableView];
-                                                [self.tableView reloadData];
-                                            }];
-    }
+                                                 pageSize:AUTOLOAD_PAGE_SIZE
+                                                pageIndex:_currentPageIndex
+                                          andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+                                              if ([[data objectForKey:K_BSDK_RESPONSE_BLOGLIST] count] < AUTOLOAD_PAGE_SIZE) {
+                                                  self.isAllRetrieved = YES;
+                                              }
+                                              [self.dataList addObjectsFromArray:[data objectForKey:K_BSDK_RESPONSE_BLOGLIST]];
 
+                                              [self onDataLoadDone];
+                                          }];
+    }
 }
 
 -(void)dealloc
@@ -159,6 +201,9 @@
     [_tableView release];
     [_friendDictionary release];
     [_dataList release];
+    [_footerButton release];
+    [_footerView release];
+    [_loadingActivityIndicator release];
 }
 
 - (void)viewDidUnload
@@ -167,6 +212,9 @@
     self.tableView = nil;
     self.friendDictionary = nil;
     self.dataList = nil;
+    self.footerButton = nil;
+    self.footerView = nil;
+    self.loadingActivityIndicator = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -178,14 +226,15 @@
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return [self getCellHeightofTableView:tableView ByWeiboData:[self.dataList objectAtIndex:[indexPath row]]];
-//    if  (self.controllerType == WeiboListViewControllerType_COMMENT_ME)
-//    {        
-//        return [self getCellHeightofTableView:tableView ByWeiboData:[self.dataList objectAtIndex:[indexPath row]]];
-//    }
-//    else
-//    {
-//        return 130;
-//    }
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (([indexPath row] == ([self.dataList count] - 1)) && !self.isAllRetrieved) {
+        if (!self.isRefreshing) {
+            [self refreshData];
+        }
+    }
 }
 
 #pragma mark UITableViewDataSource

@@ -299,8 +299,9 @@ static BSDKManager *sharedInstance;
 - (void)engine:(BSDKEngine *)engine requestDidFailWithError:(NSError *)error
 {
     NSLog(@"requestDidFailWithError: %@", error);
+    NSDictionary * errorDict = [NSDictionary dictionaryWithObjectsAndKeys:[error localizedDescription], K_BSDK_RESPONSE_MESSAGE, K_BSDK_RESPONSE_STATUS_FAILED, K_BSDK_RESPONSE_STATUS, nil];
     
-    [self doNotifyProcessStatus:error.code andData:nil];
+    [self doNotifyProcessStatus:error.code andData:errorDict];
 }
 
 #pragma mark Weibo related APIs

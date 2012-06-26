@@ -10,6 +10,7 @@
 #import "AdsPageView.h"
 #import "ViewConstants.h"
 #import "ViewHelper.h"
+#import "BSDKDefines.h"
 #import "BSDKManager.h"
 #import "LoginViewController.h"
 #import "RegisterViewController.h"
@@ -232,27 +233,33 @@
                                             [activityIndicator removeFromSuperview];
                                             [activityIndicator release];
                                             
-                                            NSArray * array = [data valueForKey:@"BlogList"];
-                                            //TODO [felix] should to remove
-                                            NSMutableArray * mutableArray = [NSMutableArray array];
-                                            for (NSDictionary * dict in array) {
-                                                if ([[dict valueForKey:@"Picture_width"] floatValue] > 0)
-                                                {
-                                                    [mutableArray addObject:dict];
+                                            if (K_BSDK_IS_RESPONSE_OK(data)) {
+                                                NSArray * array = [data valueForKey:@"BlogList"];
+                                                //TODO [felix] should to remove
+                                                NSMutableArray * mutableArray = [NSMutableArray array];
+                                                for (NSDictionary * dict in array) {
+                                                    if ([[dict valueForKey:@"Picture_width"] floatValue] > 0)
+                                                    {
+                                                        [mutableArray addObject:dict];
+                                                    }
                                                 }
-                                            }
-                                            if(_itemsViewController == nil)
-                                            {
-                                                _itemsViewController = [[ItemsViewController alloc] initWithArray:mutableArray];
-                                                _itemsViewController.view.frame = CGRectMake(0,
-                                                                                             ADS_CELL_HEIGHT + CONTENT_MARGIN,
-                                                                                             self.view.frame.size.width,
-                                                                                             USER_WINDOW_HEIGHT - ADS_CELL_HEIGHT - CONTENT_MARGIN);
-                                                [self.view addSubview:_itemsViewController.view];
+                                                if(_itemsViewController == nil)
+                                                {
+                                                    _itemsViewController = [[ItemsViewController alloc] initWithArray:mutableArray];
+                                                    _itemsViewController.view.frame = CGRectMake(0,
+                                                                                                 ADS_CELL_HEIGHT + CONTENT_MARGIN,
+                                                                                                 self.view.frame.size.width,
+                                                                                                 USER_WINDOW_HEIGHT - ADS_CELL_HEIGHT - CONTENT_MARGIN);
+                                                    [self.view addSubview:_itemsViewController.view];
+                                                }
+                                                else
+                                                {
+                                                    _itemsViewController.itemDatas = mutableArray;
+                                                }
                                             }
                                             else
                                             {
-                                                _itemsViewController.itemDatas = mutableArray;
+                                                [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
                                             }
                                         }];
 }
