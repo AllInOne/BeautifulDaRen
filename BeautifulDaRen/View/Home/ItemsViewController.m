@@ -38,7 +38,7 @@
 {
     self = [super initWithNibName:@"ItemsViewController" bundle:nil];
     if (self) {
-        self.itemDatas = [NSMutableArray arrayWithArray:array];
+        self.itemDatas = [[NSMutableArray alloc] initWithArray:array];
     }
     return self;
 }

@@ -244,16 +244,16 @@
                                             if(_itemsViewController == nil)
                                             {
                                                 _itemsViewController = [[ItemsViewController alloc] initWithArray:mutableArray];
+                                                _itemsViewController.view.frame = CGRectMake(0,
+                                                                                             ADS_CELL_HEIGHT + CONTENT_MARGIN,
+                                                                                             self.view.frame.size.width,
+                                                                                             USER_WINDOW_HEIGHT - ADS_CELL_HEIGHT - CONTENT_MARGIN);
+                                                [self.view addSubview:_itemsViewController.view];
                                             }
                                             else
                                             {
                                                 _itemsViewController.itemDatas = mutableArray;
                                             }
-                                            _itemsViewController.view.frame = CGRectMake(0,
-                                                                                         ADS_CELL_HEIGHT + CONTENT_MARGIN,
-                                                                                         self.view.frame.size.width,
-                                                                                         USER_WINDOW_HEIGHT - ADS_CELL_HEIGHT - CONTENT_MARGIN);
-                                            [self.view addSubview:_itemsViewController.view];
                                         }];
 }
 
