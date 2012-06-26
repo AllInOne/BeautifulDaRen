@@ -10,6 +10,7 @@
 #import "AdsPageView.h"
 #import "ViewConstants.h"
 #import "ViewHelper.h"
+#import "BSDKDefines.h"
 #import "BSDKManager.h"
 #import "LoginViewController.h"
 #import "RegisterViewController.h"

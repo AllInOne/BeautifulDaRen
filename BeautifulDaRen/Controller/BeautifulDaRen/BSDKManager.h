@@ -62,6 +62,11 @@
                      pageIndex:(NSInteger)pageIndex 
                andDoneCallback:(processDoneWithDictBlock)callback;
 
+- (void)getWeiboListByUserId:(NSString*)userId
+                    pageSize:(NSInteger)pageSize 
+                   pageIndex:(NSInteger)pageIndex 
+             andDoneCallback:(processDoneWithDictBlock)callback;
+
 // get the users which you are followed's weibo
 - (void)getFriendsWeiboListByUsername:(NSString*)username
                       pageSize:(NSInteger)pageSize 
@@ -108,6 +113,12 @@
 - (void)sendComment:(NSString*)comment
             toWeibo:(NSString*)blogId
      andDoneCallback:(processDoneWithDictBlock)callback;
+
+- (void)addFavourateForWeibo:(NSString*)blogId
+    andDoneCallback:(processDoneWithDictBlock)callback;
+
+- (void)removeFavourateForWeibo:(NSString*)blogId
+                andDoneCallback:(processDoneWithDictBlock)callback;
 
 - (void)getCommentListOfWeibo:(NSString*)blogId
                      pageSize:(NSInteger)pageSize 

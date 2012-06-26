@@ -71,6 +71,11 @@ static SinaSDKManager *sharedInstance;
     self.loginCallback = Block_copy(doneBlock);
 }
 
+- (void)logout
+{
+    [sinaWeiboEngine logOut];
+}
+
 - (void)sendRequestWithMethodName:(NSString *)methodName
                        httpMethod:(NSString *)httpMethod
                            params:(NSDictionary *)params

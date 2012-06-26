@@ -316,8 +316,6 @@
     __block NSString * errorMsg = nil;
     
     processDoneWithDictBlock doneBlock = ^(AIO_STATUS status, NSDictionary * data){
-        NSLog(@"Send done: %d, %@", status, data);
-
         doneCount++;
         if (doneCount == doneCountExpected) {
             [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_HIDEWAITOVERLAY object:self];

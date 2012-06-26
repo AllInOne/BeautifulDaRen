@@ -51,11 +51,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "BeautifulDaRen/View/Common/WaterFlowView.m"
-         timestampString = "359533170.55532"
+         timestampString = "362417224.529737"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "340"
-         endingLineNumber = "340"
+         startingLineNumber = "341"
+         endingLineNumber = "341"
          landmarkName = "-pageScroll"
          landmarkType = "5">
       </FileBreakpoint>
@@ -65,26 +65,12 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "BeautifulDaRen/View/Common/WaterFlowView.m"
-         timestampString = "359533170.55532"
+         timestampString = "362417224.529737"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "330"
-         endingLineNumber = "330"
+         startingLineNumber = "331"
+         endingLineNumber = "331"
          landmarkName = "-pageScroll"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "BeautifulDaRen/View/Common/WaterFlowView.m"
-         timestampString = "359006742.690316"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "198"
-         endingLineNumber = "198"
-         landmarkName = "-initialize"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -204,32 +190,6 @@
          startingLineNumber = "26"
          endingLineNumber = "26"
          landmarkName = "-initWithNibName:bundle:data:andDelegate:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "BeautifulDaRen/View/Home/ItemsViewController.m"
-         timestampString = "362335666.220152"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "161"
-         endingLineNumber = "161"
-         landmarkName = "-flowView:cellForRowAtIndex:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "BeautifulDaRen/View/Home/LoginViewController.m"
-         timestampString = "362372212.417987"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "252"
-         endingLineNumber = "252"
-         landmarkName = "-tableView:didSelectRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

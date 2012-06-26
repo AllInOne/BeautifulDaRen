@@ -299,8 +299,9 @@ static BSDKManager *sharedInstance;
 - (void)engine:(BSDKEngine *)engine requestDidFailWithError:(NSError *)error
 {
     NSLog(@"requestDidFailWithError: %@", error);
+    NSDictionary * errorDict = [NSDictionary dictionaryWithObjectsAndKeys:[error localizedDescription], K_BSDK_RESPONSE_MESSAGE, K_BSDK_RESPONSE_STATUS_FAILED, K_BSDK_RESPONSE_STATUS, nil];
     
-    [self doNotifyProcessStatus:error.code andData:nil];
+    [self doNotifyProcessStatus:error.code andData:errorDict];
 }
 
 #pragma mark Weibo related APIs
@@ -342,6 +343,41 @@ static BSDKManager *sharedInstance;
                        postDataType:kBSDKRequestPostDataTypeNormal
                    httpHeaderFields:nil
                        doneCallback:callback];
+}
+
+- (void)getWeiboListByUserId:(NSString*)userId
+                      pageSize:(NSInteger)pageSize 
+                     pageIndex:(NSInteger)pageIndex 
+               andDoneCallback:(processDoneWithDictBlock)callback
+{
+    //    if (!self.isLogin) {
+    //        callback(AIO_STATUS_NOT_SIGNED_IN, nil);
+    //        return;
+    //    }
+    
+    //    processDoneWithDictBlock loginCallbackShim = ^(AIO_STATUS status, NSDictionary * data)
+    //    {
+    //        callback(status, [data objectForKey:K_BSDK_RESPONSE_BLOGLIST]);
+    //    };
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:5];
+    
+    [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
+    [params setObject:K_BSDK_ACTION_GETLIST forKey:K_BSDK_ACTION];
+    [params setObject:[NSString stringWithFormat:@"%d", pageIndex] forKey:K_BSDK_PAGEINDEX];
+    [params setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:K_BSDK_PAGESIZE];
+
+    [params setObject:userId forKey:K_BSDK_USER_ID];
+
+    
+    
+    [self sendRequestWithMethodName:nil
+                         httpMethod:@"POST" 
+                             params:params 
+                       postDataType:kBSDKRequestPostDataTypeNormal
+                   httpHeaderFields:nil
+                       doneCallback:callback];
+    
 }
 
 - (void)getWeiboListByUsername:(NSString*)username
@@ -601,6 +637,40 @@ static BSDKManager *sharedInstance;
 }
 
 #pragma mark  message related API
+- (void)addFavourateForWeibo:(NSString*)blogId
+             andDoneCallback:(processDoneWithDictBlock)callback
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
+    
+    [params setObject:K_BSDK_CATEGORY_SNS forKey:K_BSDK_CATEGORY];
+    [params setObject:K_BSDK_ACTION_ADDFAV forKey:K_BSDK_ACTION];
+    [params setObject:blogId forKey:K_BSDK_BLOGUID];
+    
+    [self sendRequestWithMethodName:nil
+                         httpMethod:@"POST" 
+                             params:params 
+                       postDataType:kBSDKRequestPostDataTypeNormal
+                   httpHeaderFields:nil
+                       doneCallback:callback];
+}
+
+- (void)removeFavourateForWeibo:(NSString*)blogId
+             andDoneCallback:(processDoneWithDictBlock)callback
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
+    
+    [params setObject:K_BSDK_CATEGORY_SNS forKey:K_BSDK_CATEGORY];
+    [params setObject:K_BSDK_ACTION_REMOVEFAV forKey:K_BSDK_ACTION];
+    [params setObject:blogId forKey:K_BSDK_BLOGUID];
+    
+    [self sendRequestWithMethodName:nil
+                         httpMethod:@"POST" 
+                             params:params 
+                       postDataType:kBSDKRequestPostDataTypeNormal
+                   httpHeaderFields:nil
+                       doneCallback:callback];
+}
+
 - (void)sendComment:(NSString*)comment
             toWeibo:(NSString*)blogId
     andDoneCallback:(processDoneWithDictBlock)callback

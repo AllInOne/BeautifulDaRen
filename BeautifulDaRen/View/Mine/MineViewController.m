@@ -13,6 +13,7 @@
 #import "ButtonViewCell.h"
 #import "ViewConstants.h"
 #import "DataManager.h"
+#import "SinaSDKManager.h"
 #import "WeiboListViewController.h"
 #import "ViewHelper.h"
 #import "PrivateLetterViewController.h"
@@ -86,7 +87,6 @@
     
     [self.navigationItem setTitle:NSLocalizedString(@"title_mine", @"title_mine")];
     [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClick) title:NSLocalizedString(@"refresh", @"refresh")]];
-    [self refreshUserInfo];
 }
 
 - (void)viewDidUnload
@@ -304,6 +304,9 @@
             }
             else {
                 [[iToast makeText:@"账户退出失败!"] show];
+            }
+            if ([[SinaSDKManager sharedManager] isLogin]) {
+                [[SinaSDKManager sharedManager] logout];
             }
         }];
 

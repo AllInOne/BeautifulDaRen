@@ -42,6 +42,9 @@
 
 #define K_BSDK_ACTION_SENDCOMMENT @"SendComment"
 
+#define K_BSDK_ACTION_ADDFAV @"AddFav"
+#define K_BSDK_ACTION_REMOVEFAV @"RemoveFav"
+
 #define K_BSDK_ACTION_GETCOMMENTLIST @"GetCommentList"
 
 #define K_BSDK_PAGEINDEX @"Page"
@@ -73,6 +76,8 @@
 #define K_BSDK_LATITUDE @"PosX"
 #define K_BSDK_LONGITUDE @"PosY"
 
+#define K_BSDK_ISFAV @"IsFav"
+
 #define K_BSDK_CREATETIME @"CreateTime"
 
 #define K_BSDK_KEYWORD @"KeyWords"
@@ -84,6 +89,7 @@
 #define K_BSDK_FORWARDBLOGUID @"ForwardBlogId"
 #define K_BSDK_BLOGUID @"BlogId"
 #define K_BSDK_BLOGLIST @"BlogList"
+#define K_BSDK_BLOGINFO @"BlogInfo"
 
 #define K_BSDK_PICTURE_ORIGINAL @"Picture"
 #define K_BSDK_PICTURE_102 @"pic_102"
@@ -94,6 +100,10 @@
 #define K_BSDK_COMMENT_NUM @"CommentNum"
 #define K_BSDK_FAVOURATE_NUM @"FavNum"
 #define K_BSDK_FORWARD_NUM @"ForwardNum"
+
+#define K_BSDK_RETWEET_STATUS @"retweeted_status"
+
+#define K_BSDK_COMMENT_USER_ID @"CommentUserId"
 
 #define K_BSDK_CLASSLIST @"ClassList"
 #define K_BSDK_CLASSID @"ClassId"
@@ -110,7 +120,11 @@
 #define K_BSDK_RESPONSE_COMMENTLIST @"CommentList"
 #define K_BSDK_RESPONSE_ATTENTIONUSERLIST @"AttentionUserInfo"
 
-#define K_BSDK_IS_RESPONSE_OK(res) ([[res objectForKey:K_BSDK_RESPONSE_STATUS] isEqual:K_BSDK_RESPONSE_STATUS_OK])
+#define K_BSDK_IS_RESPONSE_OK(res) (![[res objectForKey:K_BSDK_RESPONSE_STATUS] isEqual:K_BSDK_RESPONSE_STATUS_FAILED])
+
 #define K_BSDK_GET_RESPONSE_MESSAGE(res) ([res objectForKey:K_BSDK_RESPONSE_MESSAGE])
+
+#define K_BSDK_IS_BLOG_FAVOURATE(data) (([data objectForKey:K_BSDK_ISFAV] != nil) \
+                                        && [[data objectForKey:K_BSDK_ISFAV] isEqual:@"1"])
 
 #endif
