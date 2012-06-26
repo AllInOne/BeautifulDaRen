@@ -138,13 +138,14 @@
     }
     else
     {
-        [[BSDKManager sharedManager] getWeiboListByUsername:userId
+        [[BSDKManager sharedManager] getWeiboListByUserId:userId
                                                    pageSize:20
                                                   pageIndex:1
                                             andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
                                                 [activityIndicator stopAnimating];
                                                 [activityIndicator release];
                                                 
+                                                self.dataList = [data objectForKey:K_BSDK_RESPONSE_BLOGLIST];
                                                 [self.view addSubview:self.tableView];
                                                 [self.tableView reloadData];
                                             }];
@@ -243,7 +244,7 @@
 {
     UITableViewCell * cell = nil;
     NSString * viewCellIdentifier = nil;
-    if  ([data objectForKey:K_BSDK_COMMENT_USER_ID] || [data objectForKey:K_BSDK_RETWEET_STATUS])
+    if  ([data objectForKey:K_BSDK_COMMENT_USER_ID] || ([data objectForKey:K_BSDK_RETWEET_STATUS] && ([[data objectForKey:K_BSDK_RETWEET_STATUS] count])))
     {
         viewCellIdentifier = @"CommentViewCell";
     }

@@ -344,6 +344,41 @@ static BSDKManager *sharedInstance;
                        doneCallback:callback];
 }
 
+- (void)getWeiboListByUserId:(NSString*)userId
+                      pageSize:(NSInteger)pageSize 
+                     pageIndex:(NSInteger)pageIndex 
+               andDoneCallback:(processDoneWithDictBlock)callback
+{
+    //    if (!self.isLogin) {
+    //        callback(AIO_STATUS_NOT_SIGNED_IN, nil);
+    //        return;
+    //    }
+    
+    //    processDoneWithDictBlock loginCallbackShim = ^(AIO_STATUS status, NSDictionary * data)
+    //    {
+    //        callback(status, [data objectForKey:K_BSDK_RESPONSE_BLOGLIST]);
+    //    };
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:5];
+    
+    [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
+    [params setObject:K_BSDK_ACTION_GETLIST forKey:K_BSDK_ACTION];
+    [params setObject:[NSString stringWithFormat:@"%d", pageIndex] forKey:K_BSDK_PAGEINDEX];
+    [params setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:K_BSDK_PAGESIZE];
+
+    [params setObject:userId forKey:K_BSDK_USER_ID];
+
+    
+    
+    [self sendRequestWithMethodName:nil
+                         httpMethod:@"POST" 
+                             params:params 
+                       postDataType:kBSDKRequestPostDataTypeNormal
+                   httpHeaderFields:nil
+                       doneCallback:callback];
+    
+}
+
 - (void)getWeiboListByUsername:(NSString*)username
                       pageSize:(NSInteger)pageSize 
                      pageIndex:(NSInteger)pageIndex 

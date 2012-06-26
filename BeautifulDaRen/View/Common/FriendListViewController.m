@@ -163,7 +163,7 @@
         [borderImageView release];
         NSDictionary * userDict = [self.friendsList objectAtIndex:section];
         friendListViewCell.friendNameLabel.text = [userDict valueForKey:KEY_ACCOUNT_USER_NAME];
-        friendListViewCell.friendWeiboLabel.text = @"我今天在天府广场附近买了一款很好看的衣服。";
+        friendListViewCell.friendWeiboLabel.text = @"";
         NSString * buttonTitle = nil;
         NSInteger relation = [[[self.friendsList objectAtIndex:[indexPath section]] valueForKey:KEY_ACCOUNT_RELATION] intValue];
         switch (self.type) {
