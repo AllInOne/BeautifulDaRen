@@ -24,7 +24,6 @@
 
 @interface ItemsViewController()
 
-@property (retain, nonatomic) NSMutableArray * itemDatas;
 @property (retain, nonatomic) NSMutableArray * itemsHeight;
 -(void)loadItemsHeight;
 
@@ -39,7 +38,7 @@
 {
     self = [super initWithNibName:@"ItemsViewController" bundle:nil];
     if (self) {
-        self.itemDatas = [NSMutableArray arrayWithArray:array];
+        self.itemDatas = [[NSMutableArray alloc] initWithArray:array];
     }
     return self;
 }
@@ -190,6 +189,13 @@
 
 - (void)flowView:(WaterFlowView *)flowView willLoadData:(int)page
 {
+    [_waterFlowView reloadData];
+}
+
+-(void)setItemDatas:(NSMutableArray *)itemDatas
+{
+    _itemDatas = itemDatas;
+    [self loadItemsHeight];
     [_waterFlowView reloadData];
 }
 

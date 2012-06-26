@@ -141,7 +141,7 @@
 
 -(IBAction)onRefreshBtnSelected:(UIButton*)sender
 {
-    NSLog(@"refresh");
+    [self refreshWeibosView];
 }
 
 - (IBAction)onRegisterBtnSelected:(UIButton*)sender
@@ -210,7 +210,6 @@
 
 - (void)refreshWeibosView
 {
-    
     NSString * userName = nil;
     if ([[BSDKManager sharedManager] isLogin])
     {
@@ -232,21 +231,29 @@
                                             [activityIndicator stopAnimating];
                                             [activityIndicator removeFromSuperview];
                                             [activityIndicator release];
+                                            
+                                            NSArray * array = [data valueForKey:@"BlogList"];
+                                            //TODO [felix] should to remove
+                                            NSMutableArray * mutableArray = [NSMutableArray array];
+                                            for (NSDictionary * dict in array) {
+                                                if ([[dict valueForKey:@"Picture_width"] floatValue] > 0)
+                                                {
+                                                    [mutableArray addObject:dict];
+                                                }
+                                            }
                                             if(_itemsViewController == nil)
                                             {
-                                                NSArray * array = [data valueForKey:@"BlogList"];
-                                                //TODO [felix] should to remove
-                                                NSMutableArray * mutableArray = [NSMutableArray array];
-                                                for (NSDictionary * dict in array) {
-                                                    if ([[dict valueForKey:@"Picture_width"] floatValue] > 0)
-                                                    {
-                                                        [mutableArray addObject:dict];
-                                                    }
-                                                }
                                                 _itemsViewController = [[ItemsViewController alloc] initWithArray:mutableArray];
-                                                _itemsViewController.view.frame = CGRectMake(0, ADS_CELL_HEIGHT + CONTENT_MARGIN, self.view.frame.size.width, USER_WINDOW_HEIGHT - ADS_CELL_HEIGHT - CONTENT_MARGIN);
+                                                _itemsViewController.view.frame = CGRectMake(0,
+                                                                                             ADS_CELL_HEIGHT + CONTENT_MARGIN,
+                                                                                             self.view.frame.size.width,
+                                                                                             USER_WINDOW_HEIGHT - ADS_CELL_HEIGHT - CONTENT_MARGIN);
                                                 [self.view addSubview:_itemsViewController.view];
-                                            }  
+                                            }
+                                            else
+                                            {
+                                                _itemsViewController.itemDatas = mutableArray;
+                                            }
                                         }];
 }
 
