@@ -335,13 +335,6 @@ enum
         city:self.userCity
         andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
             if (status == AIO_STATUS_SUCCESS && [[data valueForKey:@"status"]isEqualToString:@"y"]) {
-//                NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:
-//                                       userName, USERDEFAULT_ACCOUNT_USERNAME,
-//                                       email, USERDEFAULT_ACCOUNT_EMAIL,
-//                                       self.userCity, USERDEFAULT_ACCOUNT_CITY,
-//                                       nil];
-//                [[NSUserDefaults standardUserDefaults] setObject:dict forKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
-                
                 [self.navigationController popToRootViewControllerAnimated:YES];
                 [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_LOGIN_SUCCESS object:self userInfo:data];
             }
