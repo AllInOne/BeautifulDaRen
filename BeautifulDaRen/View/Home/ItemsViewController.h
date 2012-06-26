@@ -5,6 +5,7 @@
 
 @property (nonatomic, retain) IBOutlet WaterFlowView * waterFlowView;
 
+@property (retain, nonatomic) NSMutableArray * itemDatas;
 -(id)initWithArray:(NSArray*)array;
 
 @end
