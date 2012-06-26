@@ -252,8 +252,8 @@
         NSString* userName = self.accountNameField.text;
         NSString* password = self.accountPwdField.text;
 #ifdef DEBUG        
-        userName = @"jerry100";
-        password = @"abc123456";
+        userName = @"jerry";
+        password = @"123456";
 #endif
         NSString * iToastString = @"";
         if ([userName isEqualToString:@""])

@@ -3,6 +3,7 @@
 #import "WeiboDetailViewController.h"
 #import "ViewHelper.h"
 #import "BSDKManager.h"
+#import "BSDKDefines.h"
 #import "ViewConstants.h"
 #import "CommentViewCell.h"
 
@@ -13,6 +14,11 @@
 @property (assign, nonatomic) NSInteger controllerType;
 
 @property (retain, nonatomic) NSArray * dataList;
+
+-(NSString*)getCurrentBlogIdByData:(NSDictionary*)data;
+-(UITableViewCell*)getCellofTableView:(UITableView*)tableView ByWeiboData:(NSDictionary*)data;
+-(UITableViewCell*)getInitializedCellofTableView:(UITableView*)tableView ByWeiboData:(NSDictionary*)data;
+-(CGFloat)getCellHeightofTableView:(UITableView*)tableView ByWeiboData:(NSDictionary*)data;
 @end
 
 @implementation WeiboListViewController
@@ -111,6 +117,21 @@
                                                 [activityIndicator removeFromSuperview];
                                                 [activityIndicator release];
                                                 
+                                                self.dataList = [data objectForKey:K_BSDK_RESPONSE_COMMENTLIST];
+                                                [self.view addSubview:self.tableView];
+                                                [self.tableView reloadData];
+                                            }];
+    }
+    else if (self.controllerType == WeiboListViewControllerType_FORWARD_ME)
+    {
+        [[BSDKManager sharedManager] getAtWeiboListByUserId:userId
+                                                   pageSize:20
+                                                  pageIndex:1
+                                            andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+                                                [activityIndicator stopAnimating];
+                                                [activityIndicator release];
+                                                
+                                                self.dataList = [data objectForKey:K_BSDK_RESPONSE_BLOGLIST];
                                                 [self.view addSubview:self.tableView];
                                                 [self.tableView reloadData];
                                             }];
@@ -155,52 +176,120 @@
 #pragma mark UITableViewDelegate
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    NSInteger index = [indexPath row] % 2;
-//    return  (index == 0) ? 130 : 200;
-    return 130;
+    return [self getCellHeightofTableView:tableView ByWeiboData:[self.dataList objectAtIndex:[indexPath row]]];
+//    if  (self.controllerType == WeiboListViewControllerType_COMMENT_ME)
+//    {        
+//        return [self getCellHeightofTableView:tableView ByWeiboData:[self.dataList objectAtIndex:[indexPath row]]];
+//    }
+//    else
+//    {
+//        return 130;
+//    }
 }
 
 #pragma mark UITableViewDataSource
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell * cell = nil;
-    if  (self.controllerType == WeiboListViewControllerType_COMMENT_ME)
-    {
-        static NSString * commentViewCellIdentifier = @"CommentViewCell";
-        cell = [tableView dequeueReusableCellWithIdentifier:commentViewCellIdentifier];
-        if(cell == nil)
-        {
-            cell = [[[NSBundle mainBundle] loadNibNamed:commentViewCellIdentifier owner:self options:nil] objectAtIndex:0];
-        }
-//        CommentViewCell * atMeCell = (CommentViewCell*)cell;
-    }
-    else
-    {
-        static NSString * atMeViewCellIdentifier = @"AtMeViewCell";
-        cell = [tableView dequeueReusableCellWithIdentifier:atMeViewCellIdentifier];
-        if(cell == nil)
-        {
-            cell = [[[NSBundle mainBundle] loadNibNamed:atMeViewCellIdentifier owner:self options:nil] objectAtIndex:0];
-        }
-        AtMeViewCell * atMeCell = (AtMeViewCell*)cell;
-        atMeCell.friendNameLabel.text = @"仁和春天光华店";
-        atMeCell.shopNameLabel.text = @"仁和春天";
-        atMeCell.brandLabel.text = @"好莱坞明星";
-    }
+    
+    cell = [self getInitializedCellofTableView:tableView ByWeiboData:[self.dataList objectAtIndex:[indexPath row]]];
+//    if  (self.controllerType == WeiboListViewControllerType_COMMENT_ME)
+//    {
+//        cell = [self getCellofTableView:tableView ByWeiboData:[self.dataList objectAtIndex:[indexPath row]]];
+//    }
+//    else
+//    {
+//        static NSString * atMeViewCellIdentifier = @"AtMeViewCell";
+//        cell = [tableView dequeueReusableCellWithIdentifier:atMeViewCellIdentifier];
+//        if(cell == nil)
+//        {
+//            cell = [[[NSBundle mainBundle] loadNibNamed:atMeViewCellIdentifier owner:self options:nil] objectAtIndex:0];
+//        }
+//        AtMeViewCell * atMeCell = (AtMeViewCell*)cell;
+//        atMeCell.friendNameLabel.text = @"仁和春天光华店";
+//        atMeCell.shopNameLabel.text = @"仁和春天";
+//        atMeCell.brandLabel.text = @"好莱坞明星";
+//    }
 
     return cell;
 }
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    return [self.dataList count];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     WeiboDetailViewController *weiboDetailController = 
     [[WeiboDetailViewController alloc] init];
+
+    weiboDetailController.weiboId = [self getCurrentBlogIdByData:[self.dataList objectAtIndex:[indexPath row]]];
+
     [self.navigationController pushViewController:weiboDetailController animated:YES];
     [weiboDetailController release];
+}
+
+-(NSString*)getCurrentBlogIdByData:(NSDictionary*)data
+{
+    NSString * blogId = [data objectForKey:K_BSDK_BLOGUID];
+    if (blogId == nil) {
+        blogId = [data objectForKey:K_BSDK_UID];
+    }
+    return blogId;
+}
+
+-(UITableViewCell*)getCellofTableView:(UITableView*)tableView ByWeiboData:(NSDictionary*)data
+{
+    UITableViewCell * cell = nil;
+    NSString * viewCellIdentifier = nil;
+    if  ([data objectForKey:K_BSDK_COMMENT_USER_ID] || [data objectForKey:K_BSDK_RETWEET_STATUS])
+    {
+        viewCellIdentifier = @"CommentViewCell";
+    }
+    else
+    {
+        viewCellIdentifier = @"AtMeViewCell";
+    }
+    
+    cell = [tableView dequeueReusableCellWithIdentifier:viewCellIdentifier];
+    if(cell == nil)
+    {
+        cell = [[[NSBundle mainBundle] loadNibNamed:viewCellIdentifier owner:self options:nil] objectAtIndex:0];
+    }
+    
+    return cell;
+}
+
+-(UITableViewCell*)getInitializedCellofTableView:(UITableView*)tableView ByWeiboData:(NSDictionary*)data
+{
+    UITableViewCell * cell = [self getCellofTableView:tableView ByWeiboData:data];
+    
+    if ([cell isKindOfClass:[CommentViewCell class]]) {
+        CommentViewCell * commentCell = (CommentViewCell*)cell;
+        [commentCell setData:data];
+    }
+    else
+    {
+        AtMeViewCell * atMeCell = (AtMeViewCell*)cell;
+        [atMeCell setData:data];
+    }
+    
+    return cell;
+}
+
+
+-(CGFloat)getCellHeightofTableView:(UITableView*)tableView ByWeiboData:(NSDictionary*)data
+{
+    UITableViewCell * cell = [self getCellofTableView:tableView ByWeiboData:data];
+    if ([cell isKindOfClass:[CommentViewCell class]]) {
+        CommentViewCell * commentCell = (CommentViewCell*)cell;
+        return [commentCell getCellHeightByData:data];
+    }
+    else
+    {
+        AtMeViewCell * atMeCell = (AtMeViewCell*)cell;
+        return [atMeCell getCellHeight];
+    }
 }
 @end

@@ -9,6 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "WeiboForwardCommentViewController.h"
 
+/// There are two ways to use WeiboDetailViewController
+/// 1. set the weiboData before present the view
+/// 2. set the weiboId before present the view.
+
+/// If all of them are presented, weiboId will not be used.
+
 @interface WeiboDetailViewController : UIViewController <ForwardCommentViewControllerProtocol>
 
 @property (nonatomic, retain) IBOutlet UIScrollView * detailScrollView;
@@ -33,7 +39,9 @@
 -(IBAction)onCommentListButtonPressed:(UIButton*)sender;
 -(IBAction)onForwardButtonPressed:(UIButton*)sender;
 
+/// Only one of them should be presented
 @property (nonatomic, retain) NSDictionary * weiboData;
+@property (nonatomic, retain) NSString * weiboId;
 
 -(IBAction)onImageButtonPressed:(id)sender;
 

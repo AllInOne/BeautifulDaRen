@@ -60,6 +60,7 @@
 @synthesize priceButton = _priceButton;
 @synthesize brandLable = _brandLable;
 @synthesize usernameLabel = _usernameLabel;
+@synthesize weiboId = _weiboId;
 
 - (void)dealloc
 {
@@ -81,6 +82,7 @@
     [_merchantLable release];
     [_priceButton release];
     [_usernameLabel release];
+    [_weiboId release];
     
     [super dealloc];
 }
@@ -217,7 +219,34 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [self refreshView];
+    if (self.weiboData) {
+        [self refreshView];
+    }
+    else
+    {
+        UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        
+        activityIndicator.center = CGPointMake(SCREEN_WIDTH/2, 20);
+        [activityIndicator startAnimating];
+        
+        [self.view addSubview:activityIndicator];
+        
+        [[BSDKManager sharedManager] getWeiboById:_weiboId
+                                          andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+                                              [activityIndicator stopAnimating];
+                                              [activityIndicator removeFromSuperview];
+                                              [activityIndicator release];
+                                              
+                                              if (K_BSDK_IS_RESPONSE_OK(data)) {
+                                                  self.weiboData = data;
+                                                  [self refreshView];
+                                              }
+                                              else
+                                              {
+                                                  [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
+                                              }
+                                          }];
+    }
     [self addToolbar];
 }
 
@@ -240,6 +269,7 @@
     self.priceButton = nil;
     self.brandLable = nil;
     self.usernameLabel = nil;
+    self.weiboId = nil;
     
     [self.toolbar removeFromSuperview];
     self.toolbar = nil;
@@ -370,10 +400,12 @@
     
     NSString * price = [self.weiboData objectForKey:K_BSDK_PRICE];
     if (price && ([price intValue] != 0)) {
-        [self.priceButton setTitle:[NSString stringWithFormat:@"¥%d", [price intValue]] forState:UIControlStateNormal];
+        NSString * title = [NSString stringWithFormat:@"¥ %d", [price intValue]];
+        [self.priceButton setTitle:title forState:UIControlStateNormal];
+        
         self.priceButton.frame = CGRectMake(CGRectGetMinX(self.priceButton.frame), 
                                             CGRectGetMinY(self.favourateButton.frame) - PRICE_BUTTON_Y_OFFSET, 
-                                            CGRectGetWidth(self.priceButton.frame),
+                                            [ViewHelper getWidthOfText:title ByFontSize:self.priceButton.titleLabel.font.pointSize]+20,
                                             CGRectGetHeight(self.priceButton.frame));
     }
     else

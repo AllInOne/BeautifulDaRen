@@ -84,6 +84,7 @@
 #define K_BSDK_FORWARDBLOGUID @"ForwardBlogId"
 #define K_BSDK_BLOGUID @"BlogId"
 #define K_BSDK_BLOGLIST @"BlogList"
+#define K_BSDK_BLOGINFO @"BlogInfo"
 
 #define K_BSDK_PICTURE_ORIGINAL @"Picture"
 #define K_BSDK_PICTURE_102 @"pic_102"
@@ -94,6 +95,10 @@
 #define K_BSDK_COMMENT_NUM @"CommentNum"
 #define K_BSDK_FAVOURATE_NUM @"FavNum"
 #define K_BSDK_FORWARD_NUM @"ForwardNum"
+
+#define K_BSDK_RETWEET_STATUS @"retweeted_status"
+
+#define K_BSDK_COMMENT_USER_ID @"CommentUserId"
 
 #define K_BSDK_CLASSLIST @"ClassList"
 #define K_BSDK_CLASSID @"ClassId"
