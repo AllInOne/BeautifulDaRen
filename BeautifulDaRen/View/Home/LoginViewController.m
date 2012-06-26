@@ -251,7 +251,7 @@
     if ([indexPath section] == 1) {
         NSString* userName = self.accountNameField.text;
         NSString* password = self.accountPwdField.text;
-#if TARGET_IPHONE_SIMULATOR
+#ifdef DEBUG        
         userName = @"jerry100";
         password = @"abc123456";
 #endif
@@ -282,7 +282,7 @@
              }
              else
              {
-                 [[iToast makeText:[NSString stringWithFormat:@"%@", [data objectForKey:@"msg"]]] show];
+                 [[iToast makeText:[NSString stringWithFormat:@"%@", K_BSDK_GET_RESPONSE_MESSAGE(data)]] show];
              }
          }];
     }

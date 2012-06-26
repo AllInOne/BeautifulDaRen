@@ -92,7 +92,7 @@
 {
     [super viewDidLoad];
 
-    [_brandTextView becomeFirstResponder];
+    [_maketTextView becomeFirstResponder];
     // Do any additional setup after loading the view from its nib.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
