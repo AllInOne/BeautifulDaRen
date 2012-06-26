@@ -4,6 +4,7 @@
 #import "ViewHelper.h"
 #import "BSDKManager.h"
 #import "ViewConstants.h"
+#import "CommentViewCell.h"
 
 @interface WeiboListViewController()
 
@@ -11,12 +12,14 @@
 @property (retain, nonatomic) NSDictionary * friendDictionary;
 @property (assign, nonatomic) NSInteger controllerType;
 
+@property (retain, nonatomic) NSArray * dataList;
 @end
 
 @implementation WeiboListViewController
 @synthesize tableView = _tableView;
 @synthesize controllerType = _controllerType;
 @synthesize friendDictionary = _friendDictionary;
+@synthesize dataList = _dataList;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil
                bundle:(NSBundle *)nibBundleOrNil
@@ -87,13 +90,45 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSString * userName = self.friendDictionary ? [self.friendDictionary valueForKey:KEY_ACCOUNT_ID] : [[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] valueForKey:KEY_ACCOUNT_ID]; 
-    [[BSDKManager sharedManager] getWeiboListByUsername:userName
-                                               pageSize:20
-                                              pageIndex:1
-                                        andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-                                            
-                                        }];
+    
+    UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    
+    activityIndicator.center = CGPointMake(SCREEN_WIDTH/2, 20);
+    [activityIndicator startAnimating];
+    
+    [self.view addSubview:activityIndicator];
+    
+    [self.tableView removeFromSuperview];
+    
+    NSString * userId = self.friendDictionary ? [self.friendDictionary valueForKey:KEY_ACCOUNT_ID] : [[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] valueForKey:KEY_ACCOUNT_ID];
+    
+    if (self.controllerType == WeiboListViewControllerType_COMMENT_ME) {
+        [[BSDKManager sharedManager] getCommentListOfUser:userId
+                                                   pageSize:20
+                                                  pageIndex:1
+                                            andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+                                                [activityIndicator stopAnimating];
+                                                [activityIndicator removeFromSuperview];
+                                                [activityIndicator release];
+                                                
+                                                [self.view addSubview:self.tableView];
+                                                [self.tableView reloadData];
+                                            }];
+    }
+    else
+    {
+        [[BSDKManager sharedManager] getWeiboListByUsername:userId
+                                                   pageSize:20
+                                                  pageIndex:1
+                                            andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+                                                [activityIndicator stopAnimating];
+                                                [activityIndicator release];
+                                                
+                                                [self.view addSubview:self.tableView];
+                                                [self.tableView reloadData];
+                                            }];
+    }
+
 }
 
 -(void)dealloc
@@ -101,6 +136,7 @@
     [super dealloc];
     [_tableView release];
     [_friendDictionary release];
+    [_dataList release];
 }
 
 - (void)viewDidUnload
@@ -108,6 +144,7 @@
     [super viewDidUnload];
     self.tableView = nil;
     self.friendDictionary = nil;
+    self.dataList = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -126,17 +163,31 @@
 #pragma mark UITableViewDataSource
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString * atMeViewCellIdentifier = @"AtMeViewCell";
     UITableViewCell * cell = nil;
-    cell = [tableView dequeueReusableCellWithIdentifier:atMeViewCellIdentifier];
-    if(cell == nil)
+    if  (self.controllerType == WeiboListViewControllerType_COMMENT_ME)
     {
-        cell = [[[NSBundle mainBundle] loadNibNamed:atMeViewCellIdentifier owner:self options:nil] objectAtIndex:0];
+        static NSString * commentViewCellIdentifier = @"CommentViewCell";
+        cell = [tableView dequeueReusableCellWithIdentifier:commentViewCellIdentifier];
+        if(cell == nil)
+        {
+            cell = [[[NSBundle mainBundle] loadNibNamed:commentViewCellIdentifier owner:self options:nil] objectAtIndex:0];
+        }
+//        CommentViewCell * atMeCell = (CommentViewCell*)cell;
     }
-    AtMeViewCell * atMeCell = (AtMeViewCell*)cell;
-    atMeCell.friendNameLabel.text = @"仁和春天光华店";
-    atMeCell.shopNameLabel.text = @"仁和春天";
-    atMeCell.brandLabel.text = @"好莱坞明星";
+    else
+    {
+        static NSString * atMeViewCellIdentifier = @"AtMeViewCell";
+        cell = [tableView dequeueReusableCellWithIdentifier:atMeViewCellIdentifier];
+        if(cell == nil)
+        {
+            cell = [[[NSBundle mainBundle] loadNibNamed:atMeViewCellIdentifier owner:self options:nil] objectAtIndex:0];
+        }
+        AtMeViewCell * atMeCell = (AtMeViewCell*)cell;
+        atMeCell.friendNameLabel.text = @"仁和春天光华店";
+        atMeCell.shopNameLabel.text = @"仁和春天";
+        atMeCell.brandLabel.text = @"好莱坞明星";
+    }
+
     return cell;
 }
 

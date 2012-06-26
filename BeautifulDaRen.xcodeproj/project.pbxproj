@@ -291,6 +291,8 @@
 		CE83A1B9154C29EC005187F7 /* WeiboDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE83A1B7154C29EC005187F7 /* WeiboDetailViewController.xib */; };
 		CE83A1BD154C2A26005187F7 /* WeiboComposerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE83A1BB154C2A26005187F7 /* WeiboComposerViewController.m */; };
 		CE83A1BE154C2A26005187F7 /* WeiboComposerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE83A1BC154C2A26005187F7 /* WeiboComposerViewController.xib */; };
+		CE948BFA15995B620078814C /* CommentViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE948BF815995B5A0078814C /* CommentViewCell.m */; };
+		CE948BFB15995B620078814C /* CommentViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE948BF915995B5E0078814C /* CommentViewCell.xib */; };
 		CEADCAAD1576674400EF83BA /* segement_btn_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEADCA9E1576672B00EF83BA /* segement_btn_selected@2x.png */; };
 		CEADCAAE1576674400EF83BA /* segement_btn_unselected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEADCA9F1576672C00EF83BA /* segement_btn_unselected@2x.png */; };
 		CEADCAAF1576674400EF83BA /* segmentDividerLeftSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEADCAA01576672E00EF83BA /* segmentDividerLeftSelected@2x.png */; };
@@ -1002,6 +1004,9 @@
 		CE83A1BA154C2A26005187F7 /* WeiboComposerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboComposerViewController.h; sourceTree = "<group>"; };
 		CE83A1BB154C2A26005187F7 /* WeiboComposerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboComposerViewController.m; sourceTree = "<group>"; };
 		CE83A1BC154C2A26005187F7 /* WeiboComposerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeiboComposerViewController.xib; sourceTree = "<group>"; };
+		CE948BF715995B590078814C /* CommentViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentViewCell.h; sourceTree = "<group>"; };
+		CE948BF815995B5A0078814C /* CommentViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentViewCell.m; sourceTree = "<group>"; };
+		CE948BF915995B5E0078814C /* CommentViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentViewCell.xib; sourceTree = "<group>"; };
 		CEADCA9E1576672B00EF83BA /* segement_btn_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "segement_btn_selected@2x.png"; sourceTree = "<group>"; };
 		CEADCA9F1576672C00EF83BA /* segement_btn_unselected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "segement_btn_unselected@2x.png"; sourceTree = "<group>"; };
 		CEADCAA01576672E00EF83BA /* segmentDividerLeftSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "segmentDividerLeftSelected@2x.png"; sourceTree = "<group>"; };
@@ -1337,6 +1342,9 @@
 		C216EDBA1551882F00CA8CE8 /* SubView */ = {
 			isa = PBXGroup;
 			children = (
+				CE948BF715995B590078814C /* CommentViewCell.h */,
+				CE948BF815995B5A0078814C /* CommentViewCell.m */,
+				CE948BF915995B5E0078814C /* CommentViewCell.xib */,
 				C216EDC015518B8C00CA8CE8 /* MyInfoTopViewCell.h */,
 				C216EDC115518B8C00CA8CE8 /* MyInfoTopViewCell.m */,
 				C216EDC315518BD300CA8CE8 /* MyInfoTopViewCell.xib */,
@@ -3034,6 +3042,7 @@
 				CED2BEA21587440600E4A157 /* splash@2x.png in Resources */,
 				CEDCE09C1588314F00029D8D /* SelectCategoryCell.xib in Resources */,
 				C25123DA1591C790004F987E /* ModifyPasswordViewController.xib in Resources */,
+				CE948BFB15995B620078814C /* CommentViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3157,6 +3166,7 @@
 				C25BDE1A1584E5030006153B /* MineViewController.m in Sources */,
 				CEDCE09B1588314F00029D8D /* SelectCategoryCell.m in Sources */,
 				C25123D91591C790004F987E /* ModifyPasswordViewController.m in Sources */,
+				CE948BFA15995B620078814C /* CommentViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
