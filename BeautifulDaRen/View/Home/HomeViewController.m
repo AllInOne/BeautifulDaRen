@@ -24,7 +24,8 @@
 @property (retain, nonatomic) id observerForLoginSuccess;
 @property (retain, nonatomic) id observerForShouldLogin;
 
-- (void)refreshView;
+- (void)refreshNavigationView;
+- (void)refreshWeibosView;
 @end
 
 @implementation HomeViewController
@@ -53,8 +54,7 @@
                  object:nil
                  queue:nil
                  usingBlock:^(NSNotification *note) {
-                     NSLog(@"notification:%@",[[note valueForKey:@"userInfo"] valueForKey:@"msg"]);
-                     [self refreshView];
+                     [self refreshNavigationView];
                  }];
     
     self.observerForShouldLogin = [[NSNotificationCenter defaultCenter]
@@ -78,52 +78,9 @@
         self.adsPageView.delegate = self;
     }
 
-    if(_itemsViewController == nil)
-    {
-        _itemsViewController = [[ItemsViewController alloc] initWithNibName:@"ItemsViewController" bundle:nil];
-        _itemsViewController.view.frame = CGRectMake(0, ADS_CELL_HEIGHT + CONTENT_MARGIN, self.view.frame.size.width, USER_WINDOW_HEIGHT - ADS_CELL_HEIGHT - CONTENT_MARGIN);
-        [self.view addSubview:_itemsViewController.view];
-    }
-    [self refreshView];
-}
 
-- (void)refreshView
-{
-    if ([[BSDKManager sharedManager] isLogin]) {
-        [self.navigationItem setTitle:[[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] valueForKey:KEY_ACCOUNT_USER_NAME]];
-        
-        if([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0)
-        {
-            [self.navigationItem setRightBarButtonItems:nil];
-        }
-        else {
-            [self.navigationItem setRightBarButtonItem:nil];
-        }
-//        UIBarButtonItem* detailModeButton = [ViewHelper getBarItemOfTarget:self action:@selector(onDetailModeBtnSelected:) title:NSLocalizedString(@"detail_mode", @"detail_mode")];
-        UIBarButtonItem* refreshButton = [ViewHelper getBarItemOfTarget:self action:@selector(onRefreshBtnSelected:) title:NSLocalizedString(@"refresh", @"refresh")];
-//        [self.navigationItem setRightBarButtonItem:detailModeButton];
-        [self.navigationItem setRightBarButtonItem:refreshButton];
-    }
-    else {
-        if([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0)
-        {
-            if(![[BSDKManager sharedManager] isLogin])
-            {
-                UIBarButtonItem* loginButton = [ViewHelper getBarItemOfTarget:self action:@selector(onLoginBtnSelected:) title:NSLocalizedString(@"login", @"login button on navigation")];
-                
-                UIBarButtonItem* registerButton =[ViewHelper getBarItemOfTarget:self action:@selector(onRegisterBtnSelected:) title:NSLocalizedString(@"register", @"register button on navigation")];
-                
-                NSArray * navigationBtns = [NSArray arrayWithObjects:registerButton, loginButton, nil];
-                // setRightBarButtonItems only availability on ios 5.0 and later.
-                [self.navigationItem setRightBarButtonItems:navigationBtns animated:YES];
-            }
-        }
-        else
-        {
-            [self.navigationItem setRightBarButtonItem:[ViewHelper getRightBarItemOfTarget1:self action1:@selector(onLoginBtnSelected:) title1:NSLocalizedString(@"login", @"login button on navigation") target2:self action2:@selector(onRegisterBtnSelected:) title2:NSLocalizedString(@"register", @"register button on navigation")]];
-        }
-        [self.navigationItem setLeftBarButtonItem:[ViewHelper getLeftBarItemOfImageName:@"beautifuldaren_logo" rectSize:CGRectMake(0, 0, NAVIGATION_LEFT_LOGO_WIDTH, NAVIGATION_LEFT_LOGO_HEIGHT)]];
-    }
+    [self refreshNavigationView];
+    [self refreshWeibosView];
 }
 
 -(void) dealloc
@@ -208,6 +165,89 @@
     [_itemsViewController.view setFrame:CGRectMake(0, 0, CGRectGetWidth(_itemsViewController.view.frame), USER_WINDOW_HEIGHT)];
     
     [UIView commitAnimations];
+}
+
+
+- (void)refreshNavigationView
+{
+    if ([[BSDKManager sharedManager] isLogin]) {
+        [self.navigationItem setTitle:[[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] valueForKey:KEY_ACCOUNT_USER_NAME]];
+        
+        if([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0)
+        {
+            [self.navigationItem setRightBarButtonItems:nil];
+        }
+        else {
+            [self.navigationItem setRightBarButtonItem:nil];
+        }
+        //        UIBarButtonItem* detailModeButton = [ViewHelper getBarItemOfTarget:self action:@selector(onDetailModeBtnSelected:) title:NSLocalizedString(@"detail_mode", @"detail_mode")];
+        UIBarButtonItem* refreshButton = [ViewHelper getBarItemOfTarget:self action:@selector(onRefreshBtnSelected:) title:NSLocalizedString(@"refresh", @"refresh")];
+        //        [self.navigationItem setRightBarButtonItem:detailModeButton];
+        [self.navigationItem setLeftBarButtonItem:refreshButton];
+    }
+    else {
+        if([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0)
+        {
+            if(![[BSDKManager sharedManager] isLogin])
+            {
+                UIBarButtonItem* loginButton = [ViewHelper getBarItemOfTarget:self action:@selector(onLoginBtnSelected:) title:NSLocalizedString(@"login", @"login button on navigation")];
+                
+                UIBarButtonItem* registerButton =[ViewHelper getBarItemOfTarget:self action:@selector(onRegisterBtnSelected:) title:NSLocalizedString(@"register", @"register button on navigation")];
+                
+                NSArray * navigationBtns = [NSArray arrayWithObjects:registerButton, loginButton, nil];
+                // setRightBarButtonItems only availability on ios 5.0 and later.
+                [self.navigationItem setRightBarButtonItems:navigationBtns animated:YES];
+            }
+        }
+        else
+        {
+            [self.navigationItem setRightBarButtonItem:[ViewHelper getRightBarItemOfTarget1:self action1:@selector(onLoginBtnSelected:) title1:NSLocalizedString(@"login", @"login button on navigation") target2:self action2:@selector(onRegisterBtnSelected:) title2:NSLocalizedString(@"register", @"register button on navigation")]];
+        }
+        [self.navigationItem setLeftBarButtonItem:[ViewHelper getLeftBarItemOfImageName:@"beautifuldaren_logo" rectSize:CGRectMake(0, 0, NAVIGATION_LEFT_LOGO_WIDTH, NAVIGATION_LEFT_LOGO_HEIGHT)]];
+    }
+}
+
+
+- (void)refreshWeibosView
+{
+    
+    NSString * userName = nil;
+    if ([[BSDKManager sharedManager] isLogin])
+    {
+        userName = [[[NSUserDefaults standardUserDefaults]
+                     valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO]
+                    valueForKey:KEY_ACCOUNT_USER_NAME];
+    }
+    UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    
+    activityIndicator.frame = CGRectMake(SCREEN_WIDTH/2, 2*ADS_CELL_HEIGHT + CONTENT_MARGIN, CGRectGetWidth(activityIndicator.frame), CGRectGetHeight(activityIndicator.frame));
+    
+    [self.view addSubview:activityIndicator];
+    
+    [activityIndicator startAnimating];
+    [[BSDKManager sharedManager] getWeiboListByUsername:userName
+                                               pageSize:20
+                                              pageIndex:1
+                                        andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+                                            [activityIndicator stopAnimating];
+                                            [activityIndicator removeFromSuperview];
+                                            [activityIndicator release];
+                                            if(_itemsViewController == nil)
+                                            {
+                                                NSArray * array = [data valueForKey:@"BlogList"];
+                                                //TODO [felix] should to remove
+                                                NSMutableArray * mutableArray = [NSMutableArray array];
+                                                for (NSDictionary * dict in array) {
+                                                    if ([[dict valueForKey:@"Picture_width"] floatValue] > 0)
+                                                    {
+                                                        [mutableArray addObject:dict];
+                                                    }
+                                                }
+                                                _itemsViewController = [[ItemsViewController alloc] initWithArray:mutableArray];
+                                                _itemsViewController.view.frame = CGRectMake(0, ADS_CELL_HEIGHT + CONTENT_MARGIN, self.view.frame.size.width, USER_WINDOW_HEIGHT - ADS_CELL_HEIGHT - CONTENT_MARGIN);
+                                                [self.view addSubview:_itemsViewController.view];
+                                            }  
+                                        }];
 }
 
 @end
