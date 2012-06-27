@@ -167,12 +167,17 @@ static BSDKManager *sharedInstance;
                        doneCallback:logoutCallbackShim];
 }
 
-- (void)searchUsersByUsername:(NSString*) username andDoneCallback:(processDoneWithDictBlock)doneBlock
+- (void)searchUsersByUsername:(NSString*)username
+                     pageSize:(NSInteger)pageSize 
+                    pageIndex:(NSInteger)pageIndex 
+              andDoneCallback:(processDoneWithDictBlock)doneBlock
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
     
     [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETLIST forKey:K_BSDK_ACTION];
+    [params setObject:[NSString stringWithFormat:@"%d", pageIndex] forKey:K_BSDK_PAGEINDEX];
+    [params setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:K_BSDK_PAGESIZE];
     [params setObject:username forKey:K_BSDK_USERNAMEKEYWORDS];
     
     [self sendRequestWithMethodName:nil

@@ -21,9 +21,15 @@
 
 - (void)setRootviewController:(UIViewController*)rootViewController;
 
-- (void)signUpWithUsername:(NSString*) username password:(NSString*)password email:(NSString*)email city:(NSString*)city andDoneCallback:(processDoneWithDictBlock)doneBlock;
+- (void)signUpWithUsername:(NSString*)username
+                  password:(NSString*)password
+                     email:(NSString*)email
+                      city:(NSString*)city
+           andDoneCallback:(processDoneWithDictBlock)doneBlock;
 
-- (void)loginWithUsername:(NSString*) username password:(NSString*)password andDoneCallback:(processDoneWithDictBlock)doneBlock;
+- (void)loginWithUsername:(NSString*)username
+                 password:(NSString*)password
+          andDoneCallback:(processDoneWithDictBlock)doneBlock;
 
 - (void)logoutWithDoneCallback:(processDoneWithDictBlock)doneBlock;
 
@@ -33,9 +39,13 @@
                  andDoneCallback:(processDoneWithDictBlock)doneBlock;
 
 #pragma mark user releated API
-- (void)getUserInforByUserId:(NSString*) userId andDoneCallback:(processDoneWithDictBlock)doneBlock;
+- (void)getUserInforByUserId:(NSString*)userId
+             andDoneCallback:(processDoneWithDictBlock)doneBlock;
 
-- (void)searchUsersByUsername:(NSString*) username andDoneCallback:(processDoneWithDictBlock)doneBlock;
+- (void)searchUsersByUsername:(NSString*)username
+                     pageSize:(NSInteger)pageSize 
+                    pageIndex:(NSInteger)pageIndex 
+              andDoneCallback:(processDoneWithDictBlock)doneBlock;
 
 
 #pragma mark Weibo releated API

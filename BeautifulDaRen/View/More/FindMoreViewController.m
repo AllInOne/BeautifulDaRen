@@ -30,6 +30,8 @@
 
 @property (retain, nonatomic) IBOutlet UITableView * searchResultViewController;
 @property (retain, nonatomic) IBOutlet UISearchBar * searchBar;
+@property (assign, nonatomic) NSInteger searchUserPageIndex;
+@property (assign , atomic) BOOL isSearchMore;
 @property (nonatomic, retain) NSMutableArray *searchResults;
 
 @property (nonatomic, assign) BOOL isFindWeibo;
@@ -49,7 +51,8 @@
 @synthesize searchBar = _searchBar;
 @synthesize isFindWeibo = _isFindWeibo;
 @synthesize searchResults = _searchResults;
-
+@synthesize searchUserPageIndex = _searchUserPageIndex;
+@synthesize isSearchMore = _isSearchMore;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -106,8 +109,9 @@
 {
     [super viewDidLoad];
     self.searchResults = [[NSMutableArray alloc] init];
-    
-    _isFindWeibo = NO;
+    self.searchUserPageIndex = 1;
+    self.isFindWeibo = NO;
+    self.isSearchMore = YES;
     [self.navigationItem setTitle:NSLocalizedString(@"find_weibo_or_friend", @"find_weibo_or_friend")];
     [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClicked) title:NSLocalizedString(@"refresh", @"refresh")]];
     if([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0)
@@ -408,11 +412,22 @@
     return cell;
 }
 
+#pragma mark UIScrollViewDelegate
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    if (self.searchResultViewController.contentOffset.y + self.searchResultViewController.frame.size.height >= self.searchResultViewController.contentSize.height && self.isSearchMore)
+    {
+        self.searchUserPageIndex ++;
+        [self doSearch];
+    }
+}
 #pragma mark - UISearchBarDelegate delegate methods
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
     CGFloat height = 44.0f;
+    self.searchUserPageIndex = 1;
+    [self.searchResults removeAllObjects];
     BOOL isShowsCancelButton = NO;
     BOOL isShowsScopeButton = NO;
     if([searchText length] > 0)
@@ -500,14 +515,17 @@
 
 - (void) doSearch
 {
+    self.isSearchMore = NO;
     if ([self.searchBar.text length] <= 0) {
         return;
     }
     if (self.isFindWeibo == NO) {
         [[BSDKManager sharedManager] searchUsersByUsername:self.searchBar.text
+                                                  pageSize:10
+                                                 pageIndex:self.searchUserPageIndex 
                                            andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+                                               self.isSearchMore = YES;
                                                if (status == AIO_STATUS_SUCCESS) {
-                                                   [self.searchResults removeAllObjects];
                                                    NSArray * tempArray = [[data valueForKey:@"UserList"] copy];
                                                    for (NSDictionary * dict in tempArray)
                                                    {
@@ -523,8 +541,8 @@
     }
     else {
         [[BSDKManager sharedManager] searchWeiboByKeyword:self.searchBar.text
-                                                 pageSize:1
-                                                pageIndex:3
+                                                 pageSize:20
+                                                pageIndex:self.searchUserPageIndex
                                           andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
                                               [_searchResultViewController reloadData];
                                           }];
