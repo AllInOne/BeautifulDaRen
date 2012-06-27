@@ -19,7 +19,7 @@
 
 @interface FriendListViewController ()
 @property (assign, nonatomic) NSInteger type;
-@property (retain, nonatomic) NSDictionary * friendDictionary;
+@property (retain, nonatomic) NSDictionary * userDataDictionary;
 @property (retain, nonatomic) IBOutlet UITableView * commonTableView;
 @property (retain, nonatomic) NSMutableArray * friendsList;
 
@@ -36,7 +36,7 @@
 @synthesize type = _type;
 @synthesize commonTableView = _commonTableView;
 @synthesize friendsList = _friendsList;
-@synthesize friendDictionary = _friendDictionary;
+@synthesize userDataDictionary = _userDataDictionary;
 
 @synthesize currentPageIndex = _currentPageIndex;
 @synthesize isRefreshing = _isRefreshing;
@@ -58,23 +58,27 @@
         switch (_type) {
             case FriendListViewController_TYPE_MY_FOLLOW:
                 title = NSLocalizedString(@"my_follows", @"my_follows");
-                self.friendDictionary = nil;
+                self.userDataDictionary = nil;
                 break;
             case FriendListViewController_TYPE_MY_FANS:
                 title = NSLocalizedString(@"my_fans", @"my_fans");
-                self.friendDictionary = nil;
+                self.userDataDictionary = nil;
                 break;
             case FriendListViewController_TYPE_MY_BLACKLIST:
                 title = NSLocalizedString(@"black_list", @"black_list");
-                self.friendDictionary = nil;
+                self.userDataDictionary = nil;
                 break;
             case FriendListViewController_TYPE_FRIEND_FOLLOW:
                 title = NSLocalizedString(@"her_follows", @"her_follows");
-                self.friendDictionary = dictionary;
+                self.userDataDictionary = dictionary;
                 break;
             case FriendListViewController_TYPE_FRIEND_FANS:
                 title = NSLocalizedString(@"her_fans", @"her_fans");
-                self.friendDictionary = dictionary;
+                self.userDataDictionary = dictionary;
+                break;
+            case FriendListViewController_TYPE_FAV_ONE_BLOG:
+                title = NSLocalizedString(@"fav_list", @"fav_list");
+                self.userDataDictionary = dictionary;
                 break;
         }
         [self.navigationItem setTitle:title];
@@ -143,7 +147,7 @@
         }
         case FriendListViewController_TYPE_FRIEND_FOLLOW:
         {
-            NSString* userId = [self.friendDictionary valueForKey:KEY_ACCOUNT_USER_ID];
+            NSString* userId = [self.userDataDictionary valueForKey:KEY_ACCOUNT_USER_ID];
             [[BSDKManager sharedManager] getFollowList:userId
                                               pageSize:FRIEND_PAGE_SIZE
                                              pageIndex:self.currentPageIndex
@@ -161,10 +165,19 @@
         }
         case FriendListViewController_TYPE_FRIEND_FANS:
         {
-            NSInteger userId = [[self.friendDictionary valueForKey:KEY_ACCOUNT_USER_ID] intValue];
+            NSInteger userId = [[self.userDataDictionary valueForKey:KEY_ACCOUNT_USER_ID] intValue];
             [[BSDKManager sharedManager] getFollowerList:userId
                                                 pageSize:FRIEND_PAGE_SIZE
-                                               pageIndex:1
+                                               pageIndex:self.currentPageIndex
+                                         andDoneCallback:doneBlock];
+            break;
+        }
+        case FriendListViewController_TYPE_FAV_ONE_BLOG:
+        {
+            NSString * blogId = [self.userDataDictionary valueForKey:K_BSDK_UID];
+            [[BSDKManager sharedManager] getFavUsersByBlogId:blogId
+                                                pageSize:FRIEND_PAGE_SIZE
+                                               pageIndex:self.currentPageIndex
                                          andDoneCallback:doneBlock];
             break;
         }
@@ -183,7 +196,7 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    self.friendDictionary = nil;
+    self.userDataDictionary = nil;
     self.footerButton = nil;
     self.loadingActivityIndicator = nil;
     self.footerView = nil;
@@ -191,7 +204,7 @@
 
 - (void)dealloc
 {
-    [_friendDictionary release];
+    [_userDataDictionary release];
     [_footerButton release];
     [_footerView release];
     [_loadingActivityIndicator release];

@@ -223,6 +223,29 @@ static BSDKManager *sharedInstance;
                        doneCallback:doneBlock];
 }
 
+
+- (void)getFavUsersByBlogId:(NSString*) blogId
+                   pageSize:(NSInteger)pageSize 
+                  pageIndex:(NSInteger)pageIndex 
+            andDoneCallback:(processDoneWithDictBlock)doneBlock
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:5];
+    
+    [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
+    [params setObject:K_BSDK_ACTION_GETLIST forKey:K_BSDK_ACTION];
+    [params setObject:[NSString stringWithFormat:@"%d", pageIndex] forKey:K_BSDK_PAGEINDEX];
+    [params setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:K_BSDK_PAGESIZE];
+    [params setObject:blogId forKey:K_BSDK_FAVBLOGUID];
+
+    
+    [self sendRequestWithMethodName:nil
+                         httpMethod:@"POST" 
+                             params:params 
+                       postDataType:kBSDKRequestPostDataTypeNormal
+                   httpHeaderFields:nil
+                       doneCallback:doneBlock];
+}
+
 - (void)getUserInforByName:(NSString*) name andDoneCallback:(processDoneWithDictBlock)doneBlock
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];

@@ -88,6 +88,7 @@
 #define K_BSDK_USERINFO @"UserInfo"
 
 #define K_BSDK_FORWARDBLOGUID @"ForwardBlogId"
+#define K_BSDK_FAVBLOGUID @"FavBlogId"
 #define K_BSDK_BLOGUID @"BlogId"
 #define K_BSDK_BLOGLIST @"BlogList"
 #define K_BSDK_BLOGINFO @"BlogInfo"

@@ -39,6 +39,11 @@
 
 - (void)searchUsersByUsername:(NSString*) username andDoneCallback:(processDoneWithDictBlock)doneBlock;
 
+- (void)getFavUsersByBlogId:(NSString*) blogId 
+                   pageSize:(NSInteger)pageSize 
+                  pageIndex:(NSInteger)pageIndex 
+            andDoneCallback:(processDoneWithDictBlock)doneBlock;
+
 
 #pragma mark Weibo releated API
 

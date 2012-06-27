@@ -635,6 +635,15 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">onFavorateListButtonPressed:</string>
+						<reference key="source" ref="400405133"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">72</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">onImageButtonPressed:</string>
 						<reference key="source" ref="564808930"/>
 						<reference key="destination" ref="372490531"/>
@@ -829,7 +838,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">71</int>
+			<int key="maxID">72</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -840,6 +849,7 @@
 						<string key="onBrandButtonPressed:">id</string>
 						<string key="onBusinessButtonPressed:">id</string>
 						<string key="onCommentListButtonPressed:">UIButton</string>
+						<string key="onFavorateListButtonPressed:">UIButton</string>
 						<string key="onForwardButtonPressed:">UIButton</string>
 						<string key="onImageButtonPressed:">id</string>
 					</dictionary>
@@ -854,6 +864,10 @@
 						</object>
 						<object class="IBActionInfo" key="onCommentListButtonPressed:">
 							<string key="name">onCommentListButtonPressed:</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBActionInfo" key="onFavorateListButtonPressed:">
+							<string key="name">onFavorateListButtonPressed:</string>
 							<string key="candidateClassName">UIButton</string>
 						</object>
 						<object class="IBActionInfo" key="onForwardButtonPressed:">

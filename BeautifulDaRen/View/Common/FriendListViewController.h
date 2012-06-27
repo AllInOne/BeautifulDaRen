@@ -15,7 +15,8 @@ enum
     FriendListViewController_TYPE_MY_FANS,
     FriendListViewController_TYPE_MY_BLACKLIST,
     FriendListViewController_TYPE_FRIEND_FOLLOW,
-    FriendListViewController_TYPE_FRIEND_FANS
+    FriendListViewController_TYPE_FRIEND_FANS,
+    FriendListViewController_TYPE_FAV_ONE_BLOG
 };
 
 @interface FriendListViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, ButtonPressDelegate>

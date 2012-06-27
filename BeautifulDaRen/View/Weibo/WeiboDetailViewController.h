@@ -38,6 +38,7 @@
 
 -(IBAction)onCommentListButtonPressed:(UIButton*)sender;
 -(IBAction)onForwardButtonPressed:(UIButton*)sender;
+-(IBAction)onFavorateListButtonPressed:(UIButton*)sender;
 
 /// Only one of them should be presented
 @property (nonatomic, retain) NSDictionary * weiboData;

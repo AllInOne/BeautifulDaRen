@@ -19,6 +19,7 @@
 #import "BSDKDefines.h"
 #import "BSDKManager.h"
 #import "UIImageView+WebCache.h"
+#import "FriendListViewController.h"
 
 #define FONT_SIZE 14.0f
 #define CELL_CONTENT_WIDTH 280.0f
@@ -40,6 +41,7 @@
 @property (nonatomic, retain) UIToolbar * toolbar;
 - (void)refreshView;
 - (void)addToolbar;
+- (void)onRefreshButtonClicked;
 @end
 
 @implementation WeiboDetailViewController
@@ -191,7 +193,7 @@
             
             if (K_BSDK_IS_RESPONSE_OK(data)) {
                 [[iToast makeText:NSLocalizedString(@"cancel_favourate_succeed", @"cancel_favourate_succeed")] show];
-                [self refreshView];
+                [self onRefreshButtonClicked];
             }
             else
             {
@@ -206,7 +208,7 @@
             
             if (K_BSDK_IS_RESPONSE_OK(data)) {
                 [[iToast makeText:NSLocalizedString(@"favourate_succeed", @"favourate_succeed")] show];
-                [self refreshView];
+                [self onRefreshButtonClicked];
             }
             else
             {
@@ -239,6 +241,21 @@
 -(IBAction)onForwardButtonPressed:(UIButton*)sender
 {
     [self onForward];
+}
+
+-(IBAction)onFavorateListButtonPressed:(UIButton*)sender
+{
+    FriendListViewController * friendListViewController = [[FriendListViewController alloc]
+                                                                                    initWithNibName:@"FriendListViewController"
+                                                                                    bundle:nil
+                                                                                    type:FriendListViewController_TYPE_FAV_ONE_BLOG
+                                                                                    dictionary:self.weiboData];
+    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: friendListViewController];
+    
+    [self.navigationController presentModalViewController:navController animated:YES];
+    
+    [navController release];
+    [friendListViewController release];
 }
 
 #pragma mark - View lifecycle
