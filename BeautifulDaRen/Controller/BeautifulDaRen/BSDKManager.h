@@ -47,6 +47,9 @@
                     pageIndex:(NSInteger)pageIndex 
               andDoneCallback:(processDoneWithDictBlock)doneBlock;
 
+- (void)getUserInforByName:(NSString*)name
+           andDoneCallback:(processDoneWithDictBlock)doneBlock;
+
 
 #pragma mark Weibo releated API
 
@@ -97,6 +100,11 @@
                      pageSize:(NSInteger)pageSize 
                     pageIndex:(NSInteger)pageIndex 
               andDoneCallback:(processDoneWithDictBlock)callback;
+
+- (void)getFavWeiboListByUserId:(NSString*)userId
+                      pageSize:(NSInteger)pageSize 
+                     pageIndex:(NSInteger)pageIndex 
+               andDoneCallback:(processDoneWithDictBlock)callback;
 
 - (void)getWeiboClassesWithDoneCallback:(processDoneWithDictBlock)callback;
 

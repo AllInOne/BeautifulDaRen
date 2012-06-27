@@ -123,7 +123,7 @@
     self.isRefreshing = YES;
 
     processDoneWithDictBlock doneBlock = ^(AIO_STATUS status, NSDictionary * data){
-        NSArray * userList = [NSMutableArray arrayWithArray:[data valueForKey:K_BSDK_RESPONSE_USERLIST]];
+        NSArray * userList = [NSMutableArray arrayWithArray:[data valueForKey:K_BSDK_USERLIST]];
         [self.friendsList addObjectsFromArray:userList];
         if ([userList count] < FRIEND_PAGE_SIZE) {
             self.isAllRetrieved = YES;

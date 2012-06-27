@@ -400,12 +400,12 @@
 {
     [[BSDKManager sharedManager] getFollowList:@"32" pageSize:50 pageIndex:1 andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
         
-        NSArray * userList = [data objectForKey:K_BSDK_RESPONSE_USERLIST];
+        NSArray * userList = [data objectForKey:K_BSDK_USERLIST];
         NSMutableArray * friendList = [NSMutableArray arrayWithCapacity:[userList count]];
         
         for(NSDictionary * user in userList)
         {
-            [friendList addObject:[[user objectForKey:K_BSDK_RESPONSE_ATTENTIONUSERLIST] objectForKey:K_BSDK_USERNAME]];
+            [friendList addObject:[[user objectForKey:K_BSDK_ATTENTIONUSERLIST] objectForKey:K_BSDK_USERNAME]];
         }
         
         FriendsSelectionViewController *friendSelectionController = 

@@ -54,6 +54,7 @@
 #define K_BSDK_USERNAME @"UserName"
 #define K_BSDK_USERID @"UserId"
 #define K_BSDK_ATUSERID @"AtUserId"
+#define K_BSDK_FAVUSERID @"FavUserId"
 #define K_BSDK_USERCOUNT @"UserCount"
 #define K_BSDK_FANSUSERNAME @"FansUserName"
 #define K_BSDK_USERNAMEKEYWORDS @"UserNameKeyWords"
@@ -83,8 +84,8 @@
 #define K_BSDK_KEYWORD @"KeyWords"
 
 #define K_BSDK_UID @"id"
-#define K_BSDK_USER_ID @"UserId"
-#define K_BSDK_USER_INFO @"UserInfo"
+#define K_BSDK_USERID @"UserId"
+#define K_BSDK_USERINFO @"UserInfo"
 
 #define K_BSDK_FORWARDBLOGUID @"ForwardBlogId"
 #define K_BSDK_BLOGUID @"BlogId"
@@ -115,10 +116,10 @@
 
 #define K_BSDK_RESPONSE_MESSAGE @"msg"
 
-#define K_BSDK_RESPONSE_BLOGLIST @"BlogList"
-#define K_BSDK_RESPONSE_USERLIST @"UserList"
-#define K_BSDK_RESPONSE_COMMENTLIST @"CommentList"
-#define K_BSDK_RESPONSE_ATTENTIONUSERLIST @"AttentionUserInfo"
+#define K_BSDK_BLOGLIST @"BlogList"
+#define K_BSDK_USERLIST @"UserList"
+#define K_BSDK_COMMENTLIST @"CommentList"
+#define K_BSDK_ATTENTIONUSERLIST @"AttentionUserInfo"
 
 #define K_BSDK_IS_RESPONSE_OK(res) (![[res objectForKey:K_BSDK_RESPONSE_STATUS] isEqual:K_BSDK_RESPONSE_STATUS_FAILED])
 

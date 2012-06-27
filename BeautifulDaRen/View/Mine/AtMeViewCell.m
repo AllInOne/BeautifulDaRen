@@ -55,6 +55,7 @@
                                                 CGRectGetMinY(self.costButton.frame), 
                                                 [ViewHelper getWidthOfText:title ByFontSize:self.costButton.titleLabel.font.pointSize]+10,
                                                 CGRectGetHeight(self.costButton.frame));
+    self.costButton.center = CGPointMake(itemImageView.center.x, CGRectGetMinY(self.costButton.frame));
 }
 
 - (CGFloat)getCellHeight

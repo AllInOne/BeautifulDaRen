@@ -424,13 +424,14 @@
     self.timestampLabel.text = [ViewHelper intervalSinceNow:[self.weiboData objectForKey:K_BSDK_CREATETIME]];
     [self.timestampLabel setTextColor:[UIColor purpleColor]];
     
-    self.usernameLabel.text = [[self.weiboData objectForKey:K_BSDK_USER_INFO] objectForKey:K_BSDK_USERNAME];
+    self.usernameLabel.text = [[self.weiboData objectForKey:K_BSDK_USERINFO] objectForKey:K_BSDK_USERNAME];
     
     NSString * price = [self.weiboData objectForKey:K_BSDK_PRICE];
     if (price && ([price intValue] != 0)) {
         NSString * title = [NSString stringWithFormat:@"¥ %d", [price intValue]];
         [self.priceButton setTitle:title forState:UIControlStateNormal];
         
+        self.priceButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 5.0);
         self.priceButton.frame = CGRectMake(CGRectGetMinX(self.priceButton.frame), 
                                             CGRectGetMinY(self.favourateButton.frame) - PRICE_BUTTON_Y_OFFSET, 
                                             [ViewHelper getWidthOfText:title ByFontSize:self.priceButton.titleLabel.font.pointSize]+20,
@@ -463,7 +464,9 @@
 
 - (void)onRefreshButtonClicked {
     [[BSDKManager sharedManager] getWeiboById:[self.weiboData objectForKey:K_BSDK_UID] andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-        
+        [self.weiboData release];
+        self.weiboData = [data objectForKey:K_BSDK_BLOGINFO];
+        [self refreshView];
     }];
 }
 
@@ -474,14 +477,14 @@
 
 -(IBAction)onBrandButtonPressed:(id)sender
 {
-    FriendDetailViewController * friendDetailViewController = [[FriendDetailViewController alloc] initWithNibName:@"FriendDetailViewController" bundle:nil];
+    FriendDetailViewController * friendDetailViewController = [[FriendDetailViewController alloc] initWithFriendName:[self.weiboData objectForKey:K_BSDK_BRANDSERVICE]];
     [self.navigationController pushViewController:friendDetailViewController animated:YES];
     [friendDetailViewController release];
 }
 
 -(IBAction)onBusinessButtonPressed:(id)sender
 {
-    FriendDetailViewController * friendDetailViewController = [[FriendDetailViewController alloc] initWithNibName:@"FriendDetailViewController" bundle:nil];
+    FriendDetailViewController * friendDetailViewController = [[FriendDetailViewController alloc] initWithFriendName:[self.weiboData objectForKey:K_BSDK_SHOPMERCHANT]];
     [self.navigationController pushViewController:friendDetailViewController animated:YES];
     [friendDetailViewController release];
 }

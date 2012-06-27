@@ -157,10 +157,10 @@
                                                  pageSize:AUTOLOAD_PAGE_SIZE
                                                 pageIndex:_currentPageIndex
                                           andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-                                              if ([[data objectForKey:K_BSDK_RESPONSE_COMMENTLIST] count] < AUTOLOAD_PAGE_SIZE) {
+                                              if ([[data objectForKey:K_BSDK_COMMENTLIST] count] < AUTOLOAD_PAGE_SIZE) {
                                                   self.isAllRetrieved = YES;
                                               }
-                                              [self.dataList addObjectsFromArray:[data objectForKey:K_BSDK_RESPONSE_COMMENTLIST]];
+                                              [self.dataList addObjectsFromArray:[data objectForKey:K_BSDK_COMMENTLIST]];
 
                                               [self onDataLoadDone];
                                           }];
@@ -171,11 +171,25 @@
                                                    pageSize:AUTOLOAD_PAGE_SIZE
                                                   pageIndex:_currentPageIndex
                                             andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-                                                if ([[data objectForKey:K_BSDK_RESPONSE_BLOGLIST] count] < AUTOLOAD_PAGE_SIZE) {
+                                                if ([[data objectForKey:K_BSDK_BLOGLIST] count] < AUTOLOAD_PAGE_SIZE) {
                                                     self.isAllRetrieved = YES;
                                                 }
-                                                [self.dataList addObjectsFromArray:[data objectForKey:K_BSDK_RESPONSE_BLOGLIST]];
+                                                [self.dataList addObjectsFromArray:[data objectForKey:K_BSDK_BLOGLIST]];
 
+                                                [self onDataLoadDone];
+                                            }];
+    }
+    else if (self.controllerType == WeiboListViewControllerType_MY_COLLECTION)
+    {
+        [[BSDKManager sharedManager] getFavWeiboListByUserId:userId
+                                                   pageSize:AUTOLOAD_PAGE_SIZE
+                                                  pageIndex:_currentPageIndex
+                                            andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+                                                if ([[data objectForKey:K_BSDK_BLOGLIST] count] < AUTOLOAD_PAGE_SIZE) {
+                                                    self.isAllRetrieved = YES;
+                                                }
+                                                [self.dataList addObjectsFromArray:[data objectForKey:K_BSDK_BLOGLIST]];
+                                                
                                                 [self onDataLoadDone];
                                             }];
     }
@@ -185,10 +199,10 @@
                                                  pageSize:AUTOLOAD_PAGE_SIZE
                                                 pageIndex:_currentPageIndex
                                           andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-                                              if ([[data objectForKey:K_BSDK_RESPONSE_BLOGLIST] count] < AUTOLOAD_PAGE_SIZE) {
+                                              if ([[data objectForKey:K_BSDK_BLOGLIST] count] < AUTOLOAD_PAGE_SIZE) {
                                                   self.isAllRetrieved = YES;
                                               }
-                                              [self.dataList addObjectsFromArray:[data objectForKey:K_BSDK_RESPONSE_BLOGLIST]];
+                                              [self.dataList addObjectsFromArray:[data objectForKey:K_BSDK_BLOGLIST]];
 
                                               [self onDataLoadDone];
                                           }];

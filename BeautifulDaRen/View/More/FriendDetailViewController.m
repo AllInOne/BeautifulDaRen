@@ -28,6 +28,7 @@
 @property (retain, nonatomic) IBOutlet UITableView * friendDetailView;
 @property (assign, nonatomic) BOOL isIdentification;
 @property (retain, nonatomic) NSMutableDictionary * friendDictionary;
+@property (retain, nonatomic) NSString * friendName;
 
 @property (retain, nonatomic) IBOutlet UILabel * nameLabel;
 @property (retain, nonatomic) IBOutlet UILabel * cityLabel;
@@ -40,6 +41,7 @@
 
 - (void) onActionButtonClicked: (UIButton*)sender;
 - (void) refreshTopView;
+- (void) initialize;
 @end
 
 @implementation FriendDetailViewController
@@ -60,55 +62,73 @@
 @synthesize topicButton = _topicButton;
 @synthesize friendDictionary = _friendDictionary;
 @synthesize actionButton = _actionButton;
+@synthesize friendName = _friendName;
+
+- (void) initialize
+{
+    [self.navigationItem setTitle:NSLocalizedString(@"her_home_page", @"her_home_page")];
+    [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
+    [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onHomePageButtonClicked) title:NSLocalizedString(@"home_page", @"home_page")]];
+    _isIdentification = YES;
+    
+    UIToolbar *tempToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0,372, 320,44)];
+    
+    UIBarButtonItem *flexible = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    
+    UIBarButtonItem *atButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar_at_icon" target:self action:@selector(onAt)];
+    
+    UIBarButtonItem *removeButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar_remove_fan_icon" target:self action:@selector(onRemove)];
+    
+    NSArray *barItems = [[NSArray alloc]initWithObjects:flexible, 
+                         atButtonItem, 
+                         flexible,
+                         flexible,
+                         removeButtonItem,
+                         flexible,
+                         nil];
+    
+    tempToolbar.items= barItems;
+    UIImageView * tabBarBg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"toolbar_background"]];
+    tabBarBg.frame = CGRectMake(0, 0, 320, 45);
+    tabBarBg.contentMode = UIViewContentModeScaleToFill;
+    if (SYSTEM_VERSION_LESS_THAN(@"5.0")) {
+        [tempToolbar  insertSubview:tabBarBg atIndex:0];
+    }
+    else
+    {
+        [tempToolbar  insertSubview:tabBarBg atIndex:1];            
+    }
+    [self.view addSubview: tempToolbar];
+    [flexible release]; 
+    [tabBarBg release];
+    [barItems release];
+    [tempToolbar release];
+    
+    NSInteger relation = [[self.friendDictionary valueForKey:KEY_ACCOUNT_RELATION] intValue];
+    
+    NSString * buttonTitle = (relation == FRIEND_RELATIONSHIP_INTER_FOLLOW || relation == FRIEND_RELATIONSHIP_MY_FOLLOW) ? @"取消关注" : @"关注";
+    
+    [self.actionButton setTitle:buttonTitle forState:UIControlStateNormal];
+
+}
+
+-(id)initWithFriendName:(NSString*)name
+{
+    self = [super init];
+    if (self) {
+        self.friendDictionary = [NSMutableDictionary dictionaryWithCapacity:20];
+        self.friendName = name;
+        [self initialize];
+    }
+    return self;
+}
 
 -(id)initWithDictionary:(NSDictionary*)dictionary
 {
     self = [super init];
     if (self) {
         self.friendDictionary = [NSMutableDictionary dictionaryWithDictionary:dictionary];
-        [self.navigationItem setTitle:NSLocalizedString(@"her_home_page", @"her_home_page")];
-        [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
-        [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onHomePageButtonClicked) title:NSLocalizedString(@"home_page", @"home_page")]];
-        _isIdentification = YES;
-        
-        UIToolbar *tempToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0,372, 320,44)];
-        
-        UIBarButtonItem *flexible = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-        
-        UIBarButtonItem *atButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar_at_icon" target:self action:@selector(onAt)];
-        
-        UIBarButtonItem *removeButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar_remove_fan_icon" target:self action:@selector(onRemove)];
-        
-        NSArray *barItems = [[NSArray alloc]initWithObjects:flexible, 
-                             atButtonItem, 
-                             flexible,
-                             flexible,
-                             removeButtonItem,
-                             flexible,
-                             nil];
-        
-        tempToolbar.items= barItems;
-        UIImageView * tabBarBg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"toolbar_background"]];
-        tabBarBg.frame = CGRectMake(0, 0, 320, 45);
-        tabBarBg.contentMode = UIViewContentModeScaleToFill;
-        if (SYSTEM_VERSION_LESS_THAN(@"5.0")) {
-            [tempToolbar  insertSubview:tabBarBg atIndex:0];
-        }
-        else
-        {
-            [tempToolbar  insertSubview:tabBarBg atIndex:1];            
-        }
-        [self.view addSubview: tempToolbar];
-        [flexible release]; 
-        [tabBarBg release];
-        [barItems release];
-        [tempToolbar release];
-
-        NSInteger relation = [[self.friendDictionary valueForKey:KEY_ACCOUNT_RELATION] intValue];
-        
-        NSString * buttonTitle = (relation == FRIEND_RELATIONSHIP_INTER_FOLLOW || relation == FRIEND_RELATIONSHIP_MY_FOLLOW) ? @"取消关注" : @"关注";
-        
-        [self.actionButton setTitle:buttonTitle forState:UIControlStateNormal];
+        [self initialize];
     }
     return self;
 }
@@ -145,6 +165,8 @@
     [_publishedButton release];
     [_topicButton release];
     [_actionButton release];
+    [_friendName release];
+    [_friendDictionary release];
 }
 - (void)viewDidUnload
 {
@@ -163,13 +185,23 @@
     [super viewDidLoad];
     [self refreshTopView];
     
-    [[BSDKManager sharedManager] getUserInforByUserId:[self.friendDictionary valueForKey:KEY_ACCOUNT_USER_ID]
-                                        andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-                                            [self.friendDictionary setValuesForKeysWithDictionary:data];
-                                            
-                                            [self refreshTopView];
-                                            [self.friendDetailView reloadData];
-                                        }];
+    processDoneWithDictBlock doneblock = ^(AIO_STATUS status, NSDictionary *data) {
+        [self.friendDictionary setValuesForKeysWithDictionary:data];
+        
+        [self refreshTopView];
+        [self.friendDetailView reloadData];
+    };
+    
+    if (self.friendName == nil) {
+        [[BSDKManager sharedManager] getUserInforByUserId:[self.friendDictionary valueForKey:KEY_ACCOUNT_USER_ID]
+                                          andDoneCallback:doneblock];
+    }
+    else
+    {
+        [[BSDKManager sharedManager] getUserInforByName:self.friendName
+                                          andDoneCallback:doneblock];
+    }
+
 }
 
 - (void)viewWillAppear:(BOOL)animated

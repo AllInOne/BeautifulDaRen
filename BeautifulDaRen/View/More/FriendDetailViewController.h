@@ -11,4 +11,5 @@
 
 @interface FriendDetailViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, ButtonPressDelegate, UIActionSheetDelegate>
 -(id)initWithDictionary:(NSDictionary*)dictionary;
+-(id)initWithFriendName:(NSString*)name;
 @end
