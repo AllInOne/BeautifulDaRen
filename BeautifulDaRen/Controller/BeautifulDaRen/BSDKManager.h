@@ -35,6 +35,8 @@
 #pragma mark user releated API
 - (void)getUserInforByUserId:(NSString*) userId andDoneCallback:(processDoneWithDictBlock)doneBlock;
 
+- (void)getUserInforByName:(NSString*) name andDoneCallback:(processDoneWithDictBlock)doneBlock;
+
 - (void)searchUsersByUsername:(NSString*) username andDoneCallback:(processDoneWithDictBlock)doneBlock;
 
 
@@ -87,6 +89,11 @@
                      pageSize:(NSInteger)pageSize 
                     pageIndex:(NSInteger)pageIndex 
               andDoneCallback:(processDoneWithDictBlock)callback;
+
+- (void)getFavWeiboListByUserId:(NSString*)userId
+                      pageSize:(NSInteger)pageSize 
+                     pageIndex:(NSInteger)pageIndex 
+               andDoneCallback:(processDoneWithDictBlock)callback;
 
 - (void)getWeiboClassesWithDoneCallback:(processDoneWithDictBlock)callback;
 

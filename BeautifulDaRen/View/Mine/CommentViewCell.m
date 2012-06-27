@@ -51,7 +51,7 @@
     if (originalBlogInfo == nil) {
         originalBlogInfo = [data objectForKey:K_BSDK_RETWEET_STATUS];
     }
-    NSDictionary * authorInfo = [data objectForKey:K_BSDK_USER_INFO];
+    NSDictionary * authorInfo = [data objectForKey:K_BSDK_USERINFO];
     
     //self.authorAvatar
     self.authorName.text = [authorInfo objectForKey:K_BSDK_USERNAME];
@@ -67,7 +67,7 @@
     self.originalBrand.text = [originalBlogInfo objectForKey:K_BSDK_BRANDSERVICE];
     self.originalMerchant.text = [originalBlogInfo objectForKey:K_BSDK_SHOPMERCHANT];
     self.originalContent.text = [originalBlogInfo objectForKey:K_BSDK_CONTENT];
-    self.originalAuthorName.text = [[originalBlogInfo objectForKey:K_BSDK_USER_INFO] objectForKey:K_BSDK_USERNAME];
+    self.originalAuthorName.text = [[originalBlogInfo objectForKey:K_BSDK_USERINFO] objectForKey:K_BSDK_USERNAME];
 
     [self.originalImage setImageWithURL:[NSURL URLWithString:[originalBlogInfo objectForKey:K_BSDK_PICTURE_ORIGINAL]]];
     

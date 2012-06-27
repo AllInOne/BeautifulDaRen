@@ -104,6 +104,9 @@
             if (errorMsg == nil)
             {
                 [ViewHelper showSimpleMessage:NSLocalizedString(@"send_succeed", @"send_succeed") withTitle:nil withButtonText:NSLocalizedString(@"ok", @"ok")];
+                self.currentPageIndex = 1;
+                [self.forwardOrCommentList removeAllObjects];
+                [self refreshData];
             }
             else
             {
@@ -116,9 +119,9 @@
     
     if (view.forwardMode || (!view.forwardMode && view.isCheckBoxChecked))
     {
-        //        [[SinaSDKManager sharedManager] sendWeiBoWithText:self.weiboContentTextView.text image:[self.selectedImage scaleToSize:CGSizeMake(320.0, self.selectedImage.size.height * 320.0/self.selectedImage.size.width)] doneCallback:doneBlock];
-        
-        //        doneCountExpected++;
+        [[BSDKManager sharedManager] rePostWeiboById:self.relatedBlogId WithText:view.weiboContentTextView.text andDoneCallback:doneBlock];
+
+        doneCountExpected++;
     };
     
     if (!view.forwardMode || (view.forwardMode && view.isCheckBoxChecked)) {
@@ -152,7 +155,7 @@
     [self.footViewButton setTitle:NSLocalizedString(@"more_comment", @"more_comment") forState:UIControlStateNormal];
     
     [[BSDKManager sharedManager] getCommentListOfWeibo:self.relatedBlogId pageSize:COMMENT_PAGE_SIZE pageIndex:self.currentPageIndex andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-        NSArray * commentList = [data objectForKey:K_BSDK_RESPONSE_COMMENTLIST];
+        NSArray * commentList = [data objectForKey:K_BSDK_COMMENTLIST];
         [self.forwardOrCommentList addObjectsFromArray:commentList];
         [self.forwardOrCommentListTableView reloadData];
         self.isRefreshing = NO;
@@ -250,7 +253,7 @@
     }
 
     NSDictionary * comment = [self.forwardOrCommentList objectAtIndex:[indexPath row]];
-    NSDictionary * userInfoDict = [comment objectForKey:K_BSDK_USER_INFO];
+    NSDictionary * userInfoDict = [comment objectForKey:K_BSDK_USERINFO];
     if (userInfoDict) {
         cell.username.text = [userInfoDict objectForKey:K_BSDK_USERNAME];
     }
@@ -306,7 +309,7 @@
                 if ([pressed isEqualToString:COMMENT_LIST_VIEW_PROFILE])
                 {
                     FriendDetailViewController * friendDetailController = 
-                    [[FriendDetailViewController alloc] initWithDictionary:[[self.forwardOrCommentList objectAtIndex:self.currentCommentIndex] objectForKey:K_BSDK_USER_INFO]];
+                    [[FriendDetailViewController alloc] initWithDictionary:[[self.forwardOrCommentList objectAtIndex:self.currentCommentIndex] objectForKey:K_BSDK_USERINFO]];
                     [self.navigationController pushViewController:friendDetailController animated:YES];
                     [friendDetailController release];
                 }

@@ -275,7 +275,7 @@
          {
              if(AIO_STATUS_SUCCESS == status && K_BSDK_IS_RESPONSE_OK(data))
              {
-                 NSDictionary * dict = [data objectForKey:K_BSDK_USER_INFO];
+                 NSDictionary * dict = [data objectForKey:K_BSDK_USERINFO];
                  [[NSUserDefaults standardUserDefaults] setObject:dict forKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
                  [self.navigationController popToRootViewControllerAnimated:YES];
                  [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_LOGIN_SUCCESS object:self userInfo:data];
