@@ -166,6 +166,8 @@
 		CE03389315459DF500775217 /* SinaRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE03389015459DF500775217 /* SinaRequest.m */; };
 		CE03389415459DF500775217 /* SinaSDKManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE03389215459DF500775217 /* SinaSDKManager.m */; };
 		CE03389D1545A84900775217 /* WBAuthorizeWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE03389C1545A84900775217 /* WBAuthorizeWebView.xib */; };
+		CE07D511159B0A5100153F95 /* logout@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE07D510159B0A5100153F95 /* logout@2x.png */; };
+		CE07D513159B0A6900153F95 /* logout.png in Resources */ = {isa = PBXBuildFile; fileRef = CE07D512159B0A6900153F95 /* logout.png */; };
 		CE07F4291578B79C00DF3BE0 /* app_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CE07F4271578B79C00DF3BE0 /* app_icon.png */; };
 		CE07F42A1578B79C00DF3BE0 /* app_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE07F4281578B79C00DF3BE0 /* app_icon@2x.png */; };
 		CE20C3B3156752790031997B /* back_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE20C392156752790031997B /* back_btn@2x.png */; };
@@ -867,6 +869,8 @@
 		CE03389115459DF500775217 /* SinaSDKManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinaSDKManager.h; sourceTree = "<group>"; };
 		CE03389215459DF500775217 /* SinaSDKManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinaSDKManager.m; sourceTree = "<group>"; };
 		CE03389C1545A84900775217 /* WBAuthorizeWebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WBAuthorizeWebView.xib; sourceTree = "<group>"; };
+		CE07D510159B0A5100153F95 /* logout@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logout@2x.png"; sourceTree = "<group>"; };
+		CE07D512159B0A6900153F95 /* logout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logout.png; sourceTree = "<group>"; };
 		CE07F4271578B79C00DF3BE0 /* app_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = app_icon.png; path = logo/app_icon.png; sourceTree = "<group>"; };
 		CE07F4281578B79C00DF3BE0 /* app_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "app_icon@2x.png"; path = "logo/app_icon@2x.png"; sourceTree = "<group>"; };
 		CE20C392156752790031997B /* back_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back_btn@2x.png"; sourceTree = "<group>"; };
@@ -2128,6 +2132,7 @@
 		CECE29F41562B38E00E2A40A /* 320*480 */ = {
 			isa = PBXGroup;
 			children = (
+				CE07D512159B0A6900153F95 /* logout.png */,
 				CED2BE97158743E700E4A157 /* home_banner3.png */,
 				CED2BE98158743E700E4A157 /* home_banner4.png */,
 				CED2BE99158743E700E4A157 /* splash.png */,
@@ -2309,6 +2314,7 @@
 		CECE2A171562B39800E2A40A /* 960x640 */ = {
 			isa = PBXGroup;
 			children = (
+				CE07D510159B0A5100153F95 /* logout@2x.png */,
 				CED2BE9D1587440600E4A157 /* home_banner3@2x.png */,
 				CED2BE9E1587440600E4A157 /* home_banner4@2x.png */,
 				CED2BE9F1587440600E4A157 /* splash@2x.png */,
@@ -3043,6 +3049,8 @@
 				CEDCE09C1588314F00029D8D /* SelectCategoryCell.xib in Resources */,
 				C25123DA1591C790004F987E /* ModifyPasswordViewController.xib in Resources */,
 				CE948BFB15995B620078814C /* CommentViewCell.xib in Resources */,
+				CE07D511159B0A5100153F95 /* logout@2x.png in Resources */,
+				CE07D513159B0A6900153F95 /* logout.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
