@@ -28,4 +28,5 @@
 
 - (CGFloat)getHeight;
 
+- (IBAction)onMoreButtonPressed:(id)sender;
 @end

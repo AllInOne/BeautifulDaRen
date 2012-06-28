@@ -28,6 +28,7 @@
 #define K_BSDK_ACTION_VERIFY @"Verify"
 #define K_BSDK_ACTION_DELETE @"Del"
 #define K_BSDK_ACTION_PERIPHERAL @"Peripheral"
+#define K_BSDK_ACTION_MODIFY @"modify"
 
 #define K_BSDK_ACTION_GETCLASSLIST @"GetClassList"
 #define K_BSDK_ACTION_GETCLASSBYID @"GetClassById"
@@ -57,17 +58,28 @@
 #define K_BSDK_FAVUSERID @"FavUserId"
 #define K_BSDK_USERCOUNT @"UserCount"
 #define K_BSDK_FANSUSERNAME @"FansUserName"
+#define K_BSDK_FANSUSERINFO @"FansUserInfo"
 #define K_BSDK_USERNAMEKEYWORDS @"UserNameKeyWords"
 #define K_BSDK_PASSWORD @"PassWord"
 
 #define K_BSDK_REPASSWORD @"RePassWord"
 #define K_BSDK_OLDPASSWORD @"OldPassWord"
 
+#define K_BSDK_MODIFYUSERID @"ModiUserId"
+
 #define K_BSDK_CHECKCODE @"checkCode"
 
 #define K_BSDK_EMAIL @"Email"
 
-#define K_BSDK_City @"City"
+#define K_BSDK_CITY @"City"
+
+#define K_BSDK_TEL @"Tel"
+
+#define K_BSDK_ADDRESS @"Address"
+
+#define K_BSDK_GENDER @"Sex"
+#define K_BSDK_GENDER_MALE @"1"
+#define K_BSDK_GENDER_FEMALE @"0"
 
 #define K_BSDK_SHOPMERCHANT @"ShopMerchant"
 #define K_BSDK_BRANDSERVICE @"BrandService"
@@ -88,6 +100,7 @@
 #define K_BSDK_USERINFO @"UserInfo"
 
 #define K_BSDK_FORWARDBLOGUID @"ForwardBlogId"
+#define K_BSDK_FAVBLOGUID @"FavBlogId"
 #define K_BSDK_BLOGUID @"BlogId"
 #define K_BSDK_BLOGLIST @"BlogList"
 #define K_BSDK_BLOGINFO @"BlogInfo"
@@ -95,6 +108,7 @@
 #define K_BSDK_PICTURE_ORIGINAL @"Picture"
 #define K_BSDK_PICTURE_102 @"pic_102"
 #define K_BSDK_PICTURE_320 @"pic_320"
+#define K_BSDK_PICTURE_65  @"pic_65-65"
 #define K_BSDK_PICTURE_HEIGHT @"Picture_height"
 #define K_BSDK_PICTURE_WIDTH @"Picture_width"
 
@@ -119,7 +133,7 @@
 #define K_BSDK_BLOGLIST @"BlogList"
 #define K_BSDK_USERLIST @"UserList"
 #define K_BSDK_COMMENTLIST @"CommentList"
-#define K_BSDK_ATTENTIONUSERLIST @"AttentionUserInfo"
+#define K_BSDK_ATTENTIONUSERINFO @"AttentionUserInfo"
 
 #define K_BSDK_IS_RESPONSE_OK(res) (![[res objectForKey:K_BSDK_RESPONSE_STATUS] isEqual:K_BSDK_RESPONSE_STATUS_FAILED])
 

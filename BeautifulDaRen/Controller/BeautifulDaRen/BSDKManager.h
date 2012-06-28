@@ -50,6 +50,22 @@
 - (void)getUserInforByName:(NSString*)name
            andDoneCallback:(processDoneWithDictBlock)doneBlock;
 
+- (void)getFavUsersByBlogId:(NSString*) blogId 
+                   pageSize:(NSInteger)pageSize 
+                  pageIndex:(NSInteger)pageIndex 
+            andDoneCallback:(processDoneWithDictBlock)doneBlock;
+
+// The value of gender should be K_BSDK_GENDER_MALE or K_BSDK_GENDER_FEMALE
+- (void)modifyUser:(NSString*)userId 
+              name:(NSString*)name
+            gender:(NSString*)gender
+             email:(NSString*)email
+              city:(NSString*)city
+               tel:(NSString*)tel
+           address:(NSString*)address
+            avatar:(UIImage*)avatar
+   andDoneCallback:(processDoneWithDictBlock)doneBlock;
+
 
 #pragma mark Weibo releated API
 

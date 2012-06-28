@@ -19,7 +19,7 @@
 
 @interface FriendListViewController ()
 @property (assign, nonatomic) NSInteger type;
-@property (retain, nonatomic) NSDictionary * friendDictionary;
+@property (retain, nonatomic) NSDictionary * userDataDictionary;
 @property (retain, nonatomic) IBOutlet UITableView * commonTableView;
 @property (retain, nonatomic) NSMutableArray * friendsList;
 
@@ -29,14 +29,15 @@
 
 -(void)refreshData;
 -(void)onDataLoadDone;
-
+-(NSString*)getRelationButtonTitleOfUser:(NSDictionary*)userInfo;
+-(NSDictionary*)extractFriendDictionary:(NSDictionary*)FriendRawDict;
 @end
 
 @implementation FriendListViewController
 @synthesize type = _type;
 @synthesize commonTableView = _commonTableView;
 @synthesize friendsList = _friendsList;
-@synthesize friendDictionary = _friendDictionary;
+@synthesize userDataDictionary = _userDataDictionary;
 
 @synthesize currentPageIndex = _currentPageIndex;
 @synthesize isRefreshing = _isRefreshing;
@@ -58,23 +59,27 @@
         switch (_type) {
             case FriendListViewController_TYPE_MY_FOLLOW:
                 title = NSLocalizedString(@"my_follows", @"my_follows");
-                self.friendDictionary = nil;
+                self.userDataDictionary = nil;
                 break;
             case FriendListViewController_TYPE_MY_FANS:
                 title = NSLocalizedString(@"my_fans", @"my_fans");
-                self.friendDictionary = nil;
+                self.userDataDictionary = nil;
                 break;
             case FriendListViewController_TYPE_MY_BLACKLIST:
                 title = NSLocalizedString(@"black_list", @"black_list");
-                self.friendDictionary = nil;
+                self.userDataDictionary = nil;
                 break;
             case FriendListViewController_TYPE_FRIEND_FOLLOW:
                 title = NSLocalizedString(@"her_follows", @"her_follows");
-                self.friendDictionary = dictionary;
+                self.userDataDictionary = dictionary;
                 break;
             case FriendListViewController_TYPE_FRIEND_FANS:
                 title = NSLocalizedString(@"her_fans", @"her_fans");
-                self.friendDictionary = dictionary;
+                self.userDataDictionary = dictionary;
+                break;
+            case FriendListViewController_TYPE_FAV_ONE_BLOG:
+                title = NSLocalizedString(@"fav_list", @"fav_list");
+                self.userDataDictionary = dictionary;
                 break;
         }
         [self.navigationItem setTitle:title];
@@ -143,7 +148,7 @@
         }
         case FriendListViewController_TYPE_FRIEND_FOLLOW:
         {
-            NSString* userId = [self.friendDictionary valueForKey:KEY_ACCOUNT_USER_ID];
+            NSString* userId = [self.userDataDictionary valueForKey:K_BSDK_UID];
             [[BSDKManager sharedManager] getFollowList:userId
                                               pageSize:FRIEND_PAGE_SIZE
                                              pageIndex:self.currentPageIndex
@@ -161,10 +166,19 @@
         }
         case FriendListViewController_TYPE_FRIEND_FANS:
         {
-            NSInteger userId = [[self.friendDictionary valueForKey:KEY_ACCOUNT_USER_ID] intValue];
+            NSInteger userId = [[self.userDataDictionary valueForKey:K_BSDK_UID] intValue];
             [[BSDKManager sharedManager] getFollowerList:userId
                                                 pageSize:FRIEND_PAGE_SIZE
-                                               pageIndex:1
+                                               pageIndex:self.currentPageIndex
+                                         andDoneCallback:doneBlock];
+            break;
+        }
+        case FriendListViewController_TYPE_FAV_ONE_BLOG:
+        {
+            NSString * blogId = [self.userDataDictionary valueForKey:K_BSDK_UID];
+            [[BSDKManager sharedManager] getFavUsersByBlogId:blogId
+                                                pageSize:FRIEND_PAGE_SIZE
+                                               pageIndex:self.currentPageIndex
                                          andDoneCallback:doneBlock];
             break;
         }
@@ -183,7 +197,7 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    self.friendDictionary = nil;
+    self.userDataDictionary = nil;
     self.footerButton = nil;
     self.loadingActivityIndicator = nil;
     self.footerView = nil;
@@ -191,7 +205,7 @@
 
 - (void)dealloc
 {
-    [_friendDictionary release];
+    [_userDataDictionary release];
     [_footerButton release];
     [_footerView release];
     [_loadingActivityIndicator release];
@@ -211,7 +225,48 @@
     }
 }
 
+-(NSString*)getRelationButtonTitleOfUser:(NSDictionary*)userInfo
+{
+    NSInteger relation = [[userInfo valueForKey:KEY_ACCOUNT_RELATION] intValue];
+    NSString * title = nil;
+    
+    if (![ViewHelper isSelf:[userInfo objectForKey:K_BSDK_USERID]]) 
+    {
+        switch (relation) {
+            case FRIEND_RELATIONSHIP_INTER_FOLLOW:
+                title = NSLocalizedString(@"unfollow", @"unfollow");
+                break;
+            default:
+                title = NSLocalizedString(@"follow", @"follow");
+                break;
+        }
+    }
+    return title;
+}
 
+-(NSDictionary*)extractFriendDictionary:(NSDictionary*)FriendRawDict
+{
+    switch (_type) {
+        case FriendListViewController_TYPE_MY_FANS:
+        case FriendListViewController_TYPE_FRIEND_FANS:
+        {
+            return [FriendRawDict objectForKey:K_BSDK_FANSUSERINFO];
+            break;
+        }
+        case FriendListViewController_TYPE_MY_FOLLOW:
+        {
+            return [FriendRawDict objectForKey:K_BSDK_ATTENTIONUSERINFO];
+            break;
+        }            
+        case FriendListViewController_TYPE_FRIEND_FOLLOW:
+        case FriendListViewController_TYPE_FAV_ONE_BLOG:
+        default:
+        {
+            return FriendRawDict;
+            break;
+        }
+    }
+}
 #pragma mark UITableViewDelegate
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -226,34 +281,21 @@
         BorderImageView * borderImageView = [[BorderImageView alloc] initWithFrame:friendListViewCell.avatarImageView.frame andImage:[UIImage imageNamed:[NSString  stringWithFormat:@"search_avatar_sample%d",[indexPath row]+1]]];
         [friendListViewCell.avatarImageView addSubview:borderImageView];
         [borderImageView release];
-        NSDictionary * userDict = [self.friendsList objectAtIndex:[indexPath row]];
+        
+        NSDictionary * userDict = [self extractFriendDictionary:[self.friendsList objectAtIndex:[indexPath row]]];
         friendListViewCell.friendNameLabel.text = [userDict valueForKey:KEY_ACCOUNT_USER_NAME];
         friendListViewCell.friendWeiboLabel.text = @"";
-        NSString * buttonTitle = nil;
-        NSInteger relation = [[[self.friendsList objectAtIndex:[indexPath row]] valueForKey:KEY_ACCOUNT_RELATION] intValue];
-        switch (self.type) {
-            case FriendListViewController_TYPE_MY_FOLLOW:
-                buttonTitle = @"取消关注";
-                break;
-            case FriendListViewController_TYPE_MY_FANS:
-                if(relation == FRIEND_RELATIONSHIP_INTER_FOLLOW)
-                {
-                    buttonTitle = @"取消关注";
-                }
-                else {
-                    buttonTitle = @"关注";
-                }
-                break;
-            case FriendListViewController_TYPE_MY_BLACKLIST:
-                break;
-            case FriendListViewController_TYPE_FRIEND_FOLLOW:
-                break;
-            case FriendListViewController_TYPE_FRIEND_FANS:
-                break;
+        
+        NSString * buttonTitle = [self getRelationButtonTitleOfUser:userDict];
+        if (buttonTitle) {
+            [friendListViewCell.actionButton setTitle:buttonTitle forState:UIControlStateNormal];
+            friendListViewCell.actionButton.tag = [indexPath row];
+        }
+        else
+        {
+            [friendListViewCell.actionButton setHidden:YES];
         }
 
-        [friendListViewCell.actionButton setTitle:buttonTitle forState:UIControlStateNormal];
-        friendListViewCell.actionButton.tag = [indexPath row];
         friendListViewCell.delegate = self;
     }
     return cell;
@@ -286,7 +328,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     FriendDetailViewController * friendDetailController = 
-    [[FriendDetailViewController alloc] initWithDictionary:[self.friendsList objectAtIndex:[indexPath section]]];
+    [[FriendDetailViewController alloc] initWithDictionary:[self extractFriendDictionary:[self.friendsList objectAtIndex:[indexPath row]]]];
     [self.navigationController pushViewController:friendDetailController animated:YES];
     [friendDetailController release];
 }

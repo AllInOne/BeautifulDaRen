@@ -16,7 +16,8 @@ enum
     WeiboListViewControllerType_MY_COLLECTION,
     WeiboListViewControllerType_MY_BUYED,
     WeiboListViewControllerType_FRIEND_WEIBO,
-    WeiboListViewControllerType_FRIEND_COLLECTION
+    WeiboListViewControllerType_FRIEND_COLLECTION,
+    WeiboListViewControllerType_CATEGORY
 };
 
 @interface WeiboListViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>

@@ -68,6 +68,7 @@
 "weibo" = "微博";
 "user" = "用户";
 "follow" = "关注";
+"unfollow" = "取消关注";
 "fans" = "粉丝";
 "collection" = "收藏";
 "black_list" = "黑名单";
@@ -149,12 +150,15 @@
 
 "no_message" = "没有相关信息";
 
+"fav_list" ="收藏列表";
+
 "picture" = "图片";
 
 "please_enter_content" = "亲, 请输入内容哦!";
 "please_enter_merchant" = "亲, 请输入商家哦!";
 "please_enter_brand" = "亲, 请输入品牌哦!";
 "please_enter_price" = "亲, 请输入价格哦!";
+"please_enter_category" = "亲, 请选择分类哦!";
 
 "prompt_category_max" = "亲, 最多选%d个分类哦!";
 

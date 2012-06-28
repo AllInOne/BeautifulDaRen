@@ -17,6 +17,7 @@
 @synthesize checkBox = _checkBox;
 @synthesize textLable = _textLable;
 @synthesize isCheckBoxChecked = _isCheckBoxChecked;
+@synthesize cellButton = _cellButton;
 
 //- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 //{
@@ -40,7 +41,7 @@
 {
     [_textLable release];
     [_checkBox release];
-    
+    [_cellButton release];
     
     [super dealloc];
 }

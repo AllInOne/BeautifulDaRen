@@ -307,6 +307,11 @@
         return;
     }
     
+    if ( (self.category == nil) || ([self.category length] == 0)) {
+        [ViewHelper showSimpleMessage:NSLocalizedString(@"please_enter_category", @"please_enter_category") withTitle:nil withButtonText:NSLocalizedString(@"ok", @"ok")];
+        return;
+    }
+    
     [self dismissModalViewControllerAnimated:YES];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_SHOWWAITOVERLAY object:self];
@@ -405,7 +410,7 @@
         
         for(NSDictionary * user in userList)
         {
-            [friendList addObject:[[user objectForKey:K_BSDK_ATTENTIONUSERLIST] objectForKey:K_BSDK_USERNAME]];
+            [friendList addObject:[[user objectForKey:K_BSDK_ATTENTIONUSERINFO] objectForKey:K_BSDK_USERNAME]];
         }
         
         FriendsSelectionViewController *friendSelectionController = 

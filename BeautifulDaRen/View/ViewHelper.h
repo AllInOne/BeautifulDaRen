@@ -44,4 +44,8 @@
 + (void) handleKeyboardWillBeHidden:(UIScrollView*)scrollView;
 
 + (NSString *)intervalSinceNow: (NSString *) theDate;
+
++ (BOOL)isSelf:(NSDictionary *) userInfo;
+
++ (NSString*)getMyUserId;
 @end
