@@ -25,6 +25,8 @@
 #define CELL_CONTENT_WIDTH 280.0f
 #define CELL_CONTENT_MARGIN 5.0f
 
+#define CELL_CONTENT_MARGIN_BIG 15.0f
+
 #define IMAGE_WIDTH     (210.0f)
 
 #define PRICE_BUTTON_Y_OFFSET     (50.0f)
@@ -284,7 +286,16 @@
                                               [activityIndicator release];
                                               
                                               if (K_BSDK_IS_RESPONSE_OK(data)) {
-                                                  self.weiboData = data;
+                                                  NSDictionary * weiboInfo = [data objectForKey:K_BSDK_BLOGINFO];
+                                                  NSDictionary * retweetedStatusInfo = [weiboInfo objectForKey:K_BSDK_RETWEET_STATUS];
+                                                  if (retweetedStatusInfo && [retweetedStatusInfo count]) {
+                                                      self.weiboData = retweetedStatusInfo;
+                                                  }
+                                                  else
+                                                  {
+                                                      self.weiboData = weiboInfo;
+                                                  }
+                                                  
                                                   [self refreshView];
                                               }
                                               else
@@ -393,7 +404,7 @@
                                                    IMAGE_WIDTH, 
                                                    picHeight * IMAGE_WIDTH/picWidth);
     //  buttons
-    self.favourateButton.frame = CGRectMake(self.favourateButton.frame.origin.x, self.weiboAttachedImageView.frame.origin.y + CGRectGetHeight(self.weiboAttachedImageView.frame) + CELL_CONTENT_MARGIN, self.favourateButton.frame.size.width, self.favourateButton.frame.size.height);
+    self.favourateButton.frame = CGRectMake(self.favourateButton.frame.origin.x, self.weiboAttachedImageView.frame.origin.y + CGRectGetHeight(self.weiboAttachedImageView.frame) + CELL_CONTENT_MARGIN_BIG, self.favourateButton.frame.size.width, self.favourateButton.frame.size.height);
     
     [self.favourateButton setTitle:[NSString stringWithFormat:@"    %d", [[self.weiboData objectForKey:K_BSDK_FAVOURATE_NUM] intValue]] forState:UIControlStateNormal];
     
@@ -429,7 +440,7 @@
     if ([self.weiboData objectForKey:K_BSDK_CONTENT]) {
         _weiboContent = [[NSString alloc] initWithString:[self.weiboData objectForKey:K_BSDK_CONTENT]];
         self.contentLabel.text = self.weiboContent;
-        self.contentLabel.frame = CGRectMake(self.contentLabel.frame.origin.x, yOffset, self.contentLabel.frame.size.width, [ViewHelper getHeightOfText:self.weiboContent ByFontSize:FONT_SIZE contentWidth:CELL_CONTENT_WIDTH]);
+        self.contentLabel.frame = CGRectMake(self.contentLabel.frame.origin.x, yOffset + CELL_CONTENT_MARGIN_BIG, self.contentLabel.frame.size.width, [ViewHelper getHeightOfText:self.weiboContent ByFontSize:FONT_SIZE contentWidth:CELL_CONTENT_WIDTH]);
     }
 
     // Custom initialization

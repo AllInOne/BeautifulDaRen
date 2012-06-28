@@ -294,10 +294,10 @@ static BUIFont * instance;
     return timeString;
 }
 
-+ (BOOL)isSelf:(NSDictionary *) userInfo
++ (BOOL)isSelf:(NSString *)userId
 {
     NSDictionary * myDict = [[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
-    return [[userInfo objectForKey:K_BSDK_UID] isEqual:[myDict objectForKey:K_BSDK_UID]];
+    return [userId isEqual:[myDict objectForKey:K_BSDK_UID]];
 }
 
 + (NSString*)getMyUserId

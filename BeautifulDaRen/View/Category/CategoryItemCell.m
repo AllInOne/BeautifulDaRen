@@ -12,6 +12,7 @@
 #import "WeiboComposerViewController.h"
 #import "BSDKManager.h"
 #import "BSDKDefines.h"
+#import "WeiboListViewController.h"
 
 @interface CategoryItemCell ()
 @property (nonatomic, retain) NSDictionary * itemData;
@@ -98,6 +99,22 @@
     
     [navController release];
     [weiboDetailController release];
+}
+
+- (IBAction)onMoreButtonPressed:(id)sender
+{
+    WeiboListViewController * categoryViewController = [[WeiboListViewController alloc]
+                                                        initWithNibName:nil
+                                                        bundle:nil
+                                                        type:WeiboListViewControllerType_CATEGORY
+                                                        dictionary:self.itemData];
+    
+    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: categoryViewController];
+    
+    [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
+    
+    [navController release];
+    [categoryViewController release];
 }
 
 - (CGFloat)getHeight

@@ -271,13 +271,14 @@
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 										<int key="IBUIContentHorizontalAlignment">0</int>
 										<int key="IBUIContentVerticalAlignment">0</int>
+										<string key="IBUITitleShadowOffset">{1, 1}</string>
 										<object class="NSColor" key="IBUIHighlightedTitleColor">
 											<int key="NSColorSpace">3</int>
 											<bytes key="NSWhite">MQA</bytes>
 										</object>
 										<object class="NSColor" key="IBUINormalTitleColor">
 											<int key="NSColorSpace">2</int>
-											<bytes key="NSRGB">MC43NjA3ODQzODc2IDAgMC44MzUyOTQxODcxAA</bytes>
+											<bytes key="NSRGB">MC42MzEzNzI1NzEgMCAwLjYxNTY4NjI5NzQAA</bytes>
 										</object>
 										<object class="NSColor" key="IBUINormalTitleShadowColor">
 											<int key="NSColorSpace">3</int>
@@ -289,11 +290,11 @@
 										</object>
 										<object class="IBUIFontDescription" key="IBUIFontDescription">
 											<int key="type">2</int>
-											<double key="pointSize">13</double>
+											<double key="pointSize">12</double>
 										</object>
 										<object class="NSFont" key="IBUIFont">
 											<string key="NSName">Helvetica-Bold</string>
-											<double key="NSSize">13</double>
+											<double key="NSSize">12</double>
 											<int key="NSfFlags">16</int>
 										</object>
 									</object>

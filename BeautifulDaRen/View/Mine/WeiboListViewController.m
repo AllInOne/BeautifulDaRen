@@ -81,6 +81,10 @@
         {
             [self.navigationItem setTitle:NSLocalizedString(@"her_collection", @"her_collection")];
         }
+        else if (_controllerType == WeiboListViewControllerType_CATEGORY)
+        {
+            [self.navigationItem setTitle:[dictionary objectForKey:K_BSDK_CLASSNAME]];
+        }
         self.friendDictionary = dictionary;
     }
     return self;
@@ -192,6 +196,21 @@
                                                 
                                                 [self onDataLoadDone];
                                             }];
+    }
+    else if (_controllerType == WeiboListViewControllerType_CATEGORY)
+    {
+        
+        [[BSDKManager sharedManager] getWeiboListByClassId:[self.friendDictionary objectForKey:K_BSDK_UID]
+                                                 pageSize:AUTOLOAD_PAGE_SIZE
+                                                pageIndex:_currentPageIndex
+                                          andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+                                              if ([[data objectForKey:K_BSDK_BLOGLIST] count] < AUTOLOAD_PAGE_SIZE) {
+                                                  self.isAllRetrieved = YES;
+                                              }
+                                              [self.dataList addObjectsFromArray:[data objectForKey:K_BSDK_BLOGLIST]];
+                                              
+                                              [self onDataLoadDone];
+                                          }];
     }
     else
     {

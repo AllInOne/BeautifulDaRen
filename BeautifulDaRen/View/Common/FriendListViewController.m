@@ -230,7 +230,7 @@
     NSInteger relation = [[userInfo valueForKey:KEY_ACCOUNT_RELATION] intValue];
     NSString * title = nil;
     
-    if (![ViewHelper isSelf:userInfo]) 
+    if (![ViewHelper isSelf:[userInfo objectForKey:K_BSDK_USERID]]) 
     {
         switch (relation) {
             case FRIEND_RELATIONSHIP_INTER_FOLLOW:
@@ -282,7 +282,7 @@
         [friendListViewCell.avatarImageView addSubview:borderImageView];
         [borderImageView release];
         
-        NSDictionary * userDict = [self.friendsList objectAtIndex:[indexPath row]];
+        NSDictionary * userDict = [self extractFriendDictionary:[self.friendsList objectAtIndex:[indexPath row]]];
         friendListViewCell.friendNameLabel.text = [userDict valueForKey:KEY_ACCOUNT_USER_NAME];
         friendListViewCell.friendWeiboLabel.text = @"";
         
@@ -328,7 +328,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     FriendDetailViewController * friendDetailController = 
-    [[FriendDetailViewController alloc] initWithDictionary:[self extractFriendDictionary:[self.friendsList objectAtIndex:[indexPath section]]]];
+    [[FriendDetailViewController alloc] initWithDictionary:[self extractFriendDictionary:[self.friendsList objectAtIndex:[indexPath row]]]];
     [self.navigationController pushViewController:friendDetailController animated:YES];
     [friendDetailController release];
 }
