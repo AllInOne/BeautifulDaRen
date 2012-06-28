@@ -158,6 +158,7 @@
 "please_enter_merchant" = "亲, 请输入商家哦!";
 "please_enter_brand" = "亲, 请输入品牌哦!";
 "please_enter_price" = "亲, 请输入价格哦!";
+"please_enter_category" = "亲, 请选择分类哦!";
 
 "prompt_category_max" = "亲, 最多选%d个分类哦!";
 

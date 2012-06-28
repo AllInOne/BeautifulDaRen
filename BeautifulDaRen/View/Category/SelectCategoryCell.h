@@ -11,5 +11,6 @@
 @interface SelectCategoryCell : UIView
 
 @property (nonatomic, retain) IBOutlet UIButton * checkBox;
+@property (nonatomic, retain) IBOutlet UIButton * cellButton;
 @property (nonatomic, retain) IBOutlet UILabel * textLable;
 @end

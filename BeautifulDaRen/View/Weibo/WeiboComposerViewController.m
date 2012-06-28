@@ -307,6 +307,11 @@
         return;
     }
     
+    if ( (self.category == nil) || ([self.category length] == 0)) {
+        [ViewHelper showSimpleMessage:NSLocalizedString(@"please_enter_category", @"please_enter_category") withTitle:nil withButtonText:NSLocalizedString(@"ok", @"ok")];
+        return;
+    }
+    
     [self dismissModalViewControllerAnimated:YES];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_SHOWWAITOVERLAY object:self];

@@ -81,6 +81,7 @@
         
         cell.textLable.text = [[self.categoryListData objectAtIndex:index] objectForKey:K_BSDK_CLASSNAME];
         cell.checkBox.tag = index;
+        cell.cellButton.tag = index;
         
         cell.frame = CGRectMake(CATEGORY_CELL_X_OFFSET + (CGRectGetWidth(cell.frame) + CATEGORY_CELL_X_MARGIN) * (index % 2), 
                                 CATEGORY_CELL_Y_OFFSET + (CGRectGetHeight(cell.frame) + CATEGORY_CELL_Y_MARGIN) * (index/2), CGRectGetWidth(cell.frame), 
@@ -137,7 +138,8 @@
 -(IBAction)onCheckBoxPressed:(UIButton*)sender
 {
     [self clearCheckedCategories];
-    [sender setImage:[UIImage imageNamed:@"radio_btn_selected"] forState:UIControlStateNormal];
+    [((SelectCategoryCell*)[self.categorySelectCells objectAtIndex:sender.tag]).checkBox setImage:[UIImage imageNamed:@"radio_btn_selected"] forState:UIControlStateNormal];
+
     [self.categorySelectState replaceObjectAtIndex:sender.tag withObject:[NSNumber numberWithInt:1]];
 
 }
