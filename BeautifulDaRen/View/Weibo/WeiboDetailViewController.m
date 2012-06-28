@@ -163,6 +163,7 @@
             if (errorMsg == nil)
             {
                 [ViewHelper showSimpleMessage:NSLocalizedString(@"send_succeed", @"send_succeed") withTitle:nil withButtonText:NSLocalizedString(@"ok", @"ok")];
+                [self onRefreshButtonClicked];
             }
             else
             {
@@ -434,7 +435,15 @@
     // Custom initialization
     [_detailScrollView setContentSize:CGSizeMake(SCREEN_WIDTH, self.contentLabel.frame.origin.y + CGRectGetHeight(self.contentLabel.frame) + 150)];
     
-    [self.avatarImageView setImage:[UIImage imageNamed:@"avatar_big"]];
+    NSString * avatarUrl = [self.weiboData objectForKey:K_BSDK_PICTURE_65];
+    if (avatarUrl && [avatarUrl length]) {
+        [self.avatarImageView setImageWithURL:[NSURL URLWithString:avatarUrl]];
+    }
+    else
+    {
+       [self.avatarImageView setImage:[UIImage imageNamed:@"avatar_big"]];
+    }   
+    
     
     self.weiboAttachedImageButton.frame = self.weiboAttachedImageView.frame;
     
@@ -494,15 +503,23 @@
 
 -(IBAction)onBrandButtonPressed:(id)sender
 {
-    FriendDetailViewController * friendDetailViewController = [[FriendDetailViewController alloc] initWithFriendName:[self.weiboData objectForKey:K_BSDK_BRANDSERVICE]];
-    [self.navigationController pushViewController:friendDetailViewController animated:YES];
-    [friendDetailViewController release];
+    [[BSDKManager sharedManager] getUserInforByName:[self.weiboData objectForKey:K_BSDK_BRANDSERVICE] andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+        if (K_BSDK_IS_RESPONSE_OK(data)) {
+            FriendDetailViewController * friendDetailViewController = [[FriendDetailViewController alloc] initWithDictionary:[data objectForKey:K_BSDK_USERINFO]];
+            [self.navigationController pushViewController:friendDetailViewController animated:YES];
+            [friendDetailViewController release];
+        }
+    }];
 }
 
 -(IBAction)onBusinessButtonPressed:(id)sender
 {
-    FriendDetailViewController * friendDetailViewController = [[FriendDetailViewController alloc] initWithFriendName:[self.weiboData objectForKey:K_BSDK_SHOPMERCHANT]];
-    [self.navigationController pushViewController:friendDetailViewController animated:YES];
-    [friendDetailViewController release];
+    [[BSDKManager sharedManager] getUserInforByName:[self.weiboData objectForKey:K_BSDK_SHOPMERCHANT] andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+        if (K_BSDK_IS_RESPONSE_OK(data)) {
+            FriendDetailViewController * friendDetailViewController = [[FriendDetailViewController alloc] initWithDictionary:[data objectForKey:K_BSDK_USERINFO]];
+            [self.navigationController pushViewController:friendDetailViewController animated:YES];
+            [friendDetailViewController release];
+        }
+    }];
 }
 @end

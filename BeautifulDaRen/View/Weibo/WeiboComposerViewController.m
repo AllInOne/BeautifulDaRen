@@ -405,7 +405,7 @@
         
         for(NSDictionary * user in userList)
         {
-            [friendList addObject:[[user objectForKey:K_BSDK_ATTENTIONUSERLIST] objectForKey:K_BSDK_USERNAME]];
+            [friendList addObject:[[user objectForKey:K_BSDK_ATTENTIONUSERINFO] objectForKey:K_BSDK_USERNAME]];
         }
         
         FriendsSelectionViewController *friendSelectionController = 

@@ -17,6 +17,9 @@
 #import "ViewConstants.h"
 #import "ModifyPasswordViewController.h"
 #import "UIImage+Scale.h"
+#import "BSDKDefines.h"
+#import "BSDKManager.h"
+#import "UIImageView+WebCache.h"
 
 @interface MineEditingViewController()
 
@@ -55,7 +58,17 @@
 
 -(void)onSaveButtonClicked
 {
-    [[iToast makeText:@"保存"] show];
+    [[BSDKManager sharedManager] modifyUser:[ViewHelper getMyUserId] 
+                                       name:[_tableViewDict objectForKey:KEY_ACCOUNT_USER_NAME]
+                                      email:[_tableViewDict objectForKey:KEY_ACCOUNT_EMAIL]
+                                    city:[_tableViewDict objectForKey:KEY_ACCOUNT_CITY]
+                                        tel:[_tableViewDict objectForKey:KEY_ACCOUNT_PHONE] 
+                                    address:[_tableViewDict objectForKey:KEY_ACCOUNT_ADDRESS]
+                                     avatar:self.avatarImage 
+                            andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+                                [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
+                            }];
+    [self.avatarImage release];
 }
 
 #pragma mark - View lifecycle
@@ -74,7 +87,6 @@
     [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
     [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onSaveButtonClicked) title:NSLocalizedString(@"save", @"save")]];
     _tableViewDict = [[NSMutableDictionary alloc] init];
-    self.avatarImage = [UIImage imageNamed:@"avatar_big"];
     
     [_tableViewDict removeAllObjects];
     NSDictionary * dict = [[NSUserDefaults standardUserDefaults] objectForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
@@ -154,7 +166,22 @@
         cell = [tableView dequeueReusableCellWithIdentifier:infoTopViewIdentifier];
         if (cell == nil) {
             cell = [[[NSBundle mainBundle] loadNibNamed:infoTopViewIdentifier owner:self options:nil] objectAtIndex:1];
-            ((MyInfoTopViewCell*)cell).avatarImageView.image = self.avatarImage;
+            
+            if (self.avatarImage) {
+                ((MyInfoTopViewCell*)cell).avatarImageView.image = self.avatarImage;
+            }
+            else
+            {
+                NSString * avatarUrl = [self.tableViewDict objectForKey:K_BSDK_PICTURE_65];
+                if (avatarUrl && [avatarUrl length]) {
+                    [((MyInfoTopViewCell*)cell).avatarImageView setImageWithURL:[NSURL URLWithString:avatarUrl]];
+                }
+                else
+                {
+                    ((MyInfoTopViewCell*)cell).avatarImageView.image = [UIImage imageNamed:@"avatar_big"];
+                }            
+            }
+
             _updateAvatarButton =  ((MyInfoTopViewCell*)cell).updateAvatarButton;
             ((MyInfoTopViewCell*)cell).delegate = self;
         }
@@ -214,7 +241,7 @@
             case 3:
             {
                 buttonViewCell.leftLabel.text = NSLocalizedString(@"address", @"");
-                buttonViewCell.buttonText.text = [_tableViewDict valueForKey:KEY_ACCOUNT_Address];
+                buttonViewCell.buttonText.text = [_tableViewDict valueForKey:KEY_ACCOUNT_ADDRESS];
                 break;
             }
             case 4:
@@ -326,7 +353,7 @@
                         block = ^(NSString * text)
                         {
                             [_tableViewDict setValue:text
-                                              forKey:KEY_ACCOUNT_Address];
+                                              forKey:KEY_ACCOUNT_ADDRESS];
                             [self.tableView reloadData];
                         };
                         break;

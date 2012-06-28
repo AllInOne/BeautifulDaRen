@@ -55,6 +55,15 @@
                   pageIndex:(NSInteger)pageIndex 
             andDoneCallback:(processDoneWithDictBlock)doneBlock;
 
+- (void)modifyUser:(NSString*)userId 
+              name:(NSString*)name 
+             email:(NSString*)email
+              city:(NSString*)city
+               tel:(NSString*)tel
+           address:(NSString*)address
+            avatar:(UIImage*)avatar
+   andDoneCallback:(processDoneWithDictBlock)doneBlock;
+
 
 #pragma mark Weibo releated API
 

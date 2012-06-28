@@ -192,16 +192,15 @@
         [self.friendDetailView reloadData];
     };
     
-    if (self.friendName == nil) {
-        [[BSDKManager sharedManager] getUserInforByUserId:[self.friendDictionary valueForKey:KEY_ACCOUNT_USER_ID]
+    if (self.friendName) {
+        [[BSDKManager sharedManager] getUserInforByName:self.friendName
                                           andDoneCallback:doneblock];
     }
     else
     {
-        [[BSDKManager sharedManager] getUserInforByName:self.friendName
-                                          andDoneCallback:doneblock];
+        [self refreshTopView];
+        [self.friendDetailView reloadData];
     }
-
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -470,7 +469,7 @@
 {
     self.nameLabel.text = [self.friendDictionary valueForKey:KEY_ACCOUNT_USER_NAME];
     self.cityLabel.text = [self.friendDictionary valueForKey:KEY_ACCOUNT_CITY];
-    self.detailAddressLabel.text = [self.friendDictionary valueForKey:KEY_ACCOUNT_Address];
+    self.detailAddressLabel.text = [self.friendDictionary valueForKey:KEY_ACCOUNT_ADDRESS];
     self.levelLabel.text = [NSString stringWithFormat:@"LV%d",
                             [[self.friendDictionary valueForKey:KEY_ACCOUNT_LEVEL] intValue]];
     self.pointLabel.text = [NSString stringWithFormat:@"%@%d",

@@ -72,13 +72,14 @@ enum
 
 
 #define KEY_ACCOUNT_USER_NAME           @"UserName"
+#define KEY_ACCOUNT_EMAIL               @"Email"
 #define KEY_ACCOUNT_LEVEL               @"Levels"
 #define KEY_ACCOUNT_ID                  @"id"
 #define KEY_ACCOUNT_USER_ID             @"UserId"
 #define KEY_ACCOUNT_POINT               @"Points"
 #define KEY_ACCOUNT_CITY                @"City"
 #define KEY_ACCOUNT_PHONE               @"Tel"
-#define KEY_ACCOUNT_Address             @"Address"
+#define KEY_ACCOUNT_ADDRESS             @"Address"
 #define KEY_ACCOUNT_GENDER              @"Sex"
 #define KEY_ACCOUNT_INTRO               @"Intro"
 #define KEY_ACCOUNT_BLOG_COUNT          @"BlogNum"

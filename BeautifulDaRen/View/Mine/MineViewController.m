@@ -24,6 +24,7 @@
 #import "iToast.h"
 #import "BSDKDefines.h"
 #import "LoginViewController.h"
+#import "UIImageView+WebCache.h"
 
 @interface MineViewController()
 
@@ -133,7 +134,15 @@
         }
         
         NSDictionary * userDict = [[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
-        ((MyInfoTopViewCell*)cell).avatarImageView.image = [UIImage imageNamed:@"avatar_big"];
+        NSString * avatarUrl = [userDict objectForKey:K_BSDK_PICTURE_65];
+        if (avatarUrl && [avatarUrl length]) {
+            [((MyInfoTopViewCell*)cell).avatarImageView setImageWithURL:[NSURL URLWithString:avatarUrl]];
+        }
+        else
+        {
+            ((MyInfoTopViewCell*)cell).avatarImageView.image = [UIImage imageNamed:@"avatar_big"];
+        }
+
         ((MyInfoTopViewCell*)cell).levelLabel.text = [NSString stringWithFormat:@"LV%d",
                                                       [[userDict valueForKey:KEY_ACCOUNT_LEVEL] intValue]];
         ((MyInfoTopViewCell*)cell).levelLabelTitle.text = [NSString stringWithFormat:@"%@%d",
@@ -142,7 +151,7 @@
         ((MyInfoTopViewCell*)cell).beautifulIdLabel.text = [userDict valueForKey:KEY_ACCOUNT_USER_NAME];
         ((MyInfoTopViewCell*)cell).rightImageView.image = [UIImage imageNamed:@"gender_female"];
         ((MyInfoTopViewCell*)cell).editImageView.image = [UIImage imageNamed:@"my_edit"];
-        ((MyInfoTopViewCell*)cell).cityLabel.text = [NSString stringWithFormat:@"%@ %@", [userDict valueForKey:KEY_ACCOUNT_CITY], [userDict valueForKey:KEY_ACCOUNT_Address]];
+        ((MyInfoTopViewCell*)cell).cityLabel.text = [NSString stringWithFormat:@"%@ %@", [userDict valueForKey:KEY_ACCOUNT_CITY], [userDict valueForKey:KEY_ACCOUNT_ADDRESS]];
         _editButton = ((MyInfoTopViewCell*)cell).editButton;
         ((MyInfoTopViewCell*)cell).delegate = self;
     }
@@ -204,7 +213,7 @@
             cell = [[[NSBundle mainBundle] loadNibNamed:buttonViewCellIdentifier owner:self options:nil] objectAtIndex:0];
         }
         ((ButtonViewCell*)cell).buttonText.text = NSLocalizedString(@"switch_account", @"");
-        ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"comment_icon"];
+        ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"logout"];
     }
     return cell;
 }

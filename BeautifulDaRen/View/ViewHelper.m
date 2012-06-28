@@ -7,8 +7,9 @@
 //
 
 #import "ViewHelper.h"
-
+#import "BSDKDefines.h"
 #import "ButtonViewCell.h"
+#import "ViewConstants.h"
 #import "NSAttributedString+Attributes.h"
 
 #define BACK_BUTTON_LABEL_X_OFFSET  (5.0)
@@ -293,6 +294,14 @@ static BUIFont * instance;
     return timeString;
 }
 
++ (BOOL)isSelf:(NSDictionary *) userInfo
+{
+    NSDictionary * myDict = [[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
+    return [[userInfo objectForKey:K_BSDK_UID] isEqual:[myDict objectForKey:K_BSDK_UID]];
+}
 
-
++ (NSString*)getMyUserId
+{
+    return [[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] objectForKey:K_BSDK_UID];
+}
 @end

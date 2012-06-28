@@ -68,6 +68,7 @@
 "weibo" = "微博";
 "user" = "用户";
 "follow" = "关注";
+"unfollow" = "取消关注";
 "fans" = "粉丝";
 "collection" = "收藏";
 "black_list" = "黑名单";

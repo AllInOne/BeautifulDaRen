@@ -87,7 +87,7 @@ static BSDKManager *sharedInstance;
     [params setObject:password forKey:K_BSDK_PASSWORD];
     [params setObject:password forKey:K_BSDK_REPASSWORD];
     [params setObject:email forKey:K_BSDK_EMAIL];
-    [params setObject:city forKey:K_BSDK_City];
+    [params setObject:city forKey:K_BSDK_CITY];
     
     processDoneWithDictBlock signupCallbackShim = ^(AIO_STATUS status, NSDictionary * data)
     {
@@ -714,6 +714,66 @@ static BSDKManager *sharedInstance;
                        postDataType:kBSDKRequestPostDataTypeNormal
                    httpHeaderFields:nil
                        doneCallback:callback];
+}
+
+- (void)modifyUser:(NSString*)userId 
+              name:(NSString*)name 
+             email:(NSString*)email
+              city:(NSString*)city
+               tel:(NSString*)tel
+           address:(NSString*)address
+            avatar:(UIImage*)avatar
+   andDoneCallback:(processDoneWithDictBlock)doneBlock
+{
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
+    
+    [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
+    [params setObject:K_BSDK_ACTION_MODIFY forKey:K_BSDK_ACTION];
+
+    [params setObject:userId forKey:K_BSDK_MODIFYUSERID];
+    
+    if (name) {
+        [params setObject:name forKey:K_BSDK_USERNAME];
+    }
+    
+    if (email) {
+        [params setObject:email forKey:K_BSDK_EMAIL];
+    }
+
+    if (city) {
+        [params setObject:city forKey:K_BSDK_CITY];
+    }
+    
+    if (tel) {
+        [params setObject:tel forKey:K_BSDK_TEL];
+    }
+
+    if (address) {
+        [params setObject:address forKey:K_BSDK_ADDRESS];
+    }
+    
+    if (avatar)
+    {
+		[params setObject:avatar forKey:K_BSDK_PICTURE];
+        
+        [self sendRequestWithMethodName:@"statuses/upload.json" 
+                             httpMethod:@"POST" 
+                                 params:params 
+                           postDataType:kBSDKRequestPostDataTypeMultipart
+                       httpHeaderFields:nil
+                           doneCallback:doneBlock];
+    }
+    else
+    {
+        [self sendRequestWithMethodName:@"statuses/update.json" 
+                             httpMethod:@"POST" 
+                                 params:params 
+                           postDataType:kBSDKRequestPostDataTypeNormal
+                       httpHeaderFields:nil
+                           doneCallback:doneBlock];
+    }
+
 }
 
 #pragma mark  message related API
