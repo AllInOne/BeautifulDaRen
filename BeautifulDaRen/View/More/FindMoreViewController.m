@@ -35,7 +35,7 @@
 @property (retain, nonatomic) IBOutlet UISearchBar * searchBar;
 @property (assign, nonatomic) NSInteger searchUserPageIndex;
 @property (assign, nonatomic) NSInteger searchWeiboPageIndex;
-@property (nonatomic, retain) NSMutableArray *searchResults;
+@property (nonatomic, retain) NSMutableArray *searchUserResults;
 @property (nonatomic, retain) NSMutableArray *searchWeiboResults;
 @property (retain, nonatomic) NSMutableArray * weiboHeights;
 @property (nonatomic, assign) BOOL isFindWeibo;
@@ -46,6 +46,7 @@
 - (void) refreshHotDaRenView;
 - (void) doSearch;
 - (void) loadWeiboHeights;
+- (void) clearData;
 
 @end
 
@@ -57,7 +58,7 @@
 @synthesize searchUserView = _searchUserView;
 @synthesize searchBar = _searchBar;
 @synthesize isFindWeibo = _isFindWeibo;
-@synthesize searchResults = _searchResults;
+@synthesize searchUserResults = _searchUserResults;
 @synthesize searchUserPageIndex = _searchUserPageIndex;
 @synthesize searchWeiboPageIndex = _searchWeiboPageIndex;
 @synthesize isSearchMore = _isSearchMore;
@@ -102,7 +103,7 @@
     [_contentScrollView release];
     [_searchUserView release];
     [_searchBar release];
-    [_searchResults release];
+    [_searchUserResults release];
     [_searchWeiboResults release];
     [_searchWeiboView release];
     [_weiboHeights release];
@@ -117,7 +118,7 @@
     self.contentScrollView = nil;
     self.searchUserView = nil;
     self.searchBar = nil;
-    self.searchResults = nil;
+    self.searchUserResults = nil;
     self.searchWeiboView = nil;
     self.searchWeiboResults = nil;
     self.weiboHeights = nil;
@@ -125,7 +126,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.searchResults = [[NSMutableArray alloc] init];
+    self.searchUserResults = [[NSMutableArray alloc] init];
     self.searchWeiboResults = [[NSMutableArray alloc] init];
     self.weiboHeights = [[NSMutableArray alloc] init];
     self.searchUserPageIndex = 1;
@@ -354,7 +355,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UIViewController * viewController = [[FriendDetailViewController alloc] initWithDictionary:[self.searchResults objectAtIndex:[indexPath row]]];
+    UIViewController * viewController = [[FriendDetailViewController alloc] initWithDictionary:[self.searchUserResults objectAtIndex:[indexPath row]]];
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: viewController];
     
     [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
@@ -372,7 +373,7 @@
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return  [_searchResults count];
+    return  [_searchUserResults count];
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -386,7 +387,7 @@
         cell = [[[NSBundle mainBundle] loadNibNamed:findFriendViewCell owner:self options:nil] objectAtIndex:0];
     }
     FindFriendViewCell * friendCell = (FindFriendViewCell*)cell;
-    NSDictionary * friendDict = [self.searchResults objectAtIndex:[indexPath row]];
+    NSDictionary * friendDict = [self.searchUserResults objectAtIndex:[indexPath row]];
     friendCell.nameLabel.text = [friendDict valueForKey:KEY_ACCOUNT_USER_NAME];
     friendCell.levelLabel.text = [NSString stringWithFormat:@"LV%d",[[friendDict valueForKey:KEY_ACCOUNT_LEVEL] intValue]];
     if ([[friendDict valueForKey:KEY_ACCOUNT_RELATION] intValue] == FRIEND_RELATIONSHIP_MY_FOLLOW
@@ -414,11 +415,13 @@
 #pragma mark - UISearchBarDelegate delegate methods
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
-{
+{    
+    [self clearData];
+
     CGFloat height = 44.0f;
     self.searchUserPageIndex = 1;
     self.searchWeiboPageIndex = 1;
-    [self.searchResults removeAllObjects];
+    [self.searchUserResults removeAllObjects];
     BOOL isShowsCancelButton = NO;
     BOOL isShowsScopeButton = NO;
     if([searchText length] > 0)
@@ -471,6 +474,7 @@
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar
 {
+    [self clearData];
     [self.searchUserView setHidden:YES];
     [self.searchWeiboView setHidden:YES];
     [self.contentScrollView setHidden:NO];
@@ -491,6 +495,7 @@
 
 - (void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 {
+    [self clearData];
     self.isFindWeibo = (selectedScope ==0) ? YES : NO;
     if (self.isFindWeibo)
     {
@@ -545,7 +550,7 @@
                                                    NSArray * tempArray = [[data valueForKey:@"UserList"] copy];
                                                    for (NSDictionary * dict in tempArray)
                                                    {
-                                                       [self.searchResults addObject:[dict mutableCopy]];
+                                                       [self.searchUserResults addObject:[dict mutableCopy]];
                                                    }
                                                }
                                                else {
@@ -594,7 +599,7 @@
 - (void) didButtonPressed:(UIButton*)button  inView:(UIView *) view
 {
     NSInteger index = button.tag;
-    NSMutableDictionary * friendDict = [self.searchResults objectAtIndex:index];
+    NSMutableDictionary * friendDict = [self.searchUserResults objectAtIndex:index];
     if ([[friendDict valueForKey:KEY_ACCOUNT_RELATION] intValue] == FRIEND_RELATIONSHIP_MY_FOLLOW
         || [[friendDict valueForKey:KEY_ACCOUNT_RELATION] intValue] == FRIEND_RELATIONSHIP_INTER_FOLLOW)
     {
@@ -707,5 +712,14 @@
         CGFloat frameHeight = (frameWidth / picWidth) * picHeight;
         [self.weiboHeights addObject:[NSNumber numberWithFloat:(frameHeight+4)]];
     }
+}
+
+- (void)clearData
+{
+    self.searchUserPageIndex = 1;
+    self.searchWeiboPageIndex = 1;
+    [self.searchWeiboResults removeAllObjects];
+    [self.searchUserResults removeAllObjects];
+    [self.weiboHeights removeAllObjects];
 }
 @end
