@@ -125,15 +125,15 @@
 
 - (void)waterFlowCellSelected:(NSNotification *)notification
 {
-// TODO: [Jerry] need to set the weiboData of WeiboDetailViewController
-//    WeiboDetailViewController *weiboDetailController = 
-//    [[WeiboDetailViewController alloc] init];
-//    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: weiboDetailController];
-//    
-//    [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
-//    
-//    [navController release];
-//    [weiboDetailController release];
+    BorderImageView * borderImageView = (BorderImageView*)notification.object;
+    WeiboDetailViewController *weiboDetailController = 
+    [[WeiboDetailViewController alloc] initWithDictionary:[self.itemDatas objectAtIndex:borderImageView.index]];
+    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: weiboDetailController];
+    
+    [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
+    
+    [navController release];
+    [weiboDetailController release];
 }
 
 #pragma mark- WaterflowDataSource
@@ -169,6 +169,7 @@
         [imageView setImageWithURL:[NSURL URLWithString:url]];
         
         BorderImageView * borderImageView = [[BorderImageView alloc] initWithFrame:CGRectMake(2, 2, frameWidth + 2, frameHeight + 2) andView:imageView];
+        borderImageView.index = index;
         [cell addSubview:borderImageView];
         [borderImageView release];
         [imageView release];
@@ -186,14 +187,7 @@
 
 - (void)flowView:(WaterFlowView *)flowView didSelectAtCell:(WaterFlowCell *)cell ForIndex:(int)index
 {
-    WeiboDetailViewController *weiboDetailController = 
-    [[WeiboDetailViewController alloc] init];
-    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: weiboDetailController];
-    
-    [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
-    
-    [navController release];
-    [weiboDetailController release];
+    //TODO maybe it not need.
 }
 
 - (void)flowView:(WaterFlowView *)flowView willLoadData:(int)page
