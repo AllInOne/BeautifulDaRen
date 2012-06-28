@@ -717,7 +717,8 @@ static BSDKManager *sharedInstance;
 }
 
 - (void)modifyUser:(NSString*)userId 
-              name:(NSString*)name 
+              name:(NSString*)name
+            gender:(NSString*)gender
              email:(NSString*)email
               city:(NSString*)city
                tel:(NSString*)tel
@@ -751,6 +752,11 @@ static BSDKManager *sharedInstance;
 
     if (address) {
         [params setObject:address forKey:K_BSDK_ADDRESS];
+    }
+    
+    if (gender)
+    {
+        [params setObject:gender forKey:K_BSDK_GENDER];
     }
     
     if (avatar)

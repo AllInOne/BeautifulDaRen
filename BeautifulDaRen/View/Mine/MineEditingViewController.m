@@ -60,6 +60,7 @@
 {
     [[BSDKManager sharedManager] modifyUser:[ViewHelper getMyUserId] 
                                        name:[_tableViewDict objectForKey:KEY_ACCOUNT_USER_NAME]
+                                     gender:[_tableViewDict objectForKey:KEY_ACCOUNT_GENDER]
                                       email:[_tableViewDict objectForKey:KEY_ACCOUNT_EMAIL]
                                     city:[_tableViewDict objectForKey:KEY_ACCOUNT_CITY]
                                         tel:[_tableViewDict objectForKey:KEY_ACCOUNT_PHONE] 
@@ -195,7 +196,7 @@
         ButtonViewCell * buttonViewCell = (ButtonViewCell*)cell;
         buttonViewCell.leftLabel.text = NSLocalizedString(@"gender", @"gender");
 
-        NSInteger index = [[_tableViewDict valueForKey:KEY_ACCOUNT_GENDER] isEqualToString:@"male"] ? 1 : 0;
+        NSInteger index = [[_tableViewDict valueForKey:KEY_ACCOUNT_GENDER] isEqualToString:K_BSDK_GENDER_MALE] ? 1 : 0;
         SegmentControl * seg = [[SegmentControl alloc]
                                 initWithFrame:CGRectMake(65, 8, 112, 29)
                                 leftText:NSLocalizedString(@"female", @"gender")
@@ -430,7 +431,7 @@
 #pragma mark SegmentDelegate
 -(void)segmentChooseAtIndex:(NSInteger)index
 {
-    NSString * gender = (index == 0) ? @"female" : @"male";
+    NSString * gender = (index == 0) ? K_BSDK_GENDER_FEMALE : K_BSDK_GENDER_MALE;
     [_tableViewDict setValue:gender
                       forKey:KEY_ACCOUNT_GENDER];
 }

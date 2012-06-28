@@ -77,6 +77,10 @@
 
 #define K_BSDK_ADDRESS @"Address"
 
+#define K_BSDK_GENDER @"Sex"
+#define K_BSDK_GENDER_MALE @"1"
+#define K_BSDK_GENDER_FEMALE @"0"
+
 #define K_BSDK_SHOPMERCHANT @"ShopMerchant"
 #define K_BSDK_BRANDSERVICE @"BrandService"
 #define K_BSDK_PRICE @"Price"

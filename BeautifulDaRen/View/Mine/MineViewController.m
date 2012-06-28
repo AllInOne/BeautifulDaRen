@@ -149,7 +149,15 @@
                                                            NSLocalizedString(@"point", @"point"),
                                                            [[userDict valueForKey:KEY_ACCOUNT_POINT] intValue]];
         ((MyInfoTopViewCell*)cell).beautifulIdLabel.text = [userDict valueForKey:KEY_ACCOUNT_USER_NAME];
-        ((MyInfoTopViewCell*)cell).rightImageView.image = [UIImage imageNamed:@"gender_female"];
+        if  ([[userDict valueForKey:KEY_ACCOUNT_GENDER] isEqual:K_BSDK_GENDER_MALE])
+        {
+            ((MyInfoTopViewCell*)cell).rightImageView.image = [UIImage imageNamed:@"gender_male"];
+        }
+        else
+        {
+            ((MyInfoTopViewCell*)cell).rightImageView.image = [UIImage imageNamed:@"gender_female"];
+        }
+
         ((MyInfoTopViewCell*)cell).editImageView.image = [UIImage imageNamed:@"my_edit"];
         ((MyInfoTopViewCell*)cell).cityLabel.text = [NSString stringWithFormat:@"%@ %@", [userDict valueForKey:KEY_ACCOUNT_CITY], [userDict valueForKey:KEY_ACCOUNT_ADDRESS]];
         _editButton = ((MyInfoTopViewCell*)cell).editButton;
