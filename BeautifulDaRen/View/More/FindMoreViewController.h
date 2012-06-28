@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "CommonScrollView.h"
 #import "ButtonPressDelegate.h"
+#import "WaterFlowView.h"
 
-@interface FindMoreViewController : UIViewController <UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UITextFieldDelegate, CommonScrollViewProtocol, ButtonPressDelegate>
+@interface FindMoreViewController : UIViewController <UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UITextFieldDelegate, WaterFlowViewDelegate, WaterFlowViewDatasource, CommonScrollViewProtocol, ButtonPressDelegate>
 
 
 @end

@@ -81,7 +81,7 @@
 
 #define K_BSDK_CREATETIME @"CreateTime"
 
-#define K_BSDK_KEYWORD @"KeyWords"
+#define K_BSDK_KEYWORDS @"KeyWords"
 
 #define K_BSDK_UID @"id"
 #define K_BSDK_USERID @"UserId"

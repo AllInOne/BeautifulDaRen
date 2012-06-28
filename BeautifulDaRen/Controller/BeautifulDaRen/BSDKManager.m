@@ -512,23 +512,13 @@ static BSDKManager *sharedInstance;
                    pageIndex:(NSInteger)pageIndex 
              andDoneCallback:(processDoneWithDictBlock)callback
 {
-    //    if (!self.isLogin) {
-    //        callback(AIO_STATUS_NOT_SIGNED_IN, nil);
-    //        return;
-    //    }
-    
-//    processDoneWithDictBlock loginCallbackShim = ^(AIO_STATUS status, NSDictionary * data)
-//    {
-//        callback(status, [data objectForKey:K_BSDK_BLOGLIST]);
-//    };
-    
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:5];
     
     [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
-    [params setObject:K_BSDK_ACTION_SEARCH forKey:K_BSDK_ACTION];
+    [params setObject:K_BSDK_ACTION_GETLIST forKey:K_BSDK_ACTION];
+    [params setObject:key forKey:K_BSDK_KEYWORDS];
     [params setObject:[NSString stringWithFormat:@"%d", pageIndex] forKey:K_BSDK_PAGEINDEX];
     [params setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:K_BSDK_PAGESIZE];
-    [params setObject:key forKey:K_BSDK_KEYWORD];
     
     [self sendRequestWithMethodName:nil
                          httpMethod:@"POST" 

@@ -3,7 +3,7 @@
 
 
 @implementation BorderImageView
-
+@synthesize index = _index;
 - (id)initWithFrame:(CGRect)frame andView:(UIView*)view needNotification:(BOOL)isNeed
 {
     self = [super initWithFrame:frame];

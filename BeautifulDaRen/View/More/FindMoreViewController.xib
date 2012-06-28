@@ -216,6 +216,7 @@
 				<string key="NSFrameSize">{320, 315}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
+				<reference key="NSNextKeyView" ref="1019141402"/>
 				<string key="NSReuseIdentifierKey">_NS:190</string>
 				<bool key="IBUIClipsSubviews">YES</bool>
 				<bool key="IBUIMultipleTouchEnabled">YES</bool>
@@ -293,11 +294,11 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">searchResultViewController</string>
+						<string key="label">searchUserView</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="123681365"/>
 					</object>
-					<int key="connectionID">51</int>
+					<int key="connectionID">55</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -450,7 +451,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">51</int>
+			<int key="maxID">56</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -459,21 +460,17 @@
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="contentScrollView">UIScrollView</string>
-						<string key="followOrInviteSinaWeiboFriendButton">UIButton</string>
 						<string key="hotDaRenView">UIScrollView</string>
 						<string key="sameCityDaRenView">UIScrollView</string>
 						<string key="searchBar">UISearchBar</string>
-						<string key="searchResultViewController">UITableView</string>
+						<string key="searchUserView">UITableView</string>
+						<string key="searchWeiboView">WaterFlowView</string>
 						<string key="youMayInterestinView">UIScrollView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="contentScrollView">
 							<string key="name">contentScrollView</string>
 							<string key="candidateClassName">UIScrollView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="followOrInviteSinaWeiboFriendButton">
-							<string key="name">followOrInviteSinaWeiboFriendButton</string>
-							<string key="candidateClassName">UIButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="hotDaRenView">
 							<string key="name">hotDaRenView</string>
@@ -487,9 +484,13 @@
 							<string key="name">searchBar</string>
 							<string key="candidateClassName">UISearchBar</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="searchResultViewController">
-							<string key="name">searchResultViewController</string>
+						<object class="IBToOneOutletInfo" key="searchUserView">
+							<string key="name">searchUserView</string>
 							<string key="candidateClassName">UITableView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="searchWeiboView">
+							<string key="name">searchWeiboView</string>
+							<string key="candidateClassName">WaterFlowView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="youMayInterestinView">
 							<string key="name">youMayInterestinView</string>
@@ -499,6 +500,14 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/FindMoreViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">WaterFlowView</string>
+					<string key="superclassName">UIScrollView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/WaterFlowView.h</string>
 					</object>
 				</object>
 			</array>

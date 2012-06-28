@@ -21,7 +21,7 @@
 - (void)reloadData;
 //- (void)recycleCellIntoReusableQueue:(WaterFlowCell*)cell withIndex:(NSInteger)index;
 - (void)pageScroll;
-- (void)cellSelected:(NSNotification*)notification;
+- (void)waterFlowCellSelected:(NSNotification*)notification;
 
 @end
 
@@ -46,7 +46,7 @@
 		self.delegate = self;
         
         [[NSNotificationCenter defaultCenter] addObserver:self 
-                                                 selector:@selector(cellSelected:)
+                                                 selector:@selector(waterFlowCellSelected:)
                                                      name:@"CellSelected"
                                                    object:nil];
         [self setAutoresizingMask:
@@ -57,7 +57,6 @@
          UIViewAutoresizingFlexibleHeight |
          UIViewAutoresizingFlexibleBottomMargin];
         
-        _currentPage = 1;
         [self initialize];
     }
     return self;
@@ -80,18 +79,18 @@
 - (void)setFlowdatasource:(id<WaterFlowViewDatasource>)flowdatasource
 {
     _flowdatasource = flowdatasource;
-    [self initialize];
+//    [self initialize];
 }
 
 - (void)setFlowdelegate:(id<WaterFlowViewDelegate>)flowdelegate
 {
     _flowdelegate = flowdelegate;
-    [self initialize];
+//    [self initialize];
 }
 
 #pragma mark-
 #pragma mark- process notification
-- (void)cellSelected:(NSNotification *)notification
+- (void)waterFlowCellSelected:(NSNotification *)notification
 {
     if ([self.flowdelegate respondsToSelector:@selector(flowView:didSelectAtCell:ForIndex:)])
     {
@@ -146,6 +145,7 @@
 #pragma mark- methods
 - (void)initialize
 {    
+    _currentPage = 1;
     _numberOfColumns = [self.flowdatasource numberOfColumnsInFlowView:self];
     
     self.reusableCells = [NSMutableDictionary dictionary];
@@ -196,7 +196,10 @@
     self.alwaysBounceVertical = YES;
     self.contentSize = CGSizeMake(self.frame.size.width, scrollHeight + LOADINGVIEW_HEIGHT);
     
-    [self pageScroll];
+    if ([self.cellHeight count] > 0)
+    {
+        [self pageScroll];
+    }
 }
 
 - (void)reloadData
@@ -354,16 +357,29 @@
 
 #pragma mark-
 #pragma mark- UIScrollViewDelegate
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-    [self pageScroll];
+    // TODO
+    if([self.cellHeight count] > 0)
+    {
+        [self pageScroll];
+    }
     if (self.contentOffset.y + self.frame.size.height >= self.contentSize.height) {
         if ([self.flowdelegate conformsToProtocol:@protocol(WaterFlowViewDelegate) ]) {
             [self.flowdelegate didScrollToBottom];
         }
     }
 }
+//
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+//{
+//    [self pageScroll];
+//    if (self.contentOffset.y + self.frame.size.height >= self.contentSize.height) {
+//        if ([self.flowdelegate conformsToProtocol:@protocol(WaterFlowViewDelegate) ]) {
+//            [self.flowdelegate didScrollToBottom];
+//        }
+//    }
+//}
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {

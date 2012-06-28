@@ -87,6 +87,22 @@
     [super dealloc];
 }
 
+- (id)initWithDictionary:(NSDictionary*)weiboDict
+{
+    self = [self init];
+    if (self)
+    {
+        [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
+        
+        [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClicked) title:NSLocalizedString(@"refresh", @"refresh")]];       
+        self.navigationItem.title = NSLocalizedString(@"weibo_detail", @"weibo_detail");
+        
+        
+        self.weiboData = weiboDict;
+    }
+    return self;
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];

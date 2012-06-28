@@ -108,7 +108,7 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [[NSNotificationCenter defaultCenter] addObserver:self 
-                                             selector:@selector(cellSelected:)
+                                             selector:@selector(waterFlowCellSelected:)
                                                  name:@"borderImageViewSelected"
                                                object:nil];
 }
@@ -123,7 +123,7 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (void)cellSelected:(NSNotification *)notification
+- (void)waterFlowCellSelected:(NSNotification *)notification
 {
 // TODO: [Jerry] need to set the weiboData of WeiboDetailViewController
 //    WeiboDetailViewController *weiboDetailController = 

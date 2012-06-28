@@ -43,6 +43,8 @@
 @property (nonatomic, retain) NSDictionary * weiboData;
 @property (nonatomic, retain) NSString * weiboId;
 
+- (id)initWithDictionary:(NSDictionary*)weiboDict;
+
 -(IBAction)onImageButtonPressed:(id)sender;
 
 -(IBAction)onBrandButtonPressed:(id)sender;
