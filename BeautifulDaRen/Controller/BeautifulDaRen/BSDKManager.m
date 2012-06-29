@@ -772,6 +772,30 @@ static BSDKManager *sharedInstance;
 
 }
 
+- (void)getHotUsersByCity:(NSString*)city
+                 userType:(NSString*)type
+                 pageSize:(NSInteger)pageSize 
+                pageIndex:(NSInteger)pageIndex 
+          andDoneCallback:(processDoneWithDictBlock)doneBlock
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:6];
+    
+    [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
+    [params setObject:K_BSDK_ACTION_GETLIST forKey:K_BSDK_ACTION];
+    [params setObject:[NSString stringWithFormat:@"%d", pageIndex] forKey:K_BSDK_PAGEINDEX];
+    [params setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:K_BSDK_PAGESIZE];
+    
+    [params setObject:city forKey:K_BSDK_CITY];
+    [params setObject:type forKey:K_BSDK_USERTYPE];
+    
+    [self sendRequestWithMethodName:nil
+                         httpMethod:@"POST" 
+                             params:params 
+                       postDataType:kBSDKRequestPostDataTypeNormal
+                   httpHeaderFields:nil
+                       doneCallback:doneBlock];
+}
+
 #pragma mark  message related API
 - (void)addFavourateForWeibo:(NSString*)blogId
              andDoneCallback:(processDoneWithDictBlock)callback

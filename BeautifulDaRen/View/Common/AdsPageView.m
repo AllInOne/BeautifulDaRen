@@ -205,7 +205,7 @@
 -(IBAction)onAdsPressed:(id)sender
 {
     NSLog(@"Ads Pressed, current ads index = %d", currentPage);
-    
+#ifdef DEBUG
 //    [[BSDKManager sharedManager] signUpWithUsername:@"jerry2" password:@"123456" email:@"sdfsdf122@121.com" city:@"成都" andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
 //         NSLog(@"operation done = %d", status);
 //        [[iToast makeText:[NSString stringWithFormat:@"%@", [data objectForKey:@"msg"]]] show];
@@ -232,10 +232,14 @@
 //            NSLog(@"sign in done = %d", status);
 //            [[iToast makeText:[NSString stringWithFormat:@"%@", [data objectForKey:@"msg"]]] show];
 //        }];
-    [[BSDKManager sharedManager] getWeiboListByUsername:@"32" pageSize:20 pageIndex:1 andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-        NSLog(@"sign in done = %d", status);
-        [[iToast makeText:[NSString stringWithFormat:@"%@", [data description]]] show];
-    }];
+//    [[BSDKManager sharedManager] getWeiboListByUsername:@"32" pageSize:20 pageIndex:1 andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+//        NSLog(@"sign in done = %d", status);
+//        [[iToast makeText:[NSString stringWithFormat:@"%@", [data description]]] show];
+//    }];
+        [[BSDKManager sharedManager] getHotUsersByCity:@"成都" userType:K_BSDK_USERTYPE_INTERESTED pageSize:20 pageIndex:1 andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+            NSLog(@"sign in done = %d", status);
+            [[iToast makeText:[NSString stringWithFormat:@"%@", [data description]]] show];
+        }];
 //        [[BSDKManager sharedManager] getWeiboClassesWithDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
 //            NSLog(@"sign in done = %d", status);
 //            [[iToast makeText:[NSString stringWithFormat:@"%@", [data description]]] show];
@@ -268,6 +272,8 @@
 //        NSLog(@"sign in done = %d", status);
 //        [[iToast makeText:[NSString stringWithFormat:@"%@", [data description]]] show];
 //    }];
+    
+#endif
 }
 
 -(IBAction)onAdsPageClosedPressed:(id)sender
