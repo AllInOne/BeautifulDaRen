@@ -198,7 +198,6 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
-    self.relatedBlogId = nil;
     self.forwardOrCommentList = nil;
     self.footView = nil;
     self.footViewActivityIndicator = nil;

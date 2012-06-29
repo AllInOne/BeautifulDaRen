@@ -111,7 +111,6 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    [self setCategoryListData:nil];
     [self setCategorySelectState:nil];
     [self setContentScrollView:nil];
     [self setCategorySelectCells:nil];

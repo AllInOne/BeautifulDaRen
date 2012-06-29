@@ -44,6 +44,8 @@
 - (void)refreshView;
 - (void)addToolbar;
 - (void)onRefreshButtonClicked;
+
+- (void)getWeiboDataFromResponse;
 @end
 
 @implementation WeiboDetailViewController
@@ -330,7 +332,6 @@
     self.weiboContent = nil;
     self.contentLabel = nil;
     self.detailScrollView = nil;
-    self.userId = nil;
     self.forwardedButton = nil;
     self.commentButton = nil;
     self.favourateButton = nil;
@@ -342,7 +343,6 @@
     self.priceButton = nil;
     self.brandLable = nil;
     self.usernameLabel = nil;
-    self.weiboId = nil;
     
     [self.toolbar removeFromSuperview];
     self.toolbar = nil;
@@ -508,6 +508,11 @@
     }
 }
 
+- (void)getWeiboDataFromResponse
+{
+
+}
+
 - (void)onBackButtonClicked {
     if (![self.navigationController popViewControllerAnimated:YES])
     {
@@ -517,7 +522,7 @@
 
 - (void)onRefreshButtonClicked {
     [[BSDKManager sharedManager] getWeiboById:[self.weiboData objectForKey:K_BSDK_UID] andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-        [self.weiboData release];
+        [self setWeiboData:nil];
         self.weiboData = [data objectForKey:K_BSDK_BLOGINFO];
         [self refreshView];
     }];

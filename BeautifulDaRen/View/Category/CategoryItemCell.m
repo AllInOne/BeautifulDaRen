@@ -83,7 +83,6 @@
     [super viewDidUnload];
     [self setCategoryTitle:nil];
     [self setCategoryScrollItem:nil];
-    [self setItemData:nil];
     [self setWeiboList:nil];
 }
 

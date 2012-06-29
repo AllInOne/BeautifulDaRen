@@ -399,9 +399,10 @@
     }
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: viewController];
     
-    [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
-    [navController release];
+    [self.navigationController presentModalViewController:navController animated:YES];
+
     [viewController release];
+    [navController release];
 }
 -(void)refreshUserInfo
 {

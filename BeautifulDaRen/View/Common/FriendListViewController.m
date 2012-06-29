@@ -197,7 +197,6 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    self.userDataDictionary = nil;
     self.footerButton = nil;
     self.loadingActivityIndicator = nil;
     self.footerView = nil;

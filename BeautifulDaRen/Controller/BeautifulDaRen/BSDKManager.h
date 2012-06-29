@@ -66,7 +66,7 @@
             avatar:(UIImage*)avatar
    andDoneCallback:(processDoneWithDictBlock)doneBlock;
 
-// userType should be one of #define K_BSDK_USERTYPE_SAME_CITY,K_BSDK_USERTYPE_INTERESTED,@"3"
+// userType should be one of #define K_BSDK_USERTYPE_SAME_CITY,K_BSDK_USERTYPE_INTERESTED,K_BSDK_USERTYPE_HOT
 - (void)getHotUsersByCity:(NSString*)city
                  userType:(NSString*)type
                  pageSize:(NSInteger)pageSize 

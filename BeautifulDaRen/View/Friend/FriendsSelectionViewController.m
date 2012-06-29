@@ -82,9 +82,7 @@
 {
     [super viewDidUnload];
     [_friendsViewController.view removeFromSuperview];
-    self.selectedContacts = nil;
     self.friendsViewController = nil;
-    self.friendsList = nil;
 }
 
 - (void)dealloc {

@@ -97,11 +97,12 @@
 
 - (void)viewDidUnload
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:_observerForLoginSuccess];
     [self.adsPageView stop];
     self.adsPageView = nil;
     self.itemsViewController = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:_observerForLoginSuccess];
     self.observerForLoginSuccess = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self.observerForShouldLogin];
     self.observerForShouldLogin = nil;
     [super viewDidUnload];
 }

@@ -296,10 +296,10 @@ enum
         NSString * rePwd = self.userRePwdTextField.text;
 
 #ifdef DEBUG
-        userName = @"jerry100";
-        email = @"12121aa41@11.com";
-        pwd = @"abc123456";
-        rePwd = @"abc123456";
+        userName = @"jerry888";
+        email = @"12121aa41@11sd.com";
+        pwd = @"123456";
+        rePwd = @"123456";
         self.userCity = @"重庆"; 
 #endif
         NSString * iToastString = @"";

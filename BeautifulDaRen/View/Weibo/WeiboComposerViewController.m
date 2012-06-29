@@ -143,7 +143,6 @@
     [self setWeiboContentBgTextFiled:nil];
     [self setContentScrollView:nil];
     [self setMaketTextView:nil];
-    [self setSelectedImage: nil];
     [self setTakePhotoViewController:nil];
     [self setSinaButton:nil];
     [self setSinaShareImageView:nil];
@@ -153,9 +152,6 @@
     [self setCategoryButton:nil];
     [self setAttachedImageBgButton:nil];
     [self setLocationLoadingView:nil];
-    [self setCurrentLocation:nil];
-    [self setLocationString:nil];
-    [self setCategory:nil];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }

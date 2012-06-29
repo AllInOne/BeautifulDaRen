@@ -91,7 +91,6 @@
     [self setWeiboContentTextView:nil];
     [self setCheckBoxText:nil];
     [self setCheckBoxButton:nil];
-    [self setIsCheckBoxChecked:YES];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }

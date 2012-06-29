@@ -139,7 +139,6 @@
     self.commentMeSegmentControl = nil;
     self.atMeSegmentControl = nil;
     self.privateLetterMeSegmentControl = nil;
-    self.callBack = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

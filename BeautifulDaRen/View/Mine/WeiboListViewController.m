@@ -243,7 +243,6 @@
 {
     [super viewDidUnload];
     self.tableView = nil;
-    self.friendDictionary = nil;
     self.dataList = nil;
     self.footerButton = nil;
     self.footerView = nil;

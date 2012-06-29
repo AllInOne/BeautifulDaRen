@@ -101,8 +101,8 @@
 {
     [super viewDidUnload];
     self.waterFlowView = nil;
+    [self.itemsHeight removeAllObjects];
     self.itemsHeight = nil;
-    self.itemDatas = nil;
 }
 
 - (void) viewWillAppear:(BOOL)animated

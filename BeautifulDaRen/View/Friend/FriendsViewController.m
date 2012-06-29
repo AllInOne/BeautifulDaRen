@@ -81,7 +81,6 @@
     [self setSearchController:nil];
     [self setSections:nil];
     [self setSectionsArray:nil];
-    [self setFriendsList:nil];
 }
 
 - (void)dealloc {

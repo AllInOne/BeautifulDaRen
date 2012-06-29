@@ -21,6 +21,18 @@
 #import "BSDKManager.h"
 #import "UIImageView+WebCache.h"
 
+typedef enum
+{
+    SECTION_NICKNAME = 0,
+    SECTION_MODIFYPASSWORD ,
+    SECTION_CITY,
+    SECTION_ADDRESS,
+    SECTION_PHONE,
+//    SECTION_SENIOR,
+    SECTION_BRIEF,
+    SECTION_COUNT
+}SECTION_NAME;
+
 @interface MineEditingViewController()
 
 @property (retain, nonatomic) IBOutlet UIButton * updateAvatarButton;
@@ -87,11 +99,9 @@
     [self.navigationItem setTitle:NSLocalizedString(@"edit_profile", @"edit_profile")];
     [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
     [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onSaveButtonClicked) title:NSLocalizedString(@"save", @"save")]];
-    _tableViewDict = [[NSMutableDictionary alloc] init];
     
-    [_tableViewDict removeAllObjects];
     NSDictionary * dict = [[NSUserDefaults standardUserDefaults] objectForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
-    _tableViewDict = [dict mutableCopy];
+    _tableViewDict = [[NSMutableDictionary alloc] initWithDictionary:dict];
 }
 
 - (void)viewDidUnload
@@ -100,7 +110,6 @@
     
     self.updateAvatarButton = nil;
     self.tableViewDict = nil;
-    self.avatarImage = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -148,7 +157,7 @@
         }
         case 2:
         {
-            number = 7;
+            number = SECTION_COUNT;
             break;
         }
     }
@@ -216,13 +225,13 @@
         }
         ButtonViewCell * buttonViewCell = (ButtonViewCell*)cell;
         switch ([indexPath row]) {
-            case 0:
+            case SECTION_NICKNAME:
             {
                 buttonViewCell.leftLabel.text = NSLocalizedString(@"nickname", @"");
                 buttonViewCell.buttonText.text = [_tableViewDict valueForKey:KEY_ACCOUNT_USER_NAME];
                 break;
             }
-            case 1:
+            case SECTION_MODIFYPASSWORD:
             {
                 buttonViewCell.leftLabel.text = NSLocalizedString(@"modify_password", @"");
                 buttonViewCell.leftLabel.frame = CGRectMake(buttonViewCell.leftLabel.frame.origin.x,
@@ -233,31 +242,31 @@
                 buttonViewCell.buttonText.frame = CGRectZero;
                 break;
             }
-            case 2:
+            case SECTION_CITY:
             {
                 buttonViewCell.leftLabel.text = NSLocalizedString(@"city", @"");
                 buttonViewCell.buttonText.text = [_tableViewDict valueForKey:KEY_ACCOUNT_CITY];
                 break;
             }
-            case 3:
+            case SECTION_ADDRESS:
             {
                 buttonViewCell.leftLabel.text = NSLocalizedString(@"address", @"");
                 buttonViewCell.buttonText.text = [_tableViewDict valueForKey:KEY_ACCOUNT_ADDRESS];
                 break;
             }
-            case 4:
+            case SECTION_PHONE:
             {
                 buttonViewCell.leftLabel.text = NSLocalizedString(@"phone", @"");
                 buttonViewCell.buttonText.text = [_tableViewDict valueForKey:KEY_ACCOUNT_PHONE];
                 break;
             }
-            case 5:
-            {
-                buttonViewCell.leftLabel.text = NSLocalizedString(@"senior", @"");
-                buttonViewCell.buttonText.text = @"高级内容";
-                break;
-            } 
-            case 6:
+//            case SECTION_SENIOR:
+//            {
+//                buttonViewCell.leftLabel.text = NSLocalizedString(@"senior", @"");
+//                buttonViewCell.buttonText.text = @"高级内容";
+//                break;
+//            } 
+            case SECTION_BRIEF:
             {
                 buttonViewCell.leftLabel.text = NSLocalizedString(@"brief", @"");
                 buttonViewCell.buttonText.text = [_tableViewDict valueForKey:KEY_ACCOUNT_INTRO];
@@ -330,16 +339,16 @@
         else {
             EditDoneBlock block = nil;
             
-            if(row == 5)
-            {
-                type = EdittingViewController_type1;
-                
-            }
-            else
+//            if(row == SECTION_SENIOR)
+//            {
+//                type = EdittingViewController_type1;
+//                
+//            }
+//            else
             {
                 type = EdittingViewController_type0;
                 switch (row) {
-                    case 0:
+                    case SECTION_NICKNAME:
                     {
                         block = ^(NSString * text)
                         {
@@ -349,7 +358,7 @@
                         };
                         break;
                     }
-                    case 3:
+                    case SECTION_ADDRESS:
                     {
                         block = ^(NSString * text)
                         {
@@ -359,7 +368,7 @@
                         };
                         break;
                     }
-                    case 4:
+                    case SECTION_PHONE:
                     {
                         block = ^(NSString * text)
                         {
@@ -369,7 +378,7 @@
                         };
                         break;
                     }
-                    case 6:
+                    case SECTION_BRIEF:
                     {
                         block = ^(NSString * text)
                         {
