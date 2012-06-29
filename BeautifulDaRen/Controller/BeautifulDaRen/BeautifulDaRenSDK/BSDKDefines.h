@@ -142,4 +142,9 @@
 #define K_BSDK_IS_BLOG_FAVOURATE(data) (([data objectForKey:K_BSDK_ISFAV] != nil) \
                                         && [[data objectForKey:K_BSDK_ISFAV] isEqual:@"1"])
 
+#define K_BSDK_USERTYPE             @"UserType"
+#define K_BSDK_USERTYPE_SAME_CITY   @"1"
+#define K_BSDK_USERTYPE_INTERESTED  @"2"
+#define K_BSDK_USERTYPE_HOT         @"3"
+
 #endif
