@@ -134,7 +134,6 @@
 {
     [super viewDidUnload];
     self.contentItems  = nil;
-    self.categoryListView = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
