@@ -55,13 +55,13 @@
 #pragma mark UITableViewDelegate
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString * accountInfoCellIdentifier = @"AccountInfoInputCell";
+    static NSString * accountInfoCellIdentifier = @"AccountInfoInputCell0";
     UITableViewCell * cell = nil;
     switch ([indexPath section]) {
         case 0:
             cell = [tableView dequeueReusableCellWithIdentifier:accountInfoCellIdentifier];
             if(!cell) {
-                cell = [[[NSBundle mainBundle] loadNibNamed:accountInfoCellIdentifier owner:self options:nil] objectAtIndex:0];
+                cell = [[[NSBundle mainBundle] loadNibNamed:@"AccountInfoInputCell" owner:self options:nil] objectAtIndex:0];
             }
             if([indexPath row] == 0) {
                 ((AccountInfoInputCell*)cell).inputLabel.text =NSLocalizedString(@"account_user_account", @"user_account");

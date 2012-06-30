@@ -150,28 +150,30 @@ enum
 #pragma mark UITableViewDataSource
 - (UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString * account_input_identifier = @"AccountInfoInputCell";
+    static NSString * account_input_identifier0 = @"AccountInfoInputCell0";
+    static NSString * account_input_identifier3 = @"AccountInfoInputCell3";
     static NSString * button_view_identifier = @"ButtonViewCell";
     UITableViewCell * cell = nil;
     NSInteger section = [indexPath section];
     if(section == 0)
     {
-        cell = [tableView dequeueReusableCellWithIdentifier:account_input_identifier];
+        NSInteger index = 0;
+        switch ([indexPath row]) {
+            case 0:
+            case 1:
+            case 2:
+            case 3:
+                index = 0;
+                cell = [tableView dequeueReusableCellWithIdentifier:account_input_identifier0];
+                break;
+            case 4:
+                index = 3;
+                cell = [tableView dequeueReusableCellWithIdentifier:account_input_identifier3];
+                break;
+        }
         if(!cell)
         {
-            NSInteger index = 0;
-            switch ([indexPath row]) {
-                case 0:
-                case 1:
-                case 2:
-                case 3:
-                    index = 0;
-                    break;
-                case 4:
-                    index = 3;
-                    break;
-            }
-            cell = [[[NSBundle mainBundle] loadNibNamed:account_input_identifier owner:self options:nil] objectAtIndex:index];
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"AccountInfoInputCell" owner:self options:nil] objectAtIndex:index];
         }
         AccountInfoInputCell * accountInfoInputCell = ((AccountInfoInputCell*)cell);
         switch ([indexPath row]) {

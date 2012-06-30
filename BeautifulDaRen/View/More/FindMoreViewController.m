@@ -30,22 +30,27 @@
 @property (retain, nonatomic) IBOutlet UIScrollView * sameCityDaRenView;
 @property (retain, nonatomic) IBOutlet UIScrollView * youMayInterestinView;
 @property (retain, nonatomic) IBOutlet UIScrollView * hotDaRenView;
-@property (retain, nonatomic) IBOutlet WaterFlowView * searchWeiboView;
 @property (retain, nonatomic) IBOutlet UITableView * searchUserView;
 @property (retain, nonatomic) IBOutlet UISearchBar * searchBar;
+@property (retain, nonatomic) IBOutlet WaterFlowView * searchWeiboView;
+
 @property (assign, nonatomic) NSInteger searchUserPageIndex;
 @property (assign, nonatomic) NSInteger searchWeiboPageIndex;
-@property (nonatomic, retain) NSMutableArray *searchResults;
-@property (nonatomic, retain) NSMutableArray *searchWeiboResults;
+
+@property (retain, nonatomic) NSMutableArray *searchUserResults;
+@property (retain, nonatomic) NSMutableArray *searchWeiboResults;
+@property (retain, nonatomic) NSMutableArray *sameCityUserResults;
+@property (retain, nonatomic) NSMutableArray *interestingUserResults;
+@property (retain, nonatomic) NSMutableArray *hotUserResults;
 @property (retain, nonatomic) NSMutableArray * weiboHeights;
+
 @property (nonatomic, assign) BOOL isFindWeibo;
 @property (assign , atomic) BOOL isSearchMore;
 
-- (void) refreshSameCityDaRenView;
-- (void) refreshYouMayInterestinView;
-- (void) refreshHotDaRenView;
+- (void) refreshHotUser:(NSString*)type inScrollView:(UIScrollView*)scrollView;
 - (void) doSearch;
 - (void) loadWeiboHeights;
+- (void) clearData;
 
 @end
 
@@ -57,13 +62,16 @@
 @synthesize searchUserView = _searchUserView;
 @synthesize searchBar = _searchBar;
 @synthesize isFindWeibo = _isFindWeibo;
-@synthesize searchResults = _searchResults;
+@synthesize searchUserResults = _searchUserResults;
 @synthesize searchUserPageIndex = _searchUserPageIndex;
 @synthesize searchWeiboPageIndex = _searchWeiboPageIndex;
 @synthesize isSearchMore = _isSearchMore;
 @synthesize searchWeiboView = _searchWeiboView;
 @synthesize searchWeiboResults = _searchWeiboResults;
 @synthesize weiboHeights = _weiboHeights;
+@synthesize sameCityUserResults = _sameCityUserResults;
+@synthesize interestingUserResults =_interestingUserResults;
+@synthesize hotUserResults = _hotUserResults;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -90,9 +98,9 @@
 
 -(void)refreshView
 {
-    [self refreshSameCityDaRenView];
-    [self refreshHotDaRenView];
-    [self refreshYouMayInterestinView];
+    [self refreshHotUser:K_BSDK_USERTYPE_SAME_CITY inScrollView:self.sameCityDaRenView];
+    [self refreshHotUser:K_BSDK_USERTYPE_INTERESTED inScrollView:self.youMayInterestinView];
+    [self refreshHotUser:K_BSDK_USERTYPE_HOT inScrollView:self.hotDaRenView];
 }
 -(void)dealloc
 {
@@ -102,10 +110,13 @@
     [_contentScrollView release];
     [_searchUserView release];
     [_searchBar release];
-    [_searchResults release];
+    [_searchUserResults release];
     [_searchWeiboResults release];
     [_searchWeiboView release];
     [_weiboHeights release];
+    [_sameCityUserResults release];
+    [_interestingUserResults release];
+    [_hotUserResults release];
     [super dealloc];
 }
 - (void)viewDidUnload
@@ -117,17 +128,24 @@
     self.contentScrollView = nil;
     self.searchUserView = nil;
     self.searchBar = nil;
-    self.searchResults = nil;
+    self.searchUserResults = nil;
     self.searchWeiboView = nil;
     self.searchWeiboResults = nil;
     self.weiboHeights = nil;
+    self.sameCityUserResults = nil;
+    self.interestingUserResults = nil;
+    self.hotUserResults = nil;
 }
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.searchResults = [[NSMutableArray alloc] init];
+    self.searchUserResults = [[NSMutableArray alloc] init];
     self.searchWeiboResults = [[NSMutableArray alloc] init];
     self.weiboHeights = [[NSMutableArray alloc] init];
+    self.sameCityUserResults = [[NSMutableArray alloc] init];
+    self.interestingUserResults = [[NSMutableArray alloc] init];
+    self.hotUserResults = [[NSMutableArray alloc] init];
     self.searchUserPageIndex = 1;
     self.searchWeiboPageIndex = 1;
     self.isFindWeibo = NO;
@@ -204,157 +222,85 @@
     [weiboDetailController release];
 }
 
-- (void)refreshSameCityDaRenView
+- (void) refreshHotUser:(NSString*)type inScrollView:(UIScrollView*)scrollView
 {
     static NSString * cellViewIdentifier = @"FriendItemCell";
-    NSInteger scrollWidth = 0;
-    NSArray * nameArray = [NSArray arrayWithObjects:
-                           @"我是谁知道",
-                           @"飞越板凳", 
-                           @"优乐美",
-                           @"东东",
-                           @"你是我唯一", 
-                           @"天府广场",
-                           @"奥斯卡", 
-                           @"天之骄子",
-                           @"醉在黄鹤楼", 
-                           @"半个火枪手",
-                           @"影子爱人", 
-                           nil];
-    NSArray * avatars = [NSArray arrayWithObjects:
-                         @"search_avatar_sample1",
-                         @"search_avatar_sample2",
-                         @"search_avatar_sample3",
-                         @"search_avatar_sample4",
-                         @"search_avatar_sample5",
-                         @"search_avatar_sample6",
-                         @"search_avatar_sample7",
-                         @"search_avatar_sample8",
-                         @"search_avatar_sample9",
-                         @"search_avatar_sample10",
-                         @"search_avatar_sample11",
-                         nil];
-    for (int i = 0; i < [avatars count]; i++) {
-        FriendItemCell * cell = [[[NSBundle mainBundle] loadNibNamed:cellViewIdentifier owner:self options:nil] objectAtIndex:0];
-        
-        cell.frame = CGRectMake(i * (cell.frame.size.width + X_OFFSET), 0,
-                                cell.frame.size.width,
-                                cell.frame.size.height);
-        scrollWidth += (cell.frame.size.width + X_OFFSET);
-        
-        [_sameCityDaRenView addSubview:cell];
+    UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     
-        BorderImageView * tempBorderView = [[BorderImageView alloc] initWithFrame:cell.friendImageView.frame andImage:[UIImage imageNamed:[avatars objectAtIndex:i]]];
-        [cell.friendImageView addSubview:tempBorderView];
-        cell.friendNameLabel.text = [nameArray objectAtIndex:i];
-        
-        [tempBorderView release];
-    }
-    _sameCityDaRenView.delegate = self;
-    [_sameCityDaRenView setContentSize:CGSizeMake(scrollWidth, 0)];
-}
+    activityIndicator.frame = CGRectMake(SCREEN_WIDTH/2, 2*ADS_CELL_HEIGHT + CONTENT_MARGIN, CGRectGetWidth(activityIndicator.frame), CGRectGetHeight(activityIndicator.frame));
+    
+    [self.view addSubview:activityIndicator];
+    
+    [activityIndicator startAnimating];
 
--(void) refreshYouMayInterestinView
-{
-    static NSString * cellViewIdentifier = @"FriendItemCell";
-    NSInteger scrollWidth = 0;
-    NSArray * nameArray = [NSArray arrayWithObjects:
-                           @"天之骄子",
-                           @"醉在黄鹤楼", 
-                           @"半个火枪手",
-                           @"影子爱人", 
-                           @"我是谁知道",
-                           @"飞越板凳", 
-                           @"我的优乐美",
-                           @"东东",
-                           @"你是我唯一", 
-                           @"天府广场",
-                           @"奥斯卡", 
-                           nil];
-    NSArray * avatars = [NSArray arrayWithObjects:
-                         @"search_avatar_sample5",
-                         @"search_avatar_sample6",
-                         @"search_avatar_sample7",
-                         @"search_avatar_sample8",
-                         @"search_avatar_sample9",
-                         @"search_avatar_sample10",
-                         @"search_avatar_sample11",
-                         @"search_avatar_sample1",
-                         @"search_avatar_sample2",
-                         @"search_avatar_sample3",
-                         @"search_avatar_sample4",
-                         nil];
-    for (int i = 0; i < [avatars count]; i++) {
-        FriendItemCell * cell = [[[NSBundle mainBundle] loadNibNamed:cellViewIdentifier owner:self options:nil] objectAtIndex:0];
-        cell.frame = CGRectMake(i * (cell.frame.size.width + X_OFFSET), 0,
-                                cell.frame.size.width,
-                                cell.frame.size.height);
-        scrollWidth += (cell.frame.size.width + X_OFFSET);
+    __block NSInteger scrollWidth = 0;
+    processDoneWithDictBlock block = ^(AIO_STATUS status, NSDictionary *data)
+    {
+        [activityIndicator stopAnimating];
+        [activityIndicator removeFromSuperview];
+        [activityIndicator release];
         
-        [_youMayInterestinView addSubview:cell];
-        
-        BorderImageView * tempBorderView = [[BorderImageView alloc] initWithFrame:cell.friendImageView.frame andImage:[UIImage imageNamed:[avatars objectAtIndex:i]]];
-        [cell.friendImageView addSubview:tempBorderView];
-        cell.friendNameLabel.text = [nameArray objectAtIndex:i];
-        
-        [tempBorderView release];
-    }
-    _youMayInterestinView.delegate = self;
-    [_youMayInterestinView setContentSize:CGSizeMake(scrollWidth, 0)];
-}
+        NSMutableArray * resultArray = nil;
+        if ([type isEqualToString:K_BSDK_USERTYPE_SAME_CITY])
+        {
+            resultArray = self.sameCityUserResults;
+        }
+        else if([type isEqualToString:K_BSDK_USERTYPE_INTERESTED])
+        {
+            resultArray = self.interestingUserResults;
+        }
+        else if([type isEqualToString:K_BSDK_USERTYPE_HOT])
+        {
+            resultArray = self.hotUserResults;
+        }
 
-- (void) refreshHotDaRenView
-{
-    static NSString * cellViewIdentifier = @"FriendItemCell";
-    NSArray * nameArray = [NSArray arrayWithObjects:
-                           @"东东",
-                           @"你是我唯一", 
-                           @"天府广场",
-                           @"奥斯卡", 
-                           @"天之骄子",
-                           @"醉在黄鹤楼", 
-                           @"半个火枪手",
-                           @"影子爱人", 
-                           @"我是谁知道",
-                           @"飞越板凳", 
-                           @"我的优乐美",
-                           nil];
-    NSInteger scrollWidth = 0;
-    NSArray * avatars = [NSArray arrayWithObjects:
-                         @"search_avatar_sample9",
-                         @"search_avatar_sample10",
-                         @"search_avatar_sample11",
-                         @"search_avatar_sample1",
-                         @"search_avatar_sample2",
-                         @"search_avatar_sample3",
-                         @"search_avatar_sample4",
-                         @"search_avatar_sample5",
-                         @"search_avatar_sample6",
-                         @"search_avatar_sample7",
-                         @"search_avatar_sample8",
-                         nil];
-    for (int i = 0; i < [avatars count]; i++) {
-        FriendItemCell * cell = [[[NSBundle mainBundle] loadNibNamed:cellViewIdentifier owner:self options:nil] objectAtIndex:0];
-        cell.frame = CGRectMake(i * (cell.frame.size.width + X_OFFSET), 0,
-                                cell.frame.size.width,
-                                cell.frame.size.height);
-        scrollWidth += (cell.frame.size.width + X_OFFSET);
+        resultArray = [data objectForKey:@"UserList"];        
+        for (int i = 0; i < [resultArray count]; i++) {
+            NSDictionary * dict = [resultArray objectAtIndex:i];
+            FriendItemCell * cell = [[[NSBundle mainBundle] loadNibNamed:cellViewIdentifier owner:self options:nil] objectAtIndex:0];
+            
+            cell.frame = CGRectMake(i * (cell.frame.size.width + X_OFFSET), 0,
+                                    cell.frame.size.width,
+                                    cell.frame.size.height);
+            scrollWidth += (cell.frame.size.width + X_OFFSET);
+            
+            [scrollView addSubview:cell];
+
+            UIImageView * imageView = [[UIImageView alloc] init];
+//            NSString * url = [dict valueForKey:@"pic_102"];
+            NSString * url = @"http://111.67.203.138:9001/upfile/2012/06/29/48546776.jpg";
+            [imageView setImageWithURL:[NSURL URLWithString:url]];
+            
+            BorderImageView * tempBorderView = [[BorderImageView alloc] initWithFrame:cell.friendImageView.frame andView:imageView];
+            
+            [cell.friendImageView addSubview:tempBorderView];
+            cell.friendNameLabel.text = [dict valueForKey:KEY_ACCOUNT_USER_NAME];
+            
+            [tempBorderView release];
+        }
         
-        BorderImageView * tempBorderView = [[BorderImageView alloc] initWithFrame:cell.friendImageView.frame andImage:[UIImage imageNamed:[avatars objectAtIndex:i]]];
-        [cell.friendImageView addSubview:tempBorderView];
-        cell.friendNameLabel.text = [nameArray objectAtIndex:i];
+        [scrollView setContentSize:CGSizeMake(scrollWidth, 0)];
+    };
+    
+    if ([[BSDKManager sharedManager] isLogin])
+    {
         
-        [_hotDaRenView addSubview:cell];
-        [tempBorderView release];
+        NSString * userCity = [[[NSUserDefaults standardUserDefaults]
+                                valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO]
+                               valueForKey:KEY_ACCOUNT_CITY];
+        [[BSDKManager sharedManager] getHotUsersByCity:userCity
+                                              userType:type
+                                              pageSize:10
+                                             pageIndex:1
+                                       andDoneCallback:block];
     }
-    _hotDaRenView.delegate = self;
-    [_hotDaRenView setContentSize:CGSizeMake(scrollWidth, 0)];
+    scrollView.delegate = self;
 }
 #pragma mark UITableViewDelegate
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UIViewController * viewController = [[FriendDetailViewController alloc] initWithDictionary:[self.searchResults objectAtIndex:[indexPath row]]];
+    UIViewController * viewController = [[FriendDetailViewController alloc] initWithDictionary:[self.searchUserResults objectAtIndex:[indexPath row]]];
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: viewController];
     
     [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
@@ -372,7 +318,7 @@
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return  [_searchResults count];
+    return  [_searchUserResults count];
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -386,7 +332,7 @@
         cell = [[[NSBundle mainBundle] loadNibNamed:findFriendViewCell owner:self options:nil] objectAtIndex:0];
     }
     FindFriendViewCell * friendCell = (FindFriendViewCell*)cell;
-    NSDictionary * friendDict = [self.searchResults objectAtIndex:[indexPath row]];
+    NSDictionary * friendDict = [self.searchUserResults objectAtIndex:[indexPath row]];
     friendCell.nameLabel.text = [friendDict valueForKey:KEY_ACCOUNT_USER_NAME];
     friendCell.levelLabel.text = [NSString stringWithFormat:@"LV%d",[[friendDict valueForKey:KEY_ACCOUNT_LEVEL] intValue]];
     if ([[friendDict valueForKey:KEY_ACCOUNT_RELATION] intValue] == FRIEND_RELATIONSHIP_MY_FOLLOW
@@ -414,11 +360,13 @@
 #pragma mark - UISearchBarDelegate delegate methods
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
-{
+{    
+    [self clearData];
+
     CGFloat height = 44.0f;
     self.searchUserPageIndex = 1;
     self.searchWeiboPageIndex = 1;
-    [self.searchResults removeAllObjects];
+    [self.searchUserResults removeAllObjects];
     BOOL isShowsCancelButton = NO;
     BOOL isShowsScopeButton = NO;
     if([searchText length] > 0)
@@ -471,6 +419,7 @@
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar
 {
+    [self clearData];
     [self.searchUserView setHidden:YES];
     [self.searchWeiboView setHidden:YES];
     [self.contentScrollView setHidden:NO];
@@ -491,6 +440,7 @@
 
 - (void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 {
+    [self clearData];
     self.isFindWeibo = (selectedScope ==0) ? YES : NO;
     if (self.isFindWeibo)
     {
@@ -545,7 +495,7 @@
                                                    NSArray * tempArray = [[data valueForKey:@"UserList"] copy];
                                                    for (NSDictionary * dict in tempArray)
                                                    {
-                                                       [self.searchResults addObject:[dict mutableCopy]];
+                                                       [self.searchUserResults addObject:[dict mutableCopy]];
                                                    }
                                                }
                                                else {
@@ -594,7 +544,7 @@
 - (void) didButtonPressed:(UIButton*)button  inView:(UIView *) view
 {
     NSInteger index = button.tag;
-    NSMutableDictionary * friendDict = [self.searchResults objectAtIndex:index];
+    NSMutableDictionary * friendDict = [self.searchUserResults objectAtIndex:index];
     if ([[friendDict valueForKey:KEY_ACCOUNT_RELATION] intValue] == FRIEND_RELATIONSHIP_MY_FOLLOW
         || [[friendDict valueForKey:KEY_ACCOUNT_RELATION] intValue] == FRIEND_RELATIONSHIP_INTER_FOLLOW)
     {
@@ -707,5 +657,14 @@
         CGFloat frameHeight = (frameWidth / picWidth) * picHeight;
         [self.weiboHeights addObject:[NSNumber numberWithFloat:(frameHeight+4)]];
     }
+}
+
+- (void)clearData
+{
+    self.searchUserPageIndex = 1;
+    self.searchWeiboPageIndex = 1;
+    [self.searchWeiboResults removeAllObjects];
+    [self.searchUserResults removeAllObjects];
+    [self.weiboHeights removeAllObjects];
 }
 @end

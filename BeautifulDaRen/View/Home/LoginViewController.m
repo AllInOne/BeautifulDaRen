@@ -179,7 +179,7 @@
 
 - (UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString * account_input_identifier = @"AccountInfoInputCell";
+    static NSString * account_input_identifier = @"AccountInfoInputCell0";
     static NSString * button_view_identifier = @"ButtonViewCell";
     UITableViewCell * cell = nil;
     NSInteger section = [indexPath section];
@@ -188,7 +188,7 @@
         cell = [tableView dequeueReusableCellWithIdentifier:account_input_identifier];
         if(!cell)
         {
-            cell = [[[NSBundle mainBundle] loadNibNamed:account_input_identifier owner:self options:nil] objectAtIndex:0];
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"AccountInfoInputCell" owner:self options:nil] objectAtIndex:0];
         }
         AccountInfoInputCell * accountInfoInputCell = ((AccountInfoInputCell*)cell);
         switch ([indexPath row])
