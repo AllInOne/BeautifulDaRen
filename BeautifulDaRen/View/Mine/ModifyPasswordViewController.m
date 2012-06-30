@@ -66,7 +66,7 @@
 #pragma mark UITableViewDataSource
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString * accountInfoInputCellIdentifier = @"AccountInfoInputCell";
+    static NSString * accountInfoInputCellIdentifier = @"AccountInfoInputCell0";
     static NSString * buttonViewCellIdentifier = @"ButtonViewCell";
     UITableViewCell * cell = nil;
     if ([indexPath section] == 0)
@@ -74,7 +74,7 @@
         cell = [tableView dequeueReusableCellWithIdentifier:accountInfoInputCellIdentifier];
         if(!cell)
         {
-            cell = [[[NSBundle mainBundle] loadNibNamed:accountInfoInputCellIdentifier owner:self options:nil] objectAtIndex:0];
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"AccountInfoInputCell" owner:self options:nil] objectAtIndex:0];
         }
         AccountInfoInputCell * accountInfoInputCell = (AccountInfoInputCell*)cell;
         if ([indexPath row] == 0)

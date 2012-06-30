@@ -130,7 +130,7 @@
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 				<int key="IBUISelectionStyle">0</int>
 				<reference key="IBUIContentView" ref="529862311"/>
-				<string key="IBUIReuseIdentifier">AccountInfoInputCell</string>
+				<string key="IBUIReuseIdentifier">AccountInfoInputCell1</string>
 				<real value="38" key="IBUIRowHeight"/>
 			</object>
 			<object class="IBUITableViewCell" id="362557937">
@@ -222,6 +222,7 @@
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 				<int key="IBUISelectionStyle">0</int>
 				<reference key="IBUIContentView" ref="525282108"/>
+				<string key="IBUIReuseIdentifier">AccountInfoInputCell2</string>
 				<real value="34" key="IBUIRowHeight"/>
 			</object>
 			<object class="IBUITableViewCell" id="890837963">
@@ -306,6 +307,7 @@
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 				<int key="IBUISelectionStyle">0</int>
 				<reference key="IBUIContentView" ref="856921702"/>
+				<string key="IBUIReuseIdentifier">AccountInfoInputCell3</string>
 				<real value="39" key="IBUIRowHeight"/>
 			</object>
 			<object class="IBUITableViewCell" id="466325586">
@@ -395,6 +397,7 @@
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 				<int key="IBUISelectionStyle">0</int>
 				<reference key="IBUIContentView" ref="772040474"/>
+				<string key="IBUIReuseIdentifier">AccountInfoInputCell4</string>
 				<real value="28" key="IBUIRowHeight"/>
 			</object>
 		</array>
