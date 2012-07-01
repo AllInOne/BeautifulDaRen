@@ -235,6 +235,13 @@
             case FRIEND_RELATIONSHIP_INTER_FOLLOW:
                 title = NSLocalizedString(@"unfollow", @"unfollow");
                 break;
+            case FRIEND_RELATIONSHIP_MY_FOLLOW:
+                title = NSLocalizedString(@"unfollow", @"unfollow");
+                break;
+            case FRIEND_RELATIONSHIP_MY_FANS:
+                title = NSLocalizedString(@"remove_fan", @"remove_fan");
+                break;
+            case FRIEND_RELATIONSHIP_BALCK_LIST:
             default:
                 title = NSLocalizedString(@"follow", @"follow");
                 break;

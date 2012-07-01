@@ -135,6 +135,8 @@
 "her_fans" = "她的粉丝";
 "her_follows" = "她的关注";
 
+"remove_fan" = "移除粉丝";
+
 "favourate_succeed" = "收藏成功";
 "favourate_failed" = "收藏失败";
 "cancel_favourate_succeed" = "取消收藏成功";
