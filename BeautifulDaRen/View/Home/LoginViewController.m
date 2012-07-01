@@ -249,8 +249,8 @@
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([indexPath section] == 1) {
-        NSString* userName = self.accountNameField.text;
-        NSString* password = self.accountPwdField.text;
+        __block NSString* userName = self.accountNameField.text;
+        __block NSString* password = self.accountPwdField.text;
 #ifdef DEBUG        
         userName = @"jerry888";
         password = @"123456";
@@ -275,10 +275,16 @@
          {
              if(AIO_STATUS_SUCCESS == status && K_BSDK_IS_RESPONSE_OK(data))
              {
+                 
                  NSDictionary * dict = [data objectForKey:K_BSDK_USERINFO];
                  [[NSUserDefaults standardUserDefaults] setObject:dict forKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
                  [self.navigationController popToRootViewControllerAnimated:YES];
                  [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_LOGIN_SUCCESS object:self userInfo:data];
+                 
+                 
+                 [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:USERDEFAULT_IS_AUTO_LOGIN];
+                 [[NSUserDefaults standardUserDefaults] setObject:userName forKey:USERDEFAULT_AUTO_LOGIN_ACCOUNT_NAME];
+                 [[NSUserDefaults standardUserDefaults] setObject:password forKey:USERDEFAULT_AUTO_LOGIN_ACCOUNT_PASSWORD];
              }
              else
              {

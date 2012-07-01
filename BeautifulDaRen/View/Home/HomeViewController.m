@@ -79,8 +79,33 @@
         [self.view addSubview:self.adsPageView.view];
         self.adsPageView.delegate = self;
     }
-
-
+    
+    NSNumber * isAutoLogin = [[NSUserDefaults standardUserDefaults] objectForKey:USERDEFAULT_IS_AUTO_LOGIN];
+    if ([isAutoLogin boolValue])
+    {
+        __block NSString * userName = [[NSUserDefaults standardUserDefaults] objectForKey:USERDEFAULT_AUTO_LOGIN_ACCOUNT_NAME];
+        __block NSString * userPwd = [[NSUserDefaults standardUserDefaults] objectForKey:USERDEFAULT_AUTO_LOGIN_ACCOUNT_PASSWORD];
+        if (userName && userPwd)
+        {
+            [[BSDKManager sharedManager] loginWithUsername:userName
+                                                  password:userPwd
+                                           andDoneCallback:^(AIO_STATUS status, NSDictionary *data)
+             {
+                 if(AIO_STATUS_SUCCESS == status && K_BSDK_IS_RESPONSE_OK(data))
+                 {
+                     NSDictionary * dict = [data objectForKey:K_BSDK_USERINFO];
+                     [[NSUserDefaults standardUserDefaults] setObject:dict forKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
+                     [self.navigationController popToRootViewControllerAnimated:YES];
+                     [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_LOGIN_SUCCESS object:self userInfo:data];
+                 }
+                 else
+                 {
+                     [[iToast makeText:[NSString stringWithFormat:@"%@", K_BSDK_GET_RESPONSE_MESSAGE(data)]] show];
+                 }
+             }];
+        }
+    }
+    
     [self refreshNavigationView];
     [self refreshWeibosView];
 }
@@ -191,21 +216,20 @@
     else {
         if([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0)
         {
-            if(![[BSDKManager sharedManager] isLogin])
-            {
-                UIBarButtonItem* loginButton = [ViewHelper getBarItemOfTarget:self action:@selector(onLoginBtnSelected:) title:NSLocalizedString(@"login", @"login button on navigation")];
-                
-                UIBarButtonItem* registerButton =[ViewHelper getBarItemOfTarget:self action:@selector(onRegisterBtnSelected:) title:NSLocalizedString(@"register", @"register button on navigation")];
-                
-                NSArray * navigationBtns = [NSArray arrayWithObjects:registerButton, loginButton, nil];
-                // setRightBarButtonItems only availability on ios 5.0 and later.
-                [self.navigationItem setRightBarButtonItems:navigationBtns animated:YES];
-            }
+            UIBarButtonItem* loginButton = [ViewHelper getBarItemOfTarget:self action:@selector(onLoginBtnSelected:) title:NSLocalizedString(@"login", @"login button on navigation")];
+            
+            UIBarButtonItem* registerButton =[ViewHelper getBarItemOfTarget:self action:@selector(onRegisterBtnSelected:) title:NSLocalizedString(@"register", @"register button on navigation")];
+            
+            NSArray * navigationBtns = [NSArray arrayWithObjects:registerButton, loginButton, nil];
+            // setRightBarButtonItems only availability on ios 5.0 and later.
+            [self.navigationItem setRightBarButtonItems:navigationBtns animated:YES];
         }
         else
         {
             [self.navigationItem setRightBarButtonItem:[ViewHelper getRightBarItemOfTarget1:self action1:@selector(onLoginBtnSelected:) title1:NSLocalizedString(@"login", @"login button on navigation") target2:self action2:@selector(onRegisterBtnSelected:) title2:NSLocalizedString(@"register", @"register button on navigation")]];
         }
+        
+        [self.navigationItem setTitle:nil];
         [self.navigationItem setLeftBarButtonItem:[ViewHelper getLeftBarItemOfImageName:@"beautifuldaren_logo" rectSize:CGRectMake(0, 0, NAVIGATION_LEFT_LOGO_WIDTH, NAVIGATION_LEFT_LOGO_HEIGHT)]];
     }
 }
