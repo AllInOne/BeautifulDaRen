@@ -34,6 +34,7 @@
 @property (nonatomic, retain) CLLocation * currentLocation;
 @property (nonatomic, retain) NSString * locationString;
 @property (nonatomic, retain) NSString * category;
+@property (nonatomic, retain) NSArray * categories;
 
 - (void)setContentFrame:(CGRect)frame;
 - (void)startSelectCategoryViewWithData:(NSArray*)categories;
@@ -61,6 +62,8 @@
 @synthesize currentLocation = _currentLocation;
 @synthesize locationString = _locationString;
 @synthesize category = _category;
+@synthesize categories = _categories;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -132,6 +135,8 @@
     [self.atButton setEnabled:NO];
     [self.locationButton setEnabled:NO];
     [self.categoryButton setEnabled:NO];
+    
+     NSLog(@"weibo composer view load");
 }
 
 - (void)viewDidUnload
@@ -154,6 +159,7 @@
     [self setLocationLoadingView:nil];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    NSLog(@"weibo composer view unload");
 }
 
 - (void)dealloc
@@ -179,20 +185,10 @@
     [_currentLocation release];
     [_locationString release];
     [_category release];
+    [_categories release];
     
     [super dealloc];
 }
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-	[super viewWillDisappear:animated];
-}
-
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -479,8 +475,8 @@
 
 - (void)startSelectCategoryViewWithData:(NSArray*)categories
 {
-    SelectCategoryViewController *categorySelectionController = 
-    [[SelectCategoryViewController alloc] initWithNibName:nil bundle:nil];
+    CategorySelectViewController *categorySelectionController = 
+    [[CategorySelectViewController alloc] initWithNibName:nil bundle:nil];
     categorySelectionController.categoryListData = categories;
     categorySelectionController.delegate = self;
     categorySelectionController.initialSelectedCategoryId = self.category;
@@ -496,22 +492,18 @@
 {
     [self.categoryButton setEnabled:NO];
 //    NSArray * categories = [[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_CATEGORY];
-////    if (categories) {
-////        [self startSelectCategoryViewWithData:categories];
-////    }
-////    else
+    if (self.categories) {
+        [self startSelectCategoryViewWithData:self.categories];
+    }
+    else
     {
         [[BSDKManager sharedManager] getWeiboClassesWithDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-            // TODO: set to defautls
-            [self.categoryButton setEnabled:YES];
             NSArray * categories = [data objectForKey:K_BSDK_CLASSLIST];
-            [[NSUserDefaults standardUserDefaults] setObject:categories forKey:USERDEFAULT_CATEGORY];
-            
+            self.categories = categories;
+            [self.categoryButton setEnabled:YES];
             [self startSelectCategoryViewWithData:categories];
         }];
     }
-    
-
 }
 
 - (IBAction)onSinaPressed:(id)sender

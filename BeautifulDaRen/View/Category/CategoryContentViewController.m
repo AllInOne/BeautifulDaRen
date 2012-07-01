@@ -84,8 +84,8 @@
 -(void)dealloc
 {
     [super dealloc];
-    [_contentItems release];
     [_categoryListView release];
+    [_contentItems release];
 }
 
 #pragma mark - View lifecycle

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "FriendsSelectionViewControllerDelegate.h"
-#import "SelectCategoryViewController.h"
+#import "CategorySelectViewController.h"
 #import "TakePhotoViewController.h"
 
 @interface WeiboComposerViewController : UIViewController <UIActionSheetDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate,
