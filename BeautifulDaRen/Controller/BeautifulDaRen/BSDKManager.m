@@ -377,12 +377,13 @@ static BSDKManager *sharedInstance;
     
     [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETLIST forKey:K_BSDK_ACTION];
+    [params setObject:[NSString stringWithFormat:@"%d", pageIndex] forKey:K_BSDK_PAGEINDEX];
+    [params setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:K_BSDK_PAGESIZE];
     if (username)
     {
         [params setObject:username forKey:K_BSDK_FOLLOWUSERNAME];
     }
-    
-    
+
     [self sendRequestWithMethodName:nil
                          httpMethod:@"POST" 
                              params:params 
@@ -396,16 +397,6 @@ static BSDKManager *sharedInstance;
                      pageIndex:(NSInteger)pageIndex 
                andDoneCallback:(processDoneWithDictBlock)callback
 {
-    //    if (!self.isLogin) {
-    //        callback(AIO_STATUS_NOT_SIGNED_IN, nil);
-    //        return;
-    //    }
-    
-    //    processDoneWithDictBlock loginCallbackShim = ^(AIO_STATUS status, NSDictionary * data)
-    //    {
-    //        callback(status, [data objectForKey:K_BSDK_BLOGLIST]);
-    //    };
-    
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:5];
     
     [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
