@@ -13,7 +13,7 @@
 
 @interface WeiboComposerViewController : UIViewController <UIActionSheetDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate,
     FriendsSelectionViewControllerDelegate,
-    SelectCategoryProtocol,TakePhotoControllerDelegate, UIAlertViewDelegate>
+    SelectCategoryProtocol, UIAlertViewDelegate>
 
 @property (nonatomic, retain) UIImage * selectedImage;
 

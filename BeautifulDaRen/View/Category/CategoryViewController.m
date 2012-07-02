@@ -45,10 +45,11 @@
 }
 
 - (void)dealloc {
-    [super dealloc];
     [self.adsPageView stop];
     [_adsPageView release];
     [_categoryContentView release];
+    
+    [super dealloc];
 }
 
 - (void)viewDidUnload
@@ -115,7 +116,7 @@
     
     [UIView commitAnimations];
     
-    [self.adsPageView removeFromParentViewController];
+    [self.adsPageView.view removeFromSuperview];
     [self setAdsPageView:nil];
 }
 
@@ -124,12 +125,10 @@
     {
         [view removeFromSuperview];
     }
-//    [self.categoryContentView.view setHidden:YES];
-//    [self.categoryContentView.view removeFromSuperview];
 
     [self setCategoryContentView:nil];
     if (self.adsPageView) {
-//        [self.adsPageView.view removeFromSuperview];
+
         [self.adsPageView stop];
         [self setAdsPageView:nil];
     }

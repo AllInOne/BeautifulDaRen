@@ -30,7 +30,6 @@
 
 @interface WeiboComposerViewController ()
 @property (nonatomic, assign) BOOL isKeypadShow;
-@property (nonatomic, retain) TakePhotoViewController * takePhotoViewController;
 @property (nonatomic, retain) CLLocation * currentLocation;
 @property (nonatomic, retain) NSString * locationString;
 @property (nonatomic, retain) NSString * category;
@@ -51,7 +50,6 @@
 @synthesize attachedImageBgButton = _attachedImageBgButton;
 @synthesize selectedImage = _selectedImage;
 @synthesize isKeypadShow = _isKeypadShow;
-@synthesize takePhotoViewController = _takePhotoViewController;
 @synthesize sinaButton = _sinaButton;
 @synthesize sinaShareImageView = _sinaShareImageView;
 @synthesize priceTextView = _priceTextView;
@@ -148,7 +146,6 @@
     [self setWeiboContentBgTextFiled:nil];
     [self setContentScrollView:nil];
     [self setMaketTextView:nil];
-    [self setTakePhotoViewController:nil];
     [self setSinaButton:nil];
     [self setSinaShareImageView:nil];
     [self setPriceTextView:nil];
@@ -173,7 +170,6 @@
     [_contentScrollView release];
     
     [_selectedImage release];
-    [_takePhotoViewController release];
     [_sinaButton release];
     [_sinaShareImageView release];
     [_priceTextView release];
@@ -558,25 +554,21 @@
                 
                 if ([pressed isEqualToString:IMAGE_PICKER_CAMERA])
                 {
-                    if (self.takePhotoViewController == nil) {
-                        _takePhotoViewController =
-                        [[TakePhotoViewController alloc] initWithNibName:nil bundle:nil]; 
-                    }
+                    UIImagePickerController * imagePicker = [APPDELEGATE getImagePicker];
                     
-                    [self.takePhotoViewController setDelegate: self];
-                    [self.takePhotoViewController setupImagePicker:UIImagePickerControllerSourceTypeCamera];
-                    [self presentModalViewController:self.takePhotoViewController.imagePickerController animated:YES];
+                    [imagePicker setDelegate: self];
+                    [imagePicker setSourceType:UIImagePickerControllerSourceTypeCamera];
+                    
+                    [self presentModalViewController:imagePicker animated:YES];
                 }
                 else if ([pressed isEqualToString:IMAGE_PICKER_LIBRARY])
                 {
-                    if (self.takePhotoViewController == nil) {
-                        _takePhotoViewController =
-                        [[TakePhotoViewController alloc] initWithNibName:nil bundle:nil]; 
-                    }
+                    UIImagePickerController * imagePicker = [APPDELEGATE getImagePicker];
                     
-                    [self.takePhotoViewController setDelegate: self];
-                    [self.takePhotoViewController setupImagePicker:UIImagePickerControllerSourceTypePhotoLibrary];
-                    [self presentModalViewController:self.takePhotoViewController.imagePickerController animated:YES];
+                    [imagePicker setDelegate: self];
+                    [imagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+                    
+                    [self presentModalViewController:imagePicker animated:YES];
                 }
                 else if ([pressed isEqualToString:IMAGE_PICKER_DELETE])
                 {
@@ -596,7 +588,7 @@
     self.selectedImage = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
     if (self.selectedImage)
     {
-        [self.attachedImageBgButton setBackgroundImage:self.selectedImage forState:UIControlStateNormal];
+        [self.attachedImageBgButton setImage:self.selectedImage forState:UIControlStateNormal];
     }
 
     [self dismissModalViewControllerAnimated:YES];
@@ -614,38 +606,4 @@
     self.category = [categories objectAtIndex:0];
 }
 
-#pragma mark TakePhotoControllerDelegate
-
-- (void)didTakePicture:(UIImage *)picture
-{
-    [self dismissModalViewControllerAnimated:YES];
-    self.selectedImage = nil;
-    self.selectedImage = picture;
-    if (self.selectedImage)
-    {
-        [self.attachedImageBgButton setImage:self.selectedImage forState:UIControlStateNormal];
-    }
-}
-
-- (void)didFinishWithCamera
-{
-//    [self dismissModalViewControllerAnimated:YES];
-}
-
-- (void)didChangeToGalleryMode
-{
-    if (self.takePhotoViewController != nil) {
-        [self setTakePhotoViewController:nil];
-    }
-    if (self.takePhotoViewController == nil) {
-        _takePhotoViewController =
-        [[TakePhotoViewController alloc] initWithNibName:nil bundle:nil]; 
-    }
-    
-    [self.takePhotoViewController setDelegate: self];
-    [self.takePhotoViewController setupImagePicker:UIImagePickerControllerSourceTypePhotoLibrary];
-    
-    [self dismissModalViewControllerAnimated:NO];
-    [self presentModalViewController:self.takePhotoViewController.imagePickerController animated:YES];
-}
 @end

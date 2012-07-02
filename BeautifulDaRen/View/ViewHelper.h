@@ -48,4 +48,6 @@
 + (BOOL)isSelf:(NSDictionary *) userInfo;
 
 + (NSString*)getMyUserId;
+
++ (NSString*)getUserDefaultAvatarImageByData:(NSDictionary*)userInfo;
 @end

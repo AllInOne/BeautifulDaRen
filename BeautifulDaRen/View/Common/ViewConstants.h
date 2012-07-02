@@ -51,6 +51,8 @@
 
 #define SYSTEM_VERSION_LESS_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
 
+
+// TODO: remove it and use defines in BSDKDefines.h
 enum
 {
     FRIEND_RELATIONSHIP_NONE = 1,
@@ -71,6 +73,8 @@ enum
 #define USERDEFAULT_AUTO_LOGIN_ACCOUNT_PASSWORD @"USERDEFAULT_AUTO_LOGIN_ACCOUNT_PASSWORD"
 #define USERDEFAULT_CATEGORY @"USERDEFAULT_CATEGORY"
 
+
+// TODO: remove them and use defines in BSDKDefines.h
 #define KEY_ACCOUNT_USER_NAME           @"UserName"
 #define KEY_ACCOUNT_EMAIL               @"Email"
 #define KEY_ACCOUNT_LEVEL               @"Levels"

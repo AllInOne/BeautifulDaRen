@@ -14,6 +14,7 @@
 #import "BSDKManager.h"
 #import "ViewConstants.h"
 #import "ViewHelper.h"
+#import "UIImageView+WebCache.h"
 
 #define FRIEND_PAGE_SIZE    (5)
 
@@ -284,11 +285,24 @@
     {
         cell = [[[NSBundle mainBundle] loadNibNamed:friendListViewCellIdentifier owner:self options:nil] objectAtIndex:0];
         FriendListViewCell * friendListViewCell = (FriendListViewCell*)cell;
-        BorderImageView * borderImageView = [[BorderImageView alloc] initWithFrame:friendListViewCell.avatarImageView.frame andImage:[UIImage imageNamed:[NSString  stringWithFormat:@"search_avatar_sample%d",[indexPath row]+1]]];
-        [friendListViewCell.avatarImageView addSubview:borderImageView];
-        [borderImageView release];
         
         NSDictionary * userDict = [self extractFriendDictionary:[self.friendsList objectAtIndex:[indexPath row]]];
+        NSString * avatarUrlString = [userDict objectForKey:K_BSDK_PICTURE_65];
+        BorderImageView * borderImageView = nil;
+        if (avatarUrlString && [avatarUrlString length]) {
+            UIImageView * avatarImageView = [[UIImageView alloc] init];
+            [avatarImageView setImageWithURL:[NSURL URLWithString:avatarUrlString]];
+            borderImageView = [[BorderImageView alloc] initWithFrame:friendListViewCell.avatarImageView.frame andView:avatarImageView needNotification:NO];
+            [avatarImageView release];
+        }
+        else
+        {
+            borderImageView = [[BorderImageView alloc] initWithFrame:friendListViewCell.avatarImageView.frame andImage:[UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:userDict]]];
+        }
+         
+        [friendListViewCell.avatarImageView addSubview:borderImageView];
+        [borderImageView release];
+
         friendListViewCell.friendNameLabel.text = [userDict valueForKey:KEY_ACCOUNT_USER_NAME];
         friendListViewCell.friendWeiboLabel.text = @"";
         

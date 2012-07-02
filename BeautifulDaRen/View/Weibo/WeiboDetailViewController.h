@@ -50,4 +50,6 @@
 
 -(IBAction)onBrandButtonPressed:(id)sender;
 -(IBAction)onBusinessButtonPressed:(id)sender;
+
+-(IBAction)onUserButtonPressed:(id)sender;
 @end

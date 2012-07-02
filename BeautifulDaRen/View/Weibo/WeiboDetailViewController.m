@@ -242,7 +242,7 @@
 
 - (void)onRefresh
 {
-    [[iToast makeText:NSLocalizedString(@"refresh", @"refresh")] show];
+    [self onRefreshButtonClicked];
 }
 
 -(IBAction)onCommentListButtonPressed:(UIButton*)sender
@@ -409,16 +409,19 @@
     // attach image
     NSInteger picWidth = [[self.weiboData objectForKey:K_BSDK_PICTURE_WIDTH] intValue];
     NSInteger picHeight = [[self.weiboData objectForKey:K_BSDK_PICTURE_HEIGHT] intValue];
-    UIImageView * placeholderImageView = [[UIImageView alloc] init];
-    [placeholderImageView setImageWithURL:[NSURL URLWithString:[self.weiboData objectForKey:K_BSDK_PICTURE_102]]];                                          
-    [self.weiboAttachedImageView setImageWithURL:[NSURL URLWithString:[self.weiboData objectForKey:K_BSDK_PICTURE_320]] placeholderImage:placeholderImageView.image];
-    
-    [placeholderImageView release];
-    
-    self.weiboAttachedImageView.frame = CGRectMake((SCREEN_WIDTH - IMAGE_WIDTH)/2, 
-                                                   CGRectGetMinY(self.weiboAttachedImageView.frame), 
-                                                   IMAGE_WIDTH, 
-                                                   picHeight * IMAGE_WIDTH/picWidth);
+    if (picWidth && picHeight) {
+        UIImageView * placeholderImageView = [[UIImageView alloc] init];
+        [placeholderImageView setImageWithURL:[NSURL URLWithString:[self.weiboData objectForKey:K_BSDK_PICTURE_102]]];                                          
+        [self.weiboAttachedImageView setImageWithURL:[NSURL URLWithString:[self.weiboData objectForKey:K_BSDK_PICTURE_320]] placeholderImage:placeholderImageView.image];
+        
+        [placeholderImageView release];
+        
+        self.weiboAttachedImageView.frame = CGRectMake((SCREEN_WIDTH - IMAGE_WIDTH)/2, 
+                                                       CGRectGetMinY(self.weiboAttachedImageView.frame), 
+                                                       IMAGE_WIDTH, 
+                                                       picHeight * IMAGE_WIDTH/picWidth);
+    }
+
     //  buttons
     self.favourateButton.frame = CGRectMake(self.favourateButton.frame.origin.x, self.weiboAttachedImageView.frame.origin.y + CGRectGetHeight(self.weiboAttachedImageView.frame) + CELL_CONTENT_MARGIN_BIG, self.favourateButton.frame.size.width, self.favourateButton.frame.size.height);
     
@@ -442,6 +445,10 @@
 
         if (CLLocationCoordinate2DIsValid(CLLocationCoordinate2DMake(latitude, longtitude)))
         {
+            if (_mapViewController) {
+                [_mapViewController.view removeFromSuperview];
+                [self setMapViewController:nil];
+            }
             _mapViewController = [[MapViewController alloc] initWithName:@"test map name" description:nil latitude:latitude longitude:longtitude showSelf:NO];
             _mapViewController.view.frame = CGRectMake(MAP_VIEW_X_OFFSET, yOffset, MAP_VIEW_WIDTH, MAP_VIEW_HEIGHT);
             _mapViewController.navigationController.toolbarHidden = YES;
@@ -462,22 +469,23 @@
     // Custom initialization
     [_detailScrollView setContentSize:CGSizeMake(SCREEN_WIDTH, self.contentLabel.frame.origin.y + CGRectGetHeight(self.contentLabel.frame) + 150)];
     
-    NSString * avatarUrl = [self.weiboData objectForKey:K_BSDK_PICTURE_65];
-    if (avatarUrl && [avatarUrl length]) {
-        [self.avatarImageView setImageWithURL:[NSURL URLWithString:avatarUrl]];
+    NSDictionary * authorInfo = [self.weiboData objectForKey:K_BSDK_USERINFO];
+    
+    NSString * avatarImageUrl = [authorInfo objectForKey:K_BSDK_PICTURE_65];
+    if (avatarImageUrl && [avatarImageUrl length]) {
+        [self.avatarImageView setImageWithURL:[NSURL URLWithString:avatarImageUrl] placeholderImage:[UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:authorInfo]]];
     }
     else
     {
-       [self.avatarImageView setImage:[UIImage imageNamed:@"avatar_big"]];
-    }   
-    
-    
+        [self.avatarImageView setImage:[UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:authorInfo]]];
+    }  
+
     self.weiboAttachedImageButton.frame = self.weiboAttachedImageView.frame;
     
     self.timestampLabel.text = [ViewHelper intervalSinceNow:[self.weiboData objectForKey:K_BSDK_CREATETIME]];
     [self.timestampLabel setTextColor:[UIColor purpleColor]];
     
-    self.usernameLabel.text = [[self.weiboData objectForKey:K_BSDK_USERINFO] objectForKey:K_BSDK_USERNAME];
+    self.usernameLabel.text = [authorInfo objectForKey:K_BSDK_USERNAME];
     
     NSString * price = [self.weiboData objectForKey:K_BSDK_PRICE];
     if (price && ([price intValue] != 0)) {
@@ -553,5 +561,16 @@
             [friendDetailViewController release];
         }
     }];
+}
+
+-(IBAction)onUserButtonPressed:(id)sender
+{
+    FriendDetailViewController *userDetailController = [[FriendDetailViewController alloc] initWithDictionary:[self.weiboData objectForKey:K_BSDK_USERINFO]];
+    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: userDetailController];
+    
+    [self.navigationController presentModalViewController:navController animated:YES];
+    
+    [navController release];
+    [userDetailController release];
 }
 @end

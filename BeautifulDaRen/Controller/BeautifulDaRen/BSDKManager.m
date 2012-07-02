@@ -885,6 +885,24 @@ static BSDKManager *sharedInstance;
     
 }
 
+- (void)removeFan:(NSString*)userId
+  andDoneCallback:(processDoneWithDictBlock)callback
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
+    
+    [params setObject:K_BSDK_CATEGORY_SNS forKey:K_BSDK_CATEGORY];
+    [params setObject:K_BSDK_ACTION_REMOVEFANS forKey:K_BSDK_ACTION];
+    [params setObject:userId forKey:K_BSDK_FANSUSERID];
+    
+    [self sendRequestWithMethodName:nil
+                         httpMethod:@"POST" 
+                             params:params 
+                       postDataType:kBSDKRequestPostDataTypeNormal
+                   httpHeaderFields:nil
+                       doneCallback:callback];
+
+}
+
 #pragma mark Social related API
 
 - (void)getFollowList:(NSString*)userId
