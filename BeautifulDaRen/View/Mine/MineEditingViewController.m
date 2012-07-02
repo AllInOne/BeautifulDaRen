@@ -47,14 +47,6 @@ typedef enum
 @synthesize tableViewDict = _tableViewDict;
 @synthesize avatarImage = _avatarImage;
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-    }
-    return self;
-}
-
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
@@ -110,6 +102,7 @@ typedef enum
     
     self.updateAvatarButton = nil;
     self.tableViewDict = nil;
+    self.avatarImage = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
