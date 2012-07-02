@@ -18,6 +18,7 @@
 #import "BSDKManager.h"
 #import "iToast.h"
 #import "WeiboComposerViewController.h"
+#import "UIImageView+WebCache.h"
 
 @interface FriendDetailViewController()
 @property (retain, nonatomic) IBOutlet UIButton * weiboButton;
@@ -39,11 +40,13 @@
 @property (retain, nonatomic) IBOutlet UILabel * pointLabel;
 @property (retain, nonatomic) IBOutlet UILabel * phoneLabel;
 @property (retain, nonatomic) IBOutlet UIImageView * genderImageView;
+@property (retain, nonatomic) IBOutlet UIImageView * avatarImageView;
 @property (retain, nonatomic) IBOutlet UIButton * actionButton;
 
 - (void) onActionButtonClicked: (UIButton*)sender;
 - (void) refreshTopView;
 - (void) initialize;
+- (void) refreshView;
 @end
 
 @implementation FriendDetailViewController
@@ -65,6 +68,7 @@
 @synthesize friendDictionary = _friendDictionary;
 @synthesize actionButton = _actionButton;
 @synthesize friendName = _friendName;
+@synthesize avatarImageView = _avatarImageView;
 
 - (void) initialize
 {
@@ -77,7 +81,15 @@
     
     UIBarButtonItem *flexible = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
-    UIBarButtonItem *atButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar_at_icon" target:self action:@selector(onAt)];
+    UIBarButtonItem *atButtonItem = nil;
+    
+    if ([[self.friendDictionary objectForKey:K_BSDK_GENDER] isEqualToString:K_BSDK_GENDER_FEMALE]) {
+        atButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar_at_icon" target:self action:@selector(onAt)];
+    }
+    else
+    {
+        atButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar_at_him" target:self action:@selector(onAt)];    
+    }
     
     UIBarButtonItem *removeButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar_remove_fan_icon" target:self action:@selector(onRemove)];
     NSString * relationship = [self.friendDictionary objectForKey:K_BSDK_RELATIONSHIP];
@@ -170,6 +182,15 @@
     [_actionButton release];
     [_friendName release];
     [_friendDictionary release];
+    [_avatarImageView release];
+    [_genderImageView release];
+    
+    [_nameLabel release];
+    [_cityLabel release];
+    [_detailAddressLabel release];
+    [_levelLabel release];
+    [_pointLabel release];
+    [_phoneLabel release];
 }
 - (void)viewDidUnload
 {
@@ -182,27 +203,50 @@
     self.publishedButton = nil;
     self.topicButton = nil;
     self.actionButton = nil;
+    self.avatarImageView = nil;
+    self.genderImageView = nil;
+    
+    self.nameLabel = nil;
+    self.cityLabel = nil;
+    self.detailAddressLabel = nil;
+    self.levelLabel = nil;
+    self.pointLabel = nil;
+    self.phoneLabel = nil;
 }
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self refreshTopView];
     
+    [self refreshView];
+}
+
+- (void)refreshView
+{
+    UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    
+    activityIndicator.center = CGPointMake(SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
+    [activityIndicator startAnimating];
+    
+    [self.view addSubview:activityIndicator];    
+
     processDoneWithDictBlock doneblock = ^(AIO_STATUS status, NSDictionary *data) {
-        [self.friendDictionary setValuesForKeysWithDictionary:data];
+        [activityIndicator stopAnimating];
+        [activityIndicator removeFromSuperview];
+        [activityIndicator release];
         
+        [self.friendDictionary setValuesForKeysWithDictionary:data];
         [self refreshTopView];
         [self.friendDetailView reloadData];
     };
     
     if (self.friendName) {
         [[BSDKManager sharedManager] getUserInforByName:self.friendName
-                                          andDoneCallback:doneblock];
+                                        andDoneCallback:doneblock];
     }
     else
     {
-        [self refreshTopView];
-        [self.friendDetailView reloadData];
+        [[BSDKManager sharedManager] getUserInforByName:[self.friendDictionary objectForKey:K_BSDK_USERNAME]
+                                        andDoneCallback:doneblock];
     }
 }
 
@@ -234,21 +278,24 @@
 
 -(IBAction)actionButtonClicked:(UIButton*)sender
 {
-    NSInteger relation = [[self.friendDictionary valueForKey:KEY_ACCOUNT_RELATION] intValue];
-    NSInteger userId = [[self.friendDictionary valueForKey:KEY_ACCOUNT_USER_ID] intValue];
+    NSInteger relation = [[self.friendDictionary valueForKey:K_BSDK_RELATIONSHIP] intValue];
+    NSInteger userId = [[self.friendDictionary valueForKey:K_BSDK_UID] intValue];
+    
+    
+    processDoneWithDictBlock doneBlock = ^(AIO_STATUS status, NSDictionary *data)
+    {
+        [self refreshView];
+    };
+    
     if (relation == FRIEND_RELATIONSHIP_MY_FOLLOW || relation == FRIEND_RELATIONSHIP_INTER_FOLLOW)
     {
         [[BSDKManager sharedManager] unFollowUser:userId
-                                  andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-                                      
-                                  }];
+                                  andDoneCallback:doneBlock];
     }
     else
     {
         [[BSDKManager sharedManager] followUser:userId
-                                andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-                                    
-                                }];
+                                andDoneCallback:doneBlock];
     }
 }
 #pragma mark - Table view data source
@@ -296,7 +343,7 @@
         else if(_isIdentification && [indexPath row] == 1)
         {
             buttonViewCell.leftLabel.text = NSLocalizedString(@"authentication", @"authentication");
-            buttonViewCell.buttonText.text = @"仁和春天人东店官方账号";
+            buttonViewCell.buttonText.text = @"";
             buttonViewCell.buttonRightIcon.hidden = YES;
         }
         else
@@ -485,14 +532,29 @@
     self.nameLabel.text = [self.friendDictionary valueForKey:KEY_ACCOUNT_USER_NAME];
     self.cityLabel.text = [self.friendDictionary valueForKey:KEY_ACCOUNT_CITY];
     self.detailAddressLabel.text = [self.friendDictionary valueForKey:KEY_ACCOUNT_ADDRESS];
-    self.levelLabel.text = [NSString stringWithFormat:@"LV%d",
+    self.levelLabel.text = [NSString stringWithFormat:@"LV %d",
                             [[self.friendDictionary valueForKey:KEY_ACCOUNT_LEVEL] intValue]];
-    self.pointLabel.text = [NSString stringWithFormat:@"%@%d",
+    self.pointLabel.text = [NSString stringWithFormat:@"%@ %d",
                             NSLocalizedString(@"point", @"point"),
                             [[self.friendDictionary valueForKey:KEY_ACCOUNT_POINT] intValue]];
     self.phoneLabel.text = [self.friendDictionary valueForKey:KEY_ACCOUNT_PHONE];
+    
+    NSString * avatarImageUrl = [self.friendDictionary objectForKey:K_BSDK_PICTURE_65];
+    if (avatarImageUrl && [avatarImageUrl length]) {
+        [self.avatarImageView setImageWithURL:[NSURL URLWithString:avatarImageUrl] placeholderImage:[UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:self.friendDictionary]]];
+    }
+    else
+    {
+        [self.avatarImageView setImage:[UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:self.friendDictionary]]];
+    }
+    
+    NSString * relationship = [self.friendDictionary objectForKey:K_BSDK_RELATIONSHIP];
     NSString * genderImageName = [[self.friendDictionary valueForKey:KEY_ACCOUNT_GENDER] intValue] == 1 ? @"gender_female" : @"gender_male";
     self.genderImageView.image = [UIImage imageNamed:genderImageName];
+    
+    NSString * buttonTitle = ([relationship isEqualToString:K_BSDK_RELATIONSHIP_MY_FOLLOW] || [relationship isEqualToString:K_BSDK_RELATIONSHIP_INTER_FOLLOW]) ? NSLocalizedString(@"unfollow", @"unfollow") : NSLocalizedString(@"follow", @"follow");
+    
+    [self.actionButton setTitle:buttonTitle forState:UIControlStateNormal];
 }
 
 @end

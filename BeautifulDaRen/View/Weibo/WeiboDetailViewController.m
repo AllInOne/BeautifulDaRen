@@ -445,6 +445,10 @@
 
         if (CLLocationCoordinate2DIsValid(CLLocationCoordinate2DMake(latitude, longtitude)))
         {
+            if (_mapViewController) {
+                [_mapViewController.view removeFromSuperview];
+                [self setMapViewController:nil];
+            }
             _mapViewController = [[MapViewController alloc] initWithName:@"test map name" description:nil latitude:latitude longitude:longtitude showSelf:NO];
             _mapViewController.view.frame = CGRectMake(MAP_VIEW_X_OFFSET, yOffset, MAP_VIEW_WIDTH, MAP_VIEW_HEIGHT);
             _mapViewController.navigationController.toolbarHidden = YES;
@@ -465,22 +469,23 @@
     // Custom initialization
     [_detailScrollView setContentSize:CGSizeMake(SCREEN_WIDTH, self.contentLabel.frame.origin.y + CGRectGetHeight(self.contentLabel.frame) + 150)];
     
-    NSString * avatarUrl = [self.weiboData objectForKey:K_BSDK_PICTURE_65];
-    if (avatarUrl && [avatarUrl length]) {
-        [self.avatarImageView setImageWithURL:[NSURL URLWithString:avatarUrl]];
+    NSDictionary * authorInfo = [self.weiboData objectForKey:K_BSDK_USERINFO];
+    
+    NSString * avatarImageUrl = [authorInfo objectForKey:K_BSDK_PICTURE_65];
+    if (avatarImageUrl && [avatarImageUrl length]) {
+        [self.avatarImageView setImageWithURL:[NSURL URLWithString:avatarImageUrl] placeholderImage:[UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:authorInfo]]];
     }
     else
     {
-       [self.avatarImageView setImage:[UIImage imageNamed:@"avatar_big"]];
-    }   
-    
-    
+        [self.avatarImageView setImage:[UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:authorInfo]]];
+    }  
+
     self.weiboAttachedImageButton.frame = self.weiboAttachedImageView.frame;
     
     self.timestampLabel.text = [ViewHelper intervalSinceNow:[self.weiboData objectForKey:K_BSDK_CREATETIME]];
     [self.timestampLabel setTextColor:[UIColor purpleColor]];
     
-    self.usernameLabel.text = [[self.weiboData objectForKey:K_BSDK_USERINFO] objectForKey:K_BSDK_USERNAME];
+    self.usernameLabel.text = [authorInfo objectForKey:K_BSDK_USERNAME];
     
     NSString * price = [self.weiboData objectForKey:K_BSDK_PRICE];
     if (price && ([price intValue] != 0)) {
@@ -556,5 +561,16 @@
             [friendDetailViewController release];
         }
     }];
+}
+
+-(IBAction)onUserButtonPressed:(id)sender
+{
+    FriendDetailViewController *userDetailController = [[FriendDetailViewController alloc] initWithDictionary:[self.weiboData objectForKey:K_BSDK_USERINFO]];
+    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: userDetailController];
+    
+    [self.navigationController presentModalViewController:navController animated:YES];
+    
+    [navController release];
+    [userDetailController release];
 }
 @end

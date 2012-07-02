@@ -116,7 +116,7 @@
     
     [UIView commitAnimations];
     
-    [self.adsPageView removeFromParentViewController];
+    [self.adsPageView.view removeFromSuperview];
     [self setAdsPageView:nil];
 }
 
