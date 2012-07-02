@@ -242,7 +242,7 @@
 
 - (void)onRefresh
 {
-    [[iToast makeText:NSLocalizedString(@"refresh", @"refresh")] show];
+    [self onRefreshButtonClicked];
 }
 
 -(IBAction)onCommentListButtonPressed:(UIButton*)sender
@@ -409,16 +409,19 @@
     // attach image
     NSInteger picWidth = [[self.weiboData objectForKey:K_BSDK_PICTURE_WIDTH] intValue];
     NSInteger picHeight = [[self.weiboData objectForKey:K_BSDK_PICTURE_HEIGHT] intValue];
-    UIImageView * placeholderImageView = [[UIImageView alloc] init];
-    [placeholderImageView setImageWithURL:[NSURL URLWithString:[self.weiboData objectForKey:K_BSDK_PICTURE_102]]];                                          
-    [self.weiboAttachedImageView setImageWithURL:[NSURL URLWithString:[self.weiboData objectForKey:K_BSDK_PICTURE_320]] placeholderImage:placeholderImageView.image];
-    
-    [placeholderImageView release];
-    
-    self.weiboAttachedImageView.frame = CGRectMake((SCREEN_WIDTH - IMAGE_WIDTH)/2, 
-                                                   CGRectGetMinY(self.weiboAttachedImageView.frame), 
-                                                   IMAGE_WIDTH, 
-                                                   picHeight * IMAGE_WIDTH/picWidth);
+    if (picWidth && picHeight) {
+        UIImageView * placeholderImageView = [[UIImageView alloc] init];
+        [placeholderImageView setImageWithURL:[NSURL URLWithString:[self.weiboData objectForKey:K_BSDK_PICTURE_102]]];                                          
+        [self.weiboAttachedImageView setImageWithURL:[NSURL URLWithString:[self.weiboData objectForKey:K_BSDK_PICTURE_320]] placeholderImage:placeholderImageView.image];
+        
+        [placeholderImageView release];
+        
+        self.weiboAttachedImageView.frame = CGRectMake((SCREEN_WIDTH - IMAGE_WIDTH)/2, 
+                                                       CGRectGetMinY(self.weiboAttachedImageView.frame), 
+                                                       IMAGE_WIDTH, 
+                                                       picHeight * IMAGE_WIDTH/picWidth);
+    }
+
     //  buttons
     self.favourateButton.frame = CGRectMake(self.favourateButton.frame.origin.x, self.weiboAttachedImageView.frame.origin.y + CGRectGetHeight(self.weiboAttachedImageView.frame) + CELL_CONTENT_MARGIN_BIG, self.favourateButton.frame.size.width, self.favourateButton.frame.size.height);
     
