@@ -317,7 +317,7 @@
             }
             else
             {
-//                imageView.image = [UIImage imageNamed:[ViewHelper getUser]];
+                imageView.image = [UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:dict]];
             }
             
             BorderImageView * tempBorderView = [[BorderImageView alloc] initWithFrame:cell.friendImageView.frame andView:imageView];
