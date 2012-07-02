@@ -14,8 +14,10 @@
 #import "FriendListViewController.h"
 #import "WeiboListViewController.h"
 #import "EdittingViewController.h"
+#import "BSDKDefines.h"
 #import "BSDKManager.h"
 #import "iToast.h"
+#import "WeiboComposerViewController.h"
 
 @interface FriendDetailViewController()
 @property (retain, nonatomic) IBOutlet UIButton * weiboButton;
@@ -68,7 +70,7 @@
 {
     [self.navigationItem setTitle:NSLocalizedString(@"her_home_page", @"her_home_page")];
     [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
-    [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onHomePageButtonClicked) title:NSLocalizedString(@"home_page", @"home_page")]];
+//    [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onHomePageButtonClicked) title:NSLocalizedString(@"home_page", @"home_page")]];
     _isIdentification = YES;
     
     UIToolbar *tempToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0,372, 320,44)];
@@ -78,6 +80,10 @@
     UIBarButtonItem *atButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar_at_icon" target:self action:@selector(onAt)];
     
     UIBarButtonItem *removeButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar_remove_fan_icon" target:self action:@selector(onRemove)];
+    NSString * relationship = [self.friendDictionary objectForKey:K_BSDK_RELATIONSHIP];
+    if ( !(relationship && ([relationship isEqualToString:K_BSDK_RELATIONSHIP_MY_FANS] || [relationship isEqualToString:K_BSDK_RELATIONSHIP_INTER_FOLLOW]))) {
+        [removeButtonItem setEnabled:NO];
+    }
     
     NSArray *barItems = [[NSArray alloc]initWithObjects:flexible, 
                          atButtonItem, 
@@ -103,13 +109,10 @@
     [tabBarBg release];
     [barItems release];
     [tempToolbar release];
-    
-    NSInteger relation = [[self.friendDictionary valueForKey:KEY_ACCOUNT_RELATION] intValue];
-    
-    NSString * buttonTitle = (relation == FRIEND_RELATIONSHIP_INTER_FOLLOW || relation == FRIEND_RELATIONSHIP_MY_FOLLOW) ? @"取消关注" : @"关注";
+
+    NSString * buttonTitle = ([relationship isEqualToString:K_BSDK_RELATIONSHIP_MY_FOLLOW] || [relationship isEqualToString:K_BSDK_RELATIONSHIP_INTER_FOLLOW]) ? NSLocalizedString(@"unfollow", @"unfollow") : NSLocalizedString(@"follow", @"follow");
     
     [self.actionButton setTitle:buttonTitle forState:UIControlStateNormal];
-
 }
 
 -(id)initWithFriendName:(NSString*)name
@@ -457,12 +460,24 @@
 
 - (void)onAt
 {
-    [[iToast makeText:@"@他"] show];
+    WeiboComposerViewController *weiboComposerViewControlller = 
+    [[WeiboComposerViewController alloc] initWithNibName:nil bundle:nil];
+    
+    [weiboComposerViewControlller.weiboContentTextView setText:[NSString stringWithFormat:@"@%@", [self.friendDictionary valueForKey:KEY_ACCOUNT_USER_NAME]]];
+    
+    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: weiboComposerViewControlller];
+    
+    [self.navigationController presentModalViewController:navController animated:YES];
+    [weiboComposerViewControlller release];
+    [navController release];
+    
 }
 
 - (void)onRemove
 {
-    [[iToast makeText:@"移除"] show];
+    [[BSDKManager sharedManager] removeFan:[self.friendDictionary valueForKey:KEY_ACCOUNT_USER_ID] andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+            [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
+    }];
 }
 
 - (void) refreshTopView

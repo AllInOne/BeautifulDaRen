@@ -171,4 +171,7 @@
                     pageIndex:(NSInteger)pageIndex 
               andDoneCallback:(processDoneWithDictBlock)callback;
 
+- (void)removeFan:(NSString*)userId
+  andDoneCallback:(processDoneWithDictBlock)callback;
+
 @end

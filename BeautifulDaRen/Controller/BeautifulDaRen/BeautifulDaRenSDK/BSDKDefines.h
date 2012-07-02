@@ -46,6 +46,8 @@
 #define K_BSDK_ACTION_ADDFAV @"AddFav"
 #define K_BSDK_ACTION_REMOVEFAV @"RemoveFav"
 
+#define K_BSDK_ACTION_REMOVEFANS @"RemoveFans"
+
 #define K_BSDK_ACTION_GETCOMMENTLIST @"GetCommentList"
 
 #define K_BSDK_PAGEINDEX @"Page"
@@ -56,6 +58,7 @@
 #define K_BSDK_USERID @"UserId"
 #define K_BSDK_ATUSERID @"AtUserId"
 #define K_BSDK_FAVUSERID @"FavUserId"
+#define K_BSDK_FANSUSERID @"FansUserId"
 #define K_BSDK_USERCOUNT @"UserCount"
 #define K_BSDK_FANSUSERNAME @"FansUserName"
 #define K_BSDK_FANSUSERINFO @"FansUserInfo"
@@ -146,5 +149,12 @@
 #define K_BSDK_USERTYPE_SAME_CITY   @"1"
 #define K_BSDK_USERTYPE_INTERESTED  @"2"
 #define K_BSDK_USERTYPE_HOT         @"3"
+
+#define K_BSDK_RELATIONSHIP         @"Relation"
+#define K_BSDK_RELATIONSHIP_NONE         @"1"
+#define K_BSDK_RELATIONSHIP_MY_FOLLOW    @"2"
+#define K_BSDK_RELATIONSHIP_MY_FANS      @"3"
+#define K_BSDK_RELATIONSHIP_INTER_FOLLOW @"4"
+#define K_BSDK_RELATIONSHIP_BLACK_LIST   @"5"
 
 #endif
