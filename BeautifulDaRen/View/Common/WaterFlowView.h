@@ -42,7 +42,7 @@
 - (void)reloadData;
 
 // TODO , now the reuse cell have some problem, so fix it in future.
-//- (id)dequeueReusableCellWithIdentifier:(NSString *)identifier withIndex:(NSInteger)index;
+- (id)dequeueReusableCellWithIdentifier:(NSString *)identifier withIndex:(NSInteger)index;
 @property (nonatomic, assign) id <WaterFlowViewDelegate> flowdelegate;
 @property (nonatomic, assign) id <WaterFlowViewDatasource> flowdatasource;
 @end

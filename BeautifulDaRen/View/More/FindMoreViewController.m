@@ -44,8 +44,10 @@
 @property (retain, nonatomic) NSMutableArray *hotUserResults;
 @property (retain, nonatomic) NSMutableArray * weiboHeights;
 
-@property (nonatomic, assign) BOOL isFindWeibo;
-@property (assign , atomic) BOOL isSearchMore;
+@property (assign, nonatomic) BOOL isFindWeibo;
+@property (assign, nonatomic) BOOL inSearching;
+@property (assign, nonatomic) BOOL isSearchMoreUser;
+@property (assign, nonatomic) BOOL isSearchMoreWeibo;
 
 - (void) refreshHotUser:(NSString*)type inScrollView:(UIScrollView*)scrollView;
 - (void) doSearch;
@@ -65,13 +67,15 @@
 @synthesize searchUserResults = _searchUserResults;
 @synthesize searchUserPageIndex = _searchUserPageIndex;
 @synthesize searchWeiboPageIndex = _searchWeiboPageIndex;
-@synthesize isSearchMore = _isSearchMore;
+@synthesize inSearching = _inSearching;
 @synthesize searchWeiboView = _searchWeiboView;
 @synthesize searchWeiboResults = _searchWeiboResults;
 @synthesize weiboHeights = _weiboHeights;
 @synthesize sameCityUserResults = _sameCityUserResults;
 @synthesize interestingUserResults =_interestingUserResults;
 @synthesize hotUserResults = _hotUserResults;
+@synthesize isSearchMoreUser = _isSearchMoreUser;
+@synthesize isSearchMoreWeibo = _isSearchMoreWeibo;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -149,7 +153,9 @@
     self.searchUserPageIndex = 1;
     self.searchWeiboPageIndex = 1;
     self.isFindWeibo = NO;
-    self.isSearchMore = YES;
+    self.inSearching = NO;
+    self.isSearchMoreUser = YES;
+    self.isSearchMoreWeibo = YES;
     [self.navigationItem setTitle:NSLocalizedString(@"find_weibo_or_friend", @"find_weibo_or_friend")];
     [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClicked) title:NSLocalizedString(@"refresh", @"refresh")]];
     if([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0)
@@ -351,9 +357,8 @@
 #pragma mark UIScrollViewDelegate
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-    if (self.searchUserView.contentOffset.y + self.searchUserView.frame.size.height >= self.searchUserView.contentSize.height && self.isSearchMore)
+    if (self.searchUserView.contentOffset.y + self.searchUserView.frame.size.height >= self.searchUserView.contentSize.height && !self.inSearching)
     {
-        self.searchUserPageIndex ++;
         [self doSearch];
     }
 }
@@ -364,9 +369,6 @@
     [self clearData];
 
     CGFloat height = 44.0f;
-    self.searchUserPageIndex = 1;
-    self.searchWeiboPageIndex = 1;
-    [self.searchUserResults removeAllObjects];
     BOOL isShowsCancelButton = NO;
     BOOL isShowsScopeButton = NO;
     if([searchText length] > 0)
@@ -440,7 +442,7 @@
 
 - (void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 {
-    [self clearData];
+//    [self clearData];
     self.isFindWeibo = (selectedScope ==0) ? YES : NO;
     if (self.isFindWeibo)
     {
@@ -468,77 +470,96 @@
 
 - (void) doSearch
 {
-    self.isSearchMore = NO;
-    if ([self.searchBar.text length] <= 0) {
-        return;
-    }
-    
-    UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    
-    activityIndicator.frame = CGRectMake(SCREEN_WIDTH/2, 2*ADS_CELL_HEIGHT + CONTENT_MARGIN, CGRectGetWidth(activityIndicator.frame), CGRectGetHeight(activityIndicator.frame));
-    
-    [self.view addSubview:activityIndicator];
-    
-    [activityIndicator startAnimating];
-    
-    if (self.isFindWeibo == NO) {
-        [[BSDKManager sharedManager] searchUsersByUsername:self.searchBar.text
-                                                  pageSize:10
-                                                 pageIndex:self.searchUserPageIndex 
-                                           andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-                                               [activityIndicator stopAnimating];
-                                               [activityIndicator removeFromSuperview];
-                                               [activityIndicator release];
-
-                                               self.isSearchMore = YES;
-                                               if (status == AIO_STATUS_SUCCESS) {
-                                                   NSArray * tempArray = [[data valueForKey:@"UserList"] copy];
-                                                   for (NSDictionary * dict in tempArray)
-                                                   {
-                                                       [self.searchUserResults addObject:[dict mutableCopy]];
-                                                   }
-                                               }
-                                               else {
-                                                   [[iToast makeText:[NSString stringWithFormat:@"search status error: %d", status]] show];
-                                               }
-                                               [self.searchUserView reloadData];
-
-        }];
-    }
-    else
+    if (!self.inSearching)
     {
-        processDoneWithDictBlock block = ^(AIO_STATUS status, NSDictionary *data)
+        self.inSearching = YES;
+        if ([self.searchBar.text length] <= 0) {
+            return;
+        }
+        UIActivityIndicatorView * activityIndicator = nil;
+        if ((self.isFindWeibo == NO && self.isSearchMoreUser == YES) 
+            || (self.isFindWeibo == YES && self.isSearchMoreWeibo == YES))
         {
-            [activityIndicator stopAnimating];
-            [activityIndicator removeFromSuperview];
-            [activityIndicator release];
+            activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
             
-            if (status == AIO_STATUS_SUCCESS)
+            activityIndicator.frame = CGRectMake(SCREEN_WIDTH/2, 2*ADS_CELL_HEIGHT + CONTENT_MARGIN, CGRectGetWidth(activityIndicator.frame), CGRectGetHeight(activityIndicator.frame));
+            
+            [self.view addSubview:activityIndicator];
+            
+            [activityIndicator startAnimating];
+        }
+        
+        if (self.isFindWeibo == NO && self.isSearchMoreUser == YES) {
+            [[BSDKManager sharedManager] searchUsersByUsername:self.searchBar.text
+                                                      pageSize:10
+                                                     pageIndex:self.searchUserPageIndex 
+                                               andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+                                                   [activityIndicator stopAnimating];
+                                                   [activityIndicator removeFromSuperview];
+                                                   [activityIndicator release];
+                                                   
+                                                   self.inSearching = NO;
+                                                   if ([[data valueForKey:@"UserList"] count] == 0)
+                                                   {
+                                                       self.isSearchMoreUser = NO;
+                                                   }
+                                                   if (status == AIO_STATUS_SUCCESS) {
+                                                       NSArray * tempArray = [[data valueForKey:@"UserList"] copy];
+                                                       for (NSDictionary * dict in tempArray)
+                                                       {
+                                                           [self.searchUserResults addObject:[dict mutableCopy]];
+                                                       }
+                                                   }
+                                                   else {
+                                                       [[iToast makeText:[NSString stringWithFormat:@"search status error: %d", status]] show];
+                                                   }
+                                                   [self.searchUserView reloadData];
+                                                   
+                                               }];
+            self.searchUserPageIndex ++;
+        }
+        else if(self.isFindWeibo == YES && self.isSearchMoreWeibo == YES)
+        {
+            processDoneWithDictBlock block = ^(AIO_STATUS status, NSDictionary *data)
             {
-                NSArray * array = [data valueForKey:@"BlogList"];
-                //TODO [felix] should to remove
-                for (NSDictionary * dict in array) {
-                    if ([[dict valueForKey:@"Picture_width"] floatValue] > 0)
-                    {
-                        [self.searchWeiboResults addObject:dict];
-                    }
+                [activityIndicator stopAnimating];
+                [activityIndicator removeFromSuperview];
+                [activityIndicator release];
+                
+                self.inSearching = NO;
+                if ([[data valueForKey:@"BlogList"] count] == 0)
+                {
+                    self.isSearchMoreWeibo = NO;
                 }
-                [self.weiboHeights removeAllObjects];
-                [self loadWeiboHeights];
-                [self.searchWeiboView reloadData];
-            }
-            else
-            {
-                [[iToast makeText:[NSString stringWithFormat:@"search status error: %d", status]] show];
-            }
-            self.isSearchMore = YES;
-        };
-
-        [[BSDKManager sharedManager] searchWeiboByKeyword:self.searchBar.text
-                                                 pageSize:10
-                                                pageIndex:self.searchWeiboPageIndex
-                                          andDoneCallback:block];
-    }}
+                if (status == AIO_STATUS_SUCCESS)
+                {
+                    NSArray * array = [data valueForKey:@"BlogList"];
+                    //TODO [felix] should to remove
+                    for (NSDictionary * dict in array) {
+                        if ([[dict valueForKey:@"Picture_width"] floatValue] > 0)
+                        {
+                            [self.searchWeiboResults addObject:dict];
+                        }
+                    }
+                    [self.weiboHeights removeAllObjects];
+                    [self loadWeiboHeights];
+                    [self.searchWeiboView reloadData];
+                }
+                else
+                {
+                    [[iToast makeText:[NSString stringWithFormat:@"search status error: %d", status]] show];
+                }
+            };
+            
+            [[BSDKManager sharedManager] searchWeiboByKeyword:self.searchBar.text
+                                                     pageSize:10
+                                                    pageIndex:self.searchWeiboPageIndex
+                                              andDoneCallback:block];
+            
+            self.searchWeiboPageIndex ++;
+        }
+    }
+}
 
 #pragma mark ButtonPressDelegate
 - (void) didButtonPressed:(UIButton*)button  inView:(UIView *) view
@@ -598,9 +619,8 @@
 
 - (void)didScrollToBottom
 {
-    if (self.isSearchMore)
+    if (!self.inSearching)
     {
-        self.searchWeiboPageIndex ++;
         [self doSearch];
     }
 }
@@ -622,7 +642,7 @@
     static NSString *cellIdentifier = @"WaterFlowCell";
 	WaterFlowCell *cell = nil;
     // TODO don't use reusedable cell, there is some issues.
-    //    cell = [flowView dequeueReusableCellWithIdentifier:cellIdentifier withIndex:index];
+    cell = [flowView dequeueReusableCellWithIdentifier:cellIdentifier withIndex:index];
 	if(cell == nil)
 	{
 		cell  = [[[WaterFlowCell alloc] initWithReuseIdentifier:cellIdentifier] autorelease];
@@ -663,6 +683,8 @@
 {
     self.searchUserPageIndex = 1;
     self.searchWeiboPageIndex = 1;
+    self.isSearchMoreWeibo = YES;
+    self.isSearchMoreUser = YES;
     [self.searchWeiboResults removeAllObjects];
     [self.searchUserResults removeAllObjects];
     [self.weiboHeights removeAllObjects];

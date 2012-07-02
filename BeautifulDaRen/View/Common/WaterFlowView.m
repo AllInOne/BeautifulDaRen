@@ -19,7 +19,7 @@
 
 - (void)initialize;
 - (void)reloadData;
-//- (void)recycleCellIntoReusableQueue:(WaterFlowCell*)cell withIndex:(NSInteger)index;
+- (void)recycleCellIntoReusableQueue:(WaterFlowCell*)cell withIndex:(NSInteger)index;
 - (void)pageScroll;
 - (void)waterFlowCellSelected:(NSNotification*)notification;
 
@@ -101,45 +101,45 @@
 
 #pragma mark-
 #pragma mark - manage and reuse cells
-//- (id)dequeueReusableCellWithIdentifier:(NSString *)identifier withIndex:(NSInteger)index
-//{
-//    WaterFlowCell *cell = nil;
-//    if (!identifier || identifier == 0 ) return nil;
-//    NSLog(@"dequeueReusableCellWithIdentifier  index  %d", index);
-//    NSMutableDictionary * cellsWithIndentifier = [self.reusableCells objectForKey:identifier];
-//    if (cellsWithIndentifier &&  cellsWithIndentifier.count > 0)
-//    {
-//        cell = [cellsWithIndentifier objectForKey:[NSNumber numberWithInt:index]];
-//        [[cell retain] autorelease];
-//        [[self.reusableCells objectForKey:identifier] removeObjectForKey:[NSNumber numberWithInt:index]];
-//        return cell;
-//    }
-//    return cell;
-//}
-//
-//- (void)recycleCellIntoReusableQueue:(WaterFlowCell *)cell withIndex:(NSInteger)index
-//{
-//    if(!self.reusableCells)
-//    {
-//        self.reusableCells = [NSMutableDictionary dictionary];
-//        
-//        NSMutableDictionary * dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:cell, [NSNumber numberWithInt:index], nil];
-//        [self.reusableCells setObject:dictionary forKey:cell.reuseIdentifier];
-//    }
-//    
-//    else 
-//    {
-//        if (![self.reusableCells objectForKey:cell.reuseIdentifier])
-//        {
-//            NSMutableDictionary * dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:cell, [NSNumber numberWithInt:index], nil];
-//            [self.reusableCells setObject:dictionary forKey:cell.reuseIdentifier];
-//        }
-//        else 
-//        {
-//            [[self.reusableCells objectForKey:cell.reuseIdentifier] setObject:cell forKey:[NSNumber numberWithInt:index]];
-//        }
-//    }
-//}
+- (id)dequeueReusableCellWithIdentifier:(NSString *)identifier withIndex:(NSInteger)index
+{
+    WaterFlowCell *cell = nil;
+    if (!identifier || identifier == 0 ) return nil;
+    NSLog(@"dequeueReusableCellWithIdentifier  index  %d", index);
+    NSMutableDictionary * cellsWithIndentifier = [self.reusableCells objectForKey:identifier];
+    if (cellsWithIndentifier &&  cellsWithIndentifier.count > 0)
+    {
+        cell = [cellsWithIndentifier objectForKey:[NSNumber numberWithInt:index]];
+        [[cell retain] autorelease];
+        [[self.reusableCells objectForKey:identifier] removeObjectForKey:[NSNumber numberWithInt:index]];
+        return cell;
+    }
+    return cell;
+}
+
+- (void)recycleCellIntoReusableQueue:(WaterFlowCell *)cell withIndex:(NSInteger)index
+{
+    if(!self.reusableCells)
+    {
+        self.reusableCells = [NSMutableDictionary dictionary];
+        
+        NSMutableDictionary * dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:cell, [NSNumber numberWithInt:index], nil];
+        [self.reusableCells setObject:dictionary forKey:cell.reuseIdentifier];
+    }
+    
+    else 
+    {
+        if (![self.reusableCells objectForKey:cell.reuseIdentifier])
+        {
+            NSMutableDictionary * dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:cell, [NSNumber numberWithInt:index], nil];
+            [self.reusableCells setObject:dictionary forKey:cell.reuseIdentifier];
+        }
+        else 
+        {
+            [[self.reusableCells objectForKey:cell.reuseIdentifier] setObject:cell forKey:[NSNumber numberWithInt:index]];
+        }
+    }
+}
 
 #pragma mark-
 #pragma mark- methods
@@ -212,7 +212,7 @@
         for (NSInteger j = 0; j < [array count]; j ++)
         {
             cell = [array objectAtIndex:j];
-//            [self recycleCellIntoReusableQueue:(WaterFlowCell*)cell withIndex:[[[self.cellIndex objectAtIndex:i] objectAtIndex:j] intValue]];
+            [self recycleCellIntoReusableQueue:(WaterFlowCell*)cell withIndex:[[[self.cellIndex objectAtIndex:i] objectAtIndex:j] intValue]];
             [cell removeFromSuperview];
         }
     }
@@ -359,27 +359,20 @@
 #pragma mark- UIScrollViewDelegate
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-    // TODO
-    if([self.cellHeight count] > 0)
-    {
-        [self pageScroll];
-    }
     if (self.contentOffset.y + self.frame.size.height >= self.contentSize.height) {
         if ([self.flowdelegate conformsToProtocol:@protocol(WaterFlowViewDelegate) ]) {
             [self.flowdelegate didScrollToBottom];
         }
     }
 }
-//
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-//{
-//    [self pageScroll];
-//    if (self.contentOffset.y + self.frame.size.height >= self.contentSize.height) {
-//        if ([self.flowdelegate conformsToProtocol:@protocol(WaterFlowViewDelegate) ]) {
-//            [self.flowdelegate didScrollToBottom];
-//        }
-//    }
-//}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if([self.cellHeight count] > 0)
+    {
+        [self pageScroll];
+    }
+}
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {

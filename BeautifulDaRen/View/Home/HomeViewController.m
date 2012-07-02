@@ -22,7 +22,7 @@
 //@property (retain, nonatomic) AdsPageView * adsPageView;
 @property (retain, nonatomic) ItemsViewController* itemsViewController;
 @property (retain, nonatomic) AdsPageView * adsPageView;
-@property (retain, nonatomic) id observerForLoginSuccess;
+@property (retain, nonatomic) id observerForLoginStatus;
 @property (retain, nonatomic) id observerForShouldLogin;
 
 - (void)refreshNavigationView;
@@ -32,7 +32,7 @@
 @implementation HomeViewController
 @synthesize itemsViewController = _itemsViewController;
 @synthesize adsPageView = _adsPageView;
-@synthesize observerForLoginSuccess = _observerForLoginSuccess;
+@synthesize observerForLoginStatus = _observerForLoginStatus;
 @synthesize observerForShouldLogin = _observerForShouldLogin;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -50,7 +50,7 @@
 {
     [super viewDidLoad];
     
-    self.observerForLoginSuccess = [[NSNotificationCenter defaultCenter]
+    self.observerForLoginStatus = [[NSNotificationCenter defaultCenter]
                  addObserverForName:K_NOTIFICATION_LOGIN_SUCCESS
                  object:nil
                  queue:nil
@@ -115,7 +115,7 @@
     [self.adsPageView stop];
     [_adsPageView release];
     [_itemsViewController release];
-    [_observerForLoginSuccess release];
+    [_observerForLoginStatus release];
     [_observerForShouldLogin release];
     [super dealloc];
 }
@@ -125,8 +125,8 @@
     [self.adsPageView stop];
     self.adsPageView = nil;
     self.itemsViewController = nil;
-    [[NSNotificationCenter defaultCenter] removeObserver:_observerForLoginSuccess];
-    self.observerForLoginSuccess = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:_observerForLoginStatus];
+    self.observerForLoginStatus = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self.observerForShouldLogin];
     self.observerForShouldLogin = nil;
     [super viewDidUnload];

@@ -27,7 +27,9 @@
 
 @property (retain, nonatomic) NSMutableArray * itemsHeight;
 @property (assign, nonatomic) NSInteger pageIndex;
+@property (retain, nonatomic) id observerForLoginStatus;
 @property (assign, atomic) BOOL isSyncSccuessed;
+@property (assign, nonatomic) BOOL isFetchMore;
 -(void)loadItemsHeight;
 
 @end
@@ -38,6 +40,8 @@
 @synthesize pageIndex = _pageIndex;
 @synthesize itemDatas = _itemDatas;
 @synthesize itemsHeight = _itemsHeight;
+@synthesize isFetchMore = _isFetchMore;
+@synthesize observerForLoginStatus = _observerForLoginStatus;
 
 -(id)initWithArray:(NSArray*)array
 {
@@ -87,9 +91,19 @@
     
     self.pageIndex = 1;
     self.isSyncSccuessed = YES;
+    self.isFetchMore = YES;
     
     _itemsHeight = [[NSMutableArray alloc] init];
     [self loadItemsHeight];
+    
+    self.observerForLoginStatus = [[NSNotificationCenter defaultCenter]
+                                   addObserverForName:K_NOTIFICATION_LOGIN_SUCCESS
+                                   object:nil
+                                   queue:nil
+                                   usingBlock:^(NSNotification *note) {
+                                       self.isFetchMore = YES;
+                                       self.pageIndex = 1;
+                                   }];
 
     _waterFlowView = [[WaterFlowView alloc] initWithFrame:self.view.frame];
     _waterFlowView.flowdelegate = self;
@@ -153,7 +167,7 @@
     static NSString *cellIdentifier = @"WaterFlowCell";
 	WaterFlowCell *cell = nil;
     // TODO don't use reusedable cell, there is some issues.
-//    cell = [flowView dequeueReusableCellWithIdentifier:cellIdentifier withIndex:index];
+    cell = [flowView dequeueReusableCellWithIdentifier:cellIdentifier withIndex:index];
 	if(cell == nil)
 	{
 		cell  = [[[WaterFlowCell alloc] initWithReuseIdentifier:cellIdentifier] autorelease];
@@ -197,7 +211,7 @@
 
 - (void)didScrollToBottom
 {
-    if (self.isSyncSccuessed) {
+    if (self.isSyncSccuessed && self.isFetchMore) {
         self.isSyncSccuessed = NO;
         self.pageIndex ++;
         UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
@@ -215,6 +229,10 @@
             [activityIndicator release];
             
             NSArray * array = [data valueForKey:@"BlogList"];
+            if ([array count] == 0)
+            {
+                self.isFetchMore = NO;
+            }
             //TODO [felix] should to remove
             for (NSDictionary * dict in array) {
                 if ([[dict valueForKey:@"Picture_width"] floatValue] > 0)
