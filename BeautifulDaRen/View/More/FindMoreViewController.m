@@ -457,8 +457,6 @@
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     [_contentScrollView setHidden:YES];
-    [self.searchUserView setHidden:NO];
-    [self.searchWeiboView setHidden:YES];
     [searchBar endEditing:YES];
     self.isSearchModel = YES;
 
