@@ -44,6 +44,7 @@
 @property (retain, nonatomic) NSMutableArray *hotUserResults;
 @property (retain, nonatomic) NSMutableArray * weiboHeights;
 
+@property (assign, nonatomic) BOOL isSearchModel;
 @property (assign, nonatomic) BOOL isFindWeibo;
 @property (assign, nonatomic) BOOL inSearching;
 @property (assign, nonatomic) BOOL isSearchMoreUser;
@@ -76,6 +77,7 @@
 @synthesize hotUserResults = _hotUserResults;
 @synthesize isSearchMoreUser = _isSearchMoreUser;
 @synthesize isSearchMoreWeibo = _isSearchMoreWeibo;
+@synthesize isSearchModel = _isSearchModel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -94,10 +96,10 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
-- (void)onRefreshButtonClicked
-{
-    [[iToast makeText:NSLocalizedString(@"refresh", @"refresh")] show];
-}
+//- (void)onRefreshButtonClicked
+//{
+//    [[iToast makeText:NSLocalizedString(@"refresh", @"refresh")] show];
+//}
 #pragma mark - View lifecycle
 
 -(void)refreshView
@@ -152,12 +154,13 @@
     self.hotUserResults = [[NSMutableArray alloc] init];
     self.searchUserPageIndex = 1;
     self.searchWeiboPageIndex = 1;
+    self.isSearchModel = NO;
     self.isFindWeibo = NO;
     self.inSearching = NO;
     self.isSearchMoreUser = YES;
     self.isSearchMoreWeibo = YES;
     [self.navigationItem setTitle:NSLocalizedString(@"find_weibo_or_friend", @"find_weibo_or_friend")];
-    [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClicked) title:NSLocalizedString(@"refresh", @"refresh")]];
+//    [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClicked) title:NSLocalizedString(@"refresh", @"refresh")]];
     if([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0)
     {
         _searchBar.backgroundImage = [UIImage imageNamed:@"search_switcher_btn"];
@@ -217,15 +220,45 @@
 
 - (void)waterFlowCellSelected:(NSNotification *)notification
 {
-    BorderImageView * weiboView = (BorderImageView*)notification.object;
-    WeiboDetailViewController *weiboDetailController = 
-    [[WeiboDetailViewController alloc] initWithDictionary:[self.searchWeiboResults objectAtIndex:weiboView.index]];
-    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: weiboDetailController];
-    
-    [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
-    
-    [navController release];
-    [weiboDetailController release];
+    if (self.isSearchModel && self.isFindWeibo)
+    {
+        BorderImageView * weiboView = (BorderImageView*)notification.object;
+        WeiboDetailViewController *weiboDetailController = 
+        [[WeiboDetailViewController alloc] initWithDictionary:[self.searchWeiboResults objectAtIndex:weiboView.index]];
+        UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: weiboDetailController];
+        
+        [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
+        
+        [navController release];
+        [weiboDetailController release];
+    }
+    else if(self.isSearchModel == NO)
+    {
+        NSInteger offset = 1000;
+        NSMutableArray * resultArray = nil;
+        BorderImageView * friendView = (BorderImageView*)notification.object;
+        NSInteger type = friendView.index / offset;
+        
+        if (type == 0)
+        {
+            resultArray = self.sameCityUserResults;
+        }
+        else if(type == 1)
+        {
+            resultArray = self.interestingUserResults;
+        }
+        else if(type == 2)
+        {
+            resultArray = self.hotUserResults;
+        }
+        UIViewController * viewController = [[FriendDetailViewController alloc] initWithDictionary:[resultArray objectAtIndex:friendView.index % offset]];
+        UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: viewController];
+        
+        [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
+        
+        [navController release];
+        [viewController release];
+    }
 }
 
 - (void) refreshHotUser:(NSString*)type inScrollView:(UIScrollView*)scrollView
@@ -247,20 +280,24 @@
         [activityIndicator release];
         
         NSMutableArray * resultArray = nil;
+
+        resultArray = [data objectForKey:@"UserList"];
+        NSInteger typeOffset = 0;
         if ([type isEqualToString:K_BSDK_USERTYPE_SAME_CITY])
         {
-            resultArray = self.sameCityUserResults;
+            self.sameCityUserResults = resultArray;
         }
         else if([type isEqualToString:K_BSDK_USERTYPE_INTERESTED])
         {
-            resultArray = self.interestingUserResults;
+            self.interestingUserResults  = resultArray;;
+            typeOffset = 1000;
         }
         else if([type isEqualToString:K_BSDK_USERTYPE_HOT])
         {
-            resultArray = self.hotUserResults;
+            self.hotUserResults = resultArray;;
+            typeOffset = 2000;
         }
 
-        resultArray = [data objectForKey:@"UserList"];        
         for (int i = 0; i < [resultArray count]; i++) {
             NSDictionary * dict = [resultArray objectAtIndex:i];
             FriendItemCell * cell = [[[NSBundle mainBundle] loadNibNamed:cellViewIdentifier owner:self options:nil] objectAtIndex:0];
@@ -273,12 +310,18 @@
             [scrollView addSubview:cell];
 
             UIImageView * imageView = [[UIImageView alloc] init];
-//            NSString * url = [dict valueForKey:@"pic_102"];
-            NSString * url = @"http://111.67.203.138:9001/upfile/2012/06/29/48546776.jpg";
-            [imageView setImageWithURL:[NSURL URLWithString:url]];
+            NSString * url = [dict valueForKey:@"pic_102"];
+            if (url)
+            {
+                [imageView setImageWithURL:[NSURL URLWithString:url]];
+            }
+            else
+            {
+//                imageView.image = [UIImage imageNamed:[ViewHelper getUser]];
+            }
             
             BorderImageView * tempBorderView = [[BorderImageView alloc] initWithFrame:cell.friendImageView.frame andView:imageView];
-            
+            tempBorderView.index = i + typeOffset;
             [cell.friendImageView addSubview:tempBorderView];
             cell.friendNameLabel.text = [dict valueForKey:KEY_ACCOUNT_USER_NAME];
             
@@ -290,7 +333,6 @@
     
     if ([[BSDKManager sharedManager] isLogin])
     {
-        
         NSString * userCity = [[[NSUserDefaults standardUserDefaults]
                                 valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO]
                                valueForKey:KEY_ACCOUNT_CITY];
@@ -306,13 +348,16 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UIViewController * viewController = [[FriendDetailViewController alloc] initWithDictionary:[self.searchUserResults objectAtIndex:[indexPath row]]];
-    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: viewController];
-    
-    [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
-    
-    [navController release];
-    [viewController release];
+    if (self.isSearchModel && self.isFindWeibo == NO)
+    {
+        UIViewController * viewController = [[FriendDetailViewController alloc] initWithDictionary:[self.searchUserResults objectAtIndex:[indexPath row]]];
+        UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: viewController];
+        
+        [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
+        
+        [navController release];
+        [viewController release];
+    }
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -415,7 +460,8 @@
     [self.searchUserView setHidden:NO];
     [self.searchWeiboView setHidden:YES];
     [searchBar endEditing:YES];
-    
+    self.isSearchModel = YES;
+
     [self doSearch];
 }
 
@@ -425,6 +471,7 @@
     [self.searchUserView setHidden:YES];
     [self.searchWeiboView setHidden:YES];
     [self.contentScrollView setHidden:NO];
+    self.isSearchModel = NO;
 
     searchBar.text = @"";
     [searchBar endEditing:YES];
