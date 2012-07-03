@@ -57,7 +57,10 @@ typedef enum
 
 -(void)onBackButtonClicked
 {
-    [self dismissModalViewControllerAnimated:YES];
+    if (![self.navigationController popViewControllerAnimated:YES])
+    {
+        [self dismissModalViewControllerAnimated:YES];
+    }
 }
 
 -(void)onSaveButtonClicked
@@ -77,14 +80,6 @@ typedef enum
 }
 
 #pragma mark - View lifecycle
--(void)dealloc
-{
-    [super dealloc];
-    [_updateAvatarButton release];
-    [_tableViewDict release];
-    [_avatarImage release];
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -103,6 +98,13 @@ typedef enum
     self.updateAvatarButton = nil;
     self.tableViewDict = nil;
     self.avatarImage = nil;
+}
+-(void)dealloc
+{
+    [_updateAvatarButton release];
+    [_tableViewDict release];
+    [_avatarImage release];
+    [super dealloc];
 }
 
 - (void)viewWillAppear:(BOOL)animated

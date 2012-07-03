@@ -53,9 +53,22 @@
     }
 }
 
+- (void)dealloc
+{
+    [super dealloc];
+    [_tableView release];
+    [_oldPasswordField release];
+    [_resetPasswordField release];
+    [_repeatNewPasswordField release];
+}
+
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+    self.tableView = nil;
+    self.oldPasswordField = nil;
+    self.resetPasswordField = nil;
+    self.repeatNewPasswordField = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
