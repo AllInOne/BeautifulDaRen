@@ -394,7 +394,7 @@
 
 - (IBAction)onAtFriendPressed:(id)sender
 {
-    [[BSDKManager sharedManager] getFollowList:@"32" pageSize:50 pageIndex:1 andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+    [[BSDKManager sharedManager] getFollowList:GET_CURRENT_USER_INFO_BY_KEY(K_BSDK_UID) pageSize:50 pageIndex:1 andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
         
         NSArray * userList = [data objectForKey:K_BSDK_USERLIST];
         NSMutableArray * friendList = [NSMutableArray arrayWithCapacity:[userList count]];
@@ -415,9 +415,6 @@
         [navController release];
         [friendSelectionController release];
     }];
-    
-    
-
 }
 
 - (IBAction)onLocationPressed:(id)sender

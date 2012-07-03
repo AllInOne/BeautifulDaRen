@@ -538,7 +538,10 @@
 
 -(IBAction)onImageButtonPressed:(id)sender
 {
-    [FullImageViewController showImageUrl:[self.weiboData objectForKey:K_BSDK_PICTURE_ORIGINAL] size:CGSizeMake([[self.weiboData objectForKey:K_BSDK_PICTURE_WIDTH] intValue], [[self.weiboData objectForKey:K_BSDK_PICTURE_HEIGHT] intValue]) inNavigationController:self.navigationController];
+    if ([self.weiboData objectForKey:K_BSDK_PICTURE_ORIGINAL] && [[self.weiboData objectForKey:K_BSDK_PICTURE_WIDTH] intValue] && [[self.weiboData objectForKey:K_BSDK_PICTURE_HEIGHT] intValue]) {
+        [FullImageViewController showImageUrl:[self.weiboData objectForKey:K_BSDK_PICTURE_ORIGINAL] size:CGSizeMake([[self.weiboData objectForKey:K_BSDK_PICTURE_WIDTH] intValue], [[self.weiboData objectForKey:K_BSDK_PICTURE_HEIGHT] intValue]) inNavigationController:self.navigationController];
+    }
+
 }
 
 -(IBAction)onBrandButtonPressed:(id)sender
