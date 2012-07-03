@@ -148,7 +148,7 @@
         NSArray * categoryList = [data objectForKey:K_BSDK_CLASSLIST];
         if (categoryList) {
             for (NSDictionary * data in categoryList) {
-                [[BSDKManager sharedManager] getWeiboListByClassId:[data objectForKey:K_BSDK_UID] pageSize:20 pageIndex:1 andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+                [[BSDKManager sharedManager] getWeiboListByClassId:[data objectForKey:K_BSDK_UID] pageSize:10 pageIndex:1 andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
                     NSLog(@"retrieved weibo classes :%@", data);
                 }];
             }

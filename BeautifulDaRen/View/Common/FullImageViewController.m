@@ -101,7 +101,7 @@
     
     [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onClickReturnButton:) title:NSLocalizedString(@"go_back", @"go_back")]];
     
-    [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onClickSaveButton:) title:NSLocalizedString(@"save", @"save")]];   
+    [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onClickSaveButton:) title:NSLocalizedString(@"refresh", @"refresh")]];
     
     self.frozenSingleTap = NO;
     

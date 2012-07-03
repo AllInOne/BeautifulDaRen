@@ -92,6 +92,7 @@ enum
 #define KEY_ACCOUNT_FOLLOW_COUNT        @"AttentionNum"
 #define KEY_ACCOUNT_RELATION            @"Relation"
 
+#define GET_CURRENT_USER_INFO_BY_KEY(key)  [[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] valueForKey:key]
 
 #define ACTIONSHEET_IMAGE_PICKER 1
 

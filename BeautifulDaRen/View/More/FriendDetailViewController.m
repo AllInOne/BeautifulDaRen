@@ -552,6 +552,10 @@
     NSString * genderImageName = [[self.friendDictionary valueForKey:KEY_ACCOUNT_GENDER] intValue] == 1 ? @"gender_female" : @"gender_male";
     self.genderImageView.image = [UIImage imageNamed:genderImageName];
     
+    NSString * title = [[self.friendDictionary valueForKey:KEY_ACCOUNT_GENDER] intValue] == 1 ? @"her_home_page" : @"his_home_page";
+    
+    [self.navigationItem setTitle:NSLocalizedString(title, title)];
+    
     NSString * buttonTitle = ([relationship isEqualToString:K_BSDK_RELATIONSHIP_MY_FOLLOW] || [relationship isEqualToString:K_BSDK_RELATIONSHIP_INTER_FOLLOW]) ? NSLocalizedString(@"unfollow", @"unfollow") : NSLocalizedString(@"follow", @"follow");
     
     [self.actionButton setTitle:buttonTitle forState:UIControlStateNormal];

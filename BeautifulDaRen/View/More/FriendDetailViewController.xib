@@ -41,7 +41,7 @@
 					<object class="IBUITableView" id="1064494079">
 						<reference key="NSNextResponder" ref="423715162"/>
 						<int key="NSvFlags">274</int>
-						<string key="NSFrame">{{0, 96}, {320, 364}}</string>
+						<string key="NSFrame">{{0, 96}, {320, 276}}</string>
 						<reference key="NSSuperview" ref="423715162"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
@@ -393,7 +393,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
 				</array>
-				<string key="NSFrameSize">{320, 460}</string>
+				<string key="NSFrame">{{0, 64}, {320, 372}}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="1005247890"/>
@@ -403,6 +403,11 @@
 					<bytes key="NSWhite">MQA</bytes>
 					<reference key="NSCustomColorSpace" ref="902450684"/>
 				</object>
+				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
+				<object class="IBUISimulatedNavigationBarMetrics" key="IBUISimulatedTopBarMetrics">
+					<bool key="IBUIPrompted">NO</bool>
+				</object>
+				<object class="IBUISimulatedToolbarMetrics" key="IBUISimulatedBottomBarMetrics"/>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
 		</array>
