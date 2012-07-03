@@ -271,7 +271,10 @@
 }
 
 - (void)onBackButtonClicked {
-    [self dismissModalViewControllerAnimated:YES];
+    if (![self.navigationController popViewControllerAnimated:YES])
+    {
+        [self dismissModalViewControllerAnimated:YES];
+    }
 }
 
 - (void)onSendButtonClicked {

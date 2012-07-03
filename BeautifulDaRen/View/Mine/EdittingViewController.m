@@ -132,13 +132,13 @@
 
 - (void)viewDidUnload
 {
-    [super viewDidUnload];
     self.inputTextView = nil;
     self.editNormalView = nil;
     self.editPrivaceView = nil;
     self.commentMeSegmentControl = nil;
     self.atMeSegmentControl = nil;
     self.privateLetterMeSegmentControl = nil;
+    [super viewDidUnload];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
