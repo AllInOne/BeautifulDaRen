@@ -54,6 +54,7 @@
 - (void) doSearch;
 - (void) loadWeiboHeights;
 - (void) clearData;
+- (void) checkSearchMode;
 
 @end
 
@@ -96,10 +97,17 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
-//- (void)onRefreshButtonClicked
-//{
-//    [[iToast makeText:NSLocalizedString(@"refresh", @"refresh")] show];
-//}
+- (void)onRefreshButtonClicked
+{
+    if (self.isSearchModel)
+    {
+        [self doSearch];
+    }
+    else
+    {
+        [self refreshView];
+    }
+}
 #pragma mark - View lifecycle
 
 -(void)refreshView
@@ -160,7 +168,7 @@
     self.isSearchMoreUser = YES;
     self.isSearchMoreWeibo = YES;
     [self.navigationItem setTitle:NSLocalizedString(@"find_weibo_or_friend", @"find_weibo_or_friend")];
-//    [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClicked) title:NSLocalizedString(@"refresh", @"refresh")]];
+    [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClicked) title:NSLocalizedString(@"refresh", @"refresh")]];
     if([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0)
     {
         _searchBar.backgroundImage = [UIImage imageNamed:@"search_switcher_btn"];
@@ -176,13 +184,10 @@
     _searchBar.scopeButtonTitles = [NSArray arrayWithObjects:
                                     NSLocalizedString(@"weibo", @""),
                                     NSLocalizedString(@"user", @""), nil];
-    
-
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(waterFlowCellSelected:)
                                                  name:@"borderImageViewSelected"
@@ -202,7 +207,11 @@
     self.searchWeiboView.flowdatasource = self;
     [self.view addSubview:self.searchWeiboView];
     [self.searchWeiboView setHidden:YES];
-    [self refreshView];
+    if ([self.sameCityUserResults count] == 0
+        || [self.hotUserResults count]== 0 
+        || [self.interestingUserResults count]== 0) {
+        [self refreshView];
+    }
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -456,7 +465,7 @@
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    [_contentScrollView setHidden:YES];
+    [self.contentScrollView setHidden:YES];
     [searchBar endEditing:YES];
     self.isSearchModel = YES;
 
@@ -465,11 +474,11 @@
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar
 {
-    [self clearData];
-    [self.searchUserView setHidden:YES];
-    [self.searchWeiboView setHidden:YES];
-    [self.contentScrollView setHidden:NO];
     self.isSearchModel = NO;
+
+    [self clearData];
+    [self checkSearchMode];
+    [self.contentScrollView setHidden:NO];
 
     searchBar.text = @"";
     [searchBar endEditing:YES];
@@ -487,19 +496,8 @@
 
 - (void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 {
-//    [self clearData];
     self.isFindWeibo = (selectedScope ==0) ? YES : NO;
-    if (self.isFindWeibo)
-    {
-        [self.searchUserView setHidden:YES];
-        [self.searchWeiboView setHidden:NO];
-    }
-    else
-    {
-        [self.searchUserView setHidden:NO];
-        [self.searchWeiboView setHidden:YES];
-    }
-    [self doSearch];
+    [self checkSearchMode];
 }
 
 - (void)onItemSelected:(int)index
@@ -515,6 +513,7 @@
 
 - (void) doSearch
 {
+    [self checkSearchMode];
     if (!self.inSearching)
     {
         self.inSearching = YES;
@@ -730,8 +729,32 @@
     self.searchWeiboPageIndex = 1;
     self.isSearchMoreWeibo = YES;
     self.isSearchMoreUser = YES;
+    self.inSearching = NO;
+    self.isFindWeibo = NO;
     [self.searchWeiboResults removeAllObjects];
     [self.searchUserResults removeAllObjects];
     [self.weiboHeights removeAllObjects];
+}
+
+- (void) checkSearchMode
+{
+    if (self.isSearchModel)
+    {
+        if (self.isFindWeibo)
+        {
+            [self.searchUserView setHidden:YES];
+            [self.searchWeiboView setHidden:NO];
+        }
+        else
+        {
+            [self.searchUserView setHidden:NO];
+            [self.searchWeiboView setHidden:YES];
+        }
+    }
+    else
+    {
+        [self.searchUserView setHidden:YES];
+        [self.searchWeiboView setHidden:YES];
+    }
 }
 @end
