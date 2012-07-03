@@ -441,13 +441,11 @@
     
     [[LocationHelper sharedManager] getCurrentLocationWithDoneCallbck:^(NSError *error, CLLocation *location, MKPlacemark *placeMark) {
         NSLog(@"%@, %@, %@", error, location, placeMark);
-        if ((error == nil) || (location != nil)) {
+        if ((error == nil) || ((location != nil) && placeMark && (placeMark.locality != nil) && (placeMark.thoroughfare != nil))) {
             _locationString = nil;
-            if (placeMark)
-            {
-                self.locationString = [NSString stringWithFormat:@"%@#%@,%@＃ ", NSLocalizedString(@"i_am_here", @"i_am_here"), placeMark.locality, placeMark.thoroughfare];
-                self.weiboContentTextView.text = [self.weiboContentTextView.text stringByAppendingString: _locationString];            
-            }
+
+            self.locationString = [NSString stringWithFormat:@"%@#%@,%@＃ ", NSLocalizedString(@"i_am_here", @"i_am_here"), placeMark.locality, placeMark.thoroughfare];
+            self.weiboContentTextView.text = [self.weiboContentTextView.text stringByAppendingString: _locationString];            
 
             _currentLocation = nil;
             self.currentLocation = location;

@@ -136,7 +136,7 @@
         NSDictionary * userDict = [[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
         NSString * avatarUrl = [userDict objectForKey:K_BSDK_PICTURE_65];
         if (avatarUrl && [avatarUrl length]) {
-            [((MyInfoTopViewCell*)cell).avatarImageView setImageWithURL:[NSURL URLWithString:avatarUrl]];
+            [((MyInfoTopViewCell*)cell).avatarImageView setImageWithURL:[NSURL URLWithString:avatarUrl] placeholderImage:[UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:userDict]]];
         }
         else
         {
