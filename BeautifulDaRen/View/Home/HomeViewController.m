@@ -72,13 +72,17 @@
                                        }
                                     }];
     
-    if(self.adsPageView == nil)
-    {
-        _adsPageView = [[AdsPageView alloc] initWithNibName:@"AdsPageView" bundle:nil];
-        self.adsPageView.view.frame = CGRectMake(0, 0, self.view.frame.size.width, ADS_CELL_HEIGHT);
-        [self.view addSubview:self.adsPageView.view];
-        self.adsPageView.delegate = self;
-    }
+    _adsPageView = [[AdsPageView alloc] initWithNibName:@"AdsPageView" bundle:nil];
+    self.adsPageView.view.frame = CGRectMake(0, 0, self.view.frame.size.width, ADS_CELL_HEIGHT);
+    [self.view addSubview:self.adsPageView.view];
+    self.adsPageView.delegate = self;
+    
+    self.itemsViewController = [[ItemsViewController alloc] init];
+    _itemsViewController.view.frame = CGRectMake(0,
+                                                 ADS_CELL_HEIGHT + CONTENT_MARGIN,
+                                                 self.view.frame.size.width,
+                                                 USER_WINDOW_HEIGHT - ADS_CELL_HEIGHT - CONTENT_MARGIN);
+    [self.view addSubview:_itemsViewController.view];
     
     NSNumber * isAutoLogin = [[NSUserDefaults standardUserDefaults] objectForKey:USERDEFAULT_IS_AUTO_LOGIN];
     if ([isAutoLogin boolValue])
@@ -146,6 +150,7 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
 	[super viewWillDisappear:animated];
+    [_itemsViewController viewWillDisappear:animated];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -178,9 +183,6 @@
     
     [self.navigationController pushViewController:registerController animated:YES];
     [registerController release];
-
-//    MapViewController * mapController = [[MapViewController alloc] initWithName:@"AAA" description:@"BBB" latitude:12.32f longitude:77.12f];
-//    [self.navigationController pushViewController:mapController animated:YES];
 }
 
 #pragma mark AdsPageViewProtocol
@@ -260,19 +262,9 @@
                 [mutableArray addObject:dict];
             }
         }
-        if(_itemsViewController == nil)
-        {
-            _itemsViewController = [[ItemsViewController alloc] initWithArray:mutableArray];
-            _itemsViewController.view.frame = CGRectMake(0,
-                                                         ADS_CELL_HEIGHT + CONTENT_MARGIN,
-                                                         self.view.frame.size.width,
-                                                         USER_WINDOW_HEIGHT - ADS_CELL_HEIGHT - CONTENT_MARGIN);
-            [self.view addSubview:_itemsViewController.view];
-        }
-        else
-        {
-            _itemsViewController.itemDatas = mutableArray;
-        }
+
+        _itemsViewController.itemDatas = mutableArray;
+
         [mutableArray release];
     };
     

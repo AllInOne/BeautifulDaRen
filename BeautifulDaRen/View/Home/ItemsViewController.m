@@ -126,6 +126,7 @@
                                                  name:@"borderImageViewSelected"
                                                object:nil];
 }
+
 - (void)viewWillDisappear:(BOOL)animated
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
