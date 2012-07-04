@@ -27,6 +27,7 @@
 
 - (void)refreshNavigationView;
 - (void)refreshWeibosView;
+- (void) showAdsPageView;
 @end
 
 @implementation HomeViewController
@@ -109,9 +110,12 @@
              }];
         }
     }
-    
+    else
+    {
+        [self refreshWeibosView];
+    }
+
     [self refreshNavigationView];
-    [self refreshWeibosView];
 }
 
 -(void) dealloc
@@ -174,6 +178,7 @@
 
 -(IBAction)onRefreshBtnSelected:(UIButton*)sender
 {
+    [self showAdsPageView];
     [self refreshWeibosView];
 }
 
@@ -185,6 +190,19 @@
     [registerController release];
 }
 
+-(void) showAdsPageView
+{
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.3];
+    
+    [_adsPageView.view setHidden:NO];
+    [_itemsViewController.view setFrame:CGRectMake(0,
+                                                   ADS_CELL_HEIGHT + CONTENT_MARGIN,
+                                                   self.view.frame.size.width,
+                                                   USER_WINDOW_HEIGHT - ADS_CELL_HEIGHT - CONTENT_MARGIN)];
+    
+    [UIView commitAnimations]; 
+}
 #pragma mark AdsPageViewProtocol
 -(void) onAdsPageViewClosed
 {    

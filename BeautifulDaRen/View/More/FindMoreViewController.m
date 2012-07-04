@@ -178,9 +178,13 @@
         [_searchBar setScopeBarButtonDividerImage:[UIImage imageNamed:@"searchScopeDividerRightSelected"] forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateSelected];
         [_searchBar setScopeBarButtonDividerImage:[UIImage imageNamed:@"searchScopeDividerLeftSelected"] forLeftSegmentState:UIControlStateSelected rightSegmentState:UIControlStateNormal];
     }
-    else
-    {
-    }
+
+    self.searchWeiboView = [[WaterFlowView alloc] initWithFrame:CGRectMake(0, CONTENT_VIEW_HEIGHT_OFFSET + 44.0f, 320,270)];
+    self.searchWeiboView.flowdelegate = self;
+    self.searchWeiboView.flowdatasource = self;
+    
+    [self.searchUserView setHidden:YES];
+    [self.searchWeiboView setHidden:YES];
     _searchBar.scopeButtonTitles = [NSArray arrayWithObjects:
                                     NSLocalizedString(@"weibo", @""),
                                     NSLocalizedString(@"user", @""), nil];
@@ -200,13 +204,8 @@
     
     [self.searchUserView setFrame:CGRectMake(0, CONTENT_VIEW_HEIGHT_OFFSET + 44.0f, self.searchUserView.frame.size.width,270)];
     [self.view addSubview:self.searchUserView];
-    [self.searchUserView setHidden:YES];
     
-    self.searchWeiboView = [[WaterFlowView alloc] initWithFrame:CGRectMake(0, CONTENT_VIEW_HEIGHT_OFFSET + 44.0f, 320,270)];
-    self.searchWeiboView.flowdelegate = self;
-    self.searchWeiboView.flowdatasource = self;
     [self.view addSubview:self.searchWeiboView];
-    [self.searchWeiboView setHidden:YES];
     if ([self.sameCityUserResults count] == 0
         || [self.hotUserResults count]== 0 
         || [self.interestingUserResults count]== 0) {
@@ -319,8 +318,8 @@
             [scrollView addSubview:cell];
 
             UIImageView * imageView = [[UIImageView alloc] init];
-            NSString * url = [dict valueForKey:@"pic_102"];
-            if (url)
+            NSString * url = [dict valueForKey:@"Picture"];
+            if ([url length] > 0)
             {
                 [imageView setImageWithURL:[NSURL URLWithString:url]];
             }
@@ -461,6 +460,7 @@
     [searchBar setShowsScopeBar:isShowsScopeButton];
     [searchBar setSelectedScopeButtonIndex:1];
     [searchBar setFrame:CGRectMake(searchBar.frame.origin.x, searchBar.frame.origin.y, searchBar.frame.size.width, height)];
+    [self.searchUserView reloadData];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
@@ -734,6 +734,9 @@
     [self.searchWeiboResults removeAllObjects];
     [self.searchUserResults removeAllObjects];
     [self.weiboHeights removeAllObjects];
+    
+    [self.searchWeiboView reloadData];
+    [self.searchUserView reloadData];
 }
 
 - (void) checkSearchMode
