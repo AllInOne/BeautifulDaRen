@@ -319,8 +319,8 @@
             [scrollView addSubview:cell];
 
             UIImageView * imageView = [[UIImageView alloc] init];
-            NSString * url = [dict valueForKey:@"pic_102"];
-            if (url)
+            NSString * url = [dict valueForKey:@"Picture"];
+            if ([url length] > 0)
             {
                 [imageView setImageWithURL:[NSURL URLWithString:url]];
             }
