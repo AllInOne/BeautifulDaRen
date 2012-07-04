@@ -8,14 +8,7 @@
 
 #import "SegmentControl.h"
 
-@interface SegmentControl()
-@property (retain, nonatomic) IBOutlet UIButton * firstButton;
-@property (retain, nonatomic) IBOutlet UIButton * secondButton;
-
-@end
-
 @implementation SegmentControl
-@synthesize delegate = _delegate;
 @synthesize firstButton = _firstButton;
 @synthesize secondButton = _secondButton;
 
@@ -33,7 +26,6 @@
         [_secondButton setSelected:YES];
         index = 1;
     }
-    [_delegate segmentChooseAtIndex:index];
 }
 
 - (id) initWithFrame:(CGRect)frame leftText:(NSString *)leftText rightText:(NSString*)rightText selectedIndex:(NSInteger)index

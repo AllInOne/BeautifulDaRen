@@ -34,18 +34,23 @@ typedef enum
 }SECTION_NAME;
 
 @interface MineEditingViewController()
-
+@property (retain, nonatomic) IBOutlet UITableView * tableView;
 @property (retain, nonatomic) IBOutlet UIButton * updateAvatarButton;
 @property (retain, nonatomic) NSMutableDictionary * tableViewDict;
 @property (retain, nonatomic) UIImage * avatarImage;
+@property (retain, nonatomic) UIButton * segmentedFirstButton;
+@property (retain, nonatomic) UIButton * segmentedSecondButton;
 
 - (void)startCameraAction;
 @end
  
 @implementation MineEditingViewController
+@synthesize tableView = _tableView;
 @synthesize updateAvatarButton = _updateAvatarButton;
 @synthesize tableViewDict = _tableViewDict;
 @synthesize avatarImage = _avatarImage;
+@synthesize segmentedFirstButton = _segmentedFirstButton;
+@synthesize segmentedSecondButton = _segmentedSecondButton;
 
 - (void)didReceiveMemoryWarning
 {
@@ -95,15 +100,21 @@ typedef enum
 {
     [super viewDidUnload];
     
+    self.tableView = nil;
     self.updateAvatarButton = nil;
     self.tableViewDict = nil;
     self.avatarImage = nil;
+    self.segmentedFirstButton = nil;
+    self.segmentedSecondButton = nil;
 }
 -(void)dealloc
 {
+    [_tableView release];
     [_updateAvatarButton release];
     [_tableViewDict release];
     [_avatarImage release];
+    [_segmentedSecondButton release];
+    [_segmentedFirstButton release];
     [super dealloc];
 }
 
@@ -187,8 +198,7 @@ typedef enum
                 }            
             }
 
-            _updateAvatarButton =  ((MyInfoTopViewCell*)cell).updateAvatarButton;
-            ((MyInfoTopViewCell*)cell).delegate = self;
+            [((MyInfoTopViewCell*)cell).updateAvatarButton addTarget:self action:@selector(onUpdataAvatarPressed:) forControlEvents:UIControlEventTouchUpInside];
         }
     }
     else if(section == 1)
@@ -208,7 +218,11 @@ typedef enum
                                 selectedIndex:index];
         
         [buttonViewCell addSubview:seg];
-        seg.delegate = self;
+        [seg.firstButton addTarget:self action:@selector(onSegementButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [seg.secondButton addTarget:self action:@selector(onSegementButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+
+        self.segmentedFirstButton = seg.firstButton;
+        self.segmentedSecondButton = seg.secondButton;
         [seg release];
         cell.backgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
     }
@@ -432,10 +446,9 @@ typedef enum
     }
 }
 
-#pragma mark SegmentDelegate
--(void)segmentChooseAtIndex:(NSInteger)index
+-(IBAction)onSegementButtonPressed:(UIButton*)sender
 {
-    NSString * gender = (index == 0) ? K_BSDK_GENDER_FEMALE : K_BSDK_GENDER_MALE;
+    NSString * gender = (sender == self.segmentedFirstButton) ? K_BSDK_GENDER_FEMALE : K_BSDK_GENDER_MALE;
     [_tableViewDict setValue:gender
                       forKey:KEY_ACCOUNT_GENDER];
 }
@@ -538,6 +551,11 @@ typedef enum
     }
     
     [imagePickerActionSheet release];
+}
+
+- (IBAction)onUpdataAvatarPressed:(UIButton*)sender
+{
+    [self startCameraAction];
 }
 
 @end

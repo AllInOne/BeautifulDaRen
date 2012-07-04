@@ -9,16 +9,15 @@
 #import "MyInfoTopViewCell.h"
 
 @implementation MyInfoTopViewCell
-@synthesize avatarImageView;
-@synthesize levelLabel;
-@synthesize rightImageView;
-@synthesize beautifulIdLabel;
-@synthesize cityLabel;
-@synthesize levelLabelTitle;
-@synthesize editButton;
-@synthesize updateAvatarButton;
-@synthesize editImageView;
-@synthesize delegate = _delegate;
+@synthesize avatarImageView = _avatarImageView;
+@synthesize levelLabel = _levelLabel;
+@synthesize rightImageView = _rightImageView;
+@synthesize beautifulIdLabel = _beautifulIdLabel;
+@synthesize cityLabel = _cityLabel;
+@synthesize levelLabelTitle = _levelLabelTitle;
+@synthesize editButton = _editButton;
+@synthesize updateAvatarButton = _updateAvatarButton;
+@synthesize editImageView = _editImageView;
 
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -35,9 +34,10 @@
     [super setSelected:selected animated:animated];
 }
 
--(IBAction)buttonPressed:(UIButton*)sender
+- (void) dealloc
 {
-    [_delegate didButtonPressed:sender inView:self];
+    [_avatarImageView release];
+    [super dealloc];
 }
 
 @end
