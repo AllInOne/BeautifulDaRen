@@ -80,6 +80,12 @@ typedef enum
                                      avatar:self.avatarImage 
                             andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
                                 [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
+                                if(AIO_STATUS_SUCCESS == status && K_BSDK_IS_RESPONSE_OK(data))
+                                {
+                                    NSDictionary * dict = [data objectForKey:K_BSDK_USERINFO];
+                                    [[NSUserDefaults standardUserDefaults] setObject:dict forKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
+                                }
+                                
                             }];
     [self.avatarImage release];
 }
