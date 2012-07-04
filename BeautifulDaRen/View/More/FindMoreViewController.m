@@ -178,9 +178,11 @@
         [_searchBar setScopeBarButtonDividerImage:[UIImage imageNamed:@"searchScopeDividerRightSelected"] forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateSelected];
         [_searchBar setScopeBarButtonDividerImage:[UIImage imageNamed:@"searchScopeDividerLeftSelected"] forLeftSegmentState:UIControlStateSelected rightSegmentState:UIControlStateNormal];
     }
-    else
-    {
-    }
+
+    self.searchWeiboView = [[WaterFlowView alloc] initWithFrame:CGRectMake(0, CONTENT_VIEW_HEIGHT_OFFSET + 44.0f, 320,270)];
+    self.searchWeiboView.flowdelegate = self;
+    self.searchWeiboView.flowdatasource = self;
+
     _searchBar.scopeButtonTitles = [NSArray arrayWithObjects:
                                     NSLocalizedString(@"weibo", @""),
                                     NSLocalizedString(@"user", @""), nil];
@@ -202,9 +204,6 @@
     [self.view addSubview:self.searchUserView];
     [self.searchUserView setHidden:YES];
     
-    self.searchWeiboView = [[WaterFlowView alloc] initWithFrame:CGRectMake(0, CONTENT_VIEW_HEIGHT_OFFSET + 44.0f, 320,270)];
-    self.searchWeiboView.flowdelegate = self;
-    self.searchWeiboView.flowdatasource = self;
     [self.view addSubview:self.searchWeiboView];
     [self.searchWeiboView setHidden:YES];
     if ([self.sameCityUserResults count] == 0
