@@ -180,3 +180,5 @@
 
 "detail_mode" = "详情模式";
 "point" = "积分";
+
+"server_no_response" = "服务器无响应!";

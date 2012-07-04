@@ -2,6 +2,7 @@
 #import "BSDKRequest.h"
 #import "WBUtil.h"
 #import "JSON.h"
+#import "BSDKDefines.h"
 
 #import "WBSDKGlobal.h"
 
@@ -312,6 +313,9 @@ static NSMutableString *logBody;
 
 - (void)requestOnTimeout
 {
+    
+//    NSDictionary * falkResponse = [NSDictionary dictionaryWithObjectsAndKeys:NSLocalizedString(@"server_no_response", @"server_no_response"), K_BSDK_RESPONSE_MESSAGE, K_BSDK_RESPONSE_STATUS_FAILED, K_BSDK_RESPONSE_STATUS, nil];
+//    [self handleResponseData:falkResponse];
     [self failedWithError:[NSError errorWithDomain:@"BSDK" code:1005 userInfo:nil]];
     [self disconnect];
 }
