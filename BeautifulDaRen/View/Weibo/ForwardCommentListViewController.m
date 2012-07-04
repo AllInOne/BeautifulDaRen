@@ -70,7 +70,9 @@
     if (self) {
         // Custom initialization
         [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
+        if ( [[BSDKManager sharedManager] isLogin]) {
         [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onPostCommentButtonClicked) title:NSLocalizedString(@"post_comment", @"post_comment")]];
+        }
     }
     return self;
 }
@@ -224,9 +226,11 @@
     commentListActionSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
     commentListActionSheet.tag = ACTIONSHEET_COMMENT_LIST;
     
-    [commentListActionSheet addButtonWithTitle:COMMENT_LIST_VIEW_PROFILE];        
-
-    [commentListActionSheet addButtonWithTitle:COMMENT_LIST_POST_COMMNET];
+    [commentListActionSheet addButtonWithTitle:COMMENT_LIST_VIEW_PROFILE];
+    
+    if ( [[BSDKManager sharedManager] isLogin]) {
+        [commentListActionSheet addButtonWithTitle:COMMENT_LIST_POST_COMMNET];
+    }
     
     [commentListActionSheet setDestructiveButtonIndex:[commentListActionSheet addButtonWithTitle:NSLocalizedString(@"cancel", @"cancel")]];
     [commentListActionSheet showInView:self.view];

@@ -1,6 +1,7 @@
 #import "BorderImageView.h"
 #import <QuartzCore/QuartzCore.h>
 
+#define IMAGE_FRAME_MARGIN 1
 
 @implementation BorderImageView
 @synthesize index = _index;
@@ -9,7 +10,7 @@
     self = [super initWithFrame:frame];
     if(self)
     {
-        view.frame = CGRectMake(2, 2, frame.size.width - 4, frame.size.height - 4);
+        view.frame = CGRectMake(IMAGE_FRAME_MARGIN, IMAGE_FRAME_MARGIN, frame.size.width - 2 * IMAGE_FRAME_MARGIN, frame.size.height - 2 * IMAGE_FRAME_MARGIN);
         self.layer.borderColor = [[UIColor lightGrayColor] CGColor];
         self.layer.borderWidth = 1;
         [self addSubview:view];
@@ -30,7 +31,7 @@
     if(self)
     {
         UIImageView * imageView = [[UIImageView alloc] initWithImage:image];
-        imageView.frame = CGRectMake(2, 2, frame.size.width - 4, frame.size.height - 4);
+        imageView.frame = CGRectMake(IMAGE_FRAME_MARGIN, IMAGE_FRAME_MARGIN, frame.size.width - 2 * IMAGE_FRAME_MARGIN, frame.size.height - 2 * IMAGE_FRAME_MARGIN);
         self.layer.borderColor = [[UIColor lightGrayColor] CGColor];
         self.layer.borderWidth = 1;
         [self addSubview:imageView];  
@@ -49,7 +50,7 @@
     self = [super initWithFrame:frame];
     if(self)
     {
-        view.frame = CGRectMake(2, 2, frame.size.width - 4, frame.size.height - 4);
+        view.frame = CGRectMake(IMAGE_FRAME_MARGIN, IMAGE_FRAME_MARGIN, frame.size.width - 2 * IMAGE_FRAME_MARGIN, frame.size.height - 2 * IMAGE_FRAME_MARGIN);
         self.layer.borderColor = [[UIColor lightGrayColor] CGColor];
         self.layer.borderWidth = 1;
         [self addSubview:view];

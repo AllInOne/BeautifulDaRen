@@ -306,6 +306,14 @@ static NSMutableString *logBody;
     }
     
     connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
+    
+    [self performSelector:@selector(requestOnTimeout) withObject:self afterDelay:60.0];
+}
+
+- (void)requestOnTimeout
+{
+    [self failedWithError:[NSError errorWithDomain:@"BSDK" code:1005 userInfo:nil]];
+    [self disconnect];
 }
 
 - (void)disconnect
@@ -351,6 +359,8 @@ static NSMutableString *logBody;
     [connection cancel];
 	[connection release];
 	connection = nil;
+    
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
 }
 
 - (void)connection:(NSURLConnection *)theConnection didFailWithError:(NSError *)error
@@ -363,6 +373,7 @@ static NSMutableString *logBody;
     [connection cancel];
 	[connection release];
 	connection = nil;
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
 }
 
 @end

@@ -42,9 +42,11 @@
 @property (retain, nonatomic) IBOutlet UIImageView * genderImageView;
 @property (retain, nonatomic) IBOutlet UIImageView * avatarImageView;
 @property (retain, nonatomic) IBOutlet UIButton * actionButton;
+@property (retain, nonatomic) UIToolbar *toolbar;
 
 - (void) onActionButtonClicked: (UIButton*)sender;
 - (void) refreshTopView;
+- (void) refreshToolBar;
 - (void) initialize;
 - (void) refreshView;
 @end
@@ -69,6 +71,7 @@
 @synthesize actionButton = _actionButton;
 @synthesize friendName = _friendName;
 @synthesize avatarImageView = _avatarImageView;
+@synthesize toolbar = _toolbar;
 
 - (void) initialize
 {
@@ -77,7 +80,12 @@
 //    [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onHomePageButtonClicked) title:NSLocalizedString(@"home_page", @"home_page")]];
     _isIdentification = YES;
     
-    UIToolbar *tempToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0,372, 320,44)];
+    [self refreshToolBar];
+}
+
+- (void) refreshToolBar
+{
+    _toolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0,372, 320,44)];
     
     UIBarButtonItem *flexible = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
@@ -105,23 +113,22 @@
                          flexible,
                          nil];
     
-    tempToolbar.items= barItems;
+    _toolbar.items= barItems;
     UIImageView * tabBarBg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"toolbar_background"]];
     tabBarBg.frame = CGRectMake(0, 0, 320, 45);
     tabBarBg.contentMode = UIViewContentModeScaleToFill;
     if (SYSTEM_VERSION_LESS_THAN(@"5.0")) {
-        [tempToolbar  insertSubview:tabBarBg atIndex:0];
+        [_toolbar  insertSubview:tabBarBg atIndex:0];
     }
     else
     {
-        [tempToolbar  insertSubview:tabBarBg atIndex:1];            
+        [_toolbar  insertSubview:tabBarBg atIndex:1];            
     }
-    [self.view addSubview: tempToolbar];
+    [self.view addSubview: _toolbar];
     [flexible release]; 
     [tabBarBg release];
     [barItems release];
-    [tempToolbar release];
-
+    
     NSString * buttonTitle = ([relationship isEqualToString:K_BSDK_RELATIONSHIP_MY_FOLLOW] || [relationship isEqualToString:K_BSDK_RELATIONSHIP_INTER_FOLLOW]) ? NSLocalizedString(@"unfollow", @"unfollow") : NSLocalizedString(@"follow", @"follow");
     
     [self.actionButton setTitle:buttonTitle forState:UIControlStateNormal];
@@ -344,7 +351,14 @@
         else if(_isIdentification && [indexPath row] == 1)
         {
             buttonViewCell.leftLabel.text = NSLocalizedString(@"authentication", @"authentication");
-            buttonViewCell.buttonText.text = @"";
+            if ([[self.friendDictionary objectForKey:K_BSDK_ISVERIFY] isEqual:@"1"]) {
+                buttonViewCell.buttonText.text = NSLocalizedString(@"authentication_done", @"authentication_done");
+            }
+            else
+            {
+                buttonViewCell.buttonText.text = NSLocalizedString(@"authentication_not_done", @"authentication_not_done");
+            }
+
             buttonViewCell.buttonRightIcon.hidden = YES;
         }
         else
@@ -403,7 +417,11 @@
         
 //        _topicButton = ((GridViewCell*)cell).fifthButton;
 //        _publishedButton = ((GridViewCell*)cell).sixthButton;
-        ((GridViewCell*)cell).delegate = self;
+//        ((GridViewCell*)cell).delegate = self;
+        [((GridViewCell*)cell).firstButton addTarget:self action:@selector(didButtonPressed:inView:) forControlEvents:UIControlEventTouchUpInside];
+        [((GridViewCell*)cell).secondButton addTarget:self action:@selector(didButtonPressed:inView:) forControlEvents:UIControlEventTouchUpInside];
+        [((GridViewCell*)cell).thirdButton addTarget:self action:@selector(didButtonPressed:inView:) forControlEvents:UIControlEventTouchUpInside];
+        [((GridViewCell*)cell).fourthButton addTarget:self action:@selector(didButtonPressed:inView:) forControlEvents:UIControlEventTouchUpInside];
     }
     
     return cell;
@@ -523,7 +541,10 @@
 
 - (void)onRemove
 {
-    [[BSDKManager sharedManager] removeFan:[self.friendDictionary valueForKey:KEY_ACCOUNT_USER_ID] andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+    [[BSDKManager sharedManager] removeFan:[self.friendDictionary valueForKey:K_BSDK_UID] andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+            [self.toolbar removeFromSuperview];
+            self.toolbar = nil;
+            [self refreshToolBar];
             [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
     }];
 }

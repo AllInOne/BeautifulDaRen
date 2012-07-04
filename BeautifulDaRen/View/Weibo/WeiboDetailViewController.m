@@ -367,13 +367,24 @@
     //        UIBarButtonItem *buyButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar购买22x22" target:self action:@selector(onBuy)];
     
     UIBarButtonItem *refreshButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar_refresh_icon" target:self action:@selector(onRefresh)];
-    
-    
+    if ( ![[BSDKManager sharedManager] isLogin]) {
+        [refreshButtonItem setEnabled:NO];
+    }
+
     UIBarButtonItem *forwardButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar_forward_icon" target:self action:@selector(onForward)];
+    if ( ![[BSDKManager sharedManager] isLogin]) {
+        [forwardButtonItem setEnabled:NO];
+    }
     
     UIBarButtonItem *commentButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar_comment_icon" target:self action:@selector(onComment)];
+    if ( ![[BSDKManager sharedManager] isLogin]) {
+        [commentButtonItem setEnabled:NO];
+    }
     
     UIBarButtonItem *favourateButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar_favourate_icon" target:self action:@selector(onFavourate)];
+    if ( ![[BSDKManager sharedManager] isLogin]) {
+        [favourateButtonItem setEnabled:NO];
+    }
     
     NSArray *barItems = [[NSArray alloc]initWithObjects:flexible, 
                          refreshButtonItem, 
@@ -397,6 +408,7 @@
     {
         [tempToolbar  insertSubview:tabBarBg atIndex:1];            
     }
+
     [self.view addSubview: tempToolbar];
     [flexible release];
     [tabBarBg release];
