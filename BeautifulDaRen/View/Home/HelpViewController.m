@@ -51,6 +51,11 @@
     // Do any additional setup after loading the view from its nib.
 }
 
+-(void)dealloc
+{
+    [super dealloc];
+}
+
 - (void)viewDidUnload
 {
     [super viewDidUnload];

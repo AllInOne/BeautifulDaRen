@@ -7,12 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SegmentDelegate.h"
-
 @interface SegmentControl : UIView
 
-@property (retain, nonatomic) id<SegmentDelegate> delegate;
-
 - (id) initWithFrame:(CGRect)frame leftText:(NSString *)leftText rightText:(NSString*)rightText selectedIndex:(NSInteger)index;
-
+@property (retain, nonatomic) IBOutlet UIButton * firstButton;
+@property (retain, nonatomic) IBOutlet UIButton * secondButton;
 @end

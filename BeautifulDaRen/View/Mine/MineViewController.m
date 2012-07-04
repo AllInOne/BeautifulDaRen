@@ -71,6 +71,11 @@
 #pragma mark - View lifecycle
 -(void)dealloc
 {
+<<<<<<< HEAD
+=======
+    [super dealloc];
+    [_tableView release];
+>>>>>>> e018f6307d66616ddcb44b04e0bc9956bb784d95
     [_followButton release];
     [_fansButton release];
     [_collectionButton release];
@@ -94,6 +99,7 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+    self.tableView = nil;
     self.followButton = nil;
     self.fansButton = nil;
     self.collectionButton = nil;
@@ -161,8 +167,8 @@
 
         ((MyInfoTopViewCell*)cell).editImageView.image = [UIImage imageNamed:@"my_edit"];
         ((MyInfoTopViewCell*)cell).cityLabel.text = [NSString stringWithFormat:@"%@ %@", [userDict valueForKey:KEY_ACCOUNT_CITY], [userDict valueForKey:KEY_ACCOUNT_ADDRESS]];
-        _editButton = ((MyInfoTopViewCell*)cell).editButton;
-        ((MyInfoTopViewCell*)cell).delegate = self;
+        
+        [((MyInfoTopViewCell*)cell).editButton addTarget:self action:@selector(onEditPressed:) forControlEvents:UIControlEventTouchUpInside];
     }
     else if(section == 1) {
         cell = [tableView dequeueReusableCellWithIdentifier:gridViewIndentifier];
@@ -386,13 +392,13 @@
                           type:WeiboListViewControllerType_MY_BUYED
                           dictionary:nil];
     }
-    else if(button == _editButton)
-    {
-        viewController = [[MineEditingViewController alloc]
-                          initWithNibName:@"MineEditingViewController"
-                          bundle:nil];
-        
-    }
+//    else if(button == _editButton)
+//    {
+//        viewController = [[MineEditingViewController alloc]
+//                          initWithNibName:@"MineEditingViewController"
+//                          bundle:nil];
+//        
+//    }
     else if(button == _mypublishButton)
     {
         viewController = [[WeiboListViewController alloc]
@@ -420,5 +426,19 @@
             [self.tableView reloadData];
         }];
     }
+}
+
+
+- (IBAction)onEditPressed:(UIButton*)sender
+{
+    UIViewController * viewController = [[MineEditingViewController alloc]
+                                         initWithNibName:@"MineEditingViewController"
+                                         bundle:nil];
+    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: viewController];
+    
+    [self.navigationController presentModalViewController:navController animated:YES];
+    
+    [viewController release];
+    [navController release];
 }
 @end

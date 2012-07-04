@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ButtonPressDelegate.h"
 
 @interface MyInfoTopViewCell : UITableViewCell
 
@@ -20,6 +19,5 @@
 @property (retain, nonatomic) IBOutlet UIButton * editButton;
 @property (retain, nonatomic) IBOutlet UIButton * updateAvatarButton;
 @property (retain, nonatomic) IBOutlet UIImageView * editImageView;
-@property (retain, nonatomic) id<ButtonPressDelegate> delegate;
 
 @end
