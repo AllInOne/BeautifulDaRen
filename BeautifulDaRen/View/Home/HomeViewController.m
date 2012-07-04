@@ -109,9 +109,12 @@
              }];
         }
     }
-    
+    else
+    {
+        [self refreshWeibosView];
+    }
+
     [self refreshNavigationView];
-    [self refreshWeibosView];
 }
 
 -(void) dealloc
