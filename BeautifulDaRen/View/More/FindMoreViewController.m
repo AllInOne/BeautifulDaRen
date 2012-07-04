@@ -461,6 +461,7 @@
     [searchBar setShowsScopeBar:isShowsScopeButton];
     [searchBar setSelectedScopeButtonIndex:1];
     [searchBar setFrame:CGRectMake(searchBar.frame.origin.x, searchBar.frame.origin.y, searchBar.frame.size.width, height)];
+    [self.searchUserView reloadData];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
