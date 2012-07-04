@@ -43,7 +43,7 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.GDB"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
-      buildConfiguration = "Debug"
+      buildConfiguration = "Release"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
       <BuildableProductRunnable>
@@ -76,6 +76,11 @@
          <AdditionalOption
             key = "MallocGuardEdges"
             value = ""
+            isEnabled = "YES">
+         </AdditionalOption>
+         <AdditionalOption
+            key = "USERBREAK"
+            value = "1"
             isEnabled = "YES">
          </AdditionalOption>
          <AdditionalOption

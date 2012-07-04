@@ -3294,6 +3294,8 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer: XIAO FENG (7ZJCBASW4H)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: XIAO FENG (7ZJCBASW4H)";
+				COPY_PHASE_STRIP = YES;
+				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BeautifulDaRen/BeautifulDaRen-Prefix.pch";
 				INFOPLIST_FILE = "BeautifulDaRen/BeautifulDaRen-Info.plist";
@@ -3302,6 +3304,7 @@
 				PROVISIONING_PROFILE = "585860BC-A146-4069-972E-E34E9907515D";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "585860BC-A146-4069-972E-E34E9907515D";
 				TARGETED_DEVICE_FAMILY = 1;
+				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -3310,12 +3313,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer: XIAO FENG (7ZJCBASW4H)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: XIAO FENG (7ZJCBASW4H)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BeautifulDaRen/BeautifulDaRen-Prefix.pch";
 				INFOPLIST_FILE = "BeautifulDaRen/BeautifulDaRen-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "585860BC-A146-4069-972E-E34E9907515D";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "585860BC-A146-4069-972E-E34E9907515D";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
