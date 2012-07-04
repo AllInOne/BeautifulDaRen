@@ -71,11 +71,7 @@
 #pragma mark - View lifecycle
 -(void)dealloc
 {
-<<<<<<< HEAD
-=======
-    [super dealloc];
     [_tableView release];
->>>>>>> e018f6307d66616ddcb44b04e0bc9956bb784d95
     [_followButton release];
     [_fansButton release];
     [_collectionButton release];
