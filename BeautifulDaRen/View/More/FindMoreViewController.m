@@ -13,7 +13,6 @@
 #import "FindFriendViewCell.h"
 #import "FindWeiboViewCell.h"
 #import "FriendDetailViewController.h"
-#import "FindWeiboViewController.h"
 #import "BorderImageView.h"
 #import "BSDKManager.h"
 #import "iToast.h"

@@ -91,8 +91,6 @@
 		C2A810E01566611F008FF2B7 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A810DF1566611F008FF2B7 /* Comment.m */; };
 		C2CE7287156A929F00C22E34 /* FriendDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2CE7285156A929F00C22E34 /* FriendDetailViewController.m */; };
 		C2CE7288156A929F00C22E34 /* FriendDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2CE7286156A929F00C22E34 /* FriendDetailViewController.xib */; };
-		C2CE728C156A945600C22E34 /* FindWeiboViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2CE728A156A945600C22E34 /* FindWeiboViewController.m */; };
-		C2CE728D156A945600C22E34 /* FindWeiboViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2CE728B156A945600C22E34 /* FindWeiboViewController.xib */; };
 		C2F68D07157340E7006ED8AE /* NSAttributedString+Attributes.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F68D04157340E7006ED8AE /* NSAttributedString+Attributes.m */; };
 		C2F68D08157340E7006ED8AE /* OHAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F68D06157340E7006ED8AE /* OHAttributedLabel.m */; };
 		C2F68D0A1573415D006ED8AE /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2F68D091573415D006ED8AE /* CoreText.framework */; };
@@ -749,9 +747,6 @@
 		C2CE7284156A929E00C22E34 /* FriendDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendDetailViewController.h; sourceTree = "<group>"; };
 		C2CE7285156A929F00C22E34 /* FriendDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendDetailViewController.m; sourceTree = "<group>"; };
 		C2CE7286156A929F00C22E34 /* FriendDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendDetailViewController.xib; sourceTree = "<group>"; };
-		C2CE7289156A945500C22E34 /* FindWeiboViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindWeiboViewController.h; sourceTree = "<group>"; };
-		C2CE728A156A945600C22E34 /* FindWeiboViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindWeiboViewController.m; sourceTree = "<group>"; };
-		C2CE728B156A945600C22E34 /* FindWeiboViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FindWeiboViewController.xib; sourceTree = "<group>"; };
 		C2F68D03157340E7006ED8AE /* NSAttributedString+Attributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+Attributes.h"; sourceTree = "<group>"; };
 		C2F68D04157340E7006ED8AE /* NSAttributedString+Attributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+Attributes.m"; sourceTree = "<group>"; };
 		C2F68D05157340E7006ED8AE /* OHAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OHAttributedLabel.h; sourceTree = "<group>"; };
@@ -2143,9 +2138,6 @@
 				C2CE7284156A929E00C22E34 /* FriendDetailViewController.h */,
 				C2CE7285156A929F00C22E34 /* FriendDetailViewController.m */,
 				C2CE7286156A929F00C22E34 /* FriendDetailViewController.xib */,
-				C2CE7289156A945500C22E34 /* FindWeiboViewController.h */,
-				C2CE728A156A945600C22E34 /* FindWeiboViewController.m */,
-				C2CE728B156A945600C22E34 /* FindWeiboViewController.xib */,
 			);
 			path = More;
 			sourceTree = "<group>";
@@ -2762,7 +2754,6 @@
 				CE20C437156776E60031997B /* beautifuldaren_logo.png in Resources */,
 				C2118B7615692D56006F4551 /* WeiboListViewController.xib in Resources */,
 				C2CE7288156A929F00C22E34 /* FriendDetailViewController.xib in Resources */,
-				C2CE728D156A945600C22E34 /* FindWeiboViewController.xib in Resources */,
 				CECAA7E4156A96F700B343A3 /* action_background@2x.png in Resources */,
 				CECAA7E5156A96F700B343A3 /* action_btn@2x.png in Resources */,
 				CECAA7E6156A96F700B343A3 /* avatar_big@2x.png in Resources */,
@@ -3192,7 +3183,6 @@
 				C236348215678917008BE9BB /* LoadFakeData.m in Sources */,
 				C2118B7515692D56006F4551 /* WeiboListViewController.m in Sources */,
 				C2CE7287156A929F00C22E34 /* FriendDetailViewController.m in Sources */,
-				C2CE728C156A945600C22E34 /* FindWeiboViewController.m in Sources */,
 				C21C26A8156B7E36000F8E3C /* EdittingViewController.m in Sources */,
 				C21C26B4156BA875000F8E3C /* RadioButton.m in Sources */,
 				C27F8654156CCFE40094402B /* FindFriendViewCell.m in Sources */,
