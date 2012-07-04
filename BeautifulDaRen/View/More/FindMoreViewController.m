@@ -55,6 +55,7 @@
 - (void) loadWeiboHeights;
 - (void) clearData;
 - (void) checkSearchMode;
+- (void) refreshView;
 
 @end
 

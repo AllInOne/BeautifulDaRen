@@ -21,5 +21,7 @@ enum
 
 @property (retain, nonatomic) IBOutlet UITextView * inputTextView;
 
+@property (retain, nonatomic) NSString * placeholderString;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil type:(NSInteger)type block:(EditDoneBlock)callback;
 @end

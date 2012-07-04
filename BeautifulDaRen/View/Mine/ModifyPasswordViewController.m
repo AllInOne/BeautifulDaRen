@@ -55,11 +55,12 @@
 
 - (void)dealloc
 {
-    [super dealloc];
     [_tableView release];
     [_oldPasswordField release];
     [_resetPasswordField release];
     [_repeatNewPasswordField release];
+    
+    [super dealloc];
 }
 
 - (void)viewDidUnload

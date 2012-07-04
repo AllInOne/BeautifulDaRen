@@ -171,7 +171,6 @@
 #pragma mark - View lifecycle
 - (void)dealloc
 {
-    [super dealloc];
     [_friendDetailView release];
     [_fansButton release];
     [_followButton release];
@@ -191,6 +190,8 @@
     [_levelLabel release];
     [_pointLabel release];
     [_phoneLabel release];
+    
+    [super dealloc];
 }
 - (void)viewDidUnload
 {

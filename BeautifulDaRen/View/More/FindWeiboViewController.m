@@ -46,8 +46,8 @@
 #pragma mark - View lifecycle
 - (void)dealloc
 {
-    [super dealloc];
     [_itemsViewController release];
+    [super dealloc];
 }
 
 - (void)viewDidUnload

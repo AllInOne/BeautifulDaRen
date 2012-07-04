@@ -71,7 +71,6 @@
 #pragma mark - View lifecycle
 -(void)dealloc
 {
-    [super dealloc];
     [_followButton release];
     [_fansButton release];
     [_collectionButton release];
@@ -80,6 +79,8 @@
     [_topicButton release];
     [_editButton release];
     [_mypublishButton release];
+    
+    [super dealloc];
 }
 
 - (void)viewDidLoad

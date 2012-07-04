@@ -65,6 +65,7 @@ typedef enum
 
 -(void)onSaveButtonClicked
 {
+    [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_SHOWWAITOVERLAY object:self];
     [[BSDKManager sharedManager] modifyUser:[ViewHelper getMyUserId] 
                                        name:[_tableViewDict objectForKey:KEY_ACCOUNT_USER_NAME]
                                      gender:[_tableViewDict objectForKey:KEY_ACCOUNT_GENDER]
@@ -74,6 +75,7 @@ typedef enum
                                     address:[_tableViewDict objectForKey:KEY_ACCOUNT_ADDRESS]
                                      avatar:self.avatarImage 
                             andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+                                [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_HIDEWAITOVERLAY object:self];
                                 [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
                             }];
     [self.avatarImage release];
@@ -333,6 +335,7 @@ typedef enum
         }
         else {
             EditDoneBlock block = nil;
+            NSString * placeholderString = nil;
             
 //            if(row == SECTION_SENIOR)
 //            {
@@ -345,6 +348,7 @@ typedef enum
                 switch (row) {
                     case SECTION_NICKNAME:
                     {
+                        placeholderString = [_tableViewDict objectForKey:KEY_ACCOUNT_USER_NAME];
                         block = ^(NSString * text)
                         {
                             [_tableViewDict setValue:text
@@ -355,6 +359,7 @@ typedef enum
                     }
                     case SECTION_ADDRESS:
                     {
+                        placeholderString = [_tableViewDict objectForKey:KEY_ACCOUNT_ADDRESS];
                         block = ^(NSString * text)
                         {
                             [_tableViewDict setValue:text
@@ -365,6 +370,7 @@ typedef enum
                     }
                     case SECTION_PHONE:
                     {
+                        placeholderString = [_tableViewDict objectForKey:KEY_ACCOUNT_PHONE];
                         block = ^(NSString * text)
                         {
                             [_tableViewDict setValue:text
@@ -375,6 +381,7 @@ typedef enum
                     }
                     case SECTION_BRIEF:
                     {
+                        placeholderString = [_tableViewDict objectForKey:KEY_ACCOUNT_INTRO];
                         block = ^(NSString * text)
                         {
                             [_tableViewDict setValue:text
@@ -390,6 +397,7 @@ typedef enum
                                                                bundle:nil
                                                                type:type
                                                                block:block];
+            edittingViewController.placeholderString = placeholderString;
             [self.navigationController pushViewController:edittingViewController animated:YES];
             [edittingViewController release];
         }

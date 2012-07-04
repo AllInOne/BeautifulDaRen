@@ -62,8 +62,6 @@
 }
 
 - (void)dealloc {
-    [super dealloc];
-    
     [_adsImageNames release];
     [_adsPageController release];
     if ([_adsExchangeTimer isValid]) {
@@ -73,6 +71,8 @@
     [_firstImageView release];
     [_secondImageView release];
     [_adsButton release];
+    
+    [super dealloc];
 }
 
 #pragma mark - View lifecycle

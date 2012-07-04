@@ -19,6 +19,10 @@
 
 #define CELL_CONTENT_MARGIN  (10)
 
+@interface CommentViewCell ()
+- (void)setAvatarImageView:(UIImageView*)imageView byUserInfo:(NSDictionary*)userInfo;
+@end
+
 @implementation CommentViewCell
 
 @synthesize originalBrand = _originalBrand;
@@ -53,6 +57,8 @@
     }
     NSDictionary * authorInfo = [data objectForKey:K_BSDK_USERINFO];
     
+    NSDictionary * originalUserInfo = [originalBlogInfo objectForKey:K_BSDK_USERINFO];
+    
     //self.authorAvatar
     self.authorName.text = [authorInfo objectForKey:K_BSDK_USERNAME];
     NSString * title = [NSString stringWithFormat:@"¥ %@",[originalBlogInfo objectForKey:K_BSDK_PRICE]];
@@ -67,10 +73,13 @@
     self.originalBrand.text = [originalBlogInfo objectForKey:K_BSDK_BRANDSERVICE];
     self.originalMerchant.text = [originalBlogInfo objectForKey:K_BSDK_SHOPMERCHANT];
     self.originalContent.text = [originalBlogInfo objectForKey:K_BSDK_CONTENT];
-    self.originalAuthorName.text = [[originalBlogInfo objectForKey:K_BSDK_USERINFO] objectForKey:K_BSDK_USERNAME];
+    self.originalAuthorName.text = [originalUserInfo objectForKey:K_BSDK_USERNAME];
 
     [self.originalImage setImageWithURL:[NSURL URLWithString:[originalBlogInfo objectForKey:K_BSDK_PICTURE_ORIGINAL]]];
     
+    [self setAvatarImageView:self.originalAuthorAvatar byUserInfo:originalUserInfo];
+    [self setAvatarImageView:self.authorAvatar byUserInfo:authorInfo];
+
     self.commentContent.text = [data objectForKey:K_BSDK_CONTENT];
     
     
@@ -89,6 +98,8 @@
                                                 0, 
                                                 CELL_CONTENT_WIDTH, 
                                                 CELL_CONTENT_HEIGHT);
+    
+    
 }
 
 - (CGFloat)getCellHeightByData:(NSDictionary*)data
@@ -111,6 +122,18 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (void)setAvatarImageView:(UIImageView*)imageView byUserInfo:(NSDictionary*)userInfo
+{
+    NSString * userAvatarUrl = [userInfo objectForKey:K_BSDK_PICTURE_65];
+    if (userAvatarUrl && [userAvatarUrl length]) {
+        [imageView setImageWithURL:[NSURL URLWithString:userAvatarUrl] placeholderImage:[UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:userInfo]]];
+    }
+    else
+    {
+        [imageView setImage:[UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:userInfo]]];
+    }
 }
 
 @end

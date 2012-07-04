@@ -230,13 +230,14 @@
 
 -(void)dealloc
 {
-    [super dealloc];
     [_tableView release];
     [_friendDictionary release];
     [_dataList release];
     [_footerButton release];
     [_footerView release];
     [_loadingActivityIndicator release];
+    
+    [super dealloc];
 }
 
 - (void)viewDidUnload

@@ -79,11 +79,12 @@ enum
 #pragma mark - View lifecycle
 -(void)dealloc
 {
-    [super dealloc];
     [_tableView release];
     [_loginWithQQButton release];
     [_loginWithSinaWeiboButton release];
     [_observers release];
+    
+    [super dealloc];
 }
 
 - (void)viewDidLoad

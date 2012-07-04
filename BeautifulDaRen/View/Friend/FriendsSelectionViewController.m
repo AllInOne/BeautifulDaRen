@@ -86,10 +86,11 @@
 }
 
 - (void)dealloc {
-    [super dealloc];
     [_friendsViewController release];
     [_selectedContacts release];
     [_friendsList release];
+    
+    [super dealloc];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

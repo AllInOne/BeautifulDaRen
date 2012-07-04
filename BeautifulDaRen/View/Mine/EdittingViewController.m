@@ -19,7 +19,7 @@
 @property (retain, nonatomic) IBOutlet SegmentControl * commentMeSegmentControl;
 @property (retain, nonatomic) IBOutlet SegmentControl * atMeSegmentControl;
 @property (retain, nonatomic) IBOutlet SegmentControl * privateLetterMeSegmentControl;
-@property (copy, nonatomic) EditDoneBlock callBack;
+@property (assign, nonatomic) EditDoneBlock callBack;
 
 @end
 
@@ -32,6 +32,7 @@
 @synthesize privateLetterMeSegmentControl = _privateLetterMeSegmentControl;
 @synthesize type = _type;
 @synthesize callBack = _callBack;
+@synthesize placeholderString = _placeholderString;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil type:(NSInteger)type block:(EditDoneBlock)callback
 {
@@ -84,6 +85,11 @@
         _inputTextView.layer.cornerRadius = 5.0;
         [_inputTextView becomeFirstResponder];
         
+        if  (_placeholderString)
+        {
+            [_inputTextView setText:_placeholderString];
+        }
+        
         [self.view addSubview:_editNormalView];
     }
     else
@@ -120,7 +126,6 @@
 
 -(void)dealloc
 {
-    [super dealloc];
     [_inputTextView release];
     [_editNormalView release];
     [_editPrivaceView release];
@@ -128,6 +133,9 @@
     [_atMeSegmentControl release];
     [_privateLetterMeSegmentControl release];
     Block_release(_callBack);
+    [_placeholderString release];
+    
+    [super dealloc];
 }
 
 - (void)viewDidUnload
