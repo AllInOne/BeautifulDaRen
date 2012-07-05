@@ -20,7 +20,6 @@
 @synthesize adsPageView = _adsPageView;
 @synthesize categoryContentView = _categoryContentView;
 
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -42,6 +41,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib. 
     [self refreshView];
+    [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClicked) title:NSLocalizedString(@"refresh", @"refresh")]]; 
 }
 
 - (void)dealloc {
@@ -102,8 +102,6 @@
         _categoryContentView.view.frame = CGRectMake(0, ADS_CELL_HEIGHT + CONTENT_MARGIN, self.view.frame.size.width, USER_WINDOW_HEIGHT - ADS_CELL_HEIGHT - CONTENT_MARGIN);
         [self.view addSubview:_categoryContentView.view];
     }
-    
-    [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClicked) title:NSLocalizedString(@"refresh", @"refresh")]]; 
 }
 
 - (void)onAdsPageViewClosed

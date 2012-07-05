@@ -22,6 +22,7 @@
 @property (nonatomic, retain) IBOutlet UIView * footerView;
 @property (nonatomic, retain) IBOutlet UILabel * checkBoxText;
 @property (nonatomic, retain) IBOutlet UIButton * checkBoxButton;
+@property (nonatomic, retain) IBOutlet UIButton * atButton;
 // The mode of the controller, YES == forward mode, NO = comment mode;
 @property (nonatomic, assign) BOOL forwardMode;
 @property (nonatomic, assign) BOOL isCheckBoxChecked;

@@ -322,7 +322,6 @@
                                               }
                                           }];
     }
-    [self addToolbar];
 }
 
 - (void)viewDidUnload
@@ -360,7 +359,11 @@
 
 - (void)addToolbar
 {
-    UIToolbar *tempToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0,372, 320,44)];
+    if (_toolbar) {
+        [_toolbar removeFromSuperview];
+        self.toolbar = nil;
+    }
+   _toolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0,372, 320,44)];
     
     UIBarButtonItem *flexible = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
@@ -381,7 +384,15 @@
         [commentButtonItem setEnabled:NO];
     }
     
-    UIBarButtonItem *favourateButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar_favourate_icon" target:self action:@selector(onFavourate)];
+    UIBarButtonItem *favourateButtonItem = nil;
+    if ([[self.weiboData objectForKey:K_BSDK_ISFAV] isEqual:@"1"]) {
+        favourateButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar_cancel_fav_focus" target:self action:@selector(onFavourate)];
+    }
+    else
+    {
+        favourateButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar_favourate_icon" target:self action:@selector(onFavourate)];
+    }
+
     if ( ![[BSDKManager sharedManager] isLogin]) {
         [favourateButtonItem setEnabled:NO];
     }
@@ -397,23 +408,22 @@
                          flexible,
                          nil];
     
-    tempToolbar.items= barItems;
+    _toolbar.items= barItems;
     UIImageView * tabBarBg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"toolbar_background"]];
     tabBarBg.frame = CGRectMake(0, 0, 320, 45);
     tabBarBg.contentMode = UIViewContentModeScaleToFill;
     if (SYSTEM_VERSION_LESS_THAN(@"5.0")) {
-        [tempToolbar  insertSubview:tabBarBg atIndex:0];
+        [_toolbar  insertSubview:tabBarBg atIndex:0];
     }
     else
     {
-        [tempToolbar  insertSubview:tabBarBg atIndex:1];            
+        [_toolbar  insertSubview:tabBarBg atIndex:1];            
     }
 
-    [self.view addSubview: tempToolbar];
+    [self.view addSubview: _toolbar];
     [flexible release];
     [tabBarBg release];
     [barItems release];
-    [tempToolbar release];
 }
 
 - (void)refreshView
@@ -526,6 +536,8 @@
     {
         self.brandLable.text = brand;
     }
+    
+    [self addToolbar];
 }
 
 - (void)getWeiboDataFromResponse

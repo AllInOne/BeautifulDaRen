@@ -34,7 +34,6 @@
     [_categoryScrollItem release];
     [_categoryTitle release];
     [_itemData release];
-    [_weiboList removeAllObjects];
     [_weiboList release];
     
     [super dealloc];
@@ -135,9 +134,12 @@
     NSMutableArray * ret = [NSMutableArray arrayWithCapacity:[self.weiboList count]];
     
     for (NSDictionary * weiboData in self.weiboList) {
-        [ret addObject:[weiboData objectForKey:K_BSDK_PICTURE_102]];
+        NSString * pictureUrl = [weiboData objectForKey:K_BSDK_PICTURE_102];
+        if (pictureUrl) {
+            [ret addObject:[weiboData objectForKey:K_BSDK_PICTURE_102]];
+        }
     }
-    
+
     return ret;
 }
 @end

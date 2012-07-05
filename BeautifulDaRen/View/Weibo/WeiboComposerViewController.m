@@ -303,6 +303,11 @@
         return;
     }
     
+    if (self.selectedImage == nil) {
+        [ViewHelper showSimpleMessage:NSLocalizedString(@"please_enter_photo", @"please_enter_photo") withTitle:nil withButtonText:NSLocalizedString(@"ok", @"ok")];
+        return;
+    }
+    
     [self dismissModalViewControllerAnimated:YES];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_SHOWWAITOVERLAY object:self];
