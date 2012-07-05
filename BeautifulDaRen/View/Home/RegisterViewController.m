@@ -27,6 +27,12 @@ enum
     ACCOUNT_SETTING_CITY
 };
 
+#define USER_NAME_TEXT_FIELD @"userNameTextField"
+#define USER_EMAIL_TEXT_FIELD @"userEmailTextField"
+#define USER_PWD_TEXT_FIELD @"userPwdTextField"
+#define USER_REPWD_TEXT_FIELD @"userRePwdTextField"
+#define USER_CITY @"userCity"
+
 @interface RegisterViewController()
 
 @property (retain, nonatomic) IBOutlet UITableView * tableView;
@@ -37,7 +43,8 @@ enum
 @property (retain, nonatomic) IBOutlet UIButton * loginWithSinaWeiboButton;
 @property (retain, nonatomic) IBOutlet UIButton * loginWithQQButton;
 @property (retain, nonatomic) NSString * userCity;
-@property (retain, nonatomic)  NSMutableArray* observers;
+@property (retain, nonatomic) NSMutableArray* observers;
+@property (retain, nonatomic) NSMutableDictionary * savingInputDict;
 
 @end
 
@@ -50,6 +57,7 @@ enum
 @synthesize tableView = _tableView;
 @synthesize loginWithQQButton = _loginWithQQButton;
 @synthesize loginWithSinaWeiboButton = _loginWithSinaWeiboButton;
+@synthesize savingInputDict = _savingInputDict;
 @synthesize observers = _observers;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -84,6 +92,7 @@ enum
     [_loginWithQQButton release];
     [_loginWithSinaWeiboButton release];
     [_observers release];
+    [_savingInputDict release];
     
     [super dealloc];
 }
@@ -91,6 +100,8 @@ enum
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.savingInputDict = [[NSMutableDictionary alloc] init];
 }
 
 - (void)viewDidUnload
@@ -99,6 +110,7 @@ enum
     self.loginWithQQButton = nil;
     self.loginWithSinaWeiboButton = nil;
     self.tableView = nil;
+    self.savingInputDict = nil;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -184,6 +196,8 @@ enum
                 accountInfoInputCell.inputLabel.text = NSLocalizedString(@"account_register_email", @"");
                 accountInfoInputCell.inputTextField.delegate = self;
                 accountInfoInputCell.inputTextField.placeholder = NSLocalizedString(@"please_input_your_common_email", @"");
+                accountInfoInputCell.inputTextField.text = [self.savingInputDict valueForKey:USER_EMAIL_TEXT_FIELD];
+                self.userEmailTextField = nil;
                 self.userEmailTextField = accountInfoInputCell.inputTextField;
                 break;
             }
@@ -193,6 +207,8 @@ enum
                 accountInfoInputCell.inputTextField.delegate = self;
                 
                 accountInfoInputCell.inputTextField.placeholder = NSLocalizedString(@"please_input_a_beautifu_daren_name", @"");
+                accountInfoInputCell.inputTextField.text = [self.savingInputDict valueForKey:USER_NAME_TEXT_FIELD];
+                self.userNameTextField = nil;
                 self.userNameTextField = accountInfoInputCell.inputTextField;
                 break;
             }
@@ -201,6 +217,8 @@ enum
                 accountInfoInputCell.inputLabel.text = NSLocalizedString(@"type_password", @"");
                 accountInfoInputCell.inputTextField.delegate = self;
                 [accountInfoInputCell.inputTextField setSecureTextEntry:YES];
+                accountInfoInputCell.inputTextField.text = [self.savingInputDict valueForKey:USER_PWD_TEXT_FIELD];
+                self.userPwdTextField = nil;
                 self.userPwdTextField = accountInfoInputCell.inputTextField;
                 break;
             }
@@ -209,6 +227,8 @@ enum
                 accountInfoInputCell.inputLabel.text = NSLocalizedString(@"type_password_again", @"");
                 accountInfoInputCell.inputTextField.delegate = self;
                 [accountInfoInputCell.inputTextField setSecureTextEntry:YES];
+                accountInfoInputCell.inputTextField.text = [self.savingInputDict valueForKey:USER_REPWD_TEXT_FIELD];
+                self.userRePwdTextField = nil;
                 self.userRePwdTextField = accountInfoInputCell.inputTextField;
                 break;
             }
@@ -404,6 +424,27 @@ enum
     [textField resignFirstResponder];
     return YES;
 }
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    NSString * key = nil;
+    if (textField == self.userEmailTextField)
+    {
+        key = USER_EMAIL_TEXT_FIELD;
+    }
+    else if(textField == self.userNameTextField)
+    {
+        key = USER_NAME_TEXT_FIELD;
+    }
+    else if(textField == self.userPwdTextField)
+    {
+        key = USER_PWD_TEXT_FIELD;
+    }
+    else if(textField == self.userRePwdTextField)
+    {
+        key = USER_REPWD_TEXT_FIELD;
+    }
+    [self.savingInputDict setValue:textField.text forKey:key];
+}
 
 #pragma mark ButtonPressDelegate
 - (void)didButtonPressed:(UIButton *)button inView:(UIView *)view
@@ -441,6 +482,7 @@ enum
 - (void)onCitySelected:(NSString*)city
 {
     self.userCity = city;
+    [self.savingInputDict setValue:city forKey:USER_CITY];
     [self.tableView reloadData];
 }
 
