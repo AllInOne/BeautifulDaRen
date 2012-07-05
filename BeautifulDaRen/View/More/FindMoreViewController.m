@@ -318,7 +318,7 @@
             [scrollView addSubview:cell];
 
             UIImageView * imageView = [[UIImageView alloc] init];
-            NSString * url = [dict valueForKey:@"Picture"];
+            NSString * url = [dict valueForKey:@"pic_65-65"];
             if ([url length] > 0)
             {
                 [imageView setImageWithURL:[NSURL URLWithString:url]];
@@ -414,7 +414,7 @@
 #pragma mark UIScrollViewDelegate
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-    if (self.searchUserView.contentOffset.y + self.searchUserView.frame.size.height >= self.searchUserView.contentSize.height && !self.inSearching)
+    if (self.isSearchModel && self.searchUserView.contentOffset.y + self.searchUserView.frame.size.height >= self.searchUserView.contentSize.height && !self.inSearching)
     {
         [self doSearch];
     }
