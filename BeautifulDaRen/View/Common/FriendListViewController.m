@@ -244,10 +244,11 @@
         {
             title = NSLocalizedString(@"remove_fan", @"remove_fan");
         }
-        else if ([relation isEqualToString:K_BSDK_RELATIONSHIP_BLACK_LIST])
+        else if ([relation isEqualToString:K_BSDK_RELATIONSHIP_BLACK_LIST] || [relation isEqualToString:K_BSDK_RELATIONSHIP_NONE])
         {
             title = NSLocalizedString(@"follow", @"follow");
         }
+        
     }
     return title;
 }
@@ -261,12 +262,12 @@
             return [FriendRawDict objectForKey:K_BSDK_FANSUSERINFO];
             break;
         }
+        case FriendListViewController_TYPE_FRIEND_FOLLOW:
         case FriendListViewController_TYPE_MY_FOLLOW:
         {
             return [FriendRawDict objectForKey:K_BSDK_ATTENTIONUSERINFO];
             break;
         }            
-        case FriendListViewController_TYPE_FRIEND_FOLLOW:
         case FriendListViewController_TYPE_FAV_ONE_BLOG:
         default:
         {
