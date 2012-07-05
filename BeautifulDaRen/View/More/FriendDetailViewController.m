@@ -31,7 +31,7 @@
 @property (retain, nonatomic) IBOutlet UITableView * friendDetailView;
 @property (assign, nonatomic) BOOL isIdentification;
 @property (retain, nonatomic) NSMutableDictionary * friendDictionary;
-@property (retain, nonatomic) NSString * friendName;
+@property (retain, nonatomic) NSString * friendId;
 
 @property (retain, nonatomic) IBOutlet UILabel * nameLabel;
 @property (retain, nonatomic) IBOutlet UILabel * cityLabel;
@@ -69,7 +69,7 @@
 @synthesize topicButton = _topicButton;
 @synthesize friendDictionary = _friendDictionary;
 @synthesize actionButton = _actionButton;
-@synthesize friendName = _friendName;
+@synthesize friendId = _friendId;
 @synthesize avatarImageView = _avatarImageView;
 @synthesize toolbar = _toolbar;
 
@@ -134,12 +134,12 @@
     [self.actionButton setTitle:buttonTitle forState:UIControlStateNormal];
 }
 
--(id)initWithFriendName:(NSString*)name
+-(id)initWithFriendId:(NSString*)friendId
 {
     self = [super init];
     if (self) {
         self.friendDictionary = [NSMutableDictionary dictionaryWithCapacity:20];
-        self.friendName = name;
+        self.friendId = friendId;
         [self initialize];
     }
     return self;
@@ -186,11 +186,10 @@
     [_publishedButton release];
     [_topicButton release];
     [_actionButton release];
-    [_friendName release];
     [_friendDictionary release];
     [_avatarImageView release];
     [_genderImageView release];
-    
+    [_friendId release];
     [_nameLabel release];
     [_cityLabel release];
     [_detailAddressLabel release];
@@ -213,7 +212,7 @@
     self.actionButton = nil;
     self.avatarImageView = nil;
     self.genderImageView = nil;
-    
+    self.friendId = nil;
     self.nameLabel = nil;
     self.cityLabel = nil;
     self.detailAddressLabel = nil;
@@ -247,13 +246,13 @@
         [self.friendDetailView reloadData];
     };
     
-    if (self.friendName) {
-        [[BSDKManager sharedManager] getUserInforByName:self.friendName
-                                        andDoneCallback:doneblock];
+    if (self.friendId) {
+        [[BSDKManager sharedManager] getUserInforByUserId:self.friendId
+                                          andDoneCallback:doneblock];
     }
     else
     {
-        [[BSDKManager sharedManager] getUserInforByName:[self.friendDictionary objectForKey:K_BSDK_USERNAME]
+        [[BSDKManager sharedManager] getUserInforByUserId:[self.friendDictionary objectForKey:K_BSDK_UID]
                                         andDoneCallback:doneblock];
     }
 }

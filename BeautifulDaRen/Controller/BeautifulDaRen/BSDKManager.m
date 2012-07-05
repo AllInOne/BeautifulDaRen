@@ -210,7 +210,7 @@ static BSDKManager *sharedInstance;
                        doneCallback:doneBlock];
 }
 
-- (void)getUserInforByUserId:(NSString*) userId andDoneCallback:(processDoneWithDictBlock)doneBlock
+- (void)getUserInforByUserId:(NSString*)userId andDoneCallback:(processDoneWithDictBlock)doneBlock
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
     
