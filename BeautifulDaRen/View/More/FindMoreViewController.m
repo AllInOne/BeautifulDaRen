@@ -394,8 +394,12 @@
     NSDictionary * friendDict = [self.searchUserResults objectAtIndex:[indexPath row]];
     friendCell.nameLabel.text = [friendDict valueForKey:KEY_ACCOUNT_USER_NAME];
     friendCell.levelLabel.text = [NSString stringWithFormat:@"LV%d",[[friendDict valueForKey:KEY_ACCOUNT_LEVEL] intValue]];
-    if ([[friendDict valueForKey:KEY_ACCOUNT_RELATION] intValue] == FRIEND_RELATIONSHIP_MY_FOLLOW
-        || [[friendDict valueForKey:KEY_ACCOUNT_RELATION] intValue] == FRIEND_RELATIONSHIP_INTER_FOLLOW) {
+    
+    
+    if ([[friendDict valueForKey:K_BSDK_RELATIONSHIP] isEqualToString:K_BSDK_RELATIONSHIP_MY_FOLLOW]
+        || [[friendDict valueForKey:K_BSDK_RELATIONSHIP] isEqualToString:K_BSDK_RELATIONSHIP_INTER_FOLLOW])
+            
+    {
         [friendCell.followButton setTitle:@"取消关注" forState:UIControlStateNormal];
     }
     else 
@@ -610,14 +614,14 @@
 {
     NSInteger index = button.tag;
     NSMutableDictionary * friendDict = [self.searchUserResults objectAtIndex:index];
-    if ([[friendDict valueForKey:KEY_ACCOUNT_RELATION] intValue] == FRIEND_RELATIONSHIP_MY_FOLLOW
-        || [[friendDict valueForKey:KEY_ACCOUNT_RELATION] intValue] == FRIEND_RELATIONSHIP_INTER_FOLLOW)
+    if ([[friendDict valueForKey:K_BSDK_RELATIONSHIP] isEqualToString:K_BSDK_RELATIONSHIP_MY_FOLLOW]
+        || [[friendDict valueForKey:K_BSDK_RELATIONSHIP] isEqualToString:K_BSDK_RELATIONSHIP_INTER_FOLLOW])
     {
         [[BSDKManager sharedManager] unFollowUser:[[friendDict valueForKey:KEY_ACCOUNT_ID] intValue]
                                   andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
                                       if(AIO_STATUS_SUCCESS == status && K_BSDK_IS_RESPONSE_OK(data))
                                       {
-                                          [friendDict setValue:[NSNumber numberWithInt:FRIEND_RELATIONSHIP_NONE] forKey:KEY_ACCOUNT_RELATION];
+                                          [friendDict setValue:K_BSDK_RELATIONSHIP_NONE forKey:K_BSDK_RELATIONSHIP];
                                           [self.searchUserView reloadData];
                                       }
                                       else
@@ -632,7 +636,7 @@
                                 andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
                                     if(AIO_STATUS_SUCCESS == status && K_BSDK_IS_RESPONSE_OK(data))
                                     {
-                                        [friendDict setValue:[NSNumber numberWithInt:FRIEND_RELATIONSHIP_MY_FOLLOW] forKey:KEY_ACCOUNT_RELATION];
+                                        [friendDict setValue:K_BSDK_RELATIONSHIP_MY_FOLLOW forKey:K_BSDK_RELATIONSHIP];
                                         [self.searchUserView reloadData];
                                     }
                                     else

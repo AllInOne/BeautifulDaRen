@@ -227,25 +227,26 @@
 
 -(NSString*)getRelationButtonTitleOfUser:(NSDictionary*)userInfo
 {
-    NSInteger relation = [[userInfo valueForKey:KEY_ACCOUNT_RELATION] intValue];
+    NSString * relation = [userInfo valueForKey:K_BSDK_RELATIONSHIP];
     NSString * title = nil;
     
     if (![ViewHelper isSelf:[userInfo objectForKey:K_BSDK_USERID]]) 
     {
-        switch (relation) {
-            case FRIEND_RELATIONSHIP_INTER_FOLLOW:
-                title = NSLocalizedString(@"unfollow", @"unfollow");
-                break;
-            case FRIEND_RELATIONSHIP_MY_FOLLOW:
-                title = NSLocalizedString(@"unfollow", @"unfollow");
-                break;
-            case FRIEND_RELATIONSHIP_MY_FANS:
-                title = NSLocalizedString(@"remove_fan", @"remove_fan");
-                break;
-            case FRIEND_RELATIONSHIP_BALCK_LIST:
-            default:
-                title = NSLocalizedString(@"follow", @"follow");
-                break;
+        if ([relation isEqualToString:K_BSDK_RELATIONSHIP_INTER_FOLLOW])
+        {
+            title = NSLocalizedString(@"unfollow", @"unfollow");
+        }
+        else if ([relation isEqualToString:K_BSDK_RELATIONSHIP_MY_FOLLOW])
+        {
+            title = NSLocalizedString(@"unfollow", @"unfollow");
+        }
+        else if ([relation isEqualToString:K_BSDK_RELATIONSHIP_MY_FANS])
+        {
+            title = NSLocalizedString(@"remove_fan", @"remove_fan");
+        }
+        else if ([relation isEqualToString:K_BSDK_RELATIONSHIP_BLACK_LIST])
+        {
+            title = NSLocalizedString(@"follow", @"follow");
         }
     }
     return title;
@@ -358,7 +359,7 @@
 {
     BOOL isShouldFollow = YES;
     NSDictionary * dict = [self.friendsList objectAtIndex:button.tag];
-    NSInteger relation = [[dict valueForKey:KEY_ACCOUNT_RELATION] intValue];
+    NSString * relation = [dict valueForKey:K_BSDK_RELATIONSHIP];
     switch (self.type) {
         case FriendListViewController_TYPE_MY_FOLLOW:
         {
@@ -367,7 +368,7 @@
         }
         case FriendListViewController_TYPE_MY_FANS:
         {
-            isShouldFollow = (relation == FRIEND_RELATIONSHIP_INTER_FOLLOW) ? NO : YES;
+            isShouldFollow = ([relation isEqualToString:K_BSDK_RELATIONSHIP_INTER_FOLLOW]) ? NO : YES;
             break;
         }
         case FriendListViewController_TYPE_MY_BLACKLIST:

@@ -51,17 +51,6 @@
 
 #define SYSTEM_VERSION_LESS_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
 
-
-// TODO: remove it and use defines in BSDKDefines.h
-enum
-{
-    FRIEND_RELATIONSHIP_NONE = 1,
-    FRIEND_RELATIONSHIP_MY_FOLLOW,
-    FRIEND_RELATIONSHIP_MY_FANS,
-    FRIEND_RELATIONSHIP_INTER_FOLLOW,
-    FRIEND_RELATIONSHIP_BALCK_LIST,
-} FRIEND_RELATIONSHIP_TYPE;
-
 #define K_NOTIFICATION_SHOWWAITOVERLAY @"K_NOTIFICATION_SHOWWAITOVERLAY"
 #define K_NOTIFICATION_HIDEWAITOVERLAY @"K_NOTIFICATION_HIDEWAITOVERLAY"
 #define K_NOTIFICATION_LOGIN_SUCCESS @"K_NOTIFICATION_LOGIN_SUCCESS"
@@ -90,7 +79,6 @@ enum
 #define KEY_ACCOUNT_FAVORITE_COUNT      @"FavNum"
 #define KEY_ACCOUNT_FANS_COUNT          @"FansNum"
 #define KEY_ACCOUNT_FOLLOW_COUNT        @"AttentionNum"
-#define KEY_ACCOUNT_RELATION            @"Relation"
 
 #define GET_CURRENT_USER_INFO_BY_KEY(key)  [[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] valueForKey:key]
 

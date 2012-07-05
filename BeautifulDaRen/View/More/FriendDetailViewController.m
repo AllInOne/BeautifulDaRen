@@ -279,7 +279,7 @@
 
 -(IBAction)actionButtonClicked:(UIButton*)sender
 {
-    NSInteger relation = [[self.friendDictionary valueForKey:K_BSDK_RELATIONSHIP] intValue];
+    NSString* relation = [self.friendDictionary valueForKey:K_BSDK_RELATIONSHIP];
     NSInteger userId = [[self.friendDictionary valueForKey:K_BSDK_UID] intValue];
     
     
@@ -287,8 +287,7 @@
     {
         [self refreshView];
     };
-    
-    if (relation == FRIEND_RELATIONSHIP_MY_FOLLOW || relation == FRIEND_RELATIONSHIP_INTER_FOLLOW)
+    if ([relation isEqualToString:K_BSDK_RELATIONSHIP_MY_FOLLOW] || [relation isEqualToString:K_BSDK_RELATIONSHIP_INTER_FOLLOW])
     {
         [[BSDKManager sharedManager] unFollowUser:userId
                                   andDoneCallback:doneBlock];
