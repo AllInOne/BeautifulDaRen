@@ -96,7 +96,7 @@
 "privacy" = "隐私";
 "notes" = "备注";
 "set_notes" = "设置备注";
-"switch_account" = "切换账号";
+"switch_account" = "退出账号";
 
 "sent_password_to_email" = "密码已发至邮箱，请查收";
 "prompt" = "提示";
@@ -116,6 +116,10 @@
 "her_home_page" = "她的主页";
 "his_home_page" = "他的主页";
 "authentication" = "认证";
+
+"authentication_done" = "已认证";
+"authentication_not_done" = "未认证";
+
 
 "add_to_black_list" = "加入黑名单";
 "impeach" = "举报";
@@ -176,3 +180,5 @@
 
 "detail_mode" = "详情模式";
 "point" = "积分";
+
+"server_no_response" = "服务器无响应!";

@@ -78,6 +78,8 @@
 
 #define K_BSDK_TEL @"Tel"
 
+#define K_BSDK_INTRO @"Intro"
+
 #define K_BSDK_ADDRESS @"Address"
 
 #define K_BSDK_GENDER @"Sex"
@@ -93,6 +95,8 @@
 #define K_BSDK_LONGITUDE @"PosY"
 
 #define K_BSDK_ISFAV @"IsFav"
+
+#define K_BSDK_ISVERIFY @"IsVerify"
 
 #define K_BSDK_CREATETIME @"CreateTime"
 

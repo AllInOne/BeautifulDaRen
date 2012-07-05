@@ -394,6 +394,7 @@
 
 - (IBAction)onAtFriendPressed:(id)sender
 {
+    [self.atButton setEnabled:NO];
     [[BSDKManager sharedManager] getFollowList:GET_CURRENT_USER_INFO_BY_KEY(K_BSDK_UID) pageSize:50 pageIndex:1 andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
         
         NSArray * userList = [data objectForKey:K_BSDK_USERLIST];
@@ -414,6 +415,8 @@
         
         [navController release];
         [friendSelectionController release];
+        
+        [self.atButton setEnabled:YES];
     }];
 }
 

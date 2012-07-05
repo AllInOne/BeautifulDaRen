@@ -2,6 +2,7 @@
 #import "BSDKRequest.h"
 #import "WBUtil.h"
 #import "JSON.h"
+#import "BSDKDefines.h"
 
 #import "WBSDKGlobal.h"
 
@@ -306,6 +307,17 @@ static NSMutableString *logBody;
     }
     
     connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
+    
+    [self performSelector:@selector(requestOnTimeout) withObject:self afterDelay:60.0];
+}
+
+- (void)requestOnTimeout
+{
+    
+//    NSDictionary * falkResponse = [NSDictionary dictionaryWithObjectsAndKeys:NSLocalizedString(@"server_no_response", @"server_no_response"), K_BSDK_RESPONSE_MESSAGE, K_BSDK_RESPONSE_STATUS_FAILED, K_BSDK_RESPONSE_STATUS, nil];
+//    [self handleResponseData:falkResponse];
+    [self failedWithError:[NSError errorWithDomain:@"BSDK" code:1005 userInfo:nil]];
+    [self disconnect];
 }
 
 - (void)disconnect
@@ -351,6 +363,8 @@ static NSMutableString *logBody;
     [connection cancel];
 	[connection release];
 	connection = nil;
+    
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
 }
 
 - (void)connection:(NSURLConnection *)theConnection didFailWithError:(NSError *)error
@@ -363,6 +377,7 @@ static NSMutableString *logBody;
     [connection cancel];
 	[connection release];
 	connection = nil;
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
 }
 
 @end

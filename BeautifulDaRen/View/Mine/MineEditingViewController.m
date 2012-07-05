@@ -78,6 +78,7 @@ typedef enum
                                     city:[_tableViewDict objectForKey:KEY_ACCOUNT_CITY]
                                         tel:[_tableViewDict objectForKey:KEY_ACCOUNT_PHONE] 
                                     address:[_tableViewDict objectForKey:KEY_ACCOUNT_ADDRESS]
+                                description:[_tableViewDict valueForKey:KEY_ACCOUNT_INTRO]
                                      avatar:self.avatarImage 
                             andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
                                 [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_HIDEWAITOVERLAY object:self];

@@ -75,6 +75,8 @@
         self.navigationItem.title = @"评论";
     }
     
+    [self.checkBoxText setFont:[UIFont systemFontOfSize:16.0]];
+    
     UIImageView * toolbarBg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"toolbar_background"]];
     toolbarBg.contentMode = UIViewContentModeScaleToFill;
     [self.footerView  insertSubview:toolbarBg atIndex:0];

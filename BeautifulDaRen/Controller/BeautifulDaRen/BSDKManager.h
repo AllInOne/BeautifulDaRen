@@ -63,6 +63,7 @@
               city:(NSString*)city
                tel:(NSString*)tel
            address:(NSString*)address
+       description:(NSString*)description
             avatar:(UIImage*)avatar
    andDoneCallback:(processDoneWithDictBlock)doneBlock;
 

@@ -106,6 +106,12 @@
     self.mypublishButton = nil;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self refreshUserInfo];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
@@ -324,6 +330,7 @@
                 LoginViewController * loginContorller = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
                 [self.navigationController pushViewController:loginContorller animated:YES];
                 [loginContorller release];
+                [[NSUserDefaults standardUserDefaults] setObject:nil forKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
             }
             else {
                 [[iToast makeText:@"账户退出失败!"] show];

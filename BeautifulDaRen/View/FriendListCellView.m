@@ -7,6 +7,7 @@
 //
 
 #import "FriendListCellView.h"
+#import "UIImageView+WebCache.h"
 
 @implementation FriendListCellView
 

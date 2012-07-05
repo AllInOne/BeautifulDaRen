@@ -13,6 +13,7 @@
 #import "SelectCityViewController.h"
 #import "iToast.h"
 #import "BSDKManager.h"
+#import "BSDKDefines.h"
 
 #import "ViewHelper.h"
 #import "ViewConstants.h"
@@ -337,13 +338,21 @@ enum
         email:email
         city:self.userCity
         andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-            if (status == AIO_STATUS_SUCCESS && [[data valueForKey:@"status"]isEqualToString:@"y"]) {
+            if(AIO_STATUS_SUCCESS == status && K_BSDK_IS_RESPONSE_OK(data))
+            {
+                NSDictionary * dict = [data objectForKey:K_BSDK_USERINFO];
+                [[NSUserDefaults standardUserDefaults] setObject:dict forKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
                 [self.navigationController popToRootViewControllerAnimated:YES];
                 [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_LOGIN_SUCCESS object:self userInfo:data];
+                
+                
+                [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:USERDEFAULT_IS_AUTO_LOGIN];
+                [[NSUserDefaults standardUserDefaults] setObject:userName forKey:USERDEFAULT_AUTO_LOGIN_ACCOUNT_NAME];
+                [[NSUserDefaults standardUserDefaults] setObject:pwd forKey:USERDEFAULT_AUTO_LOGIN_ACCOUNT_PASSWORD];
             }
             else
             {
-                [[iToast makeText:[NSString stringWithFormat:@"%@", [data objectForKey:@"msg"]]] show];
+                [[iToast makeText:[NSString stringWithFormat:@"%@", K_BSDK_GET_RESPONSE_MESSAGE(data)]] show];
             }
         }];
     }

@@ -704,6 +704,7 @@ static BSDKManager *sharedInstance;
               city:(NSString*)city
                tel:(NSString*)tel
            address:(NSString*)address
+       description:(NSString*)description
             avatar:(UIImage*)avatar
    andDoneCallback:(processDoneWithDictBlock)doneBlock
 {
@@ -740,6 +741,11 @@ static BSDKManager *sharedInstance;
         [params setObject:gender forKey:K_BSDK_GENDER];
     }
     
+    if (description)
+    {
+        [params setObject:description forKey:K_BSDK_INTRO];
+    }
+
     if (avatar)
     {
 		[params setObject:avatar forKey:K_BSDK_PICTURE];
