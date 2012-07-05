@@ -93,22 +93,16 @@
                WithText:(NSString *)text 
         andDoneCallback:(processDoneWithDictBlock)callback;
 
-// If username is specified, then it will retrieve the weibos which is sent by this user, or it will retrieve the neweset weibos.
-- (void)getWeiboListByUsername:(NSString*)username
-                      pageSize:(NSInteger)pageSize 
-                     pageIndex:(NSInteger)pageIndex 
-               andDoneCallback:(processDoneWithDictBlock)callback;
-
 - (void)getWeiboListByUserId:(NSString*)userId
                     pageSize:(NSInteger)pageSize 
                    pageIndex:(NSInteger)pageIndex 
              andDoneCallback:(processDoneWithDictBlock)callback;
 
 // get the users which you are followed's weibo
-- (void)getFriendsWeiboListByUsername:(NSString*)username
-                      pageSize:(NSInteger)pageSize 
-                     pageIndex:(NSInteger)pageIndex 
-               andDoneCallback:(processDoneWithDictBlock)callback;
+- (void)getFriendsWeiboListByUserId:(NSString*)userId
+                           pageSize:(NSInteger)pageSize 
+                          pageIndex:(NSInteger)pageIndex 
+                    andDoneCallback:(processDoneWithDictBlock)callback;
 
 - (void)searchWeiboByKeyword:(NSString*)key
                       pageSize:(NSInteger)pageSize 

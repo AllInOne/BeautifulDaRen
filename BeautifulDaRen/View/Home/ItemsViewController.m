@@ -241,19 +241,19 @@
         };
         if ([[BSDKManager sharedManager] isLogin])
         {
-            NSString * userName = [[[NSUserDefaults standardUserDefaults]
-                                    valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO]
-                                   valueForKey:KEY_ACCOUNT_USER_NAME];
-            [[BSDKManager sharedManager] getFriendsWeiboListByUsername:userName
-                                                              pageSize:20
-                                                             pageIndex:self.pageIndex
-                                                       andDoneCallback:block];
+            NSString * userId = [[[NSUserDefaults standardUserDefaults]
+                                  valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO]
+                                 valueForKey:KEY_ACCOUNT_ID];
+            [[BSDKManager sharedManager] getFriendsWeiboListByUserId:userId
+                                                            pageSize:20
+                                                           pageIndex:self.pageIndex
+                                                     andDoneCallback:block];
         }
         else {
-            [[BSDKManager sharedManager] getWeiboListByUsername:nil
-                                                       pageSize:20
-                                                      pageIndex:self.pageIndex
-                                                andDoneCallback:block];
+            [[BSDKManager sharedManager] getWeiboListByUserId:nil
+                                                     pageSize:20
+                                                    pageIndex:self.pageIndex
+                                              andDoneCallback:block];
         }
     }
 }

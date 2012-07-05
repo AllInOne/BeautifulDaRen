@@ -368,10 +368,10 @@ static BSDKManager *sharedInstance;
     
 }
 
-- (void)getFriendsWeiboListByUsername:(NSString*)username
-                             pageSize:(NSInteger)pageSize 
-                            pageIndex:(NSInteger)pageIndex 
-                      andDoneCallback:(processDoneWithDictBlock)callback
+- (void)getFriendsWeiboListByUserId:(NSString*)userId
+                           pageSize:(NSInteger)pageSize 
+                          pageIndex:(NSInteger)pageIndex 
+                    andDoneCallback:(processDoneWithDictBlock)callback
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
     
@@ -379,9 +379,9 @@ static BSDKManager *sharedInstance;
     [params setObject:K_BSDK_ACTION_GETLIST forKey:K_BSDK_ACTION];
     [params setObject:[NSString stringWithFormat:@"%d", pageIndex] forKey:K_BSDK_PAGEINDEX];
     [params setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:K_BSDK_PAGESIZE];
-    if (username)
+    if (userId)
     {
-        [params setObject:username forKey:K_BSDK_FOLLOWUSERNAME];
+        [params setObject:userId forKey:K_BSDK_USERID];
     }
 
     [self sendRequestWithMethodName:nil
@@ -404,45 +404,10 @@ static BSDKManager *sharedInstance;
     [params setObject:[NSString stringWithFormat:@"%d", pageIndex] forKey:K_BSDK_PAGEINDEX];
     [params setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:K_BSDK_PAGESIZE];
 
-    [params setObject:userId forKey:K_BSDK_USERID];
-
-    
-    
-    [self sendRequestWithMethodName:nil
-                         httpMethod:@"POST" 
-                             params:params 
-                       postDataType:kBSDKRequestPostDataTypeNormal
-                   httpHeaderFields:nil
-                       doneCallback:callback];
-    
-}
-
-- (void)getWeiboListByUsername:(NSString*)username
-                      pageSize:(NSInteger)pageSize 
-                     pageIndex:(NSInteger)pageIndex 
-               andDoneCallback:(processDoneWithDictBlock)callback
-{
-    //    if (!self.isLogin) {
-    //        callback(AIO_STATUS_NOT_SIGNED_IN, nil);
-    //        return;
-    //    }
-    
-//    processDoneWithDictBlock loginCallbackShim = ^(AIO_STATUS status, NSDictionary * data)
-//    {
-//        callback(status, [data objectForKey:K_BSDK_BLOGLIST]);
-//    };
-    
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:5];
-    
-    [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
-    [params setObject:K_BSDK_ACTION_GETLIST forKey:K_BSDK_ACTION];
-    [params setObject:[NSString stringWithFormat:@"%d", pageIndex] forKey:K_BSDK_PAGEINDEX];
-    [params setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:K_BSDK_PAGESIZE];
-    if (username)
+    if (userId)
     {
-        [params setObject:username forKey:K_BSDK_USERNAME];
+        [params setObject:userId forKey:K_BSDK_USERID];
     }
-
     
     [self sendRequestWithMethodName:nil
                          httpMethod:@"POST" 
@@ -458,16 +423,6 @@ static BSDKManager *sharedInstance;
                      pageIndex:(NSInteger)pageIndex 
                andDoneCallback:(processDoneWithDictBlock)callback
 {
-    //    if (!self.isLogin) {
-    //        callback(AIO_STATUS_NOT_SIGNED_IN, nil);
-    //        return;
-    //    }
-    
-    //    processDoneWithDictBlock loginCallbackShim = ^(AIO_STATUS status, NSDictionary * data)
-    //    {
-    //        callback(status, [data objectForKey:K_BSDK_BLOGLIST]);
-    //    };
-    
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:5];
     
     [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
@@ -492,16 +447,6 @@ static BSDKManager *sharedInstance;
                      pageIndex:(NSInteger)pageIndex 
                andDoneCallback:(processDoneWithDictBlock)callback
 {
-    //    if (!self.isLogin) {
-    //        callback(AIO_STATUS_NOT_SIGNED_IN, nil);
-    //        return;
-    //    }
-    
-    //    processDoneWithDictBlock loginCallbackShim = ^(AIO_STATUS status, NSDictionary * data)
-    //    {
-    //        callback(status, [data objectForKey:K_BSDK_BLOGLIST]);
-    //    };
-    
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:5];
     
     [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
@@ -574,18 +519,10 @@ static BSDKManager *sharedInstance;
              posLongitude:(float)longitude
              doneCallback:(processDoneWithDictBlock)callback
 {
-    //    if (!self.isLogin) {
-    //        callback(AIO_STATUS_NOT_SIGNED_IN, nil);
-    //        return;
-    //    }
-    
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
     
     [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_ADD forKey:K_BSDK_ACTION];
-    
-    // SEND WEIBO DO NOT NEED USERNAME, ONLY FOR TEST, TOBE REMOVED.
-//    [params setObject:K_BSDK_TEST_USERNAME forKey:K_BSDK_USERNAME];
     
     [params setObject:text forKey:K_BSDK_CONTENT];
     [params setObject:shop forKey:K_BSDK_SHOPMERCHANT];
@@ -766,7 +703,6 @@ static BSDKManager *sharedInstance;
                        httpHeaderFields:nil
                            doneCallback:doneBlock];
     }
-
 }
 
 - (void)getHotUsersByCity:(NSString*)city

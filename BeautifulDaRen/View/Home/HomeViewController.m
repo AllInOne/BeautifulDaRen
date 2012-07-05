@@ -288,19 +288,19 @@
     
     if ([[BSDKManager sharedManager] isLogin])
     {
-        NSString * userName = [[[NSUserDefaults standardUserDefaults]
+        NSString * userId = [[[NSUserDefaults standardUserDefaults]
                                 valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO]
-                               valueForKey:KEY_ACCOUNT_USER_NAME];
-        [[BSDKManager sharedManager] getFriendsWeiboListByUsername:userName
-                                                          pageSize:20
-                                                         pageIndex:1
-                                                   andDoneCallback:block];
+                             valueForKey:KEY_ACCOUNT_ID];
+        [[BSDKManager sharedManager] getFriendsWeiboListByUserId:userId
+                                                        pageSize:20
+                                                       pageIndex:1
+                                                 andDoneCallback:block];
     }
     else {
-        [[BSDKManager sharedManager] getWeiboListByUsername:nil
-                                                   pageSize:20
-                                                  pageIndex:1
-                                            andDoneCallback:block];
+        [[BSDKManager sharedManager] getWeiboListByUserId:nil
+                                                 pageSize:20
+                                                pageIndex:1
+                                          andDoneCallback:block];
     }
 }
 
