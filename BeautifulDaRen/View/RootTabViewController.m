@@ -18,6 +18,8 @@
 
 @interface RootTabViewController()
 
+@property (retain, nonatomic) id observerForLogout;
+
 - (void)initLocalizedString;
 - (void)startMyshowAction;
 @end
@@ -30,6 +32,8 @@
 @end
 
 @implementation RootTabViewController
+
+@synthesize observerForLogout = _observerForLogout;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -52,6 +56,7 @@
 
 -(void)dealloc
 {
+//    [[NSNotificationCenter defaultCenter] removeObserver:_observerForLogout];
     [super dealloc];
 }
 
@@ -67,6 +72,16 @@
 
         [[UIToolbar appearance]setBackgroundImage:[UIImage imageNamed:@"toolbar_background"] forToolbarPosition:UIToolbarPositionBottom barMetrics:UIBarMetricsDefault];
     }
+    
+//    _observerForLogout = [[NSNotificationCenter defaultCenter]
+//                          addObserverForName:K_NOTIFICATION_LOGINOUT_SUCCESS
+//                          object:nil
+//                          queue:nil
+//                          usingBlock:^(NSNotification *note) {
+//                              for (UIViewController * view in self.tabBarController.viewControllers) {
+//                                  [view dismissModalViewControllerAnimated:YES];
+//                              }
+//                          }];
 }
 
 - (void)viewDidUnload
@@ -104,7 +119,7 @@
         [self startMyshowAction];
         return NO;
     }
-    
+
     return YES;
 }
 

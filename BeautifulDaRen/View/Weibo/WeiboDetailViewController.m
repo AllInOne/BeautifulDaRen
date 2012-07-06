@@ -287,6 +287,7 @@
     // Do any additional setup after loading the view from its nib.
     if (self.weiboData) {
         [self refreshView];
+        [self onRefreshButtonClicked];
     }
     else
     {

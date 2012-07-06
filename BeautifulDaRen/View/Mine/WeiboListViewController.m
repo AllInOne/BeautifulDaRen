@@ -358,6 +358,8 @@
         [atMeCell setData:data];
     }
     
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     return cell;
 }
 

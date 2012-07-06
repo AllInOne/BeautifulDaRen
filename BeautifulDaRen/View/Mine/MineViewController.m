@@ -149,7 +149,7 @@
         }
         else
         {
-            ((MyInfoTopViewCell*)cell).avatarImageView.image = [UIImage imageNamed:@"avatar_big"];
+            ((MyInfoTopViewCell*)cell).avatarImageView.image = [UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:userDict]];
         }
 
         ((MyInfoTopViewCell*)cell).levelLabel.text = [NSString stringWithFormat:@"LV%d",
@@ -327,7 +327,7 @@
             if(status == AIO_STATUS_SUCCESS)
             {
                 [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:USERDEFAULT_IS_AUTO_LOGIN];
-                [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_LOGIN_SUCCESS object:self userInfo:data];
+                [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_LOGINOUT_SUCCESS object:self userInfo:data];
                 
                 LoginViewController * loginContorller = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
                 [self.navigationController pushViewController:loginContorller animated:YES];

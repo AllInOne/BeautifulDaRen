@@ -17,6 +17,7 @@
 #import "BSDKDefines.h"
 #import "WeiboForwardCommentViewController.h"
 #import "FriendDetailViewController.h"
+#import "UIImageView+WebCache.h"
 
 #define FONT_SIZE           (14.0f)
 #define CELL_CONTENT_WIDTH  (240.0f)
@@ -264,7 +265,16 @@
         cell.username.text = [userInfoDict objectForKey:K_BSDK_USERNAME];
     }
 
-    [cell.userAvatar setImage:[UIImage imageNamed:@"avatar_icon"]];
+    NSString * avatarUrlString = [userInfoDict objectForKey:K_BSDK_PICTURE_65];
+    if (avatarUrlString && [avatarUrlString length]) {
+        [cell.userAvatar setImageWithURL:[NSURL URLWithString:avatarUrlString]];
+
+    }
+    else
+    {
+        [cell.userAvatar setImage:[UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:userInfoDict]]];
+    }
+
     cell.timestamp.text = [ViewHelper intervalSinceNow:[comment objectForKey:K_BSDK_CREATETIME]];
     cell.content.text = [comment objectForKey:K_BSDK_CONTENT];
     

@@ -80,11 +80,15 @@
 //    [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onHomePageButtonClicked) title:NSLocalizedString(@"home_page", @"home_page")]];
     _isIdentification = YES;
     
-    [self refreshToolBar];
+//    [self refreshToolBar];
 }
 
 - (void) refreshToolBar
 {
+    if (self.toolbar) {
+        [self.toolbar removeFromSuperview];
+        self.toolbar = nil;
+    }
     _toolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0,372, 320,44)];
     
     UIBarButtonItem *flexible = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
@@ -243,6 +247,7 @@
         
         [self.friendDictionary setValuesForKeysWithDictionary:data];
         [self refreshTopView];
+        [self refreshToolBar];
         [self.friendDetailView reloadData];
     };
     
@@ -540,10 +545,8 @@
 - (void)onRemove
 {
     [[BSDKManager sharedManager] removeFan:[self.friendDictionary valueForKey:K_BSDK_UID] andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-            [self.toolbar removeFromSuperview];
-            self.toolbar = nil;
-            [self refreshToolBar];
-            [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
+        [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
+        [self refreshView];
     }];
 }
 
