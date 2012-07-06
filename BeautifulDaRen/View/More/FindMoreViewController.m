@@ -206,9 +206,9 @@
     [self.view addSubview:self.searchUserView];
     
     [self.view addSubview:self.searchWeiboView];
-    if ([self.sameCityUserResults count] == 0
+    if (([self.sameCityUserResults count] == 0
         || [self.hotUserResults count]== 0 
-        || [self.interestingUserResults count]== 0) {
+        || [self.interestingUserResults count]== 0) && !self.isSearchModel ) {
         [self refreshView];
     }
 }
