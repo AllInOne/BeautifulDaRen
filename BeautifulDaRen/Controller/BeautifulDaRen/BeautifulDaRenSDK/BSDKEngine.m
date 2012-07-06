@@ -204,8 +204,9 @@
 //                                        postDataType:postDataType
 //                                    httpHeaderFields:httpHeaderFields
 //                                            delegate:self];
+// @"http://111.67.203.138:9001/api/mlService.php"
     self.request = [BSDKRequest requestWithAccessToken:@"JKLERKEJRK"
-                                                   url:@"http://111.67.203.138:9001/api/mlService.php"
+                                                   url:@"http://223.4.235.226:9001/api/mlService.php"
                                             httpMethod:httpMethod
                                                 params:params
                                           postDataType:postDataType

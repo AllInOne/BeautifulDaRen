@@ -34,10 +34,4 @@
     [super setSelected:selected animated:animated];
 }
 
-- (void) dealloc
-{
-    [_avatarImageView release];
-    [super dealloc];
-}
-
 @end
