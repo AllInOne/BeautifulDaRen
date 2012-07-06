@@ -315,4 +315,11 @@ static BUIFont * instance;
         return @"his_default_avatar";
     }
 }
+
++ (BOOL) isDigitsString:(NSString*)str
+{
+    NSCharacterSet* nonNumbers = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
+    NSRange r = [str rangeOfCharacterFromSet: nonNumbers];
+    return r.location == NSNotFound;
+}
 @end

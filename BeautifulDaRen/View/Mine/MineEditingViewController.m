@@ -70,6 +70,12 @@ typedef enum
 
 -(void)onSaveButtonClicked
 {
+    if (![ViewHelper isDigitsString:[_tableViewDict objectForKey:KEY_ACCOUNT_PHONE]])
+    {
+        [[iToast makeText:NSLocalizedString(@"please_correct_phone", @"please_correct_phone")] show];
+        return;
+    }
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_SHOWWAITOVERLAY object:self];
     [[BSDKManager sharedManager] modifyUser:[ViewHelper getMyUserId] 
                                        name:[_tableViewDict objectForKey:KEY_ACCOUNT_USER_NAME]

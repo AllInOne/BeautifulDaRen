@@ -173,6 +173,8 @@
 "please_enter_category" = "亲, 请选择分类哦!";
 "please_enter_photo" = "亲, 请选张图片哦!";
 
+"please_correct_phone" = "亲, 请检查电话号码格式哦!";
+
 "prompt_category_max" = "亲, 最多选%d个分类哦!";
 
 "take_photo" = "照相";
