@@ -31,7 +31,9 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        [self.navigationItem setLeftBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
+        [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
+        
+        [self.navigationItem setTitle:NSLocalizedString(@"at_my_followed_person", @"at_my_followed_person")];
     }
     return self;
 }
@@ -86,11 +88,12 @@
 }
 
 - (void)dealloc {
+    // We MUST put super dealloc here, or it will crash on iOS4.x, because [super dealloc] will need to touch _friendsViewController
+    [super dealloc];
+    
     [_friendsViewController release];
     [_selectedContacts release];
     [_friendsList release];
-    
-    [super dealloc];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -108,7 +111,7 @@
 }
 
 - (void)onBackButtonClicked {
-    if (![self.navigationController popViewControllerAnimated:YES])
+//    if (![self.navigationController popViewControllerAnimated:YES])
     {
         [self dismissModalViewControllerAnimated:YES];
     }
