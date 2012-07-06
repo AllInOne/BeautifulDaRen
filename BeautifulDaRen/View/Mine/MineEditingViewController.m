@@ -526,7 +526,7 @@ typedef enum
     [picker dismissModalViewControllerAnimated:NO];
 
     self.avatarImage = [image scaleToSize:CGSizeMake(320.0, image.size.height * 320.0/image.size.width)];
-    [(UITableView*)self.view reloadData];
+    [self.tableView reloadData];
 
 }
 

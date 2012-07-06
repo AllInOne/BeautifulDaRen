@@ -115,7 +115,7 @@
                                               CELL_CONTENT_WIDTH, 
                                               CELL_CONTENT_HEIGHT);
     
-    return CGRectGetMaxY(self.originalWeiboView.frame) + CELL_CONTENT_MARGIN;
+    return CGRectGetMaxY(self.originalWeiboView.frame);
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

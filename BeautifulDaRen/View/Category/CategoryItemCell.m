@@ -14,9 +14,11 @@
 #import "BSDKDefines.h"
 #import "WeiboListViewController.h"
 
+#define CLASS_WEIBO_PAGE_SIZE   (20.0)
+
 @interface CategoryItemCell ()
 @property (nonatomic, retain) NSDictionary * itemData;
-@property (nonatomic, retain) NSArray * weiboList;
+@property (nonatomic, retain) NSMutableArray * weiboList;
 
 -(NSArray*)getPicturesFromWeiboList;
 @end
@@ -62,13 +64,20 @@
     
     [activityIndicator startAnimating];
     
-    [[BSDKManager sharedManager] getWeiboListByClassId:[self.itemData objectForKey:K_BSDK_UID] pageSize:20 pageIndex:1 andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+    [[BSDKManager sharedManager] getWeiboListByClassId:[self.itemData objectForKey:K_BSDK_UID] pageSize:CLASS_WEIBO_PAGE_SIZE pageIndex:1 andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
         
         [activityIndicator stopAnimating];
         [activityIndicator removeFromSuperview];
         [activityIndicator release];
         
-        self.weiboList = [data objectForKey:K_BSDK_BLOGLIST];
+        self.weiboList = [NSMutableArray arrayWithCapacity:CLASS_WEIBO_PAGE_SIZE];
+        
+        NSArray * classWeiboList = [data objectForKey:K_BSDK_BLOGLIST];
+        for (NSDictionary * weibo in classWeiboList) {
+            if ([weibo objectForKey:K_BSDK_PICTURE_102]) {
+                [self.weiboList addObject:weibo];
+            }
+        }
         
         _categoryScrollItem = [[CommonScrollView alloc] initWithNibName:nil bundle:nil data:[self getPicturesFromWeiboList] andDelegate:self];
         
@@ -125,9 +134,12 @@
     NSMutableArray * ret = [NSMutableArray arrayWithCapacity:[self.weiboList count]];
     
     for (NSDictionary * weiboData in self.weiboList) {
-        [ret addObject:[weiboData objectForKey:K_BSDK_PICTURE_102]];
+        NSString * pictureUrl = [weiboData objectForKey:K_BSDK_PICTURE_102];
+        if (pictureUrl) {
+            [ret addObject:[weiboData objectForKey:K_BSDK_PICTURE_102]];
+        }
     }
-    
+
     return ret;
 }
 @end

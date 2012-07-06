@@ -127,6 +127,8 @@
 
 #define K_BSDK_COMMENT_USER_ID @"CommentUserId"
 
+#define K_BSDK_ATTENTIONUSERID @"AttentionUserId"
+
 #define K_BSDK_CLASSLIST @"ClassList"
 #define K_BSDK_CLASSID @"ClassId"
 #define K_BSDK_CLASSNAME @"classname"
