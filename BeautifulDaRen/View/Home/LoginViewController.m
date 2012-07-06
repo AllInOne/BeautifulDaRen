@@ -93,8 +93,8 @@
     [_tableView release];
     [_loginWithQQButton release];
     [_loginWithSinaWeiboButton release];
-    [_observers release];
-    
+    [_accountNameField release];
+    [_accountPwdField release];
     [super dealloc];
 }
 
@@ -110,10 +110,12 @@
     self.loginWithQQButton = nil;
     self.loginWithSinaWeiboButton = nil;
     self.tableView = nil;
+    self.accountNameField = nil;
+    self.accountPwdField = nil;
 }
 
--(void)viewWillAppear:(BOOL)animated{
-    
+-(void)viewWillAppear:(BOOL)animated
+{
     self.observers = [NSMutableArray arrayWithCapacity:2];
     id observer = [[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardDidShowNotification
                                                                     object:nil
@@ -139,11 +141,12 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [super viewWillDisappear:animated];
     for (id observer in self.observers) {
         [[NSNotificationCenter defaultCenter] removeObserver:observer];
     }
+    [self.observers removeAllObjects];
     self.observers = nil;
-    [super viewWillDisappear:animated];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

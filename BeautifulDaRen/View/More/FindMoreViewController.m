@@ -163,7 +163,7 @@
     self.searchUserPageIndex = 1;
     self.searchWeiboPageIndex = 1;
     self.isSearchModel = NO;
-    self.isFindWeibo = NO;
+    self.isFindWeibo = YES;
     self.inSearching = NO;
     self.isSearchMoreUser = YES;
     self.isSearchMoreWeibo = YES;
@@ -206,9 +206,9 @@
     [self.view addSubview:self.searchUserView];
     
     [self.view addSubview:self.searchWeiboView];
-    if ([self.sameCityUserResults count] == 0
+    if (([self.sameCityUserResults count] == 0
         || [self.hotUserResults count]== 0 
-        || [self.interestingUserResults count]== 0) {
+        || [self.interestingUserResults count]== 0) && !self.isSearchModel ) {
         [self refreshView];
     }
 }
@@ -462,7 +462,7 @@
     
     [searchBar setShowsCancelButton:isShowsCancelButton animated:YES];
     [searchBar setShowsScopeBar:isShowsScopeButton];
-    [searchBar setSelectedScopeButtonIndex:1];
+    [searchBar setSelectedScopeButtonIndex:0];
     [searchBar setFrame:CGRectMake(searchBar.frame.origin.x, searchBar.frame.origin.y, searchBar.frame.size.width, height)];
     [self.searchUserView reloadData];
 }
@@ -743,7 +743,7 @@
     self.isSearchMoreWeibo = YES;
     self.isSearchMoreUser = YES;
     self.inSearching = NO;
-    self.isFindWeibo = NO;
+    self.isFindWeibo = YES;
     [self.searchWeiboResults removeAllObjects];
     [self.searchUserResults removeAllObjects];
     [self.weiboHeights removeAllObjects];
