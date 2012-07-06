@@ -65,7 +65,7 @@
                                     object:nil
                                     queue:nil
                                    usingBlock:^(NSNotification *note) {
-                                       [[iToast makeText:@"您还没登陆，请先登录！"] show];
+                                       [[iToast makeText:@"您还没登录，请先登录！"] show];
                                        if (![self.navigationController.topViewController isKindOfClass:[LoginViewController class]]) {
                                            LoginViewController * loginContorller = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
                                            [self.navigationController pushViewController:loginContorller animated:YES];

@@ -36,7 +36,7 @@
     [super viewDidLoad];
 	_oauthButton = [[UIButton alloc] initWithFrame:CGRectMake(20, 20, 100, 40)];
 	[_oauthButton.titleLabel setFont:[UIFont boldSystemFontOfSize:14.0]];
-	[_oauthButton setTitle:@"OAuth登陆" forState:UIControlStateNormal];
+	[_oauthButton setTitle:@"OAuth登录" forState:UIControlStateNormal];
 	[_oauthButton setBackgroundImage:[[UIImage imageNamed:@"buttonnormal.png"] stretchableImageWithLeftCapWidth:10 topCapHeight:21] forState:UIControlStateNormal];
 	[_oauthButton setBackgroundImage:[[UIImage imageNamed:@"buttonhover.png"] stretchableImageWithLeftCapWidth:10 topCapHeight:21] forState:UIControlStateHighlighted];
 	[_oauthButton addTarget:self action:@selector(onClickTencentOAuth) forControlEvents:UIControlEventTouchUpInside];
