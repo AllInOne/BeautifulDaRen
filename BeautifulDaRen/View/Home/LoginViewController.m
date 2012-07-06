@@ -145,8 +145,8 @@
     for (id observer in self.observers) {
         [[NSNotificationCenter defaultCenter] removeObserver:observer];
     }
-    [_observers release];
-    _observers = nil;
+    [self.observers removeAllObjects];
+    self.observers = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
