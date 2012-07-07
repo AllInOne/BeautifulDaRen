@@ -177,6 +177,13 @@
 
 "prompt_category_max" = "亲, 最多选%d个分类哦!";
 
+"please_check_username" = "亲, 请检查用户名哦!";
+"please_check_password" = "亲, 请检查密码哦!";
+"please_check_email" = "亲, 请检查邮箱哦!";
+"please_check_city" = "亲, 请选择城市哦!";
+"password_not_the_same" = "亲, 两次输入密码不一样哦!";
+
+
 "take_photo" = "照相";
 "album" = "相册";
 "delete_selected_photos" = "删除已选择照片";

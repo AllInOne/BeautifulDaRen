@@ -15,6 +15,7 @@
 #import "ViewConstants.h"
 #import "ViewHelper.h"
 #import "UIImageView+WebCache.h"
+#import "iToast.h"
 
 #define FRIEND_PAGE_SIZE    (5)
 
@@ -32,6 +33,7 @@
 -(void)onDataLoadDone;
 -(NSString*)getRelationButtonTitleOfUser:(NSDictionary*)userInfo;
 -(NSDictionary*)extractFriendDictionary:(NSDictionary*)FriendRawDict;
+-(NSString*)getFriendInforKey;
 @end
 
 @implementation FriendListViewController
@@ -276,6 +278,30 @@
         }
     }
 }
+
+-(NSString*)getFriendInforKey
+{
+    switch (_type) {
+        case FriendListViewController_TYPE_MY_FANS:
+        case FriendListViewController_TYPE_FRIEND_FANS:
+        {
+            return K_BSDK_FANSUSERINFO;
+            break;
+        }
+        case FriendListViewController_TYPE_FRIEND_FOLLOW:
+        case FriendListViewController_TYPE_MY_FOLLOW:
+        {
+            return K_BSDK_ATTENTIONUSERINFO;
+            break;
+        }            
+        case FriendListViewController_TYPE_FAV_ONE_BLOG:
+        default:
+        {
+            return nil;
+            break;
+        }
+    }
+}
 #pragma mark UITableViewDelegate
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -318,7 +344,8 @@
             [friendListViewCell.actionButton setHidden:YES];
         }
 
-        friendListViewCell.delegate = self;
+//        friendListViewCell.delegate = self;
+        [friendListViewCell.actionButton addTarget:self action:@selector(didButtonPressed:inView:) forControlEvents:UIControlEventTouchUpInside];
     }
     return cell;
 }
@@ -359,7 +386,7 @@
 -(void)didButtonPressed:(UIButton *)button inView:(UIView *)view
 {
     BOOL isShouldFollow = YES;
-    NSDictionary * dict = [self.friendsList objectAtIndex:button.tag];
+    NSDictionary * dict = [self extractFriendDictionary:[self.friendsList objectAtIndex:button.tag]];
     NSString * relation = [dict valueForKey:K_BSDK_RELATIONSHIP];
     switch (self.type) {
         case FriendListViewController_TYPE_MY_FOLLOW:
@@ -373,22 +400,42 @@
             break;
         }
         case FriendListViewController_TYPE_MY_BLACKLIST:
-            break;
         case FriendListViewController_TYPE_FRIEND_FOLLOW:
-            break;
         case FriendListViewController_TYPE_FRIEND_FANS:
+            isShouldFollow = ([relation isEqualToString:K_BSDK_RELATIONSHIP_MY_FOLLOW] ||[relation isEqualToString:K_BSDK_RELATIONSHIP_INTER_FOLLOW]) ? NO : YES;
             break;
     }
-    
-    NSInteger userId = [[dict valueForKey:KEY_ACCOUNT_USER_ID] intValue];
-    if (!isShouldFollow)
+    NSLog(@"*******%@", self.friendsList);
+    NSLog(@"*******%@", dict);
+    NSLog(@"*******%@", relation);
+    NSInteger userId = [[dict valueForKey:K_BSDK_UID] intValue];
+    if (NO == isShouldFollow)
     {
         [[BSDKManager sharedManager] unFollowUser:userId
                                   andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-                                      if(status == AIO_STATUS_SUCCESS)
+                                      if(K_BSDK_IS_RESPONSE_OK(data))
                                       {
-                                          [self.friendsList removeObjectAtIndex:button.tag];
+                                           NSLog(@"*******%d", _type);
+                                          if (_type == FriendListViewController_TYPE_MY_FOLLOW) {
+                                              [_friendsList removeObjectAtIndex:button.tag];
+                                          }
+                                          else
+                                          {
+                                              NSMutableDictionary * rawInfo = [_friendsList objectAtIndex:button.tag];
+                                              NSMutableDictionary * info = [NSMutableDictionary dictionaryWithDictionary:[self extractFriendDictionary:rawInfo]];
+                                                                            
+                                              [info setObject:K_BSDK_RELATIONSHIP_NONE forKey:K_BSDK_RELATIONSHIP];
+                                              
+                                              [rawInfo setObject:info forKey:[self getFriendInforKey]];
+                
+                                              [_friendsList replaceObjectAtIndex:button.tag withObject:rawInfo];
+                                          }
+                                          
                                           [self.commonTableView reloadData];
+                                      }
+                                      else
+                                      {
+                                          [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
                                       }
                                   }];
     }
@@ -396,7 +443,22 @@
     {
         [[BSDKManager sharedManager] followUser:userId
                                 andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-                                    
+                                    if (K_BSDK_IS_RESPONSE_OK(data)) {
+                                        NSMutableDictionary * rawInfo = [_friendsList objectAtIndex:button.tag];
+                                        NSMutableDictionary * info = [NSMutableDictionary dictionaryWithDictionary:[self extractFriendDictionary:rawInfo]];
+                                        
+                                        [info setObject:K_BSDK_RELATIONSHIP_MY_FOLLOW forKey:K_BSDK_RELATIONSHIP];
+                                        
+                                        [rawInfo setObject:info forKey:[self getFriendInforKey]];
+                                        
+                                        [_friendsList replaceObjectAtIndex:button.tag withObject:rawInfo];
+                                        [self.commonTableView reloadData];
+                                    }
+                                    else
+                                    {
+                                        [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
+                                    }
+
                                 }];
     }
 }
