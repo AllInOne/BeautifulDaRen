@@ -478,20 +478,21 @@
     if ([self.weiboData objectForKey:K_BSDK_LATITUDE] && [self.weiboData objectForKey:K_BSDK_LONGITUDE] && (longtitude != 0) && (latitude != 0)) {
 //        _mapViewController = [[MapViewController alloc] initWithName:@"test map name" description:nil latitude:[[self.weiboData objectForKey:K_BSDK_LATITUDE] floatValue] longitude:[[self.weiboData objectForKey:K_BSDK_LONGITUDE] floatValue] showSelf:NO];
 
-        if (CLLocationCoordinate2DIsValid(CLLocationCoordinate2DMake(latitude, longtitude)))
+        if (!_mapViewController && CLLocationCoordinate2DIsValid(CLLocationCoordinate2DMake(latitude, longtitude)))
         {
             if (_mapViewController) {
                 [_mapViewController.view removeFromSuperview];
                 [self setMapViewController:nil];
-            }
+            } 
             _mapViewController = [[MapViewController alloc] initWithName:@"test map name" description:nil latitude:latitude longitude:longtitude showSelf:NO];
             _mapViewController.view.frame = CGRectMake(MAP_VIEW_X_OFFSET, yOffset, MAP_VIEW_WIDTH, MAP_VIEW_HEIGHT);
             _mapViewController.navigationController.toolbarHidden = YES;
             
             [self.detailScrollView addSubview:_mapViewController.view];
             
-            yOffset = _mapViewController.view.frame.origin.y + MAP_VIEW_HEIGHT * 2;
+
         }
+        yOffset = _mapViewController.view.frame.origin.y + MAP_VIEW_HEIGHT * 2;
     }
 
     // Custom initialization

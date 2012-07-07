@@ -103,9 +103,13 @@
         atButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar_at_him" target:self action:@selector(onAt)];    
     }
     
+    if (![[BSDKManager sharedManager] isLogin]) {
+        [atButtonItem setEnabled:NO];
+    }
+    
     UIBarButtonItem *removeButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar_remove_fan_icon" target:self action:@selector(onRemove)];
     NSString * relationship = [self.friendDictionary objectForKey:K_BSDK_RELATIONSHIP];
-    if ( !(relationship && ([relationship isEqualToString:K_BSDK_RELATIONSHIP_MY_FANS] || [relationship isEqualToString:K_BSDK_RELATIONSHIP_INTER_FOLLOW]))) {
+    if ( (!(relationship && ([relationship isEqualToString:K_BSDK_RELATIONSHIP_MY_FANS] || [relationship isEqualToString:K_BSDK_RELATIONSHIP_INTER_FOLLOW]))) || ![[BSDKManager sharedManager] isLogin]) {
         [removeButtonItem setEnabled:NO];
     }
     
@@ -579,9 +583,19 @@
     
     [self.navigationItem setTitle:NSLocalizedString(title, title)];
     
-    NSString * buttonTitle = ([relationship isEqualToString:K_BSDK_RELATIONSHIP_MY_FOLLOW] || [relationship isEqualToString:K_BSDK_RELATIONSHIP_INTER_FOLLOW]) ? NSLocalizedString(@"unfollow", @"unfollow") : NSLocalizedString(@"follow", @"follow");
+    if ([ViewHelper isSelf:[self.friendDictionary objectForKey:K_BSDK_UID]]) {
+        [self.actionButton setHidden:YES];
+    }
+    else
+    {
+        NSString * buttonTitle = ([relationship isEqualToString:K_BSDK_RELATIONSHIP_MY_FOLLOW] || [relationship isEqualToString:K_BSDK_RELATIONSHIP_INTER_FOLLOW]) ? NSLocalizedString(@"unfollow", @"unfollow") : NSLocalizedString(@"follow", @"follow");
+        
+        [self.actionButton setTitle:buttonTitle forState:UIControlStateNormal];    
+    }
     
-    [self.actionButton setTitle:buttonTitle forState:UIControlStateNormal];
+    if (![[BSDKManager sharedManager] isLogin]) {
+        [self.actionButton setHidden:YES];
+    }
 }
 
 @end
