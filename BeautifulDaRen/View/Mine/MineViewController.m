@@ -151,6 +151,16 @@
         {
             ((MyInfoTopViewCell*)cell).avatarImageView.image = [UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:userDict]];
         }
+        
+        NSString * isVerify = [userDict objectForKey:K_BSDK_ISVERIFY];
+        if (isVerify && [isVerify isEqual:@"1"]) {
+            [((MyInfoTopViewCell*)cell).vMarkImageView setImage:[UIImage imageNamed:@"v_mark_big"]];
+            [((MyInfoTopViewCell*)cell).vMarkImageView setHidden:NO];
+        }
+        else
+        {
+            [((MyInfoTopViewCell*)cell).vMarkImageView setHidden:YES];
+        }
 
         ((MyInfoTopViewCell*)cell).levelLabel.text = [NSString stringWithFormat:@"LV%d",
                                                       [[userDict valueForKey:KEY_ACCOUNT_LEVEL] intValue]];

@@ -11,6 +11,7 @@
 @interface MyInfoTopViewCell : UITableViewCell
 
 @property (retain, nonatomic) IBOutlet UIImageView * avatarImageView;
+@property (retain, nonatomic) IBOutlet UIImageView * vMarkImageView;
 @property (retain, nonatomic) IBOutlet UILabel * levelLabel;
 @property (retain, nonatomic) IBOutlet UIImageView * rightImageView;
 @property (retain, nonatomic) IBOutlet UILabel * beautifulIdLabel;

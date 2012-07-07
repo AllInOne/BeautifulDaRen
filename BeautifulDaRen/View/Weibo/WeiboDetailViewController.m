@@ -67,6 +67,7 @@
 @synthesize brandLable = _brandLable;
 @synthesize usernameLabel = _usernameLabel;
 @synthesize weiboId = _weiboId;
+@synthesize vMarkImageView = _vMarkImageView;
 
 - (void)dealloc
 {
@@ -89,6 +90,7 @@
     [_priceButton release];
     [_usernameLabel release];
     [_weiboId release];
+    [_vMarkImageView release];
     
     [super dealloc];
 }
@@ -343,6 +345,7 @@
     self.priceButton = nil;
     self.brandLable = nil;
     self.usernameLabel = nil;
+    self.vMarkImageView = nil;
     
     [self.toolbar removeFromSuperview];
     self.toolbar = nil;
@@ -458,39 +461,45 @@
     
     [self.commentButton setTitle:[NSString stringWithFormat:@"    %d", [[self.weiboData objectForKey:K_BSDK_COMMENT_NUM] intValue]] forState:UIControlStateNormal];
     
-    NSInteger yOffset = self.favourateButton.frame.origin.y + CGRectGetHeight(self.favourateButton.frame) + CELL_CONTENT_MARGIN;
+    CGFloat yOffset = self.favourateButton.frame.origin.y + CGRectGetHeight(self.favourateButton.frame) + CELL_CONTENT_MARGIN;
+
+
+    NSString * textContent = [self.weiboData objectForKey:K_BSDK_CONTENT];
+    CGFloat textHeight = [ViewHelper getHeightOfText:textContent ByFontSize:FONT_SIZE contentWidth:CELL_CONTENT_WIDTH];
+    //Content
+    if (textContent) {
+        _weiboContent = [[NSString alloc] initWithString:textContent];
+        self.contentLabel.text = self.weiboContent;
+        self.contentLabel.frame = CGRectMake(self.contentLabel.frame.origin.x, yOffset + CELL_CONTENT_MARGIN_BIG, self.contentLabel.frame.size.width, textHeight);
+    }
     
+    yOffset = CGRectGetMaxY(self.contentLabel.frame) + CELL_CONTENT_MARGIN_BIG;
+    //map
     double longtitude = [[self.weiboData objectForKey:K_BSDK_LONGITUDE] doubleValue];
     double latitude = [[self.weiboData objectForKey:K_BSDK_LATITUDE] doubleValue];
     
     if ([self.weiboData objectForKey:K_BSDK_LATITUDE] && [self.weiboData objectForKey:K_BSDK_LONGITUDE] && (longtitude != 0) && (latitude != 0)) {
 //        _mapViewController = [[MapViewController alloc] initWithName:@"test map name" description:nil latitude:[[self.weiboData objectForKey:K_BSDK_LATITUDE] floatValue] longitude:[[self.weiboData objectForKey:K_BSDK_LONGITUDE] floatValue] showSelf:NO];
 
-        if (CLLocationCoordinate2DIsValid(CLLocationCoordinate2DMake(latitude, longtitude)))
+        if (!_mapViewController && CLLocationCoordinate2DIsValid(CLLocationCoordinate2DMake(latitude, longtitude)))
         {
             if (_mapViewController) {
                 [_mapViewController.view removeFromSuperview];
                 [self setMapViewController:nil];
-            }
+            } 
             _mapViewController = [[MapViewController alloc] initWithName:@"test map name" description:nil latitude:latitude longitude:longtitude showSelf:NO];
             _mapViewController.view.frame = CGRectMake(MAP_VIEW_X_OFFSET, yOffset, MAP_VIEW_WIDTH, MAP_VIEW_HEIGHT);
             _mapViewController.navigationController.toolbarHidden = YES;
             
             [self.detailScrollView addSubview:_mapViewController.view];
             
-            yOffset = _mapViewController.view.frame.origin.y + MAP_VIEW_HEIGHT * 2;
+
         }
-    }
-    
-    //Content
-    if ([self.weiboData objectForKey:K_BSDK_CONTENT]) {
-        _weiboContent = [[NSString alloc] initWithString:[self.weiboData objectForKey:K_BSDK_CONTENT]];
-        self.contentLabel.text = self.weiboContent;
-        self.contentLabel.frame = CGRectMake(self.contentLabel.frame.origin.x, yOffset + CELL_CONTENT_MARGIN_BIG, self.contentLabel.frame.size.width, [ViewHelper getHeightOfText:self.weiboContent ByFontSize:FONT_SIZE contentWidth:CELL_CONTENT_WIDTH]);
+        yOffset = _mapViewController.view.frame.origin.y + MAP_VIEW_HEIGHT * 2;
     }
 
     // Custom initialization
-    [_detailScrollView setContentSize:CGSizeMake(SCREEN_WIDTH, self.contentLabel.frame.origin.y + CGRectGetHeight(self.contentLabel.frame) + 150)];
+    [_detailScrollView setContentSize:CGSizeMake(SCREEN_WIDTH, yOffset + 150)];
     
     NSDictionary * authorInfo = [self.weiboData objectForKey:K_BSDK_USERINFO];
     
@@ -501,7 +510,17 @@
     else
     {
         [self.avatarImageView setImage:[UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:authorInfo]]];
-    }  
+    }
+    
+    NSString * isVerify = [authorInfo objectForKey:K_BSDK_ISVERIFY];
+    if (isVerify && [isVerify isEqual:@"1"]) {
+        [self.vMarkImageView setImage:[UIImage imageNamed:@"v_mark_big"]];
+        [self.vMarkImageView setHidden:NO];
+    }
+    else
+    {
+        [self.vMarkImageView setHidden:YES];
+    }
 
     self.weiboAttachedImageButton.frame = self.weiboAttachedImageView.frame;
     

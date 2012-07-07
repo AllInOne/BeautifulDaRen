@@ -6,8 +6,9 @@
 #import "BSDKDefines.h"
 #import "ViewConstants.h"
 #import "CommentViewCell.h"
+#import "iToast.h"
 
-#define AUTOLOAD_PAGE_SIZE (3)
+#define AUTOLOAD_PAGE_SIZE (20)
 
 @interface WeiboListViewController()
 
@@ -75,11 +76,24 @@
         }
         else if(_controllerType == WeiboListViewControllerType_FRIEND_WEIBO)
         {
-            [self.navigationItem setTitle:NSLocalizedString(@"her_weibo", @"her_weibo")];
+            if ([[dictionary objectForKey:K_BSDK_GENDER] isEqual:K_BSDK_GENDER_FEMALE]) {
+                [self.navigationItem setTitle:NSLocalizedString(@"her_weibo", @"her_weibo")];
+            }
+            else
+            {
+                [self.navigationItem setTitle:NSLocalizedString(@"his_weibo", @"his_weibo")];
+            }
+
         }
         else if(_controllerType == WeiboListViewControllerType_FRIEND_COLLECTION)
         {
-            [self.navigationItem setTitle:NSLocalizedString(@"her_collection", @"her_collection")];
+            if ([[dictionary objectForKey:K_BSDK_GENDER] isEqual:K_BSDK_GENDER_FEMALE]) {
+                [self.navigationItem setTitle:NSLocalizedString(@"her_collection", @"her_collection")];
+            }
+            else
+            {
+                [self.navigationItem setTitle:NSLocalizedString(@"his_collection", @"his_collection")];
+            }
         }
         else if (_controllerType == WeiboListViewControllerType_CATEGORY)
         {
@@ -156,46 +170,46 @@
     
     NSString * userId = self.friendDictionary ? [self.friendDictionary valueForKey:KEY_ACCOUNT_ID] : [[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] valueForKey:KEY_ACCOUNT_ID];
     
+    __block NSString * dataListKey = nil;
+    processDoneWithDictBlock doneBlock = ^(AIO_STATUS status, NSDictionary * data){
+        if (K_BSDK_IS_RESPONSE_OK(data)) {
+            if ([[data objectForKey:dataListKey] count] < AUTOLOAD_PAGE_SIZE) {
+                self.isAllRetrieved = YES;
+            }
+            [self.dataList addObjectsFromArray:[data objectForKey:dataListKey]];
+            
+            [self onDataLoadDone];
+        }
+        else
+        {
+            self.isAllRetrieved = YES;
+            [[iToast makeText:NSLocalizedString(@"server_request_error", @"server_request_error")] show];
+        }
+        [self onDataLoadDone];
+    };
+    
     if (self.controllerType == WeiboListViewControllerType_COMMENT_ME) {
         [[BSDKManager sharedManager] getCommentListOfUser:userId
                                                  pageSize:AUTOLOAD_PAGE_SIZE
                                                 pageIndex:_currentPageIndex
-                                          andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-                                              if ([[data objectForKey:K_BSDK_COMMENTLIST] count] < AUTOLOAD_PAGE_SIZE) {
-                                                  self.isAllRetrieved = YES;
-                                              }
-                                              [self.dataList addObjectsFromArray:[data objectForKey:K_BSDK_COMMENTLIST]];
-
-                                              [self onDataLoadDone];
-                                          }];
+                                          andDoneCallback:doneBlock];
+        dataListKey = K_BSDK_COMMENTLIST;
     }
     else if (self.controllerType == WeiboListViewControllerType_FORWARD_ME)
     {
         [[BSDKManager sharedManager] getAtWeiboListByUserId:userId
                                                    pageSize:AUTOLOAD_PAGE_SIZE
                                                   pageIndex:_currentPageIndex
-                                            andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-                                                if ([[data objectForKey:K_BSDK_BLOGLIST] count] < AUTOLOAD_PAGE_SIZE) {
-                                                    self.isAllRetrieved = YES;
-                                                }
-                                                [self.dataList addObjectsFromArray:[data objectForKey:K_BSDK_BLOGLIST]];
-
-                                                [self onDataLoadDone];
-                                            }];
+                                            andDoneCallback:doneBlock];
+        dataListKey = K_BSDK_BLOGLIST;
     }
     else if (self.controllerType == WeiboListViewControllerType_MY_COLLECTION)
     {
         [[BSDKManager sharedManager] getFavWeiboListByUserId:userId
                                                    pageSize:AUTOLOAD_PAGE_SIZE
                                                   pageIndex:_currentPageIndex
-                                            andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-                                                if ([[data objectForKey:K_BSDK_BLOGLIST] count] < AUTOLOAD_PAGE_SIZE) {
-                                                    self.isAllRetrieved = YES;
-                                                }
-                                                [self.dataList addObjectsFromArray:[data objectForKey:K_BSDK_BLOGLIST]];
-                                                
-                                                [self onDataLoadDone];
-                                            }];
+                                            andDoneCallback:doneBlock];
+         dataListKey = K_BSDK_BLOGLIST;
     }
     else if (_controllerType == WeiboListViewControllerType_CATEGORY)
     {
@@ -203,28 +217,16 @@
         [[BSDKManager sharedManager] getWeiboListByClassId:[self.friendDictionary objectForKey:K_BSDK_UID]
                                                  pageSize:AUTOLOAD_PAGE_SIZE
                                                 pageIndex:_currentPageIndex
-                                          andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-                                              if ([[data objectForKey:K_BSDK_BLOGLIST] count] < AUTOLOAD_PAGE_SIZE) {
-                                                  self.isAllRetrieved = YES;
-                                              }
-                                              [self.dataList addObjectsFromArray:[data objectForKey:K_BSDK_BLOGLIST]];
-                                              
-                                              [self onDataLoadDone];
-                                          }];
+                                          andDoneCallback:doneBlock];
+        dataListKey = K_BSDK_BLOGLIST;
     }
     else
     {
         [[BSDKManager sharedManager] getWeiboListByUserId:userId
                                                  pageSize:AUTOLOAD_PAGE_SIZE
                                                 pageIndex:_currentPageIndex
-                                          andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-                                              if ([[data objectForKey:K_BSDK_BLOGLIST] count] < AUTOLOAD_PAGE_SIZE) {
-                                                  self.isAllRetrieved = YES;
-                                              }
-                                              [self.dataList addObjectsFromArray:[data objectForKey:K_BSDK_BLOGLIST]];
-
-                                              [self onDataLoadDone];
-                                          }];
+                                          andDoneCallback:doneBlock];
+        dataListKey = K_BSDK_BLOGLIST;
     }
 }
 

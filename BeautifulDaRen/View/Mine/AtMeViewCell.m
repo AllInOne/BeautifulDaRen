@@ -20,6 +20,7 @@
 @synthesize brandLabel;
 @synthesize costButton;
 @synthesize descriptionLabel;
+@synthesize vMarkImageView;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -48,6 +49,16 @@
     timeLabel.text = [ViewHelper intervalSinceNow:[data objectForKey:K_BSDK_CREATETIME]];
     
     [itemImageView setImageWithURL:[NSURL URLWithString:[data objectForKey:K_BSDK_PICTURE_102]]];
+    
+    NSString * isVerify = [data objectForKey:K_BSDK_ISVERIFY];
+    if (isVerify && [isVerify isEqual:@"1"]) {
+        [self.vMarkImageView setImage:[UIImage imageNamed:@"v_mark_big"]];
+        [self.vMarkImageView setHidden:NO];
+    }
+    else
+    {
+        [self.vMarkImageView setHidden:YES];
+    }
     
     NSString * title = [NSString stringWithFormat:@"¥ %@",[data objectForKey:K_BSDK_PRICE]];
     [self.costButton setTitle:title forState:UIControlStateNormal];

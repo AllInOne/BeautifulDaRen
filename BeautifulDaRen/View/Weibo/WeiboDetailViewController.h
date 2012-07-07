@@ -33,6 +33,7 @@
 @property (nonatomic, retain) IBOutlet UILabel * brandLable;
 
 @property (nonatomic, retain) IBOutlet UIImageView * avatarImageView;
+@property (nonatomic, retain) IBOutlet UIImageView * vMarkImageView;
 @property (nonatomic, retain) IBOutlet UIImageView * weiboAttachedImageView;
 @property (nonatomic, retain) IBOutlet UIButton * weiboAttachedImageButton;
 

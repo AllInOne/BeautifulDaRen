@@ -74,6 +74,8 @@
         if ( [[BSDKManager sharedManager] isLogin]) {
         [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onPostCommentButtonClicked) title:NSLocalizedString(@"post_comment", @"post_comment")]];
         }
+        
+        [self.navigationItem setTitle:NSLocalizedString(@"comment_list", @"comment_list")];
     }
     return self;
 }
@@ -283,6 +285,8 @@
     cell.content.frame = CGRectMake(cell.content.frame.origin.x, CELL_CONTENT_Y_OFFSET, cell.content.frame.size.width, contentHeight);
     
     [cell.content setFont:[UIFont systemFontOfSize:FONT_SIZE]];
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
 }

@@ -83,8 +83,10 @@
 "comment_me" = "评论我的";
 "published" = "已发布商品";
 "her_weibo" = "她的微博";
+"his_weibo" = "他的微博";
 "my_collection" = "我的收藏";
 "her_collection" = "她的收藏";
+"his_collection" = "他的收藏";
 "my_buyed" = "我购买的";
 
 "no_such_user" = "没有该用户!";
@@ -143,7 +145,9 @@
 "my_fans" = "我的粉丝";
 "my_follows" = "我的关注";
 "her_fans" = "她的粉丝";
+"his_fans" = "他的粉丝";
 "her_follows" = "她的关注";
+"his_follows" = "他的关注";
 
 "remove_fan" = "移除粉丝";
 
@@ -157,6 +161,8 @@
 "more_comment" = "更多评论";
 "post_comment" = "发表评论";
 "view_profile" = "查看此人资料";
+
+"comment_list" = "更多评论";
 
 "loading_more" = "更多...";
 
@@ -198,3 +204,5 @@
 "point" = "积分";
 
 "server_no_response" = "服务器无响应!";
+"server_request_error" = "请求服务器失败!";
+"server_data_error" = "服务器返回数据错误!";

@@ -23,6 +23,7 @@
 @property (retain, nonatomic) ItemsViewController* itemsViewController;
 @property (retain, nonatomic) AdsPageView * adsPageView;
 @property (retain, nonatomic) id observerForLoginStatus;
+@property (retain, nonatomic) id observerForLogout;
 @property (retain, nonatomic) id observerForShouldLogin;
 
 - (void)refreshNavigationView;
@@ -35,6 +36,7 @@
 @synthesize adsPageView = _adsPageView;
 @synthesize observerForLoginStatus = _observerForLoginStatus;
 @synthesize observerForShouldLogin = _observerForShouldLogin;
+@synthesize observerForLogout = _observerForLogout;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -52,13 +54,22 @@
     [super viewDidLoad];
     
     self.observerForLoginStatus = [[NSNotificationCenter defaultCenter]
-                 addObserverForName:K_NOTIFICATION_LOGIN_SUCCESS
-                 object:nil
-                 queue:nil
-                 usingBlock:^(NSNotification *note) {
-                     [self refreshNavigationView];
-                     [self refreshWeibosView];
-                 }];
+                                   addObserverForName:K_NOTIFICATION_LOGIN_SUCCESS
+                                   object:nil
+                                   queue:nil
+                                   usingBlock:^(NSNotification *note) {
+                                       [self refreshNavigationView];
+                                       [self refreshWeibosView];
+                                   }];
+    
+    self.observerForLogout = [[NSNotificationCenter defaultCenter]
+                                   addObserverForName:K_NOTIFICATION_LOGINOUT_SUCCESS
+                                   object:nil
+                                   queue:nil
+                                   usingBlock:^(NSNotification *note) {
+                                       [self refreshNavigationView];
+                                       [self refreshWeibosView];
+                                   }];
     
     self.observerForShouldLogin = [[NSNotificationCenter defaultCenter]
                                     addObserverForName:K_NOTIFICATION_SHOULD_LOGIN
@@ -124,6 +135,7 @@
     [_adsPageView release];
     [_itemsViewController release];
     [_observerForLoginStatus release];
+    [_observerForLogout release];
     [_observerForShouldLogin release];
     [super dealloc];
 }
@@ -135,6 +147,8 @@
     self.itemsViewController = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:_observerForLoginStatus];
     self.observerForLoginStatus = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:_observerForLogout];
+    self.observerForLogout = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self.observerForShouldLogin];
     self.observerForShouldLogin = nil;
     [super viewDidUnload];
