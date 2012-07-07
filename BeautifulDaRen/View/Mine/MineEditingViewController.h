@@ -7,11 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ButtonPressDelegate.h"
 #import "SelectCityViewController.h"
 #import "TakePhotoViewController.h"
 
 @interface MineEditingViewController
-: UIViewController <UITableViewDelegate, UITableViewDataSource, ButtonPressDelegate, SelectCityProtocol, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate>
+: UIViewController <UITableViewDelegate, UITableViewDataSource, SelectCityProtocol, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate>
 
 @end
