@@ -321,6 +321,7 @@
     processDoneWithDictBlock doneBlock = ^(AIO_STATUS status, NSDictionary * data){
         doneCount++;
         if (doneCount == doneCountExpected) {
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: FALSE];
             [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_HIDEWAITOVERLAY object:self];
             if ([data objectForKey:K_BSDK_RESPONSE_STATUS] && !K_BSDK_IS_RESPONSE_OK(data)) {
                 errorMsg = K_BSDK_GET_RESPONSE_MESSAGE(data);
@@ -351,6 +352,8 @@
         latitude = self.currentLocation.coordinate.latitude;
         longitude = self.currentLocation.coordinate.longitude;
     }
+    
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: TRUE];
     [[BSDKManager sharedManager] sendWeiboWithText:self.weiboContentTextView.text 
                                             image:[self.selectedImage scaleToSize:CGSizeMake(320.0, self.selectedImage.size.height * 320.0/self.selectedImage.size.width)]
                                              shop:self.maketTextView.text 
@@ -401,30 +404,39 @@
 
 - (IBAction)onAtFriendPressed:(id)sender
 {
-    [self.atButton setEnabled:NO];
-    [[BSDKManager sharedManager] getFollowList:GET_CURRENT_USER_INFO_BY_KEY(K_BSDK_UID) pageSize:50 pageIndex:1 andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-        
-        NSArray * userList = [data objectForKey:K_BSDK_USERLIST];
-        NSMutableArray * friendList = [NSMutableArray arrayWithCapacity:[userList count]];
-        
-        for(NSDictionary * user in userList)
-        {
-            [friendList addObject:[[user objectForKey:K_BSDK_ATTENTIONUSERINFO] objectForKey:K_BSDK_USERNAME]];
-        }
-        
-        FriendsSelectionViewController *friendSelectionController = 
-        [[FriendsSelectionViewController alloc] initWithNibName:nil bundle:nil];
-        friendSelectionController.delegate = self;
-        friendSelectionController.friendsList = friendList;
-        UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: friendSelectionController];
-        
-        [self.navigationController presentModalViewController:navController animated:YES];
-        
-        [navController release];
-        [friendSelectionController release];
-        
-        [self.atButton setEnabled:YES];
-    }];
+//    [self.atButton setEnabled:NO];
+//    [[BSDKManager sharedManager] getFollowList:GET_CURRENT_USER_INFO_BY_KEY(K_BSDK_UID) pageSize:50 pageIndex:1 andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+//        
+//        NSArray * userList = [data objectForKey:K_BSDK_USERLIST];
+//        NSMutableArray * friendList = [NSMutableArray arrayWithCapacity:[userList count]];
+//        
+//        for(NSDictionary * user in userList)
+//        {
+//            [friendList addObject:[[user objectForKey:K_BSDK_ATTENTIONUSERINFO] objectForKey:K_BSDK_USERNAME]];
+//        }
+//        
+//        FriendsSelectionViewController *friendSelectionController = 
+//        [[FriendsSelectionViewController alloc] initWithNibName:nil bundle:nil];
+//        friendSelectionController.delegate = self;
+//        friendSelectionController.friendsList = friendList;
+//        UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: friendSelectionController];
+//        
+//        [self.navigationController presentModalViewController:navController animated:YES];
+//        
+//        [navController release];
+//        [friendSelectionController release];
+//        
+//        [self.atButton setEnabled:YES];
+//    }];
+    FriendsSelectionViewController *friendSelectionController = 
+    [[FriendsSelectionViewController alloc] initWithNibName:nil bundle:nil];
+    friendSelectionController.delegate = self;
+    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: friendSelectionController];
+    
+    [self.navigationController presentModalViewController:navController animated:YES];
+    
+    [navController release];
+    [friendSelectionController release];
 }
 
 - (IBAction)onLocationPressed:(id)sender
@@ -481,7 +493,6 @@
 {
     CategorySelectViewController *categorySelectionController = 
     [[CategorySelectViewController alloc] initWithNibName:nil bundle:nil];
-    categorySelectionController.categoryListData = categories;
     categorySelectionController.delegate = self;
     categorySelectionController.initialSelectedCategoryId = self.category;
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: categorySelectionController];
@@ -494,20 +505,7 @@
 
 - (IBAction)onCategoryPressed:(id)sender
 {
-    [self.categoryButton setEnabled:NO];
-//    NSArray * categories = [[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_CATEGORY];
-    if (self.categories) {
-        [self startSelectCategoryViewWithData:self.categories];
-    }
-    else
-    {
-        [[BSDKManager sharedManager] getWeiboClassesWithDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-            NSArray * categories = [data objectForKey:K_BSDK_CLASSLIST];
-            self.categories = categories;
-            [self.categoryButton setEnabled:YES];
-            [self startSelectCategoryViewWithData:categories];
-        }];
-    }
+    [self startSelectCategoryViewWithData:self.categories];
 }
 
 - (IBAction)onSinaPressed:(id)sender

@@ -301,9 +301,13 @@
     NSString* relation = [self.friendDictionary valueForKey:K_BSDK_RELATIONSHIP];
     NSInteger userId = [[self.friendDictionary valueForKey:K_BSDK_UID] intValue];
     
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: TRUE];
+    
+    [self.actionButton setEnabled:NO];
     
     processDoneWithDictBlock doneBlock = ^(AIO_STATUS status, NSDictionary *data)
     {
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: FALSE];
         [self refreshView];
     };
     if ([relation isEqualToString:K_BSDK_RELATIONSHIP_MY_FOLLOW] || [relation isEqualToString:K_BSDK_RELATIONSHIP_INTER_FOLLOW])
@@ -554,7 +558,9 @@
 
 - (void)onRemove
 {
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: TRUE];
     [[BSDKManager sharedManager] removeFan:[self.friendDictionary valueForKey:K_BSDK_UID] andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: FALSE];
         [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
         [self refreshView];
     }];
@@ -606,7 +612,8 @@
     {
         NSString * buttonTitle = ([relationship isEqualToString:K_BSDK_RELATIONSHIP_MY_FOLLOW] || [relationship isEqualToString:K_BSDK_RELATIONSHIP_INTER_FOLLOW]) ? NSLocalizedString(@"unfollow", @"unfollow") : NSLocalizedString(@"follow", @"follow");
         
-        [self.actionButton setTitle:buttonTitle forState:UIControlStateNormal];    
+        [self.actionButton setTitle:buttonTitle forState:UIControlStateNormal];
+        [self.actionButton setEnabled:YES];
     }
     
     if (![[BSDKManager sharedManager] isLogin]) {

@@ -180,30 +180,15 @@
 
 - (IBAction)onAtFriendPressed:(id)sender
 {
-    [self.atButton setEnabled:NO];
-    [[BSDKManager sharedManager] getFollowList:GET_CURRENT_USER_INFO_BY_KEY(K_BSDK_UID) pageSize:50 pageIndex:1 andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-        
-        NSArray * userList = [data objectForKey:K_BSDK_USERLIST];
-        NSMutableArray * friendList = [NSMutableArray arrayWithCapacity:[userList count]];
-        
-        for(NSDictionary * user in userList)
-        {
-            [friendList addObject:[[user objectForKey:K_BSDK_ATTENTIONUSERINFO] objectForKey:K_BSDK_USERNAME]];
-        }
-        
-        FriendsSelectionViewController *friendSelectionController = 
-        [[FriendsSelectionViewController alloc] initWithNibName:nil bundle:nil];
-        friendSelectionController.delegate = self;
-        friendSelectionController.friendsList = friendList;
-        UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: friendSelectionController];
-        
-        [self.navigationController presentModalViewController:navController animated:YES];
-        
-        [navController release];
-        [friendSelectionController release];
-        
-        [self.atButton setEnabled:YES];
-    }];
+    FriendsSelectionViewController *friendSelectionController = 
+    [[FriendsSelectionViewController alloc] initWithNibName:nil bundle:nil];
+    friendSelectionController.delegate = self;
+    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: friendSelectionController];
+    
+    [self.navigationController presentModalViewController:navController animated:YES];
+    
+    [navController release];
+    [friendSelectionController release];
 }
 
 - (IBAction)onLocationPressed:(id)sender

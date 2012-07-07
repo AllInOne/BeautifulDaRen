@@ -434,9 +434,11 @@
     if([[BSDKManager sharedManager] isLogin])
     {
         NSString * accountId = [[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] valueForKey:KEY_ACCOUNT_ID];
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: TRUE];
         [[BSDKManager sharedManager] getUserInforByUserId:accountId
                                           andDoneCallback:^(AIO_STATUS status, NSDictionary *data)
         {
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: FALSE];
             [[NSUserDefaults standardUserDefaults] setObject:data forKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
             [self.tableView reloadData];
         }];

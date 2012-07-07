@@ -167,7 +167,7 @@
 -(void)onConfirmed:(WeiboForwardCommentViewController*)view
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_SHOWWAITOVERLAY object:self];
-    
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: TRUE];
     __block NSInteger doneCount = 0;
     __block NSInteger doneCountExpected = 0;
     __block NSString * errorMsg = nil;
@@ -178,6 +178,7 @@
         doneCount++;
         if (doneCount == doneCountExpected) {
             [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_HIDEWAITOVERLAY object:self];
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: FALSE];
             if ([data objectForKey:K_BSDK_RESPONSE_STATUS] && !K_BSDK_IS_RESPONSE_OK(data)) {
                 errorMsg = K_BSDK_GET_RESPONSE_MESSAGE(data);
             }
@@ -211,9 +212,13 @@
 
 - (void)onFavourate
 {
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: TRUE];
+    
     if (K_BSDK_IS_BLOG_FAVOURATE(self.weiboData)) {
         [[BSDKManager sharedManager] removeFavourateForWeibo:[self.weiboData objectForKey:K_BSDK_UID] andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
             
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: FALSE];
+
             if (K_BSDK_IS_RESPONSE_OK(data)) {
                 [[iToast makeText:NSLocalizedString(@"cancel_favourate_succeed", @"cancel_favourate_succeed")] show];
                 [self onRefreshButtonClicked];
@@ -228,6 +233,8 @@
     else
     {
         [[BSDKManager sharedManager] addFavourateForWeibo:[self.weiboData objectForKey:K_BSDK_UID] andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+            
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: FALSE];
             
             if (K_BSDK_IS_RESPONSE_OK(data)) {
                 [[iToast makeText:NSLocalizedString(@"favourate_succeed", @"favourate_succeed")] show];
@@ -573,7 +580,11 @@
 }
 
 - (void)onRefreshButtonClicked {
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: TRUE];
+    
     [[BSDKManager sharedManager] getWeiboById:[self.weiboData objectForKey:K_BSDK_UID] andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: FALSE];
+        
         [self setWeiboData:nil];
         self.weiboData = [data objectForKey:K_BSDK_BLOGINFO];
         [self refreshView];
@@ -590,7 +601,11 @@
 
 -(IBAction)onBrandButtonPressed:(id)sender
 {
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: TRUE];
+    
     [[BSDKManager sharedManager] getUserInforByName:[self.weiboData objectForKey:K_BSDK_BRANDSERVICE] andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: FALSE];
+        
         if (K_BSDK_IS_RESPONSE_OK(data)) {
             FriendDetailViewController * friendDetailViewController = [[FriendDetailViewController alloc] initWithDictionary:[data objectForKey:K_BSDK_USERINFO]];
             [self.navigationController pushViewController:friendDetailViewController animated:YES];
@@ -605,7 +620,12 @@
 
 -(IBAction)onBusinessButtonPressed:(id)sender
 {
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: TRUE];
+    
     [[BSDKManager sharedManager] getUserInforByName:[self.weiboData objectForKey:K_BSDK_SHOPMERCHANT] andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+        
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: FALSE];
+        
         if (K_BSDK_IS_RESPONSE_OK(data)) {
             FriendDetailViewController * friendDetailViewController = [[FriendDetailViewController alloc] initWithDictionary:[data objectForKey:K_BSDK_USERINFO]];
             [self.navigationController pushViewController:friendDetailViewController animated:YES];

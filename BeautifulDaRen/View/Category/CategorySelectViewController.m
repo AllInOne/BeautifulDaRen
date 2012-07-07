@@ -9,6 +9,7 @@
 #import "CategorySelectViewController.h"
 #import "ViewHelper.h"
 #import "BSDKDefines.h"
+#import "BSDKManager.h"
 #import "ViewConstants.h"
 #import "CategoryItemViewController.h"
 
@@ -25,6 +26,7 @@
 
 -(void)clearCheckedCategories;
 -(NSArray*)getCheckedCategories;
+-(void)refreshView;
 @end
 
 @implementation CategorySelectViewController
@@ -60,10 +62,8 @@
 
 #pragma mark - View lifecycle
 
-- (void)viewDidLoad
+-(void)refreshView
 {
-    [super viewDidLoad];
-    
     _contentScrollView = [[UIScrollView alloc] init];
     _contentScrollView.frame = self.view.frame;
     [self.view addSubview:_contentScrollView];
@@ -76,8 +76,8 @@
         CategoryItemViewController* cell = [[CategoryItemViewController alloc] initWithNibName:nil bundle:nil];
         
         cell.view.frame = CGRectMake(CATEGORY_CELL_X_OFFSET + (CGRectGetWidth(cell.view.frame) + CATEGORY_CELL_X_MARGIN) * (index % 2), 
-                                CATEGORY_CELL_Y_OFFSET + (CGRectGetHeight(cell.view.frame) + CATEGORY_CELL_Y_MARGIN) * (index/2), CGRectGetWidth(cell.view.frame), 
-                                CGRectGetHeight(cell.view.frame));
+                                     CATEGORY_CELL_Y_OFFSET + (CGRectGetHeight(cell.view.frame) + CATEGORY_CELL_Y_MARGIN) * (index/2), CGRectGetWidth(cell.view.frame), 
+                                     CGRectGetHeight(cell.view.frame));
         
         contentHeight = CATEGORY_CELL_Y_OFFSET + (CGRectGetHeight(cell.view.frame) + CATEGORY_CELL_Y_MARGIN) * (index/2 + 1), CGRectGetWidth(cell.view.frame);
         
@@ -102,6 +102,31 @@
     }
     
     [self.contentScrollView setContentSize:CGSizeMake(SCREEN_WIDTH, contentHeight)];
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    
+    activityIndicator.frame = CGRectMake(SCREEN_WIDTH/2, 2*ADS_CELL_HEIGHT + CONTENT_MARGIN, CGRectGetWidth(activityIndicator.frame), CGRectGetHeight(activityIndicator.frame));
+    
+    [self.view addSubview:activityIndicator];
+    
+    [activityIndicator startAnimating];
+    
+    [[BSDKManager sharedManager] getWeiboClassesWithDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+        
+        [activityIndicator stopAnimating];
+        [activityIndicator removeFromSuperview];
+        [activityIndicator release];
+        
+        NSArray * categories = [data objectForKey:K_BSDK_CLASSLIST];
+        self.categoryListData = categories;
+        
+        [self refreshView];
+    }];
 }
 
 
