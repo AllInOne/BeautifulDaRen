@@ -33,9 +33,11 @@
 @synthesize originalAuthorAvatar = _originalAuthorAvatar;
 @synthesize originalAuthorName = _originalAuthorName;
 @synthesize originalWeiboBgView = _originalWeiboBgView;
+@synthesize originalAuthorVMark = _originalAuthorVMark;
 
 @synthesize authorName = _authorName;
 @synthesize authorAvatar = _authorAvatar;
+@synthesize authorVMark = _authorVMark;
 @synthesize timestamp = _timestamp;
 @synthesize commentContent = _commentContent;
 @synthesize originalPriceButton = _originalPriceButton;
@@ -62,6 +64,17 @@
     //self.authorAvatar
     self.authorName.text = [authorInfo objectForKey:K_BSDK_USERNAME];
     NSString * title = [NSString stringWithFormat:@"¥ %@",[originalBlogInfo objectForKey:K_BSDK_PRICE]];
+    
+    NSString * isVerify = [authorInfo objectForKey:K_BSDK_ISVERIFY];
+    if (isVerify && [isVerify isEqual:@"1"]) {
+        [self.authorVMark setImage:[UIImage imageNamed:@"v_mark_big"]];
+        [self.authorVMark setHidden:NO];
+    }
+    else
+    {
+        [self.authorVMark setHidden:YES];
+    }
+    
     [self.originalPriceButton setTitle:title forState:UIControlStateNormal];
     self.originalPriceButton.frame = CGRectMake(CGRectGetMinX(self.originalPriceButton.frame), 
                                         CGRectGetMinY(self.originalPriceButton.frame), 
@@ -76,6 +89,16 @@
     self.originalAuthorName.text = [originalUserInfo objectForKey:K_BSDK_USERNAME];
 
     [self.originalImage setImageWithURL:[NSURL URLWithString:[originalBlogInfo objectForKey:K_BSDK_PICTURE_ORIGINAL]]];
+    
+    isVerify = [originalUserInfo objectForKey:K_BSDK_ISVERIFY];
+    if (isVerify && [isVerify isEqual:@"1"]) {
+        [self.originalAuthorVMark setImage:[UIImage imageNamed:@"v_mark_small"]];
+        [self.originalAuthorVMark setHidden:NO];
+    }
+    else
+    {
+        [self.originalAuthorVMark setHidden:YES];
+    }
     
     [self setAvatarImageView:self.originalAuthorAvatar byUserInfo:originalUserInfo];
     [self setAvatarImageView:self.authorAvatar byUserInfo:authorInfo];

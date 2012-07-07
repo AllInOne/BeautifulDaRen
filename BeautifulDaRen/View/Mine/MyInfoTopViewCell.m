@@ -18,6 +18,7 @@
 @synthesize editButton = _editButton;
 @synthesize updateAvatarButton = _updateAvatarButton;
 @synthesize editImageView = _editImageView;
+@synthesize vMarkImageView = _vMarkImageView;
 
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier

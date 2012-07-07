@@ -41,6 +41,7 @@
 @property (retain, nonatomic) IBOutlet UILabel * phoneLabel;
 @property (retain, nonatomic) IBOutlet UIImageView * genderImageView;
 @property (retain, nonatomic) IBOutlet UIImageView * avatarImageView;
+@property (retain, nonatomic) IBOutlet UIImageView * vMarkImageView;
 @property (retain, nonatomic) IBOutlet UIButton * actionButton;
 @property (retain, nonatomic) UIToolbar *toolbar;
 
@@ -72,6 +73,7 @@
 @synthesize friendId = _friendId;
 @synthesize avatarImageView = _avatarImageView;
 @synthesize toolbar = _toolbar;
+@synthesize vMarkImageView = _vMarkImageView;
 
 - (void) initialize
 {
@@ -204,6 +206,7 @@
     [_levelLabel release];
     [_pointLabel release];
     [_phoneLabel release];
+    [_vMarkImageView release];
     
     [super dealloc];
 }
@@ -227,6 +230,7 @@
     self.levelLabel = nil;
     self.pointLabel = nil;
     self.phoneLabel = nil;
+    self.vMarkImageView = nil;
 }
 - (void)viewDidLoad
 {
@@ -575,11 +579,21 @@
         [self.avatarImageView setImage:[UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:self.friendDictionary]]];
     }
     
+    NSString * isVerify = [self.friendDictionary objectForKey:K_BSDK_ISVERIFY];
+    if (isVerify && [isVerify isEqual:@"1"]) {
+        [self.vMarkImageView setImage:[UIImage imageNamed:@"v_mark_big"]];
+        [self.vMarkImageView setHidden:NO];
+    }
+    else
+    {
+        [self.vMarkImageView setHidden:YES];
+    }
+    
     NSString * relationship = [self.friendDictionary objectForKey:K_BSDK_RELATIONSHIP];
-    NSString * genderImageName = [[self.friendDictionary valueForKey:KEY_ACCOUNT_GENDER] intValue] == 1 ? @"gender_female" : @"gender_male";
+    NSString * genderImageName = [[self.friendDictionary valueForKey:K_BSDK_GENDER] isEqual:K_BSDK_GENDER_FEMALE] ? @"gender_female" : @"gender_male";
     self.genderImageView.image = [UIImage imageNamed:genderImageName];
     
-    NSString * title = [[self.friendDictionary valueForKey:KEY_ACCOUNT_GENDER] intValue] == 1 ? @"her_home_page" : @"his_home_page";
+    NSString * title = [[self.friendDictionary valueForKey:K_BSDK_GENDER] isEqual:K_BSDK_GENDER_FEMALE] ? @"her_home_page" : @"his_home_page";
     
     [self.navigationItem setTitle:NSLocalizedString(title, title)];
     

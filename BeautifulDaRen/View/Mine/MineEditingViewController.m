@@ -225,7 +225,7 @@ typedef enum
         ButtonViewCell * buttonViewCell = (ButtonViewCell*)cell;
         buttonViewCell.leftLabel.text = NSLocalizedString(@"gender", @"gender");
 
-        NSInteger index = [[_tableViewDict valueForKey:KEY_ACCOUNT_GENDER] isEqualToString:K_BSDK_GENDER_MALE] ? 1 : 0;
+        NSInteger index = [[_tableViewDict valueForKey:K_BSDK_GENDER] isEqualToString:K_BSDK_GENDER_MALE] ? 1 : 0;
         SegmentControl * seg = [[SegmentControl alloc]
                                 initWithFrame:CGRectMake(65, 8, 112, 29)
                                 leftText:NSLocalizedString(@"female", @"gender")

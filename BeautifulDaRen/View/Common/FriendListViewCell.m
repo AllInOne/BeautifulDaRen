@@ -14,6 +14,7 @@
 @synthesize avatarImageView;
 @synthesize actionButton;
 @synthesize delegate;
+@synthesize vMarkImageView;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

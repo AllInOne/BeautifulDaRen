@@ -67,6 +67,7 @@
 @synthesize brandLable = _brandLable;
 @synthesize usernameLabel = _usernameLabel;
 @synthesize weiboId = _weiboId;
+@synthesize vMarkImageView = _vMarkImageView;
 
 - (void)dealloc
 {
@@ -89,6 +90,7 @@
     [_priceButton release];
     [_usernameLabel release];
     [_weiboId release];
+    [_vMarkImageView release];
     
     [super dealloc];
 }
@@ -343,6 +345,7 @@
     self.priceButton = nil;
     self.brandLable = nil;
     self.usernameLabel = nil;
+    self.vMarkImageView = nil;
     
     [self.toolbar removeFromSuperview];
     self.toolbar = nil;
@@ -507,7 +510,17 @@
     else
     {
         [self.avatarImageView setImage:[UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:authorInfo]]];
-    }  
+    }
+    
+    NSString * isVerify = [authorInfo objectForKey:K_BSDK_ISVERIFY];
+    if (isVerify && [isVerify isEqual:@"1"]) {
+        [self.vMarkImageView setImage:[UIImage imageNamed:@"v_mark_big"]];
+        [self.vMarkImageView setHidden:NO];
+    }
+    else
+    {
+        [self.vMarkImageView setHidden:YES];
+    }
 
     self.weiboAttachedImageButton.frame = self.weiboAttachedImageView.frame;
     

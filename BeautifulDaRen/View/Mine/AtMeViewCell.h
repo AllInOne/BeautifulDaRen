@@ -11,6 +11,7 @@
 @interface AtMeViewCell : UITableViewCell
 
 @property (retain, nonatomic) IBOutlet UIImageView * friendImageView;
+@property (retain, nonatomic) IBOutlet UIImageView * vMarkImageView;
 @property (retain, nonatomic) IBOutlet UIImageView * itemImageView;
 @property (retain, nonatomic) IBOutlet UILabel * friendNameLabel;
 @property (retain, nonatomic) IBOutlet UILabel * timeLabel;

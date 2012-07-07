@@ -76,11 +76,24 @@
         }
         else if(_controllerType == WeiboListViewControllerType_FRIEND_WEIBO)
         {
-            [self.navigationItem setTitle:NSLocalizedString(@"her_weibo", @"her_weibo")];
+            if ([[dictionary objectForKey:K_BSDK_GENDER] isEqual:K_BSDK_GENDER_FEMALE]) {
+                [self.navigationItem setTitle:NSLocalizedString(@"her_weibo", @"her_weibo")];
+            }
+            else
+            {
+                [self.navigationItem setTitle:NSLocalizedString(@"his_weibo", @"his_weibo")];
+            }
+
         }
         else if(_controllerType == WeiboListViewControllerType_FRIEND_COLLECTION)
         {
-            [self.navigationItem setTitle:NSLocalizedString(@"her_collection", @"her_collection")];
+            if ([[dictionary objectForKey:K_BSDK_GENDER] isEqual:K_BSDK_GENDER_FEMALE]) {
+                [self.navigationItem setTitle:NSLocalizedString(@"her_collection", @"her_collection")];
+            }
+            else
+            {
+                [self.navigationItem setTitle:NSLocalizedString(@"his_collection", @"his_collection")];
+            }
         }
         else if (_controllerType == WeiboListViewControllerType_CATEGORY)
         {

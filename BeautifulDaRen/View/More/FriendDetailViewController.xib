@@ -44,6 +44,7 @@
 						<string key="NSFrame">{{0, 96}, {320, 276}}</string>
 						<reference key="NSSuperview" ref="423715162"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:418</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
@@ -153,7 +154,7 @@
 								<string key="NSFrame">{{236, 28}, {79, 24}}</string>
 								<reference key="NSSuperview" ref="1005247890"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="781941373"/>
+								<reference key="NSNextKeyView" ref="1027875431"/>
 								<string key="NSReuseIdentifierKey">_NS:225</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -377,6 +378,17 @@
 								<reference key="IBUIFontDescription" ref="1046067458"/>
 								<reference key="IBUIFont" ref="1066048074"/>
 							</object>
+							<object class="IBUIImageView" id="1027875431">
+								<reference key="NSNextResponder" ref="1005247890"/>
+								<int key="NSvFlags">292</int>
+								<string key="NSFrame">{{75, 76}, {12, 12}}</string>
+								<reference key="NSSuperview" ref="1005247890"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="781941373"/>
+								<string key="NSReuseIdentifierKey">_NS:567</string>
+								<bool key="IBUIUserInteractionEnabled">NO</bool>
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+							</object>
 						</array>
 						<string key="NSFrameSize">{320, 95}</string>
 						<reference key="NSSuperview" ref="423715162"/>
@@ -501,6 +513,14 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">vMarkImageView</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="1027875431"/>
+					</object>
+					<int key="connectionID">42</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">dataSource</string>
 						<reference key="source" ref="1064494079"/>
 						<reference key="destination" ref="372490531"/>
@@ -573,6 +593,7 @@
 							<reference ref="79307026"/>
 							<reference ref="977440762"/>
 							<reference ref="914645186"/>
+							<reference ref="1027875431"/>
 						</array>
 						<reference key="parent" ref="423715162"/>
 					</object>
@@ -654,6 +675,11 @@
 						<reference key="object" ref="386647099"/>
 						<reference key="parent" ref="423715162"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">41</int>
+						<reference key="object" ref="1027875431"/>
+						<reference key="parent" ref="1005247890"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -676,6 +702,7 @@
 				<string key="28.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="29.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="30.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="41.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="8.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="9.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
@@ -683,7 +710,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">40</int>
+			<int key="maxID">42</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -706,6 +733,7 @@
 						<string key="pointLabel">UILabel</string>
 						<string key="publishedButton">UIButton</string>
 						<string key="topicButton">UIButton</string>
+						<string key="vMarkImageView">UIImageView</string>
 						<string key="weiboButton">UIButton</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -768,6 +796,10 @@
 						<object class="IBToOneOutletInfo" key="topicButton">
 							<string key="name">topicButton</string>
 							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="vMarkImageView">
+							<string key="name">vMarkImageView</string>
+							<string key="candidateClassName">UIImageView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="weiboButton">
 							<string key="name">weiboButton</string>

@@ -74,11 +74,23 @@
                 self.userDataDictionary = nil;
                 break;
             case FriendListViewController_TYPE_FRIEND_FOLLOW:
-                title = NSLocalizedString(@"her_follows", @"her_follows");
+                if ([[dictionary objectForKey:K_BSDK_GENDER] isEqual:K_BSDK_GENDER_FEMALE]) {
+                    title = NSLocalizedString(@"her_follows", @"her_follows");
+                }
+                else
+                {
+                    title = NSLocalizedString(@"his_follows", @"his_follows");
+                }
                 self.userDataDictionary = dictionary;
                 break;
             case FriendListViewController_TYPE_FRIEND_FANS:
-                title = NSLocalizedString(@"her_fans", @"her_fans");
+                if ([[dictionary objectForKey:K_BSDK_GENDER] isEqual:K_BSDK_GENDER_FEMALE]) {
+                    title = NSLocalizedString(@"her_fans", @"her_fans");
+                }
+                else
+                {
+                    title = NSLocalizedString(@"his_fans", @"his_fans");
+                }
                 self.userDataDictionary = dictionary;
                 break;
             case FriendListViewController_TYPE_FAV_ONE_BLOG:
@@ -344,6 +356,16 @@
          
         [friendListViewCell.avatarImageView addSubview:borderImageView];
         [borderImageView release];
+        
+        NSString * isVerify = [userDict objectForKey:K_BSDK_ISVERIFY];
+        if (isVerify && [isVerify isEqual:@"1"]) {
+            [friendListViewCell.vMarkImageView setImage:[UIImage imageNamed:@"v_mark_big"]];
+            [friendListViewCell.vMarkImageView setHidden:NO];
+        }
+        else
+        {
+            [friendListViewCell.vMarkImageView setHidden:YES];
+        }
 
         friendListViewCell.friendNameLabel.text = [userDict valueForKey:KEY_ACCOUNT_USER_NAME];
         friendListViewCell.friendWeiboLabel.text = @"";
