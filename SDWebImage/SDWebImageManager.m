@@ -16,6 +16,7 @@ typedef void(^SuccessBlock)(UIImage *image);
 typedef void(^FailureBlock)(NSError *error);
 
 @interface SDWebImageManager ()
+@property (nonatomic, retain) NSString * blockUrl;
 @property (nonatomic, copy) SuccessBlock successBlock;
 @property (nonatomic, copy) FailureBlock failureBlock;
 @end
@@ -28,6 +29,7 @@ static SDWebImageManager *instance;
 #if NS_BLOCKS_AVAILABLE
 @synthesize successBlock;
 @synthesize failureBlock;
+@synthesize blockUrl;
 #endif
 
 - (id)init
@@ -122,8 +124,17 @@ static SDWebImageManager *instance;
 #if NS_BLOCKS_AVAILABLE
 - (void)downloadWithURL:(NSURL *)url delegate:(id)delegate options:(SDWebImageOptions)options success:(void (^)(UIImage *image))success failure:(void (^)(NSError *error))failure
 {
+    if (self.successBlock)
+    {
+        Block_release(successBlock);
+    }
     self.successBlock = success;
+    if (self.failureBlock) {
+        Block_release(failureBlock);
+    }
     self.failureBlock = failure;
+    self.blockUrl = nil;
+    self.blockUrl = url.absoluteString;
     [self downloadWithURL:url delegate:delegate options:options];
 }
 #endif
@@ -194,7 +205,13 @@ static SDWebImageManager *instance;
 #if NS_BLOCKS_AVAILABLE
     if (self.successBlock)
     {
-        self.successBlock(image);
+        if ([self.blockUrl isEqual:url.absoluteString]) {
+            self.successBlock(image);
+            Block_release(successBlock);
+            self.successBlock = nil;
+            Block_release(failureBlock);
+            self.failureBlock = nil;
+        }
     }
 #endif
 
@@ -243,7 +260,7 @@ static SDWebImageManager *instance;
 {
     SDWIRetain(downloader);
     SDWebImageOptions options = [[downloader.userInfo objectForKey:@"options"] intValue];
-
+    NSURL *url = [downloader.userInfo objectForKey:@"url"];
     // Notify all the downloadDelegates with this downloader
     for (NSInteger idx = (NSInteger)[downloaders count] - 1; idx >= 0; idx--)
     {
@@ -268,7 +285,13 @@ static SDWebImageManager *instance;
 #if NS_BLOCKS_AVAILABLE
                 if (self.successBlock)
                 {
-                    self.successBlock(image);
+                    if ([self.blockUrl isEqual:url.absoluteString]) {
+                        self.successBlock(image);
+                        Block_release(successBlock);
+                        self.successBlock = nil;
+                        Block_release(failureBlock);
+                        self.failureBlock = nil;
+                    }
                 }
 #endif
             }
@@ -285,7 +308,13 @@ static SDWebImageManager *instance;
 #if NS_BLOCKS_AVAILABLE
                 if (self.failureBlock)
                 {
-                    self.failureBlock(nil);
+                    if ([self.blockUrl isEqual:url.absoluteString]) {
+                        self.failureBlock(nil);
+                        Block_release(successBlock);
+                        self.successBlock = nil;
+                        Block_release(failureBlock);
+                        self.failureBlock = nil;
+                    }
                 }
 #endif
             }
@@ -342,7 +371,13 @@ static SDWebImageManager *instance;
 #if NS_BLOCKS_AVAILABLE
             if (self.failureBlock)
             {
-                self.failureBlock(error);
+                if ([self.blockUrl isEqual:downloader.url.absoluteString]) {
+                    self.failureBlock(nil);
+                    Block_release(successBlock);
+                    self.successBlock = nil;
+                    Block_release(failureBlock);
+                    self.failureBlock = nil;
+                }
             }
 #endif
 
