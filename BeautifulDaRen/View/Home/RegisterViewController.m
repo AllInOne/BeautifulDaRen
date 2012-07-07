@@ -93,7 +93,6 @@ enum
     [_loginWithSinaWeiboButton release];
     [_observers release];
     [_savingInputDict release];
-    
     [super dealloc];
 }
 
@@ -101,7 +100,7 @@ enum
 {
     [super viewDidLoad];
     
-    self.savingInputDict = [[NSMutableDictionary alloc] init];
+    _savingInputDict = [[NSMutableDictionary alloc] init];
 }
 
 - (void)viewDidUnload
