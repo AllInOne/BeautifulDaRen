@@ -287,6 +287,7 @@
     // Do any additional setup after loading the view from its nib.
     if (self.weiboData) {
         [self refreshView];
+        [self onRefreshButtonClicked];
     }
     else
     {
@@ -576,6 +577,10 @@
             [self.navigationController pushViewController:friendDetailViewController animated:YES];
             [friendDetailViewController release];
         }
+        else
+        {
+            [[iToast makeText:NSLocalizedString(@"no_such_user", @"no_such_user")] show];
+        }
     }];
 }
 
@@ -586,6 +591,10 @@
             FriendDetailViewController * friendDetailViewController = [[FriendDetailViewController alloc] initWithDictionary:[data objectForKey:K_BSDK_USERINFO]];
             [self.navigationController pushViewController:friendDetailViewController animated:YES];
             [friendDetailViewController release];
+        }
+        else
+        {
+            [[iToast makeText:NSLocalizedString(@"no_such_user", @"no_such_user")] show];
         }
     }];
 }

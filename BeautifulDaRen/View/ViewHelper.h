@@ -50,4 +50,8 @@
 + (NSString*)getMyUserId;
 
 + (NSString*)getUserDefaultAvatarImageByData:(NSDictionary*)userInfo;
+
++ (BOOL) isDigitsString:(NSString*)str;
+
++ (BOOL) NSStringIsValidEmail:(NSString *)checkString;
 @end

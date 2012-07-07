@@ -109,7 +109,7 @@
 							<object class="IBUIButton" id="422281046">
 								<reference key="NSNextResponder" ref="485515526"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{62, 4}, {34, 28}}</string>
+								<string key="NSFrame">{{177, 4}, {34, 28}}</string>
 								<reference key="NSSuperview" ref="485515526"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="327246945"/>
@@ -134,7 +134,7 @@
 							<object class="IBUIButton" id="448779645">
 								<reference key="NSNextResponder" ref="485515526"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{177, 2}, {37, 32}}</string>
+								<string key="NSFrame">{{63, 1}, {37, 32}}</string>
 								<reference key="NSSuperview" ref="485515526"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="18064158"/>
@@ -202,7 +202,6 @@
 								<string key="NSFrame">{{285, 7}, {10, 10}}</string>
 								<reference key="NSSuperview" ref="485515526"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:567</string>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -592,13 +591,13 @@
 						<int key="objectID">11</int>
 						<reference key="object" ref="485515526"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="422281046"/>
 							<reference ref="327246945"/>
 							<reference ref="18064158"/>
 							<reference ref="668615164"/>
 							<reference ref="333808481"/>
-							<reference ref="448779645"/>
 							<reference ref="635250277"/>
+							<reference ref="448779645"/>
+							<reference ref="422281046"/>
 						</array>
 						<reference key="parent" ref="191373211"/>
 					</object>
@@ -751,9 +750,7 @@
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="atButton">UIButton</string>
 						<string key="attachedImageBgButton">UIButton</string>
-						<string key="attachedImageView">UIImageView</string>
 						<string key="brandTextView">UITextField</string>
-						<string key="cameraButton">UIButton</string>
 						<string key="categoryButton">UIButton</string>
 						<string key="contentScrollView">UIScrollView</string>
 						<string key="footerView">UIView</string>
@@ -774,17 +771,9 @@
 							<string key="name">attachedImageBgButton</string>
 							<string key="candidateClassName">UIButton</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="attachedImageView">
-							<string key="name">attachedImageView</string>
-							<string key="candidateClassName">UIImageView</string>
-						</object>
 						<object class="IBToOneOutletInfo" key="brandTextView">
 							<string key="name">brandTextView</string>
 							<string key="candidateClassName">UITextField</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="cameraButton">
-							<string key="name">cameraButton</string>
-							<string key="candidateClassName">UIButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="categoryButton">
 							<string key="name">categoryButton</string>

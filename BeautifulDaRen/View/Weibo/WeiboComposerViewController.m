@@ -73,6 +73,8 @@
         [_weiboContentTextView setDelegate:self];
 
         [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
+        
+        [self.navigationItem setTitle:NSLocalizedString(@"tab_myshow", @"tab_myshow")];
 
         [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onSendButtonClicked) title:NSLocalizedString(@"send", @"send")]];
     }

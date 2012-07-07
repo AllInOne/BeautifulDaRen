@@ -326,25 +326,25 @@ enum
         self.userCity = @"重庆"; 
 #endif
         NSString * iToastString = @"";
-        if ([userName isEqualToString:@""])
+        if (!userName || [userName isEqualToString:@""])
         {
-            iToastString = @"用户名不能为空!";
+            iToastString = NSLocalizedString(@"please_check_username", @"please_check_username");
         }
-        else if ([email isEqualToString:@""])
+        else if (!email || [email isEqualToString:@""] || ![ViewHelper NSStringIsValidEmail:email])
         {
-            iToastString = @"邮箱不能为空!";
+            iToastString = NSLocalizedString(@"please_check_email", @"please_check_email");
         }
-        else if ([pwd isEqualToString:@""])
+        else if (!pwd || [pwd isEqualToString:@""])
         {
-            iToastString = @"密码不能为空!";
+            iToastString = NSLocalizedString(@"please_check_password", @"please_check_password");
         }
-        else if(![pwd isEqualToString:rePwd])
+        else if(!rePwd || ![pwd isEqualToString:rePwd])
         {
-            iToastString = @"两次密码输入不一致!";
+            iToastString = NSLocalizedString(@"password_not_the_same", @"password_not_the_same");
         }
         else if(!self.userCity || [self.userCity isEqualToString:@""])
         {
-            iToastString = @"请选择城市!";
+            iToastString = NSLocalizedString(@"please_check_city", @"please_check_city");
         }
         if(![iToastString isEqualToString:@""])
         {
