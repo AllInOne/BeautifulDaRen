@@ -88,7 +88,7 @@
     self.originalContent.text = [originalBlogInfo objectForKey:K_BSDK_CONTENT];
     self.originalAuthorName.text = [originalUserInfo objectForKey:K_BSDK_USERNAME];
 
-    [self.originalImage setImageWithURL:[NSURL URLWithString:[originalBlogInfo objectForKey:K_BSDK_PICTURE_ORIGINAL]]];
+    [self.originalImage setImageWithURL:[NSURL URLWithString:[originalBlogInfo objectForKey:K_BSDK_PICTURE_102]]];
     
     isVerify = [originalUserInfo objectForKey:K_BSDK_ISVERIFY];
     if (isVerify && [isVerify isEqual:@"1"]) {
