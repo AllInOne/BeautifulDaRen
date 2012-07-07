@@ -12,6 +12,7 @@
 #import "ViewConstants.h"
 #import "ViewHelper.h"
 #import "UIImageView+WebCache.h"
+#import "iToast.h"
 
 @interface FullImageViewController ()
 - (IBAction)onClickSaveButton:(id)sender;
@@ -26,6 +27,7 @@
 - (void)setImage:(UIImage* )newImage;
 
 @property (nonatomic, assign) CGSize imageSize;
+@property (nonatomic, assign) BOOL imageDownloadDone;
 @end
 
 @implementation FullImageViewController
@@ -44,6 +46,7 @@
 @synthesize imageData = _imageData;
 @synthesize imageUrl = _imageUrl;
 @synthesize imageSize = _imageSize;
+@synthesize imageDownloadDone = _imageDownloadDone;
 
 + (void)showImageUrl:(NSString* )imageUrl size:(CGSize)size inNavigationController:(UINavigationController* )parentNav
 {
@@ -128,6 +131,10 @@
 }
 
 - (void)onClickReturnButton:(id)sender {
+    if (!self.imageDownloadDone) {
+        [self.imageView cancelCurrentImageLoad];
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: FALSE];
+    }
     [self dismissModalViewControllerAnimated:YES];
 }
 
@@ -241,7 +248,16 @@
     }
     else
     {
-        [self.imageView setImageWithURL:[NSURL URLWithString:self.imageUrl]];
+        self.imageDownloadDone = NO;
+         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: TRUE];
+        [self.imageView setImageWithURL:[NSURL URLWithString:self.imageUrl] success:^(UIImage *image) {
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: FALSE];
+            self.imageDownloadDone = YES;
+        } failure:^(NSError *error) {
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: FALSE];
+            [[iToast makeText:NSLocalizedString(@"picture_download_failed", @"picture_download_failed")] show];
+            self.imageDownloadDone = YES;
+        }];
         self.imageView.frame = CGRectMake(0.0f, 
                                           0.0f, 
                                           self.imageSize.width, 

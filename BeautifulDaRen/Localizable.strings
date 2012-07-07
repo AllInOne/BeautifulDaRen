@@ -193,6 +193,7 @@
 "take_photo" = "照相";
 "album" = "相册";
 "delete_selected_photos" = "删除已选择照片";
+"picture_download_failed" = "图片下载失败!";
 
 "send" = "发送";
 "send_succeed" = "发送成功!";

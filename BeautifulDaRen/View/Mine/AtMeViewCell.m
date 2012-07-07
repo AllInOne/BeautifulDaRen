@@ -40,9 +40,20 @@
 
 - (void)setData:(NSDictionary*)data
 {
-    friendNameLabel.text = [data objectForKey:K_BSDK_USERNAME];
+    NSDictionary * userDict = [data objectForKey:K_BSDK_USERINFO];
+    
+    friendNameLabel.text = [userDict objectForKey:K_BSDK_USERNAME];
     shopNameLabel.text = [data objectForKey:K_BSDK_SHOPMERCHANT];
     brandLabel.text = [data objectForKey:K_BSDK_BRANDSERVICE];
+    
+    NSString * avatarImageUrl = [userDict objectForKey:K_BSDK_PICTURE_65];
+    if (avatarImageUrl && [avatarImageUrl length]) {
+        [friendImageView setImageWithURL:[NSURL URLWithString:avatarImageUrl] placeholderImage:[UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:userDict]]];
+    }
+    else
+    {
+        [friendImageView setImage:[UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:userDict]]];
+    }
     
     descriptionLabel.text = [data objectForKey:K_BSDK_CONTENT];
     
