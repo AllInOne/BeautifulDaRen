@@ -154,12 +154,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.searchUserResults = [[NSMutableArray alloc] init];
-    self.searchWeiboResults = [[NSMutableArray alloc] init];
-    self.weiboHeights = [[NSMutableArray alloc] init];
-    self.sameCityUserResults = [[NSMutableArray alloc] init];
-    self.interestingUserResults = [[NSMutableArray alloc] init];
-    self.hotUserResults = [[NSMutableArray alloc] init];
+    _searchUserResults = [[NSMutableArray alloc] init];
+    _searchWeiboResults = [[NSMutableArray alloc] init];
+    _weiboHeights = [[NSMutableArray alloc] init];
+    _sameCityUserResults = [[NSMutableArray alloc] init];
+    _interestingUserResults = [[NSMutableArray alloc] init];
+    _hotUserResults = [[NSMutableArray alloc] init];
     self.searchUserPageIndex = 1;
     self.searchWeiboPageIndex = 1;
     self.isSearchModel = NO;
