@@ -77,8 +77,8 @@
     self.adsPageView.view.frame = CGRectMake(0, 0, self.view.frame.size.width, ADS_CELL_HEIGHT);
     [self.view addSubview:self.adsPageView.view];
     self.adsPageView.delegate = self;
-    
-    self.itemsViewController = [[ItemsViewController alloc] init];
+
+    _itemsViewController = [[ItemsViewController alloc] init];
     _itemsViewController.view.frame = CGRectMake(0,
                                                  ADS_CELL_HEIGHT + CONTENT_MARGIN,
                                                  self.view.frame.size.width,
