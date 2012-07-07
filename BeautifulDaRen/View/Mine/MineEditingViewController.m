@@ -35,18 +35,16 @@ typedef enum
 
 @interface MineEditingViewController()
 @property (retain, nonatomic) IBOutlet UITableView * tableView;
-@property (retain, nonatomic) IBOutlet UIButton * updateAvatarButton;
 @property (retain, nonatomic) NSMutableDictionary * tableViewDict;
 @property (retain, nonatomic) UIImage * avatarImage;
-@property (retain, nonatomic) UIButton * segmentedFirstButton;
-@property (retain, nonatomic) UIButton * segmentedSecondButton;
+@property (assign, nonatomic) UIButton * segmentedFirstButton;
+@property (assign, nonatomic) UIButton * segmentedSecondButton;
 
 - (void)startCameraAction;
 @end
  
 @implementation MineEditingViewController
 @synthesize tableView = _tableView;
-@synthesize updateAvatarButton = _updateAvatarButton;
 @synthesize tableViewDict = _tableViewDict;
 @synthesize avatarImage = _avatarImage;
 @synthesize segmentedFirstButton = _segmentedFirstButton;
@@ -116,7 +114,6 @@ typedef enum
     [super viewDidUnload];
     
     self.tableView = nil;
-    self.updateAvatarButton = nil;
     self.tableViewDict = nil;
     self.avatarImage = nil;
     self.segmentedFirstButton = nil;
@@ -124,13 +121,10 @@ typedef enum
 }
 -(void)dealloc
 {
+    [super dealloc];
     [_tableView release];
-    [_updateAvatarButton release];
     [_tableViewDict release];
     [_avatarImage release];
-    [_segmentedSecondButton release];
-    [_segmentedFirstButton release];
-    [super dealloc];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -236,8 +230,8 @@ typedef enum
         [seg.firstButton addTarget:self action:@selector(onSegementButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [seg.secondButton addTarget:self action:@selector(onSegementButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
 
-        self.segmentedFirstButton = seg.firstButton;
-        self.segmentedSecondButton = seg.secondButton;
+        _segmentedFirstButton = seg.firstButton;
+        _segmentedSecondButton = seg.secondButton;
         [seg release];
         cell.backgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
     }
@@ -456,15 +450,6 @@ typedef enum
 - (void) genderSelected:(UISegmentedControl*)segmentedControl
 {
     [ViewHelper showSimpleMessage:@"你修改了性别" withTitle:nil withButtonText:@"好"];
-}
-
-#pragma mark ButtonPressDelegate
-- (void) didButtonPressed:(UIButton *)button inView:(UIView *)view
-{
-    if(button == _updateAvatarButton)
-    {
-        [self startCameraAction];
-    }
 }
 
 -(IBAction)onSegementButtonPressed:(UIButton*)sender

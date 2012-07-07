@@ -12,6 +12,13 @@
 @synthesize firstButton = _firstButton;
 @synthesize secondButton = _secondButton;
 
+-(void) dealloc
+{
+    [super dealloc];
+    [_firstButton release];
+    [_secondButton release];
+}
+
 -(void)onButtonClicked:(UIButton*)button{
     NSInteger index = 0;
     if(button == _firstButton)
@@ -33,8 +40,8 @@
     self = [super initWithFrame:frame];
     if(self)
     {
-        _firstButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 56, 29)] autorelease];
-        _secondButton = [[[UIButton alloc] initWithFrame:CGRectMake(56, 0, 56, 29)] autorelease];
+        _firstButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 56, 29)];
+        _secondButton = [[UIButton alloc] initWithFrame:CGRectMake(56, 0, 56, 29)];
         [_firstButton setTitle:leftText forState:UIControlStateNormal];
         [_firstButton setTitle:leftText forState:UIControlStateSelected];
         [_firstButton.titleLabel setFont:[UIFont systemFontOfSize:16]];
