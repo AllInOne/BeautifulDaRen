@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BorderImageView.h"
 #import "ButtonPressDelegate.h"
 
 @interface FindFriendViewCell : UITableViewCell
 
 @property (retain, nonatomic) IBOutlet UILabel * nameLabel;
-@property (retain, nonatomic) IBOutlet UIImageView * avatarImageView;
+@property (retain, nonatomic) IBOutlet BorderImageView * avatarImageView;
 @property (retain, nonatomic) IBOutlet UILabel * levelLabel;
 @property (retain, nonatomic) IBOutlet UIButton * followButton;
 
