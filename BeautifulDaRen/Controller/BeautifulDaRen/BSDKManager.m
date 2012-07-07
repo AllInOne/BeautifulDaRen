@@ -381,7 +381,7 @@ static BSDKManager *sharedInstance;
     [params setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:K_BSDK_PAGESIZE];
     if (userId)
     {
-        [params setObject:userId forKey:K_BSDK_ATTENTIONUSERID];
+        [params setObject:userId forKey:K_BSDK_FANSUSERID];
     }
 
     [self sendRequestWithMethodName:nil

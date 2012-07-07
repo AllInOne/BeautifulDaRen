@@ -67,7 +67,7 @@
 										<string key="NSFrame">{{18, 20}, {20, 20}}</string>
 										<reference key="NSSuperview" ref="46947073"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView" ref="266898373"/>
+										<reference key="NSNextKeyView" ref="453718085"/>
 										<string key="NSReuseIdentifierKey">_NS:567</string>
 										<bool key="IBUIUserInteractionEnabled">NO</bool>
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -227,7 +227,7 @@
 										<reference key="IBUIFontDescription" ref="1030673531"/>
 										<reference key="IBUIFont" ref="398601479"/>
 									</object>
-									<object class="IBUIImageView" id="266898373">
+									<object class="IBUIImageView" id="453718085">
 										<reference key="NSNextResponder" ref="46947073"/>
 										<int key="NSvFlags">292</int>
 										<string key="NSFrame">{{33, 34}, {7, 7}}</string>
@@ -366,7 +366,7 @@
 								<string key="NSFrame">{{259, 10}, {70, 21}}</string>
 								<reference key="NSSuperview" ref="654843917"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="352210949"/>
+								<reference key="NSNextKeyView" ref="597248840"/>
 								<string key="NSReuseIdentifierKey">_NS:328</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -381,6 +381,7 @@
 								<nil key="IBUIHighlightedColor"/>
 								<int key="IBUIBaselineAdjustment">1</int>
 								<float key="IBUIMinimumFontSize">10</float>
+								<int key="IBUITextAlignment">2</int>
 								<object class="IBUIFontDescription" key="IBUIFontDescription">
 									<int key="type">1</int>
 									<double key="pointSize">13</double>
@@ -412,7 +413,7 @@
 								<reference key="IBUIFontDescription" ref="402371718"/>
 								<reference key="IBUIFont" ref="56691479"/>
 							</object>
-							<object class="IBUIImageView" id="352210949">
+							<object class="IBUIImageView" id="597248840">
 								<reference key="NSNextResponder" ref="654843917"/>
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{37, 40}, {12, 12}}</string>
@@ -560,7 +561,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">originalAuthorVMark</string>
 						<reference key="source" ref="101737138"/>
-						<reference key="destination" ref="266898373"/>
+						<reference key="destination" ref="453718085"/>
 					</object>
 					<int key="connectionID">52</int>
 				</object>
@@ -568,7 +569,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">authorVMark</string>
 						<reference key="source" ref="101737138"/>
-						<reference key="destination" ref="352210949"/>
+						<reference key="destination" ref="597248840"/>
 					</object>
 					<int key="connectionID">53</int>
 				</object>
@@ -601,7 +602,7 @@
 							<reference ref="217781835"/>
 							<reference ref="198757470"/>
 							<reference ref="46947073"/>
-							<reference ref="352210949"/>
+							<reference ref="597248840"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -619,7 +620,7 @@
 							<reference ref="801959195"/>
 							<reference ref="355930069"/>
 							<reference ref="926397958"/>
-							<reference ref="266898373"/>
+							<reference ref="453718085"/>
 						</array>
 						<reference key="parent" ref="101737138"/>
 					</object>
@@ -695,12 +696,12 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">50</int>
-						<reference key="object" ref="352210949"/>
+						<reference key="object" ref="597248840"/>
 						<reference key="parent" ref="101737138"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">51</int>
-						<reference key="object" ref="266898373"/>
+						<reference key="object" ref="453718085"/>
 						<reference key="parent" ref="46947073"/>
 					</object>
 				</array>
