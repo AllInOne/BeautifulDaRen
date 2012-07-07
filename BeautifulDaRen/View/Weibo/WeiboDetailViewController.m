@@ -458,8 +458,20 @@
     
     [self.commentButton setTitle:[NSString stringWithFormat:@"    %d", [[self.weiboData objectForKey:K_BSDK_COMMENT_NUM] intValue]] forState:UIControlStateNormal];
     
-    NSInteger yOffset = self.favourateButton.frame.origin.y + CGRectGetHeight(self.favourateButton.frame) + CELL_CONTENT_MARGIN;
+    CGFloat yOffset = self.favourateButton.frame.origin.y + CGRectGetHeight(self.favourateButton.frame) + CELL_CONTENT_MARGIN;
+
+
+    NSString * textContent = [self.weiboData objectForKey:K_BSDK_CONTENT];
+    CGFloat textHeight = [ViewHelper getHeightOfText:textContent ByFontSize:FONT_SIZE contentWidth:CELL_CONTENT_WIDTH];
+    //Content
+    if (textContent) {
+        _weiboContent = [[NSString alloc] initWithString:textContent];
+        self.contentLabel.text = self.weiboContent;
+        self.contentLabel.frame = CGRectMake(self.contentLabel.frame.origin.x, yOffset + CELL_CONTENT_MARGIN_BIG, self.contentLabel.frame.size.width, textHeight);
+    }
     
+    yOffset = CGRectGetMaxY(self.contentLabel.frame) + CELL_CONTENT_MARGIN_BIG;
+    //map
     double longtitude = [[self.weiboData objectForKey:K_BSDK_LONGITUDE] doubleValue];
     double latitude = [[self.weiboData objectForKey:K_BSDK_LATITUDE] doubleValue];
     
@@ -481,16 +493,9 @@
             yOffset = _mapViewController.view.frame.origin.y + MAP_VIEW_HEIGHT * 2;
         }
     }
-    
-    //Content
-    if ([self.weiboData objectForKey:K_BSDK_CONTENT]) {
-        _weiboContent = [[NSString alloc] initWithString:[self.weiboData objectForKey:K_BSDK_CONTENT]];
-        self.contentLabel.text = self.weiboContent;
-        self.contentLabel.frame = CGRectMake(self.contentLabel.frame.origin.x, yOffset + CELL_CONTENT_MARGIN_BIG, self.contentLabel.frame.size.width, [ViewHelper getHeightOfText:self.weiboContent ByFontSize:FONT_SIZE contentWidth:CELL_CONTENT_WIDTH]);
-    }
 
     // Custom initialization
-    [_detailScrollView setContentSize:CGSizeMake(SCREEN_WIDTH, self.contentLabel.frame.origin.y + CGRectGetHeight(self.contentLabel.frame) + 150)];
+    [_detailScrollView setContentSize:CGSizeMake(SCREEN_WIDTH, yOffset + 150)];
     
     NSDictionary * authorInfo = [self.weiboData objectForKey:K_BSDK_USERINFO];
     
