@@ -259,7 +259,9 @@
 
 -(void)setItemDatas:(NSMutableArray *)itemDatas
 {
+    [_itemDatas release];
     _itemDatas = [itemDatas mutableCopy];
+    
     [self loadItemsHeight];
     [_waterFlowView reloadData];
 }

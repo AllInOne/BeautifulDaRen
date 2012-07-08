@@ -105,7 +105,6 @@
 {
     WaterFlowCell *cell = nil;
     if (!identifier || identifier == 0 ) return nil;
-    NSLog(@"dequeueReusableCellWithIdentifier  index  %d", index);
     NSMutableDictionary * cellsWithIndentifier = [self.reusableCells objectForKey:identifier];
     if (cellsWithIndentifier &&  cellsWithIndentifier.count > 0)
     {
