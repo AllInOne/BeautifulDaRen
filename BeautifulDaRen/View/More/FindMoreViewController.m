@@ -154,12 +154,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.searchUserResults = [[NSMutableArray alloc] init];
-    self.searchWeiboResults = [[NSMutableArray alloc] init];
-    self.weiboHeights = [[NSMutableArray alloc] init];
-    self.sameCityUserResults = [[NSMutableArray alloc] init];
-    self.interestingUserResults = [[NSMutableArray alloc] init];
-    self.hotUserResults = [[NSMutableArray alloc] init];
+    _searchUserResults = [[NSMutableArray alloc] init];
+    _searchWeiboResults = [[NSMutableArray alloc] init];
+    _weiboHeights = [[NSMutableArray alloc] init];
+    _sameCityUserResults = [[NSMutableArray alloc] init];
+    _interestingUserResults = [[NSMutableArray alloc] init];
+    _hotUserResults = [[NSMutableArray alloc] init];
     self.searchUserPageIndex = 1;
     self.searchWeiboPageIndex = 1;
     self.isSearchModel = NO;
@@ -334,6 +334,7 @@
             cell.friendNameLabel.text = [dict valueForKey:KEY_ACCOUNT_USER_NAME];
             
             [tempBorderView release];
+            [imageView release];
         }
         
         [scrollView setContentSize:CGSizeMake(scrollWidth, 0)];
@@ -394,8 +395,20 @@
     NSDictionary * friendDict = [self.searchUserResults objectAtIndex:[indexPath row]];
     friendCell.nameLabel.text = [friendDict valueForKey:KEY_ACCOUNT_USER_NAME];
     friendCell.levelLabel.text = [NSString stringWithFormat:@"LV%d",[[friendDict valueForKey:KEY_ACCOUNT_LEVEL] intValue]];
+//    friendCell.avatarImageView;
+    UIImageView * imageView = [[UIImageView alloc] init];
+    NSString * url = [friendDict valueForKey:@"pic_65-65"];
+    if ([url length] > 0)
+    {
+        [imageView setImageWithURL:[NSURL URLWithString:url]];
+    }
+    else
+    {
+        imageView.image = [UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:friendDict]];
+    }
     
-    
+    BorderImageView * tempBorderView = [[BorderImageView alloc] initWithFrame:friendCell.avatarImageView.frame andView:imageView];
+    [friendCell.avatarImageView addSubview:tempBorderView];
     if ([[friendDict valueForKey:K_BSDK_RELATIONSHIP] isEqualToString:K_BSDK_RELATIONSHIP_MY_FOLLOW]
         || [[friendDict valueForKey:K_BSDK_RELATIONSHIP] isEqualToString:K_BSDK_RELATIONSHIP_INTER_FOLLOW])
             
@@ -408,6 +421,9 @@
     }
     friendCell.followButton.tag = [indexPath row];
     friendCell.delegate = self;
+
+    [imageView release];
+    [tempBorderView release];
     return cell;
 }
 

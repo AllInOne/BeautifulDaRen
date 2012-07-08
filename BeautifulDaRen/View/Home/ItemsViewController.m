@@ -56,6 +56,7 @@
 
 - (void) loadItemsHeight
 {
+    [_itemsHeight removeAllObjects];
     NSInteger count = [self.itemDatas count];
     for (int i = 0; i < count; i++)
     {
@@ -233,8 +234,6 @@
                     [self.itemDatas addObject:dict];
                 }
             }
-            [_itemsHeight removeAllObjects];
-            
             [self loadItemsHeight];
             [_waterFlowView reloadData];
             self.isSyncSccuessed = YES;
