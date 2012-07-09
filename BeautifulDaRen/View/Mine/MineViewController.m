@@ -439,7 +439,8 @@
                                           andDoneCallback:^(AIO_STATUS status, NSDictionary *data)
         {
             if (K_BSDK_IS_RESPONSE_OK(data)) {
-                [[NSUserDefaults standardUserDefaults] setObject:data forKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
+                NSAssert(data && [data count] > 0, @"data should not be nil");
+               [[NSUserDefaults standardUserDefaults] setObject:data forKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
                 [self.tableView reloadData];
             }
             else

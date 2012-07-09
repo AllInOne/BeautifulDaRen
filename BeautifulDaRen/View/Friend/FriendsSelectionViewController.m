@@ -66,10 +66,6 @@
 
     [[BSDKManager sharedManager] getFollowList:GET_CURRENT_USER_INFO_BY_KEY(K_BSDK_UID) pageSize:500 pageIndex:1 andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
         
-        [activityIndicator stopAnimating];
-        [activityIndicator removeFromSuperview];
-        [activityIndicator release];
-        
         if (K_BSDK_IS_RESPONSE_OK(data)) {
             NSArray * userList = [data objectForKey:K_BSDK_USERLIST];
             NSMutableArray * friendList = [NSMutableArray arrayWithCapacity:[userList count]];
@@ -86,6 +82,9 @@
         {
             [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
         }
+        [activityIndicator stopAnimating];
+        [activityIndicator removeFromSuperview];
+        [activityIndicator release];
     }];
 }
 

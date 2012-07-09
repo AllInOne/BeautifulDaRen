@@ -264,36 +264,43 @@
 
 -(IBAction)onCommentListButtonPressed:(UIButton*)sender
 {
-    ForwardCommentListViewController *commentListViewContoller = 
-    [[ForwardCommentListViewController alloc] initWithNibName:nil bundle:nil];
-    
-    commentListViewContoller.relatedBlogId = [self.weiboData objectForKey:K_BSDK_UID];
-    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: commentListViewContoller];
-    
-    [self.navigationController presentModalViewController:navController animated:YES];
-    
-    [navController release];
-    [commentListViewContoller release];
+    if (self.weiboData) {
+        ForwardCommentListViewController *commentListViewContoller = 
+        [[ForwardCommentListViewController alloc] initWithNibName:nil bundle:nil];
+        
+        commentListViewContoller.relatedBlogId = [self.weiboData objectForKey:K_BSDK_UID];
+        UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: commentListViewContoller];
+        
+        [self.navigationController presentModalViewController:navController animated:YES];
+        
+        [navController release];
+        [commentListViewContoller release];
+    }
 }
 
 -(IBAction)onForwardButtonPressed:(UIButton*)sender
 {
-    [self onForward];
+    if (self.weiboData) {
+        [self onForward];
+    }
 }
 
 -(IBAction)onFavorateListButtonPressed:(UIButton*)sender
 {
-    FriendListViewController * friendListViewController = [[FriendListViewController alloc]
-                                                                                    initWithNibName:@"FriendListViewController"
-                                                                                    bundle:nil
-                                                                                    type:FriendListViewController_TYPE_FAV_ONE_BLOG
-                                                                                    dictionary:self.weiboData];
-    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: friendListViewController];
-    
-    [self.navigationController presentModalViewController:navController animated:YES];
-    
-    [navController release];
-    [friendListViewController release];
+    // Wait until the data is done.
+    if (self.weiboData) {
+        FriendListViewController * friendListViewController = [[FriendListViewController alloc]
+                                                               initWithNibName:@"FriendListViewController"
+                                                               bundle:nil
+                                                               type:FriendListViewController_TYPE_FAV_ONE_BLOG
+                                                               dictionary:self.weiboData];
+        UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: friendListViewController];
+        
+        [self.navigationController presentModalViewController:navController animated:YES];
+        
+        [navController release];
+        [friendListViewController release];
+    }
 }
 
 #pragma mark - View lifecycle
@@ -592,7 +599,7 @@
 
 -(IBAction)onImageButtonPressed:(id)sender
 {
-    if ([self.weiboData objectForKey:K_BSDK_PICTURE_ORIGINAL] && [[self.weiboData objectForKey:K_BSDK_PICTURE_WIDTH] intValue] && [[self.weiboData objectForKey:K_BSDK_PICTURE_HEIGHT] intValue]) {
+    if (self.weiboData && [self.weiboData objectForKey:K_BSDK_PICTURE_ORIGINAL] && [[self.weiboData objectForKey:K_BSDK_PICTURE_WIDTH] intValue] && [[self.weiboData objectForKey:K_BSDK_PICTURE_HEIGHT] intValue]) {
         [FullImageViewController showImageUrl:[self.weiboData objectForKey:K_BSDK_PICTURE_ORIGINAL] size:CGSizeMake([[self.weiboData objectForKey:K_BSDK_PICTURE_WIDTH] intValue], [[self.weiboData objectForKey:K_BSDK_PICTURE_HEIGHT] intValue]) inNavigationController:self.navigationController];
     }
 
@@ -600,51 +607,57 @@
 
 -(IBAction)onBrandButtonPressed:(id)sender
 {
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: TRUE];
-    
-    [[BSDKManager sharedManager] getUserInforByName:[self.weiboData objectForKey:K_BSDK_BRANDSERVICE] andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: FALSE];
+    if (self.weiboData) {
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: TRUE];
         
-        if (K_BSDK_IS_RESPONSE_OK(data)) {
-            FriendDetailViewController * friendDetailViewController = [[FriendDetailViewController alloc] initWithDictionary:[data objectForKey:K_BSDK_USERINFO]];
-            [self.navigationController pushViewController:friendDetailViewController animated:YES];
-            [friendDetailViewController release];
-        }
-        else
-        {
-            [[iToast makeText:NSLocalizedString(@"no_such_user", @"no_such_user")] show];
-        }
-    }];
+        [[BSDKManager sharedManager] getUserInforByName:[self.weiboData objectForKey:K_BSDK_BRANDSERVICE] andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: FALSE];
+            
+            if (K_BSDK_IS_RESPONSE_OK(data)) {
+                FriendDetailViewController * friendDetailViewController = [[FriendDetailViewController alloc] initWithDictionary:[data objectForKey:K_BSDK_USERINFO]];
+                [self.navigationController pushViewController:friendDetailViewController animated:YES];
+                [friendDetailViewController release];
+            }
+            else
+            {
+                [[iToast makeText:NSLocalizedString(@"no_such_user", @"no_such_user")] show];
+            }
+        }];
+    }
 }
 
 -(IBAction)onBusinessButtonPressed:(id)sender
 {
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: TRUE];
-    
-    [[BSDKManager sharedManager] getUserInforByName:[self.weiboData objectForKey:K_BSDK_SHOPMERCHANT] andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+    if (self.weiboData) {
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: TRUE];
         
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: FALSE];
-        
-        if (K_BSDK_IS_RESPONSE_OK(data)) {
-            FriendDetailViewController * friendDetailViewController = [[FriendDetailViewController alloc] initWithDictionary:[data objectForKey:K_BSDK_USERINFO]];
-            [self.navigationController pushViewController:friendDetailViewController animated:YES];
-            [friendDetailViewController release];
-        }
-        else
-        {
-            [[iToast makeText:NSLocalizedString(@"no_such_user", @"no_such_user")] show];
-        }
-    }];
+        [[BSDKManager sharedManager] getUserInforByName:[self.weiboData objectForKey:K_BSDK_SHOPMERCHANT] andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+            
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: FALSE];
+            
+            if (K_BSDK_IS_RESPONSE_OK(data)) {
+                FriendDetailViewController * friendDetailViewController = [[FriendDetailViewController alloc] initWithDictionary:[data objectForKey:K_BSDK_USERINFO]];
+                [self.navigationController pushViewController:friendDetailViewController animated:YES];
+                [friendDetailViewController release];
+            }
+            else
+            {
+                [[iToast makeText:NSLocalizedString(@"no_such_user", @"no_such_user")] show];
+            }
+        }];
+    }
 }
 
 -(IBAction)onUserButtonPressed:(id)sender
 {
-    FriendDetailViewController *userDetailController = [[FriendDetailViewController alloc] initWithDictionary:[self.weiboData objectForKey:K_BSDK_USERINFO]];
-    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: userDetailController];
-    
-    [self.navigationController presentModalViewController:navController animated:YES];
-    
-    [navController release];
-    [userDetailController release];
+    if (self.weiboData) {
+        FriendDetailViewController *userDetailController = [[FriendDetailViewController alloc] initWithDictionary:[self.weiboData objectForKey:K_BSDK_USERINFO]];
+        UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: userDetailController];
+        
+        [self.navigationController presentModalViewController:navController animated:YES];
+        
+        [navController release];
+        [userDetailController release];
+    }
 }
 @end

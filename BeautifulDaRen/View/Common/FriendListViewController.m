@@ -434,7 +434,7 @@
         }
         case FriendListViewController_TYPE_MY_FANS:
         {
-            isShouldFollow = ([relation isEqualToString:K_BSDK_RELATIONSHIP_INTER_FOLLOW]) ? NO : YES;
+            isShouldFollow = ([relation isEqualToString:K_BSDK_RELATIONSHIP_MY_FOLLOW] ||[relation isEqualToString:K_BSDK_RELATIONSHIP_INTER_FOLLOW]) ? NO : YES;
             break;
         }
         case FriendListViewController_TYPE_MY_BLACKLIST:
@@ -446,7 +446,7 @@
     }
     
     NSInteger userId = [[dict valueForKey:K_BSDK_UID] intValue];
-    
+    NSLog(@"%@, %d", relation, isShouldFollow);
     [button setEnabled:NO];
     
     if (NO == isShouldFollow)

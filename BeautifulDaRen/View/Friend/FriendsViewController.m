@@ -62,13 +62,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self updateViewController];
 
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-
-    [self updateViewController];
 }
 
 - (void)viewDidUnload {
@@ -155,8 +154,7 @@
     }
     
     cell.name.text = [contacts objectAtIndex:[indexPath row]];
-    
-    
+
     return cell;
 }
 

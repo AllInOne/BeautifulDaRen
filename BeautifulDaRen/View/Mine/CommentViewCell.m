@@ -80,6 +80,8 @@
                                         CGRectGetMinY(self.originalPriceButton.frame), 
                                         [ViewHelper getWidthOfText:title ByFontSize:self.originalPriceButton.titleLabel.font.pointSize]+10,
                                         CGRectGetHeight(self.originalPriceButton.frame));
+
+    self.originalPriceButton.center = CGPointMake(self.originalImage.center.x, CGRectGetMinY(self.originalPriceButton.frame));
     self.timestamp.text = [ViewHelper intervalSinceNow:[data objectForKey:K_BSDK_CREATETIME]];
     
 //    self.originalAuthorAvatar
