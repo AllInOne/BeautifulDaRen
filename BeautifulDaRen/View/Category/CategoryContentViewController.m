@@ -20,8 +20,6 @@
 
 @property (retain, nonatomic) NSMutableArray * contentItems;
 
--(void)getCategoryWeiboList;
-
 @end
 
 @implementation CategoryContentViewController
@@ -141,19 +139,5 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
--(void)getCategoryWeiboList
-{
-    [[BSDKManager sharedManager] getWeiboClassesWithDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-        NSArray * categoryList = [data objectForKey:K_BSDK_CLASSLIST];
-        if (categoryList) {
-            for (NSDictionary * data in categoryList) {
-                [[BSDKManager sharedManager] getWeiboListByClassId:[data objectForKey:K_BSDK_UID] pageSize:10 pageIndex:1 andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-                    NSLog(@"retrieved weibo classes :%@", data);
-                }];
-            }
-        }
-    }];
 }
 @end

@@ -94,6 +94,9 @@
 #define K_BSDK_LATITUDE @"PosX"
 #define K_BSDK_LONGITUDE @"PosY"
 
+#define K_BSDK_POINTS @"Points"
+#define K_BSDK_LEVELS @"Levels"
+
 #define K_BSDK_ISFAV @"IsFav"
 
 #define K_BSDK_ISVERIFY @"IsVerify"

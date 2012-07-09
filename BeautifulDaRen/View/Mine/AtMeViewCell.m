@@ -61,9 +61,9 @@
     
     [itemImageView setImageWithURL:[NSURL URLWithString:[data objectForKey:K_BSDK_PICTURE_102]]];
     
-    NSString * isVerify = [data objectForKey:K_BSDK_ISVERIFY];
+    NSString * isVerify = [userDict objectForKey:K_BSDK_ISVERIFY];
     if (isVerify && [isVerify isEqual:@"1"]) {
-        [self.vMarkImageView setImage:[UIImage imageNamed:@"v_mark_big"]];
+        [self.vMarkImageView setImage:[UIImage imageNamed:@"v_mark_small"]];
         [self.vMarkImageView setHidden:NO];
     }
     else

@@ -15,6 +15,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import "BorderImageView.h"
 #import "BSDKManager.h"
+#import "BSDKDefines.h"
+#import "iToast.h"
 
 #define COLUMNS_PER_ROW 4
 #define GRID_X_OFFSET 3
@@ -222,21 +224,28 @@
             [activityIndicator removeFromSuperview];
             [activityIndicator release];
             
-            NSArray * array = [data valueForKey:@"BlogList"];
-            if ([array count] == 0)
-            {
-                self.isFetchMore = NO;
-            }
-            //TODO [felix] should to remove
-            for (NSDictionary * dict in array) {
-                if ([[dict valueForKey:@"Picture_width"] floatValue] > 0)
+            if (K_BSDK_IS_RESPONSE_OK(data)) {
+                NSArray * array = [data valueForKey:@"BlogList"];
+                if ([array count] == 0)
                 {
-                    [self.itemDatas addObject:dict];
+                    self.isFetchMore = NO;
                 }
+                //TODO [felix] should to remove
+                for (NSDictionary * dict in array) {
+                    if ([[dict valueForKey:@"Picture_width"] floatValue] > 0)
+                    {
+                        [self.itemDatas addObject:dict];
+                    }
+                }
+                [self loadItemsHeight];
+                [_waterFlowView reloadData];
+                self.isSyncSccuessed = YES;
             }
-            [self loadItemsHeight];
-            [_waterFlowView reloadData];
-            self.isSyncSccuessed = YES;
+            else
+            {
+                [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
+            }
+
         };
         if ([[BSDKManager sharedManager] isLogin])
         {

@@ -288,19 +288,25 @@
         [activityIndicator removeFromSuperview];
         [activityIndicator release];
         
-        NSArray * array = [data valueForKey:@"BlogList"];
-        //TODO [felix] should to remove
-        NSMutableArray * mutableArray = [[NSMutableArray alloc] init];
-        for (NSDictionary * dict in array) {
-            if ([[dict valueForKey:@"Picture_width"] floatValue] > 0)
-            {
-                [mutableArray addObject:dict];
+        if (K_BSDK_IS_RESPONSE_OK(data)) {
+            NSArray * array = [data valueForKey:@"BlogList"];
+            //TODO [felix] should to remove
+            NSMutableArray * mutableArray = [[NSMutableArray alloc] init];
+            for (NSDictionary * dict in array) {
+                if ([[dict valueForKey:@"Picture_width"] floatValue] > 0)
+                {
+                    [mutableArray addObject:dict];
+                }
             }
+            
+            _itemsViewController.itemDatas = mutableArray;
+            
+            [mutableArray release];
         }
-
-        _itemsViewController.itemDatas = mutableArray;
-
-        [mutableArray release];
+        else
+        {
+            [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
+        }
     };
     
     if ([[BSDKManager sharedManager] isLogin])

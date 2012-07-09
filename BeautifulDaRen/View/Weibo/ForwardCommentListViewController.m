@@ -18,6 +18,7 @@
 #import "WeiboForwardCommentViewController.h"
 #import "FriendDetailViewController.h"
 #import "UIImageView+WebCache.h"
+#import "iToast.h"
 
 #define FONT_SIZE           (14.0f)
 #define CELL_CONTENT_WIDTH  (240.0f)
@@ -97,7 +98,6 @@
     __block NSString * errorMsg = nil;
     
     processDoneWithDictBlock doneBlock = ^(AIO_STATUS status, NSDictionary * data){
-        NSLog(@"Send done: %d, %@", status, data);
         
         doneCount++;
         if (doneCount == doneCountExpected) {
@@ -163,23 +163,30 @@
     [self.footViewButton setTitle:NSLocalizedString(@"more_comment", @"more_comment") forState:UIControlStateNormal];
     
     [[BSDKManager sharedManager] getCommentListOfWeibo:self.relatedBlogId pageSize:COMMENT_PAGE_SIZE pageIndex:self.currentPageIndex andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-        NSArray * commentList = [data objectForKey:K_BSDK_COMMENTLIST];
-        [self.forwardOrCommentList addObjectsFromArray:commentList];
-        [self.forwardOrCommentListTableView reloadData];
-        self.isRefreshing = NO;
-        [self.footViewActivityIndicator stopAnimating];
-        [self.footViewActivityIndicator setHidden:YES];
-        
-        if ([self.forwardOrCommentList count] == 0) {
-            [self.footViewButton setTitle:NSLocalizedString(@"no_comment", @"no_comment") forState:UIControlStateNormal];
+        if (K_BSDK_IS_RESPONSE_OK(data)) {
+            NSArray * commentList = [data objectForKey:K_BSDK_COMMENTLIST];
+            [self.forwardOrCommentList addObjectsFromArray:commentList];
+            [self.forwardOrCommentListTableView reloadData];
+            self.isRefreshing = NO;
+            [self.footViewActivityIndicator stopAnimating];
+            [self.footViewActivityIndicator setHidden:YES];
+            
+            if ([self.forwardOrCommentList count] == 0) {
+                [self.footViewButton setTitle:NSLocalizedString(@"no_comment", @"no_comment") forState:UIControlStateNormal];
+            }
+            else if ([commentList count] < COMMENT_PAGE_SIZE)
+            {
+                self.isAllRetrieved = YES;
+                [self.footView setHidden:YES];
+            }
+            
+            self.currentPageIndex++;
         }
-        else if ([commentList count] < COMMENT_PAGE_SIZE)
+        else
         {
-            self.isAllRetrieved = YES;
-            [self.footView setHidden:YES];
+            [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
         }
-        
-        self.currentPageIndex++;
+
     }];    
 }
 #pragma mark - View lifecycle
