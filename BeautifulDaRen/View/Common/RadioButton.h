@@ -15,8 +15,8 @@
 @interface RadioButton : UIView
 @property (retain, nonatomic) IBOutlet UIButton * button;
 @property (retain, nonatomic) IBOutlet UILabel * textLabel;
-@property(nonatomic,retain)NSString *groupId;
-@property(nonatomic,assign)NSUInteger index;
+@property (retain, nonatomic) NSString *groupId;
+@property (assign, nonatomic) NSUInteger index;
 
 -(id)initWithGroupId:(NSString*)groupId text:(NSString*)text index:(NSUInteger)index;
 +(void)addObserverForGroupId:(NSString*)groupId observer:(id)observer;

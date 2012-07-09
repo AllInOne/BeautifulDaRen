@@ -587,6 +587,7 @@
                                                            [self.searchUserResults addObject:mutableDict];
                                                            [mutableDict release];
                                                        }
+                                                       [tempArray release];
                                                    }
                                                    else {
                                                        [[iToast makeText:[NSString stringWithFormat:@"search status error: %d", status]] show];
