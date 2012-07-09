@@ -115,7 +115,8 @@
         {
             cell = [[[NSBundle mainBundle] loadNibNamed:buttonViewCellIdentifier owner:self options:nil] objectAtIndex:4];
         }
-        ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"common_button"];
+        ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"login_button"];
+        ((ButtonViewCell*)cell).buttonLeftIconPressed = [UIImage imageNamed:@"login_button_pressed"];
         ((ButtonViewCell*)cell).leftLabel.text = NSLocalizedString(@"enter", @"enter");
         
         cell.backgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
