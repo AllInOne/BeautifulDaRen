@@ -42,6 +42,8 @@
 @property (retain, nonatomic) NSMutableArray *interestingUserResults;
 @property (retain, nonatomic) NSMutableArray *hotUserResults;
 @property (retain, nonatomic) NSMutableArray * weiboHeights;
+@property (retain, nonatomic) UITapGestureRecognizer * searchWeiboGestureRecognizer;
+@property (retain, nonatomic) UITapGestureRecognizer * searchUserGestureRecognizer;
 
 @property (assign, nonatomic) BOOL isSearchModel;
 @property (assign, nonatomic) BOOL isFindWeibo;
@@ -79,6 +81,8 @@
 @synthesize isSearchMoreUser = _isSearchMoreUser;
 @synthesize isSearchMoreWeibo = _isSearchMoreWeibo;
 @synthesize isSearchModel = _isSearchModel;
+@synthesize searchWeiboGestureRecognizer = _searchWeiboGestureRecognizer;
+@synthesize searchUserGestureRecognizer = _searchUserGestureRecognizer;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -134,6 +138,10 @@
     [_sameCityUserResults release];
     [_interestingUserResults release];
     [_hotUserResults release];
+    [_searchUserGestureRecognizer release];
+    [_searchWeiboGestureRecognizer release];
+    [self.searchUserView removeGestureRecognizer:_searchUserGestureRecognizer];
+    [self.searchWeiboView removeGestureRecognizer:_searchWeiboGestureRecognizer];
     [super dealloc];
 }
 - (void)viewDidUnload
@@ -152,6 +160,8 @@
     self.sameCityUserResults = nil;
     self.interestingUserResults = nil;
     self.hotUserResults = nil;
+    self.searchWeiboGestureRecognizer = nil;
+    self.searchUserGestureRecognizer = nil;
 }
 
 - (void)viewDidLoad
@@ -185,6 +195,15 @@
     _searchWeiboView = [[WaterFlowView alloc] initWithFrame:CGRectMake(0, CONTENT_VIEW_HEIGHT_OFFSET + 44.0f, 320,270)];
     self.searchWeiboView.flowdelegate = self;
     self.searchWeiboView.flowdatasource = self;
+    
+    _searchWeiboGestureRecognizer = [[UITapGestureRecognizer alloc] 
+                          initWithTarget:self
+                          action:@selector(dismissKeyboard)];
+    _searchUserGestureRecognizer = [[UITapGestureRecognizer alloc] 
+                                     initWithTarget:self
+                                     action:@selector(dismissKeyboard)];
+    [_searchUserView addGestureRecognizer:_searchUserGestureRecognizer];
+    [_searchWeiboView addGestureRecognizer:_searchWeiboGestureRecognizer];
     
     [self.searchUserView setHidden:YES];
     [self.searchWeiboView setHidden:YES];
@@ -793,5 +812,8 @@
         [self.searchUserView setHidden:YES];
         [self.searchWeiboView setHidden:YES];
     }
+}
+-(void)dismissKeyboard {
+    [self.view endEditing:YES];
 }
 @end
