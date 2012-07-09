@@ -42,6 +42,9 @@
 @property (retain, nonatomic) NSMutableArray *interestingUserResults;
 @property (retain, nonatomic) NSMutableArray *hotUserResults;
 @property (retain, nonatomic) NSMutableArray * weiboHeights;
+@property (retain, nonatomic) NSMutableArray* observers;
+@property (retain, nonatomic) UITapGestureRecognizer * searchWeiboGestureRecognizer;
+@property (retain, nonatomic) UITapGestureRecognizer * searchUserGestureRecognizer;
 
 @property (assign, nonatomic) BOOL isSearchModel;
 @property (assign, nonatomic) BOOL isFindWeibo;
@@ -74,12 +77,15 @@
 @synthesize searchWeiboView = _searchWeiboView;
 @synthesize searchWeiboResults = _searchWeiboResults;
 @synthesize weiboHeights = _weiboHeights;
+@synthesize observers = _observers;
 @synthesize sameCityUserResults = _sameCityUserResults;
 @synthesize interestingUserResults =_interestingUserResults;
 @synthesize hotUserResults = _hotUserResults;
 @synthesize isSearchMoreUser = _isSearchMoreUser;
 @synthesize isSearchMoreWeibo = _isSearchMoreWeibo;
 @synthesize isSearchModel = _isSearchModel;
+@synthesize searchWeiboGestureRecognizer = _searchWeiboGestureRecognizer;
+@synthesize searchUserGestureRecognizer = _searchUserGestureRecognizer;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -144,6 +150,13 @@
     [_sameCityUserResults release];
     [_interestingUserResults release];
     [_hotUserResults release];
+    [_searchUserGestureRecognizer release];
+    [_searchWeiboGestureRecognizer release];
+    for (id observer in self.observers) {
+        [[NSNotificationCenter defaultCenter] removeObserver:observer];
+    }
+    [self.observers removeAllObjects];
+    [_observers release];
     [super dealloc];
 }
 - (void)viewDidUnload
@@ -162,6 +175,9 @@
     self.sameCityUserResults = nil;
     self.interestingUserResults = nil;
     self.hotUserResults = nil;
+    self.searchWeiboGestureRecognizer = nil;
+    self.searchUserGestureRecognizer = nil;
+    self.observers = nil;
 }
 
 - (void)viewDidLoad
@@ -197,6 +213,32 @@
     self.searchWeiboView.flowdelegate = self;
     self.searchWeiboView.flowdatasource = self;
     
+    _searchWeiboGestureRecognizer = [[UITapGestureRecognizer alloc] 
+                          initWithTarget:self
+                          action:@selector(dismissKeyboard)];
+    _searchUserGestureRecognizer = [[UITapGestureRecognizer alloc] 
+                                     initWithTarget:self
+                                     action:@selector(dismissKeyboard)];
+    
+    _observers = [[NSMutableArray alloc] initWithCapacity:2];
+    id observer = [[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardDidShowNotification
+                                                                    object:nil
+                                                                     queue:nil
+                                                                usingBlock:^(NSNotification * notification){
+                                                                    [_searchUserView addGestureRecognizer:_searchUserGestureRecognizer];
+                                                                    [_searchWeiboView addGestureRecognizer:_searchWeiboGestureRecognizer];
+                                                                }];
+    [self.observers addObject:observer];
+    
+    observer = [[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardWillHideNotification
+                                                                 object:nil
+                                                                  queue:nil
+                                                             usingBlock:^(NSNotification * notification){
+                                                                 [_searchUserView removeGestureRecognizer:_searchUserGestureRecognizer];
+                                                                 [_searchWeiboView removeGestureRecognizer:_searchWeiboGestureRecognizer];
+                                                             }];
+    [self.observers addObject:observer];
+    
     [self.searchUserView setHidden:YES];
     [self.searchWeiboView setHidden:YES];
     _searchBar.scopeButtonTitles = [NSArray arrayWithObjects:
@@ -206,6 +248,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(waterFlowCellSelected:)
                                                  name:@"borderImageViewSelected"
@@ -229,6 +272,7 @@
 
 -(void)viewWillDisappear:(BOOL)animated
 {
+    [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
