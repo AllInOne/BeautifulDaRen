@@ -347,7 +347,7 @@
         
         NSMutableArray * resultArray = nil;
 
-        resultArray = [data objectForKey:@"UserList"];
+        resultArray = [data objectForKey:K_BSDK_USERLIST];
         NSInteger typeOffset = 0;
         if ([type isEqualToString:K_BSDK_USERTYPE_SAME_CITY])
         {
@@ -376,7 +376,7 @@
             [scrollView addSubview:cell];
 
             UIImageView * imageView = [[UIImageView alloc] init];
-            NSString * url = [dict valueForKey:@"pic_65-65"];
+            NSString * url = [dict valueForKey:K_BSDK_PICTURE_65];
             if ([url length] > 0)
             {
                 [imageView setImageWithURL:[NSURL URLWithString:url]];
@@ -453,9 +453,8 @@
     NSDictionary * friendDict = [self.searchUserResults objectAtIndex:[indexPath row]];
     friendCell.nameLabel.text = [friendDict valueForKey:KEY_ACCOUNT_USER_NAME];
     friendCell.levelLabel.text = [NSString stringWithFormat:@"LV%d",[[friendDict valueForKey:KEY_ACCOUNT_LEVEL] intValue]];
-//    friendCell.avatarImageView;
     UIImageView * imageView = [[UIImageView alloc] init];
-    NSString * url = [friendDict valueForKey:@"pic_65-65"];
+    NSString * url = [friendDict valueForKey:K_BSDK_PICTURE_65];
     if ([url length] > 0)
     {
         [imageView setImageWithURL:[NSURL URLWithString:url]];
@@ -465,8 +464,21 @@
         imageView.image = [UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:friendDict]];
     }
     
-    BorderImageView * tempBorderView = [[BorderImageView alloc] initWithFrame:friendCell.avatarImageView.frame andView:imageView];
-    [friendCell.avatarImageView addSubview:tempBorderView];
+    BorderImageView * friendAvatarImageView = [[BorderImageView alloc] initWithFrame:friendCell.avatarImageView.frame andView:imageView];
+    
+    
+    if([[friendDict valueForKey:K_BSDK_ISVERIFY] isEqualToString:K_BSDK_ISVERIFY_YES])
+    {
+        UIImageView * verifyImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"v_mark_big"]];
+        verifyImageView.frame = CGRectMake(friendAvatarImageView.frame.size.width - verifyImageView.frame.size.width,
+                                           friendAvatarImageView.frame.size.height - verifyImageView.frame.size.height,
+                                           verifyImageView.frame.size.width,
+                                           verifyImageView.frame.size.height);
+        [friendAvatarImageView addSubview:verifyImageView];
+        [verifyImageView release];
+    }
+    [friendCell.avatarImageView addSubview:friendAvatarImageView];
+    
     if ([[friendDict valueForKey:K_BSDK_RELATIONSHIP] isEqualToString:K_BSDK_RELATIONSHIP_MY_FOLLOW]
         || [[friendDict valueForKey:K_BSDK_RELATIONSHIP] isEqualToString:K_BSDK_RELATIONSHIP_INTER_FOLLOW])
             
@@ -481,7 +493,7 @@
     friendCell.delegate = self;
 
     [imageView release];
-    [tempBorderView release];
+    [friendAvatarImageView release];
     return cell;
 }
 
