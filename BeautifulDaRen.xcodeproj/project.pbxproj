@@ -98,8 +98,6 @@
 		CE029ACB153E682100886227 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CE029ACA153E682100886227 /* main.m */; };
 		CE029ACF153E682100886227 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE029ACE153E682100886227 /* AppDelegate.m */; };
 		CE029B17153E68FA00886227 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = CE029AFC153E68FA00886227 /* .gitignore */; };
-		CE029B18153E68FA00886227 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = CE029AFD153E68FA00886227 /* LICENSE */; };
-		CE029B19153E68FA00886227 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = CE029AFE153E68FA00886227 /* README.md */; };
 		CE029B1A153E68FA00886227 /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = CE029B00153E68FA00886227 /* SDImageCache.m */; };
 		CE029B1B153E68FA00886227 /* SDWebImageDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = CE029B07153E68FA00886227 /* SDWebImageDecoder.m */; };
 		CE029B1C153E68FA00886227 /* SDWebImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = CE029B09153E68FA00886227 /* SDWebImageDownloader.m */; };
@@ -240,6 +238,8 @@
 		CE50FA4515A1AFBB00E2634A /* toolbar_cancel_fav_focus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE50FA3E15A1AFBB00E2634A /* toolbar_cancel_fav_focus@2x.png */; };
 		CE50FA4615A1AFBB00E2634A /* toolbar_cancel_fav@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE50FA3F15A1AFBB00E2634A /* toolbar_cancel_fav@2x.png */; };
 		CE51516315786A8300F96D1B /* LocationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CE51516215786A8300F96D1B /* LocationHelper.m */; };
+		CE51AE1C15AB2956007A58F3 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = CE51AE1B15AB2956007A58F3 /* MKAnnotationView+WebCache.m */; };
+		CE51AE1E15AB2980007A58F3 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE51AE1D15AB2980007A58F3 /* ImageIO.framework */; };
 		CE5B73C715749B69009C9669 /* hot_clothes_sample1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE5B73AF15749B69009C9669 /* hot_clothes_sample1@2x.png */; };
 		CE5B73C815749B69009C9669 /* hot_clothes_sample2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE5B73B015749B69009C9669 /* hot_clothes_sample2@2x.png */; };
 		CE5B73C915749B69009C9669 /* hot_clothes_sample3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE5B73B115749B69009C9669 /* hot_clothes_sample3@2x.png */; };
@@ -590,13 +590,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		CE029B22153E68FA00886227 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CE029B02153E68FA00886227 /* SDWebImage.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 53922D6F148C55820056699D;
-			remoteInfo = SDWebImage;
-		};
 		CE029B88153E690300886227 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CE029B62153E690300886227 /* SinaWeiBoSDK.xcodeproj */;
@@ -757,12 +750,9 @@
 		CE029ACD153E682100886227 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CE029ACE153E682100886227 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		CE029AFC153E68FA00886227 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		CE029AFD153E68FA00886227 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		CE029AFE153E68FA00886227 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		CE029AFF153E68FA00886227 /* SDImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDImageCache.h; sourceTree = "<group>"; };
 		CE029B00153E68FA00886227 /* SDImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDImageCache.m; sourceTree = "<group>"; };
 		CE029B01153E68FA00886227 /* SDImageCacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDImageCacheDelegate.h; sourceTree = "<group>"; };
-		CE029B02153E68FA00886227 /* SDWebImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = SDWebImage.xcodeproj; sourceTree = "<group>"; };
 		CE029B05153E68FA00886227 /* SDWebImageCompat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImageCompat.h; sourceTree = "<group>"; };
 		CE029B06153E68FA00886227 /* SDWebImageDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImageDecoder.h; sourceTree = "<group>"; };
 		CE029B07153E68FA00886227 /* SDWebImageDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWebImageDecoder.m; sourceTree = "<group>"; };
@@ -954,6 +944,9 @@
 		CE50FA3F15A1AFBB00E2634A /* toolbar_cancel_fav@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toolbar_cancel_fav@2x.png"; sourceTree = "<group>"; };
 		CE51516115786A8300F96D1B /* LocationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationHelper.h; sourceTree = "<group>"; };
 		CE51516215786A8300F96D1B /* LocationHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationHelper.m; sourceTree = "<group>"; };
+		CE51AE1A15AB2956007A58F3 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
+		CE51AE1B15AB2956007A58F3 /* MKAnnotationView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKAnnotationView+WebCache.m"; sourceTree = "<group>"; };
+		CE51AE1D15AB2980007A58F3 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		CE5B73AF15749B69009C9669 /* hot_clothes_sample1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hot_clothes_sample1@2x.png"; sourceTree = "<group>"; };
 		CE5B73B015749B69009C9669 /* hot_clothes_sample2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hot_clothes_sample2@2x.png"; sourceTree = "<group>"; };
 		CE5B73B115749B69009C9669 /* hot_clothes_sample3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hot_clothes_sample3@2x.png"; sourceTree = "<group>"; };
@@ -1338,6 +1331,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE51AE1E15AB2980007A58F3 /* ImageIO.framework in Frameworks */,
 				CEF3DFAF1581A14200D63425 /* CoreLocation.framework in Frameworks */,
 				CEE21595157F149C00E4F167 /* AVFoundation.framework in Frameworks */,
 				C2F68D0A1573415D006ED8AE /* CoreText.framework in Frameworks */,
@@ -1481,6 +1475,7 @@
 		CE029AAF153E682100886227 = {
 			isa = PBXGroup;
 			children = (
+				CE51AE1D15AB2980007A58F3 /* ImageIO.framework */,
 				CE029AC4153E682100886227 /* BeautifulDaRen */,
 				CE029ABD153E682100886227 /* Frameworks */,
 				CE029ABB153E682100886227 /* Products */,
@@ -1600,13 +1595,12 @@
 		CE029AFB153E68FA00886227 /* SDWebImage */ = {
 			isa = PBXGroup;
 			children = (
+				CE51AE1A15AB2956007A58F3 /* MKAnnotationView+WebCache.h */,
+				CE51AE1B15AB2956007A58F3 /* MKAnnotationView+WebCache.m */,
 				CE029AFC153E68FA00886227 /* .gitignore */,
-				CE029AFD153E68FA00886227 /* LICENSE */,
-				CE029AFE153E68FA00886227 /* README.md */,
 				CE029AFF153E68FA00886227 /* SDImageCache.h */,
 				CE029B00153E68FA00886227 /* SDImageCache.m */,
 				CE029B01153E68FA00886227 /* SDImageCacheDelegate.h */,
-				CE029B02153E68FA00886227 /* SDWebImage.xcodeproj */,
 				CE029B05153E68FA00886227 /* SDWebImageCompat.h */,
 				CE029B06153E68FA00886227 /* SDWebImageDecoder.h */,
 				CE029B07153E68FA00886227 /* SDWebImageDecoder.m */,
@@ -1624,14 +1618,6 @@
 				CE029B13153E68FA00886227 /* UIImageView+WebCache.m */,
 			);
 			path = SDWebImage;
-			sourceTree = "<group>";
-		};
-		CE029B03153E68FA00886227 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				CE029B23153E68FA00886227 /* libSDWebImage.a */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		CE029B24153E690300886227 /* SinaWeiBoSDK */ = {
@@ -2572,10 +2558,6 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = CE029B03153E68FA00886227 /* Products */;
-					ProjectRef = CE029B02153E68FA00886227 /* SDWebImage.xcodeproj */;
-				},
-				{
 					ProductGroup = CE029B63153E690300886227 /* Products */;
 					ProjectRef = CE029B62153E690300886227 /* SinaWeiBoSDK.xcodeproj */;
 				},
@@ -2592,13 +2574,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		CE029B23153E68FA00886227 /* libSDWebImage.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libSDWebImage.a;
-			remoteRef = CE029B22153E68FA00886227 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		CE029B89153E690300886227 /* libSinaWeiBoSDK.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -2622,8 +2597,6 @@
 			files = (
 				CE74544C153F1D0C00CB751A /* InfoPlist.strings in Resources */,
 				CE029B17153E68FA00886227 /* .gitignore in Resources */,
-				CE029B18153E68FA00886227 /* LICENSE in Resources */,
-				CE029B19153E68FA00886227 /* README.md in Resources */,
 				CE029B69153E690300886227 /* Localizable.strings in Resources */,
 				CE029B6A153E690300886227 /* bg.png in Resources */,
 				CE029B6B153E690300886227 /* bg@2x.png in Resources */,
@@ -3199,6 +3172,7 @@
 				CE948BFA15995B620078814C /* CommentViewCell.m in Sources */,
 				CE5DD209159FE040001A7344 /* CategorySelectViewController.m in Sources */,
 				CE5DD214159FF8C2001A7344 /* CategoryItemViewController.m in Sources */,
+				CE51AE1C15AB2956007A58F3 /* MKAnnotationView+WebCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
