@@ -153,9 +153,9 @@
     return 3;
 }
 
-- (NSInteger)flowView:(WaterFlowView *)flowView numberOfRowsInColumn:(NSInteger)column
+- (NSInteger)numberOfDataInFlowView:(WaterFlowView *)flowView
 {
-    return [self.itemDatas count] / 3;
+    return [self.itemDatas count];
 }
 
 - (WaterFlowCell *)flowView:(WaterFlowView *)flowView cellForRowAtIndex:(NSInteger)index

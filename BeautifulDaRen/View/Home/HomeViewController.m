@@ -14,7 +14,6 @@
 #import "BSDKManager.h"
 #import "LoginViewController.h"
 #import "RegisterViewController.h"
-#import "ForgetPasswordViewController.h"
 #import "iToast.h"
 
 @interface HomeViewController()
@@ -103,10 +102,12 @@
         __block NSString * userPwd = [[NSUserDefaults standardUserDefaults] objectForKey:USERDEFAULT_AUTO_LOGIN_ACCOUNT_PASSWORD];
         if (userName && userPwd)
         {
+            [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_SHOWWAITOVERLAY object:self];
             [[BSDKManager sharedManager] loginWithUsername:userName
                                                   password:userPwd
                                            andDoneCallback:^(AIO_STATUS status, NSDictionary *data)
              {
+                 [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_HIDEWAITOVERLAY object:self];
                  if(AIO_STATUS_SUCCESS == status && K_BSDK_IS_RESPONSE_OK(data))
                  {
                      NSDictionary * dict = [data objectForKey:K_BSDK_USERINFO];

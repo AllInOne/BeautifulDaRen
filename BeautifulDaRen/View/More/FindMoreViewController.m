@@ -42,6 +42,9 @@
 @property (retain, nonatomic) NSMutableArray *interestingUserResults;
 @property (retain, nonatomic) NSMutableArray *hotUserResults;
 @property (retain, nonatomic) NSMutableArray * weiboHeights;
+@property (retain, nonatomic) NSMutableArray* observers;
+@property (retain, nonatomic) UITapGestureRecognizer * searchWeiboGestureRecognizer;
+@property (retain, nonatomic) UITapGestureRecognizer * searchUserGestureRecognizer;
 
 @property (assign, nonatomic) BOOL isSearchModel;
 @property (assign, nonatomic) BOOL isFindWeibo;
@@ -49,6 +52,7 @@
 @property (assign, nonatomic) BOOL isSearchMoreUser;
 @property (assign, nonatomic) BOOL isSearchMoreWeibo;
 
+- (void) refreshLeftNavigationButton;
 - (void) refreshHotUser:(NSString*)type inScrollView:(UIScrollView*)scrollView;
 - (void) doSearch;
 - (void) loadWeiboHeights;
@@ -73,12 +77,15 @@
 @synthesize searchWeiboView = _searchWeiboView;
 @synthesize searchWeiboResults = _searchWeiboResults;
 @synthesize weiboHeights = _weiboHeights;
+@synthesize observers = _observers;
 @synthesize sameCityUserResults = _sameCityUserResults;
 @synthesize interestingUserResults =_interestingUserResults;
 @synthesize hotUserResults = _hotUserResults;
 @synthesize isSearchMoreUser = _isSearchMoreUser;
 @synthesize isSearchMoreWeibo = _isSearchMoreWeibo;
 @synthesize isSearchModel = _isSearchModel;
+@synthesize searchWeiboGestureRecognizer = _searchWeiboGestureRecognizer;
+@synthesize searchUserGestureRecognizer = _searchUserGestureRecognizer;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -108,6 +115,15 @@
         [self refreshView];
     }
 }
+
+-(void)onBackButtonClicked
+{
+    if (self.isSearchModel)
+    {
+        [self searchBarCancelButtonClicked:self.searchBar];
+    }
+}
+
 #pragma mark - View lifecycle
 
 -(void)refreshView
@@ -134,6 +150,13 @@
     [_sameCityUserResults release];
     [_interestingUserResults release];
     [_hotUserResults release];
+    [_searchUserGestureRecognizer release];
+    [_searchWeiboGestureRecognizer release];
+    for (id observer in self.observers) {
+        [[NSNotificationCenter defaultCenter] removeObserver:observer];
+    }
+    [self.observers removeAllObjects];
+    [_observers release];
     [super dealloc];
 }
 - (void)viewDidUnload
@@ -152,6 +175,9 @@
     self.sameCityUserResults = nil;
     self.interestingUserResults = nil;
     self.hotUserResults = nil;
+    self.searchWeiboGestureRecognizer = nil;
+    self.searchUserGestureRecognizer = nil;
+    self.observers = nil;
 }
 
 - (void)viewDidLoad
@@ -172,6 +198,7 @@
     self.isSearchMoreWeibo = YES;
     [self.navigationItem setTitle:NSLocalizedString(@"find_weibo_or_friend", @"find_weibo_or_friend")];
     [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClicked) title:NSLocalizedString(@"refresh", @"refresh")]];
+    [self refreshLeftNavigationButton];
     if([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0)
     {
         _searchBar.backgroundImage = [UIImage imageNamed:@"search_switcher_btn"];
@@ -182,9 +209,35 @@
         [_searchBar setScopeBarButtonDividerImage:[UIImage imageNamed:@"searchScopeDividerLeftSelected"] forLeftSegmentState:UIControlStateSelected rightSegmentState:UIControlStateNormal];
     }
 
-    self.searchWeiboView = [[WaterFlowView alloc] initWithFrame:CGRectMake(0, CONTENT_VIEW_HEIGHT_OFFSET + 44.0f, 320,270)];
+    _searchWeiboView = [[WaterFlowView alloc] initWithFrame:CGRectMake(0, CONTENT_VIEW_HEIGHT_OFFSET + 44.0f, 320,270)];
     self.searchWeiboView.flowdelegate = self;
     self.searchWeiboView.flowdatasource = self;
+    
+    _searchWeiboGestureRecognizer = [[UITapGestureRecognizer alloc] 
+                          initWithTarget:self
+                          action:@selector(dismissKeyboard)];
+    _searchUserGestureRecognizer = [[UITapGestureRecognizer alloc] 
+                                     initWithTarget:self
+                                     action:@selector(dismissKeyboard)];
+    
+    _observers = [[NSMutableArray alloc] initWithCapacity:2];
+    id observer = [[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardDidShowNotification
+                                                                    object:nil
+                                                                     queue:nil
+                                                                usingBlock:^(NSNotification * notification){
+                                                                    [_searchUserView addGestureRecognizer:_searchUserGestureRecognizer];
+                                                                    [_searchWeiboView addGestureRecognizer:_searchWeiboGestureRecognizer];
+                                                                }];
+    [self.observers addObject:observer];
+    
+    observer = [[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardWillHideNotification
+                                                                 object:nil
+                                                                  queue:nil
+                                                             usingBlock:^(NSNotification * notification){
+                                                                 [_searchUserView removeGestureRecognizer:_searchUserGestureRecognizer];
+                                                                 [_searchWeiboView removeGestureRecognizer:_searchWeiboGestureRecognizer];
+                                                             }];
+    [self.observers addObject:observer];
     
     [self.searchUserView setHidden:YES];
     [self.searchWeiboView setHidden:YES];
@@ -195,6 +248,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(waterFlowCellSelected:)
                                                  name:@"borderImageViewSelected"
@@ -218,6 +272,7 @@
 
 -(void)viewWillDisappear:(BOOL)animated
 {
+    [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -443,6 +498,16 @@
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {    
     [self clearData];
+    if ([searchText length] > 0)
+    {
+        self.isSearchModel = YES;
+    }
+    else
+    {
+        self.isSearchModel = NO;
+        return;
+    }
+    [self refreshLeftNavigationButton];
 
     CGFloat height = 44.0f;
     BOOL isShowsCancelButton = NO;
@@ -498,11 +563,10 @@
 - (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar
 {
     self.isSearchModel = NO;
-
     [self clearData];
     [self checkSearchMode];
     [self.contentScrollView setHidden:NO];
-
+    [self refreshLeftNavigationButton];
     searchBar.text = @"";
     [searchBar endEditing:YES];
     [searchBar setShowsScopeBar:NO];
@@ -587,6 +651,7 @@
                                                            [self.searchUserResults addObject:mutableDict];
                                                            [mutableDict release];
                                                        }
+                                                       [tempArray release];
                                                    }
                                                    else {
                                                        [[iToast makeText:[NSString stringWithFormat:@"search status error: %d", status]] show];
@@ -612,7 +677,6 @@
                 if (status == AIO_STATUS_SUCCESS)
                 {
                     NSArray * array = [data valueForKey:@"BlogList"];
-                    //TODO [felix] should to remove
                     for (NSDictionary * dict in array) {
                         if ([[dict valueForKey:@"Picture_width"] floatValue] > 0)
                         {
@@ -710,16 +774,15 @@
     return 3;
 }
 
-- (NSInteger)flowView:(WaterFlowView *)flowView numberOfRowsInColumn:(NSInteger)column
+- (NSInteger)numberOfDataInFlowView:(WaterFlowView *)flowView
 {
-    return [self.searchWeiboResults count] / 3;
+    return [self.searchWeiboResults count];
 }
 
 - (WaterFlowCell *)flowView:(WaterFlowView *)flowView cellForRowAtIndex:(NSInteger)index
 {
     static NSString *cellIdentifier = @"WaterFlowCell";
 	WaterFlowCell *cell = nil;
-    // TODO don't use reusedable cell, there is some issues.
     cell = [flowView dequeueReusableCellWithIdentifier:cellIdentifier withIndex:index];
 	if(cell == nil)
 	{
@@ -794,4 +857,22 @@
         [self.searchWeiboView setHidden:YES];
     }
 }
+
+- (void) refreshLeftNavigationButton
+{
+    if (self.isSearchModel)
+    {
+        [self.navigationItem setLeftBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
+    }
+    else
+    {
+        [self.navigationItem setLeftBarButtonItem:nil];
+    }
+}
+
+-(void)dismissKeyboard
+{
+    [self.view endEditing:YES];
+}
+
 @end

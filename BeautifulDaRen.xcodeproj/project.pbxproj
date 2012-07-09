@@ -83,8 +83,6 @@
 		C297D8161544233E0080294C /* (null) in Resources */ = {isa = PBXBuildFile; };
 		C297D83B154442C20080294C /* AccountInfoInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C297D836154442C20080294C /* AccountInfoInputCell.m */; };
 		C297D83C154442C20080294C /* AccountInfoInputCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C297D837154442C20080294C /* AccountInfoInputCell.xib */; };
-		C297D83D154442C20080294C /* ForgetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C297D839154442C20080294C /* ForgetPasswordViewController.m */; };
-		C297D83E154442C20080294C /* ForgetPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C297D83A154442C20080294C /* ForgetPasswordViewController.xib */; };
 		C29F6664154310B300292031 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		C2A810C31566230A008FF2B7 /* PrivateLetterViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2A810C21566230A008FF2B7 /* PrivateLetterViewCell.xib */; };
 		C2A810DD1566611E008FF2B7 /* PrivateLetter.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A810DC1566611E008FF2B7 /* PrivateLetter.m */; };
@@ -736,9 +734,6 @@
 		C297D835154442C20080294C /* AccountInfoInputCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountInfoInputCell.h; sourceTree = "<group>"; };
 		C297D836154442C20080294C /* AccountInfoInputCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountInfoInputCell.m; sourceTree = "<group>"; };
 		C297D837154442C20080294C /* AccountInfoInputCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountInfoInputCell.xib; sourceTree = "<group>"; };
-		C297D838154442C20080294C /* ForgetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetPasswordViewController.h; sourceTree = "<group>"; };
-		C297D839154442C20080294C /* ForgetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPasswordViewController.m; sourceTree = "<group>"; };
-		C297D83A154442C20080294C /* ForgetPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForgetPasswordViewController.xib; sourceTree = "<group>"; };
 		C2A810C21566230A008FF2B7 /* PrivateLetterViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrivateLetterViewCell.xib; sourceTree = "<group>"; };
 		C2A810DB1566611E008FF2B7 /* PrivateLetter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivateLetter.h; sourceTree = "<group>"; };
 		C2A810DC1566611E008FF2B7 /* PrivateLetter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivateLetter.m; sourceTree = "<group>"; };
@@ -2079,9 +2074,6 @@
 				C26798E9155E9F7B001E1D2E /* FindPasswordViewController.h */,
 				C26798EA155E9F7B001E1D2E /* FindPasswordViewController.m */,
 				C26798EB155E9F7C001E1D2E /* FindPasswordViewController.xib */,
-				C297D838154442C20080294C /* ForgetPasswordViewController.h */,
-				C297D839154442C20080294C /* ForgetPasswordViewController.m */,
-				C297D83A154442C20080294C /* ForgetPasswordViewController.xib */,
 				C22CC1801563A3A7000DF1BD /* HelpViewController.h */,
 				C22CC1811563A3A7000DF1BD /* HelpViewController.m */,
 				C22CC1821563A3A7000DF1BD /* HelpViewController.xib */,
@@ -2659,7 +2651,6 @@
 				C29F6664154310B300292031 /* (null) in Resources */,
 				C297D8161544233E0080294C /* (null) in Resources */,
 				C297D83C154442C20080294C /* AccountInfoInputCell.xib in Resources */,
-				C297D83E154442C20080294C /* ForgetPasswordViewController.xib in Resources */,
 				CE0338681545925300775217 /* MainWindow.xib in Resources */,
 				CE0338691545925300775217 /* buttonhover.png in Resources */,
 				CE03386A1545925300775217 /* buttonnormal.png in Resources */,
@@ -3130,7 +3121,6 @@
 				C26717BA1542BF2200DC40D8 /* CategoryContentViewController.m in Sources */,
 				C26717BC1542BF2200DC40D8 /* CategoryItemCell.m in Sources */,
 				C297D83B154442C20080294C /* AccountInfoInputCell.m in Sources */,
-				C297D83D154442C20080294C /* ForgetPasswordViewController.m in Sources */,
 				CE03385E1545925300775217 /* QFObject.m in Sources */,
 				CE03385F1545925300775217 /* tencentOAuthDemoAppDelegate.m in Sources */,
 				CE0338601545925300775217 /* tencentOAuthDemoViewController.m in Sources */,

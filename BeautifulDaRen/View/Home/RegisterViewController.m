@@ -91,7 +91,6 @@ enum
     [_tableView release];
     [_loginWithQQButton release];
     [_loginWithSinaWeiboButton release];
-    [_observers release];
     [_savingInputDict release];
     [super dealloc];
 }
@@ -139,11 +138,12 @@ enum
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [super viewWillDisappear:animated];
     for (id observer in self.observers) {
         [[NSNotificationCenter defaultCenter] removeObserver:observer];
     }
+    [self.observers removeAllObjects];
     self.observers = nil;
-    [super viewWillDisappear:animated];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
