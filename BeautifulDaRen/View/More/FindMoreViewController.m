@@ -42,8 +42,6 @@
 @property (retain, nonatomic) NSMutableArray *interestingUserResults;
 @property (retain, nonatomic) NSMutableArray *hotUserResults;
 @property (retain, nonatomic) NSMutableArray * weiboHeights;
-@property (retain, nonatomic) UITapGestureRecognizer * searchWeiboGestureRecognizer;
-@property (retain, nonatomic) UITapGestureRecognizer * searchUserGestureRecognizer;
 
 @property (assign, nonatomic) BOOL isSearchModel;
 @property (assign, nonatomic) BOOL isFindWeibo;
@@ -51,6 +49,7 @@
 @property (assign, nonatomic) BOOL isSearchMoreUser;
 @property (assign, nonatomic) BOOL isSearchMoreWeibo;
 
+- (void) refreshLeftNavigationButton;
 - (void) refreshHotUser:(NSString*)type inScrollView:(UIScrollView*)scrollView;
 - (void) doSearch;
 - (void) loadWeiboHeights;
@@ -81,8 +80,6 @@
 @synthesize isSearchMoreUser = _isSearchMoreUser;
 @synthesize isSearchMoreWeibo = _isSearchMoreWeibo;
 @synthesize isSearchModel = _isSearchModel;
-@synthesize searchWeiboGestureRecognizer = _searchWeiboGestureRecognizer;
-@synthesize searchUserGestureRecognizer = _searchUserGestureRecognizer;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -112,6 +109,15 @@
         [self refreshView];
     }
 }
+
+-(void)onBackButtonClicked
+{
+    if (self.isSearchModel)
+    {
+        [self searchBarCancelButtonClicked:self.searchBar];
+    }
+}
+
 #pragma mark - View lifecycle
 
 -(void)refreshView
@@ -138,10 +144,6 @@
     [_sameCityUserResults release];
     [_interestingUserResults release];
     [_hotUserResults release];
-    [_searchUserGestureRecognizer release];
-    [_searchWeiboGestureRecognizer release];
-    [self.searchUserView removeGestureRecognizer:_searchUserGestureRecognizer];
-    [self.searchWeiboView removeGestureRecognizer:_searchWeiboGestureRecognizer];
     [super dealloc];
 }
 - (void)viewDidUnload
@@ -160,8 +162,6 @@
     self.sameCityUserResults = nil;
     self.interestingUserResults = nil;
     self.hotUserResults = nil;
-    self.searchWeiboGestureRecognizer = nil;
-    self.searchUserGestureRecognizer = nil;
 }
 
 - (void)viewDidLoad
@@ -182,6 +182,7 @@
     self.isSearchMoreWeibo = YES;
     [self.navigationItem setTitle:NSLocalizedString(@"find_weibo_or_friend", @"find_weibo_or_friend")];
     [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClicked) title:NSLocalizedString(@"refresh", @"refresh")]];
+    [self refreshLeftNavigationButton];
     if([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0)
     {
         _searchBar.backgroundImage = [UIImage imageNamed:@"search_switcher_btn"];
@@ -195,15 +196,6 @@
     _searchWeiboView = [[WaterFlowView alloc] initWithFrame:CGRectMake(0, CONTENT_VIEW_HEIGHT_OFFSET + 44.0f, 320,270)];
     self.searchWeiboView.flowdelegate = self;
     self.searchWeiboView.flowdatasource = self;
-    
-    _searchWeiboGestureRecognizer = [[UITapGestureRecognizer alloc] 
-                          initWithTarget:self
-                          action:@selector(dismissKeyboard)];
-    _searchUserGestureRecognizer = [[UITapGestureRecognizer alloc] 
-                                     initWithTarget:self
-                                     action:@selector(dismissKeyboard)];
-    [_searchUserView addGestureRecognizer:_searchUserGestureRecognizer];
-    [_searchWeiboView addGestureRecognizer:_searchWeiboGestureRecognizer];
     
     [self.searchUserView setHidden:YES];
     [self.searchWeiboView setHidden:YES];
@@ -462,6 +454,16 @@
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {    
     [self clearData];
+    if ([searchText length] > 0)
+    {
+        self.isSearchModel = YES;
+    }
+    else
+    {
+        self.isSearchModel = NO;
+        return;
+    }
+    [self refreshLeftNavigationButton];
 
     CGFloat height = 44.0f;
     BOOL isShowsCancelButton = NO;
@@ -517,11 +519,10 @@
 - (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar
 {
     self.isSearchModel = NO;
-
     [self clearData];
     [self checkSearchMode];
     [self.contentScrollView setHidden:NO];
-
+    [self refreshLeftNavigationButton];
     searchBar.text = @"";
     [searchBar endEditing:YES];
     [searchBar setShowsScopeBar:NO];
@@ -813,7 +814,22 @@
         [self.searchWeiboView setHidden:YES];
     }
 }
--(void)dismissKeyboard {
+
+- (void) refreshLeftNavigationButton
+{
+    if (self.isSearchModel)
+    {
+        [self.navigationItem setLeftBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
+    }
+    else
+    {
+        [self.navigationItem setLeftBarButtonItem:nil];
+    }
+}
+
+-(void)dismissKeyboard
+{
     [self.view endEditing:YES];
 }
+
 @end
