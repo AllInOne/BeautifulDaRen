@@ -67,16 +67,9 @@
     [[SDWebImageManager sharedManager] cancelForDelegate:self];
 }
 
-- (void)webImageManager:(SDWebImageManager *)imageManager didProgressWithPartialImage:(UIImage *)image forURL:(NSURL *)url
-{
-    self.image = image;
-    [self setNeedsLayout];
-}
-
 - (void)webImageManager:(SDWebImageManager *)imageManager didFinishWithImage:(UIImage *)image
 {
     self.image = image;
-    [self setNeedsLayout];
 }
 
 @end

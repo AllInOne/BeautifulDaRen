@@ -49,26 +49,14 @@
 #endif
 
 
-NS_INLINE UIImage *SDScaledImageForPath(NSString *path, NSObject *imageOrData)
+NS_INLINE UIImage *SDScaledImageForPath(NSString *path, NSData *imageData)
 {
-    if (!imageOrData)
+    if (!imageData)
     {
         return nil;
     }
 
-    UIImage *image = nil;
-    if ([imageOrData isKindOfClass:[NSData class]])
-    {
-        image = [[UIImage alloc] initWithData:(NSData *)imageOrData];
-    }
-    else if ([imageOrData isKindOfClass:[UIImage class]])
-    {
-        image = SDWIReturnRetained((UIImage *)imageOrData);
-    }
-    else
-    {
-        return nil;
-    }
+    UIImage *image = [[UIImage alloc] initWithData:imageData];
 
     if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)])
     {
