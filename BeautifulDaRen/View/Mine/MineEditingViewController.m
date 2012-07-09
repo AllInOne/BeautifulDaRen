@@ -73,7 +73,7 @@ typedef enum
         [[iToast makeText:NSLocalizedString(@"please_correct_phone", @"please_correct_phone")] show];
         return;
     }
-    
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: TRUE];
     [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_SHOWWAITOVERLAY object:self];
     [[BSDKManager sharedManager] modifyUser:[ViewHelper getMyUserId] 
                                        name:[_tableViewDict objectForKey:KEY_ACCOUNT_USER_NAME]
@@ -85,6 +85,7 @@ typedef enum
                                 description:[_tableViewDict valueForKey:KEY_ACCOUNT_INTRO]
                                      avatar:self.avatarImage 
                             andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+                                [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: FALSE];
                                 [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_HIDEWAITOVERLAY object:self];
                                 [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
                                 if(AIO_STATUS_SUCCESS == status && K_BSDK_IS_RESPONSE_OK(data))

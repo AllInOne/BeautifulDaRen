@@ -71,10 +71,6 @@
 										<string key="NSReuseIdentifierKey">_NS:567</string>
 										<bool key="IBUIUserInteractionEnabled">NO</bool>
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-										<object class="NSCustomResource" key="IBUIImage" id="1004706015">
-											<string key="NSClassName">NSImage</string>
-											<string key="NSResourceName">avatar_sample3.png</string>
-										</object>
 									</object>
 									<object class="IBUILabel" id="355930069">
 										<reference key="NSNextResponder" ref="46947073"/>
@@ -117,10 +113,6 @@
 										<string key="NSReuseIdentifierKey">_NS:567</string>
 										<bool key="IBUIUserInteractionEnabled">NO</bool>
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-										<object class="NSCustomResource" key="IBUIImage">
-											<string key="NSClassName">NSImage</string>
-											<string key="NSResourceName">weibo_sample_picture.png</string>
-										</object>
 									</object>
 									<object class="IBUILabel" id="1018413092">
 										<reference key="NSNextResponder" ref="46947073"/>
@@ -358,7 +350,6 @@
 								<string key="NSReuseIdentifierKey">_NS:567</string>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<reference key="IBUIImage" ref="1004706015"/>
 							</object>
 							<object class="IBUILabel" id="186112296">
 								<reference key="NSNextResponder" ref="654843917"/>
@@ -832,10 +823,8 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="avatar_sample3.png">{20, 20}</string>
 			<string key="comment_background.png">{285, 72}</string>
 			<string key="weibo_price_background.png">{45, 19}</string>
-			<string key="weibo_sample_picture.png">{59, 64}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">933</string>
 	</data>

@@ -64,8 +64,10 @@
     
     [activityIndicator startAnimating];
     
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: TRUE];
+    
     [[BSDKManager sharedManager] getWeiboListByClassId:[self.itemData objectForKey:K_BSDK_UID] pageSize:CLASS_WEIBO_PAGE_SIZE pageIndex:1 andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-        
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: FALSE];
         [activityIndicator stopAnimating];
         [activityIndicator removeFromSuperview];
         [activityIndicator release];

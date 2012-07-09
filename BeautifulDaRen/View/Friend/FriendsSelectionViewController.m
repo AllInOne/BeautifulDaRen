@@ -13,6 +13,9 @@
 #import "FriendsSelectionViewController.h"
 #import "FriendsViewController.h"
 #import "ViewHelper.h"
+#import "ViewConstants.h"
+#import "BSDKDefines.h"
+#import "BSDKManager.h"
 
 @interface FriendsSelectionViewController()
 
@@ -52,7 +55,31 @@
 {
     [super viewDidLoad];
     
-    [self preloadView];
+    UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    
+    activityIndicator.frame = CGRectMake(SCREEN_WIDTH/2, 2*ADS_CELL_HEIGHT + CONTENT_MARGIN, CGRectGetWidth(activityIndicator.frame), CGRectGetHeight(activityIndicator.frame));
+    
+    [self.view addSubview:activityIndicator];
+    
+    [activityIndicator startAnimating];
+
+    [[BSDKManager sharedManager] getFollowList:GET_CURRENT_USER_INFO_BY_KEY(K_BSDK_UID) pageSize:500 pageIndex:1 andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+        
+        [activityIndicator stopAnimating];
+        [activityIndicator removeFromSuperview];
+        [activityIndicator release];
+        
+        NSArray * userList = [data objectForKey:K_BSDK_USERLIST];
+        NSMutableArray * friendList = [NSMutableArray arrayWithCapacity:[userList count]];
+        
+        for(NSDictionary * user in userList)
+        {
+            [friendList addObject:[[user objectForKey:K_BSDK_ATTENTIONUSERINFO] objectForKey:K_BSDK_USERNAME]];
+        }
+        
+        self.friendsList = friendList;
+        [self preloadView];
+    }];
 }
 
 - (void)preloadView {

@@ -279,8 +279,11 @@
     
     [activityIndicator startAnimating];
     
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: TRUE];
+    
     processDoneWithDictBlock block = ^(AIO_STATUS status, NSDictionary *data)
     {
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: FALSE];
         [activityIndicator stopAnimating];
         [activityIndicator removeFromSuperview];
         [activityIndicator release];

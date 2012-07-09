@@ -273,10 +273,13 @@
             [[iToast makeText:iToastString] show];
             return;
         }
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_SHOWWAITOVERLAY object:self];
         [[BSDKManager sharedManager] loginWithUsername:userName
                                               password:password
                                        andDoneCallback:^(AIO_STATUS status, NSDictionary *data)
          {
+             [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_HIDEWAITOVERLAY object:self];
              if(AIO_STATUS_SUCCESS == status && K_BSDK_IS_RESPONSE_OK(data))
              {
                  
