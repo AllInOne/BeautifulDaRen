@@ -204,7 +204,7 @@ typedef enum
                 }
                 else
                 {
-                    ((MyInfoTopViewCell*)cell).avatarImageView.image = [UIImage imageNamed:@"avatar_big"];
+                    ((MyInfoTopViewCell*)cell).avatarImageView.image = [UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:self.tableViewDict]];
                 }            
             }
 

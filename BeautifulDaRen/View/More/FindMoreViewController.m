@@ -124,6 +124,9 @@
     [_contentScrollView release];
     [_searchUserView release];
     [_searchBar release];
+    [self.searchWeiboResults removeAllObjects];
+    [self.searchUserResults removeAllObjects];
+    [self.weiboHeights removeAllObjects];
     [_searchUserResults release];
     [_searchWeiboResults release];
     [_searchWeiboView release];
@@ -580,7 +583,9 @@
                                                        NSArray * tempArray = [[data valueForKey:@"UserList"] copy];
                                                        for (NSDictionary * dict in tempArray)
                                                        {
-                                                           [self.searchUserResults addObject:[dict mutableCopy]];
+                                                           NSMutableDictionary * mutableDict = [dict mutableCopy];
+                                                           [self.searchUserResults addObject:mutableDict];
+                                                           [mutableDict release];
                                                        }
                                                    }
                                                    else {
