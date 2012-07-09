@@ -96,7 +96,7 @@
     [self.view addSubview:_itemsViewController.view];
     
     NSNumber * isAutoLogin = [[NSUserDefaults standardUserDefaults] objectForKey:USERDEFAULT_IS_AUTO_LOGIN];
-    if ([isAutoLogin boolValue])
+    if (![[BSDKManager sharedManager] isLogin] && [isAutoLogin boolValue])
     {
         __block NSString * userName = [[NSUserDefaults standardUserDefaults] objectForKey:USERDEFAULT_AUTO_LOGIN_ACCOUNT_NAME];
         __block NSString * userPwd = [[NSUserDefaults standardUserDefaults] objectForKey:USERDEFAULT_AUTO_LOGIN_ACCOUNT_PASSWORD];
