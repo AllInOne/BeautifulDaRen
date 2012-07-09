@@ -32,7 +32,7 @@
 #define PRICE_BUTTON_Y_OFFSET     (50.0f)
 
 #define MAP_VIEW_WIDTH      (280.0f)
-#define MAP_VIEW_HEIGHT     (60.0f)
+#define MAP_VIEW_HEIGHT     (120.0f)
 #define MAP_VIEW_X_OFFSET   ((SCREEN_WIDTH - MAP_VIEW_WIDTH)/2)
 
 
@@ -41,6 +41,8 @@
 @property (nonatomic, retain) MapViewController * mapViewController;
 @property (nonatomic, retain) NSString * weiboContent;
 @property (nonatomic, retain) UIToolbar * toolbar;
+@property (nonatomic, assign) BOOL isDoingFav;
+
 - (void)refreshView;
 - (void)addToolbar;
 - (void)onRefreshButtonClicked;
@@ -68,6 +70,7 @@
 @synthesize usernameLabel = _usernameLabel;
 @synthesize weiboId = _weiboId;
 @synthesize vMarkImageView = _vMarkImageView;
+@synthesize isDoingFav = _isDoingFav;
 
 - (void)dealloc
 {
@@ -212,11 +215,16 @@
 
 - (void)onFavourate
 {
+    if (self.isDoingFav) {
+        return;
+    }
+    
+    self.isDoingFav = YES;
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: TRUE];
     
     if (K_BSDK_IS_BLOG_FAVOURATE(self.weiboData)) {
         [[BSDKManager sharedManager] removeFavourateForWeibo:[self.weiboData objectForKey:K_BSDK_UID] andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-            
+            self.isDoingFav = NO;
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: FALSE];
 
             if (K_BSDK_IS_RESPONSE_OK(data)) {
@@ -225,7 +233,7 @@
             }
             else
             {
-                [[iToast makeText:NSLocalizedString(@"cancel_favourate_failed", @"cancel_favourate_failed")] show];
+                [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
             }
 
         }];
@@ -233,7 +241,7 @@
     else
     {
         [[BSDKManager sharedManager] addFavourateForWeibo:[self.weiboData objectForKey:K_BSDK_UID] andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-            
+            self.isDoingFav = NO;
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: FALSE];
             
             if (K_BSDK_IS_RESPONSE_OK(data)) {
@@ -242,7 +250,7 @@
             }
             else
             {
-                [[iToast makeText:NSLocalizedString(@"favourate_failed", @"favourate_failed")] show];
+                [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
             }
             
         }];
@@ -295,43 +303,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     if (self.weiboData) {
-        [self refreshView];
-        [self onRefreshButtonClicked];
+        self.weiboId = [self.weiboData objectForKey:K_BSDK_UID];
     }
-    else
-    {
-        UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        
-        activityIndicator.center = CGPointMake(SCREEN_WIDTH/2, 20);
-        [activityIndicator startAnimating];
-        
-        [self.view addSubview:activityIndicator];
-        
-        [[BSDKManager sharedManager] getWeiboById:_weiboId
-                                          andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-                                              [activityIndicator stopAnimating];
-                                              [activityIndicator removeFromSuperview];
-                                              [activityIndicator release];
-                                              
-                                              if (K_BSDK_IS_RESPONSE_OK(data)) {
-                                                  NSDictionary * weiboInfo = [data objectForKey:K_BSDK_BLOGINFO];
-                                                  NSDictionary * retweetedStatusInfo = [weiboInfo objectForKey:K_BSDK_RETWEET_STATUS];
-                                                  if (retweetedStatusInfo && [retweetedStatusInfo count]) {
-                                                      self.weiboData = retweetedStatusInfo;
-                                                  }
-                                                  else
-                                                  {
-                                                      self.weiboData = weiboInfo;
-                                                  }
-                                                  
-                                                  [self refreshView];
-                                              }
-                                              else
-                                              {
-                                                  [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
-                                              }
-                                          }];
-    }
+
+    [self onRefreshButtonClicked];
 }
 
 - (void)viewDidUnload
@@ -582,12 +557,36 @@
 - (void)onRefreshButtonClicked {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: TRUE];
     
-    [[BSDKManager sharedManager] getWeiboById:[self.weiboData objectForKey:K_BSDK_UID] andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+    UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    
+    activityIndicator.center = CGPointMake(SCREEN_WIDTH/2, 20);
+    [activityIndicator startAnimating];
+    
+    [self.view addSubview:activityIndicator];
+    
+    [[BSDKManager sharedManager] getWeiboById:self.weiboId andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: FALSE];
+        [activityIndicator stopAnimating];
+        [activityIndicator removeFromSuperview];
+        [activityIndicator release];
         
-        [self setWeiboData:nil];
-        self.weiboData = [data objectForKey:K_BSDK_BLOGINFO];
-        [self refreshView];
+        if (K_BSDK_IS_RESPONSE_OK(data)) {
+            [self setWeiboData:nil];
+            NSDictionary * weiboInfo = [data objectForKey:K_BSDK_BLOGINFO];
+            NSDictionary * retweetedStatusInfo = [weiboInfo objectForKey:K_BSDK_RETWEET_STATUS];
+            if (retweetedStatusInfo && [retweetedStatusInfo count]) {
+                self.weiboData = retweetedStatusInfo;
+            }
+            else
+            {
+                self.weiboData = weiboInfo;
+            }
+            [self refreshView];
+        }
+        else
+        {
+            [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
+        }
     }];
 }
 

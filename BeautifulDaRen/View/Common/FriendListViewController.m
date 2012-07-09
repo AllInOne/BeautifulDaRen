@@ -180,7 +180,7 @@
         }
         case FriendListViewController_TYPE_MY_FANS:
         {
-            NSInteger userId = [[[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] valueForKey:KEY_ACCOUNT_USER_ID] intValue];
+            NSInteger userId = [[[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] valueForKey:K_BSDK_UID] intValue];
             [[BSDKManager sharedManager] getFollowerList:userId
                                                 pageSize:FRIEND_PAGE_SIZE
                                                pageIndex:self.currentPageIndex
@@ -446,6 +446,9 @@
     }
     
     NSInteger userId = [[dict valueForKey:K_BSDK_UID] intValue];
+    
+    [button setEnabled:NO];
+    
     if (NO == isShouldFollow)
     {
         [[BSDKManager sharedManager] unFollowUser:userId
@@ -460,6 +463,8 @@
                                       {
                                           [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
                                       }
+                                      
+                                      [button setEnabled:YES];
                                   }];
     }
     else
@@ -474,7 +479,7 @@
                                     {
                                         [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
                                     }
-
+                                    [button setEnabled:YES];
                                 }];
     }
 }

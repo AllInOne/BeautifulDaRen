@@ -250,13 +250,27 @@
     {
         self.imageDownloadDone = NO;
          [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: TRUE];
+        
+        UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        
+        activityIndicator.center = CGPointMake(SCREEN_WIDTH/2, USER_WINDOW_HEIGHT/2);
+        [activityIndicator startAnimating];
+        
+        [self.view addSubview:activityIndicator];
+        
         [self.imageView setImageWithURL:[NSURL URLWithString:self.imageUrl] success:^(UIImage *image) {
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: FALSE];
             self.imageDownloadDone = YES;
+            [activityIndicator stopAnimating];
+            [activityIndicator removeFromSuperview];
+            [activityIndicator release];
         } failure:^(NSError *error) {
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: FALSE];
             [[iToast makeText:NSLocalizedString(@"picture_download_failed", @"picture_download_failed")] show];
             self.imageDownloadDone = YES;
+            [activityIndicator stopAnimating];
+            [activityIndicator removeFromSuperview];
+            [activityIndicator release];
         }];
         self.imageView.frame = CGRectMake(0.0f, 
                                           0.0f, 
