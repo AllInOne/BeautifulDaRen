@@ -182,7 +182,7 @@
         [_searchBar setScopeBarButtonDividerImage:[UIImage imageNamed:@"searchScopeDividerLeftSelected"] forLeftSegmentState:UIControlStateSelected rightSegmentState:UIControlStateNormal];
     }
 
-    self.searchWeiboView = [[WaterFlowView alloc] initWithFrame:CGRectMake(0, CONTENT_VIEW_HEIGHT_OFFSET + 44.0f, 320,270)];
+    _searchWeiboView = [[WaterFlowView alloc] initWithFrame:CGRectMake(0, CONTENT_VIEW_HEIGHT_OFFSET + 44.0f, 320,270)];
     self.searchWeiboView.flowdelegate = self;
     self.searchWeiboView.flowdatasource = self;
     
@@ -615,10 +615,10 @@
                     NSArray * array = [data valueForKey:@"BlogList"];
                     //TODO [felix] should to remove
                     for (NSDictionary * dict in array) {
-                        if ([[dict valueForKey:@"Picture_width"] floatValue] > 0)
-                        {
+//                        if ([[dict valueForKey:@"Picture_width"] floatValue] > 0)
+//                        {
                             [self.searchWeiboResults addObject:dict];
-                        }
+//                        }
                     }
                     [self.weiboHeights removeAllObjects];
                     [self loadWeiboHeights];
@@ -720,7 +720,6 @@
 {
     static NSString *cellIdentifier = @"WaterFlowCell";
 	WaterFlowCell *cell = nil;
-    // TODO don't use reusedable cell, there is some issues.
     cell = [flowView dequeueReusableCellWithIdentifier:cellIdentifier withIndex:index];
 	if(cell == nil)
 	{
