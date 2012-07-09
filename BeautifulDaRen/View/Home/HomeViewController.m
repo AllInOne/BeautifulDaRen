@@ -14,7 +14,6 @@
 #import "BSDKManager.h"
 #import "LoginViewController.h"
 #import "RegisterViewController.h"
-#import "ForgetPasswordViewController.h"
 #import "iToast.h"
 
 @interface HomeViewController()
