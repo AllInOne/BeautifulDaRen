@@ -21,7 +21,7 @@
 @protocol WaterFlowViewDatasource <NSObject>
 @required
 - (NSInteger)numberOfColumnsInFlowView:(WaterFlowView*)flowView;
-- (NSInteger)flowView:(WaterFlowView *)flowView numberOfRowsInColumn:(NSInteger)column;
+- (NSInteger)numberOfDataInFlowView:(WaterFlowView *)flowView;
 - (WaterFlowCell *)flowView:(WaterFlowView *)flowView cellForRowAtIndex:(NSInteger)index;
 
 @end

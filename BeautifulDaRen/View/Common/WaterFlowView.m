@@ -161,8 +161,8 @@
     }
     CGFloat minHeight = 0.f;
     NSInteger minHeightAtColumn = 0;
-    for (int i = 0; i < _numberOfColumns * [_flowdatasource flowView:self numberOfRowsInColumn:i] * _currentPage ; i++)
-    {        
+    for (int i = 0; i < [_flowdatasource numberOfDataInFlowView:self]; i++)
+    {
         //the first pics
         if(self.cellHeight.count < _numberOfColumns)
         {
@@ -223,6 +223,10 @@
 {
     for (int i = 0 ; i< _numberOfColumns; i++)
     {
+        if(i >= [self.cellHeight count])
+        {
+            continue;
+        }
         float origin_x = i * (self.frame.size.width / _numberOfColumns);
 		float width = self.frame.size.width / _numberOfColumns;
         
@@ -231,15 +235,17 @@
         if ([self.visibleCells objectAtIndex:i] == nil || ((NSArray*)[self.visibleCells objectAtIndex:i]).count == 0) //everytime reloadData is called and no cells in visibleCellArray
         {
             int rowToDisplay = 0;
-			for( int j = 0; j < [[self.cellHeight objectAtIndex:i] count] - 1; j++)  //calculate which row to display in this column
-			{
-				float everyCellHeight = [[[self.cellHeight objectAtIndex:i] objectAtIndex:j] floatValue];
-				if(everyCellHeight < self.contentOffset.y)
-				{
-					rowToDisplay ++;
-				}
-			}
-
+            if ([[self.cellHeight objectAtIndex:i] count] > 1)
+            {
+                for( int j = 0; j < [[self.cellHeight objectAtIndex:i] count] - 1; j++)  //calculate which row to display in this column
+                {
+                    float everyCellHeight = [[[self.cellHeight objectAtIndex:i] objectAtIndex:j] floatValue];
+                    if(everyCellHeight < self.contentOffset.y)
+                    {
+                        rowToDisplay ++;
+                    }
+                }
+            }
 			float origin_y = 0;
 			float height = 0;
 			if(rowToDisplay == 0)  

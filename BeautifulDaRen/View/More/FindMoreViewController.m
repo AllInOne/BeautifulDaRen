@@ -677,12 +677,11 @@
                 if (status == AIO_STATUS_SUCCESS)
                 {
                     NSArray * array = [data valueForKey:@"BlogList"];
-                    //TODO [felix] should to remove
                     for (NSDictionary * dict in array) {
-//                        if ([[dict valueForKey:@"Picture_width"] floatValue] > 0)
-//                        {
+                        if ([[dict valueForKey:@"Picture_width"] floatValue] > 0)
+                        {
                             [self.searchWeiboResults addObject:dict];
-//                        }
+                        }
                     }
                     [self.weiboHeights removeAllObjects];
                     [self loadWeiboHeights];
@@ -775,9 +774,9 @@
     return 3;
 }
 
-- (NSInteger)flowView:(WaterFlowView *)flowView numberOfRowsInColumn:(NSInteger)column
+- (NSInteger)numberOfDataInFlowView:(WaterFlowView *)flowView
 {
-    return [self.searchWeiboResults count] / 3;
+    return [self.searchWeiboResults count];
 }
 
 - (WaterFlowCell *)flowView:(WaterFlowView *)flowView cellForRowAtIndex:(NSInteger)index
