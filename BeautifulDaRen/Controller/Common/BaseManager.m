@@ -32,7 +32,7 @@
     
     if (self)
     {
-        requests = [[NSMutableArray alloc] initWithCapacity:5];
+        requests = [[NSMutableArray alloc] initWithCapacity:50];
     }
     
     return self;
