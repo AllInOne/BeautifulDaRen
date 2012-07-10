@@ -78,6 +78,8 @@
 #define KEY_ACCOUNT_INTRO               @"Intro"
 #define KEY_ACCOUNT_BLOG_COUNT          @"BlogNum"
 #define KEY_ACCOUNT_FAVORITE_COUNT      @"FavNum"
+#define KEY_ACCOUNT_AT_COUNT            @"AtNum"
+#define KEY_ACCOUNT_COMMENT_COUNT       @"CommentNum"
 #define KEY_ACCOUNT_FANS_COUNT          @"FansNum"
 #define KEY_ACCOUNT_FOLLOW_COUNT        @"AttentionNum"
 

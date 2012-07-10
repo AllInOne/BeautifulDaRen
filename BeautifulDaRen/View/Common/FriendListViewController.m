@@ -373,7 +373,6 @@
         }
 
         friendListViewCell.friendNameLabel.text = [userDict valueForKey:KEY_ACCOUNT_USER_NAME];
-        friendListViewCell.friendWeiboLabel.text = @"";
         
         NSString * buttonTitle = [self getRelationButtonTitleOfUser:userDict];
         if (buttonTitle) {

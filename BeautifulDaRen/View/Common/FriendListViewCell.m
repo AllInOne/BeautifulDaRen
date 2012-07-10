@@ -10,7 +10,6 @@
 
 @implementation FriendListViewCell
 @synthesize friendNameLabel;
-@synthesize friendWeiboLabel;
 @synthesize avatarImageView;
 @synthesize actionButton;
 @synthesize delegate;

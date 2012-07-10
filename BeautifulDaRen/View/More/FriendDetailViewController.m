@@ -19,6 +19,7 @@
 #import "iToast.h"
 #import "WeiboComposerViewController.h"
 #import "UIImageView+WebCache.h"
+#import "BorderImageView.h"
 
 @interface FriendDetailViewController()
 @property (retain, nonatomic) IBOutlet UIButton * weiboButton;
@@ -40,7 +41,7 @@
 @property (retain, nonatomic) IBOutlet UILabel * pointLabel;
 @property (retain, nonatomic) IBOutlet UILabel * phoneLabel;
 @property (retain, nonatomic) IBOutlet UIImageView * genderImageView;
-@property (retain, nonatomic) IBOutlet UIImageView * avatarImageView;
+@property (retain, nonatomic) IBOutlet BorderImageView * avatarImageView;
 @property (retain, nonatomic) IBOutlet UIImageView * vMarkImageView;
 @property (retain, nonatomic) IBOutlet UIButton * actionButton;
 @property (retain, nonatomic) UIToolbar *toolbar;
@@ -595,17 +596,26 @@
                             [[self.friendDictionary valueForKey:KEY_ACCOUNT_POINT] intValue]];
     self.phoneLabel.text = [self.friendDictionary valueForKey:KEY_ACCOUNT_PHONE];
     
-    NSString * avatarImageUrl = [self.friendDictionary objectForKey:K_BSDK_PICTURE_65];
-    if (avatarImageUrl && [avatarImageUrl length]) {
-        [self.avatarImageView setImageWithURL:[NSURL URLWithString:avatarImageUrl] placeholderImage:[UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:self.friendDictionary]]];
+    UIImageView * imageView = [[UIImageView alloc] init];
+    NSString * avatarImageUrl = [self.friendDictionary valueForKey:K_BSDK_PICTURE_65];
+    if (avatarImageUrl && [avatarImageUrl length] > 0 ) {
+        [imageView setImageWithURL:[NSURL URLWithString:avatarImageUrl] placeholderImage:[UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:self.friendDictionary]]];
     }
     else
     {
-        [self.avatarImageView setImage:[UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:self.friendDictionary]]];
+        [imageView setImage:[UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:self.friendDictionary]]];
     }
     
+    CGRect borderImageViewFrame = CGRectMake(0,0, 
+                                             self.avatarImageView.frame.size.width,
+                                             self.avatarImageView.frame.size.height);
+    BorderImageView * tempBorderView = [[BorderImageView alloc]
+                                        initWithFrame:borderImageViewFrame
+                                        andView:imageView];
+    [self.avatarImageView addSubview:tempBorderView];
+    
     NSString * isVerify = [self.friendDictionary objectForKey:K_BSDK_ISVERIFY];
-    if (isVerify && [isVerify isEqual:@"1"]) {
+    if (isVerify && [isVerify isEqual:K_BSDK_ISVERIFY_YES]) {
         [self.vMarkImageView setImage:[UIImage imageNamed:@"v_mark_big"]];
         [self.vMarkImageView setHidden:NO];
     }
