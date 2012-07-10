@@ -128,21 +128,42 @@
 
 -(void)refreshView
 {
+    [self.sameCityUserResults removeAllObjects];
+    for (UIView * subView in self.sameCityDaRenView.subviews) {
+        [subView removeFromSuperview];
+    }
+    [self.interestingUserResults removeAllObjects];
+    for (UIView * subView in self.youMayInterestinView.subviews) {
+        [subView removeFromSuperview];
+    }
+    [self.hotUserResults removeAllObjects];
+    for (UIView * subView in self.hotDaRenView.subviews) {
+        [subView removeFromSuperview];
+    }
     [self refreshHotUser:K_BSDK_USERTYPE_SAME_CITY inScrollView:self.sameCityDaRenView];
     [self refreshHotUser:K_BSDK_USERTYPE_INTERESTED inScrollView:self.youMayInterestinView];
     [self refreshHotUser:K_BSDK_USERTYPE_HOT inScrollView:self.hotDaRenView];
 }
 -(void)dealloc
 {
+    [self.sameCityUserResults removeAllObjects];
+    for (UIView * subView in _sameCityDaRenView.subviews) {
+        [subView removeFromSuperview];
+    }
+    [self.interestingUserResults removeAllObjects];
+    for (UIView * subView in _youMayInterestinView.subviews) {
+        [subView removeFromSuperview];
+    }
+    [self.hotUserResults removeAllObjects];
+    for (UIView * subView in _hotDaRenView.subviews) {
+        [subView removeFromSuperview];
+    }
     [_sameCityDaRenView release];
     [_hotDaRenView release];
     [_youMayInterestinView release];
     [_contentScrollView release];
     [_searchUserView release];
     [_searchBar release];
-    [self.searchWeiboResults removeAllObjects];
-    [self.searchUserResults removeAllObjects];
-    [self.weiboHeights removeAllObjects];
     [_searchUserResults release];
     [_searchWeiboResults release];
     [_searchWeiboView release];
@@ -262,7 +283,7 @@
     
     [self.searchUserView setFrame:CGRectMake(0, CONTENT_VIEW_HEIGHT_OFFSET + 44.0f, self.searchUserView.frame.size.width,270)];
     [self.view addSubview:self.searchUserView];
-    
+
     [self.view addSubview:self.searchWeiboView];
     if (([self.sameCityUserResults count] == 0
         && [self.hotUserResults count]== 0 
@@ -274,6 +295,10 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    [_contentScrollView removeFromSuperview];
+    [_searchWeiboView removeFromSuperview];
+    [_searchUserView removeFromSuperview];
+    [_searchWeiboView removeFromSuperview];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
