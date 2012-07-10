@@ -289,15 +289,7 @@
         [activityIndicator removeFromSuperview];
         [activityIndicator release];
         
-        NSArray * array = [data valueForKey:@"BlogList"];
-        //TODO [felix] should to remove
-        NSMutableArray * mutableArray = [[NSMutableArray alloc] init];
-        for (NSDictionary * dict in array) {
-            if ([[dict valueForKey:@"Picture_width"] floatValue] > 0)
-            {
-                [mutableArray addObject:dict];
-            }
-        }
+        NSMutableArray * mutableArray = [[data valueForKey:K_BSDK_BLOGLIST] mutableCopy];
 
         _itemsViewController.itemDatas = mutableArray;
 
