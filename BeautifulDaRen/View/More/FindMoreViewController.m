@@ -208,7 +208,8 @@
         [_searchBar setScopeBarButtonDividerImage:[UIImage imageNamed:@"searchScopeDividerRightSelected"] forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateSelected];
         [_searchBar setScopeBarButtonDividerImage:[UIImage imageNamed:@"searchScopeDividerLeftSelected"] forLeftSegmentState:UIControlStateSelected rightSegmentState:UIControlStateNormal];
     }
-
+    [_searchBar setShowsCancelButton:YES animated:YES];
+    
     _searchWeiboView = [[WaterFlowView alloc] initWithFrame:CGRectMake(0, CONTENT_VIEW_HEIGHT_OFFSET + 44.0f, 320,270)];
     self.searchWeiboView.flowdelegate = self;
     self.searchWeiboView.flowdatasource = self;
@@ -264,8 +265,8 @@
     
     [self.view addSubview:self.searchWeiboView];
     if (([self.sameCityUserResults count] == 0
-        || [self.hotUserResults count]== 0 
-        || [self.interestingUserResults count]== 0) && !self.isSearchModel ) {
+        && [self.hotUserResults count]== 0 
+        && [self.interestingUserResults count]== 0) && !self.isSearchModel ) {
         [self refreshView];
     }
 }
@@ -509,66 +510,24 @@
     }
 }
 #pragma mark - UISearchBarDelegate delegate methods
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
+{
+    self.isSearchModel = YES;
+    [self.contentScrollView setHidden:YES];
+    [searchBar setShowsScopeBar:YES];
+    [searchBar setSelectedScopeButtonIndex:0];
+    [searchBar setFrame:CGRectMake(searchBar.frame.origin.x, searchBar.frame.origin.y, searchBar.frame.size.width, 88.0f)];
+    [self refreshLeftNavigationButton];
+    return YES;
+}
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
-{    
+{
     [self clearData];
-    if ([searchText length] > 0)
-    {
-        self.isSearchModel = YES;
-    }
-    else
-    {
-        self.isSearchModel = NO;
-        return;
-    }
-    [self refreshLeftNavigationButton];
-
-    CGFloat height = 44.0f;
-    BOOL isShowsCancelButton = NO;
-    BOOL isShowsScopeButton = NO;
-    if([searchText length] > 0)
-    {
-        height = 88.0f;
-        isShowsCancelButton = YES;
-        isShowsScopeButton = YES;
-        if(_contentScrollView.frame.origin.y == CONTENT_VIEW_HEIGHT_OFFSET)
-        {
-            [UIView beginAnimations:nil context:nil];
-            [UIView setAnimationDuration:0.3];
-            
-            [_contentScrollView setFrame:CGRectMake(_contentScrollView.frame.origin.x, CONTENT_VIEW_HEIGHT_OFFSET + 44.0f, _contentScrollView.frame.size.width,_contentScrollView.frame.size.height)];
-            
-            [UIView commitAnimations];
-        }
-    }
-    else
-    {
-        height = 44.0f;
-        
-        isShowsCancelButton = NO;
-        isShowsScopeButton = NO;
-        if(_contentScrollView.frame.origin.y == CONTENT_VIEW_HEIGHT_OFFSET + 44.0f)
-        {
-            [UIView beginAnimations:nil context:nil];
-            [UIView setAnimationDuration:0.3];
-            
-            [_contentScrollView setFrame:CGRectMake(_contentScrollView.frame.origin.x, CONTENT_VIEW_HEIGHT_OFFSET, _contentScrollView.frame.size.width,_contentScrollView.frame.size.height)];
-            
-            [UIView commitAnimations];
-        }
-    }
-    
-    [searchBar setShowsCancelButton:isShowsCancelButton animated:YES];
-    [searchBar setShowsScopeBar:isShowsScopeButton];
-    [searchBar setSelectedScopeButtonIndex:0];
-    [searchBar setFrame:CGRectMake(searchBar.frame.origin.x, searchBar.frame.origin.y, searchBar.frame.size.width, height)];
-    [self.searchUserView reloadData];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    [self.contentScrollView setHidden:YES];
     [searchBar endEditing:YES];
     self.isSearchModel = YES;
 
@@ -585,7 +544,6 @@
     searchBar.text = @"";
     [searchBar endEditing:YES];
     [searchBar setShowsScopeBar:NO];
-    [searchBar setShowsCancelButton:NO animated:YES];
     [searchBar setFrame:CGRectMake(searchBar.frame.origin.x, searchBar.frame.origin.y, searchBar.frame.size.width, 44.0f)];
     
     [UIView beginAnimations:nil context:nil];
@@ -599,6 +557,7 @@
 - (void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 {
     self.isFindWeibo = (selectedScope ==0) ? YES : NO;
+    self.isSearchModel = YES;
     [self checkSearchMode];
     // search when result array is empty in the opposite mode.
     if (self.isFindWeibo && [self.searchWeiboResults count] == 0)
@@ -726,11 +685,13 @@
 {
     NSInteger index = button.tag;
     NSMutableDictionary * friendDict = [self.searchUserResults objectAtIndex:index];
+    button.enabled = NO;
     if ([[friendDict valueForKey:K_BSDK_RELATIONSHIP] isEqualToString:K_BSDK_RELATIONSHIP_MY_FOLLOW]
         || [[friendDict valueForKey:K_BSDK_RELATIONSHIP] isEqualToString:K_BSDK_RELATIONSHIP_INTER_FOLLOW])
     {
         [[BSDKManager sharedManager] unFollowUser:[[friendDict valueForKey:KEY_ACCOUNT_ID] intValue]
                                   andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+                                      button.enabled = YES;
                                       if(AIO_STATUS_SUCCESS == status && K_BSDK_IS_RESPONSE_OK(data))
                                       {
                                           [friendDict setValue:K_BSDK_RELATIONSHIP_NONE forKey:K_BSDK_RELATIONSHIP];
@@ -746,6 +707,7 @@
     {
         [[BSDKManager sharedManager] followUser:[[friendDict valueForKey:KEY_ACCOUNT_ID] intValue]
                                 andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+                                    button.enabled = YES;
                                     if(AIO_STATUS_SUCCESS == status && K_BSDK_IS_RESPONSE_OK(data))
                                     {
                                         [friendDict setValue:K_BSDK_RELATIONSHIP_MY_FOLLOW forKey:K_BSDK_RELATIONSHIP];
