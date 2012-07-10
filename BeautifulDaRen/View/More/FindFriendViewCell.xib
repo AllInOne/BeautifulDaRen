@@ -165,9 +165,12 @@
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
-								<int key="IBUIButtonType">1</int>
 								<string key="IBUINormalTitle">取消关注</string>
 								<reference key="IBUIHighlightedTitleColor" ref="294451054"/>
+								<object class="NSColor" key="IBUIDisabledTitleColor">
+									<int key="NSColorSpace">1</int>
+									<bytes key="NSRGB">MC42MzA0MzQ3ODI2IDAuNjMwNDM0NzgyNiAwLjYzMDQzNDc4MjYAA</bytes>
+								</object>
 								<reference key="IBUINormalTitleColor" ref="294451054"/>
 								<object class="NSColor" key="IBUINormalTitleShadowColor">
 									<int key="NSColorSpace">3</int>
@@ -327,6 +330,7 @@
 				<string key="-2.CustomClassName">UIResponder</string>
 				<string key="-2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="10.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<real value="3" key="10.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 				<string key="16.CustomClassName">BorderImageView</string>
 				<string key="16.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="4.CustomClassName">FindFriendViewCell</string>

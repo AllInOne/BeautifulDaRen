@@ -128,21 +128,42 @@
 
 -(void)refreshView
 {
+    [self.sameCityUserResults removeAllObjects];
+    for (UIView * subView in self.sameCityDaRenView.subviews) {
+        [subView removeFromSuperview];
+    }
+    [self.interestingUserResults removeAllObjects];
+    for (UIView * subView in self.youMayInterestinView.subviews) {
+        [subView removeFromSuperview];
+    }
+    [self.hotUserResults removeAllObjects];
+    for (UIView * subView in self.hotDaRenView.subviews) {
+        [subView removeFromSuperview];
+    }
     [self refreshHotUser:K_BSDK_USERTYPE_SAME_CITY inScrollView:self.sameCityDaRenView];
     [self refreshHotUser:K_BSDK_USERTYPE_INTERESTED inScrollView:self.youMayInterestinView];
     [self refreshHotUser:K_BSDK_USERTYPE_HOT inScrollView:self.hotDaRenView];
 }
 -(void)dealloc
 {
+    [self.sameCityUserResults removeAllObjects];
+    for (UIView * subView in _sameCityDaRenView.subviews) {
+        [subView removeFromSuperview];
+    }
+    [self.interestingUserResults removeAllObjects];
+    for (UIView * subView in _youMayInterestinView.subviews) {
+        [subView removeFromSuperview];
+    }
+    [self.hotUserResults removeAllObjects];
+    for (UIView * subView in _hotDaRenView.subviews) {
+        [subView removeFromSuperview];
+    }
     [_sameCityDaRenView release];
     [_hotDaRenView release];
     [_youMayInterestinView release];
     [_contentScrollView release];
     [_searchUserView release];
     [_searchBar release];
-    [self.searchWeiboResults removeAllObjects];
-    [self.searchUserResults removeAllObjects];
-    [self.weiboHeights removeAllObjects];
     [_searchUserResults release];
     [_searchWeiboResults release];
     [_searchWeiboView release];
@@ -208,7 +229,9 @@
         [_searchBar setScopeBarButtonDividerImage:[UIImage imageNamed:@"searchScopeDividerRightSelected"] forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateSelected];
         [_searchBar setScopeBarButtonDividerImage:[UIImage imageNamed:@"searchScopeDividerLeftSelected"] forLeftSegmentState:UIControlStateSelected rightSegmentState:UIControlStateNormal];
     }
-
+    [_searchBar setShowsCancelButton:YES animated:YES];
+    [_searchBar setSelectedScopeButtonIndex:0];
+    
     _searchWeiboView = [[WaterFlowView alloc] initWithFrame:CGRectMake(0, CONTENT_VIEW_HEIGHT_OFFSET + 44.0f, 320,270)];
     self.searchWeiboView.flowdelegate = self;
     self.searchWeiboView.flowdatasource = self;
@@ -261,11 +284,11 @@
     
     [self.searchUserView setFrame:CGRectMake(0, CONTENT_VIEW_HEIGHT_OFFSET + 44.0f, self.searchUserView.frame.size.width,270)];
     [self.view addSubview:self.searchUserView];
-    
+
     [self.view addSubview:self.searchWeiboView];
     if (([self.sameCityUserResults count] == 0
-        || [self.hotUserResults count]== 0 
-        || [self.interestingUserResults count]== 0) && !self.isSearchModel ) {
+        && [self.hotUserResults count]== 0 
+        && [self.interestingUserResults count]== 0) && !self.isSearchModel ) {
         [self refreshView];
     }
 }
@@ -273,6 +296,10 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    [_contentScrollView removeFromSuperview];
+    [_searchWeiboView removeFromSuperview];
+    [_searchUserView removeFromSuperview];
+    [_searchWeiboView removeFromSuperview];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -509,66 +536,23 @@
     }
 }
 #pragma mark - UISearchBarDelegate delegate methods
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
+{
+    self.isSearchModel = YES;
+    [self.contentScrollView setHidden:YES];
+    [searchBar setShowsScopeBar:YES];
+    [searchBar setFrame:CGRectMake(searchBar.frame.origin.x, searchBar.frame.origin.y, searchBar.frame.size.width, 88.0f)];
+    [self refreshLeftNavigationButton];
+    return YES;
+}
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
-{    
+{
     [self clearData];
-    if ([searchText length] > 0)
-    {
-        self.isSearchModel = YES;
-    }
-    else
-    {
-        self.isSearchModel = NO;
-        return;
-    }
-    [self refreshLeftNavigationButton];
-
-    CGFloat height = 44.0f;
-    BOOL isShowsCancelButton = NO;
-    BOOL isShowsScopeButton = NO;
-    if([searchText length] > 0)
-    {
-        height = 88.0f;
-        isShowsCancelButton = YES;
-        isShowsScopeButton = YES;
-        if(_contentScrollView.frame.origin.y == CONTENT_VIEW_HEIGHT_OFFSET)
-        {
-            [UIView beginAnimations:nil context:nil];
-            [UIView setAnimationDuration:0.3];
-            
-            [_contentScrollView setFrame:CGRectMake(_contentScrollView.frame.origin.x, CONTENT_VIEW_HEIGHT_OFFSET + 44.0f, _contentScrollView.frame.size.width,_contentScrollView.frame.size.height)];
-            
-            [UIView commitAnimations];
-        }
-    }
-    else
-    {
-        height = 44.0f;
-        
-        isShowsCancelButton = NO;
-        isShowsScopeButton = NO;
-        if(_contentScrollView.frame.origin.y == CONTENT_VIEW_HEIGHT_OFFSET + 44.0f)
-        {
-            [UIView beginAnimations:nil context:nil];
-            [UIView setAnimationDuration:0.3];
-            
-            [_contentScrollView setFrame:CGRectMake(_contentScrollView.frame.origin.x, CONTENT_VIEW_HEIGHT_OFFSET, _contentScrollView.frame.size.width,_contentScrollView.frame.size.height)];
-            
-            [UIView commitAnimations];
-        }
-    }
-    
-    [searchBar setShowsCancelButton:isShowsCancelButton animated:YES];
-    [searchBar setShowsScopeBar:isShowsScopeButton];
-    [searchBar setSelectedScopeButtonIndex:0];
-    [searchBar setFrame:CGRectMake(searchBar.frame.origin.x, searchBar.frame.origin.y, searchBar.frame.size.width, height)];
-    [self.searchUserView reloadData];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    [self.contentScrollView setHidden:YES];
     [searchBar endEditing:YES];
     self.isSearchModel = YES;
 
@@ -585,7 +569,6 @@
     searchBar.text = @"";
     [searchBar endEditing:YES];
     [searchBar setShowsScopeBar:NO];
-    [searchBar setShowsCancelButton:NO animated:YES];
     [searchBar setFrame:CGRectMake(searchBar.frame.origin.x, searchBar.frame.origin.y, searchBar.frame.size.width, 44.0f)];
     
     [UIView beginAnimations:nil context:nil];
@@ -598,7 +581,8 @@
 
 - (void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 {
-    self.isFindWeibo = (selectedScope ==0) ? YES : NO;
+    self.isFindWeibo = (selectedScope == 0) ? YES : NO;
+    self.isSearchModel = YES;
     [self checkSearchMode];
     // search when result array is empty in the opposite mode.
     if (self.isFindWeibo && [self.searchWeiboResults count] == 0)
@@ -657,12 +641,12 @@
                                                    [activityIndicator release];
                                                    
                                                    self.inSearching = NO;
-                                                   if ([[data valueForKey:@"UserList"] count] == 0)
+                                                   if ([[data valueForKey:K_BSDK_USERLIST] count] == 0)
                                                    {
                                                        self.isSearchMoreUser = NO;
                                                    }
                                                    if (status == AIO_STATUS_SUCCESS) {
-                                                       NSArray * tempArray = [[data valueForKey:@"UserList"] copy];
+                                                       NSArray * tempArray = [[data valueForKey:K_BSDK_USERLIST] copy];
                                                        for (NSDictionary * dict in tempArray)
                                                        {
                                                            NSMutableDictionary * mutableDict = [dict mutableCopy];
@@ -688,15 +672,15 @@
                 [activityIndicator release];
                 
                 self.inSearching = NO;
-                if ([[data valueForKey:@"BlogList"] count] == 0)
+                if ([[data valueForKey:K_BSDK_BLOGLIST] count] == 0)
                 {
                     self.isSearchMoreWeibo = NO;
                 }
                 if (status == AIO_STATUS_SUCCESS)
                 {
-                    NSArray * array = [data valueForKey:@"BlogList"];
+                    NSArray * array = [data valueForKey:K_BSDK_BLOGLIST];
                     for (NSDictionary * dict in array) {
-                        if ([[dict valueForKey:@"Picture_width"] floatValue] > 0)
+                        if ([[dict valueForKey:K_BSDK_PICTURE_WIDTH] floatValue] > 0)
                         {
                             [self.searchWeiboResults addObject:dict];
                         }
@@ -726,11 +710,13 @@
 {
     NSInteger index = button.tag;
     NSMutableDictionary * friendDict = [self.searchUserResults objectAtIndex:index];
+    button.enabled = NO;
     if ([[friendDict valueForKey:K_BSDK_RELATIONSHIP] isEqualToString:K_BSDK_RELATIONSHIP_MY_FOLLOW]
         || [[friendDict valueForKey:K_BSDK_RELATIONSHIP] isEqualToString:K_BSDK_RELATIONSHIP_INTER_FOLLOW])
     {
         [[BSDKManager sharedManager] unFollowUser:[[friendDict valueForKey:KEY_ACCOUNT_ID] intValue]
                                   andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+                                      button.enabled = YES;
                                       if(AIO_STATUS_SUCCESS == status && K_BSDK_IS_RESPONSE_OK(data))
                                       {
                                           [friendDict setValue:K_BSDK_RELATIONSHIP_NONE forKey:K_BSDK_RELATIONSHIP];
@@ -746,6 +732,7 @@
     {
         [[BSDKManager sharedManager] followUser:[[friendDict valueForKey:KEY_ACCOUNT_ID] intValue]
                                 andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+                                    button.enabled = YES;
                                     if(AIO_STATUS_SUCCESS == status && K_BSDK_IS_RESPONSE_OK(data))
                                     {
                                         [friendDict setValue:K_BSDK_RELATIONSHIP_MY_FOLLOW forKey:K_BSDK_RELATIONSHIP];
@@ -807,13 +794,13 @@
 		cell  = [[[WaterFlowCell alloc] initWithReuseIdentifier:cellIdentifier] autorelease];
         
         NSDictionary * dict = [self.searchWeiboResults objectAtIndex:index];
-        CGFloat picWidth = [[dict valueForKey:@"Picture_width"] floatValue];
-        CGFloat picHeight = [[dict valueForKey:@"Picture_height"] floatValue];
+        CGFloat picWidth = [[dict valueForKey:K_BSDK_PICTURE_WIDTH] floatValue];
+        CGFloat picHeight = [[dict valueForKey:K_BSDK_PICTURE_HEIGHT] floatValue];
         CGFloat frameWidth = (self.view.frame.size.width - 14) / 3;
         CGFloat frameHeight = (frameWidth / picWidth) * picHeight;
         
         UIImageView * imageView = [[UIImageView alloc] init];
-        NSString * url = [dict valueForKey:@"pic_102"];
+        NSString * url = [dict valueForKey:K_BSDK_PICTURE_102];
         [imageView setImageWithURL:[NSURL URLWithString:url]];
         
         BorderImageView * borderImageView = [[BorderImageView alloc] initWithFrame:CGRectMake(2, 2, frameWidth + 2, frameHeight + 2) andView:imageView];
@@ -830,8 +817,8 @@
     NSInteger count = [self.searchWeiboResults count];
     for (int i = 0; i < count; i++)
     {
-        CGFloat picWidth = [[[self.searchWeiboResults objectAtIndex:i] valueForKey:@"Picture_width"] floatValue];
-        CGFloat picHeight = [[[self.searchWeiboResults objectAtIndex:i] valueForKey:@"Picture_height"] floatValue];
+        CGFloat picWidth = [[[self.searchWeiboResults objectAtIndex:i] valueForKey:K_BSDK_PICTURE_WIDTH] floatValue];
+        CGFloat picHeight = [[[self.searchWeiboResults objectAtIndex:i] valueForKey:K_BSDK_PICTURE_HEIGHT] floatValue];
         CGFloat frameWidth = (self.view.frame.size.width - 14) / 3;
         CGFloat frameHeight = (frameWidth / picWidth) * picHeight;
         [self.weiboHeights addObject:[NSNumber numberWithFloat:(frameHeight+4)]];
@@ -845,7 +832,6 @@
     self.isSearchMoreWeibo = YES;
     self.isSearchMoreUser = YES;
     self.inSearching = NO;
-    self.isFindWeibo = YES;
     [self.searchWeiboResults removeAllObjects];
     [self.searchUserResults removeAllObjects];
     [self.weiboHeights removeAllObjects];
@@ -880,7 +866,7 @@
 {
     if (self.isSearchModel)
     {
-        [self.navigationItem setLeftBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
+        [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
     }
     else
     {

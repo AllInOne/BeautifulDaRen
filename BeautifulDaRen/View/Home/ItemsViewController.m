@@ -14,6 +14,7 @@
 #import "UIImageView+WebCache.h"
 #import <QuartzCore/QuartzCore.h>
 #import "BorderImageView.h"
+#import "BSDKDefines.h"
 #import "BSDKManager.h"
 #import "BSDKDefines.h"
 #import "iToast.h"
@@ -33,7 +34,7 @@
 @property (assign, atomic) BOOL isSyncSccuessed;
 @property (assign, nonatomic) BOOL isFetchMore;
 -(void)loadItemsHeight;
-
+-(NSDictionary*) getValidItemDictionaryAtIndex:(NSUInteger)index;
 @end
 
 @implementation ItemsViewController
@@ -62,8 +63,9 @@
     NSInteger count = [self.itemDatas count];
     for (int i = 0; i < count; i++)
     {
-        CGFloat picWidth = [[[self.itemDatas objectAtIndex:i] valueForKey:@"Picture_width"] floatValue];
-        CGFloat picHeight = [[[self.itemDatas objectAtIndex:i] valueForKey:@"Picture_height"] floatValue];
+        NSDictionary * dict = [self getValidItemDictionaryAtIndex:i];
+        CGFloat picWidth = [[dict valueForKey:K_BSDK_PICTURE_WIDTH] floatValue];
+        CGFloat picHeight = [[dict valueForKey:K_BSDK_PICTURE_HEIGHT] floatValue];
         CGFloat frameWidth = (self.view.frame.size.width - 14) / 3;
         CGFloat frameHeight = (frameWidth / picWidth) * picHeight;
         [_itemsHeight addObject:[NSNumber numberWithFloat:(frameHeight+4)]];
@@ -137,7 +139,7 @@
 {
     BorderImageView * borderImageView = (BorderImageView*)notification.object;
     WeiboDetailViewController *weiboDetailController = 
-    [[WeiboDetailViewController alloc] initWithDictionary:[self.itemDatas objectAtIndex:borderImageView.index]];
+    [[WeiboDetailViewController alloc] initWithDictionary:[self getValidItemDictionaryAtIndex:borderImageView.index]];
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: weiboDetailController];
     
     [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
@@ -162,20 +164,19 @@
 {
     static NSString *cellIdentifier = @"WaterFlowCell";
 	WaterFlowCell *cell = nil;
-    // TODO don't use reusedable cell, there is some issues.
     cell = [flowView dequeueReusableCellWithIdentifier:cellIdentifier withIndex:index];
 	if(cell == nil)
 	{
 		cell  = [[[WaterFlowCell alloc] initWithReuseIdentifier:cellIdentifier] autorelease];
         
-        NSDictionary * dict = [self.itemDatas objectAtIndex:index];
-        CGFloat picWidth = [[dict valueForKey:@"Picture_width"] floatValue];
-        CGFloat picHeight = [[dict valueForKey:@"Picture_height"] floatValue];
+        NSDictionary * dict = [self getValidItemDictionaryAtIndex:index];
+        CGFloat picWidth = [[dict valueForKey:K_BSDK_PICTURE_WIDTH] floatValue];
+        CGFloat picHeight = [[dict valueForKey:K_BSDK_PICTURE_HEIGHT] floatValue];
         CGFloat frameWidth = (self.view.frame.size.width - 14) / 3;
         CGFloat frameHeight = (frameWidth / picWidth) * picHeight;
         
         UIImageView * imageView = [[UIImageView alloc] init];
-        NSString * url = [dict valueForKey:@"pic_102"];
+        NSString * url = [dict valueForKey:K_BSDK_PICTURE_102];
         [imageView setImageWithURL:[NSURL URLWithString:url]];
         
         BorderImageView * borderImageView = [[BorderImageView alloc] initWithFrame:CGRectMake(2, 2, frameWidth + 2, frameHeight + 2) andView:imageView];
@@ -275,4 +276,13 @@
     [_waterFlowView reloadData];
 }
 
+-(NSDictionary*) getValidItemDictionaryAtIndex:(NSUInteger)index
+{
+    NSDictionary * dict = [self.itemDatas objectAtIndex:index];
+    if ([dict valueForKey:K_BSDK_PICTURE_102] == nil)
+    {
+        dict = [dict valueForKey:K_BSDK_RETWEET_STATUS];
+    }
+    return dict;
+}
 @end
