@@ -12,6 +12,7 @@
 #import "ViewHelper.h"
 #import "BSDKManager.h"
 #import "iToast.h"
+#import "BSDKDefines.h"
 #import "ViewConstants.h"
 
 @interface ModifyPasswordViewController ()
@@ -185,7 +186,7 @@
                                                   oldPassword:self.oldPasswordField.text
                                                 toNewPassword:self.resetPasswordField.text
                                               andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-                                                  [[iToast makeText:[data valueForKey:@"msg"]] show];
+                                                  [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
                                               }];
     }
 }

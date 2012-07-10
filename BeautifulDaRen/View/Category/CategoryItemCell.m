@@ -13,6 +13,7 @@
 #import "BSDKManager.h"
 #import "BSDKDefines.h"
 #import "WeiboListViewController.h"
+#import "iToast.h"
 
 #define CLASS_WEIBO_PAGE_SIZE   (20.0)
 
@@ -72,20 +73,26 @@
         [activityIndicator removeFromSuperview];
         [activityIndicator release];
         
-        self.weiboList = [NSMutableArray arrayWithCapacity:CLASS_WEIBO_PAGE_SIZE];
-        
-        NSArray * classWeiboList = [data objectForKey:K_BSDK_BLOGLIST];
-        for (NSDictionary * weibo in classWeiboList) {
-            if ([weibo objectForKey:K_BSDK_PICTURE_102]) {
-                [self.weiboList addObject:weibo];
+        if (K_BSDK_IS_RESPONSE_OK(data)) {
+            self.weiboList = [NSMutableArray arrayWithCapacity:CLASS_WEIBO_PAGE_SIZE];
+            
+            NSArray * classWeiboList = [data objectForKey:K_BSDK_BLOGLIST];
+            for (NSDictionary * weibo in classWeiboList) {
+                if ([weibo objectForKey:K_BSDK_PICTURE_102]) {
+                    [self.weiboList addObject:weibo];
+                }
             }
+            
+            _categoryScrollItem = [[CommonScrollView alloc] initWithNibName:nil bundle:nil data:[self getPicturesFromWeiboList] andDelegate:self];
+            
+            [self.view addSubview:_categoryScrollItem.view];
+            
+            _categoryScrollItem.view.frame = CGRectMake(0, CATEGORY_TITLE_FONT_HEIGHT + CONTENT_MARGIN, self.view.frame.size.width, CATEGORY_ITEM_HEIGHT);
         }
-        
-        _categoryScrollItem = [[CommonScrollView alloc] initWithNibName:nil bundle:nil data:[self getPicturesFromWeiboList] andDelegate:self];
-        
-        [self.view addSubview:_categoryScrollItem.view];
-        
-        _categoryScrollItem.view.frame = CGRectMake(0, CATEGORY_TITLE_FONT_HEIGHT + CONTENT_MARGIN, self.view.frame.size.width, CATEGORY_ITEM_HEIGHT);
+        else
+        {
+            [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
+        }
     }];
 }
 

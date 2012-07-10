@@ -253,10 +253,16 @@
         [activityIndicator removeFromSuperview];
         [activityIndicator release];
         
-        [self.friendDictionary setValuesForKeysWithDictionary:data];
-        [self refreshTopView];
-        [self refreshToolBar];
-        [self.friendDetailView reloadData];
+        if (K_BSDK_IS_RESPONSE_OK(data)) {
+            [self.friendDictionary setValuesForKeysWithDictionary:data];
+            [self refreshTopView];
+            [self refreshToolBar];
+            [self.friendDetailView reloadData];
+        }
+        else
+        {
+            [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
+        }
     };
     
     if (self.friendId) {
@@ -308,7 +314,13 @@
     processDoneWithDictBlock doneBlock = ^(AIO_STATUS status, NSDictionary *data)
     {
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: FALSE];
-        [self refreshView];
+        if (K_BSDK_IS_RESPONSE_OK(data)) {
+            [self refreshView];
+        }
+        else
+        {
+            [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
+        }
     };
     if ([relation isEqualToString:K_BSDK_RELATIONSHIP_MY_FOLLOW] || [relation isEqualToString:K_BSDK_RELATIONSHIP_INTER_FOLLOW])
     {

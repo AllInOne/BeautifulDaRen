@@ -16,6 +16,7 @@
 #import "ViewConstants.h"
 #import "BSDKDefines.h"
 #import "BSDKManager.h"
+#import "iToast.h"
 
 @interface FriendsSelectionViewController()
 
@@ -65,20 +66,25 @@
 
     [[BSDKManager sharedManager] getFollowList:GET_CURRENT_USER_INFO_BY_KEY(K_BSDK_UID) pageSize:500 pageIndex:1 andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
         
+        if (K_BSDK_IS_RESPONSE_OK(data)) {
+            NSArray * userList = [data objectForKey:K_BSDK_USERLIST];
+            NSMutableArray * friendList = [NSMutableArray arrayWithCapacity:[userList count]];
+            
+            for(NSDictionary * user in userList)
+            {
+                [friendList addObject:[[user objectForKey:K_BSDK_ATTENTIONUSERINFO] objectForKey:K_BSDK_USERNAME]];
+            }
+            
+            self.friendsList = friendList;
+            [self preloadView];
+        }
+        else
+        {
+            [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
+        }
         [activityIndicator stopAnimating];
         [activityIndicator removeFromSuperview];
         [activityIndicator release];
-        
-        NSArray * userList = [data objectForKey:K_BSDK_USERLIST];
-        NSMutableArray * friendList = [NSMutableArray arrayWithCapacity:[userList count]];
-        
-        for(NSDictionary * user in userList)
-        {
-            [friendList addObject:[[user objectForKey:K_BSDK_ATTENTIONUSERINFO] objectForKey:K_BSDK_USERNAME]];
-        }
-        
-        self.friendsList = friendList;
-        [self preloadView];
     }];
 }
 

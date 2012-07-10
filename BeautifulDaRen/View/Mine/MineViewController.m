@@ -438,9 +438,16 @@
         [[BSDKManager sharedManager] getUserInforByUserId:accountId
                                           andDoneCallback:^(AIO_STATUS status, NSDictionary *data)
         {
+            if (K_BSDK_IS_RESPONSE_OK(data)) {
+                NSAssert(data && [data count] > 0, @"data should not be nil");
+               [[NSUserDefaults standardUserDefaults] setObject:data forKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
+                [self.tableView reloadData];
+            }
+            else
+            {
+                [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
+            }
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: FALSE];
-            [[NSUserDefaults standardUserDefaults] setObject:data forKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
-            [self.tableView reloadData];
         }];
     }
 }

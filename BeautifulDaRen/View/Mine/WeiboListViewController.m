@@ -203,7 +203,7 @@
                                             andDoneCallback:doneBlock];
         dataListKey = K_BSDK_BLOGLIST;
     }
-    else if (self.controllerType == WeiboListViewControllerType_MY_COLLECTION)
+    else if (self.controllerType == WeiboListViewControllerType_MY_COLLECTION || self.controllerType == WeiboListViewControllerType_FRIEND_COLLECTION)
     {
         [[BSDKManager sharedManager] getFavWeiboListByUserId:userId
                                                    pageSize:AUTOLOAD_PAGE_SIZE
