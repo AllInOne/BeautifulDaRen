@@ -311,6 +311,7 @@
     // Do any additional setup after loading the view from its nib.
     if (self.weiboData) {
         self.weiboId = [self.weiboData objectForKey:K_BSDK_UID];
+        [self refreshView];
     }
 
     [self onRefreshButtonClicked];
