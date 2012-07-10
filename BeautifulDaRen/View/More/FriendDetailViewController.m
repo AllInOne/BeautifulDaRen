@@ -21,6 +21,16 @@
 #import "UIImageView+WebCache.h"
 #import "BorderImageView.h"
 
+typedef enum
+{
+//    SECTION_NOTE,
+    SECTION_VERIFY,
+    // key brief is the last section.
+    SECTION_BRIEF,
+    SECTION_COUNT
+}SECTION_NAME;
+
+
 @interface FriendDetailViewController()
 @property (retain, nonatomic) IBOutlet UIButton * weiboButton;
 @property (retain, nonatomic) IBOutlet UIButton * topicButton;
@@ -351,7 +361,7 @@
     NSInteger number = 0;
     if(section == 0)
     {
-        number = _isIdentification ? 3 : 2;
+        number = _isIdentification ? SECTION_COUNT : SECTION_COUNT - 1;
     }
     else if(section == 1)
     {
@@ -376,29 +386,37 @@
             cell = [[[NSBundle mainBundle] loadNibNamed:buttonViewCellIdentifier owner:self options:nil] objectAtIndex:3];
         }
         ButtonViewCell * buttonViewCell = (ButtonViewCell*)cell;
-        if(_isIdentification && [indexPath row] == 0)
+        if(_isIdentification)
         {
-            buttonViewCell.leftLabel.text = NSLocalizedString(@"notes", @"notes");
-            buttonViewCell.buttonText.text = NSLocalizedString(@"set_notes", @"set_notes");
-        }
-        else if(_isIdentification && [indexPath row] == 1)
-        {
-            buttonViewCell.leftLabel.text = NSLocalizedString(@"authentication", @"authentication");
-            if ([[self.friendDictionary objectForKey:K_BSDK_ISVERIFY] isEqual:@"1"]) {
-                buttonViewCell.buttonText.text = NSLocalizedString(@"authentication_done", @"authentication_done");
+            switch ([indexPath row]) {
+//                case SECTION_NOTE:
+//                {
+//                    buttonViewCell.leftLabel.text = NSLocalizedString(@"notes", @"notes");
+//                    buttonViewCell.buttonText.text = NSLocalizedString(@"set_notes", @"set_notes");
+//                    break;
+//                }
+                case SECTION_VERIFY:
+                {
+                    buttonViewCell.leftLabel.text = NSLocalizedString(@"authentication", @"authentication");
+                    if ([[self.friendDictionary objectForKey:K_BSDK_ISVERIFY] isEqual:@"1"]) {
+                        buttonViewCell.buttonText.text = NSLocalizedString(@"authentication_done", @"authentication_done");
+                    }
+                    else
+                    {
+                        buttonViewCell.buttonText.text = NSLocalizedString(@"authentication_not_done", @"authentication_not_done");
+                    }
+                    
+                    buttonViewCell.buttonRightIcon.hidden = YES;
+                    break;   
+                }
+                case SECTION_BRIEF:
+                {
+                    buttonViewCell.leftLabel.text = NSLocalizedString(@"brief", @"brief");
+                    buttonViewCell.buttonText.text = [self.friendDictionary valueForKey:KEY_ACCOUNT_INTRO];
+                    buttonViewCell.buttonRightIcon.hidden = YES;
+                    break;
+                }
             }
-            else
-            {
-                buttonViewCell.buttonText.text = NSLocalizedString(@"authentication_not_done", @"authentication_not_done");
-            }
-
-            buttonViewCell.buttonRightIcon.hidden = YES;
-        }
-        else
-        {
-            buttonViewCell.leftLabel.text = NSLocalizedString(@"brief", @"brief");
-            buttonViewCell.buttonText.text = [self.friendDictionary valueForKey:KEY_ACCOUNT_INTRO];
-            buttonViewCell.buttonRightIcon.hidden = YES;
         }
     }
     else if(section == 1)
@@ -434,23 +452,12 @@
         ((GridViewCell*)cell).fourthLabel.attributedText = attrStr;
         ((GridViewCell*)cell).fourthLabel.textAlignment = UITextAlignmentCenter;
         
-//        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"topic", @"") detail:@"(33)"];
-//        ((GridViewCell*)cell).fifthLabel.attributedText = attrStr;
-//        ((GridViewCell*)cell).fifthLabel.textAlignment = UITextAlignmentCenter;
-//        
-//        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"published", @"") detail:@"(12)"];
-//        ((GridViewCell*)cell).sixthLabel.attributedText = attrStr;
-//        ((GridViewCell*)cell).sixthLabel.textAlignment = UITextAlignmentCenter;
-        
         _weiboButton = ((GridViewCell*)cell).firstButton;
         _collectionButton= ((GridViewCell*)cell).secondButton;
 
         _followButton = ((GridViewCell*)cell).thirdButton;
         _fansButton = ((GridViewCell*)cell).fourthButton;
-        
-//        _topicButton = ((GridViewCell*)cell).fifthButton;
-//        _publishedButton = ((GridViewCell*)cell).sixthButton;
-//        ((GridViewCell*)cell).delegate = self;
+
         [((GridViewCell*)cell).firstButton addTarget:self action:@selector(didButtonPressed:inView:) forControlEvents:UIControlEventTouchUpInside];
         [((GridViewCell*)cell).secondButton addTarget:self action:@selector(didButtonPressed:inView:) forControlEvents:UIControlEventTouchUpInside];
         [((GridViewCell*)cell).thirdButton addTarget:self action:@selector(didButtonPressed:inView:) forControlEvents:UIControlEventTouchUpInside];
@@ -466,16 +473,16 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if([indexPath section] == 0 && [indexPath row] == 0)
-    {
-        EdittingViewController * edittingViewController = [[EdittingViewController alloc]
-                                                           initWithNibName:@"EdittingViewController"
-                                                           bundle:nil
-                                                           type:EdittingViewController_type0
-                                                           block:nil];
-        [self.navigationController pushViewController:edittingViewController animated:YES];
-        [edittingViewController release];
-    }
+//    if([indexPath section] == 0 && [indexPath row] == SECTION_NOTE)
+//    {
+//        EdittingViewController * edittingViewController = [[EdittingViewController alloc]
+//                                                           initWithNibName:@"EdittingViewController"
+//                                                           bundle:nil
+//                                                           type:EdittingViewController_type0
+//                                                           block:nil];
+//        [self.navigationController pushViewController:edittingViewController animated:YES];
+//        [edittingViewController release];
+//    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

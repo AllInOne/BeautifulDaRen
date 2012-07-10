@@ -98,10 +98,6 @@
         _commentMeSegmentControl = [_commentMeSegmentControl initWithFrame:_commentMeSegmentControl.frame leftText:NSLocalizedString(@"allow", @"allow") rightText:NSLocalizedString(@"not_allow", @"not_allow") selectedIndex:0];
         _atMeSegmentControl = [_atMeSegmentControl initWithFrame:_atMeSegmentControl.frame leftText:NSLocalizedString(@"allow", @"allow") rightText:NSLocalizedString(@"not_allow", @"not_allow") selectedIndex:0];
         _privateLetterMeSegmentControl = [_privateLetterMeSegmentControl initWithFrame:_privateLetterMeSegmentControl.frame leftText:NSLocalizedString(@"allow", @"allow") rightText:NSLocalizedString(@"not_allow", @"not_allow") selectedIndex:0];
-//
-//        [ViewHelper setSegmentControlWithSegment:_commentMeSegmentControl LeftText:NSLocalizedString(@"allow", @"") rightText:NSLocalizedString(@"not_allow", @"")];
-//        [ViewHelper setSegmentControlWithSegment:_atMeSegmentControl LeftText:NSLocalizedString(@"allow", @"") rightText:NSLocalizedString(@"not_allow", @"")];
-//        [ViewHelper setSegmentControlWithSegment:_privateLetterMeSegmentControl LeftText:NSLocalizedString(@"allow", @"") rightText:NSLocalizedString(@"not_allow", @"")];
         
         NSString * radioButtonGroupId = @"RadioButtonInEdittingView";
 
