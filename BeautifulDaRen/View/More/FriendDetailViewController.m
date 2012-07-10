@@ -237,6 +237,11 @@
     [super viewDidLoad];
     
     [self refreshView];
+    
+    if (self.friendDictionary) {
+        [self refreshTopView];
+        [self refreshToolBar];
+    }
 }
 
 - (void)refreshView
