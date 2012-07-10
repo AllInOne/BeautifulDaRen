@@ -311,6 +311,7 @@
     // Do any additional setup after loading the view from its nib.
     if (self.weiboData) {
         self.weiboId = [self.weiboData objectForKey:K_BSDK_UID];
+        [self refreshView];
     }
 
     [self onRefreshButtonClicked];
@@ -614,7 +615,7 @@
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: FALSE];
             
             if (K_BSDK_IS_RESPONSE_OK(data)) {
-                FriendDetailViewController * friendDetailViewController = [[FriendDetailViewController alloc] initWithDictionary:[data objectForKey:K_BSDK_USERINFO]];
+                FriendDetailViewController * friendDetailViewController = [[FriendDetailViewController alloc] initWithDictionary:data];
                 [self.navigationController pushViewController:friendDetailViewController animated:YES];
                 [friendDetailViewController release];
             }
@@ -636,7 +637,7 @@
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: FALSE];
             
             if (K_BSDK_IS_RESPONSE_OK(data)) {
-                FriendDetailViewController * friendDetailViewController = [[FriendDetailViewController alloc] initWithDictionary:[data objectForKey:K_BSDK_USERINFO]];
+                FriendDetailViewController * friendDetailViewController = [[FriendDetailViewController alloc] initWithDictionary:data];
                 [self.navigationController pushViewController:friendDetailViewController animated:YES];
                 [friendDetailViewController release];
             }

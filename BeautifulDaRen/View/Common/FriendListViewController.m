@@ -256,7 +256,13 @@
     {
         if ([relation isEqualToString:K_BSDK_RELATIONSHIP_INTER_FOLLOW])
         {
-            title = NSLocalizedString(@"unfollow", @"unfollow");
+            if (self.type == FriendListViewController_TYPE_MY_FANS) {
+                title = NSLocalizedString(@"remove_fan", @"remove_fan");
+            }
+            else
+            {
+                title = NSLocalizedString(@"unfollow", @"unfollow");
+            }
         }
         else if ([relation isEqualToString:K_BSDK_RELATIONSHIP_MY_FOLLOW])
         {
@@ -277,7 +283,6 @@
 
 -(NSDictionary*)extractFriendDictionary:(NSDictionary*)FriendRawDict
 {
-    NSLog(@"%@", FriendRawDict);
     switch (_type) {
         case FriendListViewController_TYPE_MY_FANS:
         case FriendListViewController_TYPE_FRIEND_FANS:
@@ -423,6 +428,7 @@
 {
     BOOL isShouldFollow = YES;
     NSDictionary * dict = [self extractFriendDictionary:[self.friendsList objectAtIndex:button.tag]];
+    NSInteger userId = [[dict valueForKey:K_BSDK_UID] intValue];
     NSString * relation = [dict valueForKey:K_BSDK_RELATIONSHIP];
     switch (self.type) {
         case FriendListViewController_TYPE_MY_FOLLOW:
@@ -432,8 +438,19 @@
         }
         case FriendListViewController_TYPE_MY_FANS:
         {
-            isShouldFollow = ([relation isEqualToString:K_BSDK_RELATIONSHIP_MY_FOLLOW] ||[relation isEqualToString:K_BSDK_RELATIONSHIP_INTER_FOLLOW]) ? NO : YES;
-            break;
+            [[BSDKManager sharedManager] removeFan:[dict valueForKey:K_BSDK_UID] andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+                if(K_BSDK_IS_RESPONSE_OK(data))
+                {
+                    [_friendsList removeObjectAtIndex:button.tag];
+                    
+                    [self.commonTableView reloadData];
+                }
+                else
+                {
+                    [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
+                }
+            }];
+            return;
         }
         case FriendListViewController_TYPE_MY_BLACKLIST:
         case FriendListViewController_TYPE_FRIEND_FOLLOW:
@@ -442,9 +459,7 @@
             isShouldFollow = ([relation isEqualToString:K_BSDK_RELATIONSHIP_MY_FOLLOW] ||[relation isEqualToString:K_BSDK_RELATIONSHIP_INTER_FOLLOW]) ? NO : YES;
             break;
     }
-    
-    NSInteger userId = [[dict valueForKey:K_BSDK_UID] intValue];
-    NSLog(@"%@, %d", relation, isShouldFollow);
+
     [button setEnabled:NO];
     
     if (NO == isShouldFollow)
