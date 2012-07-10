@@ -641,12 +641,12 @@
                                                    [activityIndicator release];
                                                    
                                                    self.inSearching = NO;
-                                                   if ([[data valueForKey:@"UserList"] count] == 0)
+                                                   if ([[data valueForKey:K_BSDK_USERLIST] count] == 0)
                                                    {
                                                        self.isSearchMoreUser = NO;
                                                    }
                                                    if (status == AIO_STATUS_SUCCESS) {
-                                                       NSArray * tempArray = [[data valueForKey:@"UserList"] copy];
+                                                       NSArray * tempArray = [[data valueForKey:K_BSDK_USERLIST] copy];
                                                        for (NSDictionary * dict in tempArray)
                                                        {
                                                            NSMutableDictionary * mutableDict = [dict mutableCopy];
@@ -672,15 +672,15 @@
                 [activityIndicator release];
                 
                 self.inSearching = NO;
-                if ([[data valueForKey:@"BlogList"] count] == 0)
+                if ([[data valueForKey:K_BSDK_BLOGLIST] count] == 0)
                 {
                     self.isSearchMoreWeibo = NO;
                 }
                 if (status == AIO_STATUS_SUCCESS)
                 {
-                    NSArray * array = [data valueForKey:@"BlogList"];
+                    NSArray * array = [data valueForKey:K_BSDK_BLOGLIST];
                     for (NSDictionary * dict in array) {
-                        if ([[dict valueForKey:@"Picture_width"] floatValue] > 0)
+                        if ([[dict valueForKey:K_BSDK_PICTURE_WIDTH] floatValue] > 0)
                         {
                             [self.searchWeiboResults addObject:dict];
                         }
@@ -794,13 +794,13 @@
 		cell  = [[[WaterFlowCell alloc] initWithReuseIdentifier:cellIdentifier] autorelease];
         
         NSDictionary * dict = [self.searchWeiboResults objectAtIndex:index];
-        CGFloat picWidth = [[dict valueForKey:@"Picture_width"] floatValue];
-        CGFloat picHeight = [[dict valueForKey:@"Picture_height"] floatValue];
+        CGFloat picWidth = [[dict valueForKey:K_BSDK_PICTURE_WIDTH] floatValue];
+        CGFloat picHeight = [[dict valueForKey:K_BSDK_PICTURE_HEIGHT] floatValue];
         CGFloat frameWidth = (self.view.frame.size.width - 14) / 3;
         CGFloat frameHeight = (frameWidth / picWidth) * picHeight;
         
         UIImageView * imageView = [[UIImageView alloc] init];
-        NSString * url = [dict valueForKey:@"pic_102"];
+        NSString * url = [dict valueForKey:K_BSDK_PICTURE_102];
         [imageView setImageWithURL:[NSURL URLWithString:url]];
         
         BorderImageView * borderImageView = [[BorderImageView alloc] initWithFrame:CGRectMake(2, 2, frameWidth + 2, frameHeight + 2) andView:imageView];
@@ -817,8 +817,8 @@
     NSInteger count = [self.searchWeiboResults count];
     for (int i = 0; i < count; i++)
     {
-        CGFloat picWidth = [[[self.searchWeiboResults objectAtIndex:i] valueForKey:@"Picture_width"] floatValue];
-        CGFloat picHeight = [[[self.searchWeiboResults objectAtIndex:i] valueForKey:@"Picture_height"] floatValue];
+        CGFloat picWidth = [[[self.searchWeiboResults objectAtIndex:i] valueForKey:K_BSDK_PICTURE_WIDTH] floatValue];
+        CGFloat picHeight = [[[self.searchWeiboResults objectAtIndex:i] valueForKey:K_BSDK_PICTURE_HEIGHT] floatValue];
         CGFloat frameWidth = (self.view.frame.size.width - 14) / 3;
         CGFloat frameHeight = (frameWidth / picWidth) * picHeight;
         [self.weiboHeights addObject:[NSNumber numberWithFloat:(frameHeight+4)]];
@@ -866,7 +866,7 @@
 {
     if (self.isSearchModel)
     {
-        [self.navigationItem setLeftBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
+        [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
     }
     else
     {
