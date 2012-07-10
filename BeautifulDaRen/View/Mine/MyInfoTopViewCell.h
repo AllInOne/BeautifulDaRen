@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "BorderImageView.h"
 @interface MyInfoTopViewCell : UITableViewCell
 
-@property (retain, nonatomic) IBOutlet UIImageView * avatarImageView;
+@property (retain, nonatomic) IBOutlet BorderImageView * avatarImageView;
 @property (retain, nonatomic) IBOutlet UIImageView * vMarkImageView;
 @property (retain, nonatomic) IBOutlet UILabel * levelLabel;
 @property (retain, nonatomic) IBOutlet UIImageView * rightImageView;

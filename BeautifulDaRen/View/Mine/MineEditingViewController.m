@@ -193,20 +193,31 @@ typedef enum
         if (cell == nil) {
             cell = [[[NSBundle mainBundle] loadNibNamed:infoTopViewIdentifier owner:self options:nil] objectAtIndex:1];
             
+            UIImageView * imageView = [[UIImageView alloc] init];
             if (self.avatarImage) {
-                ((MyInfoTopViewCell*)cell).avatarImageView.image = self.avatarImage;
+                [imageView setImage:self.avatarImage];
             }
             else
             {
                 NSString * avatarUrl = [self.tableViewDict objectForKey:K_BSDK_PICTURE_65];
-                if (avatarUrl && [avatarUrl length]) {
-                    [((MyInfoTopViewCell*)cell).avatarImageView setImageWithURL:[NSURL URLWithString:avatarUrl]];
+                if (avatarUrl && [avatarUrl length] > 0)
+                {
+                    [imageView setImageWithURL:[NSURL URLWithString:avatarUrl] placeholderImage:[UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:self.tableViewDict]]];
                 }
                 else
                 {
-                    ((MyInfoTopViewCell*)cell).avatarImageView.image = [UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:self.tableViewDict]];
+                    [imageView setImage:[UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:self.tableViewDict]]];
                 }            
             }
+            CGRect borderImageViewFrame = CGRectMake(0,0, 
+                                                     ((MyInfoTopViewCell*)cell).avatarImageView.frame.size.width,
+                                                     ((MyInfoTopViewCell*)cell).avatarImageView.frame.size.height);
+            BorderImageView * tempBorderView = [[BorderImageView alloc]
+                                                initWithFrame:borderImageViewFrame
+                                                andView:imageView];
+            [((MyInfoTopViewCell*)cell).avatarImageView addSubview:tempBorderView];
+            [imageView release];
+            [tempBorderView release];
 
             [((MyInfoTopViewCell*)cell).updateAvatarButton addTarget:self action:@selector(onUpdataAvatarPressed:) forControlEvents:UIControlEventTouchUpInside];
         }

@@ -608,7 +608,8 @@
                                         initWithFrame:borderImageViewFrame
                                         andView:imageView];
     [self.avatarImageView addSubview:tempBorderView];
-    
+    [imageView release];
+    [tempBorderView release];
     NSString * isVerify = [self.friendDictionary objectForKey:K_BSDK_ISVERIFY];
     if (isVerify && [isVerify isEqual:K_BSDK_ISVERIFY_YES]) {
         [self.vMarkImageView setImage:[UIImage imageNamed:@"v_mark_big"]];

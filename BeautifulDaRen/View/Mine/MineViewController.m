@@ -143,17 +143,27 @@
         }
         
         NSDictionary * userDict = [[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
-        NSString * avatarUrl = [userDict objectForKey:K_BSDK_PICTURE_65];
-        if (avatarUrl && [avatarUrl length]) {
-            [((MyInfoTopViewCell*)cell).avatarImageView setImageWithURL:[NSURL URLWithString:avatarUrl] placeholderImage:[UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:userDict]]];
+        UIImageView * imageView = [[UIImageView alloc] init];
+        NSString * avatarImageUrl = [userDict valueForKey:K_BSDK_PICTURE_65];
+        if (avatarImageUrl && [avatarImageUrl length] > 0 ) {
+            [imageView setImageWithURL:[NSURL URLWithString:avatarImageUrl] placeholderImage:[UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:userDict]]];
         }
         else
         {
-            ((MyInfoTopViewCell*)cell).avatarImageView.image = [UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:userDict]];
+            [imageView setImage:[UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:userDict]]];
         }
         
+        CGRect borderImageViewFrame = CGRectMake(0,0, 
+                                                 ((MyInfoTopViewCell*)cell).avatarImageView.frame.size.width,
+                                                 ((MyInfoTopViewCell*)cell).avatarImageView.frame.size.height);
+        BorderImageView * tempBorderView = [[BorderImageView alloc]
+                                            initWithFrame:borderImageViewFrame
+                                            andView:imageView];
+        [((MyInfoTopViewCell*)cell).avatarImageView addSubview:tempBorderView];
+        [imageView release];
+        [tempBorderView release];
         NSString * isVerify = [userDict objectForKey:K_BSDK_ISVERIFY];
-        if (isVerify && [isVerify isEqual:@"1"]) {
+        if (isVerify && [isVerify isEqual:K_BSDK_ISVERIFY_YES]) {
             [((MyInfoTopViewCell*)cell).vMarkImageView setImage:[UIImage imageNamed:@"v_mark_big"]];
             [((MyInfoTopViewCell*)cell).vMarkImageView setHidden:NO];
         }

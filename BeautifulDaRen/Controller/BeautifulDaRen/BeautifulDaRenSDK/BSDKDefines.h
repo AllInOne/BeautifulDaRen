@@ -99,8 +99,6 @@
 
 #define K_BSDK_ISFAV @"IsFav"
 
-#define K_BSDK_ISVERIFY @"IsVerify"
-
 #define K_BSDK_CREATETIME @"CreateTime"
 
 #define K_BSDK_KEYWORDS @"KeyWords"
@@ -166,6 +164,7 @@
 #define K_BSDK_RELATIONSHIP_INTER_FOLLOW @"4"
 #define K_BSDK_RELATIONSHIP_BLACK_LIST   @"5"
 
+#define K_BSDK_ISVERIFY @"IsVerify"
 #define K_BSDK_ISVERIFY_NO @"0"
 #define K_BSDK_ISVERIFY_YES @"1"
 
