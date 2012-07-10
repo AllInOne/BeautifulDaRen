@@ -230,6 +230,7 @@
         [_searchBar setScopeBarButtonDividerImage:[UIImage imageNamed:@"searchScopeDividerLeftSelected"] forLeftSegmentState:UIControlStateSelected rightSegmentState:UIControlStateNormal];
     }
     [_searchBar setShowsCancelButton:YES animated:YES];
+    [_searchBar setSelectedScopeButtonIndex:0];
     
     _searchWeiboView = [[WaterFlowView alloc] initWithFrame:CGRectMake(0, CONTENT_VIEW_HEIGHT_OFFSET + 44.0f, 320,270)];
     self.searchWeiboView.flowdelegate = self;
@@ -540,7 +541,6 @@
     self.isSearchModel = YES;
     [self.contentScrollView setHidden:YES];
     [searchBar setShowsScopeBar:YES];
-    [searchBar setSelectedScopeButtonIndex:0];
     [searchBar setFrame:CGRectMake(searchBar.frame.origin.x, searchBar.frame.origin.y, searchBar.frame.size.width, 88.0f)];
     [self refreshLeftNavigationButton];
     return YES;
@@ -581,7 +581,7 @@
 
 - (void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 {
-    self.isFindWeibo = (selectedScope ==0) ? YES : NO;
+    self.isFindWeibo = (selectedScope == 0) ? YES : NO;
     self.isSearchModel = YES;
     [self checkSearchMode];
     // search when result array is empty in the opposite mode.
@@ -832,7 +832,6 @@
     self.isSearchMoreWeibo = YES;
     self.isSearchMoreUser = YES;
     self.inSearching = NO;
-    self.isFindWeibo = YES;
     [self.searchWeiboResults removeAllObjects];
     [self.searchUserResults removeAllObjects];
     [self.weiboHeights removeAllObjects];
