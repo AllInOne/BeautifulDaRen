@@ -379,7 +379,6 @@
             [friendListViewCell.actionButton setHidden:YES];
         }
 
-//        friendListViewCell.delegate = self;
         [friendListViewCell.actionButton addTarget:self action:@selector(didButtonPressed:inView:) forControlEvents:UIControlEventTouchUpInside];
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
