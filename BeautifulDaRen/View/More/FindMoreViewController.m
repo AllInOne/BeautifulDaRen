@@ -494,9 +494,11 @@
         imageView.image = [UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:friendDict]];
     }
     
-    BorderImageView * friendAvatarImageView = [[BorderImageView alloc] initWithFrame:friendCell.avatarImageView.frame andView:imageView];
-    
-    
+    CGRect friendAvatarImageFrame = CGRectMake(0, 0,
+                                               friendCell.avatarImageView.frame.size.width,
+                                               friendCell.avatarImageView.frame.size.height);
+    BorderImageView * friendAvatarImageView = [[BorderImageView alloc] initWithFrame:friendAvatarImageFrame andView:imageView];
+
     if([[friendDict valueForKey:K_BSDK_ISVERIFY] isEqualToString:K_BSDK_ISVERIFY_YES])
     {
         UIImageView * verifyImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"v_mark_big"]];
