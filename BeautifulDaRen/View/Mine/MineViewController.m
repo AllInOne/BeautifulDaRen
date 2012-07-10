@@ -218,17 +218,39 @@
         if(!cell) {
             cell = [[[NSBundle mainBundle] loadNibNamed:buttonViewCellIdentifier owner:self options:nil] objectAtIndex:0];
         }
+        NSDictionary * userDict = [[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
+        ButtonViewCell * buttonViewCell = (ButtonViewCell*)cell;
         switch ([indexPath row]) {
             case 0:
             {
-                ((ButtonViewCell*)cell).buttonText.text = NSLocalizedString(@"at_me", @"");
+                buttonViewCell.buttonText.text = NSLocalizedString(@"at_me", @"");
+                CGFloat textWidth = [ViewHelper getWidthOfText:buttonViewCell.buttonText.text ByFontSize:buttonViewCell.buttonText.font.pointSize];
+                UILabel * numberLabel = [[UILabel alloc] initWithFrame:
+                                         CGRectMake(buttonViewCell.buttonText.frame.origin.x + textWidth + 10,
+                                                    buttonViewCell.buttonText.frame.origin.y, 
+                                                    50, 
+                                                    buttonViewCell.buttonText.frame.size.height)];
+                [numberLabel setTextAlignment:UITextAlignmentLeft];
+                [numberLabel setTextColor:[UIColor colorWithRed:(204.0f/255.0f) green:(88.0f/255.0f) blue:(151.0f/255.0f) alpha:1.0f]];
+                numberLabel.text = [NSString stringWithFormat:@"(%d)",[[userDict valueForKey:KEY_ACCOUNT_AT_COUNT] intValue]];
+                [buttonViewCell addSubview:numberLabel];
                 ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"my_at"];
                 break;
             }
             case 1:
             {
-                ((ButtonViewCell*)cell).buttonText.text = NSLocalizedString(@"comment_me", @"");
-                ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"comment_icon"];
+                buttonViewCell.buttonText.text = NSLocalizedString(@"comment_me", @"");
+                CGFloat textWidth = [ViewHelper getWidthOfText:buttonViewCell.buttonText.text ByFontSize:buttonViewCell.buttonText.font.pointSize];
+                UILabel * numberLabel = [[UILabel alloc] initWithFrame:
+                                         CGRectMake(buttonViewCell.buttonText.frame.origin.x + textWidth + 10,
+                                                    buttonViewCell.buttonText.frame.origin.y, 
+                                                    50, 
+                                                    buttonViewCell.buttonText.frame.size.height)];
+                [numberLabel setTextAlignment:UITextAlignmentLeft];
+                [numberLabel setTextColor:[UIColor colorWithRed:(204.0f/255.0f) green:(88.0f/255.0f) blue:(151.0f/255.0f) alpha:1.0f]];
+                numberLabel.text = [NSString stringWithFormat:@"(%d)",[[userDict valueForKey:KEY_ACCOUNT_COMMENT_COUNT] intValue]];
+                [buttonViewCell addSubview:numberLabel];
+                buttonViewCell.buttonLeftIcon.image = [UIImage imageNamed:@"comment_icon"];
                 break;
             }
         }
