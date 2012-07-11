@@ -477,7 +477,7 @@
                 [_mapViewController.view removeFromSuperview];
                 [self setMapViewController:nil];
             } 
-            _mapViewController = [[MapViewController alloc] initWithName:@"test map name" description:nil latitude:latitude longitude:longtitude showSelf:NO];
+            _mapViewController = [[MapViewController alloc] initWithName:[self.weiboData objectForKey:K_BSDK_SHOPMERCHANT] description:[self.weiboData objectForKey:K_BSDK_BRANDSERVICE] latitude:latitude longitude:longtitude showSelf:NO];
             _mapViewController.view.frame = CGRectMake(MAP_VIEW_X_OFFSET, yOffset, MAP_VIEW_WIDTH, MAP_VIEW_HEIGHT);
             _mapViewController.navigationController.toolbarHidden = YES;
             
@@ -600,8 +600,8 @@
 
 -(IBAction)onImageButtonPressed:(id)sender
 {
-    if (self.weiboData && [self.weiboData objectForKey:K_BSDK_PICTURE_ORIGINAL] && [[self.weiboData objectForKey:K_BSDK_PICTURE_WIDTH] intValue] && [[self.weiboData objectForKey:K_BSDK_PICTURE_HEIGHT] intValue]) {
-        [FullImageViewController showImageUrl:[self.weiboData objectForKey:K_BSDK_PICTURE_ORIGINAL] size:CGSizeMake([[self.weiboData objectForKey:K_BSDK_PICTURE_WIDTH] intValue], [[self.weiboData objectForKey:K_BSDK_PICTURE_HEIGHT] intValue]) inNavigationController:self.navigationController];
+    if (self.weiboData && [self.weiboData objectForKey:K_BSDK_PICTURE_320] && [[self.weiboData objectForKey:K_BSDK_PICTURE_WIDTH] intValue] && [[self.weiboData objectForKey:K_BSDK_PICTURE_HEIGHT] intValue]) {
+        [FullImageViewController showImageUrl:[self.weiboData objectForKey:K_BSDK_PICTURE_320] size:CGSizeMake([[self.weiboData objectForKey:K_BSDK_PICTURE_WIDTH] intValue], [[self.weiboData objectForKey:K_BSDK_PICTURE_HEIGHT] intValue]) inNavigationController:self.navigationController];
     }
 
 }

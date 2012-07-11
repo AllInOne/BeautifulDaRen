@@ -15,8 +15,6 @@
 @property (retain, nonatomic) IBOutlet UIView *imageParentView;
 @property (retain, nonatomic) IBOutlet UIActivityIndicatorView *indicator;
 @property (retain, nonatomic) IBOutlet UILabel *indicatorLabel;
-@property (retain, nonatomic) IBOutlet UIBarButtonItem *rightBarButton;
-@property (retain, nonatomic) IBOutlet UIBarButtonItem *leftBarButton;
 @property (nonatomic, retain) UITapGestureRecognizer *singleTap;
 @property (nonatomic, retain) UITapGestureRecognizer *doubleTap;
 @property (nonatomic) BOOL frozenSingleTap;

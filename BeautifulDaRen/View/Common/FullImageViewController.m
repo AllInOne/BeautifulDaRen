@@ -37,8 +37,6 @@
 @synthesize imageParentView = _imageParentView;
 @synthesize indicator = _indicator;
 @synthesize indicatorLabel = _indicatorLabel;
-@synthesize rightBarButton = _rightBarButton;
-@synthesize leftBarButton = _leftBarButton;
 @synthesize singleTap = _singleTap;
 @synthesize doubleTap = _doubleTap;
 @synthesize frozenSingleTap;
@@ -86,8 +84,6 @@
     [_imageView release];
     [_indicator release];
     [_indicatorLabel release];
-    [_rightBarButton release];
-    [_leftBarButton release];
     [_imageParentView release];
     [_imageData release];
     
@@ -104,7 +100,7 @@
     
     [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onClickReturnButton:) title:NSLocalizedString(@"go_back", @"go_back")]];
     
-    [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onClickSaveButton:) title:NSLocalizedString(@"refresh", @"refresh")]];
+    [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onClickSaveButton:) title:NSLocalizedString(@"save", @"save")]];
     
     self.frozenSingleTap = NO;
     
@@ -139,11 +135,11 @@
 }
 
 - (void)didFinishSaveImage:(UIImage *)image withError:(NSError *)error contextInfo:(void *)contextInfo {
-    if (!error) {
-        
+    if (error) {
+        [[iToast makeText:NSLocalizedString(@"save_failed", @"save_failed")] show];
     }
     else {
-
+        [[iToast makeText:NSLocalizedString(@"save_succeed", @"save_succeed")] show];
     }
 }
 
@@ -300,7 +296,7 @@
     self.indicator.hidden = YES;
     [self.indicator stopAnimating];
 
-    self.navigationItem.rightBarButtonItem = self.rightBarButton;
+//    self.navigationItem.rightBarButtonItem = self.rightBarButton;
     
     [self resetHideNavBarTimer];
 }

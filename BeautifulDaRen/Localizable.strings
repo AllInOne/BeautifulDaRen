@@ -190,6 +190,9 @@
 "please_check_city" = "亲, 请选择城市哦!";
 "password_not_the_same" = "亲, 两次输入密码不一样哦!";
 
+"save_succeed" = "亲, 保存成功了哦!";
+"save_failed" = "亲, 保存失败了哦!";
+
 
 "take_photo" = "照相";
 "album" = "相册";

@@ -9,6 +9,8 @@
 #define kWBRequestTimeOutInterval   180.0
 #define kWBRequestStringBoundary    @"293iosfksdfkiowjksdf31jsiuwq003s02dsaffafass3qw"
 
+#define KWBMaxImageDataSize         60000
+
 static NSMutableString *logBody;
 
 @interface BSDKRequest (Private)
@@ -129,7 +131,14 @@ static NSMutableString *logBody;
 //					[BSDKRequest appendUTF8Body:body dataString:[NSString stringWithString:@"Content-Type: image/png\r\nContent-Transfer-Encoding: binary\r\n\r\n"]];
 //					[body appendData:imageData];
 
-					NSData* imageData = UIImageJPEGRepresentation((UIImage *)dataParam, 1.0);
+					NSData* imageData = UIImageJPEGRepresentation((UIImage *)dataParam, 1);
+                    
+                    // if the size is big, we need to recompress the image
+                    NSInteger size = [imageData length];
+                    if (size > KWBMaxImageDataSize) {
+                        imageData = UIImageJPEGRepresentation((UIImage *)dataParam, KWBMaxImageDataSize/size);
+                    }
+                    
 					[BSDKRequest appendUTF8Body:body dataString:[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"Pic.jpg\"\r\n", key]];
 					[BSDKRequest appendUTF8Body:body dataString:[NSString stringWithString:@"Content-Type: image/jpeg\r\nContent-Transfer-Encoding: binary\r\n\r\n"]];
 					[body appendData:imageData];
@@ -314,9 +323,13 @@ static NSMutableString *logBody;
 - (void)requestOnTimeout
 {
     
-//    NSDictionary * falkResponse = [NSDictionary dictionaryWithObjectsAndKeys:NSLocalizedString(@"server_no_response", @"server_no_response"), K_BSDK_RESPONSE_MESSAGE, K_BSDK_RESPONSE_STATUS_FAILED, K_BSDK_RESPONSE_STATUS, nil];
+    NSDictionary * falkResponse = [NSDictionary dictionaryWithObjectsAndKeys:NSLocalizedString(@"server_no_response", @"server_no_response"), K_BSDK_RESPONSE_MESSAGE, K_BSDK_RESPONSE_STATUS_FAILED, K_BSDK_RESPONSE_STATUS, nil];
 //    [self handleResponseData:falkResponse];
-    [self failedWithError:[NSError errorWithDomain:@"BSDK" code:1005 userInfo:nil]];
+    if ([delegate respondsToSelector:@selector(request:didFinishLoadingWithResult:)])
+    {
+        [delegate request:self didFinishLoadingWithResult:falkResponse];
+    }
+//    [self failedWithError:[NSError errorWithDomain:@"BSDK" code:1005 userInfo:nil]];
     [self disconnect];
 }
 
