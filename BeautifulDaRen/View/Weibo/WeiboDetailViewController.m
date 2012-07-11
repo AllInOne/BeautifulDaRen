@@ -621,7 +621,7 @@
             }
             else
             {
-                [[iToast makeText:NSLocalizedString(@"no_such_user", @"no_such_user")] show];
+                [[iToast makeText:NSLocalizedString(@"no_such_brand_user", @"no_such_brand_user")] show];
             }
         }];
     }
@@ -643,7 +643,7 @@
             }
             else
             {
-                [[iToast makeText:NSLocalizedString(@"no_such_user", @"no_such_user")] show];
+                [[iToast makeText:NSLocalizedString(@"no_such_merchant_user", @"no_such_merchant_user")] show];
             }
         }];
     }

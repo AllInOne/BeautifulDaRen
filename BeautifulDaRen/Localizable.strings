@@ -89,7 +89,8 @@
 "his_collection" = "他的收藏";
 "my_buyed" = "我购买的";
 
-"no_such_user" = "没有该用户!";
+"no_such_merchant_user" = "亲, 该商场还没有注册秀魅丽帐号哦!";
+"no_such_brand_user" = "亲, 该品牌还没有注册秀魅丽帐号哦!";
 
 "at_my_followed_person" = "@我关注的人";
 
