@@ -24,7 +24,7 @@
 typedef enum
 {
     SECTION_NICKNAME = 0,
-//    SECTION_MODIFYPASSWORD ,
+    SECTION_MODIFYPASSWORD ,
     SECTION_CITY,
     SECTION_ADDRESS,
     SECTION_PHONE,
@@ -261,17 +261,17 @@ typedef enum
                 buttonViewCell.buttonText.text = [_tableViewDict valueForKey:KEY_ACCOUNT_USER_NAME];
                 break;
             }
-//            case SECTION_MODIFYPASSWORD:
-//            {
-//                buttonViewCell.leftLabel.text = NSLocalizedString(@"modify_password", @"");
-//                buttonViewCell.leftLabel.frame = CGRectMake(buttonViewCell.leftLabel.frame.origin.x,
-//                                                            buttonViewCell.leftLabel.frame.origin.y,
-//                                                            [ViewHelper getWidthOfText:buttonViewCell.leftLabel.text ByFontSize:buttonViewCell.leftLabel.font.pointSize],
-//                                                            buttonViewCell.leftLabel.frame.size.height);
-//                buttonViewCell.buttonText.text =@"";
-//                buttonViewCell.buttonText.frame = CGRectZero;
-//                break;
-//            }
+            case SECTION_MODIFYPASSWORD:
+            {
+                buttonViewCell.leftLabel.text = NSLocalizedString(@"modify_password", @"");
+                buttonViewCell.leftLabel.frame = CGRectMake(buttonViewCell.leftLabel.frame.origin.x,
+                                                            buttonViewCell.leftLabel.frame.origin.y,
+                                                            [ViewHelper getWidthOfText:buttonViewCell.leftLabel.text ByFontSize:buttonViewCell.leftLabel.font.pointSize],
+                                                            buttonViewCell.leftLabel.frame.size.height);
+                buttonViewCell.buttonText.text =@"";
+                buttonViewCell.buttonText.frame = CGRectZero;
+                break;
+            }
             case SECTION_CITY:
             {
                 buttonViewCell.leftLabel.text = NSLocalizedString(@"city", @"");
@@ -341,20 +341,19 @@ typedef enum
         NSInteger type = 0;
         NSInteger row = [indexPath row];
         
-//        if(row == SECTION_MODIFYPASSWORD)
-//        {
-//            ModifyPasswordViewController *modifiyPasswordViewController = 
-//            [[ModifyPasswordViewController alloc] initWithNibName:nil bundle:nil];
-//            
-//            UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: modifiyPasswordViewController];
-//            
-//            [self.navigationController presentModalViewController:navController animated:YES];
-//            
-//            [navController release];
-//            [modifiyPasswordViewController release];
-//        }
-//        else
-            if(row == SECTION_CITY)
+        if(row == SECTION_MODIFYPASSWORD)
+        {
+            ModifyPasswordViewController *modifiyPasswordViewController = 
+            [[ModifyPasswordViewController alloc] initWithNibName:nil bundle:nil];
+            
+            UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: modifiyPasswordViewController];
+            
+            [self.navigationController presentModalViewController:navController animated:YES];
+            
+            [navController release];
+            [modifiyPasswordViewController release];
+        }
+        else if(row == SECTION_CITY)
         {
             SelectCityViewController *citySelectionController = 
             [[SelectCityViewController alloc] initWithNibName:nil bundle:nil];

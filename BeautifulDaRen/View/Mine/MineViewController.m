@@ -202,19 +202,19 @@
         NSDictionary * userDict = [[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
         NSMutableAttributedString * attrStr = nil;
         
-        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"follow", @"") detail:[NSString stringWithFormat:@"(%d)", [[userDict valueForKey:KEY_ACCOUNT_FOLLOW_COUNT] intValue]]];
+        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"follow", @"") detail:[NSString stringWithFormat:@" (%d)", [[userDict valueForKey:KEY_ACCOUNT_FOLLOW_COUNT] intValue]]];
         ((GridViewCell*)cell).firstLabel.attributedText = attrStr;
         ((GridViewCell*)cell).firstLabel.textAlignment = UITextAlignmentCenter;
         
-        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"fans", @"") detail:[NSString stringWithFormat:@"(%d)", [[userDict valueForKey:KEY_ACCOUNT_FANS_COUNT] intValue]]];
+        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"fans", @"") detail:[NSString stringWithFormat:@" (%d)", [[userDict valueForKey:KEY_ACCOUNT_FANS_COUNT] intValue]]];
         ((GridViewCell*)cell).secondLabel.attributedText = attrStr;
         ((GridViewCell*)cell).secondLabel.textAlignment = UITextAlignmentCenter;
         
-        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"collection", @"") detail:[NSString stringWithFormat:@"(%d)", [[userDict valueForKey:KEY_ACCOUNT_FAVORITE_COUNT] intValue]]];
+        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"collection", @"") detail:[NSString stringWithFormat:@" (%d)", [[userDict valueForKey:KEY_ACCOUNT_FAVORITE_COUNT] intValue]]];
         ((GridViewCell*)cell).thirdLabel.attributedText = attrStr;
         ((GridViewCell*)cell).thirdLabel.textAlignment = UITextAlignmentCenter;
         
-        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"my_publish", @"") detail:[NSString stringWithFormat:@"(%d)", [[userDict valueForKey:KEY_ACCOUNT_BLOG_COUNT] intValue]]];
+        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"my_publish", @"") detail:[NSString stringWithFormat:@" (%d)", [[userDict valueForKey:KEY_ACCOUNT_BLOG_COUNT] intValue]]];
         ((GridViewCell*)cell).fourthLabel.attributedText = attrStr;
         ((GridViewCell*)cell).fourthLabel.textAlignment = UITextAlignmentCenter;
 
@@ -242,7 +242,7 @@
                                                     buttonViewCell.buttonText.frame.size.height)];
                 [numberLabel setTextAlignment:UITextAlignmentLeft];
                 [numberLabel setTextColor:[UIColor colorWithRed:(204.0f/255.0f) green:(88.0f/255.0f) blue:(151.0f/255.0f) alpha:1.0f]];
-                numberLabel.text = [NSString stringWithFormat:@"(%d)",[[userDict valueForKey:KEY_ACCOUNT_AT_COUNT] intValue]];
+                numberLabel.text = [NSString stringWithFormat:@" (%d)",[[userDict valueForKey:KEY_ACCOUNT_AT_COUNT] intValue]];
                 [buttonViewCell addSubview:numberLabel];
                 ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"my_at"];
                 break;
@@ -258,7 +258,7 @@
                                                     buttonViewCell.buttonText.frame.size.height)];
                 [numberLabel setTextAlignment:UITextAlignmentLeft];
                 [numberLabel setTextColor:[UIColor colorWithRed:(204.0f/255.0f) green:(88.0f/255.0f) blue:(151.0f/255.0f) alpha:1.0f]];
-                numberLabel.text = [NSString stringWithFormat:@"(%d)",[[userDict valueForKey:KEY_ACCOUNT_COMMENT_COUNT] intValue]];
+                numberLabel.text = [NSString stringWithFormat:@" (%d)",[[userDict valueForKey:KEY_ACCOUNT_COMMENT_COUNT] intValue]];
                 [buttonViewCell addSubview:numberLabel];
                 buttonViewCell.buttonLeftIcon.image = [UIImage imageNamed:@"comment_icon"];
                 break;
