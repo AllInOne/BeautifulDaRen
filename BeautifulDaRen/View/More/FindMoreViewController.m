@@ -704,6 +704,14 @@
             
             self.searchWeiboPageIndex ++;
         }
+        else
+        {
+            NSAssert(YES, @"Unexpected condition happend in doSearch in FindMoreViewController");
+            
+            [activityIndicator stopAnimating];
+            [activityIndicator removeFromSuperview];
+            [activityIndicator release];
+        }
     }
 }
 

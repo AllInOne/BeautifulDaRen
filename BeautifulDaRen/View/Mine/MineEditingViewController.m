@@ -95,7 +95,7 @@ typedef enum
                                 }
                                 
                             }];
-    [self.avatarImage release];
+    [_avatarImage release];
 }
 
 #pragma mark - View lifecycle

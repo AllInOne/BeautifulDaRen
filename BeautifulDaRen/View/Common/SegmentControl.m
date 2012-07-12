@@ -20,18 +20,15 @@
 }
 
 -(void)onButtonClicked:(UIButton*)button{
-    NSInteger index = 0;
     if(button == _firstButton)
     {
         [_firstButton setSelected:YES];
         [_secondButton setSelected:NO];
-        index = 0;
     }
     else if (button == _secondButton)
     {
         [_firstButton setSelected:NO];
         [_secondButton setSelected:YES];
-        index = 1;
     }
 }
 

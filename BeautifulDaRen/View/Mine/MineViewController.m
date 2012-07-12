@@ -244,7 +244,8 @@
                 [numberLabel setTextColor:[UIColor colorWithRed:(204.0f/255.0f) green:(88.0f/255.0f) blue:(151.0f/255.0f) alpha:1.0f]];
                 numberLabel.text = [NSString stringWithFormat:@" (%d)",[[userDict valueForKey:KEY_ACCOUNT_AT_COUNT] intValue]];
                 [buttonViewCell addSubview:numberLabel];
-                ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"my_at"];
+                [numberLabel release];
+                buttonViewCell.buttonLeftIcon.image = [UIImage imageNamed:@"my_at"];
                 break;
             }
             case 1:
@@ -260,6 +261,7 @@
                 [numberLabel setTextColor:[UIColor colorWithRed:(204.0f/255.0f) green:(88.0f/255.0f) blue:(151.0f/255.0f) alpha:1.0f]];
                 numberLabel.text = [NSString stringWithFormat:@" (%d)",[[userDict valueForKey:KEY_ACCOUNT_COMMENT_COUNT] intValue]];
                 [buttonViewCell addSubview:numberLabel];
+                [numberLabel release];
                 buttonViewCell.buttonLeftIcon.image = [UIImage imageNamed:@"comment_icon"];
                 break;
             }
