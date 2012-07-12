@@ -430,6 +430,7 @@
     NSDictionary * dict = [self extractFriendDictionary:[self.friendsList objectAtIndex:button.tag]];
     NSInteger userId = [[dict valueForKey:K_BSDK_UID] intValue];
     NSString * relation = [dict valueForKey:K_BSDK_RELATIONSHIP];
+    [button setEnabled:NO];
     switch (self.type) {
         case FriendListViewController_TYPE_MY_FOLLOW:
         {
@@ -449,6 +450,7 @@
                 {
                     [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
                 }
+                [button setEnabled:YES];
             }];
             return;
         }
@@ -459,8 +461,6 @@
             isShouldFollow = ([relation isEqualToString:K_BSDK_RELATIONSHIP_MY_FOLLOW] ||[relation isEqualToString:K_BSDK_RELATIONSHIP_INTER_FOLLOW]) ? NO : YES;
             break;
     }
-
-    [button setEnabled:NO];
     
     if (NO == isShouldFollow)
     {

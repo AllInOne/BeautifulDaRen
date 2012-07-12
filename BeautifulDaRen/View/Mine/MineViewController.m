@@ -371,10 +371,13 @@
                 [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:USERDEFAULT_IS_AUTO_LOGIN];
                 [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_LOGINOUT_SUCCESS object:self userInfo:data];
                 
-                LoginViewController * loginContorller = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
-                [self.navigationController pushViewController:loginContorller animated:YES];
-                [loginContorller release];
-                [[NSUserDefaults standardUserDefaults] setObject:nil forKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
+//                LoginViewController * loginContorller = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+//                [self.navigationController pushViewController:loginContorller animated:YES];
+//                [loginContorller release];
+//                [[NSUserDefaults standardUserDefaults] setObject:nil forKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
+                [self.view removeFromSuperview];
+                self.view = nil;
+                [self.tabBarController setSelectedIndex:0];
             }
             else {
                 [[iToast makeText:@"账户退出失败!"] show];

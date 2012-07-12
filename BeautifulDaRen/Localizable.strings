@@ -208,6 +208,6 @@
 "detail_mode" = "详情模式";
 "point" = "积分";
 
-"server_no_response" = "服务器无响应!";
-"server_request_error" = "请求服务器失败!";
+"server_no_response" = "亲,请求失败，请检查你的网络!";
+"server_request_error" = "亲,请求失败，请检查你的网络!";
 "server_data_error" = "服务器返回数据错误!";

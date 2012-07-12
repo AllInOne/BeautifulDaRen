@@ -483,9 +483,9 @@
             
             [self.detailScrollView addSubview:_mapViewController.view];
             
-
+            yOffset = _mapViewController.view.frame.origin.y + MAP_VIEW_HEIGHT * 2;
         }
-        yOffset = _mapViewController.view.frame.origin.y + MAP_VIEW_HEIGHT * 2;
+
     }
 
     // Custom initialization

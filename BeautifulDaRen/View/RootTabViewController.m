@@ -72,14 +72,14 @@
 
         [[UIToolbar appearance]setBackgroundImage:[UIImage imageNamed:@"toolbar_background"] forToolbarPosition:UIToolbarPositionBottom barMetrics:UIBarMetricsDefault];
     }
-    
 //    _observerForLogout = [[NSNotificationCenter defaultCenter]
 //                          addObserverForName:K_NOTIFICATION_LOGINOUT_SUCCESS
 //                          object:nil
 //                          queue:nil
 //                          usingBlock:^(NSNotification *note) {
 //                              for (UIViewController * view in self.tabBarController.viewControllers) {
-//                                  [view dismissModalViewControllerAnimated:YES];
+//                                  [view.view removeFromSuperview];
+//                                  view.view = nil;
 //                              }
 //                          }];
 }
