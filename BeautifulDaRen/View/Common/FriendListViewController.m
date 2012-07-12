@@ -356,9 +356,9 @@
         }
         else
         {
-            borderImageView = [[BorderImageView alloc] initWithFrame:friendListViewCell.avatarImageView.frame andImage:[UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:userDict]]];
+            borderImageView = [[BorderImageView alloc] initWithFrame:friendListViewCell.avatarImageView.frame andImage:[UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:userDict]] needNotification:NO];
         }
-         
+        
         [friendListViewCell.avatarImageView addSubview:borderImageView];
         [borderImageView release];
         

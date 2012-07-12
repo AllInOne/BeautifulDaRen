@@ -470,6 +470,8 @@
     {
         NSString * accountId = [[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] valueForKey:KEY_ACCOUNT_ID];
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: TRUE];
+        
+        [self.navigationItem.rightBarButtonItem setEnabled:NO];
         [[BSDKManager sharedManager] getUserInforByUserId:accountId
                                           andDoneCallback:^(AIO_STATUS status, NSDictionary *data)
         {
@@ -483,6 +485,7 @@
                 [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
             }
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: FALSE];
+            [self.navigationItem.rightBarButtonItem setEnabled:YES];
         }];
     }
 }

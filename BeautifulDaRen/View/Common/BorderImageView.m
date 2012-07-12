@@ -25,6 +25,28 @@
     return self;
 }
 
+- (id)initWithFrame:(CGRect)frame andImage:(UIImage *)image needNotification:(BOOL)isNeed
+{
+    self = [super initWithFrame:frame];
+    if(self)
+    {
+        UIImageView * imageView = [[UIImageView alloc] initWithImage:image];
+        imageView.frame = CGRectMake(IMAGE_FRAME_MARGIN, IMAGE_FRAME_MARGIN, frame.size.width - 2 * IMAGE_FRAME_MARGIN, frame.size.height - 2 * IMAGE_FRAME_MARGIN);
+        self.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+        self.layer.borderWidth = 1;
+        [self addSubview:imageView];  
+        [imageView release];
+        
+        if (isNeed) {
+            UIButton * actionButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            [actionButton setFrame:frame];
+            [actionButton addTarget:self action:@selector(onButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+            [self addSubview:actionButton];
+        }
+    }
+    return self;
+}
+
 - (id)initWithFrame:(CGRect)frame andImage:(UIImage *)image
 {
     self = [super initWithFrame:frame];
