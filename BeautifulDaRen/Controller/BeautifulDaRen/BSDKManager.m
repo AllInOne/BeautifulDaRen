@@ -283,7 +283,8 @@ static BSDKManager *sharedInstance;
                                                                       postDataType:postDataType
                                                                   httpHeaderFields:httpHeaderFields
                                                                       doneCallback:callback];
-    [self addRequest:bSDKWeiboRequest];
+//    [self addRequest:bSDKWeiboRequest];
+    [bSDKWeiboRequest start];
     [bSDKWeiboRequest release];
 }
 
