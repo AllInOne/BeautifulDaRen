@@ -26,7 +26,6 @@
 @property (retain, nonatomic) id observerForShouldLogin;
 
 - (void)refreshNavigationView;
-- (void)refreshWeibosView;
 - (void) showAdsPageView;
 @end
 
@@ -58,7 +57,7 @@
                                    queue:nil
                                    usingBlock:^(NSNotification *note) {
                                        [self refreshNavigationView];
-                                       [self refreshWeibosView];
+                                       [self.itemsViewController refresh];
                                    }];
     
     self.observerForLogout = [[NSNotificationCenter defaultCenter]
@@ -67,7 +66,7 @@
                                    queue:nil
                                    usingBlock:^(NSNotification *note) {
                                        [self refreshNavigationView];
-                                       [self refreshWeibosView];
+                                       [self.itemsViewController refresh];
                                    }];
     
     self.observerForShouldLogin = [[NSNotificationCenter defaultCenter]
@@ -87,13 +86,6 @@
     self.adsPageView.view.frame = CGRectMake(0, 0, self.view.frame.size.width, ADS_CELL_HEIGHT);
     [self.view addSubview:self.adsPageView.view];
     self.adsPageView.delegate = self;
-
-    _itemsViewController = [[ItemsViewController alloc] init];
-    _itemsViewController.view.frame = CGRectMake(0,
-                                                 ADS_CELL_HEIGHT + CONTENT_MARGIN,
-                                                 self.view.frame.size.width,
-                                                 USER_WINDOW_HEIGHT - ADS_CELL_HEIGHT - CONTENT_MARGIN);
-    [self.view addSubview:_itemsViewController.view];
     
     NSNumber * isAutoLogin = [[NSUserDefaults standardUserDefaults] objectForKey:USERDEFAULT_IS_AUTO_LOGIN];
     if (![[BSDKManager sharedManager] isLogin] && [isAutoLogin boolValue])
@@ -122,11 +114,15 @@
              }];
         }
     }
-    else
-    {
-        [self refreshWeibosView];
-    }
 
+    
+    _itemsViewController = [[ItemsViewController alloc] initWithArray:nil];
+    _itemsViewController.view.frame = CGRectMake(0,
+                                                 ADS_CELL_HEIGHT + CONTENT_MARGIN,
+                                                 self.view.frame.size.width,
+                                                 USER_WINDOW_HEIGHT - ADS_CELL_HEIGHT - CONTENT_MARGIN);
+    [self.view addSubview:_itemsViewController.view];
+    
     [self refreshNavigationView];
 }
 
@@ -194,7 +190,7 @@
 -(IBAction)onRefreshBtnSelected:(UIButton*)sender
 {
     [self showAdsPageView];
-    [self refreshWeibosView];
+    [self.itemsViewController refresh];
 }
 
 - (IBAction)onRegisterBtnSelected:(UIButton*)sender
@@ -264,58 +260,6 @@
         
         [self.navigationItem setTitle:nil];
         [self.navigationItem setLeftBarButtonItem:[ViewHelper getLeftBarItemOfImageName:@"beautifuldaren_logo" rectSize:CGRectMake(0, 0, NAVIGATION_LEFT_LOGO_WIDTH, NAVIGATION_LEFT_LOGO_HEIGHT)]];
-    }
-}
-
-
-- (void)refreshWeibosView
-{
-    UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    
-    activityIndicator.frame = CGRectMake((SCREEN_WIDTH - activityIndicator.frame.size.width ) /2, SCREEN_HEIGHT - 150, CGRectGetWidth(activityIndicator.frame), CGRectGetHeight(activityIndicator.frame));
-    
-    [self.view addSubview:activityIndicator];
-    
-    [activityIndicator startAnimating];
-    
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: TRUE];
-    
-    processDoneWithDictBlock block = ^(AIO_STATUS status, NSDictionary *data)
-    {
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: FALSE];
-        [activityIndicator stopAnimating];
-        [activityIndicator removeFromSuperview];
-        [activityIndicator release];
-
-        if (K_BSDK_IS_RESPONSE_OK(data)) {
-            NSMutableArray * mutableArray = [[data valueForKey:K_BSDK_BLOGLIST] mutableCopy];
-            
-            _itemsViewController.itemDatas = mutableArray;
-            
-            [mutableArray release];
-        }
-        else
-        {
-            [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
-        }
-
-    };
-    
-    if ([[BSDKManager sharedManager] isLogin])
-    {
-        NSString * userId = [[[NSUserDefaults standardUserDefaults]
-                                valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO]
-                             valueForKey:KEY_ACCOUNT_ID];
-        [[BSDKManager sharedManager] getFriendsWeiboListByUserId:userId
-                                                        pageSize:20
-                                                       pageIndex:1
-                                                 andDoneCallback:block];
-    }
-    else {
-        [[BSDKManager sharedManager] getWeiboListByUserId:nil
-                                                 pageSize:20
-                                                pageIndex:1
-                                          andDoneCallback:block];
     }
 }
 
