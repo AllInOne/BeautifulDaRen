@@ -443,7 +443,7 @@
                                valueForKey:KEY_ACCOUNT_CITY];
         [[BSDKManager sharedManager] getHotUsersByCity:userCity
                                               userType:type
-                                              pageSize:10
+                                              pageSize:16
                                              pageIndex:1
                                        andDoneCallback:block];
     }
@@ -506,7 +506,7 @@
     CGRect friendAvatarImageFrame = CGRectMake(0, 0,
                                                friendCell.avatarImageView.frame.size.width,
                                                friendCell.avatarImageView.frame.size.height);
-    BorderImageView * friendAvatarImageView = [[BorderImageView alloc] initWithFrame:friendAvatarImageFrame andView:imageView];
+    BorderImageView * friendAvatarImageView = [[BorderImageView alloc] initWithFrame:friendAvatarImageFrame andView:imageView needNotification:NO];
 
     if([[friendDict valueForKey:K_BSDK_ISVERIFY] isEqualToString:K_BSDK_ISVERIFY_YES])
     {
