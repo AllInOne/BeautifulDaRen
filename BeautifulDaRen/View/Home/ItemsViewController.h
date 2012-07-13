@@ -7,6 +7,6 @@
 
 @property (retain, nonatomic) NSMutableArray * itemDatas;
 -(id)initWithArray:(NSArray*)array;
-
+-(void)refresh;
 @end
 

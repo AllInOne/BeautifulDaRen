@@ -123,6 +123,10 @@
                                                  name:@"borderImageViewSelected"
                                                object:nil];
 }
+- (void) viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+}
 
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -208,63 +212,7 @@
 
 - (void)didScrollToBottom
 {
-    if (self.isSyncSccuessed && self.isFetchMore) {
-        self.isSyncSccuessed = NO;
-        self.pageIndex ++;
-        UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-
-        activityIndicator.frame = CGRectMake((SCREEN_WIDTH - activityIndicator.frame.size.width) / 2, SCREEN_HEIGHT - 220, CGRectGetWidth(activityIndicator.frame), CGRectGetHeight(activityIndicator.frame));
-        
-        [self.view addSubview:activityIndicator];
-        
-        [activityIndicator startAnimating];
-        
-        processDoneWithDictBlock block = ^(AIO_STATUS status, NSDictionary *data)
-        {
-            [activityIndicator stopAnimating];
-            [activityIndicator removeFromSuperview];
-            [activityIndicator release];
-            
-            if (K_BSDK_IS_RESPONSE_OK(data)) {
-                NSArray * array = [data valueForKey:@"BlogList"];
-                if ([array count] == 0)
-                {
-                    self.isFetchMore = NO;
-                }
-                //TODO [felix] should to remove
-                for (NSDictionary * dict in array) {
-                    if ([[dict valueForKey:@"Picture_width"] floatValue] > 0)
-                    {
-                        [self.itemDatas addObject:dict];
-                    }
-                }
-                [self loadItemsHeight];
-                [_waterFlowView reloadData];
-                self.isSyncSccuessed = YES;
-            }
-            else
-            {
-                [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
-            }
-
-        };
-        if ([[BSDKManager sharedManager] isLogin])
-        {
-            NSString * userId = [[[NSUserDefaults standardUserDefaults]
-                                  valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO]
-                                 valueForKey:KEY_ACCOUNT_ID];
-            [[BSDKManager sharedManager] getFriendsWeiboListByUserId:userId
-                                                            pageSize:20
-                                                           pageIndex:self.pageIndex
-                                                     andDoneCallback:block];
-        }
-        else {
-            [[BSDKManager sharedManager] getWeiboListByUserId:nil
-                                                     pageSize:20
-                                                    pageIndex:self.pageIndex
-                                              andDoneCallback:block];
-        }
-    }
+    [self refresh];
 }
 
 -(void)setItemDatas:(NSMutableArray *)itemDatas
@@ -284,5 +232,67 @@
         dict = [dict valueForKey:K_BSDK_RETWEET_STATUS];
     }
     return dict;
+}
+-(void)refresh
+{
+    if (self.isSyncSccuessed && self.isFetchMore) {
+        self.isSyncSccuessed = NO;
+        self.pageIndex ++;        UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        
+        CGFloat yPointOfActivityIndicator = self.waterFlowView.contentSize.height - 30;
+        if (self.waterFlowView.contentSize.height == 0) {
+            yPointOfActivityIndicator = 30;
+        }
+        activityIndicator.frame = CGRectMake((SCREEN_WIDTH - activityIndicator.frame.size.width) / 2, yPointOfActivityIndicator, CGRectGetWidth(activityIndicator.frame), CGRectGetHeight(activityIndicator.frame));
+        
+        [self.waterFlowView addSubview:activityIndicator];
+        
+        [activityIndicator startAnimating];
+        
+        processDoneWithDictBlock block = ^(AIO_STATUS status, NSDictionary *data)
+        {
+            [activityIndicator stopAnimating];
+            [activityIndicator removeFromSuperview];
+            [activityIndicator release];
+            
+            if (K_BSDK_IS_RESPONSE_OK(data)) {
+                NSArray * array = [data valueForKey:@"BlogList"];
+                if ([array count] == 0)
+                {
+                    self.isFetchMore = NO;
+                }
+                for (NSDictionary * dict in array) {
+                    if ([[dict valueForKey:@"Picture_width"] floatValue] > 0)
+                    {
+                        [self.itemDatas addObject:dict];
+                    }
+                }
+                [self loadItemsHeight];
+                [_waterFlowView reloadData];
+                self.isSyncSccuessed = YES;
+            }
+            else
+            {
+                [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
+            }
+            
+        };
+        if ([[BSDKManager sharedManager] isLogin])
+        {
+            NSString * userId = [[[NSUserDefaults standardUserDefaults]
+                                  valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO]
+                                 valueForKey:KEY_ACCOUNT_ID];
+            [[BSDKManager sharedManager] getFriendsWeiboListByUserId:userId
+                                                            pageSize:20
+                                                           pageIndex:self.pageIndex
+                                                     andDoneCallback:block];
+        }
+        else {
+            [[BSDKManager sharedManager] getWeiboListByUserId:nil
+                                                     pageSize:20
+                                                    pageIndex:self.pageIndex
+                                              andDoneCallback:block];
+        }
+    }
 }
 @end
