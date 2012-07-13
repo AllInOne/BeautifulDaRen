@@ -7,7 +7,7 @@
 */
 
 
-"app_name" = "秀魅丽";
+"app_name" = "秀悦购";
 
 "tab_home" = "首页";
 "tab_mine" = "我的";
@@ -47,13 +47,13 @@
 "input_your_new_password" = "请输入您的新密码";
 "repeat_your_old_password" = "请再次输入您的新密码";
 
-"not_user_to_register" = "还不是秀魅丽用户？立即注册";
+"not_user_to_register" = "还不是秀悦购用户？立即注册";
 "please_input_email_or_account_name" = "请输入注册邮箱/登录账户";
 "please_input_your_common_email" = "请输入你的常用邮箱";
-"please_input_a_beautifu_daren_name" = "取一个在秀魅丽的昵称";
+"please_input_a_beautifu_daren_name" = "取一个在秀悦购的昵称";
 "login_with_sina_weibo" = "新浪微博登录";
 "login_with_tencent_qq" = "腾讯QQ登录";
-"notice_for_use" = "《秀魅丽网络服务使用协议》";
+"notice_for_use" = "《秀悦购网络服务使用协议》";
 "login_with_cooperation" = "合作方登录";
 
 "local_city" = "所在城市";
@@ -89,8 +89,8 @@
 "his_collection" = "他的收藏";
 "my_buyed" = "我购买的";
 
-"no_such_merchant_user" = "亲, 该商场还没有注册秀魅丽帐号哦!";
-"no_such_brand_user" = "亲, 该品牌还没有注册秀魅丽帐号哦!";
+"no_such_merchant_user" = "亲, 该商场还没有注册秀悦购帐号哦!";
+"no_such_brand_user" = "亲, 该品牌还没有注册秀悦购帐号哦!";
 
 "at_my_followed_person" = "@我关注的人";
 

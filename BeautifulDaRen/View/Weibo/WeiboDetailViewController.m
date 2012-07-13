@@ -42,6 +42,8 @@
 @property (nonatomic, retain) NSString * weiboContent;
 @property (nonatomic, retain) UIToolbar * toolbar;
 @property (nonatomic, assign) BOOL isDoingFav;
+@property (nonatomic, assign) BOOL isAttachedImageDone;
+
 
 - (void)refreshView;
 - (void)addToolbar;
@@ -71,6 +73,7 @@
 @synthesize weiboId = _weiboId;
 @synthesize vMarkImageView = _vMarkImageView;
 @synthesize isDoingFav = _isDoingFav;
+@synthesize isAttachedImageDone = _isAttachedImageDone;
 
 - (void)dealloc
 {
@@ -425,10 +428,20 @@
     // attach image
     NSInteger picWidth = [[self.weiboData objectForKey:K_BSDK_PICTURE_WIDTH] intValue];
     NSInteger picHeight = [[self.weiboData objectForKey:K_BSDK_PICTURE_HEIGHT] intValue];
-    if (picWidth && picHeight) {
+    if (!self.isAttachedImageDone && picWidth && picHeight) {
         UIImageView * placeholderImageView = [[UIImageView alloc] init];
         [placeholderImageView setImageWithURL:[NSURL URLWithString:[self.weiboData objectForKey:K_BSDK_PICTURE_102]]];                                          
-        [self.weiboAttachedImageView setImageWithURL:[NSURL URLWithString:[self.weiboData objectForKey:K_BSDK_PICTURE_320]] placeholderImage:placeholderImageView.image];
+        [self.weiboAttachedImageView setImageWithURL:[NSURL URLWithString:[self.weiboData objectForKey:K_BSDK_PICTURE_320]] placeholderImage:placeholderImageView.image success:^(UIImage *image) {
+            self.isAttachedImageDone = YES;
+            if ([[UIApplication sharedApplication] isNetworkActivityIndicatorVisible]) {
+                [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+            }
+        } failure:^(NSError *error) {
+            self.isAttachedImageDone = YES;
+            if ([[UIApplication sharedApplication] isNetworkActivityIndicatorVisible]) {
+                [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+            }
+        }];
         
         [placeholderImageView release];
         
@@ -482,10 +495,8 @@
             _mapViewController.navigationController.toolbarHidden = YES;
             
             [self.detailScrollView addSubview:_mapViewController.view];
-            
-            yOffset = _mapViewController.view.frame.origin.y + MAP_VIEW_HEIGHT * 2;
         }
-
+        yOffset = _mapViewController.view.frame.origin.y + MAP_VIEW_HEIGHT * 2;
     }
 
     // Custom initialization
@@ -563,7 +574,7 @@
 }
 
 - (void)onRefreshButtonClicked {
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: TRUE];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: YES];
     
     UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     
@@ -573,10 +584,14 @@
     [self.view addSubview:activityIndicator];
     
     [[BSDKManager sharedManager] getWeiboById:self.weiboId andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: FALSE];
+
         [activityIndicator stopAnimating];
         [activityIndicator removeFromSuperview];
         [activityIndicator release];
+        
+        if (self.isAttachedImageDone) {
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: NO];
+        }
         
         if (K_BSDK_IS_RESPONSE_OK(data)) {
             [self setWeiboData:nil];

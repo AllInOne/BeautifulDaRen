@@ -8,6 +8,7 @@
 
 #import "BSDKWeiboRequest.h"
 #import "BSDKEngine.h"
+#import "BSDKDefines.h"
 
 @interface BSDKWeiboRequest ()
 @property (nonatomic, retain) BSDKEngine * engine;
@@ -18,6 +19,7 @@
 @property (nonatomic, retain) NSDictionary * httpHeaderFields;
 @property (nonatomic, assign) processDoneWithDictBlock doneCallback;
 
+@property (nonatomic, retain) BSDKRequest       *request;
 @end
 
 @implementation BSDKWeiboRequest
@@ -28,6 +30,7 @@
 @synthesize postDataType = _postDataType;
 @synthesize httpHeaderFields = _httpHeaderFields;
 @synthesize doneCallback = _doneCallback;
+@synthesize request = _request;
 
 - (id)initWithEngine:(BSDKEngine*)engine
           methodName:(NSString *)methodName
@@ -48,6 +51,8 @@
         self.httpHeaderFields = httpHeaderFields;
         self.doneCallback = Block_copy(callback);
         self.engine = engine;
+        
+        [self retain];
     }
     
     return self;
@@ -60,21 +65,58 @@
     [_params release];
     [_httpHeaderFields release];
     [_engine release];
+    [_request disconnect];
+    [_request release];
     Block_release(_doneCallback);
     [super dealloc];
 }
 
 - (void)start
 {
-    [self.engine loadRequestWithMethodName:self.methodUrl
-                                        httpMethod:self.httpMethod
-                                            params:self.params
-                                      postDataType:self.postDataType
-                                  httpHeaderFields:self.httpHeaderFields];
+    self.request = [BSDKRequest requestWithAccessToken:@"JKLERKEJRK"
+                                                   url:@"http://223.4.235.226:9001/api/mlService.php"
+                                            httpMethod:self.httpMethod
+                                                params:self.params
+                                          postDataType:self.postDataType
+                                      httpHeaderFields:self.httpHeaderFields
+                                              delegate:self];
+    
+    [_request connect];
+//    [self.engine loadRequestWithMethodName:self.methodUrl
+//                                        httpMethod:self.httpMethod
+//                                            params:self.params
+//                                      postDataType:self.postDataType
+//                                  httpHeaderFields:self.httpHeaderFields];
 }
 
 - (void)doneWithStatus: (AIO_STATUS)status andData: (NSDictionary*)data
 {
     self.doneCallback(status, data);
 }
+
+#pragma mark - WBRequestDelegate Methods
+- (void)request:(BSDKRequest *)request didFinishLoadingWithResult:(id)result
+{
+    NSDictionary *dict = nil;
+    if ([result isKindOfClass:[NSDictionary class]])
+    {
+        dict = (NSDictionary *)result;
+    }
+    self.doneCallback(AIO_STATUS_SUCCESS, dict);
+    
+    [self release];
+}
+
+- (void)request:(BSDKRequest *)request didFailWithError:(NSError *)error
+{
+    NSLog(@"requestDidFailWithError: %@", error);
+    NSDictionary * errorDict = [NSDictionary dictionaryWithObjectsAndKeys:[error localizedDescription], K_BSDK_RESPONSE_MESSAGE, K_BSDK_RESPONSE_STATUS_FAILED, K_BSDK_RESPONSE_STATUS, nil];
+    
+//    [self doNotifyProcessStatus:error.code andData:errorDict];
+    self.doneCallback(error.code, errorDict);
+    
+    [self release];
+}
+
+
 @end

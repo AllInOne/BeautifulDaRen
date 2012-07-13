@@ -10,7 +10,7 @@
 #import "BSDKEngine.h"
 #import "ControllerConstants.h"
 
-@interface BSDKWeiboRequest : NSObject <RequestProtocol>
+@interface BSDKWeiboRequest : NSObject <RequestProtocol, BSDKRequestDelegate>
 
 - (id)initWithEngine: (BSDKEngine*)engine
           methodName:(NSString *)methodName

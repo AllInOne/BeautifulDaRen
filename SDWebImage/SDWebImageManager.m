@@ -166,8 +166,8 @@ static SDWebImageManager *instance;
     // Check the on-disk cache async so we don't block the main thread
     [cacheDelegates addObject:delegate];
     [cacheURLs addObject:url];
-    SuccessBlock successCopy = [success copy];
-    FailureBlock failureCopy = [failure copy];
+    SuccessBlock successCopy = Block_copy(success);
+    FailureBlock failureCopy = Block_copy(failure);
     NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:
                           delegate, @"delegate",
                           url, @"url",
@@ -176,8 +176,8 @@ static SDWebImageManager *instance;
                           successCopy, @"success",
                           failureCopy, @"failure",
                           nil];
-    SDWIRelease(successCopy);
-    SDWIRelease(failureCopy);
+//    SDWIRelease(successCopy);
+//    SDWIRelease(failureCopy);
     [[SDImageCache sharedImageCache] queryDiskCacheForKey:[self cacheKeyForURL:url] delegate:self userInfo:info];
 }
 #endif
@@ -260,6 +260,10 @@ static SDWebImageManager *instance;
     {
         SuccessBlock success = [info objectForKey:@"success"];
         success(image);
+        
+        Block_release(success);
+        FailureBlock failure = [info objectForKey:@"failure"];
+        Block_release(failure);
     }
 #endif
 
@@ -380,6 +384,10 @@ static SDWebImageManager *instance;
                 {
                     SuccessBlock success = [[downloadInfo objectAtIndex:uidx] objectForKey:@"success"];
                     success(image);
+                    
+                    Block_release(success);
+                    FailureBlock failure = [[downloadInfo objectAtIndex:uidx] objectForKey:@"failure"];
+                    Block_release(failure);
                 }
 #endif
             }
@@ -407,6 +415,10 @@ static SDWebImageManager *instance;
                 {
                     FailureBlock failure = [[downloadInfo objectAtIndex:uidx] objectForKey:@"failure"];
                     failure(nil);
+
+                    Block_release(failure);
+                    SuccessBlock success = [[downloadInfo objectAtIndex:uidx] objectForKey:@"success"];
+                    Block_release(success);
                 }
 #endif
             }
@@ -475,6 +487,9 @@ static SDWebImageManager *instance;
             {
                 FailureBlock failure = [[downloadInfo objectAtIndex:uidx] objectForKey:@"failure"];
                 failure(error);
+                Block_release(failure);
+                SuccessBlock success = [[downloadInfo objectAtIndex:uidx] objectForKey:@"success"];
+                Block_release(success);
             }
 #endif
 
