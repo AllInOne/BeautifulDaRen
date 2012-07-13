@@ -9,7 +9,7 @@
 #define kWBRequestTimeOutInterval   180.0
 #define kWBRequestStringBoundary    @"293iosfksdfkiowjksdf31jsiuwq003s02dsaffafass3qw"
 
-#define KWBMaxImageDataSize         60000
+#define KWBMaxImageDataSize         80000
 
 static NSMutableString *logBody;
 
