@@ -210,6 +210,14 @@
     [self.categoryButton setEnabled:NO];
 }
 
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    if ([[textView text] length] - range.length + text.length > TEXT_VIEW_MAX_CHARACTOR_NUMBER) {
+        return NO;
+    }
+    return YES;
+}
+
 - (void)keyboardWillShow:(NSNotification *)note 
 {
     if (!self.isKeypadShow)

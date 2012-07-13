@@ -129,6 +129,7 @@
 
 - (CGFloat)getCellHeightByData:(NSDictionary*)data
 {
+    self.commentContent.text = [data objectForKey:K_BSDK_CONTENT];
     CGFloat commentHeight = [ViewHelper getHeightOfText:self.commentContent.text ByFontSize:FONT_SIZE contentWidth:CELL_CONTENT_WIDTH];
     
     self.commentContent.frame = CGRectMake(CGRectGetMinX(self.commentContent.frame), 
@@ -140,7 +141,7 @@
                                               CELL_CONTENT_WIDTH, 
                                               CELL_CONTENT_HEIGHT);
     
-    return CGRectGetMaxY(self.originalWeiboView.frame);
+    return CGRectGetMaxY(self.originalWeiboView.frame) + CELL_CONTENT_MARGIN;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

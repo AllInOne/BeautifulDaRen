@@ -87,6 +87,8 @@
     self.isCheckBoxChecked = NO;
     
     [_weiboContentTextView becomeFirstResponder];
+    
+    [_weiboContentTextView setDelegate:self];
 }
 
 - (void)viewDidUnload
@@ -116,6 +118,14 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    if ([[textView text] length] - range.length + text.length > TEXT_VIEW_MAX_CHARACTOR_NUMBER) {
+        return NO;
+    }
+    return YES;
 }
 
 - (void)keyboardWillShow:(NSNotification *)note 

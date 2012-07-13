@@ -237,7 +237,7 @@
 {
     if (self.isSyncSccuessed && self.isFetchMore) {
         self.isSyncSccuessed = NO;
-        self.pageIndex ++;        UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         
         CGFloat yPointOfActivityIndicator = self.waterFlowView.contentSize.height - 30;
         if (self.waterFlowView.contentSize.height == 0) {
@@ -255,6 +255,7 @@
             [activityIndicator stopAnimating];
             [activityIndicator removeFromSuperview];
             [activityIndicator release];
+            self.pageIndex++;
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: NO];
             
             if (AIO_STATUS_SUCCESS == status && K_BSDK_IS_RESPONSE_OK(data))
