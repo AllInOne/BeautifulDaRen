@@ -359,12 +359,11 @@
     static NSString * cellViewIdentifier = @"FriendItemCell";
     UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
 
-    activityIndicator.frame = CGRectMake((scrollView.frame.size.width - activityIndicator.frame.size.width) / 2 + scrollView.frame.origin.x,
-                                         scrollView.frame.size.height / 2 + scrollView.frame.origin.y,
+    activityIndicator.frame = CGRectMake((scrollView.frame.size.width - activityIndicator.frame.size.width) / 2,
+                                         15,
                                          activityIndicator.frame.size.width,
                                          activityIndicator.frame.size.height);
-    
-    [self.view addSubview:activityIndicator];
+    [scrollView addSubview:activityIndicator];
     
     [activityIndicator startAnimating];
 
