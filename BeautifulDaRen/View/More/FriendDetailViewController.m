@@ -263,11 +263,13 @@ typedef enum
     [activityIndicator startAnimating];
     
     [self.view addSubview:activityIndicator];    
-
+    
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: YES];
     processDoneWithDictBlock doneblock = ^(AIO_STATUS status, NSDictionary *data) {
         [activityIndicator stopAnimating];
         [activityIndicator removeFromSuperview];
         [activityIndicator release];
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: NO];
         
         if (K_BSDK_IS_RESPONSE_OK(data)) {
             [self.friendDictionary setValuesForKeysWithDictionary:data];

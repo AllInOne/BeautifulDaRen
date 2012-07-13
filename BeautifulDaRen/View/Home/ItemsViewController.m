@@ -248,14 +248,17 @@
         [self.waterFlowView addSubview:activityIndicator];
         
         [activityIndicator startAnimating];
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: YES];
         
         processDoneWithDictBlock block = ^(AIO_STATUS status, NSDictionary *data)
         {
             [activityIndicator stopAnimating];
             [activityIndicator removeFromSuperview];
             [activityIndicator release];
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: NO];
             
-            if (K_BSDK_IS_RESPONSE_OK(data)) {
+            if (AIO_STATUS_SUCCESS == status && K_BSDK_IS_RESPONSE_OK(data))
+            {
                 NSArray * array = [data valueForKey:@"BlogList"];
                 if ([array count] == 0)
                 {

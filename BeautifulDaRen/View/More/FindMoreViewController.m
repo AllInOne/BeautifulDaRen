@@ -369,63 +369,72 @@
     [activityIndicator startAnimating];
 
     __block NSInteger scrollWidth = 0;
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: YES];
     processDoneWithDictBlock block = ^(AIO_STATUS status, NSDictionary *data)
     {
         [activityIndicator stopAnimating];
         [activityIndicator removeFromSuperview];
         [activityIndicator release];
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: NO];
         
-        NSMutableArray * resultArray = nil;
-
-        resultArray = [data objectForKey:K_BSDK_USERLIST];
-        NSInteger typeOffset = 0;
-        if ([type isEqualToString:K_BSDK_USERTYPE_SAME_CITY])
+        if (AIO_STATUS_SUCCESS == status && K_BSDK_IS_RESPONSE_OK(data))
         {
-            self.sameCityUserResults = resultArray;
-        }
-        else if([type isEqualToString:K_BSDK_USERTYPE_INTERESTED])
-        {
-            self.interestingUserResults  = resultArray;;
-            typeOffset = 1000;
-        }
-        else if([type isEqualToString:K_BSDK_USERTYPE_HOT])
-        {
-            self.hotUserResults = resultArray;;
-            typeOffset = 2000;
-        }
-
-        for (int i = 0; i < [resultArray count]; i++) {
-            NSDictionary * dict = [resultArray objectAtIndex:i];
-            FriendItemCell * cell = [[[NSBundle mainBundle] loadNibNamed:cellViewIdentifier owner:self options:nil] objectAtIndex:0];
+            NSMutableArray * resultArray = nil;
             
-            cell.frame = CGRectMake(i * (cell.frame.size.width + X_OFFSET), 0,
-                                    cell.frame.size.width,
-                                    cell.frame.size.height);
-            scrollWidth += (cell.frame.size.width + X_OFFSET);
-            
-            [scrollView addSubview:cell];
-
-            UIImageView * imageView = [[UIImageView alloc] init];
-            NSString * url = [dict valueForKey:K_BSDK_PICTURE_65];
-            if ([url length] > 0)
+            resultArray = [data objectForKey:K_BSDK_USERLIST];
+            NSInteger typeOffset = 0;
+            if ([type isEqualToString:K_BSDK_USERTYPE_SAME_CITY])
             {
-                [imageView setImageWithURL:[NSURL URLWithString:url]];
+                self.sameCityUserResults = resultArray;
             }
-            else
+            else if([type isEqualToString:K_BSDK_USERTYPE_INTERESTED])
             {
-                imageView.image = [UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:dict]];
+                self.interestingUserResults  = resultArray;;
+                typeOffset = 1000;
+            }
+            else if([type isEqualToString:K_BSDK_USERTYPE_HOT])
+            {
+                self.hotUserResults = resultArray;;
+                typeOffset = 2000;
             }
             
-            BorderImageView * tempBorderView = [[BorderImageView alloc] initWithFrame:cell.friendImageView.frame andView:imageView];
-            tempBorderView.index = i + typeOffset;
-            [cell.friendImageView addSubview:tempBorderView];
-            cell.friendNameLabel.text = [dict valueForKey:KEY_ACCOUNT_USER_NAME];
+            for (int i = 0; i < [resultArray count]; i++) {
+                NSDictionary * dict = [resultArray objectAtIndex:i];
+                FriendItemCell * cell = [[[NSBundle mainBundle] loadNibNamed:cellViewIdentifier owner:self options:nil] objectAtIndex:0];
+                
+                cell.frame = CGRectMake(i * (cell.frame.size.width + X_OFFSET), 0,
+                                        cell.frame.size.width,
+                                        cell.frame.size.height);
+                scrollWidth += (cell.frame.size.width + X_OFFSET);
+                
+                [scrollView addSubview:cell];
+                
+                UIImageView * imageView = [[UIImageView alloc] init];
+                NSString * url = [dict valueForKey:K_BSDK_PICTURE_65];
+                if ([url length] > 0)
+                {
+                    [imageView setImageWithURL:[NSURL URLWithString:url]];
+                }
+                else
+                {
+                    imageView.image = [UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:dict]];
+                }
+                
+                BorderImageView * tempBorderView = [[BorderImageView alloc] initWithFrame:cell.friendImageView.frame andView:imageView];
+                tempBorderView.index = i + typeOffset;
+                [cell.friendImageView addSubview:tempBorderView];
+                cell.friendNameLabel.text = [dict valueForKey:KEY_ACCOUNT_USER_NAME];
+                
+                [tempBorderView release];
+                [imageView release];
+            }
             
-            [tempBorderView release];
-            [imageView release];
+            [scrollView setContentSize:CGSizeMake(scrollWidth, 0)];
         }
-        
-        [scrollView setContentSize:CGSizeMake(scrollWidth, 0)];
+        else
+        {
+            [[iToast makeText:[NSString stringWithFormat:@"%@", K_BSDK_GET_RESPONSE_MESSAGE(data)]] show];
+        }
     };
     
     if ([[BSDKManager sharedManager] isLogin])
@@ -440,6 +449,7 @@
                                        andDoneCallback:block];
     }
     scrollView.delegate = self;
+        
 }
 #pragma mark UITableViewDelegate
 
@@ -617,6 +627,7 @@
         if ([self.searchBar.text length] <= 0) {
             return;
         }
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: YES];
         UIActivityIndicatorView * activityIndicator = nil;
         if ((self.isFindWeibo == NO && self.isSearchMoreUser == YES) 
             || (self.isFindWeibo == YES && self.isSearchMoreWeibo == YES))
@@ -634,35 +645,39 @@
         }
         
         if (self.isFindWeibo == NO && self.isSearchMoreUser == YES) {
+            
+            processDoneWithDictBlock block = ^(AIO_STATUS status, NSDictionary *data)
+            {
+                [activityIndicator stopAnimating];
+                [activityIndicator removeFromSuperview];
+                [activityIndicator release];
+                [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: NO];
+                
+                self.inSearching = NO;
+                if ([[data valueForKey:K_BSDK_USERLIST] count] == 0)
+                {
+                    self.isSearchMoreUser = NO;
+                }
+                if (AIO_STATUS_SUCCESS == status && K_BSDK_IS_RESPONSE_OK(data))
+                {
+                    NSArray * tempArray = [[data valueForKey:K_BSDK_USERLIST] copy];
+                    for (NSDictionary * dict in tempArray)
+                    {
+                        NSMutableDictionary * mutableDict = [dict mutableCopy];
+                        [self.searchUserResults addObject:mutableDict];
+                        [mutableDict release];
+                    }
+                    [tempArray release];
+                }
+                else {
+                    [[iToast makeText:[NSString stringWithFormat:@"%@", K_BSDK_GET_RESPONSE_MESSAGE(data)]] show];
+                }
+                [self.searchUserView reloadData];
+            };
             [[BSDKManager sharedManager] searchUsersByUsername:self.searchBar.text
                                                       pageSize:10
                                                      pageIndex:self.searchUserPageIndex 
-                                               andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-                                                   [activityIndicator stopAnimating];
-                                                   [activityIndicator removeFromSuperview];
-                                                   [activityIndicator release];
-                                                   
-                                                   self.inSearching = NO;
-                                                   if ([[data valueForKey:K_BSDK_USERLIST] count] == 0)
-                                                   {
-                                                       self.isSearchMoreUser = NO;
-                                                   }
-                                                   if (status == AIO_STATUS_SUCCESS) {
-                                                       NSArray * tempArray = [[data valueForKey:K_BSDK_USERLIST] copy];
-                                                       for (NSDictionary * dict in tempArray)
-                                                       {
-                                                           NSMutableDictionary * mutableDict = [dict mutableCopy];
-                                                           [self.searchUserResults addObject:mutableDict];
-                                                           [mutableDict release];
-                                                       }
-                                                       [tempArray release];
-                                                   }
-                                                   else {
-                                                       [[iToast makeText:[NSString stringWithFormat:@"search status error: %d", status]] show];
-                                                   }
-                                                   [self.searchUserView reloadData];
-                                                   
-                                               }];
+                                               andDoneCallback:block];
             self.searchUserPageIndex ++;
         }
         else if(self.isFindWeibo == YES && self.isSearchMoreWeibo == YES)
@@ -672,13 +687,14 @@
                 [activityIndicator stopAnimating];
                 [activityIndicator removeFromSuperview];
                 [activityIndicator release];
-                
+                [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: NO];
                 self.inSearching = NO;
                 if ([[data valueForKey:K_BSDK_BLOGLIST] count] == 0)
                 {
                     self.isSearchMoreWeibo = NO;
                 }
-                if (status == AIO_STATUS_SUCCESS)
+                
+                if (AIO_STATUS_SUCCESS == status && K_BSDK_IS_RESPONSE_OK(data))
                 {
                     NSArray * array = [data valueForKey:K_BSDK_BLOGLIST];
                     for (NSDictionary * dict in array) {
@@ -693,7 +709,7 @@
                 }
                 else
                 {
-                    [[iToast makeText:[NSString stringWithFormat:@"search status error: %d", status]] show];
+                    [[iToast makeText:[NSString stringWithFormat:@"%@", K_BSDK_GET_RESPONSE_MESSAGE(data)]] show];
                 }
             };
             
@@ -711,6 +727,7 @@
             [activityIndicator stopAnimating];
             [activityIndicator removeFromSuperview];
             [activityIndicator release];
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: NO];
         }
     }
 }
