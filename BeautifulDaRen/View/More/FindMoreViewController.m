@@ -578,6 +578,7 @@
     [self.contentScrollView setHidden:NO];
     [self refreshLeftNavigationButton];
     searchBar.text = @"";
+    searchBar.selectedScopeButtonIndex = 0;
     [searchBar endEditing:YES];
     [searchBar setShowsScopeBar:NO];
     [searchBar setFrame:CGRectMake(searchBar.frame.origin.x, searchBar.frame.origin.y, searchBar.frame.size.width, 44.0f)];
