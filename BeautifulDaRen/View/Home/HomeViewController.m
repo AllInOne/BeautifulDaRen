@@ -57,6 +57,7 @@
                                    queue:nil
                                    usingBlock:^(NSNotification *note) {
                                        [self refreshNavigationView];
+                                       [self.itemsViewController clearData];
                                        [self.itemsViewController refresh];
                                    }];
     
@@ -66,6 +67,7 @@
                                    queue:nil
                                    usingBlock:^(NSNotification *note) {
                                        [self refreshNavigationView];
+                                       [self.itemsViewController clearData];
                                        [self.itemsViewController refresh];
                                    }];
     
@@ -122,7 +124,10 @@
                                                  self.view.frame.size.width,
                                                  USER_WINDOW_HEIGHT - ADS_CELL_HEIGHT - CONTENT_MARGIN);
     [self.view addSubview:_itemsViewController.view];
-    
+    if (![[BSDKManager sharedManager] isLogin] && ![isAutoLogin boolValue])
+    {
+        [self.itemsViewController refresh];
+    }
     [self refreshNavigationView];
 }
 

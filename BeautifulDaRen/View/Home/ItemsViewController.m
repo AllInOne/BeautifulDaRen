@@ -260,13 +260,13 @@
             
             if (AIO_STATUS_SUCCESS == status && K_BSDK_IS_RESPONSE_OK(data))
             {
-                NSArray * array = [data valueForKey:@"BlogList"];
+                NSArray * array = [data valueForKey:K_BSDK_BLOGLIST];
                 if ([array count] == 0)
                 {
                     self.isFetchMore = NO;
                 }
                 for (NSDictionary * dict in array) {
-                    if ([[dict valueForKey:@"Picture_width"] floatValue] > 0)
+                    if ([[dict valueForKey:K_BSDK_PICTURE_WIDTH] floatValue] > 0)
                     {
                         [self.itemDatas addObject:dict];
                     }
@@ -274,6 +274,7 @@
                 [self loadItemsHeight];
                 [_waterFlowView reloadData];
                 self.isSyncSccuessed = YES;
+                self.pageIndex ++;
             }
             else
             {
@@ -298,5 +299,15 @@
                                               andDoneCallback:block];
         }
     }
+}
+
+-(void)clearData
+{
+    [self.itemDatas removeAllObjects];
+    [self loadItemsHeight];
+    [_waterFlowView reloadData];
+    self.isSyncSccuessed = YES;
+    self.isFetchMore = YES;
+    self.pageIndex = 1;
 }
 @end
