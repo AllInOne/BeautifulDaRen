@@ -87,6 +87,8 @@
     self.isCheckBoxChecked = NO;
     
     [_weiboContentTextView becomeFirstResponder];
+    
+    [_weiboContentTextView setDelegate:self];
 }
 
 - (void)viewDidUnload
@@ -116,6 +118,14 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    if ([[textView text] length] - range.length + text.length > TEXT_VIEW_MAX_CHARACTOR_NUMBER) {
+        return NO;
+    }
+    return YES;
 }
 
 - (void)keyboardWillShow:(NSNotification *)note 
@@ -165,10 +175,17 @@
 }
 
 - (void)onBackButtonClicked {
-    if (![self.navigationController popViewControllerAnimated:YES])
-    {
-        [self dismissModalViewControllerAnimated:YES];
-    }
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"prompt", @"prompt")
+                                                    message:NSLocalizedString(@"composer_back_confirmation", @"composer_back_confirmation")
+                                                   delegate:self
+                                          cancelButtonTitle:NSLocalizedString(@"cancel", @"cancel")
+                                          otherButtonTitles:NSLocalizedString(@"confirm", @"confirm"), nil];
+    alert.tag = TAG_ALERTVIEW_BACK_CONFIRM;
+    
+    [alert show];
+    [alert release];
+    
+    return;
 }
 
 - (void)onSendButtonClicked {
@@ -226,6 +243,24 @@
 - (void)didFinishContactSelectionWithContacts:(NSString *)friendId
 {
     self.weiboContentTextView.text = [self.weiboContentTextView.text stringByAppendingString: [NSString stringWithFormat:@"@%@ ", friendId]];
+}
+
+#pragma mark - UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == TAG_ALERTVIEW_BACK_CONFIRM)
+    {
+        switch (buttonIndex) {
+            case 1:
+                if (![self.navigationController popViewControllerAnimated:YES])
+                {
+                    [self dismissModalViewControllerAnimated:YES];
+                }
+                break;               
+            default:
+                break;
+        }    
+    }
 }
 
 @end

@@ -20,6 +20,15 @@
 #import "ViewHelper.h"
 #import "iToast.h"
 
+typedef enum
+{
+    LOGIN_CELL_USERNAME_PASSWORD = 0,
+    LOGIN_CELL_LOGIN_BUTTON,
+    LOGIN_CELL_REGISTER,
+//    LOGIN_CELL_SINA_LOGIN,
+    LOGIN_CELL_COUNT
+}LOGIN_CELL_INDEX;
+
 @interface LoginViewController()
 
 @property (retain, nonatomic) IBOutlet UITableView * tableView;
@@ -160,14 +169,14 @@
 {
     NSInteger number = 0;
     switch (section) {
-        case 0:
+        case LOGIN_CELL_USERNAME_PASSWORD:
         {
             number = 2;
             break;
         }   
-        case 1:
-        case 2:
-        case 3:
+        case LOGIN_CELL_LOGIN_BUTTON:
+        case LOGIN_CELL_REGISTER:
+//        case LOGIN_CELL_SINA_LOGIN:
         {
             number = 1;
             break;
@@ -178,7 +187,7 @@
 
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4;
+    return LOGIN_CELL_COUNT;
 }
 
 - (UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -187,7 +196,7 @@
     static NSString * button_view_identifier = @"ButtonViewCell";
     UITableViewCell * cell = nil;
     NSInteger section = [indexPath section];
-    if(section == 0)
+    if(section == LOGIN_CELL_USERNAME_PASSWORD)
     {
         cell = [tableView dequeueReusableCellWithIdentifier:account_input_identifier];
         if(!cell)
@@ -217,7 +226,7 @@
             }
         }
     }
-    else if(section == 1)
+    else if(section == LOGIN_CELL_LOGIN_BUTTON)
     {
         cell = [tableView dequeueReusableCellWithIdentifier:button_view_identifier];
         if(!cell)
@@ -230,7 +239,7 @@
         
         cell.backgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
     }
-    else if (section == 2)
+    else if (section == LOGIN_CELL_REGISTER)
     {
         cell = [tableView dequeueReusableCellWithIdentifier:button_view_identifier];
         if(!cell)
@@ -239,20 +248,20 @@
         }
         ((ButtonViewCell*)cell).buttonText.text = NSLocalizedString(@"not_user_to_register", @"You are not user, please register");
     }
-    else if (section == 3)
-    {
-        cell = [ViewHelper getLoginWithExtenalViewCellInTableView:tableView cellForRowAtIndexPath:indexPath];
-        _loginWithSinaWeiboButton = ((ButtonViewCell*)cell).leftButton;
-        _loginWithQQButton = ((ButtonViewCell*)cell).rightButton;
-        ((ButtonViewCell*)cell).delegate = self;
-    }
+//    else if (section == LOGIN_CELL_SINA_LOGIN)
+//    {
+//        cell = [ViewHelper getLoginWithExtenalViewCellInTableView:tableView cellForRowAtIndexPath:indexPath];
+//        _loginWithSinaWeiboButton = ((ButtonViewCell*)cell).leftButton;
+//        _loginWithQQButton = ((ButtonViewCell*)cell).rightButton;
+//        ((ButtonViewCell*)cell).delegate = self;
+//    }
     return cell;
 }
 
 #pragma mark UITableViewDelegate
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([indexPath section] == 1) {
+    if ([indexPath section] == LOGIN_CELL_LOGIN_BUTTON) {
         __block NSString* userName = self.accountNameField.text;
         __block NSString* password = self.accountPwdField.text;
 #ifdef DEBUG        
@@ -299,7 +308,7 @@
              }
          }];
     }
-    else if([indexPath section] == 2)
+    else if([indexPath section] == LOGIN_CELL_REGISTER)
     {
         RegisterViewController * registerController = [[RegisterViewController alloc] initWithNibName:@"RegisterViewController" bundle:nil];
         [self.navigationController pushViewController:registerController animated:YES];
@@ -309,27 +318,27 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     CGFloat height = 3;
-    if(section == 0)
+    if(section == LOGIN_CELL_USERNAME_PASSWORD)
     {
         height = 10;
     }
-    else if (section == 3 ) {
-        height = 25;
-    }
+//    else if (section == LOGIN_CELL_SINA_LOGIN ) {
+//        height = 25;
+//    }
     return height;
 }
 
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView * view = nil;
-    if(section == 3)
-    {
-        view = [[[NSBundle mainBundle] loadNibNamed:@"HomeViewHeaderView" owner:self options:nil] objectAtIndex:0];
-        UILabel * label = (UILabel*)[view viewWithTag:1];
-        [label setTextColor:[UIColor darkGrayColor]];
-        label.text = NSLocalizedString(@"login_with_cooperation", @"login_with_cooperation");
-    }
-    else
+//    if(section == LOGIN_CELL_SINA_LOGIN)
+//    {
+//        view = [[[NSBundle mainBundle] loadNibNamed:@"HomeViewHeaderView" owner:self options:nil] objectAtIndex:0];
+//        UILabel * label = (UILabel*)[view viewWithTag:1];
+//        [label setTextColor:[UIColor darkGrayColor]];
+//        label.text = NSLocalizedString(@"login_with_cooperation", @"login_with_cooperation");
+//    }
+//    else
     {
         view = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
     }

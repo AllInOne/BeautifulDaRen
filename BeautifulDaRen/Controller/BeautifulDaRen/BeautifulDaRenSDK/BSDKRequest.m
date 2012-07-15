@@ -230,10 +230,15 @@ static NSMutableString *logBody;
 
 - (void)failedWithError:(NSError *)error 
 {
-	if ([delegate respondsToSelector:@selector(request:didFailWithError:)]) 
-	{
-		[delegate request:self didFailWithError:error];
-	}
+//	if ([delegate respondsToSelector:@selector(request:didFailWithError:)]) 
+//	{
+//		[delegate request:self didFailWithError:error];
+//	}
+    NSDictionary * falkResponse = [NSDictionary dictionaryWithObjectsAndKeys:NSLocalizedString(@"server_request_error", @"server_request_error"), K_BSDK_RESPONSE_MESSAGE, K_BSDK_RESPONSE_STATUS_FAILED, K_BSDK_RESPONSE_STATUS, nil];
+    if ([delegate respondsToSelector:@selector(request:didFinishLoadingWithResult:)])
+    {
+        [delegate request:self didFinishLoadingWithResult:falkResponse];
+    }
 }
 
 #pragma mark - WBRequest Public Methods

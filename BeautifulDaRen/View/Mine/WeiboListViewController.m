@@ -168,6 +168,9 @@
     
     self.isRefreshing = YES;
     
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    [self.navigationItem.rightBarButtonItem setEnabled:NO];
+    
     NSString * userId = self.friendDictionary ? [self.friendDictionary valueForKey:KEY_ACCOUNT_ID] : [[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] valueForKey:KEY_ACCOUNT_ID];
     
     __block NSString * dataListKey = nil;
@@ -185,7 +188,9 @@
             self.isAllRetrieved = YES;
             [[iToast makeText:NSLocalizedString(@"server_request_error", @"server_request_error")] show];
         }
-        [self onDataLoadDone];
+
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        [self.navigationItem.rightBarButtonItem setEnabled:YES];
     };
     
     if (self.controllerType == WeiboListViewControllerType_COMMENT_ME) {

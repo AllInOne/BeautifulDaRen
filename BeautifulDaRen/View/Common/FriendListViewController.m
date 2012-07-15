@@ -143,6 +143,8 @@
     
     self.isRefreshing = YES;
 
+    [self.navigationItem.rightBarButtonItem setEnabled:NO];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     processDoneWithDictBlock doneBlock = ^(AIO_STATUS status, NSDictionary * data){
         if (K_BSDK_IS_RESPONSE_OK(data)) {
             NSArray * userList = [NSMutableArray arrayWithArray:[data valueForKey:K_BSDK_USERLIST]];
@@ -157,6 +159,8 @@
             [[iToast makeText:NSLocalizedString(@"server_request_error", @"server_request_error")] show];
         }
         [self onDataLoadDone];
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        [self.navigationItem.rightBarButtonItem setEnabled:YES];
     };
     
     switch (_type) {

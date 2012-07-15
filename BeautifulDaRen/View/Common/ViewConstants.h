@@ -15,6 +15,8 @@
 #define ADS_CELL_HEIGHT             (67)
 #define USER_INFOR_CELL_HEIGHT      (80)
 
+#define TEXT_VIEW_MAX_CHARACTOR_NUMBER    140
+
 #define CONTENT_MARGIN              (5.0)
 
 
@@ -84,6 +86,9 @@
 #define KEY_ACCOUNT_FOLLOW_COUNT        @"AttentionNum"
 
 #define GET_CURRENT_USER_INFO_BY_KEY(key)  [[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] valueForKey:key]
+
+#define TAG_ALERTVIEW_CLEAR_LOCATION    0
+#define TAG_ALERTVIEW_BACK_CONFIRM    1
 
 #define ACTIONSHEET_IMAGE_PICKER 1
 

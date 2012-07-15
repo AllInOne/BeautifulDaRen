@@ -279,6 +279,7 @@
             [activityIndicator stopAnimating];
             [activityIndicator removeFromSuperview];
             [activityIndicator release];
+            self.pageIndex++;
             
             [textLabel removeFromSuperview];
             [indicatorView removeFromSuperview];
