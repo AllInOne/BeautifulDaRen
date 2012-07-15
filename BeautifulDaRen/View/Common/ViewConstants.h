@@ -15,7 +15,7 @@
 #define ADS_CELL_HEIGHT             (67)
 #define USER_INFOR_CELL_HEIGHT      (80)
 
-#define TEXT_VIEW_MAX_CHARACTOR_NUMBER    50
+#define TEXT_VIEW_MAX_CHARACTOR_NUMBER    140
 
 #define CONTENT_MARGIN              (5.0)
 
