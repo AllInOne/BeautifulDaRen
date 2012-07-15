@@ -25,9 +25,6 @@
 #define LOCATION_ACTIVITY_Y_OFFSET     (25.0)
 #define LOCATION_ACTIVITY_X_OFFSET     (10.0)
 
-#define TAG_ALERTVIEW_CLEAR_LOCATION    0
-
-
 @interface WeiboComposerViewController ()
 @property (nonatomic, assign) BOOL isKeypadShow;
 @property (nonatomic, retain) CLLocation * currentLocation;
@@ -281,10 +278,17 @@
 }
 
 - (void)onBackButtonClicked {
-    if (![self.navigationController popViewControllerAnimated:YES])
-    {
-        [self dismissModalViewControllerAnimated:YES];
-    }
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"prompt", @"prompt")
+                                                    message:NSLocalizedString(@"composer_back_confirmation", @"composer_back_confirmation")
+                                                   delegate:self
+                                          cancelButtonTitle:NSLocalizedString(@"cancel", @"cancel")
+                                          otherButtonTitles:NSLocalizedString(@"confirm", @"confirm"), nil];
+    alert.tag = TAG_ALERTVIEW_BACK_CONFIRM;
+    
+    [alert show];
+    [alert release];
+    
+    return;
 }
 
 - (void)onSendButtonClicked {
@@ -551,6 +555,19 @@
             default:
                 break;
         }
+    }
+    else if (alertView.tag == TAG_ALERTVIEW_BACK_CONFIRM)
+    {
+        switch (buttonIndex) {
+            case 1:
+                if (![self.navigationController popViewControllerAnimated:YES])
+                {
+                    [self dismissModalViewControllerAnimated:YES];
+                }
+                break;               
+            default:
+                break;
+        }    
     }
 }
 

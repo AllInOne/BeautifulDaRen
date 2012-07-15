@@ -414,8 +414,17 @@ typedef enum
                 case SECTION_BRIEF:
                 {
                     buttonViewCell.leftLabel.text = NSLocalizedString(@"brief", @"brief");
-                    buttonViewCell.buttonText.text = [self.friendDictionary valueForKey:KEY_ACCOUNT_INTRO];
                     buttonViewCell.buttonRightIcon.hidden = YES;
+                    
+                    NSString * description = [self.friendDictionary valueForKey:KEY_ACCOUNT_INTRO];
+                    if  (description && [description length])
+                    {
+                        buttonViewCell.buttonText.text = description;
+                    }
+                    else
+                    {
+                        buttonViewCell.buttonText.text = NSLocalizedString(@"descripton_not_done", @"descripton_not_done");
+                    }
                     break;
                 }
             }

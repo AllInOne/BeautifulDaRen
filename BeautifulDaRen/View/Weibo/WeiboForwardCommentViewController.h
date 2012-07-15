@@ -16,7 +16,7 @@
 @end
 
 @interface WeiboForwardCommentViewController : UIViewController <UIActionSheetDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate,
-    FriendsSelectionViewControllerDelegate>
+    FriendsSelectionViewControllerDelegate, UIAlertViewDelegate>
 
 @property (nonatomic, retain) IBOutlet UITextView * weiboContentTextView;
 @property (nonatomic, retain) IBOutlet UIView * footerView;

@@ -31,7 +31,7 @@
 "account_user_account" = "用户账号";
 "account_register_email" = "注册邮箱";
 "user_name" = "用户名";
-"user_name_id" = "用户名ID";
+"user_name_id" = "昵称";
 "password" = "密码";
 "type_password" = "输入密码";
 "type_password_again" = "确认密码";
@@ -127,7 +127,9 @@
 "authentication" = "认证";
 
 "authentication_done" = "已认证";
-"authentication_not_done" = "未认证";
+"authentication_not_done" = "待认证";
+
+"descripton_not_done" = "未填写个人简介";
 
 
 "add_to_black_list" = "加入黑名单";
@@ -142,6 +144,9 @@
 "get_location_falied" = "亲，获取位置信息失败";
 "clear" = "删除";
 "i_am_here" = "我在这里";
+
+"composer_back_confirmation" = "亲，你确定要放弃编辑，返回吗?";
+"confirm" = "确定";
 
 "my_fans" = "我的粉丝";
 "my_follows" = "我的关注";

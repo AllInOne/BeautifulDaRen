@@ -87,6 +87,9 @@
 
 #define GET_CURRENT_USER_INFO_BY_KEY(key)  [[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] valueForKey:key]
 
+#define TAG_ALERTVIEW_CLEAR_LOCATION    0
+#define TAG_ALERTVIEW_BACK_CONFIRM    1
+
 #define ACTIONSHEET_IMAGE_PICKER 1
 
 #define IMAGE_PICKER_CAMERA       NSLocalizedString(@"take_photo", @"take_photo")

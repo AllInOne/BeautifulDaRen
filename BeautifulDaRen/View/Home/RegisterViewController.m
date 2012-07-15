@@ -18,14 +18,22 @@
 #import "ViewHelper.h"
 #import "ViewConstants.h"
 
-enum
+typedef enum
 {
     ACCOUNT_SETTING_EMAIL = 0,
     ACCOUNT_SETTING_USER_ID,
     ACCOUNT_SETTING_PASSWORD,
     ACCOUNT_SETTING_PASSWORD_AGAIN,
     ACCOUNT_SETTING_CITY
-};
+}ACCOUNT_SETTING_FIELD;
+
+typedef enum 
+{
+    REGISTER_CELL_ACCOUNT_SETTING = 0,
+    REGISTER_CELL_REGISTER_BUTTON,
+//    REGISTER_CELL_SINA,
+    REGISTER_CELL_COUNT
+}REGISTER_CELL_INDEX;
 
 #define USER_NAME_TEXT_FIELD @"userNameTextField"
 #define USER_EMAIL_TEXT_FIELD @"userEmailTextField"
@@ -168,7 +176,7 @@ enum
     static NSString * button_view_identifier = @"ButtonViewCell";
     UITableViewCell * cell = nil;
     NSInteger section = [indexPath section];
-    if(section == 0)
+    if(section == REGISTER_CELL_ACCOUNT_SETTING)
     {
         NSInteger index = 0;
         switch ([indexPath row]) {
@@ -203,6 +211,7 @@ enum
             case ACCOUNT_SETTING_USER_ID:
             {
                 accountInfoInputCell.inputLabel.text = NSLocalizedString(@"user_name_id", @"");
+                accountInfoInputCell.inputLabel.textAlignment = UITextAlignmentLeft;
                 accountInfoInputCell.inputTextField.delegate = self;
                 
                 accountInfoInputCell.inputTextField.placeholder = NSLocalizedString(@"please_input_a_beautifu_daren_name", @"");
@@ -244,7 +253,7 @@ enum
             }
         }
     }
-    else if (section == 1)
+    else if (section == REGISTER_CELL_REGISTER_BUTTON)
     {
         cell = [tableView dequeueReusableCellWithIdentifier:button_view_identifier];
         if(!cell)
@@ -257,42 +266,42 @@ enum
         
         cell.backgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
     }
-    else if (section == 2)
-    {
-        cell = [ViewHelper getLoginWithExtenalViewCellInTableView:tableView cellForRowAtIndexPath:indexPath];
-        self.loginWithSinaWeiboButton = ((ButtonViewCell*)cell).leftButton;
-        self.loginWithQQButton = ((ButtonViewCell*)cell).rightButton;
-        ((ButtonViewCell*)cell).delegate = self;
-    }
+//    else if (section == REGISTER_CELL_SINA)
+//    {
+//        cell = [ViewHelper getLoginWithExtenalViewCellInTableView:tableView cellForRowAtIndexPath:indexPath];
+//        self.loginWithSinaWeiboButton = ((ButtonViewCell*)cell).leftButton;
+//        self.loginWithQQButton = ((ButtonViewCell*)cell).rightButton;
+//        ((ButtonViewCell*)cell).delegate = self;
+//    }
     return cell;
 }
 
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    return REGISTER_CELL_COUNT;
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     NSInteger number = 0;
-    if(section == 0)
+    if(section == REGISTER_CELL_ACCOUNT_SETTING)
     {
         number = 5;
     }
-    else if(section == 1)
+    else if(section == REGISTER_CELL_REGISTER_BUTTON)
     {
         number = 1;
     }
-    else if(section == 2)
-    {
-        number = 1;
-    }
+//    else if(section == REGISTER_CELL_SINA)
+//    {
+//        number = 1;
+//    }
     return number;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSInteger section = [indexPath section];
-    if(section == 0)
+    if(section == REGISTER_CELL_ACCOUNT_SETTING)
     {
         switch ([indexPath row]) {
             case ACCOUNT_SETTING_CITY:
@@ -311,7 +320,7 @@ enum
             }
         }
     }
-    else if(section == 1)
+    else if(section == REGISTER_CELL_REGISTER_BUTTON)
     {
         NSString * userName = self.userNameTextField.text;
         NSString * email = self.userEmailTextField.text;
@@ -382,27 +391,27 @@ enum
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     CGFloat height = 3;
-    if(section == 0)
+    if(section == REGISTER_CELL_ACCOUNT_SETTING)
     {
         height = 10;
     }
-    else if (section == 2) {
-        height = 25;
-    }
+//    else if (section == REGISTER_CELL_SINA) {
+//        height = 25;
+//    }
     return height;
 }
 
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView * view = nil;
-    if(section == 2)
-    {
-        view = [[[NSBundle mainBundle] loadNibNamed:@"HomeViewHeaderView" owner:self options:nil] objectAtIndex:0];
-        UILabel * label = (UILabel*)[view viewWithTag:1];
-        label.textColor = [UIColor darkGrayColor];
-        label.text = NSLocalizedString(@"login_with_cooperation", @"login_with_cooperation");
-    }
-    else
+//    if(section == REGISTER_CELL_SINA)
+//    {
+//        view = [[[NSBundle mainBundle] loadNibNamed:@"HomeViewHeaderView" owner:self options:nil] objectAtIndex:0];
+//        UILabel * label = (UILabel*)[view viewWithTag:1];
+//        label.textColor = [UIColor darkGrayColor];
+//        label.text = NSLocalizedString(@"login_with_cooperation", @"login_with_cooperation");
+//    }
+//    else
     {
         view = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
     }
