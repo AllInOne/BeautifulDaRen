@@ -166,7 +166,7 @@
 "comment_list" = "更多评论";
 
 "loading_more" = "更多...";
-
+"fetching" = "获取中...";
 "no_message" = "没有相关信息";
 
 "fav_list" ="收藏列表";

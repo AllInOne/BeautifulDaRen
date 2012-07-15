@@ -196,6 +196,7 @@
 -(IBAction)onRefreshBtnSelected:(UIButton*)sender
 {
     [self showAdsPageView];
+    [self.itemsViewController clearData];
     [self.itemsViewController refresh];
 }
 

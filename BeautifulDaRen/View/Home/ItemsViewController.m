@@ -33,6 +33,7 @@
 @property (retain, nonatomic) id observerForLoginStatus;
 @property (assign, atomic) BOOL isSyncSccuessed;
 @property (assign, nonatomic) BOOL isFetchMore;
+
 -(void)loadItemsHeight;
 -(NSDictionary*) getValidItemDictionaryAtIndex:(NSUInteger)index;
 @end
@@ -106,6 +107,10 @@
     _waterFlowView.flowdelegate = self;
     _waterFlowView.flowdatasource = self;
     [self.view addSubview:_waterFlowView];
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, 44, 0.0);
+    self.waterFlowView.contentInset = contentInsets;
+    self.waterFlowView.scrollIndicatorInsets = contentInsets;
 }
 
 - (void)viewDidUnload
@@ -235,12 +240,13 @@
 }
 -(void)refresh
 {
-    if (self.isSyncSccuessed && self.isFetchMore) {
+    if (self.isSyncSccuessed && self.isFetchMore)
+    {
         self.isSyncSccuessed = NO;
         UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         activityIndicator.frame = CGRectMake(0, 10, CGRectGetWidth(activityIndicator.frame), CGRectGetHeight(activityIndicator.frame));
         
-        NSString * text =  @"正在取最新...";
+        NSString * text = NSLocalizedString(@"fetching", @"fetching");
         CGFloat textWidth = [ViewHelper getWidthOfText:text ByFontSize:13.0f];
         UILabel * textLabel = [[UILabel alloc] initWithFrame:CGRectMake(30,0, textWidth, 44)];
         textLabel.text = text;
@@ -255,13 +261,14 @@
         [indicatorView addSubview:textLabel];
         [textLabel release];
         
-        CGFloat yPointOfActivityIndicator = self.waterFlowView.contentSize.height - 30;
+        CGFloat yPointOfActivityIndicator = self.waterFlowView.contentSize.height;
         if (self.waterFlowView.contentSize.height == 0) {
-            yPointOfActivityIndicator = 30;
+            yPointOfActivityIndicator = 20;
         }
         indicatorView.frame = CGRectMake(100, yPointOfActivityIndicator, 200,44);
         
         [self.waterFlowView addSubview:indicatorView];
+        
         [indicatorView release];
         
         [activityIndicator startAnimating];
@@ -297,6 +304,7 @@
             {
                 [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
             }
+            
             
         };
         if ([[BSDKManager sharedManager] isLogin])
