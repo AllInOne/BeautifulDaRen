@@ -144,6 +144,7 @@
 
 - (void)viewDidUnload
 {
+    [self.itemsViewController viewDidUnload];
     [self.adsPageView stop];
     self.adsPageView = nil;
     self.itemsViewController = nil;

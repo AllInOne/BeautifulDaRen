@@ -238,24 +238,45 @@
     if (self.isSyncSccuessed && self.isFetchMore) {
         self.isSyncSccuessed = NO;
         UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        activityIndicator.frame = CGRectMake(0, 10, CGRectGetWidth(activityIndicator.frame), CGRectGetHeight(activityIndicator.frame));
+        
+        NSString * text =  @"正在取最新...";
+        CGFloat textWidth = [ViewHelper getWidthOfText:text ByFontSize:13.0f];
+        UILabel * textLabel = [[UILabel alloc] initWithFrame:CGRectMake(30,0, textWidth, 44)];
+        textLabel.text = text;
+        [textLabel setTextColor:[UIColor grayColor]];
+        [textLabel setBackgroundColor:[UIColor clearColor]];
+        [textLabel setFont:[UIFont systemFontOfSize:13.0f]];
+
+        UIView * indicatorView = [[UIView alloc] init];
+        [indicatorView setBackgroundColor:[UIColor clearColor]];
+        
+        [indicatorView addSubview:activityIndicator];
+        [indicatorView addSubview:textLabel];
+        [textLabel release];
         
         CGFloat yPointOfActivityIndicator = self.waterFlowView.contentSize.height - 30;
         if (self.waterFlowView.contentSize.height == 0) {
             yPointOfActivityIndicator = 30;
         }
-        activityIndicator.frame = CGRectMake((SCREEN_WIDTH - activityIndicator.frame.size.width) / 2, yPointOfActivityIndicator, CGRectGetWidth(activityIndicator.frame), CGRectGetHeight(activityIndicator.frame));
+        indicatorView.frame = CGRectMake(100, yPointOfActivityIndicator, 200,44);
         
-        [self.waterFlowView addSubview:activityIndicator];
+        [self.waterFlowView addSubview:indicatorView];
+        [indicatorView release];
         
         [activityIndicator startAnimating];
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: YES];
-        
+
         processDoneWithDictBlock block = ^(AIO_STATUS status, NSDictionary *data)
         {
             [activityIndicator stopAnimating];
             [activityIndicator removeFromSuperview];
             [activityIndicator release];
             self.pageIndex++;
+            
+            [textLabel removeFromSuperview];
+            [indicatorView removeFromSuperview];
+            
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: NO];
             
             if (AIO_STATUS_SUCCESS == status && K_BSDK_IS_RESPONSE_OK(data))
@@ -266,10 +287,7 @@
                     self.isFetchMore = NO;
                 }
                 for (NSDictionary * dict in array) {
-                    if ([[dict valueForKey:K_BSDK_PICTURE_WIDTH] floatValue] > 0)
-                    {
-                        [self.itemDatas addObject:dict];
-                    }
+                    [self.itemDatas addObject:dict];
                 }
                 [self loadItemsHeight];
                 [_waterFlowView reloadData];
