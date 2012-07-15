@@ -265,10 +265,7 @@
                     self.isFetchMore = NO;
                 }
                 for (NSDictionary * dict in array) {
-                    if ([[dict valueForKey:K_BSDK_PICTURE_WIDTH] floatValue] > 0)
-                    {
-                        [self.itemDatas addObject:dict];
-                    }
+                    [self.itemDatas addObject:dict];
                 }
                 [self loadItemsHeight];
                 [_waterFlowView reloadData];
