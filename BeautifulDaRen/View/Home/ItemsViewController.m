@@ -26,6 +26,7 @@
 #define GRID_X_DELTA 80
 #define GRID_Y_DELTA 80
 
+#define INDICATOR_HEIGHT 30
 @interface ItemsViewController()
 
 @property (retain, nonatomic) NSMutableArray * itemsHeight;
@@ -108,7 +109,7 @@
     _waterFlowView.flowdatasource = self;
     [self.view addSubview:_waterFlowView];
     
-    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, 44, 0.0);
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, INDICATOR_HEIGHT, 0.0);
     self.waterFlowView.contentInset = contentInsets;
     self.waterFlowView.scrollIndicatorInsets = contentInsets;
 }
@@ -248,7 +249,7 @@
         
         NSString * text = NSLocalizedString(@"fetching", @"fetching");
         CGFloat textWidth = [ViewHelper getWidthOfText:text ByFontSize:13.0f];
-        UILabel * textLabel = [[UILabel alloc] initWithFrame:CGRectMake(30,0, textWidth, 44)];
+        UILabel * textLabel = [[UILabel alloc] initWithFrame:CGRectMake(30,5, textWidth, INDICATOR_HEIGHT)];
         textLabel.text = text;
         [textLabel setTextColor:[UIColor grayColor]];
         [textLabel setBackgroundColor:[UIColor clearColor]];
@@ -265,7 +266,7 @@
         if (self.waterFlowView.contentSize.height == 0) {
             yPointOfActivityIndicator = 20;
         }
-        indicatorView.frame = CGRectMake(100, yPointOfActivityIndicator, 200,44);
+        indicatorView.frame = CGRectMake(120, yPointOfActivityIndicator, 200,INDICATOR_HEIGHT);
         
         [self.waterFlowView addSubview:indicatorView];
         
