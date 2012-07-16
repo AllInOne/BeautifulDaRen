@@ -607,17 +607,20 @@
 
 - (void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 {
-    self.isFindWeibo = (selectedScope == 0) ? YES : NO;
-    self.isSearchModel = YES;
-    [self checkSearchMode];
-    // search when result array is empty in the opposite mode.
-    if (self.isFindWeibo && [self.searchWeiboResults count] == 0)
+    if (self.isSearchModel)
     {
-        [self doSearch];
-    }
-    else if (!self.isFindWeibo && [self.searchUserResults count] == 0)
-    {
-        [self doSearch];
+        self.isFindWeibo = (selectedScope == 0) ? YES : NO;
+        self.isSearchModel = YES;
+        [self checkSearchMode];
+        // search when result array is empty in the opposite mode.
+        if (self.isFindWeibo && [self.searchWeiboResults count] == 0)
+        {
+            [self doSearch];
+        }
+        else if (!self.isFindWeibo && [self.searchUserResults count] == 0)
+        {
+            [self doSearch];
+        }
     }
 }
 
