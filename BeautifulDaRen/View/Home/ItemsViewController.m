@@ -255,9 +255,6 @@
         {
             callback();
             Block_release(callback);
-            self.pageIndex++;
-            
-            
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: NO];
             
             if (AIO_STATUS_SUCCESS == status && K_BSDK_IS_RESPONSE_OK(data))
