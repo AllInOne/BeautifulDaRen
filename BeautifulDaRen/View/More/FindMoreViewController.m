@@ -23,6 +23,8 @@
 
 #define X_OFFSET 7
 #define CONTENT_VIEW_HEIGHT_OFFSET 50
+#define SEARCH_WEIBO 0
+#define SEARCH_USER 1
 @interface FindMoreViewController()
 
 @property (retain, nonatomic) IBOutlet UIScrollView * contentScrollView;
@@ -47,7 +49,6 @@
 @property (retain, nonatomic) UITapGestureRecognizer * searchUserGestureRecognizer;
 
 @property (assign, nonatomic) BOOL isSearchModel;
-@property (assign, nonatomic) BOOL isFindWeibo;
 @property (assign, nonatomic) BOOL inSearching;
 @property (assign, nonatomic) BOOL isSearchMoreUser;
 @property (assign, nonatomic) BOOL isSearchMoreWeibo;
@@ -71,7 +72,6 @@
 @synthesize contentScrollView = _contentScrollView;
 @synthesize searchUserView = _searchUserView;
 @synthesize searchBar = _searchBar;
-@synthesize isFindWeibo = _isFindWeibo;
 @synthesize searchUserResults = _searchUserResults;
 @synthesize searchUserPageIndex = _searchUserPageIndex;
 @synthesize searchWeiboPageIndex = _searchWeiboPageIndex;
@@ -216,7 +216,6 @@
     self.searchUserPageIndex = 1;
     self.searchWeiboPageIndex = 1;
     self.isSearchModel = NO;
-    self.isFindWeibo = YES;
     self.inSearching = NO;
     self.isSearchMoreUser = YES;
     self.isSearchMoreWeibo = YES;
@@ -323,7 +322,7 @@
 
 - (void)waterFlowCellSelected:(NSNotification *)notification
 {
-    if (self.isSearchModel && self.isFindWeibo)
+    if (self.isSearchModel && self.searchBar.selectedScopeButtonIndex == SEARCH_WEIBO)
     {
         BorderImageView * weiboView = (BorderImageView*)notification.object;
         WeiboDetailViewController *weiboDetailController = 
@@ -464,7 +463,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.isSearchModel && self.isFindWeibo == NO)
+    if (self.isSearchModel && self.searchBar.selectedScopeButtonIndex == SEARCH_USER)
     {
         UIViewController * viewController = [[FriendDetailViewController alloc] initWithDictionary:[self.searchUserResults objectAtIndex:[indexPath row]]];
         UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: viewController];
@@ -609,15 +608,14 @@
 {
     if (self.isSearchModel)
     {
-        self.isFindWeibo = (selectedScope == 0) ? YES : NO;
         self.isSearchModel = YES;
         [self checkSearchMode];
         // search when result array is empty in the opposite mode.
-        if (self.isFindWeibo && [self.searchWeiboResults count] == 0)
+        if (self.searchBar.selectedScopeButtonIndex == SEARCH_WEIBO && [self.searchWeiboResults count] == 0)
         {
             [self doSearch];
         }
-        else if (!self.isFindWeibo && [self.searchUserResults count] == 0)
+        else if (self.searchBar.selectedScopeButtonIndex == SEARCH_USER && [self.searchUserResults count] == 0)
         {
             [self doSearch];
         }
@@ -647,11 +645,11 @@
         
         callBackBlock callback = nil;
         UIScrollView * contentView = nil;
-        if (self.isFindWeibo == NO && self.isSearchMoreUser == YES)
+        if (self.searchBar.selectedScopeButtonIndex == SEARCH_USER && self.isSearchMoreUser == YES)
         {
             contentView = self.searchUserView;
         }
-        else if(self.isFindWeibo == YES && self.isSearchMoreWeibo == YES)
+        else if(self.searchBar.selectedScopeButtonIndex == SEARCH_WEIBO && self.isSearchMoreWeibo == YES)
         {
             contentView = self.searchWeiboView;
         }
@@ -662,7 +660,7 @@
             CGRect frame = CGRectMake(120, contentView.contentSize.height, 200, 30);
             callback = [ViewHelper getIndicatorViewBlockWithFrame:frame inView:contentView];
         }
-        if (self.isFindWeibo == NO && self.isSearchMoreUser == YES)
+        if (self.searchBar.selectedScopeButtonIndex == SEARCH_USER && self.isSearchMoreUser == YES)
         {
             processDoneWithDictBlock block = ^(AIO_STATUS status, NSDictionary *data)
             {
@@ -701,7 +699,7 @@
                                                      pageIndex:self.searchUserPageIndex 
                                                andDoneCallback:block];
         }
-        else if(self.isFindWeibo == YES && self.isSearchMoreWeibo == YES)
+        else if(self.searchBar.selectedScopeButtonIndex == SEARCH_WEIBO && self.isSearchMoreWeibo == YES)
         {
             processDoneWithDictBlock block = ^(AIO_STATUS status, NSDictionary *data)
             {
@@ -895,7 +893,7 @@
 {
     if (self.isSearchModel)
     {
-        if (self.isFindWeibo)
+        if (self.searchBar.selectedScopeButtonIndex == SEARCH_WEIBO)
         {
             [self.searchUserView setHidden:YES];
             [self.searchWeiboView setHidden:NO];
