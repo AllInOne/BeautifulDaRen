@@ -264,6 +264,13 @@
                                                              }];
     [self.observers addObject:observer];
     
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, 30, 0.0);
+    self.searchUserView.contentInset = contentInsets;
+    self.searchUserView.scrollIndicatorInsets = contentInsets;
+    
+    self.searchWeiboView.contentInset = contentInsets;
+    self.searchWeiboView.scrollIndicatorInsets = contentInsets;
+    
     [self.searchUserView setHidden:YES];
     [self.searchWeiboView setHidden:YES];
     _searchBar.scopeButtonTitles = [NSArray arrayWithObjects:
@@ -630,29 +637,27 @@
             return;
         }
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: YES];
-        UIActivityIndicatorView * activityIndicator = nil;
-        if ((self.isFindWeibo == NO && self.isSearchMoreUser == YES) 
-            || (self.isFindWeibo == YES && self.isSearchMoreWeibo == YES))
+        
+        callBackBlock callback = nil;
+        UIScrollView * contentView = nil;
+        if (self.isFindWeibo == NO && self.isSearchMoreUser == YES)
         {
-            activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-            
-            activityIndicator.frame = CGRectMake((SCREEN_WIDTH - activityIndicator.frame.size.width ) / 2,
-                                                 2 * ADS_CELL_HEIGHT + CONTENT_MARGIN,
-                                                 CGRectGetWidth(activityIndicator.frame),
-                                                 CGRectGetHeight(activityIndicator.frame));
-            
-            [self.view addSubview:activityIndicator];
-            
-            [activityIndicator startAnimating];
+            contentView = self.searchUserView;
+        }
+        else if(self.isFindWeibo == YES && self.isSearchMoreWeibo == YES)
+        {
+            contentView = self.searchWeiboView;
         }
         
+        CGRect frame = CGRectMake(120, contentView.contentSize.height, 200, 30);
+        callback = [ViewHelper getIndicatorViewBlockWithFrame:frame inView:contentView];
+
         if (self.isFindWeibo == NO && self.isSearchMoreUser == YES)
         {
             processDoneWithDictBlock block = ^(AIO_STATUS status, NSDictionary *data)
             {
-                [activityIndicator stopAnimating];
-                [activityIndicator removeFromSuperview];
-                [activityIndicator release];
+                callback();
+                Block_release(callback);
                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: NO];
                 
                 self.inSearching = NO;
@@ -686,9 +691,8 @@
         {
             processDoneWithDictBlock block = ^(AIO_STATUS status, NSDictionary *data)
             {
-                [activityIndicator stopAnimating];
-                [activityIndicator removeFromSuperview];
-                [activityIndicator release];
+                callback();
+                Block_release(callback);
                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: NO];
                 self.inSearching = NO;
                 if ([[data valueForKey:K_BSDK_BLOGLIST] count] == 0)
@@ -726,9 +730,8 @@
         {
             NSAssert(YES, @"Unexpected condition happend in doSearch in FindMoreViewController");
             
-            [activityIndicator stopAnimating];
-            [activityIndicator removeFromSuperview];
-            [activityIndicator release];
+            callback();
+            Block_release(callback);
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: NO];
         }
     }
