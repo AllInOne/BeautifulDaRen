@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ControllerConstants.h"
 
 @interface ViewHelper : NSObject
 
@@ -51,7 +52,9 @@
 
 + (NSString*)getUserDefaultAvatarImageByData:(NSDictionary*)userInfo;
 
-+ (BOOL) isDigitsString:(NSString*)str;
++ (BOOL)isDigitsString:(NSString*)str;
 
-+ (BOOL) NSStringIsValidEmail:(NSString *)checkString;
++ (BOOL)NSStringIsValidEmail:(NSString *)checkString;
+
++ (callBackBlock)getIndicatorViewBlockWithFrame:(CGRect)frame inView:(UIView*)superView;
 @end

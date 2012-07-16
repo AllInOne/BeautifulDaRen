@@ -428,12 +428,12 @@
                     imageView.image = [UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:dict]];
                 }
                 
-                BorderImageView * tempBorderView = [[BorderImageView alloc] initWithFrame:cell.friendImageView.frame andView:imageView];
-                tempBorderView.index = i + typeOffset;
-                [cell.friendImageView addSubview:tempBorderView];
+                BorderImageView * borderView = [[BorderImageView alloc] initWithFrame:cell.friendImageView.frame andView:imageView];
+                borderView.index = i + typeOffset;
+                [cell.friendImageView addSubview:borderView];
                 cell.friendNameLabel.text = [dict valueForKey:KEY_ACCOUNT_USER_NAME];
                 
-                [tempBorderView release];
+                [borderView release];
                 [imageView release];
             }
             
@@ -667,14 +667,14 @@
                 }
                 if (AIO_STATUS_SUCCESS == status && K_BSDK_IS_RESPONSE_OK(data))
                 {
-                    NSArray * tempArray = [[data valueForKey:K_BSDK_USERLIST] copy];
-                    for (NSDictionary * dict in tempArray)
+                    NSArray * valueArray = [[data valueForKey:K_BSDK_USERLIST] copy];
+                    for (NSDictionary * dict in valueArray)
                     {
                         NSMutableDictionary * mutableDict = [dict mutableCopy];
                         [self.searchUserResults addObject:mutableDict];
                         [mutableDict release];
                     }
-                    [tempArray release];
+                    [valueArray release];
                     self.searchUserPageIndex ++;
                 }
                 else {

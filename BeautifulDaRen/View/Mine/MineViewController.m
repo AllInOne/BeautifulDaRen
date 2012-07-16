@@ -156,12 +156,12 @@
         CGRect borderImageViewFrame = CGRectMake(0,0, 
                                                  ((MyInfoTopViewCell*)cell).avatarImageView.frame.size.width,
                                                  ((MyInfoTopViewCell*)cell).avatarImageView.frame.size.height);
-        BorderImageView * tempBorderView = [[BorderImageView alloc]
+        BorderImageView * borderView = [[BorderImageView alloc]
                                             initWithFrame:borderImageViewFrame
                                             andView:imageView];
-        [((MyInfoTopViewCell*)cell).avatarImageView addSubview:tempBorderView];
+        [((MyInfoTopViewCell*)cell).avatarImageView addSubview:borderView];
         [imageView release];
-        [tempBorderView release];
+        [borderView release];
         NSString * isVerify = [userDict objectForKey:K_BSDK_ISVERIFY];
         if (isVerify && [isVerify isEqual:K_BSDK_ISVERIFY_YES]) {
             [((MyInfoTopViewCell*)cell).vMarkImageView setImage:[UIImage imageNamed:@"v_mark_big"]];

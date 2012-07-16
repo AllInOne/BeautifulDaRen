@@ -333,4 +333,41 @@ static BUIFont * instance;
     return [emailTest evaluateWithObject:checkString];
 }
 
+
++ (callBackBlock)getIndicatorViewBlockWithFrame:(CGRect)frame inView:(UIView*)superView
+{
+    UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    activityIndicator.frame = CGRectMake(0, 10, CGRectGetWidth(activityIndicator.frame), CGRectGetHeight(activityIndicator.frame));
+    [activityIndicator startAnimating];
+    
+    NSString * text = NSLocalizedString(@"fetching", @"fetching");
+    CGFloat textWidth = [ViewHelper getWidthOfText:text ByFontSize:13.0f];
+    UILabel * textLabel = [[UILabel alloc] initWithFrame:CGRectMake(30,5, textWidth, 30)];
+    textLabel.text = text;
+    [textLabel setTextColor:[UIColor grayColor]];
+    [textLabel setBackgroundColor:[UIColor clearColor]];
+    [textLabel setFont:[UIFont systemFontOfSize:13.0f]];
+    
+    UIView * indicatorView = [[UIView alloc] initWithFrame:frame];
+    [indicatorView setBackgroundColor:[UIColor clearColor]];
+    
+    [indicatorView addSubview:activityIndicator];
+    [indicatorView addSubview:textLabel];
+    
+    [superView addSubview:indicatorView];
+
+    [textLabel release];
+    [activityIndicator release];
+    [indicatorView release];
+    
+    callBackBlock callback = ^(void)
+    {
+        [activityIndicator stopAnimating];
+        [activityIndicator removeFromSuperview];
+        [textLabel removeFromSuperview];
+        [indicatorView removeFromSuperview];
+    };
+
+    return Block_copy(callback);
+}
 @end

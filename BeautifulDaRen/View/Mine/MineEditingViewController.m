@@ -212,12 +212,12 @@ typedef enum
             CGRect borderImageViewFrame = CGRectMake(0,0, 
                                                      ((MyInfoTopViewCell*)cell).avatarImageView.frame.size.width,
                                                      ((MyInfoTopViewCell*)cell).avatarImageView.frame.size.height);
-            BorderImageView * tempBorderView = [[BorderImageView alloc]
+            BorderImageView * borderView = [[BorderImageView alloc]
                                                 initWithFrame:borderImageViewFrame
                                                 andView:imageView];
-            [((MyInfoTopViewCell*)cell).avatarImageView addSubview:tempBorderView];
+            [((MyInfoTopViewCell*)cell).avatarImageView addSubview:borderView];
             [imageView release];
-            [tempBorderView release];
+            [borderView release];
 
             [((MyInfoTopViewCell*)cell).updateAvatarButton addTarget:self action:@selector(onUpdataAvatarPressed:) forControlEvents:UIControlEventTouchUpInside];
         }
