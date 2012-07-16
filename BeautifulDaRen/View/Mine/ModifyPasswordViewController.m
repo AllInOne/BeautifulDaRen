@@ -161,19 +161,19 @@
         NSString * iToastString = @"";
         if ([self.oldPasswordField.text isEqualToString:@""])
         {
-            iToastString = @"旧密码不能为空!";
+            iToastString = @"亲, 旧密码不能为空哦!";
         }
         else if ([self.resetPasswordField.text isEqualToString:@""])
         {
-            iToastString = @"新密码不能为空!";
+            iToastString = @"亲, 新密码不能为空哦!";
         }
         else if ([self.resetPasswordField.text isEqualToString:@""])
         {
-            iToastString = @"请再次输入新密码!";
+            iToastString = @"亲, 请再次输入新密码哦!";
         }
         else if (![self.repeatNewPasswordField.text isEqualToString:self.resetPasswordField.text])
         {
-            iToastString = @"两次输入新密码不一致!";
+            iToastString = @"亲, 两次输入新密码不一致哦!";
         }
         if(![iToastString isEqualToString:@""])
         {

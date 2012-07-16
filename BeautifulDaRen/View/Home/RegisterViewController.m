@@ -468,17 +468,17 @@ typedef enum
             [[SinaSDKManager sharedManager] loginWithDoneCallback:^(LOGIN_STATUS status) {
                 NSLog(@"Sina SDK login done, status:%d", status);
                 if (status == LOGIN_STATUS_SUCCESS) {
-                    [[iToast makeText:@"亲，认证成功了！"] show];
+                    [[iToast makeText:@"亲，认证成功了哦！"] show];
                 }
                 else
                 {
-                    [[iToast makeText:@"亲，认证失败了！"] show];
+                    [[iToast makeText:@"亲，认证失败了哦！"] show];
                 }
             }];   
         }
         else
         {
-            [[iToast makeText:@"亲，已经认证过了！"] show];
+            [[iToast makeText:@"亲，已经认证过了哦！"] show];
         }
     }
     else if(button == self.loginWithQQButton)

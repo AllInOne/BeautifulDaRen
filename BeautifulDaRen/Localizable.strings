@@ -187,6 +187,8 @@
 
 "please_correct_phone" = "亲, 请检查电话号码格式哦!";
 
+"please_login" = "亲, 您还没有登录哦!";
+
 "prompt_category_max" = "亲, 最多选%d个分类哦!";
 
 "please_check_username" = "亲, 请检查用户名哦!";

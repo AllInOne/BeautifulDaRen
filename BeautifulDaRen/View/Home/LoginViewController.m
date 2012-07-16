@@ -271,11 +271,11 @@ typedef enum
         NSString * iToastString = @"";
         if ([userName isEqualToString:@""])
         {
-            iToastString = @"用户名不能为空!";
+            iToastString = @"亲, 用户名不能为空哦!";
         }
         else if ([password isEqualToString:@""])
         {
-            iToastString = @"密码不能为空!";
+            iToastString = @"亲, 密码不能为空哦!";
         }
         if(![iToastString isEqualToString:@""])
         {

@@ -146,7 +146,7 @@
         UIImageView * imageView = [[UIImageView alloc] init];
         NSString * avatarImageUrl = [userDict valueForKey:K_BSDK_PICTURE_65];
         if (avatarImageUrl && [avatarImageUrl length] > 0 ) {
-            [imageView setImageWithURL:[NSURL URLWithString:avatarImageUrl] placeholderImage:[UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:userDict]]];
+            [imageView setImageWithURL:[NSURL URLWithString:avatarImageUrl]];
         }
         else
         {
@@ -382,7 +382,7 @@
                 [self.tabBarController setSelectedIndex:0];
             }
             else {
-                [[iToast makeText:@"账户退出失败!"] show];
+                [[iToast makeText:@"亲, 账户退出失败!"] show];
             }
             if ([[SinaSDKManager sharedManager] isLogin]) {
                 [[SinaSDKManager sharedManager] logout];
