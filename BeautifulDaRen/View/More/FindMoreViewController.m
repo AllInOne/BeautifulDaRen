@@ -57,6 +57,7 @@
 - (void) doSearch;
 - (void) loadWeiboHeights;
 - (void) reset;
+- (void) clearData;
 - (void) checkSearchMode;
 - (void) refreshView;
 
@@ -108,6 +109,7 @@
 {
     if (self.isSearchModel)
     {
+        [self clearData];
         [self doSearch];
     }
     else
@@ -644,8 +646,8 @@
             [activityIndicator startAnimating];
         }
         
-        if (self.isFindWeibo == NO && self.isSearchMoreUser == YES) {
-            
+        if (self.isFindWeibo == NO && self.isSearchMoreUser == YES)
+        {
             processDoneWithDictBlock block = ^(AIO_STATUS status, NSDictionary *data)
             {
                 [activityIndicator stopAnimating];
@@ -668,6 +670,7 @@
                         [mutableDict release];
                     }
                     [tempArray release];
+                    self.searchUserPageIndex ++;
                 }
                 else {
                     [[iToast makeText:[NSString stringWithFormat:@"%@", K_BSDK_GET_RESPONSE_MESSAGE(data)]] show];
@@ -678,7 +681,6 @@
                                                       pageSize:10
                                                      pageIndex:self.searchUserPageIndex 
                                                andDoneCallback:block];
-            self.searchUserPageIndex ++;
         }
         else if(self.isFindWeibo == YES && self.isSearchMoreWeibo == YES)
         {
@@ -854,11 +856,16 @@
 
 - (void)reset
 {
-    self.searchUserPageIndex = 1;
-    self.searchWeiboPageIndex = 1;
     self.isSearchMoreWeibo = YES;
     self.isSearchMoreUser = YES;
     self.inSearching = NO;
+    [self clearData];
+}
+
+- (void) clearData
+{
+    self.searchUserPageIndex = 1;
+    self.searchWeiboPageIndex = 1;
     [self.searchWeiboResults removeAllObjects];
     [self.searchUserResults removeAllObjects];
     [self.weiboHeights removeAllObjects];
