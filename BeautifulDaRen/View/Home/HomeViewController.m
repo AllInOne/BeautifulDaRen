@@ -88,7 +88,14 @@
     self.adsPageView.view.frame = CGRectMake(0, 0, self.view.frame.size.width, ADS_CELL_HEIGHT);
     [self.view addSubview:self.adsPageView.view];
     self.adsPageView.delegate = self;
-    
+
+    _itemsViewController = [[ItemsViewController alloc] initWithArray:nil];
+    _itemsViewController.view.frame = CGRectMake(0,
+                                                 ADS_CELL_HEIGHT + CONTENT_MARGIN,
+                                                 self.view.frame.size.width,
+                                                 USER_WINDOW_HEIGHT - ADS_CELL_HEIGHT - CONTENT_MARGIN);
+    [self.view addSubview:_itemsViewController.view];
+
     NSNumber * isAutoLogin = [[NSUserDefaults standardUserDefaults] objectForKey:USERDEFAULT_IS_AUTO_LOGIN];
     if (![[BSDKManager sharedManager] isLogin] && [isAutoLogin boolValue])
     {
@@ -116,15 +123,14 @@
              }];
         }
     }
-
-    
-    _itemsViewController = [[ItemsViewController alloc] initWithArray:nil];
-    _itemsViewController.view.frame = CGRectMake(0,
-                                                 ADS_CELL_HEIGHT + CONTENT_MARGIN,
-                                                 self.view.frame.size.width,
-                                                 USER_WINDOW_HEIGHT - ADS_CELL_HEIGHT - CONTENT_MARGIN);
-    [self.view addSubview:_itemsViewController.view];
-    if (![[BSDKManager sharedManager] isLogin] && ![isAutoLogin boolValue])
+    // refresh view data when not auto signin.
+    else if (![[BSDKManager sharedManager] isLogin] && ![isAutoLogin boolValue])
+    {
+        [self.itemsViewController refresh];
+    }
+    // when recieved memory warning in other view, this view will be call viewDidUnload.
+    // so, when show this view again, the viewdidload will be called again.
+    else if([[BSDKManager sharedManager] isLogin])
     {
         [self.itemsViewController refresh];
     }
