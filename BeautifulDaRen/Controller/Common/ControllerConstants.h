@@ -27,6 +27,7 @@ typedef enum
     AIO_STATUS_NOT_FOUND
 }AIO_STATUS;
 
+typedef void(^callBackBlock)(void);
 typedef void(^loginDoneBlock)(LOGIN_STATUS status);
 typedef void(^processDoneBlock)(AIO_STATUS status);
 typedef void(^processDoneWithDictBlock)(AIO_STATUS status, NSDictionary * data);

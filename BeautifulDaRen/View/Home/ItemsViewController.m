@@ -26,6 +26,7 @@
 #define GRID_X_DELTA 80
 #define GRID_Y_DELTA 80
 
+#define INDICATOR_HEIGHT 30
 @interface ItemsViewController()
 
 @property (retain, nonatomic) NSMutableArray * itemsHeight;
@@ -108,7 +109,7 @@
     _waterFlowView.flowdatasource = self;
     [self.view addSubview:_waterFlowView];
     
-    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, 44, 0.0);
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, INDICATOR_HEIGHT, 0.0);
     self.waterFlowView.contentInset = contentInsets;
     self.waterFlowView.scrollIndicatorInsets = contentInsets;
 }
@@ -242,47 +243,20 @@
 {
     if (self.isSyncSccuessed && self.isFetchMore)
     {
-        self.isSyncSccuessed = NO;
-        UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        activityIndicator.frame = CGRectMake(0, 10, CGRectGetWidth(activityIndicator.frame), CGRectGetHeight(activityIndicator.frame));
-        
-        NSString * text = NSLocalizedString(@"fetching", @"fetching");
-        CGFloat textWidth = [ViewHelper getWidthOfText:text ByFontSize:13.0f];
-        UILabel * textLabel = [[UILabel alloc] initWithFrame:CGRectMake(30,0, textWidth, 44)];
-        textLabel.text = text;
-        [textLabel setTextColor:[UIColor grayColor]];
-        [textLabel setBackgroundColor:[UIColor clearColor]];
-        [textLabel setFont:[UIFont systemFontOfSize:13.0f]];
-
-        UIView * indicatorView = [[UIView alloc] init];
-        [indicatorView setBackgroundColor:[UIColor clearColor]];
-        
-        [indicatorView addSubview:activityIndicator];
-        [indicatorView addSubview:textLabel];
-        [textLabel release];
+        self.isSyncSccuessed = NO;     
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: YES];
         
         CGFloat yPointOfActivityIndicator = self.waterFlowView.contentSize.height;
         if (self.waterFlowView.contentSize.height == 0) {
             yPointOfActivityIndicator = 20;
         }
-        indicatorView.frame = CGRectMake(100, yPointOfActivityIndicator, 200,44);
-        
-        [self.waterFlowView addSubview:indicatorView];
-        
-        [indicatorView release];
-        
-        [activityIndicator startAnimating];
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: YES];
-
+        callBackBlock callback = [ViewHelper getIndicatorViewBlockWithFrame:CGRectMake(120, yPointOfActivityIndicator, 200,INDICATOR_HEIGHT) inView:self.waterFlowView];   
         processDoneWithDictBlock block = ^(AIO_STATUS status, NSDictionary *data)
         {
-            [activityIndicator stopAnimating];
-            [activityIndicator removeFromSuperview];
-            [activityIndicator release];
+            callback();
+            Block_release(callback);
             self.pageIndex++;
             
-            [textLabel removeFromSuperview];
-            [indicatorView removeFromSuperview];
             
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: NO];
             

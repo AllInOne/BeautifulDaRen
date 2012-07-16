@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ControllerConstants.h"
 
 @interface ViewHelper : NSObject
 
@@ -27,8 +28,6 @@
 + (UIBarButtonItem*)getRightBarItemOfTarget1:(id)target1 action1:(SEL)action1 title1:(NSString*)title1 target2:(id)target2 action2:(SEL)action2 title2:(NSString*)title2;
 
 + (UIBarButtonItem*)getToolBarItemOfImageName:(NSString*)image target:(id)target action:(SEL)action;
-
-+ (UIImage*) getBubbleImageWithWidth:(NSInteger)width height:(NSInteger)height;
 
 + (UIBarButtonItem*) getCameraBarItemOftarget:(id)target action:(SEL)action;
 
@@ -51,7 +50,9 @@
 
 + (NSString*)getUserDefaultAvatarImageByData:(NSDictionary*)userInfo;
 
-+ (BOOL) isDigitsString:(NSString*)str;
++ (BOOL)isDigitsString:(NSString*)str;
 
-+ (BOOL) NSStringIsValidEmail:(NSString *)checkString;
++ (BOOL)NSStringIsValidEmail:(NSString *)checkString;
+
++ (callBackBlock)getIndicatorViewBlockWithFrame:(CGRect)frame inView:(UIView*)superView;
 @end

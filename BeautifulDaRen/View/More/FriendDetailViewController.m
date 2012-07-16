@@ -627,12 +627,12 @@ typedef enum
     CGRect borderImageViewFrame = CGRectMake(0,0, 
                                              self.avatarImageView.frame.size.width,
                                              self.avatarImageView.frame.size.height);
-    BorderImageView * tempBorderView = [[BorderImageView alloc]
+    BorderImageView * borderView = [[BorderImageView alloc]
                                         initWithFrame:borderImageViewFrame
                                         andView:imageView];
-    [self.avatarImageView addSubview:tempBorderView];
+    [self.avatarImageView addSubview:borderView];
     [imageView release];
-    [tempBorderView release];
+    [borderView release];
     NSString * isVerify = [self.friendDictionary objectForKey:K_BSDK_ISVERIFY];
     if (isVerify && [isVerify isEqual:K_BSDK_ISVERIFY_YES]) {
         [self.vMarkImageView setImage:[UIImage imageNamed:@"v_mark_big"]];
