@@ -29,8 +29,6 @@
 
 + (UIBarButtonItem*)getToolBarItemOfImageName:(NSString*)image target:(id)target action:(SEL)action;
 
-+ (UIImage*) getBubbleImageWithWidth:(NSInteger)width height:(NSInteger)height;
-
 + (UIBarButtonItem*) getCameraBarItemOftarget:(id)target action:(SEL)action;
 
 + (NSMutableAttributedString*)getGridViewCellForContactInformationWithName:(NSString*)name detail:(NSString*)detail;

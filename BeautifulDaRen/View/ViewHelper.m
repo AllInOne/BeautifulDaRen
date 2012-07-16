@@ -191,21 +191,6 @@ static BUIFont * instance;
     return [[[UIBarButtonItem alloc] initWithCustomView:button] autorelease];
 }
 
-+ (UIImage*) getBubbleImageWithWidth:(NSInteger)width height:(NSInteger)height
-{
-    static NSString * bubbleImageName = @"comment_background";
-    UIImage * image = nil;
-//    if([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0)
-//    {
-//        imageView.image = [[UIImage imageNamed:bubbleImageName] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
-//    }
-//    else
-//    {
-        image = [[UIImage imageNamed:bubbleImageName] stretchableImageWithLeftCapWidth:50 topCapHeight:50];
-//    }
-    return image;
-}
-
 + (NSMutableAttributedString *) getGridViewCellForContactInformationWithName:(NSString*)name detail:(NSString*)detail
 {
     NSString * tempString = [NSString stringWithFormat:@"%@%@", name, detail];
