@@ -260,17 +260,22 @@
             if (AIO_STATUS_SUCCESS == status && K_BSDK_IS_RESPONSE_OK(data))
             {
                 NSArray * array = [data valueForKey:K_BSDK_BLOGLIST];
-                if ([array count] == 0)
-                {
-                    self.isFetchMore = NO;
-                }
                 for (NSDictionary * dict in array) {
                     [self.itemDatas addObject:dict];
                 }
                 [self loadItemsHeight];
                 [_waterFlowView reloadData];
                 self.isSyncSccuessed = YES;
-                self.pageIndex ++;
+                
+                if (([[data valueForKey:K_BSDK_PAGECOUNT] intValue] ==  self.pageIndex)
+                    || ([[data valueForKey:K_BSDK_BLOGLIST] count] == 0))
+                {
+                    self.isFetchMore = NO;
+                }
+                else
+                {
+                    self.pageIndex ++;
+                }
             }
             else
             {

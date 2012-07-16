@@ -140,6 +140,8 @@
 
 #define K_BSDK_RESPONSE_MESSAGE @"msg"
 
+#define K_BSDK_PAGECOUNT @"PageCount"
+
 #define K_BSDK_BLOGLIST @"BlogList"
 #define K_BSDK_USERLIST @"UserList"
 #define K_BSDK_COMMENTLIST @"CommentList"

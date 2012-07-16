@@ -60,6 +60,7 @@
 - (void) clearData;
 - (void) checkSearchMode;
 - (void) refreshView;
+- (NSDictionary*) getValidItemDictionaryAtIndex:(NSUInteger)index;
 
 @end
 
@@ -640,7 +641,6 @@
         if ([self.searchBar.text length] <= 0) {
             return;
         }
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: YES];
         
         callBackBlock callback = nil;
         UIScrollView * contentView = nil;
@@ -655,6 +655,7 @@
         
         if (contentView)
         {
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: YES];
             CGRect frame = CGRectMake(120, contentView.contentSize.height, 200, 30);
             callback = [ViewHelper getIndicatorViewBlockWithFrame:frame inView:contentView];
         }
@@ -667,10 +668,6 @@
                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: NO];
                 
                 self.inSearching = NO;
-                if ([[data valueForKey:K_BSDK_USERLIST] count] == 0)
-                {
-                    self.isSearchMoreUser = NO;
-                }
                 if (AIO_STATUS_SUCCESS == status && K_BSDK_IS_RESPONSE_OK(data))
                 {
                     NSArray * valueArray = [[data valueForKey:K_BSDK_USERLIST] copy];
@@ -681,7 +678,15 @@
                         [mutableDict release];
                     }
                     [valueArray release];
-                    self.searchUserPageIndex ++;
+                    if (([[data valueForKey:K_BSDK_PAGECOUNT] intValue] ==  self.searchUserPageIndex)
+                        || ([[data valueForKey:K_BSDK_USERLIST] count] == 0))
+                    {
+                        self.isSearchMoreUser = NO;
+                    }
+                    else
+                    {
+                        self.searchUserPageIndex ++;
+                    }
                 }
                 else {
                     [[iToast makeText:[NSString stringWithFormat:@"%@", K_BSDK_GET_RESPONSE_MESSAGE(data)]] show];
@@ -701,21 +706,24 @@
                 Block_release(callback);
                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: NO];
                 self.inSearching = NO;
-                if ([[data valueForKey:K_BSDK_BLOGLIST] count] == 0)
-                {
-                    self.isSearchMoreWeibo = NO;
-                }
                 
                 if (AIO_STATUS_SUCCESS == status && K_BSDK_IS_RESPONSE_OK(data))
                 {
                     NSArray * array = [data valueForKey:K_BSDK_BLOGLIST];
-                    for (NSDictionary * dict in array) {
-                        if ([[dict valueForKey:K_BSDK_PICTURE_WIDTH] floatValue] > 0)
-                        {
-                            [self.searchWeiboResults addObject:dict];
-                        }
+                    for (NSDictionary * dict in array)
+                    {
+                        [self.searchWeiboResults addObject:dict];
                     }
-                    [self.weiboHeights removeAllObjects];
+                    
+                    if (([[data valueForKey:K_BSDK_PAGECOUNT] intValue] ==  self.searchWeiboPageIndex)
+                        || ([[data valueForKey:K_BSDK_BLOGLIST] count] == 0))
+                    {
+                        self.isSearchMoreWeibo = NO;
+                    }
+                    else
+                    {
+                        self.searchWeiboPageIndex ++;
+                    }
                     [self loadWeiboHeights];
                     [self.searchWeiboView reloadData];
                 }
@@ -729,8 +737,6 @@
                                                      pageSize:10
                                                     pageIndex:self.searchWeiboPageIndex
                                               andDoneCallback:block];
-            
-            self.searchWeiboPageIndex ++;
         }
         else
         {
@@ -828,7 +834,7 @@
 	{
 		cell  = [[[WaterFlowCell alloc] initWithReuseIdentifier:cellIdentifier] autorelease];
         
-        NSDictionary * dict = [self.searchWeiboResults objectAtIndex:index];
+        NSDictionary * dict = [self getValidItemDictionaryAtIndex:index];
         CGFloat picWidth = [[dict valueForKey:K_BSDK_PICTURE_WIDTH] floatValue];
         CGFloat picHeight = [[dict valueForKey:K_BSDK_PICTURE_HEIGHT] floatValue];
         CGFloat frameWidth = (self.view.frame.size.width - 14) / 3;
@@ -849,11 +855,13 @@
 
 - (void) loadWeiboHeights
 {
+    [self.weiboHeights removeAllObjects];
     NSInteger count = [self.searchWeiboResults count];
     for (int i = 0; i < count; i++)
     {
-        CGFloat picWidth = [[[self.searchWeiboResults objectAtIndex:i] valueForKey:K_BSDK_PICTURE_WIDTH] floatValue];
-        CGFloat picHeight = [[[self.searchWeiboResults objectAtIndex:i] valueForKey:K_BSDK_PICTURE_HEIGHT] floatValue];
+        NSDictionary * dict = [self getValidItemDictionaryAtIndex:i];
+        CGFloat picWidth = [[dict valueForKey:K_BSDK_PICTURE_WIDTH] floatValue];
+        CGFloat picHeight = [[dict valueForKey:K_BSDK_PICTURE_HEIGHT] floatValue];
         CGFloat frameWidth = (self.view.frame.size.width - 14) / 3;
         CGFloat frameHeight = (frameWidth / picWidth) * picHeight;
         [self.weiboHeights addObject:[NSNumber numberWithFloat:(frameHeight+4)]];
@@ -917,6 +925,16 @@
 -(void)dismissKeyboard
 {
     [self.view endEditing:YES];
+}
+
+-(NSDictionary*) getValidItemDictionaryAtIndex:(NSUInteger)index
+{
+    NSDictionary * dict = [self.searchWeiboResults objectAtIndex:index];
+    if ([dict valueForKey:K_BSDK_PICTURE_102] == nil)
+    {
+        dict = [dict valueForKey:K_BSDK_RETWEET_STATUS];
+    }
+    return dict;
 }
 
 @end
