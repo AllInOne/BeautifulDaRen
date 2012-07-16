@@ -649,9 +649,11 @@
             contentView = self.searchWeiboView;
         }
         
-        CGRect frame = CGRectMake(120, contentView.contentSize.height, 200, 30);
-        callback = [ViewHelper getIndicatorViewBlockWithFrame:frame inView:contentView];
-
+        if (contentView)
+        {
+            CGRect frame = CGRectMake(120, contentView.contentSize.height, 200, 30);
+            callback = [ViewHelper getIndicatorViewBlockWithFrame:frame inView:contentView];
+        }
         if (self.isFindWeibo == NO && self.isSearchMoreUser == YES)
         {
             processDoneWithDictBlock block = ^(AIO_STATUS status, NSDictionary *data)
@@ -728,10 +730,7 @@
         }
         else
         {
-            NSAssert(YES, @"Unexpected condition happend in doSearch in FindMoreViewController");
-            
-            callback();
-            Block_release(callback);
+            self.inSearching = NO;
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: NO];
         }
     }
@@ -859,8 +858,6 @@
 
 - (void)reset
 {
-    self.isSearchMoreWeibo = YES;
-    self.isSearchMoreUser = YES;
     self.inSearching = NO;
     [self clearData];
 }
@@ -869,6 +866,8 @@
 {
     self.searchUserPageIndex = 1;
     self.searchWeiboPageIndex = 1;
+    self.isSearchMoreWeibo = YES;
+    self.isSearchMoreUser = YES;
     [self.searchWeiboResults removeAllObjects];
     [self.searchUserResults removeAllObjects];
     [self.weiboHeights removeAllObjects];
