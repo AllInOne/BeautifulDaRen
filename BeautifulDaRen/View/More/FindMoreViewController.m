@@ -56,7 +56,7 @@
 - (void) refreshHotUser:(NSString*)type inScrollView:(UIScrollView*)scrollView;
 - (void) doSearch;
 - (void) loadWeiboHeights;
-- (void) clearData;
+- (void) reset;
 - (void) checkSearchMode;
 - (void) refreshView;
 
@@ -559,7 +559,7 @@
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-    [self clearData];
+    [self reset];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
@@ -573,7 +573,7 @@
 - (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar
 {
     self.isSearchModel = NO;
-    [self clearData];
+    [self reset];
     [self checkSearchMode];
     [self.contentScrollView setHidden:NO];
     [self refreshLeftNavigationButton];
@@ -852,7 +852,7 @@
     }
 }
 
-- (void)clearData
+- (void)reset
 {
     self.searchUserPageIndex = 1;
     self.searchWeiboPageIndex = 1;
