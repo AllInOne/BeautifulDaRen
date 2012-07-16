@@ -668,10 +668,6 @@
                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: NO];
                 
                 self.inSearching = NO;
-                if ([[data valueForKey:K_BSDK_USERLIST] count] == 0)
-                {
-                    self.isSearchMoreUser = NO;
-                }
                 if (AIO_STATUS_SUCCESS == status && K_BSDK_IS_RESPONSE_OK(data))
                 {
                     NSArray * valueArray = [[data valueForKey:K_BSDK_USERLIST] copy];
@@ -682,7 +678,15 @@
                         [mutableDict release];
                     }
                     [valueArray release];
-                    self.searchUserPageIndex ++;
+                    if (([[data valueForKey:K_BSDK_PAGECOUNT] intValue] ==  self.searchUserPageIndex)
+                        || ([[data valueForKey:K_BSDK_USERLIST] count] == 0))
+                    {
+                        self.isSearchMoreUser = NO;
+                    }
+                    else
+                    {
+                        self.searchUserPageIndex ++;
+                    }
                 }
                 else {
                     [[iToast makeText:[NSString stringWithFormat:@"%@", K_BSDK_GET_RESPONSE_MESSAGE(data)]] show];
@@ -702,10 +706,6 @@
                 Block_release(callback);
                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: NO];
                 self.inSearching = NO;
-                if ([[data valueForKey:K_BSDK_BLOGLIST] count] == 0)
-                {
-                    self.isSearchMoreWeibo = NO;
-                }
                 
                 if (AIO_STATUS_SUCCESS == status && K_BSDK_IS_RESPONSE_OK(data))
                 {
@@ -713,6 +713,16 @@
                     for (NSDictionary * dict in array)
                     {
                         [self.searchWeiboResults addObject:dict];
+                    }
+                    
+                    if (([[data valueForKey:K_BSDK_PAGECOUNT] intValue] ==  self.searchWeiboPageIndex)
+                        || ([[data valueForKey:K_BSDK_BLOGLIST] count] == 0))
+                    {
+                        self.isSearchMoreWeibo = NO;
+                    }
+                    else
+                    {
+                        self.searchWeiboPageIndex ++;
                     }
                     [self loadWeiboHeights];
                     [self.searchWeiboView reloadData];
@@ -727,8 +737,6 @@
                                                      pageSize:10
                                                     pageIndex:self.searchWeiboPageIndex
                                               andDoneCallback:block];
-            
-            self.searchWeiboPageIndex ++;
         }
         else
         {
