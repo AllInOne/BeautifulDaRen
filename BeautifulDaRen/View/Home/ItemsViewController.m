@@ -243,47 +243,20 @@
 {
     if (self.isSyncSccuessed && self.isFetchMore)
     {
-        self.isSyncSccuessed = NO;
-        UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        activityIndicator.frame = CGRectMake(0, 10, CGRectGetWidth(activityIndicator.frame), CGRectGetHeight(activityIndicator.frame));
-        
-        NSString * text = NSLocalizedString(@"fetching", @"fetching");
-        CGFloat textWidth = [ViewHelper getWidthOfText:text ByFontSize:13.0f];
-        UILabel * textLabel = [[UILabel alloc] initWithFrame:CGRectMake(30,5, textWidth, INDICATOR_HEIGHT)];
-        textLabel.text = text;
-        [textLabel setTextColor:[UIColor grayColor]];
-        [textLabel setBackgroundColor:[UIColor clearColor]];
-        [textLabel setFont:[UIFont systemFontOfSize:13.0f]];
-
-        UIView * indicatorView = [[UIView alloc] init];
-        [indicatorView setBackgroundColor:[UIColor clearColor]];
-        
-        [indicatorView addSubview:activityIndicator];
-        [indicatorView addSubview:textLabel];
-        [textLabel release];
+        self.isSyncSccuessed = NO;     
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: YES];
         
         CGFloat yPointOfActivityIndicator = self.waterFlowView.contentSize.height;
         if (self.waterFlowView.contentSize.height == 0) {
             yPointOfActivityIndicator = 20;
         }
-        indicatorView.frame = CGRectMake(120, yPointOfActivityIndicator, 200,INDICATOR_HEIGHT);
-        
-        [self.waterFlowView addSubview:indicatorView];
-        
-        [indicatorView release];
-        
-        [activityIndicator startAnimating];
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: YES];
-
+        callBackBlock callback = [ViewHelper getIndicatorViewBlockWithFrame:CGRectMake(120, yPointOfActivityIndicator, 200,INDICATOR_HEIGHT) inView:self.waterFlowView];   
         processDoneWithDictBlock block = ^(AIO_STATUS status, NSDictionary *data)
         {
-            [activityIndicator stopAnimating];
-            [activityIndicator removeFromSuperview];
-            [activityIndicator release];
+            callback();
+            Block_release(callback);
             self.pageIndex++;
             
-            [textLabel removeFromSuperview];
-            [indicatorView removeFromSuperview];
             
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: NO];
             
