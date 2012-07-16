@@ -362,20 +362,18 @@
 
 #pragma mark-
 #pragma mark- UIScrollViewDelegate
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
-{
-    if (self.contentOffset.y + self.frame.size.height >= self.contentSize.height) {
-        if ([self.flowdelegate conformsToProtocol:@protocol(WaterFlowViewDelegate) ]) {
-            [self.flowdelegate didScrollToBottom];
-        }
-    }
-}
-
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     if([self.cellHeight count] > 0)
     {
         [self pageScroll];
+        if (self.contentOffset.y + self.frame.size.height >= self.contentSize.height)
+        {
+            if ([self.flowdelegate conformsToProtocol:@protocol(WaterFlowViewDelegate) ])
+            {
+                [self.flowdelegate didScrollToBottom];
+            }
+        }
     }
 }
 

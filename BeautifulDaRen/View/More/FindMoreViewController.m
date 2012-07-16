@@ -548,11 +548,15 @@
 }
 
 #pragma mark UIScrollViewDelegate
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     if (self.isSearchModel && self.searchUserView.contentOffset.y + self.searchUserView.frame.size.height >= self.searchUserView.contentSize.height && !self.inSearching)
     {
-        [self doSearch];
+        if (!self.inSearching)
+        {
+            [self doSearch];
+        }
     }
 }
 #pragma mark - UISearchBarDelegate delegate methods
