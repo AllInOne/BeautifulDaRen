@@ -308,7 +308,6 @@
     [self.itemDatas removeAllObjects];
     [self loadItemsHeight];
     [_waterFlowView reloadData];
-    self.isSyncSccuessed = YES;
     self.isFetchMore = YES;
     self.pageIndex = 1;
 }
