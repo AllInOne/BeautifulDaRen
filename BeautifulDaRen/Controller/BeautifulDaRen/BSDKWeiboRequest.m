@@ -102,6 +102,11 @@
     {
         dict = (NSDictionary *)result;
     }
+    
+    NSLog(@"========================================================");
+    NSLog(@"\r\n \r\n BSDK RESPONSE: %@\r\n \r\n", dict);
+    NSLog(@"========================================================");
+    
     self.doneCallback(AIO_STATUS_SUCCESS, dict);
     
     [self release];

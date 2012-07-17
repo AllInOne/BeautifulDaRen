@@ -187,9 +187,6 @@ static NSMutableString *logBody;
 	
 	NSString *dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     
-    NSLog(@"========================================================");
-    NSLog(@"\r\n \r\n BSDK RESPONSE: %@\r\n \r\n", dataString);
-    NSLog(@"========================================================");
 	SBJSON *jsonParser = [[SBJSON alloc]init];
 	
 	NSError *parseError = nil;
@@ -234,7 +231,16 @@ static NSMutableString *logBody;
 //	{
 //		[delegate request:self didFailWithError:error];
 //	}
-    NSDictionary * falkResponse = [NSDictionary dictionaryWithObjectsAndKeys:NSLocalizedString(@"server_request_error", @"server_request_error"), K_BSDK_RESPONSE_MESSAGE, K_BSDK_RESPONSE_STATUS_FAILED, K_BSDK_RESPONSE_STATUS, nil];
+    NSDictionary * falkResponse = nil;
+    NSLog(@"******************BSDK error:%@, %d", error, error.code);
+    if (error.code == -1004) {
+        falkResponse = [NSDictionary dictionaryWithObjectsAndKeys:NSLocalizedString(@"server_no_response", @"server_no_response"), K_BSDK_RESPONSE_MESSAGE, K_BSDK_RESPONSE_STATUS_FAILED, K_BSDK_RESPONSE_STATUS, nil];
+    }
+    else
+    {
+        falkResponse = [NSDictionary dictionaryWithObjectsAndKeys:NSLocalizedString(@"server_request_error", @"server_request_error"), K_BSDK_RESPONSE_MESSAGE, K_BSDK_RESPONSE_STATUS_FAILED, K_BSDK_RESPONSE_STATUS, nil];
+    }
+
     if ([delegate respondsToSelector:@selector(request:didFinishLoadingWithResult:)])
     {
         [delegate request:self didFinishLoadingWithResult:falkResponse];
