@@ -57,7 +57,7 @@
                                    queue:nil
                                    usingBlock:^(NSNotification *note) {
                                        [self refreshNavigationView];
-                                       [self.itemsViewController clearData];
+                                       [self.itemsViewController reset];
                                        [self.itemsViewController refresh];
                                    }];
     
@@ -67,7 +67,7 @@
                                    queue:nil
                                    usingBlock:^(NSNotification *note) {
                                        [self refreshNavigationView];
-                                       [self.itemsViewController clearData];
+                                       [self.itemsViewController reset];
                                        [self.itemsViewController refresh];
                                    }];
     

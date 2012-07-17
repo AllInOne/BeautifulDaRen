@@ -9,5 +9,6 @@
 -(id)initWithArray:(NSArray*)array;
 -(void)refresh;
 -(void)clearData;
+-(void)reset;
 @end
 

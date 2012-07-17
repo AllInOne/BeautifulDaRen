@@ -265,7 +265,6 @@
                 }
                 [self loadItemsHeight];
                 [_waterFlowView reloadData];
-                self.isSyncSccuessed = YES;
                 
                 if (([[data valueForKey:K_BSDK_PAGECOUNT] intValue] ==  self.pageIndex)
                     || ([[data valueForKey:K_BSDK_BLOGLIST] count] == 0))
@@ -281,8 +280,7 @@
             {
                 [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
             }
-            
-            
+            self.isSyncSccuessed = YES;
         };
         if ([[BSDKManager sharedManager] isLogin])
         {
@@ -301,6 +299,12 @@
                                               andDoneCallback:block];
         }
     }
+}
+
+-(void)reset
+{
+    self.isSyncSccuessed = YES;
+    [self clearData];
 }
 
 -(void)clearData
