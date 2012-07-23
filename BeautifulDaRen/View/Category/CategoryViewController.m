@@ -10,6 +10,7 @@
 #import "ViewConstants.h"
 #import "ViewHelper.h"
 #import "CommonScrollView.h"
+#import "BSDKDefines.h"
 
 @interface CategoryViewController ()
 - (void)refreshView;
@@ -92,6 +93,8 @@
         _adsPageView = [[AdsPageView alloc] initWithNibName:@"AdsPageView" bundle:nil];
         self.adsPageView.view.frame = CGRectMake(0, 0, ADS_CELL_WIDTH, ADS_CELL_HEIGHT);
         [self.adsPageView setDelegate:self];
+        [self.adsPageView setType:K_BSDK_ADSTYPE_HOT];
+        [self.adsPageView setCity:[ViewHelper getMyCity]];
         [self.view addSubview:self.adsPageView.view];
     }
     
@@ -114,6 +117,7 @@
     
     [UIView commitAnimations];
     
+    [self.adsPageView stop];
     [self.adsPageView.view removeFromSuperview];
     [self setAdsPageView:nil];
 }

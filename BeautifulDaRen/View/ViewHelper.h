@@ -48,6 +48,8 @@
 
 + (NSString*)getMyUserId;
 
++ (NSString*)getMyCity;
+
 + (NSString*)getUserDefaultAvatarImageByData:(NSDictionary*)userInfo;
 
 + (BOOL)isDigitsString:(NSString*)str;

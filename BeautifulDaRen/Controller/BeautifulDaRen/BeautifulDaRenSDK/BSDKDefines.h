@@ -16,6 +16,7 @@
 #define K_BSDK_CATEGORY_USER @"user"
 #define K_BSDK_CATEGORY_BLOG @"blog"
 #define K_BSDK_CATEGORY_SNS @"sns"
+#define K_BSDK_CATEGORY_AD @"ad"
 
 #define K_BSDK_ACTION @"action"
 #define K_BSDK_ACTION_ADD @"Add"
@@ -29,6 +30,7 @@
 #define K_BSDK_ACTION_DELETE @"Del"
 #define K_BSDK_ACTION_PERIPHERAL @"Peripheral"
 #define K_BSDK_ACTION_MODIFY @"modify"
+#define K_BSDK_ACTION_GETADDS @"getAds"
 
 #define K_BSDK_ACTION_GETCLASSLIST @"GetClassList"
 #define K_BSDK_ACTION_GETCLASSBYID @"GetClassById"
@@ -76,7 +78,21 @@
 
 #define K_BSDK_CITY @"City"
 
+#define K_BSDK_ADSTYPE @"AdsType"
+
+#define K_BSDK_ADSLIST @"AdsList"
+
+#define K_BSDK_IMAGEURL @"imgurl"
+
+#define K_BSDK_IMAGEURL_RETINA @"imgurl2"
+
 #define K_BSDK_TEL @"Tel"
+
+#define K_BSDK_ADS_LINKID @"linkid"
+
+#define K_BSDK_ADS_LINKTYPE @"linktype"
+#define K_BSDK_ADS_LINKTYPE_WEIBO @"0"
+#define K_BSDK_ADS_LINKTYPE_USER @"1"
 
 #define K_BSDK_INTRO @"Intro"
 
@@ -169,5 +185,11 @@
 #define K_BSDK_ISVERIFY @"IsVerify"
 #define K_BSDK_ISVERIFY_NO @"0"
 #define K_BSDK_ISVERIFY_YES @"1"
+
+#define K_BSDK_DEFAULT_CITY     @"成都"
+
+#define K_BSDK_ADSTYPE_LOGOUT   1
+#define K_BSDK_ADSTYPE_LOGIN    2
+#define K_BSDK_ADSTYPE_HOT      3
 
 #endif

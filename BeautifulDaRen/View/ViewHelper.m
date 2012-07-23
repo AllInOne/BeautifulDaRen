@@ -290,6 +290,11 @@ static BUIFont * instance;
     return [[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] objectForKey:K_BSDK_UID];
 }
 
++ (NSString*)getMyCity
+{
+    return [[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] objectForKey:K_BSDK_CITY];
+}
+
 + (NSString*)getUserDefaultAvatarImageByData:(NSDictionary*)userInfo
 {
     if ([[userInfo objectForKey:K_BSDK_GENDER] isEqualToString:K_BSDK_GENDER_FEMALE]) {

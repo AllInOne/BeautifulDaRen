@@ -13,6 +13,8 @@
 
 #define ADS_CELL_WIDTH              (320)
 #define ADS_CELL_HEIGHT             (67)
+#define ADS_PAGE_CONTROLLER_DOT_WIDTH             (5)
+
 #define USER_INFOR_CELL_HEIGHT      (80)
 
 #define TEXT_VIEW_MAX_CHARACTOR_NUMBER    140
@@ -46,6 +48,9 @@
 #define TEXT_VIEW_MARGE_HEIGHT      (20.0)
 // The height of the screen user could use. (Whole screen height minus navigation bar and tab bar)
 #define USER_WINDOW_HEIGHT          (SCREEN_HEIGHT - NAVIGATION_BAR_HEIGHT - TAB_BAR_HEIGHT - STATUS_BAR_HEIGHT)
+
+#define IS_RETINA ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2.0)
+
 
 #define APPDELEGATE ((AppDelegate*)([UIApplication sharedApplication].delegate))
 

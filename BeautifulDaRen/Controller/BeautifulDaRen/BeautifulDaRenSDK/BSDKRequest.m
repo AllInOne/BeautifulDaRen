@@ -379,6 +379,7 @@ static NSMutableString *logBody;
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)theConnection 
 {
+    NSLog(@"%@", [[[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding] autorelease]);
 	[self handleResponseData:responseData];
     
 	[responseData release];

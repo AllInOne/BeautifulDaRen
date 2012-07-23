@@ -140,12 +140,12 @@
 "allow" = "允许";
 "not_allow" = "不允许";
 
-"clear_location" = "亲，你要清除位置信息吗？";
-"get_location_falied" = "亲，获取位置信息失败";
+"clear_location" = "亲, 你要清除位置信息吗？";
+"get_location_falied" = "亲, 获取位置信息失败";
 "clear" = "删除";
 "i_am_here" = "我在这里";
 
-"composer_back_confirmation" = "亲，你确定要放弃编辑，返回吗?";
+"composer_back_confirmation" = "亲, 你确定要放弃编辑, 返回吗?";
 "confirm" = "确定";
 
 "my_fans" = "我的粉丝";
@@ -215,6 +215,6 @@
 "detail_mode" = "详情模式";
 "point" = "积分";
 
-"server_no_response" = "亲,请求失败，请检查你的网络哦!";
-"server_request_error" = "亲,请求失败，亲再试一次呢!";
-"server_data_error" = "亲，服务器返回数据错误了哦!";
+"server_no_response" = "亲, 请求失败, 请检查你的网络哦!";
+"server_request_error" = "亲, 请求失败, 亲再试一次呢!";
+"server_data_error" = "亲, 服务器返回数据错误了哦!";

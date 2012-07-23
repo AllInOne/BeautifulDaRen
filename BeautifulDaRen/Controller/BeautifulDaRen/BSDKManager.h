@@ -166,6 +166,10 @@
                     pageIndex:(NSInteger)pageIndex 
               andDoneCallback:(processDoneWithDictBlock)callback;
 
+- (void)getAdsByCity:(NSString*)city
+                type:(NSInteger)type
+     andDoneCallback:(processDoneWithDictBlock)callback;
+
 - (void)removeFan:(NSString*)userId
   andDoneCallback:(processDoneWithDictBlock)callback;
 

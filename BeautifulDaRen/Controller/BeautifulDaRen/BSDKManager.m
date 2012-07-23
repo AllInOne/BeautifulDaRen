@@ -892,4 +892,24 @@ static BSDKManager *sharedInstance;
     
 }
 
+- (void)getAdsByCity:(NSString*)city
+                type:(NSInteger)type
+     andDoneCallback:(processDoneWithDictBlock)callback
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
+    
+    [params setObject:K_BSDK_CATEGORY_AD forKey:K_BSDK_CATEGORY];
+    [params setObject:K_BSDK_ACTION_GETADDS forKey:K_BSDK_ACTION];
+    [params setObject:[NSString stringWithFormat:@"%d", type] forKey:K_BSDK_ADSTYPE];
+    [params setObject:city forKey:K_BSDK_CITY];
+    
+    [self sendRequestWithMethodName:nil
+                         httpMethod:@"POST"
+                             params:params
+                       postDataType:kBSDKRequestPostDataTypeNormal
+                   httpHeaderFields:nil
+                       doneCallback:callback];
+    
+}
+
 @end

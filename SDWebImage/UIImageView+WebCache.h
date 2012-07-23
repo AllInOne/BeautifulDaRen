@@ -10,6 +10,10 @@
 #import "SDWebImageManagerDelegate.h"
 #import "SDWebImageManager.h"
 
+typedef void (^imageDownloadSuccessBlock)(UIImage *image);
+
+typedef void (^imageDownloadFailureBlock)(NSError *error);
+
 /**
  * Integrates SDWebImage async downloading and caching of remote images with UIImageView.
  *

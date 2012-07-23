@@ -25,6 +25,7 @@
 @property (retain, nonatomic) id observerForLogout;
 @property (retain, nonatomic) id observerForShouldLogin;
 
+- (void)refreshAdsView;
 - (void)refreshNavigationView;
 - (void) showAdsPageView;
 @end
@@ -59,6 +60,8 @@
                                        [self refreshNavigationView];
                                        [self.itemsViewController reset];
                                        [self.itemsViewController refresh];
+                                       [self refreshAdsView];
+                                       [self showAdsPageView];
                                    }];
     
     self.observerForLogout = [[NSNotificationCenter defaultCenter]
@@ -69,6 +72,8 @@
                                        [self refreshNavigationView];
                                        [self.itemsViewController reset];
                                        [self.itemsViewController refresh];
+                                       [self refreshAdsView];
+                                       [self showAdsPageView];
                                    }];
     
     self.observerForShouldLogin = [[NSNotificationCenter defaultCenter]
@@ -83,11 +88,6 @@
                                            [loginContorller release];
                                        }
                                     }];
-    
-    _adsPageView = [[AdsPageView alloc] initWithNibName:@"AdsPageView" bundle:nil];
-    self.adsPageView.view.frame = CGRectMake(0, 0, self.view.frame.size.width, ADS_CELL_HEIGHT);
-    [self.view addSubview:self.adsPageView.view];
-    self.adsPageView.delegate = self;
 
     _itemsViewController = [[ItemsViewController alloc] initWithArray:nil];
     _itemsViewController.view.frame = CGRectMake(0,
@@ -120,6 +120,8 @@
                  {
                      [[iToast makeText:[NSString stringWithFormat:@"%@", K_BSDK_GET_RESPONSE_MESSAGE(data)]] show];
                  }
+                 
+                 [self refreshAdsView];
              }];
         }
     }
@@ -127,15 +129,42 @@
     else if (![[BSDKManager sharedManager] isLogin] && ![isAutoLogin boolValue])
     {
         [self.itemsViewController refresh];
+        [self refreshAdsView];
     }
     // when recieved memory warning in other view, this view will be call viewDidUnload.
     // so, when show this view again, the viewdidload will be called again.
     else if([[BSDKManager sharedManager] isLogin])
     {
         [self.itemsViewController refresh];
+        [self refreshAdsView];
     }
     [self refreshNavigationView];
 }
+
+- (void)refreshAdsView
+{
+    if (self.adsPageView) {
+        
+        [self.adsPageView stop];
+        [self.adsPageView.view removeFromSuperview];
+        [self setAdsPageView:nil];
+    }
+    _adsPageView = [[AdsPageView alloc] initWithNibName:@"AdsPageView" bundle:nil];
+    self.adsPageView.view.frame = CGRectMake(0, 0, self.view.frame.size.width, ADS_CELL_HEIGHT);
+    [self.view addSubview:self.adsPageView.view];
+    [self.adsPageView setType:K_BSDK_ADSTYPE_HOT];
+    if ([[BSDKManager sharedManager] isLogin]) {
+        [self.adsPageView setCity:[ViewHelper getMyCity]];
+        [self.adsPageView setType:K_BSDK_ADSTYPE_LOGIN];
+    }
+    else
+    {
+        [self.adsPageView setType:K_BSDK_ADSTYPE_LOGOUT];
+    }
+
+    self.adsPageView.delegate = self;
+}
+
 
 -(void) dealloc
 {
@@ -201,9 +230,10 @@
 
 -(IBAction)onRefreshBtnSelected:(UIButton*)sender
 {
-    [self showAdsPageView];
     [self.itemsViewController clearData];
     [self.itemsViewController refresh];
+    [self refreshAdsView];
+    [self showAdsPageView];
 }
 
 - (IBAction)onRegisterBtnSelected:(UIButton*)sender
@@ -218,13 +248,11 @@
 {
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.3];
-    
-    [_adsPageView.view setHidden:NO];
+
     [_itemsViewController.view setFrame:CGRectMake(0,
                                                    ADS_CELL_HEIGHT + CONTENT_MARGIN,
                                                    self.view.frame.size.width,
                                                    USER_WINDOW_HEIGHT - ADS_CELL_HEIGHT - CONTENT_MARGIN)];
-    
     [UIView commitAnimations]; 
 }
 #pragma mark AdsPageViewProtocol
@@ -237,6 +265,10 @@
     [_itemsViewController.view setFrame:CGRectMake(0, 0, CGRectGetWidth(_itemsViewController.view.frame), USER_WINDOW_HEIGHT)];
     
     [UIView commitAnimations];
+    
+    [_adsPageView stop];
+    [_adsPageView.view removeFromSuperview];
+    [self setAdsPageView:nil];
 }
 
 

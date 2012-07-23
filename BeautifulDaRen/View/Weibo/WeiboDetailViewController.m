@@ -608,6 +608,7 @@
         }
         else
         {
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: NO];
             [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
         }
     }];
