@@ -239,6 +239,7 @@
     }
     return dict;
 }
+
 -(void)refresh
 {
     if (self.isSyncSccuessed && self.isFetchMore)
@@ -260,7 +261,15 @@
             if (AIO_STATUS_SUCCESS == status && K_BSDK_IS_RESPONSE_OK(data))
             {
                 NSArray * array = [data valueForKey:K_BSDK_BLOGLIST];
-                for (NSDictionary * dict in array) {
+                for (NSDictionary * dict in array)
+                {
+                    NSDictionary * weiboDict = [dict valueForKey:K_BSDK_PICTURE_102] == nil ? [dict valueForKey:K_BSDK_RETWEET_STATUS] : dict;
+                    if ([[weiboDict valueForKey:K_BSDK_PICTURE_WIDTH] isEqualToString:@""]
+                        || [[weiboDict valueForKey:K_BSDK_PICTURE_HEIGHT] isEqualToString:@""])
+                    {
+                        NSAssert(NO, @"Picture_width or Picture_height Can't be empty!");
+                        continue;
+                    }
                     [self.itemDatas addObject:dict];
                 }
                 [self loadItemsHeight];
