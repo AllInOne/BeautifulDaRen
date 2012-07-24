@@ -43,7 +43,7 @@
 @property (nonatomic, retain) UIToolbar * toolbar;
 @property (nonatomic, assign) BOOL isDoingFav;
 @property (nonatomic, assign) BOOL isAttachedImageDone;
-
+@property (nonatomic, assign) BOOL isAttachedImageSucceed;
 
 - (void)refreshView;
 - (void)addToolbar;
@@ -74,6 +74,7 @@
 @synthesize vMarkImageView = _vMarkImageView;
 @synthesize isDoingFav = _isDoingFav;
 @synthesize isAttachedImageDone = _isAttachedImageDone;
+@synthesize isAttachedImageSucceed = _isAttachedImageSucceed;
 
 - (void)dealloc
 {
@@ -428,11 +429,12 @@
     // attach image
     NSInteger picWidth = [[self.weiboData objectForKey:K_BSDK_PICTURE_WIDTH] intValue];
     NSInteger picHeight = [[self.weiboData objectForKey:K_BSDK_PICTURE_HEIGHT] intValue];
-    if (!self.isAttachedImageDone && picWidth && picHeight) {
+    if (!self.isAttachedImageSucceed && picWidth && picHeight) {
         UIImageView * placeholderImageView = [[UIImageView alloc] init];
         [placeholderImageView setImageWithURL:[NSURL URLWithString:[self.weiboData objectForKey:K_BSDK_PICTURE_102]]];                                          
         [self.weiboAttachedImageView setImageWithURL:[NSURL URLWithString:[self.weiboData objectForKey:K_BSDK_PICTURE_320]] placeholderImage:placeholderImageView.image success:^(UIImage *image) {
             self.isAttachedImageDone = YES;
+            self.isAttachedImageSucceed = YES;
             if ([[UIApplication sharedApplication] isNetworkActivityIndicatorVisible]) {
                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
             }
@@ -535,10 +537,10 @@
         NSString * title = [NSString stringWithFormat:@"¥ %d", [price intValue]];
         [self.priceButton setTitle:title forState:UIControlStateNormal];
         
-        self.priceButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 5.0);
+//        self.priceButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 5.0);
         self.priceButton.frame = CGRectMake(CGRectGetMinX(self.priceButton.frame), 
                                             CGRectGetMinY(self.favourateButton.frame) - PRICE_BUTTON_Y_OFFSET, 
-                                            [ViewHelper getWidthOfText:title ByFontSize:self.priceButton.titleLabel.font.pointSize]+20,
+                                            MAX([ViewHelper getWidthOfText:title ByFontSize:self.priceButton.titleLabel.font.pointSize]+20, 60),
                                             CGRectGetHeight(self.priceButton.frame));
     }
     else

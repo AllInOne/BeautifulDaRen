@@ -397,27 +397,27 @@
 							<object class="IBUIButton" id="297656590">
 								<reference key="NSNextResponder" ref="362104111"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{232, 201}, {72, 29}}</string>
+								<string key="NSFrame">{{220, 200}, {72, 29}}</string>
 								<reference key="NSSuperview" ref="362104111"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="942924528"/>
 								<string key="NSReuseIdentifierKey">_NS:225</string>
+								<object class="NSColor" key="IBUIBackgroundColor">
+									<int key="NSColorSpace">3</int>
+									<bytes key="NSWhite">MCAwAA</bytes>
+								</object>
 								<bool key="IBUIOpaque">NO</bool>
-								<float key="IBUIAlpha">0.80000001192092896</float>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<string key="IBUITitleShadowOffset">{0, 1}</string>
 								<reference key="IBUIHighlightedTitleColor" ref="953005364"/>
-								<object class="NSColor" key="IBUINormalTitleColor">
-									<int key="NSColorSpace">2</int>
-									<bytes key="NSRGB">MC42MzEzNzI1NzEgMCAwLjQ2NjY2NjY5ODUAA</bytes>
-								</object>
+								<reference key="IBUINormalTitleColor" ref="953005364"/>
 								<reference key="IBUINormalTitleShadowColor" ref="622127201"/>
 								<object class="NSCustomResource" key="IBUINormalBackgroundImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">weibo_price_label.png</string>
+									<string key="NSResourceName">price_bg@2x.png</string>
 								</object>
 								<object class="IBUIFontDescription" key="IBUIFontDescription">
 									<int key="type">2</int>
@@ -1054,11 +1054,11 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="more_btn.png">{8, 12}</string>
+			<string key="price_bg@2x.png">{120, 56}</string>
 			<string key="weibo_comment_icon.png">{14, 14}</string>
 			<string key="weibo_detail_btn.png">{58, 23}</string>
 			<string key="weibo_favourate_icon.png">{14, 14}</string>
 			<string key="weibo_forward_icon.png">{14, 14}</string>
-			<string key="weibo_price_label.png">{65, 29}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">933</string>
 	</data>

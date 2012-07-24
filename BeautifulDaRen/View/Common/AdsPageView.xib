@@ -74,6 +74,25 @@
 									<int key="NSfFlags">16</int>
 								</object>
 							</object>
+							<object class="IBUIPageControl" id="975356761">
+								<reference key="NSNextResponder" ref="801499767"/>
+								<int key="NSvFlags">1316</int>
+								<object class="NSPSMatrix" key="NSFrameMatrix"/>
+								<string key="NSFrame">{{271, 33}, {38, 36}}</string>
+								<reference key="NSSuperview" ref="801499767"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="173643921"/>
+								<string key="NSReuseIdentifierKey">_NS:660</string>
+								<object class="NSColor" key="IBUIBackgroundColor">
+									<int key="NSColorSpace">3</int>
+									<bytes key="NSWhite">MCAwAA</bytes>
+								</object>
+								<bool key="IBUIOpaque">NO</bool>
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+								<int key="IBUIContentHorizontalAlignment">0</int>
+								<int key="IBUIContentVerticalAlignment">0</int>
+								<int key="IBUINumberOfPages">3</int>
+							</object>
 							<object class="IBUIButton" id="173643921">
 								<reference key="NSNextResponder" ref="801499767"/>
 								<int key="NSvFlags">292</int>
@@ -99,25 +118,6 @@
 								</object>
 								<reference key="IBUIFontDescription" ref="918202687"/>
 								<reference key="IBUIFont" ref="208551646"/>
-							</object>
-							<object class="IBUIPageControl" id="975356761">
-								<reference key="NSNextResponder" ref="801499767"/>
-								<int key="NSvFlags">1316</int>
-								<object class="NSPSMatrix" key="NSFrameMatrix"/>
-								<string key="NSFrame">{{271, 33}, {38, 36}}</string>
-								<reference key="NSSuperview" ref="801499767"/>
-								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="173643921"/>
-								<string key="NSReuseIdentifierKey">_NS:660</string>
-								<object class="NSColor" key="IBUIBackgroundColor">
-									<int key="NSColorSpace">3</int>
-									<bytes key="NSWhite">MCAwAA</bytes>
-								</object>
-								<bool key="IBUIOpaque">NO</bool>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<int key="IBUIContentHorizontalAlignment">0</int>
-								<int key="IBUIContentVerticalAlignment">0</int>
-								<int key="IBUINumberOfPages">3</int>
 							</object>
 						</array>
 						<string key="NSFrameSize">{320, 136}</string>

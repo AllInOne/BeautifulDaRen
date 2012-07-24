@@ -150,9 +150,7 @@
         [self setAdsPageView:nil];
     }
     _adsPageView = [[AdsPageView alloc] initWithNibName:@"AdsPageView" bundle:nil];
-    self.adsPageView.view.frame = CGRectMake(0, 0, self.view.frame.size.width, ADS_CELL_HEIGHT);
-    [self.view addSubview:self.adsPageView.view];
-    [self.adsPageView setType:K_BSDK_ADSTYPE_HOT];
+
     if ([[BSDKManager sharedManager] isLogin]) {
         [self.adsPageView setCity:[ViewHelper getMyCity]];
         [self.adsPageView setType:K_BSDK_ADSTYPE_LOGIN];
@@ -161,6 +159,8 @@
     {
         [self.adsPageView setType:K_BSDK_ADSTYPE_LOGOUT];
     }
+    self.adsPageView.view.frame = CGRectMake(0, 0, self.view.frame.size.width, ADS_CELL_HEIGHT);
+    [self.view addSubview:self.adsPageView.view];
 
     self.adsPageView.delegate = self;
 }

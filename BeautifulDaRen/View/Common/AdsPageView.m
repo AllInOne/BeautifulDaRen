@@ -85,8 +85,8 @@
         
         self.city = K_BSDK_DEFAULT_CITY;
         
-        self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, ADS_CELL_HEIGHT);
-        self.adsPageController.frame = CGRectMake(self.adsPageController.frame.origin.x, ADS_CELL_HEIGHT - 30, self.adsPageController.frame.size.width, self.adsPageController.frame.size.height);
+////        self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, ADS_CELL_HEIGHT);
+//        self.adsPageController.frame = CGRectMake(self.adsPageController.frame.origin.x, ADS_CELL_HEIGHT - 30, self.adsPageController.frame.size.width, self.adsPageController.frame.size.height);
     }
     return self;  
 }
@@ -175,9 +175,10 @@
                                       }
                                       
                                       [self downloadAllImagesWithCallback:^(AIO_STATUS status) {
+                                          [_closeButton setHidden:NO];
                                           [self initControls];
                                           
-                                          [_closeButton setHidden:NO];
+
                                           [activityIndicator stopAnimating];
                                           [activityIndicator removeFromSuperview];
                                           [activityIndicator release];
@@ -226,7 +227,7 @@
 
 - (void)initControls
 {
-    if (self.adsExchangeTimer == nil) {
+    if (self.adsExchangeTimer == nil && ([self.adsImageNames count] > 1)) {
         self.adsExchangeTimer = [NSTimer timerWithTimeInterval:ADS_EXCHANGE_TIME_OUT_SECONDS
                                                         target:self
                                                       selector:@selector(handleTimeOut:)
@@ -234,13 +235,6 @@
                                                        repeats:YES];
         [[NSRunLoop currentRunLoop] addTimer:self.adsExchangeTimer forMode:NSDefaultRunLoopMode];
     }
-
-    
-    if (_adsDragGesture == nil) {
-        _adsDragGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(onAdsDragged:)];
-        [self.view addGestureRecognizer:_adsDragGesture];
-    }
-
 
     if (self.firstImageView == nil)
     {
@@ -251,16 +245,23 @@
     [_firstImageView setHidden:NO];
     [_firstImageView setBackgroundColor:[UIColor whiteColor]];
     
-    if (self.secondImageView == nil) {
-        _secondImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, ADS_CELL_WIDTH, ADS_CELL_HEIGHT)];
-        [self.view insertSubview:_secondImageView belowSubview:self.adsPageController];
-        [_secondImageView setHidden:YES];
+    if ([self.adsImageNames count] > 1) {
+        if (self.secondImageView == nil) {
+            _secondImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, ADS_CELL_WIDTH, ADS_CELL_HEIGHT)];
+            [self.view insertSubview:_secondImageView belowSubview:self.adsPageController];
+            [_secondImageView setHidden:YES];
+        }
+        
+        [_secondImageView setImageWithURL:[NSURL URLWithString:[_adsImageNames objectAtIndex:1]]];
+        [_secondImageView setHidden:NO];
+        [_secondImageView setBackgroundColor:[UIColor whiteColor]];
+        
+        if (_adsDragGesture == nil) {
+            _adsDragGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(onAdsDragged:)];
+            [self.view addGestureRecognizer:_adsDragGesture];
+        }
     }
 
-    [_secondImageView setImageWithURL:[NSURL URLWithString:[_adsImageNames objectAtIndex:1]]];
-    [_secondImageView setHidden:NO];
-    [_secondImageView setBackgroundColor:[UIColor whiteColor]];
-    
     //set all the images to download them all at the beginning
     self.adsPageController.numberOfPages =  self.totalPageSize;
     self.adsPageController.frame = CGRectMake(SCREEN_WIDTH - 10 * (self.totalPageSize + 1), ADS_CELL_HEIGHT - 30, ADS_PAGE_CONTROLLER_DOT_WIDTH * self.totalPageSize, CGRectGetHeight(self.adsPageController.frame));
@@ -279,13 +280,13 @@
     [super viewWillAppear:animated];
 }
 
--(void)loadView{
-    [super loadView];
-    //控件区域
-    // 设定翻页事件的处理方法
-    [self.adsPageController addTarget:self action:@selector(pageTurn:)
-                  forControlEvents:UIControlEventValueChanged];
-}
+//-(void)loadView{
+//    [super loadView];
+//    //控件区域
+//    // 设定翻页事件的处理方法
+//    [self.adsPageController addTarget:self action:@selector(pageTurn:)
+//                  forControlEvents:UIControlEventValueChanged];
+//}
 
 - (void)handleTimeOut:(NSTimer*)theTimer
 {

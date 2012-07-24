@@ -91,10 +91,10 @@
 {
     if (self.adsPageView == nil) {
         _adsPageView = [[AdsPageView alloc] initWithNibName:@"AdsPageView" bundle:nil];
-        self.adsPageView.view.frame = CGRectMake(0, 0, ADS_CELL_WIDTH, ADS_CELL_HEIGHT);
-        [self.adsPageView setDelegate:self];
         [self.adsPageView setType:K_BSDK_ADSTYPE_HOT];
         [self.adsPageView setCity:[ViewHelper getMyCity]];
+        [self.adsPageView setDelegate:self];
+        self.adsPageView.view.frame = CGRectMake(0, 0, ADS_CELL_WIDTH, ADS_CELL_HEIGHT);
         [self.view addSubview:self.adsPageView.view];
     }
     
