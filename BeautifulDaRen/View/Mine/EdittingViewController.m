@@ -77,7 +77,7 @@
     [super viewDidLoad];
     
     [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
-    [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onSaveButtonClicked) title:NSLocalizedString(@"save", @"save")]];
+    [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onSaveButtonClicked) title:NSLocalizedString(@"enter", @"enter")]];
     if (_type == EdittingViewController_type0) {
         [self.navigationItem setTitle:NSLocalizedString(@"modify", @"modify")];
         _inputTextView.layer.borderColor = [[UIColor grayColor] CGColor];
