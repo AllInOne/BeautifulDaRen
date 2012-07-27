@@ -228,10 +228,6 @@
     [self.delegate didFinishContactSelectionWithContacts:contactId];
 }
 
-- (void)searchDisplayController:(UISearchDisplayController *)controller didShowSearchResultsTableView:(UITableView *)tableView {
-    tableView.bounds = CGRectMake(tableView.bounds.origin.x, tableView.bounds.origin.y, self.tableView.frame.size.width, tableView.bounds.size.height);
-}
-
 - (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
 {
     if (!_filteredContacts) {
@@ -254,6 +250,13 @@
     }
 }
 
+- (void)refreshVisibleData {
+    if (!_tableView.dragging && !_tableView.decelerating) {
+        [_tableView reloadData];
+    }
+}
+#pragma mark - UISearchDisplayDelegate
+
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
     [self filterContentForSearchText:searchString scope:
      [[self.searchController.searchBar scopeButtonTitles] objectAtIndex:[self.searchController.searchBar selectedScopeButtonIndex]]];
@@ -264,16 +267,13 @@
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption {
     [self filterContentForSearchText:[self.searchController.searchBar text] scope:
      [[self.searchController.searchBar scopeButtonTitles] objectAtIndex:searchOption]];
-
+    
     return YES;
 }
 
-- (void)refreshVisibleData {
-    if (!_tableView.dragging && !_tableView.decelerating) {
-        [_tableView reloadData];
-    }
+- (void)searchDisplayController:(UISearchDisplayController *)controller didShowSearchResultsTableView:(UITableView *)tableView {
+    tableView.bounds = CGRectMake(tableView.bounds.origin.x, tableView.bounds.origin.y, self.tableView.frame.size.width, tableView.bounds.size.height);
 }
-
 #pragma mark - BaseViewController subclass
 
 - (void)updateViewController {

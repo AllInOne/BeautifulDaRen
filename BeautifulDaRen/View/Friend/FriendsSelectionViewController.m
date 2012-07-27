@@ -29,7 +29,7 @@
 @synthesize selectedContacts=_selectedContacts;
 @synthesize friendsViewController = _friendsViewController;
 @synthesize friendsList = _friendsList;
-@synthesize delegate;
+@synthesize delegate = _delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -95,16 +95,17 @@
         _friendsViewController.friendsList = self.friendsList;
         _friendsViewController.view.frame = CGRectMake(0, 44, self.view.frame.size.width, 375);
         [self.view addSubview:_friendsViewController.view];
+        
+        [self.searchDisplayController setDelegate:_friendsViewController];
+        [self.searchDisplayController setSearchResultsDelegate:_friendsViewController];
+        [self.searchDisplayController setSearchResultsDataSource:_friendsViewController];
+        _friendsViewController.searchController = self.searchDisplayController;
     }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self.searchDisplayController setDelegate:_friendsViewController];
-    [self.searchDisplayController setSearchResultsDelegate:_friendsViewController];
-    [self.searchDisplayController setSearchResultsDataSource:_friendsViewController];
-    _friendsViewController.searchController = self.searchDisplayController;
     [self.friendsViewController viewWillAppear:animated];
 }
 
