@@ -37,7 +37,6 @@
 		C2319FB21560F9AA005CCD4E /* HomeViewHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2319FB11560F9AA005CCD4E /* HomeViewHeaderView.xib */; };
 		C2319FBA156145BC005CCD4E /* AtMeViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C2319FB9156145BC005CCD4E /* AtMeViewCell.m */; };
 		C2319FBC156145DC005CCD4E /* AtMeViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2319FBB156145DC005CCD4E /* AtMeViewCell.xib */; };
-		C236348215678917008BE9BB /* LoadFakeData.m in Sources */ = {isa = PBXBuildFile; fileRef = C236348115678917008BE9BB /* LoadFakeData.m */; };
 		C24B1008155BDB1100918530 /* MineEditingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C24B1006155BDB1000918530 /* MineEditingViewController.m */; };
 		C24B1009155BDB1100918530 /* MineEditingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C24B1007155BDB1100918530 /* MineEditingViewController.xib */; };
 		C24B11A015499641004F6F8E /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C24B119E15499641004F6F8E /* RegisterViewController.m */; };
@@ -655,8 +654,6 @@
 		C2319FB9156145BC005CCD4E /* AtMeViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AtMeViewCell.m; sourceTree = "<group>"; };
 		C2319FBB156145DC005CCD4E /* AtMeViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AtMeViewCell.xib; sourceTree = "<group>"; };
 		C233C147155F779D0038BAB6 /* AdsPageViewProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AdsPageViewProtocol.h; path = Protocol/AdsPageViewProtocol.h; sourceTree = "<group>"; };
-		C236348015678917008BE9BB /* LoadFakeData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadFakeData.h; sourceTree = "<group>"; };
-		C236348115678917008BE9BB /* LoadFakeData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadFakeData.m; sourceTree = "<group>"; };
 		C24B1005155BDB0F00918530 /* MineEditingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineEditingViewController.h; sourceTree = "<group>"; };
 		C24B1006155BDB1000918530 /* MineEditingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineEditingViewController.m; sourceTree = "<group>"; };
 		C24B1007155BDB1100918530 /* MineEditingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MineEditingViewController.xib; sourceTree = "<group>"; };
@@ -1519,9 +1516,7 @@
 			isa = PBXGroup;
 			children = (
 				CE029ACD153E682100886227 /* AppDelegate.h */,
-				C236348015678917008BE9BB /* LoadFakeData.h */,
 				CE029ACE153E682100886227 /* AppDelegate.m */,
-				C236348115678917008BE9BB /* LoadFakeData.m */,
 				CE745450153F1F8900CB751A /* Asserts */,
 				CE029AF2153E68CD00886227 /* Controller */,
 				CE029AF3153E68D800886227 /* Model */,
@@ -3151,7 +3146,6 @@
 				C2519F9B1564E36E0040EBC5 /* WaterFlowView.m in Sources */,
 				C2A810DD1566611E008FF2B7 /* PrivateLetter.m in Sources */,
 				C2A810E01566611F008FF2B7 /* Comment.m in Sources */,
-				C236348215678917008BE9BB /* LoadFakeData.m in Sources */,
 				C2118B7515692D56006F4551 /* WeiboListViewController.m in Sources */,
 				C2CE7287156A929F00C22E34 /* FriendDetailViewController.m in Sources */,
 				C21C26A8156B7E36000F8E3C /* EdittingViewController.m in Sources */,
