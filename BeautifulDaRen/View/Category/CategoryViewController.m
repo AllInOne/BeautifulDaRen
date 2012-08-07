@@ -11,15 +11,19 @@
 #import "ViewHelper.h"
 #import "CommonScrollView.h"
 #import "BSDKDefines.h"
+#import "BSDKManager.h"
 
 @interface CategoryViewController ()
 - (void)refreshView;
+- (void)onRefreshButtonClicked;
+@property (retain, nonatomic) id observerForLoginStatus;
 @end
 
 @implementation CategoryViewController
 
 @synthesize adsPageView = _adsPageView;
 @synthesize categoryContentView = _categoryContentView;
+@synthesize observerForLoginStatus = _observerForLoginStatus;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -42,14 +46,24 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib. 
     [self refreshView];
-    [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClicked) title:NSLocalizedString(@"refresh", @"refresh")]]; 
+    [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClicked) title:NSLocalizedString(@"refresh", @"refresh")]];
+    self.observerForLoginStatus = [[NSNotificationCenter defaultCenter]
+                                   addObserverForName:K_NOTIFICATION_LOGIN_SUCCESS
+                                   object:nil
+                                   queue:nil
+                                   usingBlock:^(NSNotification *note) {
+                                       [self onRefreshButtonClicked];
+                                   }];
 }
 
 - (void)dealloc {
     [self.adsPageView stop];
     [_adsPageView release];
     [_categoryContentView release];
-    
+    if (_observerForLoginStatus) {
+        [[NSNotificationCenter defaultCenter] removeObserver:_observerForLoginStatus];
+        self.observerForLoginStatus = nil;
+    }
     [super dealloc];
 }
 
@@ -59,6 +73,8 @@
     self.categoryContentView = nil;
     [self.adsPageView stop];
     self.adsPageView = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:_observerForLoginStatus];
+    self.observerForLoginStatus = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -92,7 +108,10 @@
     if (self.adsPageView == nil) {
         _adsPageView = [[AdsPageView alloc] initWithNibName:@"AdsPageView" bundle:nil];
         [self.adsPageView setType:K_BSDK_ADSTYPE_HOT];
-        [self.adsPageView setCity:[ViewHelper getMyCity]];
+        if ([[BSDKManager sharedManager] isLogin]) {
+            [self.adsPageView setCity:[ViewHelper getMyCity]];
+        }
+        
         [self.adsPageView setDelegate:self];
         self.adsPageView.view.frame = CGRectMake(0, 0, ADS_CELL_WIDTH, ADS_CELL_HEIGHT);
         [self.view addSubview:self.adsPageView.view];

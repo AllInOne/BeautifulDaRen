@@ -83,7 +83,7 @@
             self.type = K_BSDK_ADSTYPE_LOGOUT;
         }
         
-        self.city = K_BSDK_DEFAULT_CITY;
+//        self.city = K_BSDK_DEFAULT_CITY;
         
 ////        self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, ADS_CELL_HEIGHT);
 //        self.adsPageController.frame = CGRectMake(self.adsPageController.frame.origin.x, ADS_CELL_HEIGHT - 30, self.adsPageController.frame.size.width, self.adsPageController.frame.size.height);

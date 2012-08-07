@@ -43,6 +43,7 @@
 }
 
 - (void)onDoneButtonClicked:(id)sender {
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: NO];
     [self.navigationController dismissModalViewControllerAnimated:YES];
 }
 
@@ -60,6 +61,7 @@
     
 	NSURLRequest *request = [NSURLRequest requestWithURL:_requestUrl];
 	[_webView loadRequest:request];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: YES];
 }
 
 
@@ -93,6 +95,12 @@
     [_webView release];
     [super dealloc];
 }
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: NO];
+}
+
 - (BOOL)webView:(UIWebView *)aWebView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     NSRange range = [request.URL.absoluteString rangeOfString:@"code="];

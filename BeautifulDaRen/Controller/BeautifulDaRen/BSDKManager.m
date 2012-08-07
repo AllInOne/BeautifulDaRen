@@ -901,8 +901,10 @@ static BSDKManager *sharedInstance;
     [params setObject:K_BSDK_CATEGORY_AD forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETADDS forKey:K_BSDK_ACTION];
     [params setObject:[NSString stringWithFormat:@"%d", type] forKey:K_BSDK_ADSTYPE];
-    [params setObject:city forKey:K_BSDK_CITY];
-    
+    if (city) {
+        [params setObject:city forKey:K_BSDK_CITY];
+    }
+
     [self sendRequestWithMethodName:nil
                          httpMethod:@"POST"
                              params:params

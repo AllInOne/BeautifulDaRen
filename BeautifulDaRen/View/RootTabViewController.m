@@ -15,6 +15,8 @@
 #import "UIImage+Scale.h"
 #import "WeiboComposerViewController.h"
 #import "MyShowViewController.h"
+#import "CategoryViewController.h"
+#import "LoginViewController.h"
 
 @interface RootTabViewController()
 
@@ -110,8 +112,16 @@
     UINavigationController * navController = (UINavigationController*)viewController;
     [navController popToRootViewControllerAnimated:NO];
     // when clicked HomeView, it should be turn to home view.
-    if (![[BSDKManager sharedManager] isLogin] && ![navController.topViewController isKindOfClass:[HomeViewController class]]) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_SHOULD_LOGIN object:self];
+    if (![[BSDKManager sharedManager] isLogin] && !([navController.topViewController isKindOfClass:[HomeViewController class]] || [navController.topViewController isKindOfClass:[CategoryViewController class]])) {
+        
+//        [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_SHOULD_LOGIN object:self];
+
+        LoginViewController * loginContorller = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+        UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: loginContorller];
+        [self presentModalViewController:navController animated:YES];
+        [navController release];
+        [loginContorller release];
+
         return NO;
     }
     else if ( [navController.topViewController isKindOfClass:[MyShowViewController class]] )
@@ -130,9 +140,9 @@
     NSArray* cameraShareArray = [NSArray arrayWithObjects:NSLocalizedString(@"tab_myshow", @"tab_myshow"),NSLocalizedString(@"tab_myshow", @"tab_myshow"),nil];
     NSArray* mineArray = [NSArray arrayWithObjects:NSLocalizedString(@"tab_mine", @"tab_mine"),NSLocalizedString(@"tab_mine", @"tab_mine"),nil];
     NSArray* moreArray = [NSArray arrayWithObjects:NSLocalizedString(@"tab_search", @"tab_search"), NSLocalizedString(@"tab_search", @"tab_search"),nil];
-    NSArray* localizedStringsArray = [NSArray arrayWithObjects:homeArray, categoryArray, cameraShareArray, mineArray, moreArray, nil];
+    NSArray* localizedStringsArray = [NSArray arrayWithObjects:homeArray, categoryArray, cameraShareArray, moreArray, mineArray, nil];
     
-    NSArray* tabbarIconNamesArray = [NSArray arrayWithObjects:@"tabbar_home_icon", @"tabbar_hot_icon", @"tabbar_show_icon", @"tabbar_mine_icon", @"tabbar_search_icon", nil];
+    NSArray* tabbarIconNamesArray = [NSArray arrayWithObjects:@"tabbar_home_icon", @"tabbar_hot_icon", @"tabbar_show_icon", @"tabbar_search_icon", @"tabbar_mine_icon", nil];
     
     NSInteger index = 0;
     for (UINavigationController* navigation in [self customizableViewControllers]){

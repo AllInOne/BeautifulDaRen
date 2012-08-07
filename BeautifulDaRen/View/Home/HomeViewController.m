@@ -250,7 +250,7 @@
     [UIView setAnimationDuration:0.3];
 
     [_itemsViewController.view setFrame:CGRectMake(0,
-                                                   ADS_CELL_HEIGHT + CONTENT_MARGIN,
+                                                   ADS_CELL_HEIGHT + 2.0,
                                                    self.view.frame.size.width,
                                                    USER_WINDOW_HEIGHT - ADS_CELL_HEIGHT - CONTENT_MARGIN)];
     [UIView commitAnimations]; 

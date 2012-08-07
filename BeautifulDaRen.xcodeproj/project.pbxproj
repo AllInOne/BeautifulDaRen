@@ -3256,6 +3256,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution: XIAO FENG";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: XIAO FENG";
+				COMPRESS_PNG_FILES = NO;
 				COPY_PHASE_STRIP = YES;
 				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -3276,6 +3277,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution: XIAO FENG";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: XIAO FENG";
+				COMPRESS_PNG_FILES = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BeautifulDaRen/BeautifulDaRen-Prefix.pch";
 				INFOPLIST_FILE = "BeautifulDaRen/BeautifulDaRen-Info.plist";
