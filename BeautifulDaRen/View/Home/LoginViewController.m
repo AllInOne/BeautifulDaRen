@@ -294,7 +294,10 @@ typedef enum
                  
                  NSDictionary * dict = [data objectForKey:K_BSDK_USERINFO];
                  [[NSUserDefaults standardUserDefaults] setObject:dict forKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
-                 [self.navigationController popToRootViewControllerAnimated:YES];
+                 if(![self.navigationController popToRootViewControllerAnimated:YES])
+                 {
+                     [self dismissModalViewControllerAnimated:YES];
+                 }
                  [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_LOGIN_SUCCESS object:self userInfo:data];
                  
                  
