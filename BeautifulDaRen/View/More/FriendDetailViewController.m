@@ -30,6 +30,7 @@ typedef enum
     SECTION_COUNT
 }SECTION_NAME;
 
+#define BREIF_WIDTH_OFFSET 30
 
 @interface FriendDetailViewController()
 @property (retain, nonatomic) IBOutlet UIButton * weiboButton;
@@ -417,6 +418,19 @@ typedef enum
                     buttonViewCell.buttonRightIcon.hidden = YES;
                     
                     NSString * description = [self.friendDictionary valueForKey:KEY_ACCOUNT_INTRO];
+                    if ([description length] > 0)
+                    {
+                        CGFloat frameWidth = buttonViewCell.buttonText.frame.size.width + BREIF_WIDTH_OFFSET;
+                        CGFloat frameHeight = [ViewHelper getHeightOfText:description ByFontSize:15.0f contentWidth:frameWidth];
+                        buttonViewCell.buttonText.frame = CGRectMake(buttonViewCell.buttonText.frame.origin.x,
+                                                                     buttonViewCell.buttonText.frame.origin.y,
+                                                                     frameWidth,
+                                                                     frameHeight);
+                        buttonViewCell.leftLabel.frame = CGRectMake(buttonViewCell.leftLabel.frame.origin.x,
+                                                                    (buttonViewCell.frame.size.height - buttonViewCell.leftLabel.frame.size.height)/2,
+                                                                    frameWidth,
+                                                                    frameHeight);
+                    }
                     if  (description && [description length])
                     {
                         buttonViewCell.buttonText.text = description;
@@ -503,6 +517,15 @@ typedef enum
     if(section == 0)
     {
         height = 40.0f;
+        if ([indexPath row] == SECTION_BRIEF)
+        {
+            NSString * description = [self.friendDictionary valueForKey:KEY_ACCOUNT_INTRO];
+            if ([description length] > 0)
+            {
+                CGFloat frameWidth = 184 + BREIF_WIDTH_OFFSET;
+                height = [ViewHelper getHeightOfText:description ByFontSize:15.0f contentWidth:frameWidth] + 15;
+            }
+        }
     }
     else if (section == 1)
     {
