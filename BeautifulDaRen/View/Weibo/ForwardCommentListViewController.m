@@ -239,7 +239,7 @@
     [commentListActionSheet addButtonWithTitle:COMMENT_LIST_VIEW_PROFILE];
     
     if ( [[BSDKManager sharedManager] isLogin]) {
-        [commentListActionSheet addButtonWithTitle:COMMENT_LIST_POST_COMMNET];
+        [commentListActionSheet addButtonWithTitle:COMMENT_LIST_REPLY_COMMNET];
     }
     
     [commentListActionSheet setDestructiveButtonIndex:[commentListActionSheet addButtonWithTitle:NSLocalizedString(@"cancel", @"cancel")]];
@@ -340,7 +340,7 @@
                     [self.navigationController pushViewController:friendDetailController animated:YES];
                     [friendDetailController release];
                 }
-                else if ([pressed isEqualToString:COMMENT_LIST_POST_COMMNET])
+                else if ([pressed isEqualToString:COMMENT_LIST_REPLY_COMMNET])
                 {
                     [self onPostCommentButtonClicked];
                 }

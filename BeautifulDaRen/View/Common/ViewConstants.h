@@ -105,5 +105,6 @@
 
 #define COMMENT_LIST_VIEW_PROFILE       NSLocalizedString(@"view_profile", @"view_profile")
 #define COMMENT_LIST_POST_COMMNET       NSLocalizedString(@"post_comment", @"post_comment")
+#define COMMENT_LIST_REPLY_COMMNET       NSLocalizedString(@"reply_comment", @"reply_comment")
 
 #endif

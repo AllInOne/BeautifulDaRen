@@ -166,6 +166,7 @@
 "no_comment" = "没有评论";
 "more_comment" = "更多评论";
 "post_comment" = "发表评论";
+"reply_comment" = "回复评论";
 "view_profile" = "查看此人资料";
 
 "comment_list" = "更多评论";
