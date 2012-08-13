@@ -299,7 +299,27 @@ typedef enum
             case SECTION_BRIEF:
             {
                 buttonViewCell.leftLabel.text = NSLocalizedString(@"brief", @"");
-                buttonViewCell.buttonText.text = [_tableViewDict valueForKey:KEY_ACCOUNT_INTRO];
+                NSString * description = [_tableViewDict valueForKey:KEY_ACCOUNT_INTRO];
+                buttonViewCell.buttonText.text = description;
+                if ([description length] > 0)
+                {
+                    CGFloat frameWidth = buttonViewCell.buttonText.frame.size.width;
+                    CGFloat frameHeight = [ViewHelper getHeightOfText:description ByFontSize:15.0f contentWidth:frameWidth];
+                    CGFloat heightOffset = frameHeight - buttonViewCell.buttonText.frame.size.height;
+                    buttonViewCell.buttonText.frame = CGRectMake(buttonViewCell.buttonText.frame.origin.x,
+                                                                 buttonViewCell.buttonText.frame.origin.y,
+                                                                 frameWidth,
+                                                                 frameHeight);
+                    buttonViewCell.leftLabel.frame = CGRectMake(buttonViewCell.leftLabel.frame.origin.x,
+                                                                buttonViewCell.leftLabel.frame.origin.y+heightOffset/2,
+                                                                buttonViewCell.leftLabel.frame.size.width,
+                                                                buttonViewCell.leftLabel.frame.size.height);
+                    buttonViewCell.buttonRightIcon.frame = CGRectMake(buttonViewCell.buttonRightIcon.frame.origin.x,
+                                                                      buttonViewCell.buttonRightIcon.frame.origin.y+heightOffset/2,
+                                                                      buttonViewCell.buttonRightIcon.frame.size.width,
+                                                                      buttonViewCell.buttonRightIcon.frame.size.height);
+                }
+
                 break;
             } 
         }
@@ -326,8 +346,18 @@ typedef enum
         case 2:
         {
             height = 40.0f;
+            if ([indexPath row] == SECTION_BRIEF)
+            {
+                NSString * description = [_tableViewDict valueForKey:KEY_ACCOUNT_INTRO];
+                if ([description length] > 0)
+                {
+                    CGFloat frameWidth = 184;
+                    height = [ViewHelper getHeightOfText:description ByFontSize:15.0f contentWidth:frameWidth] + 15;
+                }
+            }
             break;
-        }    }
+        }
+    }
     return height;
 }
 

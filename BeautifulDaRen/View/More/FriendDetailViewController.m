@@ -422,14 +422,15 @@ typedef enum
                     {
                         CGFloat frameWidth = buttonViewCell.buttonText.frame.size.width + BREIF_WIDTH_OFFSET;
                         CGFloat frameHeight = [ViewHelper getHeightOfText:description ByFontSize:15.0f contentWidth:frameWidth];
+                        CGFloat heightOffset = frameHeight - buttonViewCell.buttonText.frame.size.height;
                         buttonViewCell.buttonText.frame = CGRectMake(buttonViewCell.buttonText.frame.origin.x,
                                                                      buttonViewCell.buttonText.frame.origin.y,
                                                                      frameWidth,
                                                                      frameHeight);
                         buttonViewCell.leftLabel.frame = CGRectMake(buttonViewCell.leftLabel.frame.origin.x,
-                                                                    (buttonViewCell.frame.size.height - buttonViewCell.leftLabel.frame.size.height)/2,
-                                                                    frameWidth,
-                                                                    frameHeight);
+                                                                    buttonViewCell.leftLabel.frame.origin.y+heightOffset/2,
+                                                                    buttonViewCell.leftLabel.frame.size.width,
+                                                                    buttonViewCell.leftLabel.frame.size.height);
                     }
                     if  (description && [description length])
                     {
@@ -498,16 +499,7 @@ typedef enum
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    if([indexPath section] == 0 && [indexPath row] == SECTION_NOTE)
-//    {
-//        EdittingViewController * edittingViewController = [[EdittingViewController alloc]
-//                                                           initWithNibName:@"EdittingViewController"
-//                                                           bundle:nil
-//                                                           type:EdittingViewController_type0
-//                                                           block:nil];
-//        [self.navigationController pushViewController:edittingViewController animated:YES];
-//        [edittingViewController release];
-//    }
+    // TODO
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
