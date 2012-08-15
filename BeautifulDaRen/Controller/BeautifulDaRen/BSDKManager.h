@@ -148,6 +148,7 @@
 
 - (void)sendComment:(NSString*)comment
             toWeibo:(NSString*)blogId
+          toComment:(NSString*)commentId
      andDoneCallback:(processDoneWithDictBlock)callback;
 
 - (void)addFavourateForWeibo:(NSString*)blogId

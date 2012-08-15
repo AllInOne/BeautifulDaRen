@@ -767,6 +767,7 @@ static BSDKManager *sharedInstance;
 
 - (void)sendComment:(NSString*)comment
             toWeibo:(NSString*)blogId
+          toComment:(NSString*)commentId
     andDoneCallback:(processDoneWithDictBlock)callback
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
@@ -775,7 +776,10 @@ static BSDKManager *sharedInstance;
     [params setObject:K_BSDK_ACTION_SENDCOMMENT forKey:K_BSDK_ACTION];
     [params setObject:comment forKey:K_BSDK_CONTENT];
     [params setObject:blogId forKey:K_BSDK_BLOGUID];
-    
+    if(commentId)
+    {
+        [params setObject:commentId forKey:K_BSDK_COMMENTUID];
+    }
     [self sendRequestWithMethodName:nil
                          httpMethod:@"POST" 
                              params:params 

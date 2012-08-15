@@ -212,7 +212,7 @@
     };
     
     if (!view.forwardMode || (view.forwardMode && view.isCheckBoxChecked)) {
-        [[BSDKManager sharedManager] sendComment:view.weiboContentTextView.text toWeibo:[self.weiboData objectForKey:K_BSDK_UID] andDoneCallback:doneBlock];
+        [[BSDKManager sharedManager] sendComment:view.weiboContentTextView.text toWeibo:[self.weiboData objectForKey:K_BSDK_UID] toComment:nil andDoneCallback:doneBlock];
         doneCountExpected++;
     }
 }

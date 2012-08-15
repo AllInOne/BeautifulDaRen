@@ -38,6 +38,8 @@
 @property (nonatomic, assign) NSInteger currentPageIndex;
 
 @property (nonatomic, assign) NSInteger currentCommentIndex;
+@property (nonatomic, retain) NSString * relatedCommentId;
+@property (nonatomic, retain) NSString * relatedCommentUserName;
 
 -(void)refreshData;
 -(void)startCommentListAction;
@@ -48,6 +50,8 @@
 @synthesize forwardOrCommentListTableView = _forwardOrCommentListTableView;
 @synthesize forwardOrCommentList = _forwardOrCommentList;
 @synthesize relatedBlogId = _relatedBlogId;
+@synthesize relatedCommentId = _relatedCommentId;
+@synthesize relatedCommentUserName = _relatedCommentUserName;
 @synthesize isRefreshing = _isRefreshing;
 @synthesize footView = _footView;
 @synthesize footViewButton = _footViewButton;
@@ -60,6 +64,8 @@
 {
     [_forwardOrCommentList release];
     [_relatedBlogId release];
+    [_relatedCommentId release];
+    [_relatedCommentUserName release];
     [_footView release];
     [_footViewActivityIndicator release];
     [_footViewButton release];
@@ -129,8 +135,14 @@
         doneCountExpected++;
     };
     
-    if (!view.forwardMode || (view.forwardMode && view.isCheckBoxChecked)) {
-        [[BSDKManager sharedManager] sendComment:view.weiboContentTextView.text toWeibo:self.relatedBlogId andDoneCallback:doneBlock];
+    if (!view.forwardMode || (view.forwardMode && view.isCheckBoxChecked))
+    {
+        NSMutableString * commentText = [view.weiboContentTextView.text mutableCopy];
+        if(self.relatedCommentId)
+        {
+            commentText = [NSMutableString stringWithFormat:@"回复 @%@ : %@",self.relatedCommentUserName, commentText];
+        }
+        [[BSDKManager sharedManager] sendComment:commentText toWeibo:self.relatedBlogId toComment:self.relatedCommentId andDoneCallback:doneBlock];
     }
 }
 
@@ -197,7 +209,8 @@
     [self.forwardOrCommentListTableView setDelegate:self];
     [self.forwardOrCommentListTableView setDataSource:self];
     self.forwardOrCommentListTableView.tableFooterView = self.footView;
-    
+    self.relatedCommentId = nil;
+    self.relatedCommentUserName = nil;
     self.currentPageIndex = 1;
     // Do any additional setup after loading the view from its nib.
     self.forwardOrCommentList = [NSMutableArray arrayWithCapacity:INITIAL_SIZE];
@@ -318,6 +331,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     self.currentCommentIndex = [indexPath row];
+    self.relatedCommentId = [[self.forwardOrCommentList objectAtIndex:self.currentCommentIndex] valueForKey:K_BSDK_UID];
+    self.relatedCommentUserName = [[[self.forwardOrCommentList objectAtIndex:self.currentCommentIndex] valueForKey:K_BSDK_USERINFO] objectForKey:K_BSDK_USERNAME];
     [self startCommentListAction];
 }
 
