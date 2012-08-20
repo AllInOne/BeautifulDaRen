@@ -354,7 +354,8 @@
     
     if (!self.sinaShareImageView.hidden && [[SinaSDKManager sharedManager] isLogin])
     {
-        [[SinaSDKManager sharedManager] sendWeiBoWithText:self.weiboContentTextView.text image:[self.selectedImage scaleToSize:CGSizeMake(320.0, self.selectedImage.size.height * 320.0/self.selectedImage.size.width)] doneCallback:doneBlock];
+        NSString * syncContent = [NSString stringWithFormat:@"商场: @%@ 品牌: @%@ 标价: ¥%@ %@", self.maketTextView.text, self.brandTextView.text, self.priceTextView.text, self.weiboContentTextView.text];
+        [[SinaSDKManager sharedManager] sendWeiBoWithText:syncContent image:[self.selectedImage scaleToSize:CGSizeMake(320.0, self.selectedImage.size.height * 320.0/self.selectedImage.size.width)] doneCallback:doneBlock];
         doneCountExpected++;
     };
     
