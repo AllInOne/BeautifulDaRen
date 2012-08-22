@@ -13,6 +13,6 @@
 @property (retain, nonatomic) IBOutlet UIImageView * avatarImage;
 @property (retain, nonatomic) IBOutlet UILabel * nameLabel;
 @property (retain, nonatomic) IBOutlet UILabel * timeLabel;
-@property (retain, nonatomic) IBOutlet UITextView * detailView;
+@property (retain, nonatomic) IBOutlet UILabel * detailView;
 
 @end
