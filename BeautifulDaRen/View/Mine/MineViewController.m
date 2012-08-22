@@ -265,6 +265,23 @@
                 buttonViewCell.buttonLeftIcon.image = [UIImage imageNamed:@"comment_icon"];
                 break;
             }
+            case 2:
+            {
+                buttonViewCell.buttonText.text = NSLocalizedString(@"private_letter", @"");
+                CGFloat textWidth = [ViewHelper getWidthOfText:buttonViewCell.buttonText.text ByFontSize:buttonViewCell.buttonText.font.pointSize];
+                UILabel * numberLabel = [[UILabel alloc] initWithFrame:
+                                         CGRectMake(buttonViewCell.buttonText.frame.origin.x + textWidth + 10,
+                                                    buttonViewCell.buttonText.frame.origin.y, 
+                                                    50, 
+                                                    buttonViewCell.buttonText.frame.size.height)];
+                [numberLabel setTextAlignment:UITextAlignmentLeft];
+                [numberLabel setTextColor:[UIColor colorWithRed:(204.0f/255.0f) green:(88.0f/255.0f) blue:(151.0f/255.0f) alpha:1.0f]];
+                numberLabel.text = [NSString stringWithFormat:@" (%d)",[[userDict valueForKey:KEY_ACCOUNT_COMMENT_COUNT] intValue]];
+                [buttonViewCell addSubview:numberLabel];
+                [numberLabel release];
+                buttonViewCell.buttonLeftIcon.image = [UIImage imageNamed:@"my_private_letter"];
+                break;
+            }
         }
     }
     else if (section == 3)
@@ -290,7 +307,7 @@
             numberOfRows = 1;
             break;
         case 2:
-            numberOfRows = 2;
+            numberOfRows = 3;
             break;
         case 3:
             numberOfRows = 1;
@@ -359,6 +376,20 @@
                 [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
                 [navController release];
                 [commentMeViewController release];
+                break;
+            }
+            case 2:
+            {
+                PrivateLetterViewController * privateLetterViewController = [[PrivateLetterViewController alloc]
+                                                                    initWithNibName:nil
+                                                                    bundle:nil];
+                
+                UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: privateLetterViewController];
+                
+                [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
+                
+                [navController release];
+                [privateLetterViewController release];
                 break;
             }
         }

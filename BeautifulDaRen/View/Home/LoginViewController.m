@@ -267,7 +267,7 @@ typedef enum
 #ifdef DEBUG
         if ((userName == nil) && (password == nil)) {
             userName = @"jerry888";
-            password = @"123456";
+            password = @"210140";
         }
 #endif
         NSString * iToastString = @"";

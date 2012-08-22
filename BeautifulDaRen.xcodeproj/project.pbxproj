@@ -222,6 +222,8 @@
 		CE2322A915BE947B0079930B /* price_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE2322A815BE947B0079930B /* price_bg@2x.png */; };
 		CE2322AB15BE95350079930B /* price_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CE2322AA15BE95350079930B /* price_bg.png */; };
 		CE38B7EE15483CB10080DD99 /* QZoneSDKManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE38B7ED15483CB10080DD99 /* QZoneSDKManager.m */; };
+		CE3CE34315E525DB00AC6608 /* PrivateLetterDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3CE34115E525DA00AC6608 /* PrivateLetterDetailViewController.m */; };
+		CE3CE34415E525DB00AC6608 /* PrivateLetterDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE3CE34215E525DA00AC6608 /* PrivateLetterDetailViewController.xib */; };
 		CE417871157C8A1200A7155D /* BSDKManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE417870157C8A1200A7155D /* BSDKManager.m */; };
 		CE417876157C8AA300A7155D /* BSDKEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = CE417873157C8AA200A7155D /* BSDKEngine.m */; };
 		CE417877157C8AA300A7155D /* BSDKRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE417875157C8AA300A7155D /* BSDKRequest.m */; };
@@ -923,6 +925,9 @@
 		CE2322AA15BE95350079930B /* price_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = price_bg.png; sourceTree = "<group>"; };
 		CE38B7EC15483CB10080DD99 /* QZoneSDKManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QZoneSDKManager.h; path = Tencent/QZoneSDKManager.h; sourceTree = "<group>"; };
 		CE38B7ED15483CB10080DD99 /* QZoneSDKManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QZoneSDKManager.m; path = Tencent/QZoneSDKManager.m; sourceTree = "<group>"; };
+		CE3CE34015E525DA00AC6608 /* PrivateLetterDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivateLetterDetailViewController.h; sourceTree = "<group>"; };
+		CE3CE34115E525DA00AC6608 /* PrivateLetterDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivateLetterDetailViewController.m; sourceTree = "<group>"; };
+		CE3CE34215E525DA00AC6608 /* PrivateLetterDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrivateLetterDetailViewController.xib; sourceTree = "<group>"; };
 		CE41786F157C8A1200A7155D /* BSDKManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSDKManager.h; sourceTree = "<group>"; };
 		CE417870157C8A1200A7155D /* BSDKManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSDKManager.m; sourceTree = "<group>"; };
 		CE417872157C8AA200A7155D /* BSDKEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSDKEngine.h; sourceTree = "<group>"; };
@@ -2101,6 +2106,9 @@
 				C25123D61591C790004F987E /* ModifyPasswordViewController.h */,
 				C25123D71591C790004F987E /* ModifyPasswordViewController.m */,
 				C25123D81591C790004F987E /* ModifyPasswordViewController.xib */,
+				CE3CE34015E525DA00AC6608 /* PrivateLetterDetailViewController.h */,
+				CE3CE34115E525DA00AC6608 /* PrivateLetterDetailViewController.m */,
+				CE3CE34215E525DA00AC6608 /* PrivateLetterDetailViewController.xib */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -3053,6 +3061,7 @@
 				CE50FA4615A1AFBB00E2634A /* toolbar_cancel_fav@2x.png in Resources */,
 				CE2322A915BE947B0079930B /* price_bg@2x.png in Resources */,
 				CE2322AB15BE95350079930B /* price_bg.png in Resources */,
+				CE3CE34415E525DB00AC6608 /* PrivateLetterDetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3175,6 +3184,7 @@
 				CE5DD209159FE040001A7344 /* CategorySelectViewController.m in Sources */,
 				CE5DD214159FF8C2001A7344 /* CategoryItemViewController.m in Sources */,
 				CE51AE1C15AB2956007A58F3 /* MKAnnotationView+WebCache.m in Sources */,
+				CE3CE34315E525DB00AC6608 /* PrivateLetterDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

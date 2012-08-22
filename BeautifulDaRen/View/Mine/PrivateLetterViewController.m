@@ -10,6 +10,7 @@
 #import "PrivateLetterViewCell.h"
 #import "ViewHelper.h"
 #import "ViewConstants.h"
+#import "PrivateLetterDetailViewController.h"
 
 @interface PrivateLetterViewController()
 
@@ -126,8 +127,8 @@
     privateLetterCell.nameLabel.text = @"Adam Lambert";
     privateLetterCell.timeLabel.text = @"22分钟前";
     privateLetterCell.detailView.text = @"this is a long long long longa long long long longa long long long longa long long long long long long long  view";
-    CGFloat textViewHeight = [ViewHelper getHeightOfText:privateLetterCell.detailView.text ByFontSize:privateLetterCell.detailView.font.pointSize contentWidth:privateLetterCell.detailView.frame.size.width] + TEXT_VIEW_MARGE_HEIGHT;
-    privateLetterCell.detailView.frame = CGRectMake(privateLetterCell.detailView.frame.origin.x, privateLetterCell.detailView.frame.origin.y, privateLetterCell.detailView.frame.size.width, textViewHeight);
+//    CGFloat textViewHeight = [ViewHelper getHeightOfText:privateLetterCell.detailView.text ByFontSize:privateLetterCell.detailView.font.pointSize contentWidth:privateLetterCell.detailView.frame.size.width] + TEXT_VIEW_MARGE_HEIGHT;
+////    privateLetterCell.detailView.frame = CGRectMake(privateLetterCell.detailView.frame.origin.x, privateLetterCell.detailView.frame.origin.y, privateLetterCell.detailView.frame.size.width, textViewHeight);
     return cell;
 }
 
@@ -173,19 +174,20 @@
 #pragma mark - Table view delegate
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return  200;
+    return  60;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
+    PrivateLetterDetailViewController * privateLetterDetailViewController = [[PrivateLetterDetailViewController alloc]
+                                                         initWithNibName:@"PrivateLetterDetailViewController"
+                                                         bundle:nil];
+    
+    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: privateLetterDetailViewController];
+    
+    [self.navigationController presentModalViewController:navController animated:YES];
+    [navController release];
+    [privateLetterDetailViewController release];
 }
 
 @end

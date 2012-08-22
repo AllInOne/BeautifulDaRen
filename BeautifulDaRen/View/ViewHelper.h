@@ -57,4 +57,6 @@
 + (BOOL)NSStringIsValidEmail:(NSString *)checkString;
 
 + (callBackBlock)getIndicatorViewBlockWithFrame:(CGRect)frame inView:(UIView*)superView;
+
++ (UIView *)bubbleView:(NSString *)text from:(BOOL)fromSelf;
 @end

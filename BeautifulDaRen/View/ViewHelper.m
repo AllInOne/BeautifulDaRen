@@ -360,4 +360,43 @@ static BUIFont * instance;
 
     return Block_copy(callback);
 }
+
++ (UIView *)bubbleView:(NSString *)text from:(BOOL)fromSelf {
+    // build single chat bubble cell with given text
+    UIView *returnView = [[UIView alloc] initWithFrame:CGRectZero];
+    returnView.backgroundColor = [UIColor clearColor];
+    //根据气泡箭头的方向选择不同气泡图片
+    UIImage *bubble = [UIImage imageNamed:@"private_letter_background"];
+    //对气泡图片进行拉伸
+    UIImageView *bubbleImageView = [[UIImageView alloc] initWithImage:[bubble stretchableImageWithLeftCapWidth:0.0 topCapHeight:0.0]];
+
+    UIFont *font = [UIFont systemFontOfSize:12];
+    //获取文字所占的大小
+    CGSize size = [text sizeWithFont:font constrainedToSize:CGSizeMake(150.0f, 1000.0f) lineBreakMode:UILineBreakModeCharacterWrap];
+
+    UILabel *bubbleText = [[UILabel alloc] initWithFrame:CGRectMake(21.0f, 14.0f, size.width+10, size.height+10)];
+    bubbleText.backgroundColor = [UIColor clearColor];
+    bubbleText.font = font;
+    bubbleText.numberOfLines = 0;
+    bubbleText.lineBreakMode = UILineBreakModeCharacterWrap;
+    bubbleText.text = text;
+
+    bubbleImageView.frame = CGRectMake(0.0f, 0.0f, 200.0f, size.height+40.0f);
+    if(fromSelf)
+    {
+        returnView.frame = CGRectMake(120.0f, 10.0f, 200.0f, size.height+50.0f);
+    }
+    else
+    {
+        returnView.frame = CGRectMake(0.0f, 10.0f, 200.0f, size.height+50.0f);
+    }
+
+    [returnView addSubview:bubbleImageView];
+    [bubbleImageView release];
+    [returnView addSubview:bubbleText];
+    [bubbleText release];
+
+    return [returnView autorelease];
+}
+
 @end
