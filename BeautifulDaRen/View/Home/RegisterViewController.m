@@ -14,7 +14,7 @@
 #import "iToast.h"
 #import "BSDKManager.h"
 #import "BSDKDefines.h"
-
+#import "AgreementViewController.h"
 #import "ViewHelper.h"
 #import "ViewConstants.h"
 
@@ -31,6 +31,7 @@ typedef enum
 {
     REGISTER_CELL_ACCOUNT_SETTING = 0,
     REGISTER_CELL_REGISTER_BUTTON,
+    REGISTER_CELL_REGISTER_AGREEMENT,
 //    REGISTER_CELL_SINA,
     REGISTER_CELL_COUNT
 }REGISTER_CELL_INDEX;
@@ -50,6 +51,7 @@ typedef enum
 @property (retain, nonatomic) IBOutlet UITextField * userRePwdTextField;
 @property (retain, nonatomic) IBOutlet UIButton * loginWithSinaWeiboButton;
 @property (retain, nonatomic) IBOutlet UIButton * loginWithQQButton;
+@property (retain, nonatomic) IBOutlet UIButton * agreementButton;
 @property (retain, nonatomic) NSString * userCity;
 @property (retain, nonatomic) NSMutableArray* observers;
 @property (retain, nonatomic) NSMutableDictionary * savingInputDict;
@@ -63,6 +65,7 @@ typedef enum
 @synthesize userCity = _userCity;
 @synthesize userNameTextField = _userNameTextField;
 @synthesize tableView = _tableView;
+@synthesize agreementButton = _agreementButton;
 @synthesize loginWithQQButton = _loginWithQQButton;
 @synthesize loginWithSinaWeiboButton = _loginWithSinaWeiboButton;
 @synthesize savingInputDict = _savingInputDict;
@@ -100,6 +103,7 @@ typedef enum
     [_loginWithQQButton release];
     [_loginWithSinaWeiboButton release];
     [_savingInputDict release];
+    [_agreementButton release];
     [super dealloc];
 }
 
@@ -115,6 +119,7 @@ typedef enum
     [super viewDidUnload];
     self.loginWithQQButton = nil;
     self.loginWithSinaWeiboButton = nil;
+    self.agreementButton = nil;
     self.tableView = nil;
     self.savingInputDict = nil;
 }
@@ -266,6 +271,19 @@ typedef enum
         
         cell.backgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
     }
+    else if(section == REGISTER_CELL_REGISTER_AGREEMENT)
+    {
+        cell = [tableView dequeueReusableCellWithIdentifier:button_view_identifier];
+        if(!cell)
+        {
+            cell = [[[NSBundle mainBundle] loadNibNamed:button_view_identifier owner:self options:nil] objectAtIndex:7];
+        }
+        ((ButtonViewCell*)cell).leftLabel.text = @"《美丽达人网络服务使用协议》";
+        ((ButtonViewCell*)cell).leftLabel.textColor = [UIColor blueColor];
+        self.agreementButton = ((ButtonViewCell*)cell).leftButton;
+        ((ButtonViewCell*)cell).delegate = self;
+        cell.backgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+    }
 //    else if (section == REGISTER_CELL_SINA)
 //    {
 //        cell = [ViewHelper getLoginWithExtenalViewCellInTableView:tableView cellForRowAtIndexPath:indexPath];
@@ -292,10 +310,10 @@ typedef enum
     {
         number = 1;
     }
-//    else if(section == REGISTER_CELL_SINA)
-//    {
-//        number = 1;
-//    }
+    else if(section == REGISTER_CELL_REGISTER_AGREEMENT)
+    {
+        number = 1;
+    }
     return number;
 }
 
@@ -480,6 +498,12 @@ typedef enum
         {
             [[iToast makeText:@"亲，已经认证过了哦！"] show];
         }
+    }
+    else if(button == self.agreementButton)
+    {
+        AgreementViewController * agreementViewController = [[AgreementViewController alloc] initWithNibName:@"HelpViewController" bundle:nil];
+        [self.navigationController pushViewController:agreementViewController animated:YES];
+        [agreementViewController release];
     }
     else if(button == self.loginWithQQButton)
     {

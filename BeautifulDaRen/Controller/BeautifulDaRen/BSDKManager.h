@@ -174,4 +174,8 @@
 - (void)removeFan:(NSString*)userId
   andDoneCallback:(processDoneWithDictBlock)callback;
 
+- (void)getHelpAndCallback:(processDoneWithDictBlock)callback;
+
+- (void)geAgreementAndCallback:(processDoneWithDictBlock)callback;
+
 @end

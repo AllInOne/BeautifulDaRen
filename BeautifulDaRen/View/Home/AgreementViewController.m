@@ -1,16 +1,19 @@
 //
-//  HelpViewController.m
+//  AgreementViewController.m
 //  BeautifulDaRen
 //
-//  Created by gang liu on 5/16/12.
-//  Copyright (c) 2012 myriad. All rights reserved.
+//  Created by liu gang on 8/22/12.
+//
 //
 
-#import "HelpViewController.h"
+#import "AgreementViewController.h"
 #import "ViewHelper.h"
 #import "BSDKManager.h"
+@interface AgreementViewController ()
 
-@implementation HelpViewController
+@end
+
+@implementation AgreementViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -36,28 +39,12 @@
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
-#pragma mark - View lifecycle
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    [[BSDKManager sharedManager] getHelpAndCallback:^(AIO_STATUS status, NSDictionary *data) {
-        NSLog(@"help:%@",[data description]);
+    [[BSDKManager sharedManager] geAgreementAndCallback:^(AIO_STATUS status, NSDictionary *data) {
+        NSLog(@"Agreement::::::::::%@",[data description]);
     }];
-}
-
--(void)dealloc
-{
-    [super dealloc];
 }
 
 - (void)viewDidUnload
@@ -69,7 +56,6 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 

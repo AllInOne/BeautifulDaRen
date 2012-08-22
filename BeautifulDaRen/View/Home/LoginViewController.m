@@ -54,7 +54,7 @@ typedef enum
     if (self) {
         [self.navigationItem setTitle:NSLocalizedString(@"login", @"login")];
         [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
-//        [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onFindPasswordButtonClicked) title:NSLocalizedString(@"find_password", @"find_password")]];
+        [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onFindPasswordButtonClicked) title:NSLocalizedString(@"find_password", @"find_password")]];
     }
     return self;
 }
@@ -265,8 +265,8 @@ typedef enum
         __block NSString* userName = self.accountNameField.text;
         __block NSString* password = self.accountPwdField.text;
 #ifdef DEBUG        
-        userName = @"jerry888";
-        password = @"123456";
+        userName = @"tankliu002";
+        password = @"abc123456";
 #endif
         NSString * iToastString = @"";
         if ([userName isEqualToString:@""])
