@@ -33,6 +33,7 @@
 #define K_BSDK_ACTION_GETADDS @"getAds"
 #define K_BSDK_ACTION_GETHELP @"GetHelp"
 #define K_BSDK_ACTION_GETAGREEMENT @"GetAgreement"
+#define K_BSDK_ACTION_FORGET_PASSWORD @"ForgetPasswordMail"
 
 #define K_BSDK_ACTION_GETCLASSLIST @"GetClassList"
 #define K_BSDK_ACTION_GETCLASSBYID @"GetClassById"

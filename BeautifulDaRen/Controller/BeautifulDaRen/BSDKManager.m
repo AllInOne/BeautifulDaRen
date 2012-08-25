@@ -947,4 +947,23 @@ static BSDKManager *sharedInstance;
                        doneCallback:callback];
 }
 
+- (void)findPasswordOfUserName:(NSString *)userName
+                         email:(NSString *)email
+                   andCallBack:(processDoneWithDictBlock)callback
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
+    
+    [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
+    [params setObject:K_BSDK_ACTION_FORGET_PASSWORD forKey:K_BSDK_ACTION];
+    [params setObject:userName forKey:K_BSDK_USERNAME];
+    [params setObject:email forKey:K_BSDK_EMAIL];
+    
+    [self sendRequestWithMethodName:nil
+                         httpMethod:@"POST"
+                             params:params
+                       postDataType:kBSDKRequestPostDataTypeNormal
+                   httpHeaderFields:nil
+                       doneCallback:callback];
+}
+
 @end

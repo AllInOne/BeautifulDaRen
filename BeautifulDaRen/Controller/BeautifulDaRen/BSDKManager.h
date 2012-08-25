@@ -178,4 +178,8 @@
 
 - (void)geAgreementAndCallback:(processDoneWithDictBlock)callback;
 
+- (void)findPasswordOfUserName:(NSString *)userName
+                         email:(NSString *)email
+                   andCallBack:(processDoneWithDictBlock)callback;
+
 @end

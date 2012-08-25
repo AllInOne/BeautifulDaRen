@@ -10,8 +10,17 @@
 #import "ButtonViewCell.h"
 #import "HelpViewController.h"
 #import "ViewHelper.h"
+#import "iToast.h"
+#import "BSDKManager.h"
+
+@interface FindPasswordViewController()
+@property (retain, nonatomic) UITextField *userNameTextField;
+@property (retain, nonatomic) UITextField *userEmailTextField;
+@end
 
 @implementation FindPasswordViewController
+@synthesize userEmailTextField = _userEmailTextField;
+@synthesize userNameTextField = _userNameTextField;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -34,12 +43,16 @@
 - (void)dealloc
 {
     [super dealloc];
+    
+    [_userNameTextField release];
+    [_userEmailTextField release];
 }
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+
+    self.userNameTextField = nil;
+    self.userEmailTextField = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -92,7 +105,11 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    NSInteger number = 1;
+    if (section == 0) {
+        number = 2;
+    }
+    return number;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -104,7 +121,16 @@
     {
         cell = [[[UITableViewCell alloc] init] autorelease];
         UITextField * textFiled = [[UITextField alloc] initWithFrame:CGRectMake(20, 10, 300, 40)];
-        textFiled.placeholder = NSLocalizedString(@"please_input_email_or_account_name", @"please_input_email_or_account_name");
+        if ([indexPath row] == 0)
+        {
+            textFiled.placeholder = NSLocalizedString(@"please_input_account_name", @"please_input_account_name");
+            self.userNameTextField = textFiled;
+        }
+        else if ([indexPath row] == 1)
+        {
+            textFiled.placeholder = NSLocalizedString(@"please_input_account_email", @"please_input_account_email");
+            self.userEmailTextField = textFiled;
+        }
         [cell addSubview:textFiled];
         [textFiled release];
     }
@@ -132,7 +158,22 @@
     switch ([indexPath section]) {
         case 1:
         {
-            [ViewHelper showSimpleMessage:NSLocalizedString(@"sent_password_to_email", @"sent_password_to_email") withTitle:NSLocalizedString(@"prompt", @"prompt") withButtonText:NSLocalizedString(@"ok_I_know", @"ok_I_know")];
+            if ([self.userNameTextField.text length] <= 0)
+            {
+                [[iToast makeText:@"请输入登陆账号!"] show];
+                break;
+            }
+            else if ([self.userEmailTextField.text length] <= 0)
+            {
+                [[iToast makeText:@"请输入注册邮箱!"] show];
+                break;
+            }
+            [[BSDKManager sharedManager] findPasswordOfUserName:self.userNameTextField.text
+                                                          email:self.userEmailTextField.text
+                                                    andCallBack:^(AIO_STATUS status, NSDictionary *data)
+             {
+                 [[iToast makeText:[data valueForKey:@"msg"]] show];
+            }];
             break;
         }
     }
