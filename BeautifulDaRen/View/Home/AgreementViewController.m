@@ -10,7 +10,7 @@
 #import "ViewHelper.h"
 #import "BSDKManager.h"
 @interface AgreementViewController ()
-
+@property (assign , nonatomic) IBOutlet UITextView *textView;
 @end
 
 @implementation AgreementViewController
@@ -19,7 +19,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        [self.navigationItem setTitle:NSLocalizedString(@"title_help", @"title_help")];
+        [self.navigationItem setTitle:NSLocalizedString(@"title_agreement", @"title_agreement")];
         [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back",@"go_back")]];
         [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(backToHomePageButtonClicked) title:NSLocalizedString(@"title_home",@"title_home")]];
     }
@@ -42,8 +42,21 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [[BSDKManager sharedManager] geAgreementAndCallback:^(AIO_STATUS status, NSDictionary *data) {
-        NSLog(@"Agreement::::::::::%@",[data description]);
+    
+    UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    
+    activityIndicator.frame = CGRectMake((self.view.frame.size.width - activityIndicator.frame.size.width) / 2,
+                                         15,
+                                         activityIndicator.frame.size.width,
+                                         activityIndicator.frame.size.height);
+    [self.view addSubview:activityIndicator];
+    [activityIndicator startAnimating];
+    [[BSDKManager sharedManager] geAgreementAndCallback:^(AIO_STATUS status, NSDictionary *data)
+     {
+        [activityIndicator stopAnimating];
+        [activityIndicator removeFromSuperview];
+        [activityIndicator release];
+        self.textView.text = [data valueForKey:@"msg"];
     }];
 }
 

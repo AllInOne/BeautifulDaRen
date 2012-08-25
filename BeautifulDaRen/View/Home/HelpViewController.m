@@ -10,6 +10,11 @@
 #import "ViewHelper.h"
 #import "BSDKManager.h"
 
+@interface HelpViewController()
+@property (retain, nonatomic) IBOutlet UITextView *textView;
+
+@end
+
 @implementation HelpViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -50,8 +55,19 @@
 {
     [super viewDidLoad];
     
-    [[BSDKManager sharedManager] getHelpAndCallback:^(AIO_STATUS status, NSDictionary *data) {
-        NSLog(@"help:%@",[data description]);
+    UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    
+    activityIndicator.frame = CGRectMake((self.view.frame.size.width - activityIndicator.frame.size.width) / 2,
+                                         15,
+                                         activityIndicator.frame.size.width,
+                                         activityIndicator.frame.size.height);
+    [self.view addSubview:activityIndicator];
+    [activityIndicator startAnimating];
+    [[BSDKManager sharedManager] getHelpAndCallback:^(AIO_STATUS status, NSDictionary *data) {        
+        [activityIndicator stopAnimating];
+        [activityIndicator removeFromSuperview];
+        [activityIndicator release];
+        self.textView.text = [data valueForKey:@"msg"];
     }];
 }
 

@@ -501,7 +501,7 @@ typedef enum
     }
     else if(button == self.agreementButton)
     {
-        AgreementViewController * agreementViewController = [[AgreementViewController alloc] initWithNibName:@"HelpViewController" bundle:nil];
+        AgreementViewController * agreementViewController = [[AgreementViewController alloc] initWithNibName:@"AgreementViewController" bundle:nil];
         [self.navigationController pushViewController:agreementViewController animated:YES];
         [agreementViewController release];
     }
