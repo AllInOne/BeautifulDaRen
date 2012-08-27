@@ -37,6 +37,8 @@
 		C2319FB21560F9AA005CCD4E /* HomeViewHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2319FB11560F9AA005CCD4E /* HomeViewHeaderView.xib */; };
 		C2319FBA156145BC005CCD4E /* AtMeViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C2319FB9156145BC005CCD4E /* AtMeViewCell.m */; };
 		C2319FBC156145DC005CCD4E /* AtMeViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2319FBB156145DC005CCD4E /* AtMeViewCell.xib */; };
+		C233487515EB06950000CCED /* AgreementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C233487015EB06950000CCED /* AgreementViewController.m */; };
+		C233487615EB06950000CCED /* AgreementViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C233487115EB06950000CCED /* AgreementViewController.xib */; };
 		C24B1008155BDB1100918530 /* MineEditingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C24B1006155BDB1000918530 /* MineEditingViewController.m */; };
 		C24B1009155BDB1100918530 /* MineEditingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C24B1007155BDB1100918530 /* MineEditingViewController.xib */; };
 		C24B11A015499641004F6F8E /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C24B119E15499641004F6F8E /* RegisterViewController.m */; };
@@ -51,8 +53,6 @@
 		C25123D91591C790004F987E /* ModifyPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C25123D71591C790004F987E /* ModifyPasswordViewController.m */; };
 		C25123DA1591C790004F987E /* ModifyPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C25123D81591C790004F987E /* ModifyPasswordViewController.xib */; };
 		C2519F9B1564E36E0040EBC5 /* WaterFlowView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2519F9A1564E36E0040EBC5 /* WaterFlowView.m */; };
-		C258934715E4E7FE003C38CB /* AgreementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C258934515E4E7FC003C38CB /* AgreementViewController.m */; };
-		C258934815E4E7FE003C38CB /* AgreementViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C258934615E4E7FD003C38CB /* AgreementViewController.xib */; };
 		C25BDE1A1584E5030006153B /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C25BDE181584E5030006153B /* MineViewController.m */; };
 		C25BDE1B1584E5030006153B /* MineViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C25BDE191584E5030006153B /* MineViewController.xib */; };
 		C26717AE1542BF0000DC40D8 /* CommonScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = C26717A61542BF0000DC40D8 /* CommonScrollView.m */; };
@@ -657,6 +657,9 @@
 		C2319FB8156145BC005CCD4E /* AtMeViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AtMeViewCell.h; sourceTree = "<group>"; };
 		C2319FB9156145BC005CCD4E /* AtMeViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AtMeViewCell.m; sourceTree = "<group>"; };
 		C2319FBB156145DC005CCD4E /* AtMeViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AtMeViewCell.xib; sourceTree = "<group>"; };
+		C233486F15EB06950000CCED /* AgreementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgreementViewController.h; sourceTree = "<group>"; };
+		C233487015EB06950000CCED /* AgreementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgreementViewController.m; sourceTree = "<group>"; };
+		C233487115EB06950000CCED /* AgreementViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AgreementViewController.xib; sourceTree = "<group>"; };
 		C233C147155F779D0038BAB6 /* AdsPageViewProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AdsPageViewProtocol.h; path = Protocol/AdsPageViewProtocol.h; sourceTree = "<group>"; };
 		C24B1005155BDB0F00918530 /* MineEditingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineEditingViewController.h; sourceTree = "<group>"; };
 		C24B1006155BDB1000918530 /* MineEditingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineEditingViewController.m; sourceTree = "<group>"; };
@@ -681,9 +684,6 @@
 		C25123D81591C790004F987E /* ModifyPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ModifyPasswordViewController.xib; sourceTree = "<group>"; };
 		C2519F991564E36E0040EBC5 /* WaterFlowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaterFlowView.h; sourceTree = "<group>"; };
 		C2519F9A1564E36E0040EBC5 /* WaterFlowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaterFlowView.m; sourceTree = "<group>"; };
-		C258934415E4E7FC003C38CB /* AgreementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgreementViewController.h; sourceTree = "<group>"; };
-		C258934515E4E7FC003C38CB /* AgreementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgreementViewController.m; sourceTree = "<group>"; };
-		C258934615E4E7FD003C38CB /* AgreementViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AgreementViewController.xib; sourceTree = "<group>"; };
 		C25BDE171584E5030006153B /* MineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineViewController.h; sourceTree = "<group>"; };
 		C25BDE181584E5030006153B /* MineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineViewController.m; sourceTree = "<group>"; };
 		C25BDE191584E5030006153B /* MineViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MineViewController.xib; sourceTree = "<group>"; };
@@ -2066,6 +2066,9 @@
 		CEC0B58B153EFBF600F20DC0 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				C233486F15EB06950000CCED /* AgreementViewController.h */,
+				C233487015EB06950000CCED /* AgreementViewController.m */,
+				C233487115EB06950000CCED /* AgreementViewController.xib */,
 				C26798E9155E9F7B001E1D2E /* FindPasswordViewController.h */,
 				C26798EA155E9F7B001E1D2E /* FindPasswordViewController.m */,
 				C26798EB155E9F7C001E1D2E /* FindPasswordViewController.xib */,
@@ -2085,9 +2088,6 @@
 				C24B119E15499641004F6F8E /* RegisterViewController.m */,
 				C24B119F15499641004F6F8E /* RegisterViewController.xib */,
 				C28A4B8915413AB2008A806D /* SubView */,
-				C258934415E4E7FC003C38CB /* AgreementViewController.h */,
-				C258934515E4E7FC003C38CB /* AgreementViewController.m */,
-				C258934615E4E7FD003C38CB /* AgreementViewController.xib */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -3069,11 +3069,8 @@
 				CE50FA4615A1AFBB00E2634A /* toolbar_cancel_fav@2x.png in Resources */,
 				CE2322A915BE947B0079930B /* price_bg@2x.png in Resources */,
 				CE2322AB15BE95350079930B /* price_bg.png in Resources */,
-<<<<<<< HEAD
-				C258934815E4E7FE003C38CB /* AgreementViewController.xib in Resources */,
-=======
 				CE3CE34415E525DB00AC6608 /* PrivateLetterDetailViewController.xib in Resources */,
->>>>>>> fe9ad9bf14dabf31587a315cd1f788f23bcac8bc
+				C233487615EB06950000CCED /* AgreementViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3196,11 +3193,8 @@
 				CE5DD209159FE040001A7344 /* CategorySelectViewController.m in Sources */,
 				CE5DD214159FF8C2001A7344 /* CategoryItemViewController.m in Sources */,
 				CE51AE1C15AB2956007A58F3 /* MKAnnotationView+WebCache.m in Sources */,
-<<<<<<< HEAD
-				C258934715E4E7FE003C38CB /* AgreementViewController.m in Sources */,
-=======
 				CE3CE34315E525DB00AC6608 /* PrivateLetterDetailViewController.m in Sources */,
->>>>>>> fe9ad9bf14dabf31587a315cd1f788f23bcac8bc
+				C233487515EB06950000CCED /* AgreementViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
