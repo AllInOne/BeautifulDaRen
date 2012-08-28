@@ -13,6 +13,10 @@
 #import "NSAttributedString+Attributes.h"
 
 #define BACK_BUTTON_LABEL_X_OFFSET  (5.0)
+
+#define BUBBLE_AVATAR_SIZE  (32.0)
+
+
 @interface BUIFont : NSObject
 
 @property (retain, nonatomic) UIFont* font14;
@@ -380,20 +384,35 @@ static BUIFont * instance;
     bubbleText.numberOfLines = 0;
     bubbleText.lineBreakMode = UILineBreakModeCharacterWrap;
     bubbleText.text = text;
-
-    bubbleImageView.frame = CGRectMake(0.0f, 0.0f, 200.0f, size.height+40.0f);
+    
     if(fromSelf)
     {
-        returnView.frame = CGRectMake(120.0f, 10.0f, 200.0f, size.height+50.0f);
+        bubbleImageView.frame = CGRectMake(0.0f, 0.0f, 200.0f, size.height+40.0f);
+        bubbleText.frame = CGRectMake(21.0f, 14.0f, size.width+10, size.height+10);
+        returnView.frame = CGRectMake(80.0f, 10.0f, 240.0f, size.height+50.0f);
     }
     else
     {
-        returnView.frame = CGRectMake(0.0f, 10.0f, 200.0f, size.height+50.0f);
+        bubbleImageView.frame = CGRectMake(40.0f, 0.0f, 200.0f, size.height+40.0f);
+        bubbleText.frame = CGRectMake(61.0f, 14.0f, size.width+10, size.height+10);
+        returnView.frame = CGRectMake(0.0f, 10.0f, 240.0f, size.height+50.0f);
+    }
+    
+    UIImageView * avatar = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"avatar_big"]];
+    if (fromSelf) {
+        avatar.frame = CGRectMake(200.0 + 5.0, 10.0, BUBBLE_AVATAR_SIZE, BUBBLE_AVATAR_SIZE);
+    }
+    else
+    {
+        avatar.frame = CGRectMake(5.0, 10.0, BUBBLE_AVATAR_SIZE, BUBBLE_AVATAR_SIZE);
     }
 
     [returnView addSubview:bubbleImageView];
-    [bubbleImageView release];
+    [returnView addSubview:avatar];
     [returnView addSubview:bubbleText];
+    
+    [avatar release];
+    [bubbleImageView release];
     [bubbleText release];
 
     return [returnView autorelease];

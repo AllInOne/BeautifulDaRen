@@ -21,6 +21,11 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
+        
+        [self.navigationItem setTitle:NSLocalizedString(@"private_letter", @"private_letter")];
+        
+        [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClicked) title:NSLocalizedString(@"refresh", @"refresh")]];
     }
     return self;
 }
@@ -31,6 +36,19 @@
     [super didReceiveMemoryWarning];
     
     // Release any cached data, images, etc that aren't in use.
+}
+
+- (void) onBackButtonClicked
+{
+    if (![self.navigationController popViewControllerAnimated:YES])
+    {
+        [self dismissModalViewControllerAnimated:YES];
+    }
+}
+
+- (void) onRefreshButtonClicked
+{
+
 }
 
 #pragma mark - View lifecycle
