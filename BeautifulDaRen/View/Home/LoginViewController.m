@@ -25,7 +25,7 @@ typedef enum
     LOGIN_CELL_USERNAME_PASSWORD = 0,
     LOGIN_CELL_LOGIN_BUTTON,
     LOGIN_CELL_REGISTER,
-//    LOGIN_CELL_SINA_LOGIN,
+    LOGIN_CELL_SINA_LOGIN,
     LOGIN_CELL_COUNT
 }LOGIN_CELL_INDEX;
 
@@ -176,7 +176,7 @@ typedef enum
         }   
         case LOGIN_CELL_LOGIN_BUTTON:
         case LOGIN_CELL_REGISTER:
-//        case LOGIN_CELL_SINA_LOGIN:
+        case LOGIN_CELL_SINA_LOGIN:
         {
             number = 1;
             break;
@@ -248,13 +248,13 @@ typedef enum
         }
         ((ButtonViewCell*)cell).buttonText.text = NSLocalizedString(@"not_user_to_register", @"You are not user, please register");
     }
-//    else if (section == LOGIN_CELL_SINA_LOGIN)
-//    {
-//        cell = [ViewHelper getLoginWithExtenalViewCellInTableView:tableView cellForRowAtIndexPath:indexPath];
-//        _loginWithSinaWeiboButton = ((ButtonViewCell*)cell).leftButton;
-//        _loginWithQQButton = ((ButtonViewCell*)cell).rightButton;
-//        ((ButtonViewCell*)cell).delegate = self;
-//    }
+    else if (section == LOGIN_CELL_SINA_LOGIN)
+    {
+        cell = [ViewHelper getLoginWithExtenalViewCellInTableView:tableView cellForRowAtIndexPath:indexPath];
+        _loginWithSinaWeiboButton = ((ButtonViewCell*)cell).leftButton;
+        _loginWithQQButton = ((ButtonViewCell*)cell).rightButton;
+        ((ButtonViewCell*)cell).delegate = self;
+    }
     return cell;
 }
 
@@ -328,23 +328,23 @@ typedef enum
     {
         height = 10;
     }
-//    else if (section == LOGIN_CELL_SINA_LOGIN ) {
-//        height = 25;
-//    }
+    else if (section == LOGIN_CELL_SINA_LOGIN ) {
+        height = 25;
+    }
     return height;
 }
 
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView * view = nil;
-//    if(section == LOGIN_CELL_SINA_LOGIN)
-//    {
-//        view = [[[NSBundle mainBundle] loadNibNamed:@"HomeViewHeaderView" owner:self options:nil] objectAtIndex:0];
-//        UILabel * label = (UILabel*)[view viewWithTag:1];
-//        [label setTextColor:[UIColor darkGrayColor]];
-//        label.text = NSLocalizedString(@"login_with_cooperation", @"login_with_cooperation");
-//    }
-//    else
+    if(section == LOGIN_CELL_SINA_LOGIN)
+    {
+        view = [[[NSBundle mainBundle] loadNibNamed:@"HomeViewHeaderView" owner:self options:nil] objectAtIndex:0];
+        UILabel * label = (UILabel*)[view viewWithTag:1];
+        [label setTextColor:[UIColor darkGrayColor]];
+        label.text = NSLocalizedString(@"login_with_cooperation", @"login_with_cooperation");
+    }
+    else
     {
         view = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
     }
