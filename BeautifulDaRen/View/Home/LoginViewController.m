@@ -390,8 +390,8 @@ typedef enum
                                        // NSString * sinaName = [data objectForKey:@"name"];
                                         [[BSDKManager sharedManager] loginSinaUserId:uid 
                                                                             userName:[data objectForKey:@"name"]
-                                                                                 sex:[data objectForKey:@"gender"]
-                                                                                city:[data objectForKey:@"gender"]
+                                                                                 sex:([[data objectForKey:@"gender"] isEqual:@"m"] ? @"1" : @"0")
+                                                                                city:[data objectForKey:@"city"]
                                                                                email:nil andCallBack:^(AIO_STATUS status, NSDictionary *data) {
                                                                                    if ((status == AIO_STATUS_SUCCESS) && K_BSDK_IS_RESPONSE_OK(data)) {
                                                                                        [[iToast makeText:@"亲，认证成功了！"] show];

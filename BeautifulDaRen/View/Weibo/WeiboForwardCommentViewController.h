@@ -27,6 +27,10 @@
 @property (nonatomic, assign) BOOL forwardMode;
 @property (nonatomic, assign) BOOL isCheckBoxChecked;
 
+@property (nonatomic, retain) IBOutlet UIButton * sinaButton;
+@property (nonatomic, retain) IBOutlet UIImageView * sinaShareImageView;
+@property (nonatomic, retain) IBOutlet UIImageView * sinaSepImageView;
+
 @property (nonatomic, assign) id<ForwardCommentViewControllerProtocol> delegate; 
 
 - (IBAction)onAtFriendPressed:(id)sender;
@@ -34,4 +38,6 @@
 
 - (IBAction)onForward2SinaPressed:(id)sender;
 - (IBAction)onForward2TencentPressed:(id)sender;
+
+- (IBAction)onSinaPressed:(id)sender;
 @end
