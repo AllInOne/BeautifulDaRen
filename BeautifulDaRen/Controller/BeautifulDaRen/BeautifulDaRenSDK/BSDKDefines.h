@@ -55,6 +55,9 @@
 
 #define K_BSDK_ACTION_GETCOMMENTLIST @"GetCommentList"
 
+#define K_BSDK_ACTION_SINAUSERLOGIN @"sinaUserLogin"
+#define K_BSDK_ACTION_ADDNOTENAME @"addNoteName"
+
 #define K_BSDK_PAGEINDEX @"Page"
 #define K_BSDK_PAGESIZE @"PageSize"
 
@@ -132,6 +135,7 @@
 #define K_BSDK_COMMENTUID @"ReplyId"
 #define K_BSDK_BLOGLIST @"BlogList"
 #define K_BSDK_BLOGINFO @"BlogInfo"
+#define K_BSDK_SHOWFORWARD  @"ShowForward"
 
 #define K_BSDK_PICTURE_ORIGINAL @"Picture"
 #define K_BSDK_PICTURE_102 @"pic_102"
@@ -149,6 +153,16 @@
 #define K_BSDK_COMMENT_USER_ID @"CommentUserId"
 
 #define K_BSDK_ATTENTIONUSERID @"AttentionUserId"
+
+
+#define K_BSDK_SINA_USER_ID @"sinaUserId"
+#define K_BSDK_SINA_USER_NAME @"sinaUserName"
+#define K_BSDK_SINA_SEX @"sinaSex"
+#define K_BSDK_SINA_CITY  @"sinaCity"
+#define K_BSDK_SINA_EMAIL   @"sinaEmail"
+
+#define K_BSDK_NOTE_USER_ID @"NoteUserId"
+#define K_BSDK_NOTE_NAME    @"NoteName"
 
 #define K_BSDK_CLASSLIST @"ClassList"
 #define K_BSDK_CLASSID @"ClassId"

@@ -25,6 +25,10 @@
 
 - (void)loginWithDoneCallback:(loginDoneBlock)doneBlock;
 
+- (void)getInfoOfUser:(NSString*)uid doneCallback:(processDoneWithDictBlock)callback;
+
+- (void)getMyUidWithDoneCallback:(processDoneWithDictBlock)callback;
+
 - (void)sendRequestWithMethodName:(NSString *)methodName
                        httpMethod:(NSString *)httpMethod
                            params:(NSDictionary *)params

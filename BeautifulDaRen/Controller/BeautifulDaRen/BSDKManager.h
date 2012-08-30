@@ -182,4 +182,18 @@
                          email:(NSString *)email
                    andCallBack:(processDoneWithDictBlock)callback;
 
+
+- (void)loginSinaUserId:(NSString *)userId
+               userName:(NSString *)userName
+                    sex:(NSString *)sex
+                   city:(NSString *)city
+                  email:(NSString *)email
+            andCallBack:(processDoneWithDictBlock)callback;
+
+- (void)addNoteToUserId:(NSString *)userId
+               noteName:(NSString *)noteName
+            andCallBack:(processDoneWithDictBlock)callback;
+
+
+
 @end
