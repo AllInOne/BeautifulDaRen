@@ -372,13 +372,49 @@ typedef enum
 {
     if(button ==  self.loginWithSinaWeiboButton)
     {
+        [[SinaSDKManager sharedManager] logout];
         if (![[SinaSDKManager sharedManager] isLogin])
         {
             [[SinaSDKManager sharedManager] setRootviewController:self.navigationController];
             [[SinaSDKManager sharedManager] loginWithDoneCallback:^(LOGIN_STATUS status) {
                 NSLog(@"Sina SDK login done, status:%d", status);
                 if (status == LOGIN_STATUS_SUCCESS) {
-                    [[iToast makeText:@"亲，认证成功了！"] show];
+                    
+                    [[SinaSDKManager sharedManager] getMyUidWithDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+                        if (status == AIO_STATUS_SUCCESS) {
+                            NSString * uid = [[data objectForKey:@"uid"] stringValue];
+                            if (uid) {
+                                [[NSUserDefaults standardUserDefaults] setObject:uid forKey:USERDEFAULT_SINA_USER_UID];
+                                [[SinaSDKManager sharedManager] getInfoOfUser:uid doneCallback:^(AIO_STATUS status, NSDictionary *data) {
+                                    if (status == AIO_STATUS_SUCCESS) {
+                                       // NSString * sinaName = [data objectForKey:@"name"];
+                                        [[BSDKManager sharedManager] loginSinaUserId:uid 
+                                                                            userName:[data objectForKey:@"name"]
+                                                                                 sex:[data objectForKey:@"gender"]
+                                                                                city:[data objectForKey:@"gender"]
+                                                                               email:nil andCallBack:^(AIO_STATUS status, NSDictionary *data) {
+                                                                                   if ((status == AIO_STATUS_SUCCESS) && K_BSDK_IS_RESPONSE_OK(data)) {
+                                                                                       [[iToast makeText:@"亲，认证成功了！"] show];
+                                                                                   }
+                                                                                   else
+                                                                                   {
+                                                                                       [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
+                                                                                   }
+                                                                               }];
+                                    }
+                                    else
+                                    {
+                                        [[iToast makeText:@"获取信息失败，请再试一次!"] show];
+                                    }
+                                }];
+                            }
+                        }
+                        else
+                        {
+                            [[iToast makeText:@"亲，认证失败了！"] show];
+                        }
+                    }];
+                    
                 }
                 else
                 {

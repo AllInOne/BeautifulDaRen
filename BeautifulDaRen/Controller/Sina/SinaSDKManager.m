@@ -123,6 +123,31 @@ static SinaSDKManager *sharedInstance;
 
 }
 
+- (void)getInfoOfUser:(NSString*)uid doneCallback:(processDoneWithDictBlock)callback
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:2];
+    
+    [params setObject:uid forKey:@"uid"];
+    
+    [self sendRequestWithMethodName:@"users/show.json" 
+                         httpMethod:@"GET" 
+                             params:params 
+                       postDataType:kWBRequestPostDataTypeNormal
+                   httpHeaderFields:nil
+                       doneCallback:callback];
+}
+
+- (void)getMyUidWithDoneCallback:(processDoneWithDictBlock)callback
+{
+    [self sendRequestWithMethodName:@"account/get_uid.json" 
+                         httpMethod:@"GET" 
+                             params:nil 
+                       postDataType:kWBRequestPostDataTypeNormal
+                   httpHeaderFields:nil
+                       doneCallback:callback];
+}
+
+
 #pragma mark SINA engine delegates
 
 - (void)engineAlreadyLoggedIn:(WBEngine *)engine
