@@ -3178,8 +3178,8 @@
 					armv7,
 					armv6,
 				);
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: XIAO FENG";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: XIAO FENG";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -3194,6 +3194,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				PROVISIONING_PROFILE = "D7DBF5D7-B6C2-42C5-B7A8-D0D393A01695";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D7DBF5D7-B6C2-42C5-B7A8-D0D393A01695";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -3206,8 +3208,8 @@
 					armv7,
 					armv6,
 				);
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: XIAO FENG";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: XIAO FENG";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -3216,6 +3218,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "D7DBF5D7-B6C2-42C5-B7A8-D0D393A01695";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D7DBF5D7-B6C2-42C5-B7A8-D0D393A01695";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
