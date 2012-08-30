@@ -18,9 +18,12 @@
 #import "CategoryViewController.h"
 #import "LoginViewController.h"
 
+#define INDEX_MINE_VIEW_NAVIGATION (4)
+
 @interface RootTabViewController()
 
-@property (retain, nonatomic) id observerForLogout;
+@property (retain, nonatomic) id observerForNewInfoToMe;
+@property (assign, nonatomic) UINavigationController * mineViewNavigationController;
 
 - (void)initLocalizedString;
 - (void)startMyshowAction;
@@ -34,8 +37,8 @@
 @end
 
 @implementation RootTabViewController
-
-@synthesize observerForLogout = _observerForLogout;
+@synthesize mineViewNavigationController = _mineViewNavigationController;
+@synthesize observerForNewInfoToMe = _observerForNewInfoToMe;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -58,7 +61,7 @@
 
 -(void)dealloc
 {
-//    [[NSNotificationCenter defaultCenter] removeObserver:_observerForLogout];
+    [[NSNotificationCenter defaultCenter] removeObserver:_observerForNewInfoToMe];
     [super dealloc];
 }
 
@@ -74,16 +77,14 @@
 
         [[UIToolbar appearance]setBackgroundImage:[UIImage imageNamed:@"toolbar_background"] forToolbarPosition:UIToolbarPositionBottom barMetrics:UIBarMetricsDefault];
     }
-//    _observerForLogout = [[NSNotificationCenter defaultCenter]
-//                          addObserverForName:K_NOTIFICATION_LOGINOUT_SUCCESS
-//                          object:nil
-//                          queue:nil
-//                          usingBlock:^(NSNotification *note) {
-//                              for (UIViewController * view in self.tabBarController.viewControllers) {
-//                                  [view.view removeFromSuperview];
-//                                  view.view = nil;
-//                              }
-//                          }];
+    _observerForNewInfoToMe = [[NSNotificationCenter defaultCenter]
+                          addObserverForName:K_NOTIFICATION_MINE_NEW_INFO
+                          object:nil
+                          queue:nil
+                          usingBlock:^(NSNotification *notification) {
+                              // TODO
+                              self.mineViewNavigationController.tabBarItem.badgeValue = @"2";
+                          }];
 }
 
 - (void)viewDidUnload
@@ -113,8 +114,6 @@
     [navController popToRootViewControllerAnimated:NO];
     // when clicked HomeView, it should be turn to home view.
     if (![[BSDKManager sharedManager] isLogin] && !([navController.topViewController isKindOfClass:[HomeViewController class]] || [navController.topViewController isKindOfClass:[CategoryViewController class]])) {
-        
-//        [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_SHOULD_LOGIN object:self];
 
         LoginViewController * loginContorller = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
         UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: loginContorller];
@@ -146,6 +145,9 @@
     
     NSInteger index = 0;
     for (UINavigationController* navigation in [self customizableViewControllers]){
+        if (index == INDEX_MINE_VIEW_NAVIGATION) {
+            self.mineViewNavigationController = navigation;
+        }
         UINavigationItem* navigationItem = navigation.topViewController.navigationItem;
         NSArray* textArray = [localizedStringsArray objectAtIndex:index];
         [navigationItem setTitle:[textArray objectAtIndex:0]];
