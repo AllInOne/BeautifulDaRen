@@ -8,7 +8,6 @@
 
 #import "ItemsViewController.h"
 #import "ViewConstants.h"
-#import "WaresItem.h"
 #import "WeiboDetailViewController.h"
 #import "ViewHelper.h"
 #import "UIImageView+WebCache.h"

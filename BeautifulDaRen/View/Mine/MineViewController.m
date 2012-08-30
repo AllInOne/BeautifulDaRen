@@ -12,7 +12,6 @@
 #import "GridViewCell.h"
 #import "ButtonViewCell.h"
 #import "ViewConstants.h"
-#import "DataManager.h"
 #import "SinaSDKManager.h"
 #import "WeiboListViewController.h"
 #import "ViewHelper.h"

@@ -7,12 +7,9 @@
 //
 
 #import "ForwardCommentListViewController.h"
-#import "comment.h"
 #import "ViewHelper.h"
 #import "ViewConstants.h"
-#import "DataConstants.h"
 #import "ForwardCommentTableViewCell.h"
-#import "DataManager.h"
 #import "BSDKManager.h"
 #import "BSDKDefines.h"
 #import "WeiboForwardCommentViewController.h"

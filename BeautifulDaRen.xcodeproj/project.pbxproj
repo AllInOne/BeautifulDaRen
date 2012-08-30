@@ -18,11 +18,9 @@
 		C2118B7615692D56006F4551 /* WeiboListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2118B7415692D56006F4551 /* WeiboListViewController.xib */; };
 		C2139A6A1564087600C3922D /* PrivateLetterViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C2139A691564087600C3922D /* PrivateLetterViewCell.m */; };
 		C2139A7515640E2900C3922D /* PrivateLetterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2139A7315640E2900C3922D /* PrivateLetterViewController.m */; };
-		C213AB9A155C1BCD00667556 /* BeautifulDaRen.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C213AB98155C1BCD00667556 /* BeautifulDaRen.xcdatamodeld */; };
 		C213AB9F155C1CD800667556 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C213AB9E155C1CD800667556 /* CoreData.framework */; };
 		C21526B01577842200F044B5 /* GridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C21526AE1577842200F044B5 /* GridViewCell.m */; };
 		C21526B11577842200F044B5 /* GridViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C21526AF1577842200F044B5 /* GridViewCell.xib */; };
-		C215A7A21553EABF001BF379 /* WaresItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C215A7A01553EABF001BF379 /* WaresItem.m */; };
 		C216EDC215518B8C00CA8CE8 /* MyInfoTopViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C216EDC115518B8C00CA8CE8 /* MyInfoTopViewCell.m */; };
 		C216EDC415518BD300CA8CE8 /* MyInfoTopViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C216EDC315518BD300CA8CE8 /* MyInfoTopViewCell.xib */; };
 		C21C26A8156B7E36000F8E3C /* EdittingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C21C26A6156B7E33000F8E3C /* EdittingViewController.m */; };
@@ -65,8 +63,6 @@
 		C26717BD1542BF2200DC40D8 /* CategoryItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C26717B91542BF2200DC40D8 /* CategoryItemCell.xib */; };
 		C26798EC155E9F7C001E1D2E /* FindPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C26798EA155E9F7B001E1D2E /* FindPasswordViewController.m */; };
 		C26798ED155E9F7C001E1D2E /* FindPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C26798EB155E9F7C001E1D2E /* FindPasswordViewController.xib */; };
-		C274DCBE155EB7BA0098EE22 /* UserIdentity.m in Sources */ = {isa = PBXBuildFile; fileRef = C274DCBD155EB7BA0098EE22 /* UserIdentity.m */; };
-		C274DCC1155EB99B0098EE22 /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C274DCC0155EB99B0098EE22 /* CoreDataManager.m */; };
 		C27F8654156CCFE40094402B /* FindFriendViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C27F8653156CCFE30094402B /* FindFriendViewCell.m */; };
 		C27F8656156CCFF70094402B /* FindFriendViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C27F8655156CCFF70094402B /* FindFriendViewCell.xib */; };
 		C27F865B156CF4C10094402B /* FindWeiboViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C27F865A156CF4C10094402B /* FindWeiboViewCell.m */; };
@@ -86,8 +82,6 @@
 		C297D83C154442C20080294C /* AccountInfoInputCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C297D837154442C20080294C /* AccountInfoInputCell.xib */; };
 		C29F6664154310B300292031 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		C2A810C31566230A008FF2B7 /* PrivateLetterViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2A810C21566230A008FF2B7 /* PrivateLetterViewCell.xib */; };
-		C2A810DD1566611E008FF2B7 /* PrivateLetter.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A810DC1566611E008FF2B7 /* PrivateLetter.m */; };
-		C2A810E01566611F008FF2B7 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A810DF1566611F008FF2B7 /* Comment.m */; };
 		C2CE7287156A929F00C22E34 /* FriendDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2CE7285156A929F00C22E34 /* FriendDetailViewController.m */; };
 		C2CE7288156A929F00C22E34 /* FriendDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2CE7286156A929F00C22E34 /* FriendDetailViewController.xib */; };
 		C2F68D07157340E7006ED8AE /* NSAttributedString+Attributes.m in Sources */ = {isa = PBXBuildFile; fileRef = C2F68D04157340E7006ED8AE /* NSAttributedString+Attributes.m */; };
@@ -343,7 +337,6 @@
 		CEADCAD71576675900EF83BA /* toolbar_remove_fan_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CEADCAC91576675900EF83BA /* toolbar_remove_fan_icon.png */; };
 		CEBCD04C154FD253000D41E1 /* ChineseToPinyin.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBCD04B154FD253000D41E1 /* ChineseToPinyin.m */; };
 		CEBCD053154FF377000D41E1 /* BaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBCD051154FF377000D41E1 /* BaseManager.m */; };
-		CEBCD056154FF3A6000D41E1 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBCD055154FF3A6000D41E1 /* DataManager.m */; };
 		CEBCD05A15500CF8000D41E1 /* WeiboForwardCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBCD05715500CF8000D41E1 /* WeiboForwardCommentViewController.m */; };
 		CEBCD05D155018D9000D41E1 /* WeiboForwardCommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEBCD05C155018D9000D41E1 /* WeiboForwardCommentViewController.xib */; };
 		CEC0B589153EFBE800F20DC0 /* CategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC0B587153EFBE800F20DC0 /* CategoryViewController.m */; };
@@ -630,14 +623,11 @@
 		C2139A7215640E2900C3922D /* PrivateLetterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivateLetterViewController.h; sourceTree = "<group>"; };
 		C2139A7315640E2900C3922D /* PrivateLetterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivateLetterViewController.m; sourceTree = "<group>"; };
 		C2139A7415640E2900C3922D /* PrivateLetterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrivateLetterViewController.xib; sourceTree = "<group>"; };
-		C213AB99155C1BCD00667556 /* BeautifulDaRen.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BeautifulDaRen.xcdatamodel; sourceTree = "<group>"; };
 		C213AB9E155C1CD800667556 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		C21526AD1577842200F044B5 /* GridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridViewCell.h; sourceTree = "<group>"; };
 		C21526AE1577842200F044B5 /* GridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridViewCell.m; sourceTree = "<group>"; };
 		C21526AF1577842200F044B5 /* GridViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GridViewCell.xib; sourceTree = "<group>"; };
 		C215A76D1553CCEF001BF379 /* ButtonPressDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonPressDelegate.h; sourceTree = "<group>"; };
-		C215A79F1553EABF001BF379 /* WaresItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaresItem.h; sourceTree = "<group>"; };
-		C215A7A01553EABF001BF379 /* WaresItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaresItem.m; sourceTree = "<group>"; };
 		C216EDC015518B8C00CA8CE8 /* MyInfoTopViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfoTopViewCell.h; sourceTree = "<group>"; };
 		C216EDC115518B8C00CA8CE8 /* MyInfoTopViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfoTopViewCell.m; sourceTree = "<group>"; };
 		C216EDC315518BD300CA8CE8 /* MyInfoTopViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyInfoTopViewCell.xib; sourceTree = "<group>"; };
@@ -702,12 +692,6 @@
 		C26798E9155E9F7B001E1D2E /* FindPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindPasswordViewController.h; sourceTree = "<group>"; };
 		C26798EA155E9F7B001E1D2E /* FindPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindPasswordViewController.m; sourceTree = "<group>"; };
 		C26798EB155E9F7C001E1D2E /* FindPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FindPasswordViewController.xib; sourceTree = "<group>"; };
-		C274DCBC155EB7BA0098EE22 /* UserIdentity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserIdentity.h; sourceTree = "<group>"; };
-		C274DCBD155EB7BA0098EE22 /* UserIdentity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserIdentity.m; sourceTree = "<group>"; };
-		C274DCBF155EB99B0098EE22 /* CoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreDataManager.h; path = Common/CoreDataManager.h; sourceTree = "<group>"; };
-		C274DCC0155EB99B0098EE22 /* CoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreDataManager.m; path = Common/CoreDataManager.m; sourceTree = "<group>"; };
-		C274DCC2155EBA6F0098EE22 /* DataManagerCallbacks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataManagerCallbacks.h; path = Common/DataManagerCallbacks.h; sourceTree = "<group>"; };
-		C274DCDA155EBBBD0098EE22 /* DataConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataConstants.h; sourceTree = "<group>"; };
 		C274DCDC155EC3D70098EE22 /* UpdateViewControllerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UpdateViewControllerProtocol.h; path = Protocol/UpdateViewControllerProtocol.h; sourceTree = "<group>"; };
 		C27F8652156CCFE30094402B /* FindFriendViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindFriendViewCell.h; sourceTree = "<group>"; };
 		C27F8653156CCFE30094402B /* FindFriendViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindFriendViewCell.m; sourceTree = "<group>"; };
@@ -734,10 +718,6 @@
 		C297D836154442C20080294C /* AccountInfoInputCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountInfoInputCell.m; sourceTree = "<group>"; };
 		C297D837154442C20080294C /* AccountInfoInputCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountInfoInputCell.xib; sourceTree = "<group>"; };
 		C2A810C21566230A008FF2B7 /* PrivateLetterViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrivateLetterViewCell.xib; sourceTree = "<group>"; };
-		C2A810DB1566611E008FF2B7 /* PrivateLetter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivateLetter.h; sourceTree = "<group>"; };
-		C2A810DC1566611E008FF2B7 /* PrivateLetter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivateLetter.m; sourceTree = "<group>"; };
-		C2A810DE1566611F008FF2B7 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
-		C2A810DF1566611F008FF2B7 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
 		C2CE7284156A929E00C22E34 /* FriendDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendDetailViewController.h; sourceTree = "<group>"; };
 		C2CE7285156A929F00C22E34 /* FriendDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendDetailViewController.m; sourceTree = "<group>"; };
 		C2CE7286156A929F00C22E34 /* FriendDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendDetailViewController.xib; sourceTree = "<group>"; };
@@ -1067,8 +1047,6 @@
 		CEBCD050154FF377000D41E1 /* BaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseManager.h; path = Common/BaseManager.h; sourceTree = "<group>"; };
 		CEBCD051154FF377000D41E1 /* BaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseManager.m; path = Common/BaseManager.m; sourceTree = "<group>"; };
 		CEBCD052154FF377000D41E1 /* ControllerConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ControllerConstants.h; path = Common/ControllerConstants.h; sourceTree = "<group>"; };
-		CEBCD054154FF3A6000D41E1 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
-		CEBCD055154FF3A6000D41E1 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
 		CEBCD05715500CF8000D41E1 /* WeiboForwardCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboForwardCommentViewController.m; sourceTree = "<group>"; };
 		CEBCD05915500CF8000D41E1 /* WeiboForwardCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboForwardCommentViewController.h; sourceTree = "<group>"; };
 		CEBCD05C155018D9000D41E1 /* WeiboForwardCommentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeiboForwardCommentViewController.xib; sourceTree = "<group>"; };
@@ -1552,8 +1530,6 @@
 			isa = PBXGroup;
 			children = (
 				CE41786D157C8A1100A7155D /* BeautifulDaRen */,
-				CEBCD054154FF3A6000D41E1 /* DataManager.h */,
-				CEBCD055154FF3A6000D41E1 /* DataManager.m */,
 				CEBCD04F154FF361000D41E1 /* Common */,
 				CEE30724154FCAB4004D2E96 /* Utility */,
 				CE38B7EF15483CB80080DD99 /* Tencent */,
@@ -1565,16 +1541,6 @@
 		CE029AF3153E68D800886227 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C213AB98155C1BCD00667556 /* BeautifulDaRen.xcdatamodeld */,
-				C2A810DE1566611F008FF2B7 /* Comment.h */,
-				C2A810DF1566611F008FF2B7 /* Comment.m */,
-				C274DCDA155EBBBD0098EE22 /* DataConstants.h */,
-				C2A810DB1566611E008FF2B7 /* PrivateLetter.h */,
-				C2A810DC1566611E008FF2B7 /* PrivateLetter.m */,
-				C274DCBC155EB7BA0098EE22 /* UserIdentity.h */,
-				C274DCBD155EB7BA0098EE22 /* UserIdentity.m */,
-				C215A79F1553EABF001BF379 /* WaresItem.h */,
-				C215A7A01553EABF001BF379 /* WaresItem.m */,
 			);
 			name = Model;
 			path = BeautifulDaRen/Model;
@@ -2015,9 +1981,6 @@
 		CEBCD04F154FF361000D41E1 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				C274DCC2155EBA6F0098EE22 /* DataManagerCallbacks.h */,
-				C274DCBF155EB99B0098EE22 /* CoreDataManager.h */,
-				C274DCC0155EB99B0098EE22 /* CoreDataManager.m */,
 				CEBCD050154FF377000D41E1 /* BaseManager.h */,
 				CEBCD051154FF377000D41E1 /* BaseManager.m */,
 				CEBCD052154FF377000D41E1 /* ControllerConstants.h */,
@@ -3140,11 +3103,9 @@
 				CEE30722154F8533004D2E96 /* FriendListCellView.m in Sources */,
 				CEBCD04C154FD253000D41E1 /* ChineseToPinyin.m in Sources */,
 				CEBCD053154FF377000D41E1 /* BaseManager.m in Sources */,
-				CEBCD056154FF3A6000D41E1 /* DataManager.m in Sources */,
 				CEBCD05A15500CF8000D41E1 /* WeiboForwardCommentViewController.m in Sources */,
 				CE62B3621551790A0017AA88 /* SelectCityViewController.m in Sources */,
 				C216EDC215518B8C00CA8CE8 /* MyInfoTopViewCell.m in Sources */,
-				C215A7A21553EABF001BF379 /* WaresItem.m in Sources */,
 				CEEF7B20155549B5001ABCEC /* ForwardCommentListViewController.m in Sources */,
 				CEEF7B381555599A001ABCEC /* ForwardCommentTableViewCell.m in Sources */,
 				CEF432431556AB5D004D47BA /* TakePhotoViewController.m in Sources */,
@@ -3152,18 +3113,13 @@
 				C20BD4B215591F72006BEEC8 /* FindMoreViewController.m in Sources */,
 				C20FAB0E1559539400895272 /* FriendItemCell.m in Sources */,
 				C24B1008155BDB1100918530 /* MineEditingViewController.m in Sources */,
-				C213AB9A155C1BCD00667556 /* BeautifulDaRen.xcdatamodeld in Sources */,
 				C26798EC155E9F7C001E1D2E /* FindPasswordViewController.m in Sources */,
-				C274DCBE155EB7BA0098EE22 /* UserIdentity.m in Sources */,
-				C274DCC1155EB99B0098EE22 /* CoreDataManager.m in Sources */,
 				CEF1FE27155F655B005DFDC8 /* PhotoConfirmViewController.m in Sources */,
 				C2319FBA156145BC005CCD4E /* AtMeViewCell.m in Sources */,
 				C22CC1831563A3A7000DF1BD /* HelpViewController.m in Sources */,
 				C2139A6A1564087600C3922D /* PrivateLetterViewCell.m in Sources */,
 				C2139A7515640E2900C3922D /* PrivateLetterViewController.m in Sources */,
 				C2519F9B1564E36E0040EBC5 /* WaterFlowView.m in Sources */,
-				C2A810DD1566611E008FF2B7 /* PrivateLetter.m in Sources */,
-				C2A810E01566611F008FF2B7 /* Comment.m in Sources */,
 				C2118B7515692D56006F4551 /* WeiboListViewController.m in Sources */,
 				C2CE7287156A929F00C22E34 /* FriendDetailViewController.m in Sources */,
 				C21C26A8156B7E36000F8E3C /* EdittingViewController.m in Sources */,
@@ -3326,19 +3282,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		C213AB98155C1BCD00667556 /* BeautifulDaRen.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				C213AB99155C1BCD00667556 /* BeautifulDaRen.xcdatamodel */,
-			);
-			currentVersion = C213AB99155C1BCD00667556 /* BeautifulDaRen.xcdatamodel */;
-			path = BeautifulDaRen.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = CE029AB1153E682100886227 /* Project object */;
 }

@@ -8,7 +8,6 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "FullImageViewController.h"
-#import "DataManager.h"
 #import "ViewConstants.h"
 #import "ViewHelper.h"
 #import "UIImageView+WebCache.h"
