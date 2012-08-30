@@ -264,9 +264,8 @@ typedef enum
     if ([indexPath section] == LOGIN_CELL_LOGIN_BUTTON) {
         __block NSString* userName = self.accountNameField.text;
         __block NSString* password = self.accountPwdField.text;
-
 #ifdef DEBUG
-        if ((userName == nil) && (password == nil)) {
+        if ([userName length] == 0 && [password length] == 0) {
             userName = @"jerry888";
             password = @"210140";
         }
