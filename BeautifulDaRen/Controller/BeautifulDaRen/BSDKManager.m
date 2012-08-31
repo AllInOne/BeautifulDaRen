@@ -976,7 +976,7 @@ static BSDKManager *sharedInstance;
                   email:(NSString *)email
             andCallBack:(processDoneWithDictBlock)callback
 {
-    
+    NSLog(@"##############%@", city);
     if (self.isLogin) {
         NSDictionary * data = [NSDictionary dictionaryWithObjectsAndKeys:@"已经登陆！",K_BSDK_RESPONSE_MESSAGE, nil];
         callback(AIO_STATUS_BAD_STATE, data);

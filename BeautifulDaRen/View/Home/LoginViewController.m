@@ -19,6 +19,7 @@
 #import "ViewConstants.h"
 #import "ViewHelper.h"
 #import "iToast.h"
+#import "SinaCityCode.h"
 
 typedef enum
 {
@@ -400,14 +401,16 @@ typedef enum
                                 [[SinaSDKManager sharedManager] getInfoOfUser:uid doneCallback:^(AIO_STATUS status, NSDictionary *data) {
                                     if (status == AIO_STATUS_SUCCESS) {
                                        // NSString * sinaName = [data objectForKey:@"name"];
+                                        NSString * provinceCode = [data objectForKey:@"province"];
+                                        NSString * cityCode = [data objectForKey:@"city"];
                                         [[BSDKManager sharedManager] loginSinaUserId:uid 
                                                                             userName:[data objectForKey:@"name"]
                                                                                  sex:([[data objectForKey:@"gender"] isEqual:@"m"] ? @"1" : @"0")
-                                                                                city:[data objectForKey:@"city"]
+                                                                                city:[[SinaCityCode sharedInstance] getCityNameByProvinceCode:provinceCode andCityCode:cityCode]
                                                                                email:nil andCallBack:^(AIO_STATUS status, NSDictionary *response) {
                                                                                    if ((status == AIO_STATUS_SUCCESS) && K_BSDK_IS_RESPONSE_OK(response)) {
                                                                                        NSDictionary * userInfo = [response objectForKey:K_BSDK_USERINFO];
-                                                                                       NSLog(@"***%@", userInfo);
+                                                                                       
                                                                                        [[NSUserDefaults standardUserDefaults] setObject:[userInfo objectForKey:K_BSDK_USERNAME] forKey:USERDEFAULT_AUTO_LOGIN_ACCOUNT_NAME];
                                                                                        [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:USERDEFAULT_AUTO_LOGIN_ACCOUNT_IS_SINA];
                                                                                        
