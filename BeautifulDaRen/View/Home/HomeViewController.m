@@ -101,28 +101,40 @@
     {
         __block NSString * userName = [[NSUserDefaults standardUserDefaults] objectForKey:USERDEFAULT_AUTO_LOGIN_ACCOUNT_NAME];
         __block NSString * userPwd = [[NSUserDefaults standardUserDefaults] objectForKey:USERDEFAULT_AUTO_LOGIN_ACCOUNT_PASSWORD];
-        if (userName && userPwd)
+        if (userName)
         {
+            processDoneWithDictBlock doneCallBack = ^(AIO_STATUS status, NSDictionary *data){
+                [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_HIDEWAITOVERLAY object:self];
+                if(AIO_STATUS_SUCCESS == status && K_BSDK_IS_RESPONSE_OK(data))
+                {
+                    NSDictionary * dict = [data objectForKey:K_BSDK_USERINFO];
+                    [[NSUserDefaults standardUserDefaults] setObject:dict forKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
+                    [self.navigationController popToRootViewControllerAnimated:YES];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_LOGIN_SUCCESS object:self userInfo:data];
+                }
+                else
+                {
+                    [[iToast makeText:[NSString stringWithFormat:@"%@", K_BSDK_GET_RESPONSE_MESSAGE(data)]] show];
+                }
+                
+                [self refreshAdsView];            
+            };
+            
             [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_SHOWWAITOVERLAY object:self];
-            [[BSDKManager sharedManager] loginWithUsername:userName
-                                                  password:userPwd
-                                           andDoneCallback:^(AIO_STATUS status, NSDictionary *data)
-             {
-                 [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_HIDEWAITOVERLAY object:self];
-                 if(AIO_STATUS_SUCCESS == status && K_BSDK_IS_RESPONSE_OK(data))
-                 {
-                     NSDictionary * dict = [data objectForKey:K_BSDK_USERINFO];
-                     [[NSUserDefaults standardUserDefaults] setObject:dict forKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
-                     [self.navigationController popToRootViewControllerAnimated:YES];
-                     [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_LOGIN_SUCCESS object:self userInfo:data];
-                 }
-                 else
-                 {
-                     [[iToast makeText:[NSString stringWithFormat:@"%@", K_BSDK_GET_RESPONSE_MESSAGE(data)]] show];
-                 }
-                 
-                 [self refreshAdsView];
-             }];
+            
+            NSString * isSinaAccount = [[NSUserDefaults standardUserDefaults] objectForKey:USERDEFAULT_AUTO_LOGIN_ACCOUNT_IS_SINA];
+            
+            if ([isSinaAccount isEqual:@"0"]) {
+                [[BSDKManager sharedManager] loginWithUsername:userName
+                                                      password:userPwd
+                                               andDoneCallback:doneCallBack];
+            }
+            else
+            {
+                NSDictionary * accountInfo = [[NSUserDefaults standardUserDefaults] objectForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
+                [[BSDKManager sharedManager] loginSinaUserId:[[NSUserDefaults standardUserDefaults] objectForKey:USERDEFAULT_SINA_USER_UID] userName:userName sex:[accountInfo objectForKey:K_BSDK_GENDER] city:[accountInfo objectForKey:K_BSDK_CITY] email:nil andCallBack:doneCallBack];
+            }
+
         }
     }
     // refresh view data when not auto signin.
