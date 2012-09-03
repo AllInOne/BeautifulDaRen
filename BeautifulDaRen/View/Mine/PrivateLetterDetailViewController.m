@@ -12,9 +12,18 @@
 
 #define BUBBLE_VIEW_MARGIN  (10.0)
 
+@interface PrivateLetterDetailViewController ()
+
+@property (nonatomic, assign) BOOL  isKeypadShow;
+
+@end
+
 @implementation PrivateLetterDetailViewController
 
 @synthesize contentScrollView = _contentScrollView;
+@synthesize footerView = _footerView;
+@synthesize privateLetterComposerView = _privateLetterComposerView;
+@synthesize isKeypadShow = _isKeypadShow;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -86,6 +95,15 @@
     [self.contentScrollView addSubview:bubble4];
     
     [self.contentScrollView setContentSize:CGSizeMake(SCREEN_WIDTH, scrollViewHeight + 100)];
+
+    UIImageView * toolbarBg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"toolbar_background"]];
+    toolbarBg.contentMode = UIViewContentModeScaleToFill;
+    [self.footerView  insertSubview:toolbarBg atIndex:0];
+    
+    [self.privateLetterComposerView setDelegate:self];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)viewDidUnload
@@ -95,6 +113,8 @@
     // e.g. self.myOutlet = nil;
     
     self.contentScrollView = nil;
+    self.footerView = nil;
+    self.privateLetterComposerView = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -103,4 +123,55 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (void)keyboardWillShow:(NSNotification *)note 
+{
+    if (!self.isKeypadShow)
+    {
+        NSDictionary *info = [note userInfo];
+        
+        CGSize kbSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+        double animDuration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+        
+        [UIView animateWithDuration:animDuration animations:^
+         {
+             NSLog(@"%@", self.contentScrollView);
+             self.contentScrollView.frame = CGRectMake(self.contentScrollView.frame.origin.x,
+                                               self.contentScrollView.frame.origin.y,
+                                               self.contentScrollView.frame.size.width,
+                                               self.contentScrollView.frame.size.height - kbSize.height);
+             
+             self.footerView.center = CGPointMake(self.footerView.center.x,
+                                                  self.footerView.center.y - kbSize.height);
+         }];
+        
+        self.contentScrollView.contentSize = CGSizeMake(self.contentScrollView.contentSize.width, self.contentScrollView.contentSize.height - kbSize.height);
+        self.isKeypadShow = YES;
+    }
+    
+}
+
+- (void)keyboardWillHide:(NSNotification *)note
+{
+    if (self.isKeypadShow)
+    {
+        NSDictionary *info = [note userInfo];
+        
+        CGSize kbSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+        double animDuration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+        
+        [UIView animateWithDuration:animDuration animations:^
+         {
+             self.contentScrollView.frame = CGRectMake(self.contentScrollView.frame.origin.x,
+                                                       self.contentScrollView.frame.origin.y,
+                                                       self.contentScrollView.frame.size.width,
+                                                       self.contentScrollView.frame.size.height + kbSize.height);
+             
+             self.footerView.center = CGPointMake(self.footerView.center.x,
+                                                  self.footerView.center.y + kbSize.height);
+         }];
+        
+        self.contentScrollView.contentSize = CGSizeMake(self.contentScrollView.contentSize.width, self.contentScrollView.contentSize.height + kbSize.height);
+        self.isKeypadShow = NO;    
+    }
+}
 @end

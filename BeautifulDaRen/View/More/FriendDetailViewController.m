@@ -117,8 +117,11 @@ typedef enum
         atButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar_at_him" target:self action:@selector(onAt)];    
     }
     
+    UIBarButtonItem *privateLetterButtonItem = [ViewHelper getToolBarItemOfImageName:@"private_letter_icon" target:self action:@selector(onPrivateLetter)];
+    
     if (![[BSDKManager sharedManager] isLogin]) {
         [atButtonItem setEnabled:NO];
+        [privateLetterButtonItem setEnabled:NO];
     }
     
     UIBarButtonItem *removeButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar_remove_fan_icon" target:self action:@selector(onRemove)];
@@ -127,12 +130,12 @@ typedef enum
         [removeButtonItem setEnabled:NO];
     }
     
-    NSArray *barItems = [[NSArray alloc]initWithObjects:flexible, 
-                         atButtonItem, 
+    NSArray *barItems = [[NSArray alloc]initWithObjects:
+                         privateLetterButtonItem,
                          flexible,
+                         atButtonItem,
                          flexible,
                          removeButtonItem,
-                         flexible,
                          nil];
     
     _toolbar.items= barItems;
@@ -590,6 +593,13 @@ typedef enum
     
     [actionSheet showInView:sender.superview.superview];
     [actionSheet release];
+}
+
+- (void)onPrivateLetter
+{
+
+
+
 }
 
 - (void)onAt
