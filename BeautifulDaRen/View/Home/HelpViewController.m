@@ -16,6 +16,7 @@
 @end
 
 @implementation HelpViewController
+@synthesize textView = _textView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

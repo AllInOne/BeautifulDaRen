@@ -14,6 +14,7 @@
 @end
 
 @implementation AgreementViewController
+@synthesize textView = _textView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
