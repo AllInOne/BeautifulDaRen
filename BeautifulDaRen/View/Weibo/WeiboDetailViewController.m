@@ -20,6 +20,7 @@
 #import "BSDKManager.h"
 #import "UIImageView+WebCache.h"
 #import "FriendListViewController.h"
+#import "SinaSDKManager.h"
 
 #define FONT_SIZE 14.0f
 #define CELL_CONTENT_WIDTH 280.0f
@@ -41,6 +42,8 @@
 @property (nonatomic, retain) MapViewController * mapViewController;
 @property (nonatomic, retain) NSString * weiboContent;
 @property (nonatomic, retain) UIToolbar * toolbar;
+@property (nonatomic, retain) UIImage * attachedImage;
+
 @property (nonatomic, assign) BOOL isDoingFav;
 @property (nonatomic, assign) BOOL isAttachedImageDone;
 @property (nonatomic, assign) BOOL isAttachedImageSucceed;
@@ -75,6 +78,7 @@
 @synthesize isDoingFav = _isDoingFav;
 @synthesize isAttachedImageDone = _isAttachedImageDone;
 @synthesize isAttachedImageSucceed = _isAttachedImageSucceed;
+@synthesize attachedImage = _attachedImage;
 
 - (void)dealloc
 {
@@ -98,6 +102,7 @@
     [_usernameLabel release];
     [_weiboId release];
     [_vMarkImageView release];
+    [_attachedImage release];
     
     [super dealloc];
 }
@@ -209,6 +214,13 @@
         [[BSDKManager sharedManager] rePostWeiboById:[self.weiboData objectForKey:K_BSDK_UID] WithText:view.weiboContentTextView.text andDoneCallback:doneBlock];
         
         doneCountExpected++;
+        
+        if (![view.sinaShareImageView isHidden]) {
+            NSString * syncContent = [NSString stringWithFormat:@"商场: @%@ 品牌: @%@ 标价: ¥%@ %@ <%@>", [self.weiboData objectForKey: K_BSDK_SHOPMERCHANT], [self.weiboData objectForKey: K_BSDK_BRANDSERVICE], [self.weiboData objectForKey: K_BSDK_PRICE], view.weiboContentTextView.text,[self.weiboData objectForKey: K_BSDK_CONTENT]];
+            [[SinaSDKManager sharedManager] sendWeiBoWithText:syncContent image:self.attachedImage doneCallback:^(AIO_STATUS status, NSDictionary *data) {
+                
+            }];
+        }
     };
     
     if (!view.forwardMode || (view.forwardMode && view.isCheckBoxChecked)) {
@@ -340,6 +352,7 @@
     self.brandLable = nil;
     self.usernameLabel = nil;
     self.vMarkImageView = nil;
+    self.attachedImage = nil;
     
     [self.toolbar removeFromSuperview];
     self.toolbar = nil;
@@ -435,6 +448,7 @@
         [self.weiboAttachedImageView setImageWithURL:[NSURL URLWithString:[self.weiboData objectForKey:K_BSDK_PICTURE_320]] placeholderImage:placeholderImageView.image success:^(UIImage *image) {
             self.isAttachedImageDone = YES;
             self.isAttachedImageSucceed = YES;
+            self.attachedImage = image;
             if ([[UIApplication sharedApplication] isNetworkActivityIndicatorVisible]) {
                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
             }

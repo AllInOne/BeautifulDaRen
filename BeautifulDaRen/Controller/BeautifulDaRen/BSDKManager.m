@@ -976,6 +976,24 @@ static BSDKManager *sharedInstance;
                   email:(NSString *)email
             andCallBack:(processDoneWithDictBlock)callback
 {
+    NSLog(@"##############%@", city);
+    if (self.isLogin) {
+        NSDictionary * data = [NSDictionary dictionaryWithObjectsAndKeys:@"已经登陆！",K_BSDK_RESPONSE_MESSAGE, nil];
+        callback(AIO_STATUS_BAD_STATE, data);
+        
+        return;
+    }
+    
+    processDoneWithDictBlock loginCallbackShim = ^(AIO_STATUS status, NSDictionary * data)
+    {
+        if ((status == AIO_STATUS_SUCCESS) && K_BSDK_IS_RESPONSE_OK(data))
+        {
+            self.isAlreadyLogin = YES;
+        }
+        
+        callback(status, data);
+    };
+    
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:7];
     
     [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
@@ -992,7 +1010,7 @@ static BSDKManager *sharedInstance;
                              params:params 
                        postDataType:kBSDKRequestPostDataTypeNormal
                    httpHeaderFields:nil
-                       doneCallback:callback];
+                       doneCallback:loginCallbackShim];
 
 }
 

@@ -12,6 +12,7 @@
 #import "BSDKManager.h"
 #import "BSDKDefines.h"
 #import "ViewConstants.h"
+#import "SinaSDKManager.h"
 
 #define WEIBO_CONTENT_TEXTVIEW_Y_OFFSET (90.0)
 #define WEIBO_CONTENT_TEXTVIEW_MARGIN   (2.0)
@@ -32,6 +33,10 @@
 @synthesize isCheckBoxChecked = _isCheckBoxChecked;
 @synthesize atButton = _atButton;
 @synthesize delegate = _delegate;
+
+@synthesize sinaButton = _sinaButton;
+@synthesize sinaShareImageView = _sinaShareImageView;
+@synthesize sinaSepImageView = _sinaSepImageView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -89,6 +94,24 @@
     [_weiboContentTextView becomeFirstResponder];
     
     [_weiboContentTextView setDelegate:self];
+    
+    if (self.forwardMode) {
+        if ([[SinaSDKManager sharedManager] isLogin])
+        {
+            [self.sinaButton setImage:[UIImage imageNamed:@"myshow_sina_color"] forState:UIControlStateNormal];
+        }
+        else
+        {
+            [self.sinaButton setImage:[UIImage imageNamed:@"myshow_sina_gray"] forState:UIControlStateNormal];
+            [self.sinaShareImageView setHidden:YES];
+        }
+    }
+    else
+    {
+        [self.sinaButton setHidden:YES];
+        [self.sinaSepImageView setHidden:YES];
+        [self.sinaShareImageView setHidden:YES];
+    }
 }
 
 - (void)viewDidUnload
@@ -99,6 +122,9 @@
     [self setCheckBoxText:nil];
     [self setCheckBoxButton:nil];
     [self setAtButton:nil];
+    [self setSinaButton:nil];
+    [self setSinaShareImageView:nil];
+    [self setSinaSepImageView:nil];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
@@ -110,6 +136,9 @@
     [_checkBoxText release];
     [_checkBoxButton release];
     [_atButton release];
+    [_sinaShareImageView release];
+    [_sinaButton release];
+    [_sinaSepImageView release];
     [super dealloc];
 }
 
@@ -186,6 +215,23 @@
     [alert release];
     
     return;
+}
+
+- (IBAction)onSinaPressed:(id)sender
+{
+    if (![[SinaSDKManager sharedManager] isLogin])
+    {
+        [[SinaSDKManager sharedManager] setRootviewController:self.navigationController];
+        [[SinaSDKManager sharedManager] loginWithDoneCallback:^(LOGIN_STATUS status) {
+            NSLog(@"Sina SDK login done, status:%d", status);
+            [self.sinaButton setImage:[UIImage imageNamed:@"myshow_sina_color"] forState:UIControlStateNormal];
+            [self.sinaShareImageView setHidden:NO];
+        }];   
+    }
+    else
+    {
+        [self.sinaShareImageView setHidden:(self.sinaShareImageView.hidden ? NO : YES)];
+    }
 }
 
 - (void)onSendButtonClicked {

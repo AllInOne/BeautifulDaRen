@@ -2,10 +2,10 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1280</int>
-		<string key="IBDocument.SystemVersion">11A511a</string>
+		<string key="IBDocument.SystemVersion">11E53</string>
 		<string key="IBDocument.InterfaceBuilderVersion">1938</string>
-		<string key="IBDocument.AppKitVersion">1138</string>
-		<string key="IBDocument.HIToolboxVersion">566.00</string>
+		<string key="IBDocument.AppKitVersion">1138.47</string>
+		<string key="IBDocument.HIToolboxVersion">569.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			<string key="NS.object.0">933</string>
@@ -13,6 +13,7 @@
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBUITextView</string>
 			<string>IBUIButton</string>
+			<string>IBUIImageView</string>
 			<string>IBUIView</string>
 			<string>IBUILabel</string>
 			<string>IBProxyObject</string>
@@ -110,12 +111,68 @@
 									<int key="NSfFlags">16</int>
 								</object>
 							</object>
+							<object class="IBUIButton" id="141373487">
+								<reference key="NSNextResponder" ref="637981467"/>
+								<int key="NSvFlags">292</int>
+								<string key="NSFrame">{{276, 4}, {37, 32}}</string>
+								<reference key="NSSuperview" ref="637981467"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="563468695"/>
+								<string key="NSReuseIdentifierKey">_NS:225</string>
+								<bool key="IBUIOpaque">NO</bool>
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+								<int key="IBUIContentHorizontalAlignment">0</int>
+								<int key="IBUIContentVerticalAlignment">0</int>
+								<reference key="IBUIHighlightedTitleColor" ref="754668331"/>
+								<object class="NSColor" key="IBUINormalTitleColor">
+									<int key="NSColorSpace">1</int>
+									<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
+								</object>
+								<reference key="IBUINormalTitleShadowColor" ref="697516286"/>
+								<object class="NSCustomResource" key="IBUINormalImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">myshow_sina_color.png</string>
+								</object>
+								<reference key="IBUIFontDescription" ref="836971484"/>
+								<reference key="IBUIFont" ref="922964485"/>
+							</object>
+							<object class="IBUIImageView" id="563468695">
+								<reference key="NSNextResponder" ref="637981467"/>
+								<int key="NSvFlags">292</int>
+								<string key="NSFrame">{{298, 8}, {10, 13}}</string>
+								<reference key="NSSuperview" ref="637981467"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
+								<string key="NSReuseIdentifierKey">_NS:567</string>
+								<bool key="IBUIUserInteractionEnabled">NO</bool>
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+								<object class="NSCustomResource" key="IBUIImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">myshow_share_btn.png</string>
+								</object>
+							</object>
+							<object class="IBUIImageView" id="161652554">
+								<reference key="NSNextResponder" ref="637981467"/>
+								<int key="NSvFlags">292</int>
+								<string key="NSFrame">{{266, 0}, {2, 40}}</string>
+								<reference key="NSSuperview" ref="637981467"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="141373487"/>
+								<string key="NSReuseIdentifierKey">_NS:567</string>
+								<bool key="IBUIUserInteractionEnabled">NO</bool>
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+								<object class="NSCustomResource" key="IBUIImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">myshow_margin.png</string>
+								</object>
+							</object>
 							<object class="IBUIButton" id="749710861">
 								<reference key="NSNextResponder" ref="637981467"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{249, 5}, {30, 30}}</string>
+								<string key="NSFrame">{{217, 5}, {30, 30}}</string>
 								<reference key="NSSuperview" ref="637981467"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="161652554"/>
 								<string key="NSReuseIdentifierKey">_NS:225</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -238,6 +295,30 @@
 					<int key="connectionID">16</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">sinaButton</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="141373487"/>
+					</object>
+					<int key="connectionID">20</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">sinaShareImageView</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="563468695"/>
+					</object>
+					<int key="connectionID">21</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">sinaSepImageView</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="161652554"/>
+					</object>
+					<int key="connectionID">23</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">onCheckBoxPressed:</string>
 						<reference key="source" ref="904975175"/>
@@ -254,6 +335,15 @@
 						<int key="IBEventType">7</int>
 					</object>
 					<int key="connectionID">13</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">onSinaPressed:</string>
+						<reference key="source" ref="141373487"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">22</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -296,6 +386,9 @@
 							<reference ref="904975175"/>
 							<reference ref="105838315"/>
 							<reference ref="749710861"/>
+							<reference ref="141373487"/>
+							<reference ref="563468695"/>
+							<reference ref="161652554"/>
 						</array>
 						<reference key="parent" ref="191373211"/>
 					</object>
@@ -314,6 +407,21 @@
 						<reference key="object" ref="749710861"/>
 						<reference key="parent" ref="637981467"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">18</int>
+						<reference key="object" ref="141373487"/>
+						<reference key="parent" ref="637981467"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">19</int>
+						<reference key="object" ref="563468695"/>
+						<reference key="parent" ref="637981467"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">17</int>
+						<reference key="object" ref="161652554"/>
+						<reference key="parent" ref="637981467"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -324,6 +432,10 @@
 				<string key="1.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="10.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="11.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="17.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="18.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<real value="0.0" key="18.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
+				<string key="19.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="3.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="4.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="5.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -332,7 +444,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">16</int>
+			<int key="maxID">23</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -344,6 +456,7 @@
 						<string key="onCheckBoxPressed:">id</string>
 						<string key="onForward2SinaPressed:">id</string>
 						<string key="onForward2TencentPressed:">id</string>
+						<string key="onSinaPressed:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="onAtFriendPressed:">
@@ -362,14 +475,26 @@
 							<string key="name">onForward2TencentPressed:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="onSinaPressed:">
+							<string key="name">onSinaPressed:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="atButton">UIButton</string>
 						<string key="checkBoxButton">UIButton</string>
 						<string key="checkBoxText">UILabel</string>
 						<string key="footerView">UIView</string>
+						<string key="sinaButton">UIButton</string>
+						<string key="sinaSepImageView">UIImageView</string>
+						<string key="sinaShareImageView">UIImageView</string>
 						<string key="weiboContentTextView">UITextView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="atButton">
+							<string key="name">atButton</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="checkBoxButton">
 							<string key="name">checkBoxButton</string>
 							<string key="candidateClassName">UIButton</string>
@@ -381,6 +506,18 @@
 						<object class="IBToOneOutletInfo" key="footerView">
 							<string key="name">footerView</string>
 							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="sinaButton">
+							<string key="name">sinaButton</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="sinaSepImageView">
+							<string key="name">sinaSepImageView</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="sinaShareImageView">
+							<string key="name">sinaShareImageView</string>
+							<string key="candidateClassName">UIImageView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="weiboContentTextView">
 							<string key="name">weiboContentTextView</string>
@@ -401,6 +538,9 @@
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="comment_forward_unchecked.png">{20, 20}</string>
 			<string key="myshow_at.png">{20, 20}</string>
+			<string key="myshow_margin.png">{2, 46}</string>
+			<string key="myshow_share_btn.png">{8, 8}</string>
+			<string key="myshow_sina_color.png">{20, 20}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">933</string>
 	</data>
