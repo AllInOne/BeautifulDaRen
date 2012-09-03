@@ -11,7 +11,7 @@
 #import "BSDKWeiboRequest.h"
 #import "BSDKEngine.h"
 #import "BSDKDefines.h"
-
+#import "ViewConstants.h"
 
 static BSDKManager *sharedInstance;
 
@@ -1013,12 +1013,25 @@ static BSDKManager *sharedInstance;
 
 }
 
-- (void)addNoteToUserId:(NSString *)userId
+- (void)addNoteToUserId:(NSString *)noteUserId
                noteName:(NSString *)noteName
             andCallBack:(processDoneWithDictBlock)callback
 {
-
-
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
+    
+    [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
+    [params setObject:K_BSDK_ACTION_ADDNOTENAME forKey:K_BSDK_ACTION];
+    NSDictionary * userDict = [[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
+    [params setObject:[userDict valueForKey:K_BSDK_UID] forKey:K_BSDK_USERID];
+    [params setObject:noteUserId forKey:K_BSDK_NOTE_USER_ID];
+    [params setObject:noteName forKey:K_BSDK_NOTE_NAME];
+    
+    [self sendRequestWithMethodName:nil
+                         httpMethod:@"POST"
+                             params:params
+                       postDataType:kBSDKRequestPostDataTypeNormal
+                   httpHeaderFields:nil
+                       doneCallback:callback];
 }
 
 @end

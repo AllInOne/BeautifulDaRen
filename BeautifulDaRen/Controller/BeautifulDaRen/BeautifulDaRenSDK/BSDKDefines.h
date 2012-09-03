@@ -163,6 +163,7 @@
 
 #define K_BSDK_NOTE_USER_ID @"NoteUserId"
 #define K_BSDK_NOTE_NAME    @"NoteName"
+#define K_BSDK_USER_NOTE_NAME @"UserNoteName"
 
 #define K_BSDK_CLASSLIST @"ClassList"
 #define K_BSDK_CLASSID @"ClassId"

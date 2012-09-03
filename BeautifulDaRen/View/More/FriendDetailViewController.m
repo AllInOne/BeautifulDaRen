@@ -23,7 +23,7 @@
 
 typedef enum
 {
-//    SECTION_NOTE,
+    SECTION_NOTE,
     SECTION_VERIFY,
     // key brief is the last section.
     SECTION_BRIEF,
@@ -395,12 +395,13 @@ typedef enum
         if(_isIdentification)
         {
             switch ([indexPath row]) {
-//                case SECTION_NOTE:
-//                {
-//                    buttonViewCell.leftLabel.text = NSLocalizedString(@"notes", @"notes");
-//                    buttonViewCell.buttonText.text = NSLocalizedString(@"set_notes", @"set_notes");
-//                    break;
-//                }
+                case SECTION_NOTE:
+                {
+                    buttonViewCell.leftLabel.text = NSLocalizedString(@"notes", @"notes");
+                    NSString * note = [self.friendDictionary valueForKey:K_BSDK_USER_NOTE_NAME];
+                    buttonViewCell.buttonText.text = ([note length] > 0) ? note : NSLocalizedString(@"set_notes", @"set_notes");
+                    break;
+                }
                 case SECTION_VERIFY:
                 {
                     buttonViewCell.leftLabel.text = NSLocalizedString(@"authentication", @"authentication");
@@ -502,7 +503,29 @@ typedef enum
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // TODO
+    switch ([indexPath row]) {
+        case SECTION_NOTE:
+        {
+            EdittingViewController * edittingViewController = [[EdittingViewController alloc] initWithNibName:@"EdittingViewController" bundle:nil type:EdittingViewController_type0 block:^(NSString *text) {
+                if (![text isEqualToString:[self.friendDictionary valueForKey:K_BSDK_USER_NOTE_NAME]]) {
+                    [[BSDKManager sharedManager] addNoteToUserId:[self.friendDictionary valueForKey:K_BSDK_UID] noteName:text andCallBack:^(AIO_STATUS status, NSDictionary *data) {
+                        if(AIO_STATUS_SUCCESS == status && K_BSDK_IS_RESPONSE_OK(data))
+                        {
+                            [self.friendDictionary setValue:text forKey:K_BSDK_USER_NOTE_NAME];
+                            [self.friendDetailView reloadData];
+                        }
+                        else{
+                            [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
+                        }
+                    }];
+                }
+            }];
+            edittingViewController.placeholderString = [self.friendDictionary valueForKey:K_BSDK_USER_NOTE_NAME];
+            [self.navigationController pushViewController:edittingViewController animated:YES];
+            [edittingViewController release];
+        }
+            break;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
