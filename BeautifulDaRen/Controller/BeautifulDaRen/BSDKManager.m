@@ -600,6 +600,23 @@ static BSDKManager *sharedInstance;
     
 }
 
+- (void)deleteWeibo:(NSString *)weiboId
+    andDoneCallback:(processDoneWithDictBlock)callback
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
+    
+    [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
+    [params setObject:K_BSDK_ACTION_DELETE forKey:K_BSDK_ACTION];
+    
+    [params setObject:weiboId forKey:K_BSDK_BLOGUID];
+    
+    [self sendRequestWithMethodName:nil
+                         httpMethod:@"POST"
+                             params:params
+                       postDataType:kBSDKRequestPostDataTypeNormal
+                   httpHeaderFields:nil
+                       doneCallback:callback];
+}
 
 #pragma mark User related methods
 - (void)followUser:(NSInteger)userId

@@ -129,6 +129,9 @@
 - (void)getWeiboById:(NSString*)classId
      andDoneCallback:(processDoneWithDictBlock)callback;
 
+- (void)deleteWeibo:(NSString *)weiboId
+    andDoneCallback:(processDoneWithDictBlock)callback;
+
 #pragma mark Social related API
 - (void)followUser:(NSInteger)userId
    andDoneCallback:(processDoneWithDictBlock)callback;

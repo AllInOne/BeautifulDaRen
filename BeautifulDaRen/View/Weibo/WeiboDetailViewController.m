@@ -273,6 +273,20 @@
     }
 }
 
+- (void)onDeleteWeibo
+{
+    [[BSDKManager sharedManager] deleteWeibo:[self.weiboData objectForKey:K_BSDK_UID] andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+        if (K_BSDK_IS_RESPONSE_OK(data)) {
+            [[iToast makeText:@"删除成功"] show];
+            [self onBackButtonClicked];
+        }
+        else
+        {
+            [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
+        }
+    }];
+}
+
 - (void)onRefresh
 {
     [self onRefreshButtonClicked];
@@ -403,21 +417,46 @@
     {
         favourateButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar_favourate_icon" target:self action:@selector(onFavourate)];
     }
+    
+    NSDictionary * userDict = [[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
+    UIBarButtonItem *deleteButtonItem = nil;
+    if ([[self.weiboData objectForKey:K_BSDK_USERID] isEqual:[userDict valueForKey:K_BSDK_UID]]) {
+        deleteButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar_remove_fan_icon" target:self action:@selector(onDeleteWeibo)];
+    }
 
     if ( ![[BSDKManager sharedManager] isLogin]) {
         [favourateButtonItem setEnabled:NO];
     }
     
-    NSArray *barItems = [[NSArray alloc]initWithObjects:flexible, 
-                         refreshButtonItem, 
-                         flexible,
-                         forwardButtonItem,
-                         flexible,
-                         commentButtonItem, 
-                         flexible, 
-                         favourateButtonItem,
-                         flexible,
-                         nil];
+    NSArray *barItems = nil;
+    if([[self.weiboData objectForKey:K_BSDK_USERID] isEqual:[userDict valueForKey:K_BSDK_UID]])
+    {
+        barItems = [[NSArray alloc]initWithObjects:flexible,
+                    refreshButtonItem,
+                    flexible,
+                    forwardButtonItem,
+                    flexible,
+                    commentButtonItem,
+                    flexible,
+                    favourateButtonItem,
+                    flexible,
+                    deleteButtonItem,
+                    flexible,
+                    nil];
+    }
+    else{
+        
+        barItems = [[NSArray alloc]initWithObjects:flexible,
+                    refreshButtonItem,
+                    flexible,
+                    forwardButtonItem,
+                    flexible,
+                    commentButtonItem,
+                    flexible,
+                    favourateButtonItem,
+                    flexible,
+                    nil];
+    }
     
     _toolbar.items= barItems;
     UIImageView * tabBarBg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"toolbar_background"]];
