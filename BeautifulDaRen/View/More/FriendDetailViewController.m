@@ -620,7 +620,9 @@ typedef enum
 
 - (void)onPrivateLetter
 {
-
+    [[BSDKManager sharedManager] sendPrivateMsgToUser:[self.friendDictionary objectForKey:K_BSDK_UID] content:@"test private message" andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+        NSLog(@"########%@", data);
+    }];
 
 
 }

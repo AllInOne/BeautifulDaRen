@@ -58,6 +58,10 @@
 #define K_BSDK_ACTION_SINAUSERLOGIN @"sinaUserLogin"
 #define K_BSDK_ACTION_ADDNOTENAME @"addNoteName"
 
+#define K_BSDK_ACTION_GETPRIVATEMSGLIST @"GetPrivateMsgList"
+#define K_BSDK_ACTION_GETPRIVATEUSERLIST @"GetPrivateUserList"
+#define K_BSDK_ACTION_SENDPRIVATEMSG @"SendPrivateMsg"
+
 #define K_BSDK_PAGEINDEX @"Page"
 #define K_BSDK_PAGESIZE @"PageSize"
 
@@ -129,6 +133,8 @@
 #define K_BSDK_USERID @"UserId"
 #define K_BSDK_USERINFO @"UserInfo"
 
+#define K_BSDK_RECEIVEUSERID @"ReceiveUserId"
+
 #define K_BSDK_FORWARDBLOGUID @"ForwardBlogId"
 #define K_BSDK_FAVBLOGUID @"FavBlogId"
 #define K_BSDK_BLOGUID @"BlogId"
@@ -136,6 +142,9 @@
 #define K_BSDK_BLOGLIST @"BlogList"
 #define K_BSDK_BLOGINFO @"BlogInfo"
 #define K_BSDK_SHOWFORWARD  @"ShowForward"
+
+#define K_BSDK_MSGTYPE @"MsgType"
+#define K_BSDK_USERTYPE @"UserType"
 
 #define K_BSDK_PICTURE_ORIGINAL @"Picture"
 #define K_BSDK_PICTURE_102 @"pic_102"
@@ -210,5 +219,19 @@
 #define K_BSDK_ADSTYPE_LOGOUT   1
 #define K_BSDK_ADSTYPE_LOGIN    2
 #define K_BSDK_ADSTYPE_HOT      3
+
+typedef enum
+{
+    K_BSDK_PRIVATEMSG_USER_TYPE_MY_SENT = 1,
+    K_BSDK_PRIVATEMSG_USER_TYPE_MY_RECEIVED,
+    K_BSDK_PRIVATEMSG_USER_TYPE_ALL
+}K_BSDK_PRIVATEMSG_USER_TYPE;
+
+typedef enum
+{
+    K_BSDK_PRIVATEMSG_MSG_TYPE_MY_SENT = 1,
+    K_BSDK_PRIVATEMSG_MSG_TYPE_MY_RECEIVED,
+    K_BSDK_PRIVATEMSG_MSG_TYPE_ALL
+}K_BSDK_PRIVATEMSG_MSG_TYPE;
 
 #endif
