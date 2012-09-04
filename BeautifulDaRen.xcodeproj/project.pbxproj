@@ -301,6 +301,7 @@
 		CE74544E153F1D3D00CB751A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE74544F153F1D3D00CB751A /* Localizable.strings */; };
 		CE74545A153F22F700CB751A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE745459153F22F700CB751A /* QuartzCore.framework */; };
 		CE81A7D915F0A5CE00D3702A /* SinaCityCode.m in Sources */ = {isa = PBXBuildFile; fileRef = CE81A7D815F0A5CE00D3702A /* SinaCityCode.m */; };
+		CE81A86C15F6533400D3702A /* PrivateLetterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE81A86B15F6533400D3702A /* PrivateLetterViewController.xib */; };
 		CE83A1B8154C29EC005187F7 /* WeiboDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE83A1B6154C29EC005187F7 /* WeiboDetailViewController.m */; };
 		CE83A1B9154C29EC005187F7 /* WeiboDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE83A1B7154C29EC005187F7 /* WeiboDetailViewController.xib */; };
 		CE83A1BD154C2A26005187F7 /* WeiboComposerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE83A1BB154C2A26005187F7 /* WeiboComposerViewController.m */; };
@@ -623,7 +624,6 @@
 		C2139A691564087600C3922D /* PrivateLetterViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivateLetterViewCell.m; sourceTree = "<group>"; };
 		C2139A7215640E2900C3922D /* PrivateLetterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivateLetterViewController.h; sourceTree = "<group>"; };
 		C2139A7315640E2900C3922D /* PrivateLetterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivateLetterViewController.m; sourceTree = "<group>"; };
-		C2139A7415640E2900C3922D /* PrivateLetterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrivateLetterViewController.xib; sourceTree = "<group>"; };
 		C213AB9E155C1CD800667556 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		C21526AD1577842200F044B5 /* GridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridViewCell.h; sourceTree = "<group>"; };
 		C21526AE1577842200F044B5 /* GridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridViewCell.m; sourceTree = "<group>"; };
@@ -1007,6 +1007,7 @@
 		CE7C9D1715400ED000F3812F /* ViewConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewConstants.h; sourceTree = "<group>"; };
 		CE81A7D715F0A5CE00D3702A /* SinaCityCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinaCityCode.h; sourceTree = "<group>"; };
 		CE81A7D815F0A5CE00D3702A /* SinaCityCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinaCityCode.m; sourceTree = "<group>"; };
+		CE81A86B15F6533400D3702A /* PrivateLetterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrivateLetterViewController.xib; sourceTree = "<group>"; };
 		CE83A1B5154C29EC005187F7 /* WeiboDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboDetailViewController.h; sourceTree = "<group>"; };
 		CE83A1B6154C29EC005187F7 /* WeiboDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboDetailViewController.m; sourceTree = "<group>"; };
 		CE83A1B7154C29EC005187F7 /* WeiboDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeiboDetailViewController.xib; sourceTree = "<group>"; };
@@ -2069,7 +2070,6 @@
 				C24B1007155BDB1100918530 /* MineEditingViewController.xib */,
 				C2139A7215640E2900C3922D /* PrivateLetterViewController.h */,
 				C2139A7315640E2900C3922D /* PrivateLetterViewController.m */,
-				C2139A7415640E2900C3922D /* PrivateLetterViewController.xib */,
 				C2118B7215692D56006F4551 /* WeiboListViewController.h */,
 				C2118B7315692D56006F4551 /* WeiboListViewController.m */,
 				C2118B7415692D56006F4551 /* WeiboListViewController.xib */,
@@ -2085,6 +2085,7 @@
 				CE3CE34015E525DA00AC6608 /* PrivateLetterDetailViewController.h */,
 				CE3CE34115E525DA00AC6608 /* PrivateLetterDetailViewController.m */,
 				CE3CE34215E525DA00AC6608 /* PrivateLetterDetailViewController.xib */,
+				CE81A86B15F6533400D3702A /* PrivateLetterViewController.xib */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -3039,6 +3040,7 @@
 				CE2322AB15BE95350079930B /* price_bg.png in Resources */,
 				CE3CE34415E525DB00AC6608 /* PrivateLetterDetailViewController.xib in Resources */,
 				C233487615EB06950000CCED /* AgreementViewController.xib in Resources */,
+				CE81A86C15F6533400D3702A /* PrivateLetterViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

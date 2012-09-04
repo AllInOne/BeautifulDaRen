@@ -12,6 +12,7 @@
 #import "ViewConstants.h"
 #import "PrivateLetterDetailViewController.h"
 #import "BSDKManager.h"
+#import "UIImageView+WebCache.h"
 
 @interface PrivateLetterViewController()
 
@@ -23,10 +24,15 @@
 @synthesize relatedUsers = _relatedUsers;
 @synthesize privateLetterTableView = _privateLetterTableView;
 
-- (id)initWithStyle:(UITableViewStyle)style
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithStyle:style];
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
+        
+        [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClicked) title:NSLocalizedString(@"refresh", @"refresh")]];       
+        self.navigationItem.title = NSLocalizedString(@"private_letter", @"private_letter");
+        [self.view setHidden:NO];
     }
     return self;
 }
@@ -59,27 +65,44 @@
 {
     [super viewDidLoad];
     
-    [_privateLetterTableView setHidden:YES];
+    [_privateLetterTableView setDelegate:self];
+    [_privateLetterTableView setDataSource:self];
     
-    [self.navigationItem setTitle:NSLocalizedString(@"private_letter", @"private_letter")];
-    [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
-    [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClicked) title:NSLocalizedString(@"refresh", @"refresh")]];
+    if (self.relatedUsers == nil) {
+        self.relatedUsers = [NSMutableArray arrayWithCapacity:20]; 
+        UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        
+        activityIndicator.center = CGPointMake(SCREEN_WIDTH/2, ADS_CELL_HEIGHT/2);
+        [activityIndicator startAnimating];
+        
+        [self.view addSubview:activityIndicator];
+        
+        [[BSDKManager sharedManager] getPrivateMsgUserListByType:1
+                                                        pageSize:20
+                                                       pageIndex:1 andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+                                                           [_relatedUsers addObjectsFromArray:[data objectForKey:K_BSDK_USERLIST]];                                                       
+                                                           //                                                       [_privateLetterTableView setHidden:NO];
+                                                           
+                                                           [activityIndicator stopAnimating];
+                                                           [activityIndicator removeFromSuperview];
+                                                           [activityIndicator release];
+                                                           
+                                                           [_privateLetterTableView reloadData];
+                                                           
+                                                           NSLog(@"%@", _relatedUsers);
+                                                           
+                                                       }];
+    }
+    else
+    {
+        [_privateLetterTableView reloadData];
+    }
+
+//    [self.navigationItem setTitle:NSLocalizedString(@"private_letter", @"private_letter")];
+//    [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
+//    [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClicked) title:NSLocalizedString(@"refresh", @"refresh")]];
     
-    UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    
-    activityIndicator.center = CGPointMake(SCREEN_WIDTH/2, ADS_CELL_HEIGHT/2);
-    [activityIndicator startAnimating];
-    
-    [self.view addSubview:activityIndicator];
-    
-    [[BSDKManager sharedManager] getPrivateMsgUserListByType:1
-                                                    pageSize:20
-                                                   pageIndex:1 andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-                                                       
-                                                       [_privateLetterTableView setHidden:NO];
-                                                       [_privateLetterTableView reloadData];
-                                                       [_relatedUsers addObjectsFromArray:[data objectForKey:K_BSDK_GENDER]];
-                                                   }];
+
 }
 
 - (void)viewDidUnload
@@ -119,7 +142,7 @@
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    return [_relatedUsers count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -130,10 +153,21 @@
     if (cell == nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:privateLetterViewCellIdentifier owner:self options:nil] objectAtIndex:0];
     }
+    
+    NSDictionary * userDict = [_relatedUsers objectAtIndex:[indexPath row]];
     PrivateLetterViewCell * privateLetterCell = ((PrivateLetterViewCell*)cell);
-    privateLetterCell.avatarImage.image = [UIImage imageNamed:@"avatar_big"];
-    privateLetterCell.nameLabel.text = @"Adam Lambert";
-    privateLetterCell.timeLabel.text = @"22分钟前";
+    
+    NSString * avatarImageUrl = [userDict objectForKey:K_BSDK_PICTURE_65];
+    if (avatarImageUrl && [avatarImageUrl length]) {
+        [privateLetterCell.avatarImage setImageWithURL:[NSURL URLWithString:avatarImageUrl] placeholderImage:[UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:userDict]]];
+    }
+    else
+    {
+        [privateLetterCell.avatarImage setImage:[UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:userDict]]];
+    }
+
+    privateLetterCell.nameLabel.text = [userDict objectForKey:K_BSDK_USERNAME];
+    privateLetterCell.timeLabel.text = [ViewHelper intervalSinceNow:[userDict objectForKey:K_BSDK_CREATETIME]];
     privateLetterCell.detailView.text = @"this is a long long long longa long long long longa long long long longa long long long long long long long  view";
 //    CGFloat textViewHeight = [ViewHelper getHeightOfText:privateLetterCell.detailView.text ByFontSize:privateLetterCell.detailView.font.pointSize contentWidth:privateLetterCell.detailView.frame.size.width] + TEXT_VIEW_MARGE_HEIGHT;
 ////    privateLetterCell.detailView.frame = CGRectMake(privateLetterCell.detailView.frame.origin.x, privateLetterCell.detailView.frame.origin.y, privateLetterCell.detailView.frame.size.width, textViewHeight);
@@ -187,9 +221,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSDictionary * userDict = [_relatedUsers objectAtIndex:[indexPath row]];
     PrivateLetterDetailViewController * privateLetterDetailViewController = [[PrivateLetterDetailViewController alloc]
                                                          initWithNibName:@"PrivateLetterDetailViewController"
                                                          bundle:nil];
+    privateLetterDetailViewController.userId = [userDict objectForKey:K_BSDK_UID];
     
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: privateLetterDetailViewController];
     

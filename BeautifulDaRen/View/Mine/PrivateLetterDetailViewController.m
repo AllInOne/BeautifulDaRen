@@ -32,6 +32,7 @@
 @synthesize currentPageIndex = _currentPageIndex;
 @synthesize isAllRetrieved = _isAllRetrieved;
 @synthesize messages = _messages;
+@synthesize userId = _userId;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -76,6 +77,7 @@
     [_footerView release];
     [_privateLetterComposerView release];
     [_messages release];
+    [_userId release];
 
     [super dealloc];
 }
@@ -94,46 +96,17 @@
     
     [self.view addSubview:activityIndicator];
     
-    [[BSDKManager sharedManager] getPrivateMsgUserListByType:K_BSDK_PRIVATEMSG_USER_TYPE_ALL
-                                                    pageSize:20
-                                                   pageIndex:0 andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-                                                       
-                                                       [_messages addObjectsFromArray:[data objectForKey:K_BSDK_GENDER]];
-                                                       //    NSInteger scrollViewHeight = 0;    
-                                                       //    UIView * bubble1 = [ViewHelper bubbleView:@"最近怎么样啊?" from:NO];
-                                                       //
-                                                       //    scrollViewHeight = CGRectGetHeight(bubble1.frame) + BUBBLE_VIEW_MARGIN;
-                                                       //    
-                                                       //    [self.contentScrollView addSubview:bubble1];
-                                                       //    
-                                                       //    UIView * bubble2 = [ViewHelper bubbleView:@"太棒了！刚从普吉岛回来，玩了半个月，买了好多东西，最近有空吗，过来帮我欣赏欣赏啊？" from:YES];
-                                                       //    
-                                                       //    bubble2.frame = CGRectMake(CGRectGetMinX(bubble2.frame), scrollViewHeight, CGRectGetWidth(bubble2.frame), CGRectGetHeight(bubble2.frame));
-                                                       //    
-                                                       //    scrollViewHeight += CGRectGetHeight(bubble2.frame) + BUBBLE_VIEW_MARGIN;
-                                                       //    
-                                                       //    [self.contentScrollView addSubview:bubble2];
-                                                       //    UIView * bubble3 = [ViewHelper bubbleView:@"好啊，这个周六有空没有啊?" from:NO];
-                                                       //    
-                                                       //    bubble3.frame = CGRectMake(CGRectGetMinX(bubble3.frame), scrollViewHeight, CGRectGetWidth(bubble3.frame), CGRectGetHeight(bubble3.frame));
-                                                       //    
-                                                       //    scrollViewHeight += CGRectGetHeight(bubble3.frame) + BUBBLE_VIEW_MARGIN;
-                                                       //    
-                                                       //    [self.contentScrollView addSubview:bubble3];
-                                                       //    
-                                                       //    UIView * bubble4 = [ViewHelper bubbleView:@"恩，就就周六见了?" from:YES];
-                                                       //    bubble4.frame = CGRectMake(CGRectGetMinX(bubble4.frame), scrollViewHeight, CGRectGetWidth(bubble4.frame), CGRectGetHeight(bubble4.frame));
-                                                       //    
-                                                       //    scrollViewHeight += CGRectGetHeight(bubble4.frame) + BUBBLE_VIEW_MARGIN;
-                                                       //    [self.contentScrollView addSubview:bubble4];
-                                                       //    
-                                                       //    [self.contentScrollView setContentSize:CGSizeMake(SCREEN_WIDTH, scrollViewHeight + 100)];                                                      
-                                                       
-                                                       
-                                                       
-                                                       
-                                                       
-                                                       
+    [[BSDKManager sharedManager] getPrivateMsgListOfUser:self.userId
+                                                    type:K_BSDK_PRIVATEMSG_MSG_TYPE_ALL
+                                                pageSize:20 
+                                               pageIndex:1 andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+                                                   
+                                                   [activityIndicator stopAnimating];
+                                                   [activityIndicator removeFromSuperview];
+                                                   [activityIndicator release];
+                                                   
+                                                       [_messages addObjectsFromArray:[data objectForKey:K_BSDK_USERLIST]];
+
                                                        
                                                    }];
     

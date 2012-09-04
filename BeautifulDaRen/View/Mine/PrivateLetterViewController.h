@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PrivateLetterViewController : UITableViewController
+@interface PrivateLetterViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, retain) IBOutlet UITableView * privateLetterTableView;
 

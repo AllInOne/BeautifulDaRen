@@ -10,6 +10,8 @@
 
 @interface PrivateLetterDetailViewController : UIViewController<UITextFieldDelegate>
 
+@property (nonatomic, retain) NSString * userId;
+
 @property (nonatomic, retain) IBOutlet UIScrollView * contentScrollView;
 @property (nonatomic, retain) IBOutlet UIView * footerView;
 
