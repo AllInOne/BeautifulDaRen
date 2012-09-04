@@ -35,6 +35,9 @@
     
     [_waitOverlay release];
     _waitOverlay = [[WaitOverlay alloc]initWithFrame:self.window.frame];
+    
+//    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationType)
+//     (UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeBadge)];
     return YES;
 }
 
@@ -52,6 +55,7 @@
      Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
      If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
      */
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -75,6 +79,20 @@
      Save data if appropriate.
      See also applicationDidEnterBackground:.
      */
+}
+
+- (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    /*
+     Sent to the delegate when the application successfully registers with Apple Push Service (APS).
+     */
+    
+    NSMutableString * deviceTokenString = [NSMutableString stringWithCapacity:([deviceToken length] * 2)];
+    const unsigned char * dataBuffer = (const unsigned char *)[deviceToken bytes];
+    for (int i = 0; i < [deviceToken length]; i++) {
+        [deviceTokenString appendFormat:@"%02lx", (unsigned long)dataBuffer[i]];
+    }
+    NSLog(@"device token:%@",deviceTokenString);
 }
 
 /*
