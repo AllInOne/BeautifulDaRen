@@ -10,11 +10,8 @@
 #import "AppDelegate.h"
 #import "BSDKWeiboRequest.h"
 #import "BSDKEngine.h"
-<<<<<<< HEAD
 #import "BSDKDefines.h"
 #import "ViewConstants.h"
-=======
->>>>>>> Add APIs for sending and retrieving private message
 
 static BSDKManager *sharedInstance;
 
