@@ -10,4 +10,6 @@
 
 @interface PrivateLetterViewController : UITableViewController
 
+@property (nonatomic, retain) IBOutlet UITableView * privateLetterTableView;
+
 @end

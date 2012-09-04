@@ -10,8 +10,11 @@
 #import "AppDelegate.h"
 #import "BSDKWeiboRequest.h"
 #import "BSDKEngine.h"
+<<<<<<< HEAD
 #import "BSDKDefines.h"
 #import "ViewConstants.h"
+=======
+>>>>>>> Add APIs for sending and retrieving private message
 
 static BSDKManager *sharedInstance;
 
@@ -817,7 +820,7 @@ static BSDKManager *sharedInstance;
                     pageIndex:(NSInteger)pageIndex 
               andDoneCallback:(processDoneWithDictBlock)callback
 {
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:5];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:6];
     
     [params setObject:K_BSDK_CATEGORY_SNS forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETCOMMENTLIST forKey:K_BSDK_ACTION];
@@ -1029,6 +1032,70 @@ static BSDKManager *sharedInstance;
     [self sendRequestWithMethodName:nil
                          httpMethod:@"POST"
                              params:params
+                       postDataType:kBSDKRequestPostDataTypeNormal
+                   httpHeaderFields:nil
+                       doneCallback:callback];
+}
+
+- (void)sendPrivateMsgToUser:(NSString*)userId
+                     content:(NSString*)content
+             andDoneCallback:(processDoneWithDictBlock)callback
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
+    
+    [params setObject:K_BSDK_CATEGORY_SNS forKey:K_BSDK_CATEGORY];
+    [params setObject:K_BSDK_ACTION_SENDPRIVATEMSG forKey:K_BSDK_ACTION];
+    [params setObject:content forKey:K_BSDK_CONTENT];
+    [params setObject:userId forKey:K_BSDK_RECEIVEUSERID];
+    
+    [self sendRequestWithMethodName:nil
+                         httpMethod:@"POST" 
+                             params:params 
+                       postDataType:kBSDKRequestPostDataTypeNormal
+                   httpHeaderFields:nil
+                       doneCallback:callback];
+}
+
+- (void)getPrivateMsgUserListByType:(K_BSDK_PRIVATEMSG_USER_TYPE)type
+                           pageSize:(NSInteger)pageSize 
+                          pageIndex:(NSInteger)pageIndex 
+                    andDoneCallback:(processDoneWithDictBlock)callback
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:5];
+    
+    [params setObject:K_BSDK_CATEGORY_SNS forKey:K_BSDK_CATEGORY];
+    [params setObject:K_BSDK_ACTION_GETPRIVATEUSERLIST forKey:K_BSDK_ACTION];
+    [params setObject:[NSString stringWithFormat:@"%d", pageIndex] forKey:K_BSDK_PAGEINDEX];
+    [params setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:K_BSDK_PAGESIZE];
+    [params setObject:[NSString stringWithFormat:@"%d", type] forKey:K_BSDK_USERTYPE];
+    
+    [self sendRequestWithMethodName:nil
+                         httpMethod:@"POST" 
+                             params:params 
+                       postDataType:kBSDKRequestPostDataTypeNormal
+                   httpHeaderFields:nil
+                       doneCallback:callback];
+
+}
+
+- (void)getPrivateMsgListOfUser:(NSString*)userId
+                           type:(K_BSDK_PRIVATEMSG_MSG_TYPE)type
+                       pageSize:(NSInteger)pageSize 
+                      pageIndex:(NSInteger)pageIndex 
+                andDoneCallback:(processDoneWithDictBlock)callback
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:5];
+    
+    [params setObject:K_BSDK_CATEGORY_SNS forKey:K_BSDK_CATEGORY];
+    [params setObject:K_BSDK_ACTION_GETPRIVATEMSGLIST forKey:K_BSDK_ACTION];
+    [params setObject:[NSString stringWithFormat:@"%d", pageIndex] forKey:K_BSDK_PAGEINDEX];
+    [params setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:K_BSDK_PAGESIZE];
+    [params setObject:userId forKey:K_BSDK_USERID];
+    [params setObject:[NSString stringWithFormat:@"%d", type] forKey:K_BSDK_MSGTYPE];
+    
+    [self sendRequestWithMethodName:nil
+                         httpMethod:@"POST" 
+                             params:params 
                        postDataType:kBSDKRequestPostDataTypeNormal
                    httpHeaderFields:nil
                        doneCallback:callback];

@@ -11,27 +11,17 @@
 #import "ViewHelper.h"
 #import "ViewConstants.h"
 #import "PrivateLetterDetailViewController.h"
+#import "BSDKManager.h"
 
 @interface PrivateLetterViewController()
 
-@property (retain, nonatomic) NSMutableDictionary * fakeLetters;
-- (void) loadFakeLetters;
+@property (nonatomic, retain) NSMutableArray * relatedUsers;
+
 @end
 
 @implementation PrivateLetterViewController
-@synthesize fakeLetters = _fakeLetters;
-
-- (void) loadFakeLetters
-{
-    if(_fakeLetters)
-    {
-        _fakeLetters = nil;
-    }
-    NSDictionary * letter1 = [NSDictionary dictionaryWithObjectsAndKeys: nil];
-    _fakeLetters = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
-                    letter1, nil];
-    [_fakeLetters autorelease];
-}
+@synthesize relatedUsers = _relatedUsers;
+@synthesize privateLetterTableView = _privateLetterTableView;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -69,9 +59,27 @@
 {
     [super viewDidLoad];
     
+    [_privateLetterTableView setHidden:YES];
+    
     [self.navigationItem setTitle:NSLocalizedString(@"private_letter", @"private_letter")];
     [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
     [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClicked) title:NSLocalizedString(@"refresh", @"refresh")]];
+    
+    UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    
+    activityIndicator.center = CGPointMake(SCREEN_WIDTH/2, ADS_CELL_HEIGHT/2);
+    [activityIndicator startAnimating];
+    
+    [self.view addSubview:activityIndicator];
+    
+    [[BSDKManager sharedManager] getPrivateMsgUserListByType:1
+                                                    pageSize:20
+                                                   pageIndex:1 andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+                                                       
+                                                       [_privateLetterTableView setHidden:NO];
+                                                       [_privateLetterTableView reloadData];
+                                                       [_relatedUsers addObjectsFromArray:[data objectForKey:K_BSDK_GENDER]];
+                                                   }];
 }
 
 - (void)viewDidUnload

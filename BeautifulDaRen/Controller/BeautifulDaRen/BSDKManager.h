@@ -10,6 +10,7 @@
 #import "ControllerConstants.h"
 #import "BSDKEngine.h"
 #import "BaseManager.h"
+#import "BSDKDefines.h"
 
 @interface BSDKManager : BaseManager <BSDKEngineDelegate>
 
@@ -194,6 +195,18 @@
                noteName:(NSString *)noteName
             andCallBack:(processDoneWithDictBlock)callback;
 
+- (void)sendPrivateMsgToUser:(NSString*)userId
+                     content:(NSString*)content
+             andDoneCallback:(processDoneWithDictBlock)callback;
 
+- (void)getPrivateMsgUserListByType:(K_BSDK_PRIVATEMSG_USER_TYPE)type
+                           pageSize:(NSInteger)pageSize 
+                          pageIndex:(NSInteger)pageIndex 
+                    andDoneCallback:(processDoneWithDictBlock)callback;
 
+- (void)getPrivateMsgListOfUser:(NSString*)userId
+                           type:(K_BSDK_PRIVATEMSG_MSG_TYPE)type
+                       pageSize:(NSInteger)pageSize 
+                      pageIndex:(NSInteger)pageIndex 
+                andDoneCallback:(processDoneWithDictBlock)callback;
 @end

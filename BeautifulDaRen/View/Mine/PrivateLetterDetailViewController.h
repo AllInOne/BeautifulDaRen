@@ -15,4 +15,6 @@
 
 @property (nonatomic, retain) IBOutlet UITextField * privateLetterComposerView;
 
+-(IBAction)onSendButtonPressed:(id)sender;
+
 @end
