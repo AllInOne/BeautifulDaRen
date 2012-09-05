@@ -58,5 +58,5 @@
 
 + (callBackBlock)getIndicatorViewBlockWithFrame:(CGRect)frame inView:(UIView*)superView;
 
-+ (UIView *)bubbleView:(NSString *)text from:(BOOL)fromSelf;
++ (UIView *)bubbleView:(NSString *)text from:(NSDictionary*)user atTime:(NSString*)timestamp;
 @end

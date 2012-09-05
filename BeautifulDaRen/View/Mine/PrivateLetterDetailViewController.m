@@ -21,6 +21,8 @@
 @property (nonatomic, assign) BOOL  isAllRetrieved;
 @property (nonatomic, retain) NSMutableArray * messages;
 
+- (void)refreshView;
+
 @end
 
 @implementation PrivateLetterDetailViewController
@@ -69,6 +71,29 @@
 
 }
 
+- (void)refreshView
+{
+    CGFloat viewHeight = 10.0;
+    
+    for (UIView * view in self.contentScrollView.subviews) {
+        [view removeFromSuperview];
+    }
+    
+    for (NSDictionary * message in _messages) {
+        UIView * bubbleView= [ViewHelper bubbleView:[message objectForKey:K_BSDK_CONTENT] from:[message objectForKey:K_BSDK_USERINFO] atTime:[message objectForKey:K_BSDK_CREATETIME]];
+        
+        bubbleView.frame = CGRectMake(0.0, viewHeight, CGRectGetWidth(bubbleView.frame), CGRectGetHeight(bubbleView.frame));
+        
+        [self.contentScrollView addSubview:bubbleView];
+        
+        viewHeight += (CGRectGetHeight(bubbleView.frame) + 10.0);
+                                                                                                
+    }
+    
+    [self.contentScrollView setContentSize:CGSizeMake(SCREEN_WIDTH, (viewHeight))];
+
+}
+
 #pragma mark - View lifecycle
 
 - (void)dealloc
@@ -105,8 +130,9 @@
                                                    [activityIndicator removeFromSuperview];
                                                    [activityIndicator release];
                                                    
-                                                       [_messages addObjectsFromArray:[data objectForKey:K_BSDK_USERLIST]];
-
+                                                   [_messages addObjectsFromArray:[data objectForKey:K_BSDK_USERLIST]];
+                                                    
+                                                   [self refreshView];
                                                        
                                                    }];
     

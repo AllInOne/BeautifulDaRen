@@ -12,4 +12,8 @@
 
 @property (nonatomic, retain) IBOutlet UITableView * privateLetterTableView;
 
+@property (nonatomic, retain) IBOutlet UIView * footerView;
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView * loadingActivityIndicator;
+@property (nonatomic, retain) IBOutlet UIButton * footerButton;
+
 @end
