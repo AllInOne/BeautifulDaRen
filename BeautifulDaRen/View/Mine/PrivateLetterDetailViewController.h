@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PrivateLetterDetailViewController : UIViewController<UITextFieldDelegate>
+@interface PrivateLetterDetailViewController : UIViewController<UITextFieldDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, retain) NSString * userId;
 

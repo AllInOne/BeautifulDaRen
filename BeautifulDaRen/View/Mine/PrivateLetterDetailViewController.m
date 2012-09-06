@@ -79,7 +79,7 @@
         [view removeFromSuperview];
     }
     
-    for (NSDictionary * message in _messages) {
+    for (NSDictionary * message in [_messages reverseObjectEnumerator]) {
         UIView * bubbleView= [ViewHelper bubbleView:[message objectForKey:K_BSDK_CONTENT] from:[message objectForKey:K_BSDK_USERINFO] atTime:[message objectForKey:K_BSDK_CREATETIME]];
         
         bubbleView.frame = CGRectMake(0.0, viewHeight, CGRectGetWidth(bubbleView.frame), CGRectGetHeight(bubbleView.frame));
@@ -147,6 +147,8 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    
+    [self.contentScrollView setDelegate:self];
 }
 
 - (void)viewDidUnload
@@ -166,6 +168,13 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    if (self.isKeypadShow) {
+        [self.privateLetterComposerView resignFirstResponder];
+    }
+}
+
 - (void)keyboardWillShow:(NSNotification *)note 
 {
     if (!self.isKeypadShow)
@@ -179,15 +188,14 @@
          {
              NSLog(@"%@", self.contentScrollView);
              self.contentScrollView.frame = CGRectMake(self.contentScrollView.frame.origin.x,
-                                               self.contentScrollView.frame.origin.y,
+                                               self.contentScrollView.frame.origin.y - kbSize.height,
                                                self.contentScrollView.frame.size.width,
-                                               self.contentScrollView.frame.size.height - kbSize.height);
+                                               self.contentScrollView.frame.size.height);
              
              self.footerView.center = CGPointMake(self.footerView.center.x,
                                                   self.footerView.center.y - kbSize.height);
          }];
-        
-        self.contentScrollView.contentSize = CGSizeMake(self.contentScrollView.contentSize.width, self.contentScrollView.contentSize.height - kbSize.height);
+
         self.isKeypadShow = YES;
     }
     
@@ -205,15 +213,14 @@
         [UIView animateWithDuration:animDuration animations:^
          {
              self.contentScrollView.frame = CGRectMake(self.contentScrollView.frame.origin.x,
-                                                       self.contentScrollView.frame.origin.y,
+                                                       self.contentScrollView.frame.origin.y + kbSize.height,
                                                        self.contentScrollView.frame.size.width,
-                                                       self.contentScrollView.frame.size.height + kbSize.height);
+                                                       self.contentScrollView.frame.size.height);
              
              self.footerView.center = CGPointMake(self.footerView.center.x,
                                                   self.footerView.center.y + kbSize.height);
          }];
         
-        self.contentScrollView.contentSize = CGSizeMake(self.contentScrollView.contentSize.width, self.contentScrollView.contentSize.height + kbSize.height);
         self.isKeypadShow = NO;    
     }
 }

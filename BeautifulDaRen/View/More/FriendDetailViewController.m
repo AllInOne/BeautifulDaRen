@@ -117,7 +117,7 @@ typedef enum
         atButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar_at_him" target:self action:@selector(onAt)];    
     }
     
-    UIBarButtonItem *privateLetterButtonItem = [ViewHelper getToolBarItemOfImageName:@"private_letter_icon" target:self action:@selector(onPrivateLetter)];
+    UIBarButtonItem *privateLetterButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar_private_letter_icon" target:self action:@selector(onPrivateLetter)];
     
     if (![[BSDKManager sharedManager] isLogin]) {
         [atButtonItem setEnabled:NO];
@@ -131,11 +131,15 @@ typedef enum
     }
     
     NSArray *barItems = [[NSArray alloc]initWithObjects:
+                         flexible,
                          privateLetterButtonItem,
+                         flexible,
                          flexible,
                          atButtonItem,
                          flexible,
+                         flexible,
                          removeButtonItem,
+                         flexible,
                          nil];
     
     _toolbar.items= barItems;
