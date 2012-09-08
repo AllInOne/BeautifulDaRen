@@ -133,6 +133,8 @@
 #define K_BSDK_USERID @"UserId"
 #define K_BSDK_USERINFO @"UserInfo"
 
+#define K_BSDK_RELATEDUSERID @"RelaUserId"
+
 #define K_BSDK_RECEIVEUSERID @"ReceiveUserId"
 
 #define K_BSDK_FORWARDBLOGUID @"ForwardBlogId"

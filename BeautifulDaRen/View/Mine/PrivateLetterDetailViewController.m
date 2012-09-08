@@ -21,6 +21,8 @@
 @property (nonatomic, assign) BOOL  isAllRetrieved;
 @property (nonatomic, retain) NSMutableArray * messages;
 
+- (void)refreshView;
+
 @end
 
 @implementation PrivateLetterDetailViewController
@@ -32,6 +34,7 @@
 @synthesize currentPageIndex = _currentPageIndex;
 @synthesize isAllRetrieved = _isAllRetrieved;
 @synthesize messages = _messages;
+@synthesize userId = _userId;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -68,6 +71,29 @@
 
 }
 
+- (void)refreshView
+{
+    CGFloat viewHeight = 10.0;
+    
+    for (UIView * view in self.contentScrollView.subviews) {
+        [view removeFromSuperview];
+    }
+    
+    for (NSDictionary * message in [_messages reverseObjectEnumerator]) {
+        UIView * bubbleView= [ViewHelper bubbleView:[message objectForKey:K_BSDK_CONTENT] from:[message objectForKey:K_BSDK_USERINFO] atTime:[message objectForKey:K_BSDK_CREATETIME]];
+        
+        bubbleView.frame = CGRectMake(0.0, viewHeight, CGRectGetWidth(bubbleView.frame), CGRectGetHeight(bubbleView.frame));
+        
+        [self.contentScrollView addSubview:bubbleView];
+        
+        viewHeight += (CGRectGetHeight(bubbleView.frame) + 10.0);
+                                                                                                
+    }
+    
+    [self.contentScrollView setContentSize:CGSizeMake(SCREEN_WIDTH, (viewHeight))];
+
+}
+
 #pragma mark - View lifecycle
 
 - (void)dealloc
@@ -76,6 +102,7 @@
     [_footerView release];
     [_privateLetterComposerView release];
     [_messages release];
+    [_userId release];
 
     [super dealloc];
 }
@@ -94,46 +121,18 @@
     
     [self.view addSubview:activityIndicator];
     
-    [[BSDKManager sharedManager] getPrivateMsgUserListByType:K_BSDK_PRIVATEMSG_USER_TYPE_ALL
-                                                    pageSize:20
-                                                   pageIndex:0 andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-                                                       
-                                                       [_messages addObjectsFromArray:[data objectForKey:K_BSDK_GENDER]];
-                                                       //    NSInteger scrollViewHeight = 0;    
-                                                       //    UIView * bubble1 = [ViewHelper bubbleView:@"最近怎么样啊?" from:NO];
-                                                       //
-                                                       //    scrollViewHeight = CGRectGetHeight(bubble1.frame) + BUBBLE_VIEW_MARGIN;
-                                                       //    
-                                                       //    [self.contentScrollView addSubview:bubble1];
-                                                       //    
-                                                       //    UIView * bubble2 = [ViewHelper bubbleView:@"太棒了！刚从普吉岛回来，玩了半个月，买了好多东西，最近有空吗，过来帮我欣赏欣赏啊？" from:YES];
-                                                       //    
-                                                       //    bubble2.frame = CGRectMake(CGRectGetMinX(bubble2.frame), scrollViewHeight, CGRectGetWidth(bubble2.frame), CGRectGetHeight(bubble2.frame));
-                                                       //    
-                                                       //    scrollViewHeight += CGRectGetHeight(bubble2.frame) + BUBBLE_VIEW_MARGIN;
-                                                       //    
-                                                       //    [self.contentScrollView addSubview:bubble2];
-                                                       //    UIView * bubble3 = [ViewHelper bubbleView:@"好啊，这个周六有空没有啊?" from:NO];
-                                                       //    
-                                                       //    bubble3.frame = CGRectMake(CGRectGetMinX(bubble3.frame), scrollViewHeight, CGRectGetWidth(bubble3.frame), CGRectGetHeight(bubble3.frame));
-                                                       //    
-                                                       //    scrollViewHeight += CGRectGetHeight(bubble3.frame) + BUBBLE_VIEW_MARGIN;
-                                                       //    
-                                                       //    [self.contentScrollView addSubview:bubble3];
-                                                       //    
-                                                       //    UIView * bubble4 = [ViewHelper bubbleView:@"恩，就就周六见了?" from:YES];
-                                                       //    bubble4.frame = CGRectMake(CGRectGetMinX(bubble4.frame), scrollViewHeight, CGRectGetWidth(bubble4.frame), CGRectGetHeight(bubble4.frame));
-                                                       //    
-                                                       //    scrollViewHeight += CGRectGetHeight(bubble4.frame) + BUBBLE_VIEW_MARGIN;
-                                                       //    [self.contentScrollView addSubview:bubble4];
-                                                       //    
-                                                       //    [self.contentScrollView setContentSize:CGSizeMake(SCREEN_WIDTH, scrollViewHeight + 100)];                                                      
-                                                       
-                                                       
-                                                       
-                                                       
-                                                       
-                                                       
+    [[BSDKManager sharedManager] getPrivateMsgListOfUser:self.userId
+                                                    type:K_BSDK_PRIVATEMSG_MSG_TYPE_ALL
+                                                pageSize:20 
+                                               pageIndex:1 andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+                                                   
+                                                   [activityIndicator stopAnimating];
+                                                   [activityIndicator removeFromSuperview];
+                                                   [activityIndicator release];
+                                                   
+                                                   [_messages addObjectsFromArray:[data objectForKey:K_BSDK_USERLIST]];
+                                                    
+                                                   [self refreshView];
                                                        
                                                    }];
     
@@ -148,6 +147,8 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    
+    [self.contentScrollView setDelegate:self];
 }
 
 - (void)viewDidUnload
@@ -167,6 +168,13 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    if (self.isKeypadShow) {
+        [self.privateLetterComposerView resignFirstResponder];
+    }
+}
+
 - (void)keyboardWillShow:(NSNotification *)note 
 {
     if (!self.isKeypadShow)
@@ -180,15 +188,14 @@
          {
              NSLog(@"%@", self.contentScrollView);
              self.contentScrollView.frame = CGRectMake(self.contentScrollView.frame.origin.x,
-                                               self.contentScrollView.frame.origin.y,
+                                               self.contentScrollView.frame.origin.y - kbSize.height,
                                                self.contentScrollView.frame.size.width,
-                                               self.contentScrollView.frame.size.height - kbSize.height);
+                                               self.contentScrollView.frame.size.height);
              
              self.footerView.center = CGPointMake(self.footerView.center.x,
                                                   self.footerView.center.y - kbSize.height);
          }];
-        
-        self.contentScrollView.contentSize = CGSizeMake(self.contentScrollView.contentSize.width, self.contentScrollView.contentSize.height - kbSize.height);
+
         self.isKeypadShow = YES;
     }
     
@@ -206,15 +213,14 @@
         [UIView animateWithDuration:animDuration animations:^
          {
              self.contentScrollView.frame = CGRectMake(self.contentScrollView.frame.origin.x,
-                                                       self.contentScrollView.frame.origin.y,
+                                                       self.contentScrollView.frame.origin.y + kbSize.height,
                                                        self.contentScrollView.frame.size.width,
-                                                       self.contentScrollView.frame.size.height + kbSize.height);
+                                                       self.contentScrollView.frame.size.height);
              
              self.footerView.center = CGPointMake(self.footerView.center.x,
                                                   self.footerView.center.y + kbSize.height);
          }];
         
-        self.contentScrollView.contentSize = CGSizeMake(self.contentScrollView.contentSize.width, self.contentScrollView.contentSize.height + kbSize.height);
         self.isKeypadShow = NO;    
     }
 }

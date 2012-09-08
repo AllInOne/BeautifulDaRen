@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PrivateLetterDetailViewController : UIViewController<UITextFieldDelegate>
+@interface PrivateLetterDetailViewController : UIViewController<UITextFieldDelegate, UIScrollViewDelegate>
+
+@property (nonatomic, retain) NSString * userId;
 
 @property (nonatomic, retain) IBOutlet UIScrollView * contentScrollView;
 @property (nonatomic, retain) IBOutlet UIView * footerView;

@@ -11,6 +11,7 @@
 #import "ButtonViewCell.h"
 #import "ViewConstants.h"
 #import "NSAttributedString+Attributes.h"
+#import "UIImageView+WebCache.h"
 
 #define BACK_BUTTON_LABEL_X_OFFSET  (5.0)
 
@@ -365,11 +366,15 @@ static BUIFont * instance;
     return Block_copy(callback);
 }
 
-+ (UIView *)bubbleView:(NSString *)text from:(BOOL)fromSelf {
+
++ (UIView *)bubbleView:(NSString *)text from:(NSDictionary*)user atTime:(NSString*)timestamp {
     // build single chat bubble cell with given text
+    BOOL fromSelf = [ViewHelper isSelf:user];
+    
     UIView *returnView = [[UIView alloc] initWithFrame:CGRectZero];
     returnView.backgroundColor = [UIColor clearColor];
     //根据气泡箭头的方向选择不同气泡图片
+    
     UIImage *bubble = [UIImage imageNamed:@"private_letter_background"];
     //对气泡图片进行拉伸
     UIImageView *bubbleImageView = [[UIImageView alloc] initWithImage:[bubble stretchableImageWithLeftCapWidth:0.0 topCapHeight:0.0]];
@@ -387,33 +392,53 @@ static BUIFont * instance;
     
     if(fromSelf)
     {
-        bubbleImageView.frame = CGRectMake(0.0f, 0.0f, 200.0f, size.height+40.0f);
-        bubbleText.frame = CGRectMake(21.0f, 14.0f, size.width+10, size.height+10);
-        returnView.frame = CGRectMake(80.0f, 10.0f, 240.0f, size.height+50.0f);
+        bubbleImageView.frame = CGRectMake(0.0f, 30.0f, 200.0f, size.height+40.0f);
+        bubbleText.frame = CGRectMake(21.0f, 40.0f, size.width+10, size.height+10);
+        returnView.frame = CGRectMake(80.0f, 30.0f, 240.0f, size.height+70.0f);
     }
     else
     {
-        bubbleImageView.frame = CGRectMake(40.0f, 0.0f, 200.0f, size.height+40.0f);
-        bubbleText.frame = CGRectMake(61.0f, 14.0f, size.width+10, size.height+10);
-        returnView.frame = CGRectMake(0.0f, 10.0f, 240.0f, size.height+50.0f);
+        bubbleImageView.frame = CGRectMake(40.0f, 30.0f, 200.0f, size.height+40.0f);
+        bubbleText.frame = CGRectMake(61.0f, 40.0f, size.width+10, size.height+10);
+        returnView.frame = CGRectMake(0.0f, 30.0f, 240.0f, size.height+70.0f);
     }
     
-    UIImageView * avatar = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"avatar_big"]];
+    UILabel * timeLable = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, SCREEN_WIDTH, 15)];
+    bubbleText.backgroundColor = [UIColor clearColor];
+    timeLable.textAlignment = UITextAlignmentCenter;
+    timeLable.font = font;
+    timeLable.numberOfLines = 0;
+    timeLable.textColor = [UIColor purpleColor];
+    timeLable.lineBreakMode = UILineBreakModeCharacterWrap;
+    timeLable.text = [ViewHelper intervalSinceNow:timestamp];
+    
+    UIImageView * avatar = [[UIImageView alloc] init];
     if (fromSelf) {
-        avatar.frame = CGRectMake(200.0 + 5.0, 10.0, BUBBLE_AVATAR_SIZE, BUBBLE_AVATAR_SIZE);
+        avatar.frame = CGRectMake(200.0 + 5.0, 30.0, BUBBLE_AVATAR_SIZE, BUBBLE_AVATAR_SIZE);
     }
     else
     {
-        avatar.frame = CGRectMake(5.0, 10.0, BUBBLE_AVATAR_SIZE, BUBBLE_AVATAR_SIZE);
+        avatar.frame = CGRectMake(5.0, 30.0, BUBBLE_AVATAR_SIZE, BUBBLE_AVATAR_SIZE);
+    }
+    
+    NSString * avatarImageUrl = [user objectForKey:K_BSDK_PICTURE_65];
+    if (avatarImageUrl && [avatarImageUrl length]) {
+        [avatar setImageWithURL:[NSURL URLWithString:avatarImageUrl] placeholderImage:[UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:user]]];
+    }
+    else
+    {
+        [avatar setImage:[UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:user]]];
     }
 
     [returnView addSubview:bubbleImageView];
     [returnView addSubview:avatar];
     [returnView addSubview:bubbleText];
+    [returnView addSubview:timeLable];
     
     [avatar release];
     [bubbleImageView release];
     [bubbleText release];
+    [timeLable release];
 
     return [returnView autorelease];
 }

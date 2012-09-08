@@ -1104,7 +1104,7 @@ static BSDKManager *sharedInstance;
     [params setObject:K_BSDK_ACTION_GETPRIVATEMSGLIST forKey:K_BSDK_ACTION];
     [params setObject:[NSString stringWithFormat:@"%d", pageIndex] forKey:K_BSDK_PAGEINDEX];
     [params setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:K_BSDK_PAGESIZE];
-    [params setObject:userId forKey:K_BSDK_USERID];
+    [params setObject:userId forKey:K_BSDK_RELATEDUSERID];
     [params setObject:[NSString stringWithFormat:@"%d", type] forKey:K_BSDK_MSGTYPE];
     
     [self sendRequestWithMethodName:nil
