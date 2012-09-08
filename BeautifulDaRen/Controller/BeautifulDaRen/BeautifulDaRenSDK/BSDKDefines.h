@@ -158,7 +158,7 @@
 #define K_BSDK_FORWARD_NUM @"ForwardNum"
 
 #define K_BSDK_RETWEET_STATUS @"retweeted_status"
-
+#define K_BSDK_WEIBO_VISIBLE @"Visible"
 #define K_BSDK_COMMENT_USER_ID @"CommentUserId"
 
 #define K_BSDK_ATTENTIONUSERID @"AttentionUserId"
