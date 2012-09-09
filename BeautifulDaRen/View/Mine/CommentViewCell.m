@@ -67,7 +67,7 @@
     NSString * title = [NSString stringWithFormat:@"¥ %@",[originalBlogInfo objectForKey:K_BSDK_PRICE]];
     
     NSString * isVerify = [authorInfo objectForKey:K_BSDK_ISVERIFY];
-    if (isVerify && [isVerify isEqual:@"1"]) {
+    if (isVerify && [isVerify isEqual:K_BSDK_ISVERIFY_YES]) {
         [self.authorVMark setImage:[UIImage imageNamed:@"v_mark_big"]];
         [self.authorVMark setHidden:NO];
     }

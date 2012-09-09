@@ -331,8 +331,12 @@
     if  ([data objectForKey:K_BSDK_COMMENT_USER_ID] || ([data objectForKey:K_BSDK_RETWEET_STATUS] && ([[data objectForKey:K_BSDK_RETWEET_STATUS] count])))
     {
         viewCellIdentifier = @"CommentViewCell";
-        NSData *retweet = [data objectForKey:K_BSDK_RETWEET_STATUS];
-        if ([[retweet valueForKey:K_BSDK_WEIBO_VISIBLE] intValue] == K_BSDK_WEIBO_VISIBLE_NO) {
+        
+        NSDictionary * originalBlogInfo = [data objectForKey:K_BSDK_BLOGINFO];
+        if (originalBlogInfo == nil) {
+            originalBlogInfo = [data objectForKey:K_BSDK_RETWEET_STATUS];
+        }
+        if ([[originalBlogInfo valueForKey:K_BSDK_WEIBO_VISIBLE] intValue] == K_BSDK_WEIBO_VISIBLE_NO) {
             indexOfCellInXib = 1;
         }
     }
