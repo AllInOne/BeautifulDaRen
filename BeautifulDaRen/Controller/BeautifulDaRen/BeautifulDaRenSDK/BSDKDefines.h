@@ -160,7 +160,6 @@
 #define K_BSDK_FORWARD_NUM @"ForwardNum"
 
 #define K_BSDK_RETWEET_STATUS @"retweeted_status"
-#define K_BSDK_WEIBO_VISIBLE @"Visible"
 #define K_BSDK_COMMENT_USER_ID @"CommentUserId"
 
 #define K_BSDK_ATTENTIONUSERID @"AttentionUserId"
@@ -215,6 +214,10 @@
 #define K_BSDK_ISVERIFY @"IsVerify"
 #define K_BSDK_ISVERIFY_NO @"0"
 #define K_BSDK_ISVERIFY_YES @"1"
+
+#define K_BSDK_WEIBO_VISIBLE @"Visible"
+#define K_BSDK_WEIBO_VISIBLE_YES (0)
+#define K_BSDK_WEIBO_VISIBLE_NO (1)
 
 #define K_BSDK_DEFAULT_CITY     @"成都"
 

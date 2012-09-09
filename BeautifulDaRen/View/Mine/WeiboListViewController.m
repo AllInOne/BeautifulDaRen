@@ -283,24 +283,6 @@
     UITableViewCell * cell = nil;
     
     cell = [self getInitializedCellofTableView:tableView ByWeiboData:[self.dataList objectAtIndex:[indexPath row]]];
-//    if  (self.controllerType == WeiboListViewControllerType_COMMENT_ME)
-//    {
-//        cell = [self getCellofTableView:tableView ByWeiboData:[self.dataList objectAtIndex:[indexPath row]]];
-//    }
-//    else
-//    {
-//        static NSString * atMeViewCellIdentifier = @"AtMeViewCell";
-//        cell = [tableView dequeueReusableCellWithIdentifier:atMeViewCellIdentifier];
-//        if(cell == nil)
-//        {
-//            cell = [[[NSBundle mainBundle] loadNibNamed:atMeViewCellIdentifier owner:self options:nil] objectAtIndex:0];
-//        }
-//        AtMeViewCell * atMeCell = (AtMeViewCell*)cell;
-//        atMeCell.friendNameLabel.text = @"仁和春天光华店";
-//        atMeCell.shopNameLabel.text = @"仁和春天";
-//        atMeCell.brandLabel.text = @"好莱坞明星";
-//    }
-
     return cell;
 }
 
@@ -311,13 +293,25 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    WeiboDetailViewController *weiboDetailController = 
-    [[WeiboDetailViewController alloc] init];
-
-    weiboDetailController.weiboId = [self getCurrentBlogIdByData:[self.dataList objectAtIndex:[indexPath row]]];
-
-    [self.navigationController pushViewController:weiboDetailController animated:YES];
-    [weiboDetailController release];
+    NSDictionary * originalBlogInfo = [[self.dataList objectAtIndex:indexPath.row] objectForKey:K_BSDK_BLOGINFO];
+    if (originalBlogInfo == nil) {
+        originalBlogInfo = [[self.dataList objectAtIndex:indexPath.row] objectForKey:K_BSDK_RETWEET_STATUS];
+    }
+    NSLog(@"blog:%@",originalBlogInfo);
+    if (originalBlogInfo != nil && K_BSDK_WEIBO_VISIBLE_YES == [[originalBlogInfo valueForKey:K_BSDK_WEIBO_VISIBLE] intValue])
+    {
+        WeiboDetailViewController *weiboDetailController =
+        [[WeiboDetailViewController alloc] init];
+        
+        weiboDetailController.weiboId = [self getCurrentBlogIdByData:[self.dataList objectAtIndex:[indexPath row]]];
+        
+        [self.navigationController pushViewController:weiboDetailController animated:YES];
+        [weiboDetailController release];
+    }
+    else
+    {
+        [[iToast makeText:@"原微博已被删除!"] show];
+    }
 }
 
 -(NSString*)getCurrentBlogIdByData:(NSDictionary*)data
@@ -333,19 +327,23 @@
 {
     UITableViewCell * cell = nil;
     NSString * viewCellIdentifier = nil;
+    NSInteger indexOfCellInXib = 0;
     if  ([data objectForKey:K_BSDK_COMMENT_USER_ID] || ([data objectForKey:K_BSDK_RETWEET_STATUS] && ([[data objectForKey:K_BSDK_RETWEET_STATUS] count])))
     {
         viewCellIdentifier = @"CommentViewCell";
+        NSData *retweet = [data objectForKey:K_BSDK_RETWEET_STATUS];
+        if ([[retweet valueForKey:K_BSDK_WEIBO_VISIBLE] intValue] == K_BSDK_WEIBO_VISIBLE_NO) {
+            indexOfCellInXib = 1;
+        }
     }
     else
     {
         viewCellIdentifier = @"AtMeViewCell";
     }
-    
     cell = [tableView dequeueReusableCellWithIdentifier:viewCellIdentifier];
     if(cell == nil)
     {
-        cell = [[[NSBundle mainBundle] loadNibNamed:viewCellIdentifier owner:self options:nil] objectAtIndex:0];
+        cell = [[[NSBundle mainBundle] loadNibNamed:viewCellIdentifier owner:self options:nil] objectAtIndex:indexOfCellInXib];
     }
     
     return cell;
