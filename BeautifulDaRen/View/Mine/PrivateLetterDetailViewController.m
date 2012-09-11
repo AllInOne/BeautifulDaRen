@@ -10,6 +10,7 @@
 #import "ViewHelper.h"
 #import "ViewConstants.h"
 #import "BSDKManager.h"
+#import "iToast.h"
 
 #define BUBBLE_VIEW_MARGIN  (10.0)
 
@@ -227,7 +228,8 @@
 
 -(IBAction)onSendButtonPressed:(id)sender
 {
-
-
+    [[BSDKManager sharedManager] sendPrivateMsgToUser:self.userId content:self.privateLetterComposerView.text andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+        [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
+    }];
 }
 @end

@@ -91,6 +91,9 @@
 "his_collection" = "他的收藏";
 "my_buyed" = "我购买的";
 
+"favourating" = "正在收藏...";
+"canceling_favourate" = "正在取消收藏...";
+
 "no_such_merchant_user" = "亲, 该商场还没有注册秀悦购帐号哦!";
 "no_such_brand_user" = "亲, 该品牌还没有注册秀悦购帐号哦!";
 

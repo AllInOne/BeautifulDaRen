@@ -216,12 +216,14 @@
     }
 
     privateLetterCell.nameLabel.text = [userDict objectForKey:K_BSDK_USERNAME];
-    privateLetterCell.timeLabel.text = [ViewHelper intervalSinceNow:[userDict objectForKey:K_BSDK_CREATETIME]];
-    privateLetterCell.detailView.text = @"this is a long long long longa long long long longa long long long longa long long long long long long long  view";
+
+    NSDictionary * lastMessageInfo = [userDict objectForKey:K_BSDK_LASTMSGINFO];
+    
+    privateLetterCell.timeLabel.text = [ViewHelper intervalSinceNow:[lastMessageInfo objectForKey:K_BSDK_CREATETIME]];
+    privateLetterCell.detailView.text = [lastMessageInfo objectForKey:K_BSDK_CONTENT];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//    CGFloat textViewHeight = [ViewHelper getHeightOfText:privateLetterCell.detailView.text ByFontSize:privateLetterCell.detailView.font.pointSize contentWidth:privateLetterCell.detailView.frame.size.width] + TEXT_VIEW_MARGE_HEIGHT;
-////    privateLetterCell.detailView.frame = CGRectMake(privateLetterCell.detailView.frame.origin.x, privateLetterCell.detailView.frame.origin.y, privateLetterCell.detailView.frame.size.width, textViewHeight);
+
     return cell;
 }
 
