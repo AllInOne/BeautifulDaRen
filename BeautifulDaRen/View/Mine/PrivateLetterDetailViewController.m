@@ -13,6 +13,7 @@
 #import "iToast.h"
 
 #define BUBBLE_VIEW_MARGIN  (10.0)
+#define PRIVATE_LETTER_PAGE_SIZE    (1)
 
 @interface PrivateLetterDetailViewController ()
 
@@ -21,8 +22,11 @@
 @property (nonatomic, assign) NSInteger currentPageIndex;
 @property (nonatomic, assign) BOOL  isAllRetrieved;
 @property (nonatomic, retain) NSMutableArray * messages;
+@property (nonatomic, retain) UIButton * loadButton;
 
 - (void)refreshView;
+
+- (UIButton*)getRefreshButton;
 
 @end
 
@@ -36,6 +40,7 @@
 @synthesize isAllRetrieved = _isAllRetrieved;
 @synthesize messages = _messages;
 @synthesize userId = _userId;
+@synthesize loadButton = _loadButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -46,7 +51,7 @@
         
         [self.navigationItem setTitle:NSLocalizedString(@"private_letter", @"private_letter")];
         
-        [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClicked) title:NSLocalizedString(@"refresh", @"refresh")]];
+//        [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClicked) title:NSLocalizedString(@"refresh", @"refresh")]];
     }
     return self;
 }
@@ -67,9 +72,55 @@
     }
 }
 
-- (void) onRefreshButtonClicked
+- (void) onLoadPrivateLetterButtonClicked
 {
+    UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    
+    [self.loadButton setTitle:nil forState:UIControlStateNormal];
+    
+    activityIndicator.center = self.loadButton.center;
+    [activityIndicator startAnimating];
+    
+    [self.view addSubview:activityIndicator];
+    
+    _currentPageIndex++;
+    
+    [[BSDKManager sharedManager] getPrivateMsgListOfUser:self.userId
+                                                    type:K_BSDK_PRIVATEMSG_MSG_TYPE_ALL
+                                                pageSize:PRIVATE_LETTER_PAGE_SIZE 
+                                               pageIndex:_currentPageIndex andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+                                                   
+                                                   [activityIndicator stopAnimating];
+                                                   [activityIndicator removeFromSuperview];
+                                                   [activityIndicator release];
+                                                   
+                                                   [self.loadButton setTitle:NSLocalizedString(@"load_old_private_message", @"load_old_private_message") forState:UIControlStateNormal];
+                                                   
+                                                   [_messages addObjectsFromArray:[data objectForKey:K_BSDK_USERLIST]];
+                                                   
+                                                   [self refreshView];
+                                                   
+                                               }];
+    
+}
 
+- (UIButton*) getRefreshButton
+{
+    if (self.loadButton == nil) {
+        self.loadButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_loadButton setBackgroundImage:[UIImage imageNamed:@"loading_btn"] forState:UIControlStateNormal];
+        [_loadButton setTitle:NSLocalizedString(@"load_old_private_message", @"load_old_private_message") forState:UIControlStateNormal];
+        [_loadButton addTarget:self action:@selector(onLoadPrivateLetterButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+        
+        [_loadButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_loadButton.titleLabel setFont:[UIFont systemFontOfSize:16]];
+
+        
+        _loadButton.frame = CGRectMake(0, 0, 220, 30);
+    }
+
+    
+    return _loadButton;
 }
 
 - (void)refreshView
@@ -79,6 +130,14 @@
     for (UIView * view in self.contentScrollView.subviews) {
         [view removeFromSuperview];
     }
+    
+    UIButton * loadButton = [self getRefreshButton];
+    [loadButton setCenter:CGPointMake(SCREEN_WIDTH/2, viewHeight + 30.0/2)];
+    
+    viewHeight += 40.0;
+    
+    [self.contentScrollView addSubview:loadButton];
+    
     
     for (NSDictionary * message in [_messages reverseObjectEnumerator]) {
         UIView * bubbleView= [ViewHelper bubbleView:[message objectForKey:K_BSDK_CONTENT] from:[message objectForKey:K_BSDK_USERINFO] atTime:[message objectForKey:K_BSDK_CREATETIME]];
@@ -104,6 +163,7 @@
     [_privateLetterComposerView release];
     [_messages release];
     [_userId release];
+    [_loadButton release];
 
     [super dealloc];
 }
@@ -114,6 +174,8 @@
     // Do any additional setup after loading the view from its nib.
     
     self.messages = [NSMutableArray arrayWithCapacity:40];
+    
+    _currentPageIndex = 1;
 
     UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     
@@ -124,8 +186,8 @@
     
     [[BSDKManager sharedManager] getPrivateMsgListOfUser:self.userId
                                                     type:K_BSDK_PRIVATEMSG_MSG_TYPE_ALL
-                                                pageSize:20 
-                                               pageIndex:1 andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+                                                pageSize:PRIVATE_LETTER_PAGE_SIZE 
+                                               pageIndex:_currentPageIndex andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
                                                    
                                                    [activityIndicator stopAnimating];
                                                    [activityIndicator removeFromSuperview];
@@ -161,6 +223,7 @@
     self.contentScrollView = nil;
     self.footerView = nil;
     self.privateLetterComposerView = nil;
+    self.loadButton = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

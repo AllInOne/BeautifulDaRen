@@ -58,6 +58,8 @@
 "notice_for_use" = "《秀悦购网络服务使用协议》";
 "login_with_cooperation" = "合作方登录";
 
+"load_old_private_message" = "载入以前的私信";
+
 "local_city" = "所在城市";
 "my_gender" = "我的性别";
 "avatar" = "头像";

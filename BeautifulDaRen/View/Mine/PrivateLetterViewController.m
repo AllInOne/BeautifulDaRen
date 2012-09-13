@@ -69,7 +69,10 @@
 
 - (void) onRefreshButtonClicked
 {
-    [ViewHelper showSimpleMessage:@"refresh button click" withTitle:nil withButtonText:@"ok"];
+    [self.relatedUsers removeAllObjects];
+    _currentIndex = 1;
+    [self.privateLetterTableView reloadData];
+    [self refreshData];
 }
 
 
@@ -131,6 +134,7 @@
 - (void)refreshData
 {
     [self.footerView setHidden:NO];
+    [self.loadingActivityIndicator setHidden:NO];
     [self.loadingActivityIndicator startAnimating];
     [self.footerButton setTitle:NSLocalizedString(@"loading_more", @"loading_more") forState:UIControlStateNormal];
     

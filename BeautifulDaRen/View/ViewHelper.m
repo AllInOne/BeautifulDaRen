@@ -369,13 +369,21 @@ static BUIFont * instance;
 
 + (UIView *)bubbleView:(NSString *)text from:(NSDictionary*)user atTime:(NSString*)timestamp {
     // build single chat bubble cell with given text
-    BOOL fromSelf = [ViewHelper isSelf:user];
+    BOOL fromSelf = [ViewHelper isSelf:[user objectForKey:K_BSDK_UID]];
     
-    UIView *returnView = [[UIView alloc] initWithFrame:CGRectZero];
-    returnView.backgroundColor = [UIColor clearColor];
+    NSLog(@"bubbleView is self : %d", fromSelf);
+    
     //根据气泡箭头的方向选择不同气泡图片
     
-    UIImage *bubble = [UIImage imageNamed:@"private_letter_background"];
+    UIImage *bubble = nil;
+    if (fromSelf) {
+        bubble = [UIImage imageNamed:@"private_letter_background_right"];
+    }
+    else
+    {
+        bubble = [UIImage imageNamed:@"private_letter_background_left"];
+    }
+    
     //对气泡图片进行拉伸
     UIImageView *bubbleImageView = [[UIImageView alloc] initWithImage:[bubble stretchableImageWithLeftCapWidth:0.0 topCapHeight:0.0]];
 
@@ -390,11 +398,13 @@ static BUIFont * instance;
     bubbleText.lineBreakMode = UILineBreakModeCharacterWrap;
     bubbleText.text = text;
     
+    UIView *returnView = [[UIView alloc] init];
+    returnView.backgroundColor = [UIColor clearColor];
     if(fromSelf)
     {
-        bubbleImageView.frame = CGRectMake(0.0f, 30.0f, 200.0f, size.height+40.0f);
-        bubbleText.frame = CGRectMake(21.0f, 40.0f, size.width+10, size.height+10);
-        returnView.frame = CGRectMake(80.0f, 30.0f, 240.0f, size.height+70.0f);
+        bubbleImageView.frame = CGRectMake(80.0f, 30.0f, 200.0f, size.height+40.0f);
+        bubbleText.frame = CGRectMake(101.0f, 40.0f, size.width+10, size.height+10);
+        returnView.frame = CGRectMake(180.0f, 130.0f, 240.0f, size.height+70.0f);
     }
     else
     {
@@ -414,7 +424,7 @@ static BUIFont * instance;
     
     UIImageView * avatar = [[UIImageView alloc] init];
     if (fromSelf) {
-        avatar.frame = CGRectMake(200.0 + 5.0, 30.0, BUBBLE_AVATAR_SIZE, BUBBLE_AVATAR_SIZE);
+        avatar.frame = CGRectMake(280.0 + 5.0, 30.0, BUBBLE_AVATAR_SIZE, BUBBLE_AVATAR_SIZE);
     }
     else
     {
