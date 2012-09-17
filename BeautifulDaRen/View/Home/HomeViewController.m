@@ -111,6 +111,9 @@
                     [[NSUserDefaults standardUserDefaults] setObject:dict forKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
                     [self.navigationController popToRootViewControllerAnimated:YES];
                     [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_LOGIN_SUCCESS object:self userInfo:data];
+                    
+                    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationType)
+                    (UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeBadge)];
                 }
                 else
                 {

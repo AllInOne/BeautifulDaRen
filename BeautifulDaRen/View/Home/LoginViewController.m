@@ -323,6 +323,9 @@ typedef enum
                  [[NSUserDefaults standardUserDefaults] setObject:userName forKey:USERDEFAULT_AUTO_LOGIN_ACCOUNT_NAME];
                  [[NSUserDefaults standardUserDefaults] setObject:password forKey:USERDEFAULT_AUTO_LOGIN_ACCOUNT_PASSWORD];
                  [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:USERDEFAULT_AUTO_LOGIN_ACCOUNT_IS_SINA];
+                 
+                 [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationType)
+                  (UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeBadge)];
              }
          }];
     }

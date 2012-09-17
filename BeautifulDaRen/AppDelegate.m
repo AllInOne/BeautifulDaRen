@@ -11,6 +11,8 @@
 #import "RootTabViewController.h"
 #import "WaitOverlay.h"
 #import "ViewConstants.h"
+#import "BSDKManager.h"
+#import "iToast.h"
 
 @implementation AppDelegate
 
@@ -37,8 +39,6 @@
     [_waitOverlay release];
     _waitOverlay = [[WaitOverlay alloc]initWithFrame:self.window.frame];
     
-    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationType)
-     (UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeBadge)];
     return YES;
 }
 
@@ -95,7 +95,13 @@
         [deviceTokenString appendFormat:@"%02lx", (unsigned long)dataBuffer[i]];
     }
     NSLog(@"device token:%@",deviceToken);
-//    NSLog(@"device token:%@",deviceTokenString);
+    [[BSDKManager sharedManager] sendDeviceToken:deviceTokenString andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+        if(AIO_STATUS_SUCCESS == status && K_BSDK_IS_RESPONSE_OK(data))
+        {
+        } else {
+            [[iToast makeText:@"系统注册通知服务失败!"] show];
+        }
+    }];
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error

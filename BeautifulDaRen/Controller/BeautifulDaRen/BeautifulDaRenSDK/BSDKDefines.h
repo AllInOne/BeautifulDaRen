@@ -61,6 +61,7 @@
 #define K_BSDK_ACTION_GETPRIVATEMSGLIST @"GetPrivateMsgList"
 #define K_BSDK_ACTION_GETPRIVATEUSERLIST @"GetPrivateUserList"
 #define K_BSDK_ACTION_SENDPRIVATEMSG @"SendPrivateMsg"
+#define K_BSDK_ACTION_BINDDEVICETOKEN @"bindUserDeviceToken"
 
 #define K_BSDK_PAGEINDEX @"Page"
 #define K_BSDK_PAGESIZE @"PageSize"
@@ -136,6 +137,7 @@
 #define K_BSDK_USERINFO @"UserInfo"
 
 #define K_BSDK_RELATEDUSERID @"RelaUserId"
+#define K_BSDK_DEVICETOKEN @"deviceToken"
 
 #define K_BSDK_RECEIVEUSERID @"ReceiveUserId"
 

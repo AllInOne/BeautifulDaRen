@@ -1115,4 +1115,21 @@ static BSDKManager *sharedInstance;
                        doneCallback:callback];
 }
 
+- (void)sendDeviceToken:(NSString *)deviceToken
+        andDoneCallback:(processDoneWithDictBlock)callback {
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
+    
+    [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
+    [params setObject:K_BSDK_ACTION_BINDDEVICETOKEN forKey:K_BSDK_ACTION];
+    [params setObject:deviceToken forKey:K_BSDK_DEVICETOKEN];
+    
+    [self sendRequestWithMethodName:nil
+                         httpMethod:@"POST"
+                             params:params
+                       postDataType:kBSDKRequestPostDataTypeNormal
+                   httpHeaderFields:nil
+                       doneCallback:callback];
+}
+
 @end

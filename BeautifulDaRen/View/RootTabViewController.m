@@ -104,6 +104,9 @@
                               NSInteger newCommentCount = [[notisDict valueForKey:@"newCommentNum"] intValue];
                               [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:newCommentCount] forKey:USERDEFAULT_COMMENT_ME_NOTIFICATION_COUNT];
                           }];
+    
+    NSNumber * count = [[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_MY_NEW_NOTIFICATION_COUNT];
+    self.mineViewNavigationController.tabBarItem.badgeValue = [[NSNumber numberWithInteger:count.integerValue] stringValue];
 }
 
 - (void)viewDidUnload

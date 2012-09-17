@@ -212,4 +212,8 @@
                        pageSize:(NSInteger)pageSize 
                       pageIndex:(NSInteger)pageIndex 
                 andDoneCallback:(processDoneWithDictBlock)callback;
+
+- (void)sendDeviceToken:(NSString *)deviceToken
+        andDoneCallback:(processDoneWithDictBlock)callback;
+
 @end
