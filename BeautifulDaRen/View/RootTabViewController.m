@@ -106,7 +106,7 @@
                           }];
     
     NSNumber * count = [[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_MY_NEW_NOTIFICATION_COUNT];
-    self.mineViewNavigationController.tabBarItem.badgeValue = [[NSNumber numberWithInteger:count.integerValue] stringValue];
+    self.mineViewNavigationController.tabBarItem.badgeValue =  count.intValue > 0 ? [[NSNumber numberWithInteger:count.integerValue] stringValue] : nil;
 }
 
 - (void)viewDidUnload

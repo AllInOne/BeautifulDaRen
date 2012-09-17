@@ -435,6 +435,18 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_HIDEWAITOVERLAY object:self];
             if(status == AIO_STATUS_SUCCESS)
             {
+                self.navigationController.tabBarItem.badgeValue = nil;
+                [[NSUserDefaults standardUserDefaults] setObject:nil
+                                                          forKey:USERDEFAULT_MY_NEW_NOTIFICATION_COUNT];
+                [[NSUserDefaults standardUserDefaults] setObject:nil
+                                                          forKey:USERDEFAULT_AT_ME_NOTIFICATION_COUNT];
+                [[NSUserDefaults standardUserDefaults] setObject:nil
+                                                          forKey:USERDEFAULT_PRIVATE_MESSAGE_NOTIFICATION_COUNT];
+                [[NSUserDefaults standardUserDefaults] setObject:nil
+                                                          forKey:USERDEFAULT_FOLLOW_ME_NOTIFICATION_COUNT];
+                [[NSUserDefaults standardUserDefaults] setObject:nil
+                                                          forKey:USERDEFAULT_COMMENT_ME_NOTIFICATION_COUNT];
+                
                 [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:USERDEFAULT_IS_AUTO_LOGIN];
                 [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_LOGINOUT_SUCCESS object:self userInfo:data];
                 

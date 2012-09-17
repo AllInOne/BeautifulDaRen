@@ -143,7 +143,7 @@
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     [self.navigationItem.rightBarButtonItem setEnabled:NO];
 
-    [[BSDKManager sharedManager] getPrivateMsgUserListByType:1
+    [[BSDKManager sharedManager] getPrivateMsgUserListByType:K_BSDK_PRIVATEMSG_USER_TYPE_ALL
                                                     pageSize:PRIVATE_LETTER_PAGE_SIZE
                                                    pageIndex:_currentIndex andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
                                                        if (K_BSDK_IS_RESPONSE_OK(data)) {
