@@ -51,6 +51,7 @@
 - (void)refreshView;
 - (void)addToolbar;
 - (void)onRefreshButtonClicked;
+- (void)onBackButtonClicked;
 
 - (void)getWeiboDataFromResponse;
 @end
@@ -79,6 +80,9 @@
 @synthesize isAttachedImageDone = _isAttachedImageDone;
 @synthesize isAttachedImageSucceed = _isAttachedImageSucceed;
 @synthesize attachedImage = _attachedImage;
+@synthesize favourateBgView = _favourateBgView;
+@synthesize favourateWaitingLabel = _favourateWaitingLabel;
+@synthesize favourateWaitingIndicator = _favourateWaitingIndicator;
 
 - (void)dealloc
 {
@@ -103,6 +107,9 @@
     [_weiboId release];
     [_vMarkImageView release];
     [_attachedImage release];
+    [_favourateBgView release];
+    [_favourateWaitingIndicator release];
+    [_favourateWaitingLabel release];
     
     [super dealloc];
 }
@@ -235,42 +242,69 @@
         return;
     }
     
-    self.isDoingFav = YES;
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: TRUE];
+    [self.favourateBgView setHidden:NO];
+    [self.favourateBgView setFrame:CGRectMake(0.0, CGRectGetMaxY(self.view.frame), SCREEN_WIDTH, 44)];
+    [self.favourateBgView setBackgroundColor:[UIColor whiteColor]];
     
-    if (K_BSDK_IS_BLOG_FAVOURATE(self.weiboData)) {
-        [[BSDKManager sharedManager] removeFavourateForWeibo:[self.weiboData objectForKey:K_BSDK_UID] andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-            self.isDoingFav = NO;
-            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: FALSE];
-
-            if (K_BSDK_IS_RESPONSE_OK(data)) {
-                [[iToast makeText:NSLocalizedString(@"cancel_favourate_succeed", @"cancel_favourate_succeed")] show];
-                [self onRefreshButtonClicked];
-            }
-            else
-            {
-                [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
-            }
-
-        }];
+    [self.favourateWaitingIndicator startAnimating];
+    
+    if (K_BSDK_IS_BLOG_FAVOURATE(self.weiboData))
+    {
+         self.favourateWaitingLabel.text = NSLocalizedString(@"canceling_favourate", @"canceling_favourate");
     }
     else
     {
-        [[BSDKManager sharedManager] addFavourateForWeibo:[self.weiboData objectForKey:K_BSDK_UID] andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-            self.isDoingFav = NO;
-            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: FALSE];
-            
-            if (K_BSDK_IS_RESPONSE_OK(data)) {
-                [[iToast makeText:NSLocalizedString(@"favourate_succeed", @"favourate_succeed")] show];
-                [self onRefreshButtonClicked];
-            }
-            else
-            {
-                [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
-            }
-            
-        }];
+         self.favourateWaitingLabel.text = NSLocalizedString(@"favourating", @"favourating");
     }
+    
+    [UIView animateWithDuration:0.5
+                     animations:^{ 
+                         [self.toolbar setHidden:YES];
+                         
+                         [self.favourateBgView setFrame:CGRectMake(0.0, CGRectGetMaxY(self.view.frame) - 44, SCREEN_WIDTH, 44)];
+                     } 
+                     completion:^(BOOL finished){
+                         self.isDoingFav = YES;
+                         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: TRUE];
+                         
+                         if (K_BSDK_IS_BLOG_FAVOURATE(self.weiboData)) {
+                             [[BSDKManager sharedManager] removeFavourateForWeibo:[self.weiboData objectForKey:K_BSDK_UID] andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+                                 self.isDoingFav = NO;
+                                 [self.favourateBgView setHidden:YES];
+                                 [self.favourateWaitingIndicator stopAnimating];
+                                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: FALSE];
+                                 
+                                 if (K_BSDK_IS_RESPONSE_OK(data)) {
+                                     [[iToast makeText:NSLocalizedString(@"cancel_favourate_succeed", @"cancel_favourate_succeed")] show];
+                                     [self onRefreshButtonClicked];
+                                 }
+                                 else
+                                 {
+                                     [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
+                                 }
+                                 
+                             }];
+                         }
+                         else
+                         {
+                             [[BSDKManager sharedManager] addFavourateForWeibo:[self.weiboData objectForKey:K_BSDK_UID] andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+                                 self.isDoingFav = NO;
+                                 [self.favourateBgView setHidden:YES];
+                                 [self.favourateWaitingIndicator stopAnimating];
+                                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: FALSE];
+                                 
+                                 if (K_BSDK_IS_RESPONSE_OK(data)) {
+                                     [[iToast makeText:NSLocalizedString(@"favourate_succeed", @"favourate_succeed")] show];
+                                     [self onRefreshButtonClicked];
+                                 }
+                                 else
+                                 {
+                                     [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
+                                 }
+                                 
+                             }];
+                         }
+                     }];
 }
 
 - (void)onDeleteWeibo
@@ -345,6 +379,7 @@
     }
 
     [self onRefreshButtonClicked];
+    [self.favourateBgView setHidden:YES];
 }
 
 - (void)viewDidUnload
@@ -367,6 +402,10 @@
     self.usernameLabel = nil;
     self.vMarkImageView = nil;
     self.attachedImage = nil;
+    
+    self.favourateWaitingIndicator = nil;
+    self.favourateWaitingLabel = nil;
+    self.favourateBgView = nil;
     
     [self.toolbar removeFromSuperview];
     self.toolbar = nil;

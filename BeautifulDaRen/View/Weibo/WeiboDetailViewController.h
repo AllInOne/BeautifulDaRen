@@ -37,6 +37,10 @@
 @property (nonatomic, retain) IBOutlet UIImageView * weiboAttachedImageView;
 @property (nonatomic, retain) IBOutlet UIButton * weiboAttachedImageButton;
 
+@property (nonatomic, retain) IBOutlet UIView * favourateBgView;
+@property (nonatomic, retain) IBOutlet UILabel * favourateWaitingLabel;
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView * favourateWaitingIndicator;
+
 -(IBAction)onCommentListButtonPressed:(UIButton*)sender;
 -(IBAction)onForwardButtonPressed:(UIButton*)sender;
 -(IBAction)onFavorateListButtonPressed:(UIButton*)sender;

@@ -77,6 +77,8 @@
 #define K_BSDK_USERNAMEKEYWORDS @"UserNameKeyWords"
 #define K_BSDK_PASSWORD @"PassWord"
 
+#define K_BSDK_LASTMSGINFO @"LastMsgInfo"
+
 #define K_BSDK_REPASSWORD @"RePassWord"
 #define K_BSDK_OLDPASSWORD @"OldPassWord"
 

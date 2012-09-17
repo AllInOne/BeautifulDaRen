@@ -20,6 +20,7 @@
 #import "WeiboComposerViewController.h"
 #import "UIImageView+WebCache.h"
 #import "BorderImageView.h"
+#import "PrivateLetterDetailViewController.h"
 
 typedef enum
 {
@@ -624,9 +625,16 @@ typedef enum
 
 - (void)onPrivateLetter
 {
-    [[BSDKManager sharedManager] sendPrivateMsgToUser:[self.friendDictionary objectForKey:K_BSDK_UID] content:@"test private message" andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-        [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
-    }];
+    PrivateLetterDetailViewController *privateLetterDetailViewControlller = 
+    [[PrivateLetterDetailViewController alloc] initWithNibName:nil bundle:nil];
+    
+    privateLetterDetailViewControlller.userId = [self.friendDictionary valueForKey:K_BSDK_UID];
+    
+    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: privateLetterDetailViewControlller];
+    
+    [self.navigationController presentModalViewController:navController animated:YES];
+    [privateLetterDetailViewControlller release];
+    [navController release];  
 
 
 }
