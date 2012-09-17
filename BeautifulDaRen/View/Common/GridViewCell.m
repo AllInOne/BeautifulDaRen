@@ -23,6 +23,8 @@
 @synthesize fifthButton;
 @synthesize sixthButton;
 
+@synthesize secondBadgeView;
+
 @synthesize delegate;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier

@@ -10,6 +10,7 @@
 
 #import "RootTabViewController.h"
 #import "WaitOverlay.h"
+#import "ViewConstants.h"
 
 @implementation AppDelegate
 
@@ -36,8 +37,8 @@
     [_waitOverlay release];
     _waitOverlay = [[WaitOverlay alloc]initWithFrame:self.window.frame];
     
-//    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationType)
-//     (UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeBadge)];
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationType)
+     (UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeBadge)];
     return YES;
 }
 
@@ -63,6 +64,7 @@
     /*
      Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
      */
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
@@ -92,7 +94,21 @@
     for (int i = 0; i < [deviceToken length]; i++) {
         [deviceTokenString appendFormat:@"%02lx", (unsigned long)dataBuffer[i]];
     }
-    NSLog(@"device token:%@",deviceTokenString);
+    NSLog(@"device token:%@",deviceToken);
+//    NSLog(@"device token:%@",deviceTokenString);
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
+{
+    NSLog(@"error:%@",error);
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    NSLog(@"%@",userInfo);
+    [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_MINE_NEW_INFO
+                                                        object:self
+                                                      userInfo:userInfo];
 }
 
 /*

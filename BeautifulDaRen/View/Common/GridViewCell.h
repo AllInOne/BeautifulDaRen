@@ -25,6 +25,7 @@
 @property (retain, nonatomic) IBOutlet UIButton * fourthButton;
 @property (retain, nonatomic) IBOutlet UIButton * fifthButton;
 @property (retain, nonatomic) IBOutlet UIButton * sixthButton;
+@property (retain, nonatomic) IBOutlet UIImageView *secondBadgeView;
 
 @property (retain, nonatomic) id<ButtonPressDelegate> delegate;
 

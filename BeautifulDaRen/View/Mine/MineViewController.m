@@ -39,6 +39,9 @@
 
 -(void)refreshUserInfo;
 
+-(UILabel *)getBadgeLabel:(NSString *)badge;
+- (void)refreshBadges:(NSString *)string;
+
 @end
 
 @implementation MineViewController
@@ -221,6 +224,12 @@
         _fansButton = ((GridViewCell*)cell).secondButton;
         _collectionButton = ((GridViewCell*)cell).thirdButton;
         _mypublishButton = ((GridViewCell*)cell).fourthButton;
+        NSNumber * followNumber = [[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_FOLLOW_ME_NOTIFICATION_COUNT];
+        if (followNumber.intValue > 0) {
+            ((GridViewCell*)cell).secondBadgeView.image = [UIImage imageNamed:@"badge"];
+            NSString * badge = followNumber.intValue < 10 ? [followNumber stringValue] : @"N";
+            [((GridViewCell*)cell).secondBadgeView addSubview:[self getBadgeLabel:badge]];
+        }
     }
     else if (section == 2) {
         cell = [tableView dequeueReusableCellWithIdentifier:buttonViewCellIdentifier];
@@ -245,6 +254,12 @@
                 [buttonViewCell addSubview:numberLabel];
                 [numberLabel release];
                 buttonViewCell.buttonLeftIcon.image = [UIImage imageNamed:@"my_at"];
+                NSNumber * atMeNumber = [[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_AT_ME_NOTIFICATION_COUNT];
+                if (atMeNumber.intValue > 0) {
+                    buttonViewCell.badgeView.image = [UIImage imageNamed:@"badge"];
+                    NSString * badge = atMeNumber.intValue < 10 ? [atMeNumber stringValue] : @"N";
+                    [buttonViewCell.badgeView addSubview:[self getBadgeLabel:badge]];
+                }
                 break;
             }
             case 1:
@@ -262,6 +277,12 @@
                 [buttonViewCell addSubview:numberLabel];
                 [numberLabel release];
                 buttonViewCell.buttonLeftIcon.image = [UIImage imageNamed:@"comment_icon"];
+                NSNumber * commentMeNumber = [[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_COMMENT_ME_NOTIFICATION_COUNT];
+                if (commentMeNumber.intValue > 0) {
+                    buttonViewCell.badgeView.image = [UIImage imageNamed:@"badge"];
+                    NSString * badge = commentMeNumber.intValue < 10 ? [commentMeNumber stringValue] : @"N";
+                    [buttonViewCell.badgeView addSubview:[self getBadgeLabel:badge]];
+                }
                 break;
             }
             case 2:
@@ -279,6 +300,13 @@
                 [buttonViewCell addSubview:numberLabel];
                 [numberLabel release];
                 buttonViewCell.buttonLeftIcon.image = [UIImage imageNamed:@"my_private_letter"];
+                
+                NSNumber * privateMessageNumber = [[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_PRIVATE_MESSAGE_NOTIFICATION_COUNT];
+                if (privateMessageNumber.intValue > 0) {
+                    buttonViewCell.badgeView.image = [UIImage imageNamed:@"badge"];
+                    NSString * badge = privateMessageNumber.intValue < 10 ? [privateMessageNumber stringValue] : @"N";
+                    [buttonViewCell.badgeView addSubview:[self getBadgeLabel:badge]];
+                }
                 break;
             }
         }
@@ -360,6 +388,8 @@
                 
                 [navController release];
                 [forwadMeViewController release];
+                
+                [self refreshBadges:USERDEFAULT_AT_ME_NOTIFICATION_COUNT];
                 break;
             }
             case 1:
@@ -375,6 +405,9 @@
                 [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
                 [navController release];
                 [commentMeViewController release];
+               
+                
+                [self refreshBadges:USERDEFAULT_COMMENT_ME_NOTIFICATION_COUNT];
                 break;
             }
             case 2:
@@ -389,6 +422,8 @@
                 
                 [navController release];
                 [privateLetterViewController release];
+                
+                [self refreshBadges:USERDEFAULT_PRIVATE_MESSAGE_NOTIFICATION_COUNT];
                 break;
             }
         }
@@ -441,6 +476,7 @@
                           bundle:nil
                           type:FriendListViewController_TYPE_MY_FANS
                           dictionary:nil];
+        [self refreshBadges:USERDEFAULT_FOLLOW_ME_NOTIFICATION_COUNT];
     }
     else if (button == _collectionButton)
     {
@@ -508,6 +544,7 @@
                                           andDoneCallback:^(AIO_STATUS status, NSDictionary *data)
         {
             if (K_BSDK_IS_RESPONSE_OK(data)) {
+                
                 NSAssert(data && [data count] > 0, @"data should not be nil");
                [[NSUserDefaults standardUserDefaults] setObject:data forKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
                 [self.tableView reloadData];
@@ -522,7 +559,6 @@
     }
 }
 
-
 - (IBAction)onEditPressed:(UIButton*)sender
 {
     UIViewController * viewController = [[MineEditingViewController alloc]
@@ -534,5 +570,33 @@
     
     [viewController release];
     [navController release];
+}
+
+
+-(UILabel *)getBadgeLabel:(NSString *)badge {
+    UILabel * badgeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
+    badgeLabel.backgroundColor = [UIColor clearColor];
+    badgeLabel.textColor = [UIColor whiteColor];
+    badgeLabel.textAlignment = UITextAlignmentCenter;
+    badgeLabel.text = badge;
+    return [badgeLabel autorelease];
+}
+
+- (void)refreshBadges:(NSString *)string {
+    NSNumber *count = [[NSUserDefaults standardUserDefaults] valueForKey:string];
+    NSNumber *allCount = [[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_MY_NEW_NOTIFICATION_COUNT];
+    NSNumber *newAllCount = [NSNumber numberWithInteger:allCount.intValue - count.intValue];
+    [[NSUserDefaults standardUserDefaults] setObject:newAllCount
+                                              forKey:USERDEFAULT_MY_NEW_NOTIFICATION_COUNT];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:0]
+                                              forKey:string];
+
+    if ( newAllCount.intValue <= 0) {
+        self.navigationController.tabBarItem.badgeValue = nil;
+    } else {
+        self.navigationController.tabBarItem.badgeValue = newAllCount.stringValue;
+    }
+    
+    [self.tableView reloadData];
 }
 @end

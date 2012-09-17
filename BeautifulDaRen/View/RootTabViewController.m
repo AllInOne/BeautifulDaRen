@@ -17,6 +17,7 @@
 #import "MyShowViewController.h"
 #import "CategoryViewController.h"
 #import "LoginViewController.h"
+#import "MineViewController.h"
 
 #define INDEX_MINE_VIEW_NAVIGATION (4)
 
@@ -82,8 +83,36 @@
                           object:nil
                           queue:nil
                           usingBlock:^(NSNotification *notification) {
-                              // TODO
-                              self.mineViewNavigationController.tabBarItem.badgeValue = @"2";
+                              NSDictionary * apsDict = [[notification valueForKey:@"userInfo"] valueForKey:@"aps"];
+                              
+                              NSNumber * myNotificationCount = [[NSUserDefaults standardUserDefaults] objectForKey:USERDEFAULT_MY_NEW_NOTIFICATION_COUNT];
+                              NSInteger newCount = [[apsDict valueForKey:@"badge"] intValue];
+                              NSInteger currentCount = myNotificationCount.intValue + newCount;
+                              self.mineViewNavigationController.tabBarItem.badgeValue = [[NSNumber numberWithInteger:currentCount] stringValue];
+                              [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:currentCount] forKey:USERDEFAULT_MY_NEW_NOTIFICATION_COUNT];
+                              
+                              
+                              NSDictionary * notisDict = [apsDict valueForKey:@"notifications"];
+                              
+                              NSNumber * myAtCount = [[NSUserDefaults standardUserDefaults] objectForKey:USERDEFAULT_AT_ME_NOTIFICATION_COUNT];
+                              NSInteger newAtCount = [[notisDict valueForKey:@"newAtNum"] intValue];
+                              NSInteger currentAtCount = myAtCount.intValue + newAtCount;
+                              [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:currentAtCount] forKey:USERDEFAULT_AT_ME_NOTIFICATION_COUNT];
+                              
+                              NSNumber * messageCount = [[NSUserDefaults standardUserDefaults] objectForKey:USERDEFAULT_PRIVATE_MESSAGE_NOTIFICATION_COUNT];
+                              NSInteger newMessageCount = [[notisDict valueForKey:@"newPrivateNum"] intValue];
+                              NSInteger currentMessageCount = messageCount.intValue + newMessageCount;
+                              [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:currentMessageCount] forKey:USERDEFAULT_PRIVATE_MESSAGE_NOTIFICATION_COUNT];
+                              
+                              NSNumber * followCount = [[NSUserDefaults standardUserDefaults] objectForKey:USERDEFAULT_FOLLOW_ME_NOTIFICATION_COUNT];
+                              NSInteger newFollowCount = [[notisDict valueForKey:@"newAttentionNum"] intValue];
+                              NSInteger currentFollowCount = followCount.intValue + newFollowCount;
+                              [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:currentFollowCount] forKey:USERDEFAULT_FOLLOW_ME_NOTIFICATION_COUNT];
+                              
+                              NSNumber * commentCount = [[NSUserDefaults standardUserDefaults] objectForKey:USERDEFAULT_COMMENT_ME_NOTIFICATION_COUNT];
+                              NSInteger newCommentCount = [[notisDict valueForKey:@"newCommentNum"] intValue];
+                              NSInteger currentCommentCount = commentCount.intValue + newCommentCount;
+                              [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:currentCommentCount] forKey:USERDEFAULT_COMMENT_ME_NOTIFICATION_COUNT];
                           }];
 }
 
@@ -128,7 +157,7 @@
         [self startMyshowAction];
         return NO;
     }
-
+    
     return YES;
 }
 

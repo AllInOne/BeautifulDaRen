@@ -18,6 +18,7 @@
 @synthesize rightButton;
 @synthesize segmentedControl;
 @synthesize buttonLeftIconPressed;
+@synthesize badgeView;
 
 @synthesize delegate;
 
