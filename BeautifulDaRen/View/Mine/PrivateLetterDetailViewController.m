@@ -13,7 +13,7 @@
 #import "iToast.h"
 
 #define BUBBLE_VIEW_MARGIN  (10.0)
-#define PRIVATE_LETTER_PAGE_SIZE    (1)
+#define PRIVATE_LETTER_PAGE_SIZE    (20)
 
 @interface PrivateLetterDetailViewController ()
 
