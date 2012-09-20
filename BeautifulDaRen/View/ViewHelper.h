@@ -11,6 +11,8 @@
 
 @interface ViewHelper : NSObject
 
++ (dispatch_queue_t) getImageDownloadQueue;
+
 +(void)showSimpleMessage:(NSString*)message withTitle:(NSString*)title withButtonText:(NSString*)buttonText;
 
 +(UITableViewCell*) getLoginWithExtenalViewCellInTableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;

@@ -51,7 +51,22 @@ static BUIFont * instance;
 
 @end
 
+static dispatch_queue_t background_cacheQueue = NULL;
+
+#pragma mark - C interface
+static dispatch_queue_t getImageDownloadQueue() {
+    if (background_cacheQueue == NULL){
+        background_cacheQueue = dispatch_queue_create("ImageDownloaderQueue", DISPATCH_QUEUE_CONCURRENT);
+    }
+    
+    return background_cacheQueue;
+}
+
 @implementation ViewHelper
+
++ (dispatch_queue_t) getImageDownloadQueue {
+    return getImageDownloadQueue();
+}
 
 +(void)showSimpleMessage:(NSString*)message withTitle:(NSString*)title withButtonText:(NSString*)buttonText
 {

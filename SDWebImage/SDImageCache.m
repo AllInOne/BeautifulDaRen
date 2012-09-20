@@ -70,6 +70,7 @@ static natural_t get_free_memory(void)
         cacheInQueue.maxConcurrentOperationCount = 1;
         cacheOutQueue = [[NSOperationQueue alloc] init];
         cacheOutQueue.maxConcurrentOperationCount = 1;
+        
 
 #if TARGET_OS_IPHONE
         // Subscribe to app events

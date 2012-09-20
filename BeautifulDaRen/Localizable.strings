@@ -9,10 +9,10 @@
 
 "app_name" = "秀悦购";
 
-"tab_home" = "最新";
+"tab_home" = "关注";
 "tab_mine" = "我的";
 "tab_myshow" = "我秀";
-"tab_hot" = "关注";
+"tab_hot" = "最新";
 "tab_search" = "发现";
 "enter" = "确认";
 "go_back" = "返回";
