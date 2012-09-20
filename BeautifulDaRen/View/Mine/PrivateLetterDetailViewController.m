@@ -41,6 +41,7 @@
 @synthesize messages = _messages;
 @synthesize userId = _userId;
 @synthesize loadButton = _loadButton;
+@synthesize sendButton = _sendButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -83,8 +84,6 @@
     
     [self.view addSubview:activityIndicator];
     
-    _currentPageIndex++;
-    
     [[BSDKManager sharedManager] getPrivateMsgListOfUser:self.userId
                                                     type:K_BSDK_PRIVATEMSG_MSG_TYPE_ALL
                                                 pageSize:PRIVATE_LETTER_PAGE_SIZE 
@@ -99,6 +98,8 @@
                                                    [_messages addObjectsFromArray:[data objectForKey:K_BSDK_USERLIST]];
                                                    
                                                    [self refreshView];
+                                                   
+                                                    _currentPageIndex++;
                                                    
                                                }];
     
@@ -151,6 +152,8 @@
     }
     
     [self.contentScrollView setContentSize:CGSizeMake(SCREEN_WIDTH, (viewHeight))];
+    
+    [self.contentScrollView setContentOffset:CGPointMake(0.0, (viewHeight - USER_WINDOW_HEIGHT))];
 
 }
 
@@ -164,6 +167,7 @@
     [_messages release];
     [_userId release];
     [_loadButton release];
+    [_sendButton release];
 
     [super dealloc];
 }
@@ -196,6 +200,8 @@
                                                    [_messages addObjectsFromArray:[data objectForKey:K_BSDK_USERLIST]];
                                                     
                                                    [self refreshView];
+                                                   
+                                                    _currentPageIndex++;
                                                        
                                                    }];
     
@@ -224,6 +230,7 @@
     self.footerView = nil;
     self.privateLetterComposerView = nil;
     self.loadButton = nil;
+    self.sendButton = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -291,8 +298,17 @@
 
 -(IBAction)onSendButtonPressed:(id)sender
 {
+    [self.sendButton setEnabled:NO];
     [[BSDKManager sharedManager] sendPrivateMsgToUser:self.userId content:self.privateLetterComposerView.text andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+        [self.sendButton setEnabled:YES];
         [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
+        if (K_BSDK_IS_RESPONSE_OK(data)) {
+            [self.privateLetterComposerView resignFirstResponder];
+            
+            self.currentPageIndex = 1;
+            [self.messages removeAllObjects];
+            [self onLoadPrivateLetterButtonClicked];
+        }
     }];
 }
 @end

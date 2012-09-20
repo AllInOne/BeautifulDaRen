@@ -14,6 +14,7 @@
 
 @property (nonatomic, retain) IBOutlet UIScrollView * contentScrollView;
 @property (nonatomic, retain) IBOutlet UIView * footerView;
+@property (nonatomic, retain) IBOutlet UIButton * sendButton;
 
 @property (nonatomic, retain) IBOutlet UITextField * privateLetterComposerView;
 
