@@ -37,6 +37,8 @@
 @property (retain, nonatomic) IBOutlet UIButton * topicButton;
 @property (retain, nonatomic) IBOutlet UIButton * editButton;
 
+@property (retain, nonatomic) id observerForNewInfoToMe;
+
 -(void)refreshUserInfo;
 
 -(UILabel *)getBadgeLabel:(NSString *)badge;
@@ -54,6 +56,7 @@
 @synthesize topicButton = _topicButton;
 @synthesize editButton = _editButton;
 @synthesize mypublishButton = _mypublishButton;
+@synthesize observerForNewInfoToMe = _observerForNewInfoToMe;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -92,11 +95,22 @@
     
     [self.navigationItem setTitle:NSLocalizedString(@"title_mine", @"title_mine")];
     [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClick) title:NSLocalizedString(@"refresh", @"refresh")]];
+    
+    
+    _observerForNewInfoToMe = [[NSNotificationCenter defaultCenter]
+                               addObserverForName:K_NOTIFICATION_MINE_NEW_INFO
+                               object:nil
+                               queue:nil
+                               usingBlock:^(NSNotification *notification) {
+                                   [self.tableView reloadData];
+                               }];
+    
+
 }
 
 - (void)viewDidUnload
 {
-    [super viewDidUnload];
+    [[NSNotificationCenter defaultCenter] removeObserver:_observerForNewInfoToMe];
     self.tableView = nil;
     self.followButton = nil;
     self.fansButton = nil;
@@ -106,6 +120,7 @@
     self.topicButton = nil;
     self.editButton = nil;
     self.mypublishButton = nil;
+    [super viewDidUnload];
 }
 
 - (void)viewWillAppear:(BOOL)animated
