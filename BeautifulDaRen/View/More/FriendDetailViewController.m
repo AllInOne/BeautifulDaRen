@@ -513,7 +513,10 @@ typedef enum
         {
             EdittingViewController * edittingViewController = [[EdittingViewController alloc] initWithNibName:@"EdittingViewController" bundle:nil type:EdittingViewController_type0 block:^(NSString *text) {
                 if (![text isEqualToString:[self.friendDictionary valueForKey:K_BSDK_USER_NOTE_NAME]]) {
+                    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: YES];
                     [[BSDKManager sharedManager] addNoteToUserId:[self.friendDictionary valueForKey:K_BSDK_UID] noteName:text andCallBack:^(AIO_STATUS status, NSDictionary *data) {
+                        
+                        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: NO];
                         if(AIO_STATUS_SUCCESS == status && K_BSDK_IS_RESPONSE_OK(data))
                         {
                             [self.friendDictionary setValue:text forKey:K_BSDK_USER_NOTE_NAME];

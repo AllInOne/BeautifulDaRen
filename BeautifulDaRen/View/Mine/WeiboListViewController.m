@@ -293,9 +293,13 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"===========\n%@",[self.dataList objectAtIndex:indexPath.row]);
     NSDictionary * originalBlogInfo = [[self.dataList objectAtIndex:indexPath.row] objectForKey:K_BSDK_BLOGINFO];
     if (originalBlogInfo == nil) {
         originalBlogInfo = [[self.dataList objectAtIndex:indexPath.row] objectForKey:K_BSDK_RETWEET_STATUS];
+        if (originalBlogInfo == nil) {
+            originalBlogInfo = [self.dataList objectAtIndex:indexPath.row];
+        }
     }
     NSLog(@"blog:%@",originalBlogInfo);
     if (originalBlogInfo != nil && K_BSDK_WEIBO_VISIBLE_YES == [[originalBlogInfo valueForKey:K_BSDK_WEIBO_VISIBLE] intValue])
