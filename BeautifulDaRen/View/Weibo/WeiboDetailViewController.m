@@ -36,7 +36,6 @@
 #define MAP_VIEW_HEIGHT     (120.0f)
 #define MAP_VIEW_X_OFFSET   ((SCREEN_WIDTH - MAP_VIEW_WIDTH)/2)
 
-
 @interface WeiboDetailViewController ()
 
 @property (nonatomic, retain) MapViewController * mapViewController;
@@ -110,7 +109,7 @@
     [_favourateBgView release];
     [_favourateWaitingIndicator release];
     [_favourateWaitingLabel release];
-    
+
     [super dealloc];
 }
 
@@ -120,11 +119,10 @@
     if (self)
     {
         [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
-        
-        [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClicked) title:NSLocalizedString(@"refresh", @"refresh")]];       
+
+        [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClicked) title:NSLocalizedString(@"refresh", @"refresh")]];
         self.navigationItem.title = NSLocalizedString(@"weibo_detail", @"weibo_detail");
-        
-        
+
         self.weiboData = weiboDict;
     }
     return self;
@@ -135,8 +133,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
-        
-        [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClicked) title:NSLocalizedString(@"refresh", @"refresh")]];       
+
+        [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClicked) title:NSLocalizedString(@"refresh", @"refresh")]];
         self.navigationItem.title = NSLocalizedString(@"weibo_detail", @"weibo_detail");
     }
     return self;
@@ -146,7 +144,7 @@
 {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
+
     // Release any cached data, images, etc that aren't in use.
 }
 
@@ -157,12 +155,12 @@
 
 - (void)onForward
 {
-    WeiboForwardCommentViewController *forwardViewContoller = 
+    WeiboForwardCommentViewController *forwardViewContoller =
     [[WeiboForwardCommentViewController alloc] initWithNibName:nil bundle:nil];
     forwardViewContoller.forwardMode = YES;
     [forwardViewContoller setDelegate:self];
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: forwardViewContoller];
- 
+
     [self.navigationController presentModalViewController:navController animated:YES];
 
     [navController release];
@@ -171,14 +169,14 @@
 
 - (void)onComment
 {
-    WeiboForwardCommentViewController *forwardViewContoller = 
+    WeiboForwardCommentViewController *forwardViewContoller =
     [[WeiboForwardCommentViewController alloc] initWithNibName:nil bundle:nil];
     forwardViewContoller.forwardMode = NO;
     [forwardViewContoller setDelegate:self];
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: forwardViewContoller];
-    
+
     [self.navigationController presentModalViewController:navController animated:YES];
-    
+
     [navController release];
     [forwardViewContoller release];
 }
@@ -190,10 +188,10 @@
     __block NSInteger doneCount = 0;
     __block NSInteger doneCountExpected = 0;
     __block NSString * errorMsg = nil;
-    
+
     processDoneWithDictBlock doneBlock = ^(AIO_STATUS status, NSDictionary * data){
         NSLog(@"Send done: %d, %@", status, data);
-        
+
         doneCount++;
         if (doneCount == doneCountExpected) {
             [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_HIDEWAITOVERLAY object:self];
@@ -201,7 +199,7 @@
             if ([data objectForKey:K_BSDK_RESPONSE_STATUS] && !K_BSDK_IS_RESPONSE_OK(data)) {
                 errorMsg = K_BSDK_GET_RESPONSE_MESSAGE(data);
             }
-            
+
             if (errorMsg == nil)
             {
                 [ViewHelper showSimpleMessage:NSLocalizedString(@"send_succeed", @"send_succeed") withTitle:nil withButtonText:NSLocalizedString(@"ok", @"ok")];
@@ -212,24 +210,23 @@
                 [ViewHelper showSimpleMessage:errorMsg withTitle:nil withButtonText:NSLocalizedString(@"ok", @"ok")];
             }
         }
-        
+
     };
-    
-    
+
     if (view.forwardMode || (!view.forwardMode && view.isCheckBoxChecked))
     {
         [[BSDKManager sharedManager] rePostWeiboById:[self.weiboData objectForKey:K_BSDK_UID] WithText:view.weiboContentTextView.text andDoneCallback:doneBlock];
-        
+
         doneCountExpected++;
-        
+
         if (![view.sinaShareImageView isHidden]) {
             NSString * syncContent = [NSString stringWithFormat:@"商场: @%@ 品牌: @%@ 标价: ¥%@ %@ <%@>", [self.weiboData objectForKey: K_BSDK_SHOPMERCHANT], [self.weiboData objectForKey: K_BSDK_BRANDSERVICE], [self.weiboData objectForKey: K_BSDK_PRICE], view.weiboContentTextView.text,[self.weiboData objectForKey: K_BSDK_CONTENT]];
             [[SinaSDKManager sharedManager] sendWeiBoWithText:syncContent image:self.attachedImage doneCallback:^(AIO_STATUS status, NSDictionary *data) {
-                
+
             }];
         }
     };
-    
+
     if (!view.forwardMode || (view.forwardMode && view.isCheckBoxChecked)) {
         [[BSDKManager sharedManager] sendComment:view.weiboContentTextView.text toWeibo:[self.weiboData objectForKey:K_BSDK_UID] toComment:nil andDoneCallback:doneBlock];
         doneCountExpected++;
@@ -241,13 +238,13 @@
     if (self.isDoingFav) {
         return;
     }
-    
+
     [self.favourateBgView setHidden:NO];
     [self.favourateBgView setFrame:CGRectMake(0.0, CGRectGetMaxY(self.view.frame), SCREEN_WIDTH, 44)];
     [self.favourateBgView setBackgroundColor:[UIColor whiteColor]];
-    
+
     [self.favourateWaitingIndicator startAnimating];
-    
+
     if (K_BSDK_IS_BLOG_FAVOURATE(self.weiboData))
     {
          self.favourateWaitingLabel.text = NSLocalizedString(@"canceling_favourate", @"canceling_favourate");
@@ -256,24 +253,24 @@
     {
          self.favourateWaitingLabel.text = NSLocalizedString(@"favourating", @"favourating");
     }
-    
+
     [UIView animateWithDuration:0.5
-                     animations:^{ 
+                     animations:^{
                          [self.toolbar setHidden:YES];
-                         
+
                          [self.favourateBgView setFrame:CGRectMake(0.0, CGRectGetMaxY(self.view.frame) - 44, SCREEN_WIDTH, 44)];
-                     } 
+                     }
                      completion:^(BOOL finished){
                          self.isDoingFav = YES;
                          [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: TRUE];
-                         
+
                          if (K_BSDK_IS_BLOG_FAVOURATE(self.weiboData)) {
                              [[BSDKManager sharedManager] removeFavourateForWeibo:[self.weiboData objectForKey:K_BSDK_UID] andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
                                  self.isDoingFav = NO;
                                  [self.favourateBgView setHidden:YES];
                                  [self.favourateWaitingIndicator stopAnimating];
                                  [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: FALSE];
-                                 
+
                                  if (K_BSDK_IS_RESPONSE_OK(data)) {
                                      [[iToast makeText:NSLocalizedString(@"cancel_favourate_succeed", @"cancel_favourate_succeed")] show];
                                      [self onRefreshButtonClicked];
@@ -282,7 +279,7 @@
                                  {
                                      [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
                                  }
-                                 
+
                              }];
                          }
                          else
@@ -292,7 +289,7 @@
                                  [self.favourateBgView setHidden:YES];
                                  [self.favourateWaitingIndicator stopAnimating];
                                  [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: FALSE];
-                                 
+
                                  if (K_BSDK_IS_RESPONSE_OK(data)) {
                                      [[iToast makeText:NSLocalizedString(@"favourate_succeed", @"favourate_succeed")] show];
                                      [self onRefreshButtonClicked];
@@ -301,7 +298,7 @@
                                  {
                                      [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
                                  }
-                                 
+
                              }];
                          }
                      }];
@@ -329,14 +326,14 @@
 -(IBAction)onCommentListButtonPressed:(UIButton*)sender
 {
     if (self.weiboData) {
-        ForwardCommentListViewController *commentListViewContoller = 
+        ForwardCommentListViewController *commentListViewContoller =
         [[ForwardCommentListViewController alloc] initWithNibName:nil bundle:nil];
-        
+
         commentListViewContoller.relatedBlogId = [self.weiboData objectForKey:K_BSDK_UID];
         UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: commentListViewContoller];
-        
+
         [self.navigationController presentModalViewController:navController animated:YES];
-        
+
         [navController release];
         [commentListViewContoller release];
     }
@@ -359,9 +356,9 @@
                                                                type:FriendListViewController_TYPE_FAV_ONE_BLOG
                                                                dictionary:self.weiboData];
         UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: friendListViewController];
-        
+
         [self.navigationController presentModalViewController:navController animated:YES];
-        
+
         [navController release];
         [friendListViewController release];
     }
@@ -402,11 +399,11 @@
     self.usernameLabel = nil;
     self.vMarkImageView = nil;
     self.attachedImage = nil;
-    
+
     self.favourateWaitingIndicator = nil;
     self.favourateWaitingLabel = nil;
     self.favourateBgView = nil;
-    
+
     [self.toolbar removeFromSuperview];
     self.toolbar = nil;
 
@@ -428,11 +425,11 @@
         self.toolbar = nil;
     }
    _toolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0,372, 320,44)];
-    
+
     UIBarButtonItem *flexible = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    
+
     //        UIBarButtonItem *buyButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar购买22x22" target:self action:@selector(onBuy)];
-    
+
     UIBarButtonItem *refreshButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar_refresh_icon" target:self action:@selector(onRefresh)];
     if ( ![[BSDKManager sharedManager] isLogin]) {
         [refreshButtonItem setEnabled:NO];
@@ -442,12 +439,12 @@
     if ( ![[BSDKManager sharedManager] isLogin]) {
         [forwardButtonItem setEnabled:NO];
     }
-    
+
     UIBarButtonItem *commentButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar_comment_icon" target:self action:@selector(onComment)];
     if ( ![[BSDKManager sharedManager] isLogin]) {
         [commentButtonItem setEnabled:NO];
     }
-    
+
     UIBarButtonItem *favourateButtonItem = nil;
     if ([[self.weiboData objectForKey:K_BSDK_ISFAV] isEqual:@"1"]) {
         favourateButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar_cancel_fav_focus" target:self action:@selector(onFavourate)];
@@ -456,7 +453,7 @@
     {
         favourateButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar_favourate_icon" target:self action:@selector(onFavourate)];
     }
-    
+
     NSDictionary * userDict = [[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
     UIBarButtonItem *deleteButtonItem = nil;
     if ([[self.weiboData objectForKey:K_BSDK_USERID] isEqual:[userDict valueForKey:K_BSDK_UID]]) {
@@ -466,7 +463,7 @@
     if ( ![[BSDKManager sharedManager] isLogin]) {
         [favourateButtonItem setEnabled:NO];
     }
-    
+
     NSArray *barItems = nil;
     if([[self.weiboData objectForKey:K_BSDK_USERID] isEqual:[userDict valueForKey:K_BSDK_UID]])
     {
@@ -484,7 +481,7 @@
                     nil];
     }
     else{
-        
+
         barItems = [[NSArray alloc]initWithObjects:flexible,
                     refreshButtonItem,
                     flexible,
@@ -496,7 +493,7 @@
                     flexible,
                     nil];
     }
-    
+
     _toolbar.items= barItems;
     UIImageView * tabBarBg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"toolbar_background"]];
     tabBarBg.frame = CGRectMake(0, 0, 320, 45);
@@ -506,7 +503,7 @@
     }
     else
     {
-        [_toolbar  insertSubview:tabBarBg atIndex:1];            
+        [_toolbar  insertSubview:tabBarBg atIndex:1];
     }
 
     [self.view addSubview: _toolbar];
@@ -516,13 +513,13 @@
 }
 
 - (void)refreshView
-{    
+{
     // attach image
     NSInteger picWidth = [[self.weiboData objectForKey:K_BSDK_PICTURE_WIDTH] intValue];
     NSInteger picHeight = [[self.weiboData objectForKey:K_BSDK_PICTURE_HEIGHT] intValue];
     if (!self.isAttachedImageSucceed && picWidth && picHeight) {
         UIImageView * placeholderImageView = [[UIImageView alloc] init];
-        [placeholderImageView setImageWithURL:[NSURL URLWithString:[self.weiboData objectForKey:K_BSDK_PICTURE_102]]];                                          
+        [placeholderImageView setImageWithURL:[NSURL URLWithString:[self.weiboData objectForKey:K_BSDK_PICTURE_102]]];
         [self.weiboAttachedImageView setImageWithURL:[NSURL URLWithString:[self.weiboData objectForKey:K_BSDK_PICTURE_320]] placeholderImage:placeholderImageView.image success:^(UIImage *image) {
             self.isAttachedImageDone = YES;
             self.isAttachedImageSucceed = YES;
@@ -536,30 +533,29 @@
                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
             }
         }];
-        
+
         [placeholderImageView release];
-        
-        self.weiboAttachedImageView.frame = CGRectMake((SCREEN_WIDTH - IMAGE_WIDTH)/2, 
-                                                       CGRectGetMinY(self.weiboAttachedImageView.frame), 
-                                                       IMAGE_WIDTH, 
+
+        self.weiboAttachedImageView.frame = CGRectMake((SCREEN_WIDTH - IMAGE_WIDTH)/2,
+                                                       CGRectGetMinY(self.weiboAttachedImageView.frame),
+                                                       IMAGE_WIDTH,
                                                        picHeight * IMAGE_WIDTH/picWidth);
     }
 
     //  buttons
     self.favourateButton.frame = CGRectMake(self.favourateButton.frame.origin.x, self.weiboAttachedImageView.frame.origin.y + CGRectGetHeight(self.weiboAttachedImageView.frame) + CELL_CONTENT_MARGIN_BIG, self.favourateButton.frame.size.width, self.favourateButton.frame.size.height);
-    
+
     [self.favourateButton setTitle:[NSString stringWithFormat:@"    %d", [[self.weiboData objectForKey:K_BSDK_FAVOURATE_NUM] intValue]] forState:UIControlStateNormal];
-    
+
     self.forwardedButton.frame = CGRectMake(self.forwardedButton.frame.origin.x, self.favourateButton.frame.origin.y, self.forwardedButton.frame.size.width, self.forwardedButton.frame.size.height);
 
     [self.forwardedButton setTitle:[NSString stringWithFormat:@"    %d", [[self.weiboData objectForKey:K_BSDK_FORWARD_NUM] intValue]] forState:UIControlStateNormal];
-    
-    self.commentButton.frame = CGRectMake(self.commentButton.frame.origin.x, self.favourateButton.frame.origin.y, self.commentButton.frame.size.width, self.commentButton.frame.size.height);
-    
-    [self.commentButton setTitle:[NSString stringWithFormat:@"    %d", [[self.weiboData objectForKey:K_BSDK_COMMENT_NUM] intValue]] forState:UIControlStateNormal];
-    
-    CGFloat yOffset = self.favourateButton.frame.origin.y + CGRectGetHeight(self.favourateButton.frame) + CELL_CONTENT_MARGIN;
 
+    self.commentButton.frame = CGRectMake(self.commentButton.frame.origin.x, self.favourateButton.frame.origin.y, self.commentButton.frame.size.width, self.commentButton.frame.size.height);
+
+    [self.commentButton setTitle:[NSString stringWithFormat:@"    %d", [[self.weiboData objectForKey:K_BSDK_COMMENT_NUM] intValue]] forState:UIControlStateNormal];
+
+    CGFloat yOffset = self.favourateButton.frame.origin.y + CGRectGetHeight(self.favourateButton.frame) + CELL_CONTENT_MARGIN;
 
     NSString * textContent = [self.weiboData objectForKey:K_BSDK_CONTENT];
     CGFloat textHeight = [ViewHelper getHeightOfText:textContent ByFontSize:FONT_SIZE contentWidth:CELL_CONTENT_WIDTH];
@@ -569,12 +565,12 @@
         self.contentLabel.text = self.weiboContent;
         self.contentLabel.frame = CGRectMake(self.contentLabel.frame.origin.x, yOffset + CELL_CONTENT_MARGIN_BIG, self.contentLabel.frame.size.width, textHeight);
     }
-    
+
     yOffset = CGRectGetMaxY(self.contentLabel.frame) + CELL_CONTENT_MARGIN_BIG;
     //map
     double longtitude = [[self.weiboData objectForKey:K_BSDK_LONGITUDE] doubleValue];
     double latitude = [[self.weiboData objectForKey:K_BSDK_LATITUDE] doubleValue];
-    
+
     if ([self.weiboData objectForKey:K_BSDK_LATITUDE] && [self.weiboData objectForKey:K_BSDK_LONGITUDE] && (longtitude != 0) && (latitude != 0)) {
 //        _mapViewController = [[MapViewController alloc] initWithName:@"test map name" description:nil latitude:[[self.weiboData objectForKey:K_BSDK_LATITUDE] floatValue] longitude:[[self.weiboData objectForKey:K_BSDK_LONGITUDE] floatValue] showSelf:NO];
 
@@ -583,11 +579,11 @@
             if (_mapViewController) {
                 [_mapViewController.view removeFromSuperview];
                 [self setMapViewController:nil];
-            } 
+            }
             _mapViewController = [[MapViewController alloc] initWithName:[self.weiboData objectForKey:K_BSDK_SHOPMERCHANT] description:[self.weiboData objectForKey:K_BSDK_BRANDSERVICE] latitude:latitude longitude:longtitude showSelf:NO];
             _mapViewController.view.frame = CGRectMake(MAP_VIEW_X_OFFSET, yOffset, MAP_VIEW_WIDTH, MAP_VIEW_HEIGHT);
             _mapViewController.navigationController.toolbarHidden = YES;
-            
+
             [self.detailScrollView addSubview:_mapViewController.view];
         }
         yOffset = _mapViewController.view.frame.origin.y + MAP_VIEW_HEIGHT * 2;
@@ -595,9 +591,9 @@
 
     // Custom initialization
     [_detailScrollView setContentSize:CGSizeMake(SCREEN_WIDTH, yOffset + 150)];
-    
+
     NSDictionary * authorInfo = [self.weiboData objectForKey:K_BSDK_USERINFO];
-    
+
     NSString * avatarImageUrl = [authorInfo objectForKey:K_BSDK_PICTURE_65];
     if (avatarImageUrl && [avatarImageUrl length]) {
         [self.avatarImageView setImageWithURL:[NSURL URLWithString:avatarImageUrl] placeholderImage:[UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:authorInfo]]];
@@ -606,7 +602,7 @@
     {
         [self.avatarImageView setImage:[UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:authorInfo]]];
     }
-    
+
     NSString * isVerify = [authorInfo objectForKey:K_BSDK_ISVERIFY];
     if (isVerify && [isVerify isEqual:@"1"]) {
         [self.vMarkImageView setImage:[UIImage imageNamed:@"v_mark_big"]];
@@ -618,20 +614,20 @@
     }
 
     self.weiboAttachedImageButton.frame = self.weiboAttachedImageView.frame;
-    
+
     self.timestampLabel.text = [ViewHelper intervalSinceNow:[self.weiboData objectForKey:K_BSDK_CREATETIME]];
     [self.timestampLabel setTextColor:[UIColor purpleColor]];
-    
+
     self.usernameLabel.text = [authorInfo objectForKey:K_BSDK_USERNAME];
-    
+
     NSString * price = [self.weiboData objectForKey:K_BSDK_PRICE];
     if (price && ([price intValue] != 0)) {
         NSString * title = [NSString stringWithFormat:@"¥ %d", [price intValue]];
         [self.priceButton setTitle:title forState:UIControlStateNormal];
-        
+
 //        self.priceButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 5.0);
-        self.priceButton.frame = CGRectMake(CGRectGetMinX(self.priceButton.frame), 
-                                            CGRectGetMinY(self.favourateButton.frame) - PRICE_BUTTON_Y_OFFSET, 
+        self.priceButton.frame = CGRectMake(CGRectGetMinX(self.priceButton.frame),
+                                            CGRectGetMinY(self.favourateButton.frame) - PRICE_BUTTON_Y_OFFSET,
                                             MAX([ViewHelper getWidthOfText:title ByFontSize:self.priceButton.titleLabel.font.pointSize]+20, 60),
                                             CGRectGetHeight(self.priceButton.frame));
     }
@@ -639,19 +635,19 @@
     {
         [self.priceButton setHidden:YES];
     }
-    
+
     NSString * merchant = [self.weiboData objectForKey:K_BSDK_SHOPMERCHANT];
     if  (merchant)
     {
         self.merchantLable.text = merchant;
     }
-    
+
     NSString * brand = [self.weiboData objectForKey:K_BSDK_BRANDSERVICE];
     if  (brand)
     {
         self.brandLable.text = brand;
     }
-    
+
     [self addToolbar];
 }
 
@@ -669,24 +665,24 @@
 
 - (void)onRefreshButtonClicked {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: YES];
-    
+
     UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    
+
     activityIndicator.center = CGPointMake(SCREEN_WIDTH/2, 20);
     [activityIndicator startAnimating];
-    
+
     [self.view addSubview:activityIndicator];
-    
+
     [[BSDKManager sharedManager] getWeiboById:self.weiboId andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
 
         [activityIndicator stopAnimating];
         [activityIndicator removeFromSuperview];
         [activityIndicator release];
-        
+
         if (self.isAttachedImageDone) {
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: NO];
         }
-        
+
         if (K_BSDK_IS_RESPONSE_OK(data)) {
             [self setWeiboData:nil];
             NSDictionary * weiboInfo = [data objectForKey:K_BSDK_BLOGINFO];
@@ -720,10 +716,10 @@
 {
     if (self.weiboData) {
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: TRUE];
-        
+
         [[BSDKManager sharedManager] getUserInforByName:[self.weiboData objectForKey:K_BSDK_BRANDSERVICE] andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: FALSE];
-            
+
             if (K_BSDK_IS_RESPONSE_OK(data)) {
                 FriendDetailViewController * friendDetailViewController = [[FriendDetailViewController alloc] initWithDictionary:data];
                 [self.navigationController pushViewController:friendDetailViewController animated:YES];
@@ -741,11 +737,11 @@
 {
     if (self.weiboData) {
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: TRUE];
-        
+
         [[BSDKManager sharedManager] getUserInforByName:[self.weiboData objectForKey:K_BSDK_SHOPMERCHANT] andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-            
+
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: FALSE];
-            
+
             if (K_BSDK_IS_RESPONSE_OK(data)) {
                 FriendDetailViewController * friendDetailViewController = [[FriendDetailViewController alloc] initWithDictionary:data];
                 [self.navigationController pushViewController:friendDetailViewController animated:YES];
@@ -764,9 +760,9 @@
     if (self.weiboData) {
         FriendDetailViewController *userDetailController = [[FriendDetailViewController alloc] initWithDictionary:[self.weiboData objectForKey:K_BSDK_USERINFO]];
         UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: userDetailController];
-        
+
         [self.navigationController presentModalViewController:navController animated:YES];
-        
+
         [navController release];
         [userDetailController release];
     }

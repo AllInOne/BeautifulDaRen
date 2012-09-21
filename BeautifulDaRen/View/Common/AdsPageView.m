@@ -82,13 +82,13 @@
         {
             self.type = K_BSDK_ADSTYPE_LOGOUT;
         }
-        
+
 //        self.city = K_BSDK_DEFAULT_CITY;
-        
+
 ////        self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, ADS_CELL_HEIGHT);
 //        self.adsPageController.frame = CGRectMake(self.adsPageController.frame.origin.x, ADS_CELL_HEIGHT - 30, self.adsPageController.frame.size.width, self.adsPageController.frame.size.height);
     }
-    return self;  
+    return self;
 }
 
 - (void)dealloc {
@@ -105,7 +105,7 @@
     [_adsImageData release];
     [_adsDragGesture release];
     [_closeButton release];
-    
+
     [super dealloc];
 }
 
@@ -113,7 +113,7 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    
+
     [self setAdsImageNames:nil];
     self.adsPageController = nil;
     self.firstImageView  = nil;
@@ -138,18 +138,18 @@
     [_firstImageView setHidden:YES];
     [_secondImageView setHidden:YES];
     [_closeButton setHidden:YES];
-    
+
     UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    
+
     activityIndicator.center = CGPointMake(SCREEN_WIDTH/2, ADS_CELL_HEIGHT/2);
     [activityIndicator startAnimating];
-    
+
     [self.view addSubview:activityIndicator];
-    
+
     [[BSDKManager sharedManager] getAdsByCity:_city
                                          type:_type
                               andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-                                  
+
                                   if (K_BSDK_IS_RESPONSE_OK(data)) {
                                       self.adsImageData = nil;
                                       self.adsImageData = [data objectForKey:K_BSDK_ADSLIST];
@@ -162,7 +162,7 @@
                                       {
                                           _adsImageNames = [[NSMutableArray alloc] initWithCapacity: self.totalPageSize];
                                       }
-                                      
+
                                       for (NSDictionary * ad in self.adsImageData) {
                                           if (IS_RETINA)
                                           {
@@ -173,11 +173,10 @@
                                               [_adsImageNames addObject:[ad objectForKey:K_BSDK_IMAGEURL]];
                                           }
                                       }
-                                      
+
                                       [self downloadAllImagesWithCallback:^(AIO_STATUS status) {
                                           [_closeButton setHidden:NO];
                                           [self initControls];
-                                          
 
                                           [activityIndicator stopAnimating];
                                           [activityIndicator removeFromSuperview];
@@ -205,14 +204,14 @@
                 callback(AIO_STATUS_SUCCESS);
             }
         };
-        
+
         imageDownloadSuccessBlock successBlock = ^(UIImage *image){
             downloadedImageCount++;
             if (downloadedImageCount >= imageCount) {
                 callback(AIO_STATUS_SUCCESS);
             }
         };
-        
+
         NSLog(@"%@", self.adsImageNames);
         for (NSString * imageUrl in self.adsImageNames) {
             UIImageView * falkImageView = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, ADS_CELL_WIDTH, ADS_CELL_HEIGHT)] autorelease];
@@ -244,18 +243,18 @@
     [_firstImageView setImageWithURL:[NSURL URLWithString:[_adsImageNames objectAtIndex:0]]];
     [_firstImageView setHidden:NO];
     [_firstImageView setBackgroundColor:[UIColor whiteColor]];
-    
+
     if ([self.adsImageNames count] > 1) {
         if (self.secondImageView == nil) {
             _secondImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, ADS_CELL_WIDTH, ADS_CELL_HEIGHT)];
             [self.view insertSubview:_secondImageView belowSubview:self.adsPageController];
             [_secondImageView setHidden:YES];
         }
-        
+
         [_secondImageView setImageWithURL:[NSURL URLWithString:[_adsImageNames objectAtIndex:1]]];
         [_secondImageView setHidden:NO];
         [_secondImageView setBackgroundColor:[UIColor whiteColor]];
-        
+
         if (_adsDragGesture == nil) {
             _adsDragGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(onAdsDragged:)];
             [self.view addGestureRecognizer:_adsDragGesture];
@@ -265,7 +264,7 @@
     //set all the images to download them all at the beginning
     self.adsPageController.numberOfPages =  self.totalPageSize;
     self.adsPageController.frame = CGRectMake(SCREEN_WIDTH - 10 * (self.totalPageSize + 1), ADS_CELL_HEIGHT - 30, ADS_PAGE_CONTROLLER_DOT_WIDTH * self.totalPageSize, CGRectGetHeight(self.adsPageController.frame));
-    
+
     [self setCurrentPageIndex:0];
 }
 
@@ -296,9 +295,9 @@
         if (currentPage != ( self.totalPageSize - 1)) {
             destPage = currentPage + 1;
         }
-        
+
         [self transitionPage:currentPage toPage: destPage];
-        
+
         [self setCurrentPageIndex:destPage];
     }
 }
@@ -307,17 +306,17 @@
 {
     [self.adsPageController setCurrentPage:pageIndex];
     self.currentPage = pageIndex;
-    NSString* imgActive = [[NSBundle mainBundle] pathForResource:@"banner_switcher_focus" ofType:@"png"]; 
-    NSString* imgInactive = [[NSBundle mainBundle] pathForResource:@"banner_switcher_normal" ofType:@"png"]; 
-    
-    for (NSUInteger subviewIndex = 0; subviewIndex < [self.adsPageController.subviews count]; subviewIndex++) { 
-        UIImageView* subview = [self.adsPageController.subviews objectAtIndex:subviewIndex]; 
-        if (subviewIndex == self.currentPage) { 
-            [subview setImage:[UIImage imageWithContentsOfFile:imgActive]]; 
-        } else { 
-            [subview setImage:[UIImage imageWithContentsOfFile:imgInactive]]; 
-        } 
-        //        subview.frame = CGRectMake(/* position and dimensi***** you need */); 
+    NSString* imgActive = [[NSBundle mainBundle] pathForResource:@"banner_switcher_focus" ofType:@"png"];
+    NSString* imgInactive = [[NSBundle mainBundle] pathForResource:@"banner_switcher_normal" ofType:@"png"];
+
+    for (NSUInteger subviewIndex = 0; subviewIndex < [self.adsPageController.subviews count]; subviewIndex++) {
+        UIImageView* subview = [self.adsPageController.subviews objectAtIndex:subviewIndex];
+        if (subviewIndex == self.currentPage) {
+            [subview setImage:[UIImage imageWithContentsOfFile:imgActive]];
+        } else {
+            [subview setImage:[UIImage imageWithContentsOfFile:imgInactive]];
+        }
+        //        subview.frame = CGRectMake(/* position and dimensi***** you need */);
     }
 }
 
@@ -329,23 +328,23 @@
     if (from!=to) {
         self.secondImageView.center = CGPointMake(160, self.secondImageView.center.y);
         self.firstImageView.center = CGPointMake(160, self.firstImageView.center.y);
-        
+
         [self.firstImageView setImageWithURL:[NSURL URLWithString:[_adsImageNames objectAtIndex:from]]];
-        
+
         CABasicAnimation * firstAnimation = [self getAnimation];
         [firstAnimation setFromValue:[NSValue valueWithCGPoint:CGPointMake(160, self.secondImageView.center.y)]];
         [firstAnimation setToValue:[NSValue valueWithCGPoint:CGPointMake(-160, self.firstImageView.center.y)]];
-        
+
         [[self.firstImageView layer] addAnimation:firstAnimation forKey:@"firstImageGoBackAutoAnimation"];
-        
+
         [self.secondImageView setHidden:NO];
-        [self.secondImageView setImageWithURL:[NSURL URLWithString:[_adsImageNames objectAtIndex:to]]];        
-        
+        [self.secondImageView setImageWithURL:[NSURL URLWithString:[_adsImageNames objectAtIndex:to]]];
+
         CABasicAnimation * secondAnimation = [self getAnimation];
         [secondAnimation setFromValue:[NSValue valueWithCGPoint:CGPointMake(480, self.secondImageView.center.y)]];
         [secondAnimation setToValue:[NSValue valueWithCGPoint:CGPointMake(160, self.secondImageView.center.y)]];
-        
-        [[self.secondImageView layer] addAnimation:secondAnimation forKey:@"secondImageGoBackAutoAnimation"];   
+
+        [[self.secondImageView layer] addAnimation:secondAnimation forKey:@"secondImageGoBackAutoAnimation"];
     }
 }
 
@@ -363,40 +362,40 @@
 -(IBAction)onAdsPressed:(id)sender
 {
     NSLog(@"Ads Pressed, current ads index = %d", currentPage);
-    
+
     NSDictionary * adsDict = [self.adsImageData objectAtIndex:currentPage];
-    
+
     if ([[adsDict objectForKey:K_BSDK_ADS_LINKTYPE] isEqual:K_BSDK_ADS_LINKTYPE_WEIBO]) {
-        WeiboDetailViewController *weiboDetailController = 
+        WeiboDetailViewController *weiboDetailController =
         [[WeiboDetailViewController alloc] init];
-        
+
         weiboDetailController.weiboId = [adsDict objectForKey:K_BSDK_ADS_LINKID];
-        
+
         UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: weiboDetailController];
-        
+
         [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
         [navController release];
-        [weiboDetailController release]; 
+        [weiboDetailController release];
     }
     else
     {
-        FriendDetailViewController * friendDetailController = 
+        FriendDetailViewController * friendDetailController =
         [[FriendDetailViewController alloc] initWithFriendId:[adsDict objectForKey:K_BSDK_ADS_LINKID]];
 
         UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: friendDetailController];
-        
+
         [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
         [navController release];
         [friendDetailController release];
     }
-    
+
     return;
 #ifdef DEBUG
 //    [[BSDKManager sharedManager] signUpWithUsername:@"jerry2" password:@"123456" email:@"sdfsdf122@121.com" city:@"成都" andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
 //         NSLog(@"operation done = %d", status);
 //        [[iToast makeText:[NSString stringWithFormat:@"%@", [data objectForKey:@"msg"]]] show];
 //    }];
-    
+
     if (![[BSDKManager sharedManager] isLogin])
     {
         [[BSDKManager sharedManager] loginWithUsername:@"jerry" password:@"123456" andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
@@ -426,7 +425,6 @@
 //            NSLog(@"sign in done = %d", status);
 //            [[iToast makeText:[NSString stringWithFormat:@"%@", [data description]]] show];
 //        }];
-        
 
 //        [[BSDKManager sharedManager] getWeiboClassesWithDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
 //            NSLog(@"sign in done = %d", status);
@@ -441,7 +439,7 @@
 //        NSLog(@"sign in done = %d", status);
 //        //[[iToast makeText:[NSString stringWithFormat:@"%@", [data description]]] show];
 //    }];
-//        
+//
 //    [[BSDKManager sharedManager] getCommentListOfUser:@"32" pageSize:20 pageIndex:1 andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
 //            NSLog(@"sign in done = %d", status);
 //            //[[iToast makeText:[NSString stringWithFormat:@"%@", [data description]]] show];
@@ -450,9 +448,9 @@
 //            NSLog(@"sign in done = %d", status);
 //            [[iToast makeText:[NSString stringWithFormat:@"%@", [data objectForKey:@"msg"]]] show];
 //        }];
-        
+
     }
-    
+
 //    [[BSDKManager sharedManager] searchUsersByUsername:@"121asdfasdf" andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
 //         NSLog(@"sign in done = %d", status);
 //        [[iToast makeText:[NSString stringWithFormat:@"%@", [data objectForKey:@"msg"]]] show];
@@ -461,7 +459,7 @@
 //        NSLog(@"sign in done = %d", status);
 //        [[iToast makeText:[NSString stringWithFormat:@"%@", [data description]]] show];
 //    }];
-    
+
 #endif
 }
 
@@ -498,7 +496,7 @@
                 {
                     _isNextImageFromLeft = NO;
                 }
-                
+
                 if (!self.isNextImageInitialized)
                 {
                     if (_isNextImageFromLeft) {
@@ -506,13 +504,13 @@
                     }
                     else
                     {
-                        nextAdsPage = (self.currentPage < ( self.totalPageSize - 1) ? (self.currentPage + 1) : 0);                    
+                        nextAdsPage = (self.currentPage < ( self.totalPageSize - 1) ? (self.currentPage + 1) : 0);
                     }
                     [self.secondImageView setImageWithURL:[NSURL URLWithString:[self.adsImageNames objectAtIndex: nextAdsPage]]];
                 self.secondImageView.center = CGPointMake(self.firstImageView.center.x + ( _isNextImageFromLeft ? (-320) : 320 ), self.firstImageView.center.y);
                     self.isNextImageInitialized = YES;
                 }
-                                                
+
                 self.firstImageView.center = CGPointMake(self.firstImageView.center.x + delta.x, self.firstImageView.center.y);
                 self.secondImageView.center = CGPointMake(self.secondImageView.center.x + delta.x, self.secondImageView.center.y);
                 [sender setTranslation:CGPointZero inView:self.secondImageView];
@@ -522,7 +520,7 @@
             break;
         }
         case UIGestureRecognizerStateCancelled:
-        case UIGestureRecognizerStateEnded: 
+        case UIGestureRecognizerStateEnded:
         {
             CABasicAnimation *firstImageGoBackAnimation = [self getAnimation];
             [firstImageGoBackAnimation setFromValue:[NSValue valueWithCGPoint:self.firstImageView.center]];
@@ -534,22 +532,20 @@
             {
                 [firstImageGoBackAnimation setToValue:[NSValue valueWithCGPoint:CGPointMake(-160, self.firstImageView.center.y)]];
                 self.firstImageView.center = CGPointMake(-160, self.firstImageView.center.y);
-                
-                
+
                 [secondImageGoBackAnimation setToValue:[NSValue valueWithCGPoint:CGPointMake(160, self.secondImageView.center.y)]];
                 self.secondImageView.center = CGPointMake(160, self.secondImageView.center.y);
-                
+
                 [self setCurrentPageIndex:(self.currentPage < ( self.totalPageSize - 1) ? (self.currentPage + 1) : 0)];
             }
             else if (self.firstImageView.center.x >= 270)
             {
                 [firstImageGoBackAnimation setToValue:[NSValue valueWithCGPoint:CGPointMake(480, self.firstImageView.center.y)]];
                 self.firstImageView.center = CGPointMake(480, self.firstImageView.center.y);
-                
-                
+
                 [secondImageGoBackAnimation setToValue:[NSValue valueWithCGPoint:CGPointMake(160, self.secondImageView.center.y)]];
                 self.secondImageView.center = CGPointMake(160, self.secondImageView.center.y);
-                
+
                 [self setCurrentPageIndex:(self.currentPage > 0 ? (self.currentPage - 1) : ( self.totalPageSize - 1))];
             }
             else
@@ -559,15 +555,15 @@
 
                 if (self.isNextImageFromLeft) {
                     [secondImageGoBackAnimation setToValue:[NSValue valueWithCGPoint:CGPointMake(-160, self.secondImageView.center.y)]];
-                    self.secondImageView.center = CGPointMake(-160, self.secondImageView.center.y); 
+                    self.secondImageView.center = CGPointMake(-160, self.secondImageView.center.y);
                 }
                 else
                 {
                     [secondImageGoBackAnimation setToValue:[NSValue valueWithCGPoint:CGPointMake(480, self.secondImageView.center.y)]];
-                    self.secondImageView.center = CGPointMake(480, self.secondImageView.center.y); 
+                    self.secondImageView.center = CGPointMake(480, self.secondImageView.center.y);
                 }
             }
-            
+
             [[self.firstImageView layer] addAnimation:firstImageGoBackAnimation forKey:@"firstImageGoBackAnimation"];
             [[self.secondImageView layer] addAnimation:secondImageGoBackAnimation forKey:@"secondImageGoBackAnimation"];
             self.isAdsAutoChangeDisabled = NO;
@@ -584,7 +580,7 @@
     [animation setBeginTime:CACurrentMediaTime()];
     [animation setAutoreverses:NO];
     [animation setRepeatCount:0];
-    
+
     return animation;
 }
 @end

@@ -26,5 +26,4 @@
     NSLog(@"Contact pressed");
 }
 
-
 @end

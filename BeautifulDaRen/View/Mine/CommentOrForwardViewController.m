@@ -47,7 +47,7 @@
 {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
+
     // Release any cached data, images, etc that aren't in use.
 }
 
@@ -101,35 +101,35 @@
 //        UIImageView * originalWeiboAvatarImageView = [[[UIImageView alloc] initWithFrame:CGRectMake(15, 8, 25, 25)] autorelease];
 //        originalWeiboAvatarImageView.image = [UIImage imageNamed:@"avatar_big"];
 //        [atMeCell.weiboView addSubview:originalWeiboAvatarImageView];
-//        
+//
 //        UILabel * originalWeiBoNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, 12, 150, 25)];
 //        originalWeiBoNameLabel.font = [UIFont systemFontOfSize:12];
 //        originalWeiBoNameLabel.text = @"原始微博name";
 //        originalWeiBoNameLabel.backgroundColor = [UIColor clearColor];
 //        [atMeCell.weiboView addSubview:originalWeiBoNameLabel];
-//        
+//
 //        UILabel * originalWeiBoTimeLineLabel = [[UILabel alloc] initWithFrame:CGRectMake(220, 12, 60, 25)];
 //        originalWeiBoTimeLineLabel.font = [UIFont systemFontOfSize:12];
 //        originalWeiBoTimeLineLabel.backgroundColor = [UIColor clearColor];
 //        originalWeiBoTimeLineLabel.text = @"12天以前";
 //        [atMeCell.weiboView addSubview:originalWeiBoTimeLineLabel];
-//        
+//
 //        UIImageView * originalWeiboItemImageView = [[[UIImageView alloc] initWithFrame:CGRectMake(15, 40, 60, 60)] autorelease];
 //        originalWeiboItemImageView.image = [UIImage imageNamed:@"avatar_big"];
 //        [atMeCell.weiboView addSubview:originalWeiboItemImageView];
-//        
+//
 //        UILabel * originalWeiBoCostLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 83, 33, 15)];
 //        originalWeiBoCostLabel.font = [UIFont systemFontOfSize:12];
 //        originalWeiboItemImageView.backgroundColor = [UIColor clearColor];
 //        originalWeiBoCostLabel.text = @"￥120";
 //        [atMeCell.weiboView addSubview:originalWeiBoCostLabel];
-//        
+//
 //        UILabel * originalWeiBoShopLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 50, 200, 20)];
 //        originalWeiBoShopLabel.font = [UIFont systemFontOfSize:12];
 //        originalWeiBoShopLabel.backgroundColor = [UIColor clearColor];
 //        originalWeiBoShopLabel.text = @"商场：万达广场";
 //        [atMeCell.weiboView addSubview:originalWeiBoShopLabel];
-//        
+//
 //        UILabel * originalWeiBoBrandLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 75, 200, 20)];
 //        originalWeiBoBrandLabel.font = [UIFont systemFontOfSize:12];
 //        originalWeiBoBrandLabel.backgroundColor = [UIColor clearColor];

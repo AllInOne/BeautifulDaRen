@@ -10,7 +10,6 @@
 #import "ItemsViewController.h"
 #import "AdsPageViewProtocol.h"
 
-
 @interface HomeViewController : UIViewController<AdsPageViewProtocol>
 
 - (IBAction)onLoginBtnSelected:(UIButton*)sender;

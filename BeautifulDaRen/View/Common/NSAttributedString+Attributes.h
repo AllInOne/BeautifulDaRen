@@ -1,17 +1,17 @@
 /***********************************************************************************
  *
  * Copyright (c) 2010 Olivier Halligon
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -19,7 +19,7 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
- * 
+ *
  ***********************************************************************************
  *
  * Created by Olivier Halligon  (AliSoftware) on 20 Jul. 2010.
@@ -29,11 +29,9 @@
  *
  ***********************************************************************************/
 
-
 #import <Foundation/Foundation.h>
 #import <CoreText/CoreText.h>
 #import <UIKit/UIKit.h>
-
 
 /////////////////////////////////////////////////////////////////////////////
 // MARK: -
@@ -50,7 +48,6 @@
 //! Note: Use CGFLOAT_MAX for the CGSize's height if you don't want a constraint for the height.
 -(CGSize)sizeConstrainedToSize:(CGSize)maxSize fitRange:(NSRange*)fitRange;
 @end
-
 
 /////////////////////////////////////////////////////////////////////////////
 // MARK: -
@@ -74,5 +71,4 @@
 -(void)setTextAlignment:(CTTextAlignment)alignment lineBreakMode:(CTLineBreakMode)lineBreakMode;
 -(void)setTextAlignment:(CTTextAlignment)alignment lineBreakMode:(CTLineBreakMode)lineBreakMode range:(NSRange)range;
 @end
-
 

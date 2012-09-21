@@ -24,7 +24,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        
+
         [self.navigationItem setTitle:@"我的好友"];
         [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
     }
@@ -53,7 +53,6 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
-
 #pragma mark UITableViewDelegate
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -61,15 +60,15 @@
     static NSString * friendListViewCellIdentifier = @"FriendListViewCell";
     NSArray * nameArray = [NSArray arrayWithObjects:
                            @"东东",
-                           @"也许你是我唯一", 
+                           @"也许你是我唯一",
                            @"天府广场",
-                           @"奥斯卡", 
+                           @"奥斯卡",
                            @"天之骄子",
-                           @"醉在黄鹤楼", 
+                           @"醉在黄鹤楼",
                            @"半个火枪手",
-                           @"影子爱人", 
+                           @"影子爱人",
                            @"你知道我是谁知道",
-                           @"飞越板凳", 
+                           @"飞越板凳",
                            @"你是我的优乐美",
                            nil];
     UITableViewCell * cell = nil;
@@ -81,7 +80,7 @@
         FriendListViewCell * friendListViewCell = (FriendListViewCell*)cell;
         BorderImageView * borderImageView = [[[BorderImageView alloc] initWithFrame:friendListViewCell.avatarImageView.frame andImage:[UIImage imageNamed:[NSString  stringWithFormat:@"search_avatar_sample%d",section+1]]] autorelease];
         [friendListViewCell.avatarImageView addSubview:borderImageView];
-        
+
         friendListViewCell.friendNameLabel.text = [nameArray objectAtIndex:section];
         friendListViewCell.friendWeiboLabel.text = @"我今天在天府广场附近买了一款很好看的衣服。";
     }
@@ -105,7 +104,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+
 }
 
 @end

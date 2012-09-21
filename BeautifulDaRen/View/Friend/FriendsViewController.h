@@ -17,7 +17,7 @@
 
 @property(assign, nonatomic) id<FriendsSelectionViewControllerDelegate> delegate;
 @property(retain,nonatomic) IBOutlet UITableView *tableView;
-@property(retain,nonatomic) NSMutableDictionary *sections; 
+@property(retain,nonatomic) NSMutableDictionary *sections;
 @property(retain,nonatomic) NSArray *sectionsArray;
 @property(retain,nonatomic) NSMutableArray *filteredContacts;
 @property(retain,nonatomic) UISearchDisplayController *searchController;

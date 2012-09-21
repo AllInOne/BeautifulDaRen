@@ -20,7 +20,6 @@
 @synthesize scrollView = _scrollView;
 @synthesize delegate = _delegate;
 
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil data: (NSArray *)data andDelegate:(id<CommonScrollViewProtocol>) delegate
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -31,9 +30,9 @@
             item.button.tag = index;
 
             [item.image setImageWithURL:[NSURL URLWithString:[data objectAtIndex:index]]];
-            
+
             BorderImageView * borderImageView = [[BorderImageView alloc] initWithFrame:CGRectMake(SCROLL_ITEM_MARGIN + index * (SCROLL_ITEM_WIDTH + SCROLL_ITEM_MARGIN), 0, SCROLL_ITEM_WIDTH, SCROLL_ITEM_HEIGHT) andView:item needNotification:NO];
-            
+
             [self.view addSubview:borderImageView];
             [self.scrollView addSubview:borderImageView];
             [borderImageView release];
@@ -49,7 +48,7 @@
 {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
+
     // Release any cached data, images, etc that aren't in use.
 }
 

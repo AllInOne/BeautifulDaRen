@@ -57,15 +57,15 @@
     if (originalBlogInfo == nil) {
         originalBlogInfo = [data objectForKey:K_BSDK_RETWEET_STATUS];
     }
-    
+
     NSDictionary * authorInfo = [data objectForKey:K_BSDK_USERINFO];
-    
+
     NSDictionary * originalUserInfo = [originalBlogInfo objectForKey:K_BSDK_USERINFO];
-    
+
     //self.authorAvatar
     self.authorName.text = [authorInfo objectForKey:K_BSDK_USERNAME];
     NSString * title = [NSString stringWithFormat:@"¥ %@",[originalBlogInfo objectForKey:K_BSDK_PRICE]];
-    
+
     NSString * isVerify = [authorInfo objectForKey:K_BSDK_ISVERIFY];
     if (isVerify && [isVerify isEqual:K_BSDK_ISVERIFY_YES]) {
         [self.authorVMark setImage:[UIImage imageNamed:@"v_mark_big"]];
@@ -75,14 +75,13 @@
     {
         [self.authorVMark setHidden:YES];
     }
-    
+
     [self setAvatarImageView:self.authorAvatar byUserInfo:authorInfo];
-    
+
     self.commentContent.text = [data objectForKey:K_BSDK_CONTENT];
-    
-    
+
     CGFloat commentHeight = [ViewHelper getHeightOfText:self.commentContent.text ByFontSize:FONT_SIZE contentWidth:CELL_CONTENT_WIDTH];
-    
+
     self.commentContent.frame = CGRectMake(CGRectGetMinX(self.commentContent.frame),
                                            CGRectGetMinY(self.commentContent.frame),
                                            CGRectGetWidth(self.commentContent.frame),
@@ -94,17 +93,17 @@
                                                     CGRectGetMinY(self.originalPriceButton.frame),
                                                     [ViewHelper getWidthOfText:title ByFontSize:self.originalPriceButton.titleLabel.font.pointSize]+10,
                                                     CGRectGetHeight(self.originalPriceButton.frame));
-        
+
         self.originalPriceButton.center = CGPointMake(self.originalImage.center.x, CGRectGetMinY(self.originalPriceButton.frame));
-        
+
         //    self.originalAuthorAvatar
         self.originalBrand.text = [originalBlogInfo objectForKey:K_BSDK_BRANDSERVICE];
         self.originalMerchant.text = [originalBlogInfo objectForKey:K_BSDK_SHOPMERCHANT];
         self.originalContent.text = [originalBlogInfo objectForKey:K_BSDK_CONTENT];
         self.originalAuthorName.text = [originalUserInfo objectForKey:K_BSDK_USERNAME];
-        
+
         [self.originalImage setImageWithURL:[NSURL URLWithString:[originalBlogInfo objectForKey:K_BSDK_PICTURE_102]]];
-        
+
         isVerify = [originalUserInfo objectForKey:K_BSDK_ISVERIFY];
         if (isVerify && [isVerify isEqual:@"1"]) {
             [self.originalAuthorVMark setImage:[UIImage imageNamed:@"v_mark_small"]];
@@ -114,14 +113,14 @@
         {
             [self.originalAuthorVMark setHidden:YES];
         }
-        
+
         [self setAvatarImageView:self.originalAuthorAvatar byUserInfo:originalUserInfo];
         self.originalWeiboBgView.frame = CGRectMake(0,
                                                     0,
                                                     CELL_CONTENT_WIDTH,
                                                     CELL_CONTENT_HEIGHT);
     }
-    
+
     CGFloat height = CELL_CONTENT_HEIGHT;
     if (K_BSDK_WEIBO_VISIBLE_NO == [[originalBlogInfo valueForKey:K_BSDK_WEIBO_VISIBLE] intValue])
     {
@@ -137,7 +136,7 @@
 {
     self.commentContent.text = [data objectForKey:K_BSDK_CONTENT];
     CGFloat commentHeight = [ViewHelper getHeightOfText:self.commentContent.text ByFontSize:FONT_SIZE contentWidth:CELL_CONTENT_WIDTH];
-    
+
     self.commentContent.frame = CGRectMake(CGRectGetMinX(self.commentContent.frame),
                                            CGRectGetMinY(self.commentContent.frame),
                                            CGRectGetWidth(self.commentContent.frame),

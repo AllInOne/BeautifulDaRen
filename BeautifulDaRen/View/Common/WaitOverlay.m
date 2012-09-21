@@ -30,14 +30,14 @@
         [_activityView startAnimating];
         _activityView.autoresizingMask = UIViewAutoresizingNone;
         self.autoresizingMask = UIViewAutoresizingNone;
-        [[NSNotificationCenter defaultCenter] addObserver:self 
+        [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(showOverlay)
-                                                     name:K_NOTIFICATION_SHOWWAITOVERLAY 
+                                                     name:K_NOTIFICATION_SHOWWAITOVERLAY
                                                    object:nil];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self 
+
+        [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(hideOverlay)
-                                                     name:K_NOTIFICATION_HIDEWAITOVERLAY 
+                                                     name:K_NOTIFICATION_HIDEWAITOVERLAY
                                                    object:nil];
         [self setBackgroundColor:[UIColor blackColor]];
         [self setAlpha:0.5];
@@ -51,7 +51,7 @@
     [self addSubview:_activityView];
 }
 
-- (void)showOverlay { 
+- (void)showOverlay {
     UIWindow* appWindow = [[UIApplication sharedApplication].windows objectAtIndex:0];
     appWindow.userInteractionEnabled = NO;
     [appWindow addSubview:self];

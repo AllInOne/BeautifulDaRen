@@ -43,8 +43,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
-        
-        [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClicked) title:NSLocalizedString(@"refresh", @"refresh")]];       
+
+        [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClicked) title:NSLocalizedString(@"refresh", @"refresh")]];
         self.navigationItem.title = NSLocalizedString(@"private_letter", @"private_letter");
         [self.view setHidden:NO];
     }
@@ -55,7 +55,7 @@
 {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
+
     // Release any cached data, images, etc that aren't in use.
 }
 
@@ -75,20 +75,19 @@
     [self refreshData];
 }
 
-
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     _currentIndex = 1;
-    
+
     [_privateLetterTableView setDelegate:self];
     [_privateLetterTableView setDataSource:self];
-    
+
     self.relatedUsers = [NSMutableArray arrayWithCapacity:2 * PRIVATE_LETTER_PAGE_SIZE];
-    
+
     [self refreshData];
 
 }
@@ -137,9 +136,9 @@
     [self.loadingActivityIndicator setHidden:NO];
     [self.loadingActivityIndicator startAnimating];
     [self.footerButton setTitle:NSLocalizedString(@"loading_more", @"loading_more") forState:UIControlStateNormal];
-    
+
     self.isRefreshing = YES;
-    
+
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     [self.navigationItem.rightBarButtonItem setEnabled:NO];
 
@@ -148,18 +147,17 @@
                                                    pageIndex:_currentIndex andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
                                                        if (K_BSDK_IS_RESPONSE_OK(data)) {
                                                            NSArray * users = [data objectForKey:K_BSDK_USERLIST];
-                                                           [_relatedUsers addObjectsFromArray:users];                                                       
-                                                           
+                                                           [_relatedUsers addObjectsFromArray:users];
+
                                                            if ([users count] < PRIVATE_LETTER_PAGE_SIZE) {
                                                                self.isAllRetrieved = YES;
                                                            }
 
                                                            [self.loadingActivityIndicator stopAnimating];
-                                                           
-                                                           
+
                                                            self.isRefreshing = NO;
                                                            self.currentIndex++;
-                                                           
+
                                                            if ((self.relatedUsers == nil) || ([self.relatedUsers count] == 0)) {
                                                                [self.footerButton setTitle:NSLocalizedString(@"no_message", @"no_message") forState:UIControlStateNormal];
                                                                [self.loadingActivityIndicator setHidden:YES];
@@ -175,7 +173,7 @@
                                                            self.isAllRetrieved = YES;
                                                            [[iToast makeText:NSLocalizedString(@"server_request_error", @"server_request_error")] show];
                                                        }
-                                                       
+
                                                        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
                                                        [self.navigationItem.rightBarButtonItem setEnabled:YES];
                                                    }];
@@ -201,15 +199,15 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *privateLetterViewCellIdentifier = @"PrivateLetterViewCell";
-    
+
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:privateLetterViewCellIdentifier];
     if (cell == nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:privateLetterViewCellIdentifier owner:self options:nil] objectAtIndex:0];
     }
-    
+
     NSDictionary * userDict = [_relatedUsers objectAtIndex:[indexPath row]];
     PrivateLetterViewCell * privateLetterCell = ((PrivateLetterViewCell*)cell);
-    
+
     NSString * avatarImageUrl = [userDict objectForKey:K_BSDK_PICTURE_65];
     if (avatarImageUrl && [avatarImageUrl length]) {
         [privateLetterCell.avatarImage setImageWithURL:[NSURL URLWithString:avatarImageUrl] placeholderImage:[UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:userDict]]];
@@ -222,10 +220,10 @@
     privateLetterCell.nameLabel.text = [userDict objectForKey:K_BSDK_USERNAME];
 
     NSDictionary * lastMessageInfo = [userDict objectForKey:K_BSDK_LASTMSGINFO];
-    
+
     privateLetterCell.timeLabel.text = [ViewHelper intervalSinceNow:[lastMessageInfo objectForKey:K_BSDK_CREATETIME]];
     privateLetterCell.detailView.text = [lastMessageInfo objectForKey:K_BSDK_CONTENT];
-    
+
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
     return cell;
@@ -247,10 +245,10 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
+    }
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+    }
 }
 */
 
@@ -283,9 +281,9 @@
                                                          initWithNibName:@"PrivateLetterDetailViewController"
                                                          bundle:nil];
     privateLetterDetailViewController.userId = [userDict objectForKey:K_BSDK_UID];
-    
+
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: privateLetterDetailViewController];
-    
+
     [self.navigationController presentModalViewController:navController animated:YES];
     [navController release];
     [privateLetterDetailViewController release];

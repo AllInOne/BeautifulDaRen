@@ -42,7 +42,7 @@ typedef enum
 
 - (void)startCameraAction;
 @end
- 
+
 @implementation MineEditingViewController
 @synthesize tableView = _tableView;
 @synthesize tableViewDict = _tableViewDict;
@@ -54,7 +54,7 @@ typedef enum
 {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
+
     // Release any cached data, images, etc that aren't in use.
 }
 
@@ -75,15 +75,15 @@ typedef enum
     }
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: TRUE];
     [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_SHOWWAITOVERLAY object:self];
-    [[BSDKManager sharedManager] modifyUser:[ViewHelper getMyUserId] 
+    [[BSDKManager sharedManager] modifyUser:[ViewHelper getMyUserId]
                                        name:[_tableViewDict objectForKey:KEY_ACCOUNT_USER_NAME]
                                      gender:[_tableViewDict objectForKey:KEY_ACCOUNT_GENDER]
                                       email:[_tableViewDict objectForKey:KEY_ACCOUNT_EMAIL]
                                     city:[_tableViewDict objectForKey:KEY_ACCOUNT_CITY]
-                                        tel:[_tableViewDict objectForKey:KEY_ACCOUNT_PHONE] 
+                                        tel:[_tableViewDict objectForKey:KEY_ACCOUNT_PHONE]
                                     address:[_tableViewDict objectForKey:KEY_ACCOUNT_ADDRESS]
                                 description:[_tableViewDict valueForKey:KEY_ACCOUNT_INTRO]
-                                     avatar:self.avatarImage 
+                                     avatar:self.avatarImage
                             andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
                                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: FALSE];
                                 [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_HIDEWAITOVERLAY object:self];
@@ -93,7 +93,7 @@ typedef enum
                                     NSDictionary * dict = [data objectForKey:K_BSDK_USERINFO];
                                     [[NSUserDefaults standardUserDefaults] setObject:dict forKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
                                 }
-                                
+
                             }];
     [_avatarImage release];
 }
@@ -105,7 +105,7 @@ typedef enum
     [self.navigationItem setTitle:NSLocalizedString(@"edit_profile", @"edit_profile")];
     [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
     [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onSaveButtonClicked) title:NSLocalizedString(@"save", @"save")]];
-    
+
     NSDictionary * dict = [[NSUserDefaults standardUserDefaults] objectForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
     _tableViewDict = [[NSMutableDictionary alloc] initWithDictionary:dict];
 }
@@ -113,7 +113,7 @@ typedef enum
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    
+
     self.tableView = nil;
     self.tableViewDict = nil;
     self.avatarImage = nil;
@@ -184,7 +184,7 @@ typedef enum
 {
     static NSString * infoTopViewIdentifier = @"MyInfoTopViewCell";
     static NSString * buttonViewCellIdentifier = @"ButtonViewCell";
-    
+
     UITableViewCell * cell;
     NSInteger section = [indexPath section];
     if(section == 0)
@@ -192,7 +192,7 @@ typedef enum
         cell = [tableView dequeueReusableCellWithIdentifier:infoTopViewIdentifier];
         if (cell == nil) {
             cell = [[[NSBundle mainBundle] loadNibNamed:infoTopViewIdentifier owner:self options:nil] objectAtIndex:1];
-            
+
             UIImageView * imageView = [[UIImageView alloc] init];
             if (self.avatarImage) {
                 [imageView setImage:self.avatarImage];
@@ -207,9 +207,9 @@ typedef enum
                 else
                 {
                     [imageView setImage:[UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:self.tableViewDict]]];
-                }            
+                }
             }
-            CGRect borderImageViewFrame = CGRectMake(0,0, 
+            CGRect borderImageViewFrame = CGRectMake(0,0,
                                                      ((MyInfoTopViewCell*)cell).avatarImageView.frame.size.width,
                                                      ((MyInfoTopViewCell*)cell).avatarImageView.frame.size.height);
             BorderImageView * borderView = [[BorderImageView alloc]
@@ -237,7 +237,7 @@ typedef enum
                                 leftText:NSLocalizedString(@"female", @"gender")
                                 rightText:NSLocalizedString(@"male", @"gender")
                                 selectedIndex:index];
-        
+
         [buttonViewCell addSubview:seg];
         [seg.firstButton addTarget:self action:@selector(onSegementButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [seg.secondButton addTarget:self action:@selector(onSegementButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -295,7 +295,7 @@ typedef enum
 //                buttonViewCell.leftLabel.text = NSLocalizedString(@"senior", @"");
 //                buttonViewCell.buttonText.text = @"高级内容";
 //                break;
-//            } 
+//            }
             case SECTION_BRIEF:
             {
                 buttonViewCell.leftLabel.text = NSLocalizedString(@"brief", @"");
@@ -321,7 +321,7 @@ typedef enum
                 }
 
                 break;
-            } 
+            }
         }
     }
     return cell;
@@ -370,40 +370,40 @@ typedef enum
     {
         NSInteger type = 0;
         NSInteger row = [indexPath row];
-        
+
         if(row == SECTION_MODIFYPASSWORD)
         {
-            ModifyPasswordViewController *modifiyPasswordViewController = 
+            ModifyPasswordViewController *modifiyPasswordViewController =
             [[ModifyPasswordViewController alloc] initWithNibName:nil bundle:nil];
-            
+
             UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: modifiyPasswordViewController];
-            
+
             [self.navigationController presentModalViewController:navController animated:YES];
-            
+
             [navController release];
             [modifiyPasswordViewController release];
         }
         else if(row == SECTION_CITY)
         {
-            SelectCityViewController *citySelectionController = 
+            SelectCityViewController *citySelectionController =
             [[SelectCityViewController alloc] initWithNibName:nil bundle:nil];
-            
+
             UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: citySelectionController];
             citySelectionController.delegate = self;
-            
+
             [self.navigationController presentModalViewController:navController animated:YES];
-            
+
             [navController release];
             [citySelectionController release];
         }
         else {
             EditDoneBlock block = nil;
             NSString * placeholderString = nil;
-            
+
 //            if(row == SECTION_SENIOR)
 //            {
 //                type = EdittingViewController_type1;
-//                
+//
 //            }
 //            else
             {
@@ -456,7 +456,7 @@ typedef enum
                 }
             }
             EdittingViewController * edittingViewController = [[EdittingViewController alloc]
-                                                               initWithNibName:@"EdittingViewController" 
+                                                               initWithNibName:@"EdittingViewController"
                                                                bundle:nil
                                                                type:type
                                                                block:block];
@@ -467,7 +467,6 @@ typedef enum
     }
 }
 
-
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return 3;
@@ -475,7 +474,7 @@ typedef enum
 
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    
+
     return [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
 }
 
@@ -520,24 +519,24 @@ typedef enum
             case ACTIONSHEET_IMAGE_PICKER:
             {
                 NSString *pressed = [actionSheet buttonTitleAtIndex:buttonIndex];
-                
+
                 if ([pressed isEqualToString:IMAGE_PICKER_CAMERA])
                 {
                     UIImagePickerController * imagePicker = [APPDELEGATE getImagePicker];
-                    
+
                     [imagePicker setDelegate: self];
                     [imagePicker setSourceType: UIImagePickerControllerSourceTypeCamera];
-                    
+
                     [self presentModalViewController:imagePicker animated:YES];
-                    
+
                 }
                 else if ([pressed isEqualToString:IMAGE_PICKER_LIBRARY])
                 {
                     UIImagePickerController * imagePicker = [APPDELEGATE getImagePicker];
-                    
+
                     [imagePicker setDelegate: self];
                     [imagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
-                    
+
                     [self presentModalViewController:imagePicker animated:YES];
                 }
                 else if ([pressed isEqualToString:IMAGE_PICKER_DELETE])
@@ -564,7 +563,7 @@ typedef enum
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
-    
+
     [picker dismissModalViewControllerAnimated:YES];
 }
 
@@ -575,29 +574,29 @@ typedef enum
                                                                 cancelButtonTitle:nil
                                                            destructiveButtonTitle:nil
                                                                 otherButtonTitles:nil];
-    
+
     imagePickerActionSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
     imagePickerActionSheet.tag = ACTIONSHEET_IMAGE_PICKER;
-    
+
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
     {
         if ([UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceRear])
         {
-            [imagePickerActionSheet addButtonWithTitle:IMAGE_PICKER_CAMERA];        
+            [imagePickerActionSheet addButtonWithTitle:IMAGE_PICKER_CAMERA];
         }
     }
-    
+
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
     {
         [imagePickerActionSheet addButtonWithTitle:IMAGE_PICKER_LIBRARY];
     }
-    
+
     if ([imagePickerActionSheet numberOfButtons] > 0)
     {
         [imagePickerActionSheet setDestructiveButtonIndex:[imagePickerActionSheet addButtonWithTitle:NSLocalizedString(@"cancel", @"cancel")]];
         [imagePickerActionSheet showInView:self.view];
     }
-    
+
     [imagePickerActionSheet release];
 }
 

@@ -29,12 +29,12 @@
 - (id)init
 {
     self = [super init];
-    
+
     if (self)
     {
         requests = [[NSMutableArray alloc] initWithCapacity:50];
     }
-    
+
     return self;
 }
 
@@ -42,7 +42,7 @@
 {
     Block_release(self.loginCallback);
     self.loginCallback = nil;
-    
+
     if (self.currentRequest) {
         [_currentRequest release];
     }
@@ -76,13 +76,12 @@
         [self.currentRequest doneWithStatus:status andData:dict];
         self.currentRequest = nil;
     }
-    
+
     if ([self.requests count]) {
         self.currentRequest = [self.requests objectAtIndex:0];
         [self.requests removeObjectAtIndex:0];
         [self.currentRequest start];
     }
 }
-
 
 @end

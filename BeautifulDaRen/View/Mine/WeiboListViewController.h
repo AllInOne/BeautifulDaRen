@@ -31,5 +31,4 @@ enum
                  type:(NSInteger)type
            dictionary:(NSDictionary*)dictionary;
 
-
 @end

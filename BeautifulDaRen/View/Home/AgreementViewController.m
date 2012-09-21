@@ -43,9 +43,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    
+
     activityIndicator.frame = CGRectMake((self.view.frame.size.width - activityIndicator.frame.size.width) / 2,
                                          15,
                                          activityIndicator.frame.size.width,

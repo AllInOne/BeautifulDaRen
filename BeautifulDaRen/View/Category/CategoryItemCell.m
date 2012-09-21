@@ -36,7 +36,7 @@
     [_categoryTitle release];
     [_itemData release];
     [_weiboList release];
-    
+
     [super dealloc];
 }
 
@@ -54,39 +54,39 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     self.categoryTitle.text = [self.itemData objectForKey:K_BSDK_CLASSNAME];
-    
+
     UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    
+
     activityIndicator.frame = CGRectMake(SCREEN_WIDTH/2, CATEGORY_TITLE_FONT_HEIGHT + CONTENT_MARGIN, CGRectGetWidth(activityIndicator.frame), CGRectGetHeight(activityIndicator.frame));
-    
+
     [self.view addSubview:activityIndicator];
-    
+
     [activityIndicator startAnimating];
-    
+
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: TRUE];
-    
+
     [[BSDKManager sharedManager] getWeiboListByClassId:[self.itemData objectForKey:K_BSDK_UID] pageSize:CLASS_WEIBO_PAGE_SIZE pageIndex:1 andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: FALSE];
         [activityIndicator stopAnimating];
         [activityIndicator removeFromSuperview];
         [activityIndicator release];
-        
+
         if (K_BSDK_IS_RESPONSE_OK(data)) {
             self.weiboList = [NSMutableArray arrayWithCapacity:CLASS_WEIBO_PAGE_SIZE];
-            
+
             NSArray * classWeiboList = [data objectForKey:K_BSDK_BLOGLIST];
             for (NSDictionary * weibo in classWeiboList) {
                 if ([weibo objectForKey:K_BSDK_PICTURE_102]) {
                     [self.weiboList addObject:weibo];
                 }
             }
-            
+
             _categoryScrollItem = [[CommonScrollView alloc] initWithNibName:nil bundle:nil data:[self getPicturesFromWeiboList] andDelegate:self];
-            
+
             [self.view addSubview:_categoryScrollItem.view];
-            
+
             _categoryScrollItem.view.frame = CGRectMake(0, CATEGORY_TITLE_FONT_HEIGHT + CONTENT_MARGIN, self.view.frame.size.width, CATEGORY_ITEM_HEIGHT);
         }
         else
@@ -107,12 +107,12 @@
 - (void)onItemSelected:(int)index
 {
     NSLog(@"Category %d selected", index);
-    WeiboDetailViewController *weiboDetailController = 
+    WeiboDetailViewController *weiboDetailController =
     [[WeiboDetailViewController alloc] initWithDictionary:[self.weiboList objectAtIndex:index]];
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: weiboDetailController];
-    
+
     [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
-    
+
     [navController release];
     [weiboDetailController release];
 }
@@ -124,11 +124,11 @@
                                                         bundle:nil
                                                         type:WeiboListViewControllerType_CATEGORY
                                                         dictionary:self.itemData];
-    
+
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: categoryViewController];
-    
+
     [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
-    
+
     [navController release];
     [categoryViewController release];
 }
@@ -141,7 +141,7 @@
 -(NSArray*)getPicturesFromWeiboList
 {
     NSMutableArray * ret = [NSMutableArray arrayWithCapacity:[self.weiboList count]];
-    
+
     for (NSDictionary * weiboData in self.weiboList) {
         NSString * pictureUrl = [weiboData objectForKey:K_BSDK_PICTURE_102];
         if (pictureUrl) {

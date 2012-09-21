@@ -37,7 +37,7 @@
         _cityListData = [[NSArray alloc] initWithObjects:@"北京",
                                                         @"上海",
                                                         @"深圳",
-                                                        @"广州", 
+                                                        @"广州",
                                                         @"成都",
                                                         @"重庆",
                                                         @"长沙",
@@ -76,7 +76,7 @@
                                                         @"澳门",
                                                         nil];
     }
-    
+
     return self;
 }
 
@@ -84,7 +84,7 @@
 {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
+
     // Release any cached data, images, etc that aren't in use.
 }
 
@@ -111,7 +111,6 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-
 #pragma mark - UITableView delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -133,17 +132,17 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+
     static NSString *CellIdentifier = @"Cell";
-    
+
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
-    
+
     // Configure the cell...
     cell.textLabel.text = [self.cityListData objectAtIndex:[indexPath row]];
-    
+
     return cell;
 }
 

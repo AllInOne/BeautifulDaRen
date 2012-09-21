@@ -42,15 +42,15 @@ static LocationHelper *sharedInstance;
 - (id)init
 {
     self = [super init];
-    
+
     if (self)
     {
-        gps = [[CLLocationManager alloc] init];  
-        gps.delegate = self;  
-        gps.desiredAccuracy = kCLLocationAccuracyBest;  
-        gps.distanceFilter = kCLDistanceFilterNone; 
+        gps = [[CLLocationManager alloc] init];
+        gps.delegate = self;
+        gps.desiredAccuracy = kCLLocationAccuracyBest;
+        gps.distanceFilter = kCLDistanceFilterNone;
     }
-    
+
     return self;
 }
 
@@ -67,53 +67,53 @@ static LocationHelper *sharedInstance;
     [super dealloc];
 }
 
-- (void)locationManager:(CLLocationManager *)locationManager didUpdateToLocation:(CLLocation *)newLocation  
-           fromLocation:(CLLocation *) oldLocation;  
-{  
+- (void)locationManager:(CLLocationManager *)locationManager didUpdateToLocation:(CLLocation *)newLocation
+           fromLocation:(CLLocation *) oldLocation;
+{
     self.locationStr = [NSString stringWithFormat:@"%f,%f",newLocation.coordinate.latitude, newLocation.coordinate.longitude];
     self.location = newLocation;
     [self startedReverseGeoderWithLatitude:newLocation.coordinate.latitude longitude:newLocation.coordinate.longitude];
     [gps stopUpdatingLocation];
-}  
+}
 
-- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {  
-    if ( [error code] == kCLErrorDenied ) {  
-        [manager stopUpdatingHeading];  
-    } else if ([error code] == kCLErrorHeadingFailure) {  
-        
-    }  
-}  
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+    if ( [error code] == kCLErrorDenied ) {
+        [manager stopUpdatingHeading];
+    } else if ([error code] == kCLErrorHeadingFailure) {
 
--(void) startedReverseGeoderWithLatitude:(double)latitude longitude:(double)longitude{  
-    CLLocationCoordinate2D coordinate2D;  
-    coordinate2D.longitude = longitude;  
-    coordinate2D.latitude = latitude;  
-    MKReverseGeocoder *geoCoder = [[MKReverseGeocoder alloc] initWithCoordinate:coordinate2D];  
-    geoCoder.delegate = self;  
-    [geoCoder start];  
-}  
+    }
+}
 
--(void)reverseGeocoder:(MKReverseGeocoder *)geocoder didFindPlacemark:(MKPlacemark *)placemark  
-{  
-    
-    NSString *subthroung=placemark.thoroughfare;  
-    NSString *local=placemark.locality;  
+-(void) startedReverseGeoderWithLatitude:(double)latitude longitude:(double)longitude{
+    CLLocationCoordinate2D coordinate2D;
+    coordinate2D.longitude = longitude;
+    coordinate2D.latitude = latitude;
+    MKReverseGeocoder *geoCoder = [[MKReverseGeocoder alloc] initWithCoordinate:coordinate2D];
+    geoCoder.delegate = self;
+    [geoCoder start];
+}
+
+-(void)reverseGeocoder:(MKReverseGeocoder *)geocoder didFindPlacemark:(MKPlacemark *)placemark
+{
+
+    NSString *subthroung=placemark.thoroughfare;
+    NSString *local=placemark.locality;
     NSLog(@"您当前所在位置:%@,%@", local, subthroung);
-    
+
     if (_doneCallback) {
         _doneCallback(self.error, self.location, placemark);
     }
-    
+
     Block_release(_doneCallback);
     _doneCallback = nil;
-}  
--(void)reverseGeocoder:(MKReverseGeocoder *)geocoder didFailWithError:(NSError *)error  
+}
+-(void)reverseGeocoder:(MKReverseGeocoder *)geocoder didFailWithError:(NSError *)error
 {
     _error = nil;
     self.error = error;
-    
+
     _retryCount++;
-    
+
     if (self.retryCount < LOCATION_RETRY_COUNT_LIMITATION) {
         [gps startUpdatingLocation];
     }
@@ -122,11 +122,11 @@ static LocationHelper *sharedInstance;
         if (_doneCallback) {
             _doneCallback(self.error, self.location, nil);
         }
-        
+
         Block_release(_doneCallback);
-        _doneCallback = nil;    
+        _doneCallback = nil;
     }
-}  
+}
 
 -(void) start
 {

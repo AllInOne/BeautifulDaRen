@@ -57,7 +57,7 @@
 {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
+
     // Release any cached data, images, etc that aren't in use.
 }
 
@@ -70,7 +70,7 @@
     // Do any additional setup after loading the view from its nib.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-    
+
     if (self.forwardMode) {
         self.navigationItem.title = @"转发";
         self.checkBoxText.text = @"同时评论给用户";
@@ -80,21 +80,21 @@
         self.checkBoxText.text = @"同时转发到我的微博";
         self.navigationItem.title = @"评论";
     }
-    
+
     [self.checkBoxText setFont:[UIFont systemFontOfSize:16.0]];
-    
+
     UIImageView * toolbarBg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"toolbar_background"]];
     toolbarBg.contentMode = UIViewContentModeScaleToFill;
     [self.footerView  insertSubview:toolbarBg atIndex:0];
-    
+
     [toolbarBg release];
-    
+
     self.isCheckBoxChecked = NO;
-    
+
     [_weiboContentTextView becomeFirstResponder];
-    
+
     [_weiboContentTextView setDelegate:self];
-    
+
     if (self.forwardMode) {
         if ([[SinaSDKManager sharedManager] isLogin])
         {
@@ -142,7 +142,6 @@
     [super dealloc];
 }
 
-
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
@@ -157,12 +156,12 @@
     return YES;
 }
 
-- (void)keyboardWillShow:(NSNotification *)note 
+- (void)keyboardWillShow:(NSNotification *)note
 {
     if (!self.isKeypadShow)
     {
         NSDictionary *info = [note userInfo];
-        
+
         CGSize kbSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
         double animDuration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
         NSLog(@"%@", self.weiboContentTextView);
@@ -172,7 +171,7 @@
                                                          self.weiboContentTextView.frame.origin.y,
                                                          self.weiboContentTextView.frame.size.width,
                                                          self.weiboContentTextView.frame.size.height - kbSize.height);
-             
+
              self.footerView.center = CGPointMake(self.footerView.center.x,
                                                   self.footerView.center.y - kbSize.height);
          }];
@@ -185,17 +184,17 @@
     if (self.isKeypadShow)
     {
         NSDictionary *info = [note userInfo];
-        
+
         CGSize kbSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
         double animDuration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-        
+
         [UIView animateWithDuration:animDuration animations:^
          {
              self.weiboContentTextView.frame =CGRectMake(self.weiboContentTextView.frame.origin.x,
                                                          self.weiboContentTextView.frame.origin.y,
                                                          self.weiboContentTextView.frame.size.width,
                                                          self.weiboContentTextView.frame.size.height + kbSize.height);
-             
+
              self.footerView.center = CGPointMake(self.footerView.center.x,
                                                   self.footerView.center.y + kbSize.height);
          }];
@@ -210,10 +209,10 @@
                                           cancelButtonTitle:NSLocalizedString(@"cancel", @"cancel")
                                           otherButtonTitles:NSLocalizedString(@"confirm", @"confirm"), nil];
     alert.tag = TAG_ALERTVIEW_BACK_CONFIRM;
-    
+
     [alert show];
     [alert release];
-    
+
     return;
 }
 
@@ -226,7 +225,7 @@
             NSLog(@"Sina SDK login done, status:%d", status);
             [self.sinaButton setImage:[UIImage imageNamed:@"myshow_sina_color"] forState:UIControlStateNormal];
             [self.sinaShareImageView setHidden:NO];
-        }];   
+        }];
     }
     else
     {
@@ -243,13 +242,13 @@
 
 - (IBAction)onAtFriendPressed:(id)sender
 {
-    FriendsSelectionViewController *friendSelectionController = 
+    FriendsSelectionViewController *friendSelectionController =
     [[FriendsSelectionViewController alloc] initWithNibName:nil bundle:nil];
     friendSelectionController.delegate = self;
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: friendSelectionController];
-    
+
     [self.navigationController presentModalViewController:navController animated:YES];
-    
+
     [navController release];
     [friendSelectionController release];
 }
@@ -282,7 +281,7 @@
     }
     else {
         self.isCheckBoxChecked = YES;
-        [self.checkBoxButton setImage:[UIImage imageNamed:@"comment_forward_checked.png"] forState:UIControlStateNormal];        
+        [self.checkBoxButton setImage:[UIImage imageNamed:@"comment_forward_checked.png"] forState:UIControlStateNormal];
     }
 }
 
@@ -302,10 +301,10 @@
                 {
                     [self dismissModalViewControllerAnimated:YES];
                 }
-                break;               
+                break;
             default:
                 break;
-        }    
+        }
     }
 }
 

@@ -17,5 +17,4 @@ enum
 @interface CommentOrForwardViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil type:(NSInteger)type;
 
-
 @end

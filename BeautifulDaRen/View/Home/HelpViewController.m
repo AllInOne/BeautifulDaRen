@@ -46,7 +46,7 @@
 {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
+
     // Release any cached data, images, etc that aren't in use.
 }
 
@@ -55,16 +55,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    
+
     activityIndicator.frame = CGRectMake((self.view.frame.size.width - activityIndicator.frame.size.width) / 2,
                                          15,
                                          activityIndicator.frame.size.width,
                                          activityIndicator.frame.size.height);
     [self.view addSubview:activityIndicator];
     [activityIndicator startAnimating];
-    [[BSDKManager sharedManager] getHelpAndCallback:^(AIO_STATUS status, NSDictionary *data) {        
+    [[BSDKManager sharedManager] getHelpAndCallback:^(AIO_STATUS status, NSDictionary *data) {
         [activityIndicator stopAnimating];
         [activityIndicator removeFromSuperview];
         [activityIndicator release];

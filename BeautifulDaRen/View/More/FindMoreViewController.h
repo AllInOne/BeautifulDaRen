@@ -13,5 +13,4 @@
 
 @interface FindMoreViewController : UIViewController <UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UITextFieldDelegate, WaterFlowViewDelegate, WaterFlowViewDatasource, CommonScrollViewProtocol, ButtonPressDelegate>
 
-
 @end

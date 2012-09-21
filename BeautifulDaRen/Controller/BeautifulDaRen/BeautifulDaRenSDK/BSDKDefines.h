@@ -168,7 +168,6 @@
 
 #define K_BSDK_ATTENTIONUSERID @"AttentionUserId"
 
-
 #define K_BSDK_SINA_USER_ID @"sinaUserId"
 #define K_BSDK_SINA_USER_NAME @"sinaUserName"
 #define K_BSDK_SINA_SEX @"sinaSex"

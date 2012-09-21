@@ -29,7 +29,6 @@
 
 @property(assign, nonatomic) BOOL scrolling;
 
-
 @end
 
 @implementation FriendsViewController
@@ -54,7 +53,7 @@
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
+
     // Release any cached data, images, etc that aren't in use.
 }
 
@@ -100,34 +99,34 @@
 - (NSString*) sectionLetterForContact: (NSString*) contact {
     if (contact) {
         NSString *filteredName = [[contact uppercaseString] stringByTrimmingCharactersInSet: [[NSCharacterSet letterCharacterSet] invertedSet]];
-        
+
         NSString* pingying = [ChineseToPinyin pinyinFromChiniseString:filteredName];
         if ([pingying length]) {
             return [pingying substringToIndex: 1];
         }
-        
+
         return DEFAULT_SECTION_LETTER;
     }
-    
+
     return DEFAULT_SECTION_LETTER;
 }
 
 - (void) createSectionsForContacts: (NSArray*) contacts {
     for(NSString *contact in contacts) {
         NSString *sectionLetter = [self sectionLetterForContact: contact];
-        
+
         if (!_sections) {
             _sections = [[NSMutableDictionary alloc] init];
         }
-        
+
         NSMutableArray *contactsInSection = [self.sections objectForKey: sectionLetter];
-        
+
         if (!contactsInSection) {
             contactsInSection = [NSMutableArray array];
         }
-        
+
         [contactsInSection addObject: contact];
-        
+
         [self.sections setObject: contactsInSection forKey: sectionLetter];
     }
     self.sectionsArray = [[self.sections allKeys] sortedArrayUsingSelector: @selector(caseInsensitiveCompare:)];
@@ -147,12 +146,12 @@
     {
         contacts = [self.sections objectForKey: [self.sectionsArray objectAtIndex: indexPath.section]];
     }
-    
+
     FriendListCellView *cell = [tableView dequeueReusableCellWithIdentifier:friendListTableViewCellIdentifier];
     if (cell == nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:friendListTableViewCellIdentifier owner:self options:nil] objectAtIndex:0];
     }
-    
+
     cell.name.text = [contacts objectAtIndex:[indexPath row]];
 
     return cell;
@@ -160,7 +159,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSArray *contacts = nil;
-    
+
     if (tableView == self.searchController.searchResultsTableView)
     {
         contacts = self.filteredContacts;
@@ -169,7 +168,7 @@
     {
         contacts = [self.sections objectForKey: [self.sectionsArray objectAtIndex: section]];
     }
-    
+
     return [contacts count];
 }
 
@@ -182,15 +181,14 @@
     }
 }
 
-//- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section 
+//- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 //{
 //    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 30)];
 //
 ////    [headerView setBackgroundColor:[UIColor purpleColor]];
-//    
+//
 //    return headerView;
 //}
-
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if (tableView == self.searchController.searchResultsTableView) {
@@ -216,14 +214,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSArray * contacts = nil;
-    
+
     if (tableView == self.searchController.searchResultsTableView) {
         contacts = self.filteredContacts;
     }
     else {
         contacts = [self.sections objectForKey: [self.sectionsArray objectAtIndex: indexPath.section]];
     }
-    
+
     NSString* contactId = [contacts objectAtIndex: indexPath.row];
     [self.delegate didFinishContactSelectionWithContacts:contactId];
 }
@@ -235,11 +233,11 @@
     }
 
     [self.filteredContacts removeAllObjects];
-    
+
     for (id key in self.sections)
     {
         NSArray *section = [self.sections objectForKey:key];
-        
+
         for (NSString *contactId in section)
         {
             if (([contactId rangeOfString:searchText options:NSCaseInsensitiveSearch].location != NSNotFound)
@@ -260,14 +258,14 @@
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
     [self filterContentForSearchText:searchString scope:
      [[self.searchController.searchBar scopeButtonTitles] objectAtIndex:[self.searchController.searchBar selectedScopeButtonIndex]]];
-    
+
     return YES;
 }
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption {
     [self filterContentForSearchText:[self.searchController.searchBar text] scope:
      [[self.searchController.searchBar scopeButtonTitles] objectAtIndex:searchOption]];
-    
+
     return YES;
 }
 
@@ -279,7 +277,7 @@
 - (void)updateViewController {
     [self.sections removeAllObjects];
     [self createSectionsForContacts: self.friendsList];
-    
+
     [self.tableView reloadData];
 }
 

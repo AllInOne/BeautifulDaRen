@@ -42,7 +42,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     [self.navigationItem setTitle:NSLocalizedString(@"modify_password", @"modify_password")];
     [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
 }
@@ -60,7 +60,7 @@
     [_oldPasswordField release];
     [_resetPasswordField release];
     [_repeatNewPasswordField release];
-    
+
     [super dealloc];
 }
 
@@ -118,7 +118,7 @@
         }
     }
     else {
-        
+
         cell = [tableView dequeueReusableCellWithIdentifier:buttonViewCellIdentifier];
         if(!cell)
         {
@@ -127,7 +127,7 @@
         ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"login_button"];
         ((ButtonViewCell*)cell).buttonLeftIconPressed = [UIImage imageNamed:@"login_button_pressed"];
         ((ButtonViewCell*)cell).leftLabel.text = NSLocalizedString(@"enter", @"enter");
-        
+
         cell.backgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
     }
     return cell;
@@ -149,7 +149,7 @@
 
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
-    
+
     return 2;
 }
 
@@ -180,7 +180,7 @@
             [[iToast makeText:iToastString] show];
             return;
         }
-        
+
         NSString * accountName = [[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] valueForKey:KEY_ACCOUNT_USER_NAME];
         [[BSDKManager sharedManager] changePasswordByUsername:accountName
                                                   oldPassword:self.oldPasswordField.text

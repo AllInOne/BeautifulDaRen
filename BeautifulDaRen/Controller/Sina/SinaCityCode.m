@@ -47,8 +47,6 @@
 
 @end
 
-
-
 static SinaCityCode *sharedInstance;
 
 @implementation SinaCityCode
@@ -99,7 +97,7 @@ static SinaCityCode *sharedInstance;
 - (id)init
 {
     self = [super init];
-    
+
     if (self)
     {
         self.anhui = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -122,7 +120,7 @@ static SinaCityCode *sharedInstance;
             @"宣城",@"18",
             nil
         ];
-        
+
         self.fujian = [NSDictionary dictionaryWithObjectsAndKeys:
             @"福州",@"1",
             @"厦门",@"2",
@@ -135,7 +133,7 @@ static SinaCityCode *sharedInstance;
             @"宁德",@"9",
                     nil
         ];
-        
+
         self.gansu = [NSDictionary dictionaryWithObjectsAndKeys:
             @"兰州",@"1",
             @"嘉峪关",@"2",
@@ -153,7 +151,7 @@ static SinaCityCode *sharedInstance;
             @"甘南",@"30",
             nil
         ];
-        
+
        self.guangdong = [NSDictionary dictionaryWithObjectsAndKeys:
             @"广州",@"1",
             @"韶关",@"2",
@@ -178,7 +176,7 @@ static SinaCityCode *sharedInstance;
             @"云浮",@"53",
             nil
         ];
-        
+
         self.guizhou = [NSDictionary dictionaryWithObjectsAndKeys:
             @"贵阳",@"1",
             @"六盘水",@"2",
@@ -191,7 +189,7 @@ static SinaCityCode *sharedInstance;
             @"黔南",@"27",
             nil
         ];
-        
+
         self.guangxi = [NSDictionary dictionaryWithObjectsAndKeys:
             @"南宁",@"1",
             @"柳州",@"2",
@@ -209,14 +207,14 @@ static SinaCityCode *sharedInstance;
             @"柳州",@"22",
             nil
                    ];
-        
+
         self.hainan = [NSDictionary dictionaryWithObjectsAndKeys:
             @"海口",@"1",
             @"三亚",@"2",
             @"其他",@"90",
             nil
         ];
-        
+
         self.hebei = [NSDictionary dictionaryWithObjectsAndKeys:
             @"石家庄",@"1",
             @"唐山",@"2",
@@ -231,7 +229,7 @@ static SinaCityCode *sharedInstance;
             @"衡水",@"11",
             nil
         ];
-        
+
         self.heilongjiang = [NSDictionary dictionaryWithObjectsAndKeys:
             @"哈尔滨",@"1",
             @"吉吉哈尔",@"2",
@@ -248,7 +246,7 @@ static SinaCityCode *sharedInstance;
             @"大兴安岭",@"27",
             nil
         ];
-        
+
         self.henan = [NSDictionary dictionaryWithObjectsAndKeys:
             @"郑州",@"1",
             @"开封",@"2",
@@ -269,7 +267,7 @@ static SinaCityCode *sharedInstance;
             @"驻马店",@"17",
                                  nil
         ];
-        
+
        self.neimenggu = [NSDictionary dictionaryWithObjectsAndKeys:
             @"呼和浩特",@"1",
             @"包头",@"2",
@@ -285,7 +283,7 @@ static SinaCityCode *sharedInstance;
             @"阿拉善盟",@"29",
             nil
         ];
-                                     
+
       self.jiangsu = [NSDictionary dictionaryWithObjectsAndKeys:
           @"南京",@"1",
           @"无锡",@"2",
@@ -376,7 +374,7 @@ static SinaCityCode *sharedInstance;
             @"临汾",@"10",
             @"吕梁",@"23",
             nil
-                          ];    
+                          ];
        self.shandong = [NSDictionary dictionaryWithObjectsAndKeys:
             @"济南",@"1",
             @"青岛",@"2",
@@ -397,7 +395,7 @@ static SinaCityCode *sharedInstance;
             @"菏泽",@"17",
             nil
             ];
-                          
+
      self.sichuan = [NSDictionary dictionaryWithObjectsAndKeys:
             @"成都",@"1",
             @"自贡",@"3",
@@ -431,7 +429,7 @@ static SinaCityCode *sharedInstance;
             @"阿里",@"6",
             @"林芝",@"7",
             nil
-            ];    
+            ];
         self.xinjiang = [NSDictionary dictionaryWithObjectsAndKeys:
             @"乌鲁木齐",@"1",
             @"克拉玛依",@"2",
@@ -467,7 +465,7 @@ static SinaCityCode *sharedInstance;
             @"迪庆",@"34",
             @"临沧",@"35",
             nil
-            ];    
+            ];
       self.zhejiang = [NSDictionary dictionaryWithObjectsAndKeys:
             @"杭州",@"1",
             @"宁波",@"2",
@@ -628,14 +626,13 @@ static SinaCityCode *sharedInstance;
          guowai,@"400",
          [NSDictionary dictionaryWithDictionary:nil],@"100",
          nil
-         ];  
+         ];
     }
-    
+
     [self getCityNameByProvinceCode:@"61" andCityCode:@"5"];
-    
+
     return self;
 }
-
 
 -(NSString*)getProvinceNameByCode:(NSString*)code
 {
@@ -647,9 +644,9 @@ static SinaCityCode *sharedInstance;
     NSLog(@"pro:%@", provinceCode);
     NSLog(@"city:%@", cityCode);
     NSLog(@"city:%@", self.provinceData);
-    
+
     NSDictionary * province = [self.provinceData objectForKey:provinceCode];
-    NSLog(@"prodata:%@", province);   
+    NSLog(@"prodata:%@", province);
     if (nil == province) {
         return [provinceNames objectForKey:provinceCode];
     }

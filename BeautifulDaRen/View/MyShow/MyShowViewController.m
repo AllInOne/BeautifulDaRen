@@ -47,7 +47,7 @@
 {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
+
     // Release any cached data, images, etc that aren't in use.
 }
 
@@ -59,7 +59,7 @@
     // Do any additional setup after loading the view from its nib.
     self.takePhotoViewController =
     [[[TakePhotoViewController alloc] initWithNibName:nil bundle:nil] autorelease];
-    
+
     [self.takePhotoViewController setDelegate:self];
     self.currentType = UIImagePickerControllerSourceTypeCamera;
     self.shouldShowSelf = YES;
@@ -102,17 +102,17 @@
 - (void)didTakePicture:(UIImage *)picture
 {
     self.shouldShowSelf = NO;
-    WeiboComposerViewController *weiboComposerViewControlller = 
+    WeiboComposerViewController *weiboComposerViewControlller =
     [[WeiboComposerViewController alloc] initWithNibName:nil bundle:nil];
-    
+
     weiboComposerViewControlller.selectedImage = [picture scaleToSize:CGSizeMake(320.0, picture.size.height * 320.0/picture.size.width)];
 
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: weiboComposerViewControlller];
-    
+
     [self.navigationController presentModalViewController:navController animated:YES];
     [weiboComposerViewControlller release];
     [navController release];
-    
+
     [self.tabBarController setSelectedIndex:0];
     self.currentType = UIImagePickerControllerSourceTypeCamera;
     self.shouldShowSelf = YES;
@@ -129,16 +129,16 @@
 {
     self.currentType = UIImagePickerControllerSourceTypePhotoLibrary;
     self.shouldShowSelf = NO;
-    
+
     if (_selectPhotoViewController == nil) {
         self.selectPhotoViewController =
         [[[TakePhotoViewController alloc] initWithNibName:nil bundle:nil] autorelease];
-        
+
         [self.selectPhotoViewController setDelegate:self];
     }
-    
+
     [self dismissModalViewControllerAnimated:NO];
-    
+
     [self.selectPhotoViewController setupImagePicker:self.currentType];
     [self.parentViewController presentModalViewController:self.selectPhotoViewController.imagePickerController animated:YES];
     //[self.takePhotoViewController.imagePickerController release];

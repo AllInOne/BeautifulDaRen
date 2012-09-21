@@ -27,7 +27,7 @@ typedef enum
     ACCOUNT_SETTING_CITY
 }ACCOUNT_SETTING_FIELD;
 
-typedef enum 
+typedef enum
 {
     REGISTER_CELL_ACCOUNT_SETTING = 0,
     REGISTER_CELL_REGISTER_BUTTON,
@@ -85,7 +85,7 @@ typedef enum
 {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
+
     // Release any cached data, images, etc that aren't in use.
 }
 
@@ -110,7 +110,7 @@ typedef enum
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     _savingInputDict = [[NSMutableDictionary alloc] init];
 }
 
@@ -125,7 +125,7 @@ typedef enum
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    
+
     self.observers = [NSMutableArray arrayWithCapacity:2];
     id observer = [[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardDidShowNotification
                                                                     object:nil
@@ -137,7 +137,7 @@ typedef enum
                                                                                            scrollView:self.tableView];
                                                                 }];
     [self.observers addObject:observer];
-    
+
     observer = [[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardWillHideNotification
                                                                  object:nil
                                                                   queue:nil
@@ -145,7 +145,7 @@ typedef enum
                                                                  [ViewHelper handleKeyboardWillBeHidden:self.tableView];
                                                              }];
     [self.observers addObject:observer];
-    
+
     [super viewWillAppear:animated];
 }
 
@@ -169,7 +169,7 @@ typedef enum
 
 -(IBAction)registerButtonSelected:(id)sender
 {
-    // TODO 
+    // TODO
     NSLog(@"TO handle register button.");
 }
 
@@ -218,7 +218,7 @@ typedef enum
                 accountInfoInputCell.inputLabel.text = NSLocalizedString(@"user_name_id", @"");
                 accountInfoInputCell.inputLabel.textAlignment = UITextAlignmentLeft;
                 accountInfoInputCell.inputTextField.delegate = self;
-                
+
                 accountInfoInputCell.inputTextField.placeholder = NSLocalizedString(@"please_input_a_beautifu_daren_name", @"");
                 accountInfoInputCell.inputTextField.text = [self.savingInputDict valueForKey:USER_NAME_TEXT_FIELD];
                 self.userNameTextField = nil;
@@ -268,7 +268,7 @@ typedef enum
         ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"login_button"];
         ((ButtonViewCell*)cell).buttonLeftIconPressed = [UIImage imageNamed:@"login_button_pressed"];
         ((ButtonViewCell*)cell).leftLabel.text = NSLocalizedString(@"register", @"register");
-        
+
         cell.backgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
     }
     else if(section == REGISTER_CELL_REGISTER_AGREEMENT)
@@ -324,14 +324,14 @@ typedef enum
         switch ([indexPath row]) {
             case ACCOUNT_SETTING_CITY:
             {
-                SelectCityViewController *citySelectionController = 
+                SelectCityViewController *citySelectionController =
                 [[SelectCityViewController alloc] initWithNibName:nil bundle:nil];
                 citySelectionController.delegate = self;
 
                 UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: citySelectionController];
-                
+
                 [self.navigationController presentModalViewController:navController animated:YES];
-                
+
                 [navController release];
                 [citySelectionController release];
                 break;
@@ -350,7 +350,7 @@ typedef enum
         email = @"12121aa41@11sd.com";
         pwd = @"123456";
         rePwd = @"123456";
-        self.userCity = @"重庆"; 
+        self.userCity = @"重庆";
 #endif
         NSString * iToastString = @"";
         if (!userName || [userName isEqualToString:@""])
@@ -378,7 +378,7 @@ typedef enum
             [[iToast makeText:iToastString] show];
             return;
         }
-        
+
         [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_SHOWWAITOVERLAY object:self];
        [[BSDKManager sharedManager]
         signUpWithUsername:userName
@@ -393,8 +393,7 @@ typedef enum
                 [[NSUserDefaults standardUserDefaults] setObject:dict forKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
                 [self.navigationController popToRootViewControllerAnimated:YES];
                 [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_LOGIN_SUCCESS object:self userInfo:data];
-                
-                
+
                 [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:USERDEFAULT_IS_AUTO_LOGIN];
                 [[NSUserDefaults standardUserDefaults] setObject:userName forKey:USERDEFAULT_AUTO_LOGIN_ACCOUNT_NAME];
                 [[NSUserDefaults standardUserDefaults] setObject:pwd forKey:USERDEFAULT_AUTO_LOGIN_ACCOUNT_PASSWORD];
@@ -446,7 +445,6 @@ typedef enum
     return [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
 }
 
-
 #pragma mark UITextFieldDelegate
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
@@ -492,7 +490,7 @@ typedef enum
                 {
                     [[iToast makeText:@"亲，认证失败了哦！"] show];
                 }
-            }];   
+            }];
         }
         else
         {

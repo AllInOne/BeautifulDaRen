@@ -48,10 +48,10 @@
 + (void)showImageUrl:(NSString* )imageUrl size:(CGSize)size inNavigationController:(UINavigationController* )parentNav
 {
     FullImageViewController* fullImageViewController = [[FullImageViewController alloc] initWithNibName:nil bundle:nil];
-    
+
     [fullImageViewController setImageUrl:imageUrl];
     [fullImageViewController setImageSize:size];
-    
+
     UINavigationController * navController= [[UINavigationController alloc] initWithRootViewController:fullImageViewController];
     [parentNav presentModalViewController:navController animated:YES];
     [navController release];
@@ -59,11 +59,11 @@
 }
 
 + (void)showImage:(UIImage* )image inNavigationController:(UINavigationController* )parentNav {
-    
+
     FullImageViewController* fullImageViewController = [[FullImageViewController alloc] initWithNibName:nil bundle:nil];
 
     [fullImageViewController setImageData:image];
-    
+
     UINavigationController * navController= [[UINavigationController alloc] initWithRootViewController:fullImageViewController];
     [parentNav presentModalViewController:navController animated:YES];
     [navController release];
@@ -75,7 +75,7 @@
     [_timerHideNavBar invalidate];
     [self.scrollView removeGestureRecognizer:self.singleTap];
     [self.scrollView removeGestureRecognizer:self.doubleTap];
-    
+
     [_timerHideNavBar release];
     [_singleTap release];
     [_doubleTap release];
@@ -85,7 +85,7 @@
     [_indicatorLabel release];
     [_imageParentView release];
     [_imageData release];
-    
+
     [super dealloc];
 }
 
@@ -94,20 +94,20 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+
     self.navigationItem.title = NSLocalizedString(@"picture", @"picture");
-    
+
     [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onClickReturnButton:) title:NSLocalizedString(@"go_back", @"go_back")]];
-    
+
     [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onClickSaveButton:) title:NSLocalizedString(@"save", @"save")]];
-    
+
     self.frozenSingleTap = NO;
-    
+
     [self setImage:self.imageData];
-    
+
     _singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
     [self.scrollView addGestureRecognizer:_singleTap];
-    
+
     _doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
     self.doubleTap.numberOfTapsRequired = 2;
     [self.scrollView addGestureRecognizer:_doubleTap];
@@ -117,7 +117,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    
+
     self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
 }
 
@@ -144,9 +144,9 @@
 
 - (void)handleSingleTap:(UIGestureRecognizer *)gestureRecognizer {
     if (!self.frozenSingleTap) {
-        
+
         [self clearHideNavBarTimer];
-        
+
         self.frozenSingleTap = YES;
 
         [UIView animateWithDuration:0.5
@@ -159,7 +159,7 @@
                              }
                          } completion:^(BOOL finished) {
                              self.frozenSingleTap = NO;
-                             
+
                              if (self.navigationController.navigationBar.alpha == 1.0) {
                                  [self resetHideNavBarTimer];
                              }
@@ -190,26 +190,25 @@
                          else {
                              self.navigationController.navigationBar.alpha = 1.0;
                          }
-    }]; 
+    }];
 }
 
 - (CGRect)zoomRectForScale:(float)scale withCenter:(CGPoint)center {
-    
+
     CGRect zoomRect;
-    
-    // the zoom rect is in the content view's coordinates. 
+
+    // the zoom rect is in the content view's coordinates.
     //    At a zoom scale of 1.0, it would be the size of the imageScrollView's bounds.
     //    As the zoom scale decreases, so more content is visible, the size of the rect grows.
     zoomRect.size.height = self.scrollView.frame.size.height / scale;
     zoomRect.size.width  = self.scrollView.frame.size.width  / scale;
-    
+
     // choose an origin so as to get the right center.
     zoomRect.origin.x    = center.x - (zoomRect.size.width  / 2.0);
     zoomRect.origin.y    = center.y - (zoomRect.size.height / 2.0);
-    
+
     return zoomRect;
 }
-
 
 - (void)clearHideNavBarTimer {
     [self.timerHideNavBar invalidate];
@@ -245,14 +244,14 @@
     {
         self.imageDownloadDone = NO;
          [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: TRUE];
-        
+
         __block UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        
+
         activityIndicator.center = CGPointMake(SCREEN_WIDTH/2, USER_WINDOW_HEIGHT/2);
         [activityIndicator startAnimating];
-        
+
         [self.view addSubview:activityIndicator];
-        
+
         [self.imageView setImageWithURL:[NSURL URLWithString:self.imageUrl] success:^(UIImage *image) {
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: FALSE];
             self.imageDownloadDone = YES;
@@ -272,19 +271,18 @@
                 activityIndicator = nil;
             }
         }];
-        self.imageView.frame = CGRectMake(0.0f, 
-                                          0.0f, 
-                                          self.imageSize.width, 
-                                          self.imageSize.height);        
+        self.imageView.frame = CGRectMake(0.0f,
+                                          0.0f,
+                                          self.imageSize.width,
+                                          self.imageSize.height);
         widthScale = self.imageSize.width / self.scrollView.frame.size.width;
         heightScale = self.imageSize.height / self.scrollView.frame.size.height;
     }
 
-
     float compressScale = fmaxf(widthScale, heightScale);
-    self.imageView.frame = CGRectMake(self.imageView.frame.origin.x, 
-                                      self.imageView.frame.origin.y, 
-                                      self.imageView.frame.size.width / compressScale, 
+    self.imageView.frame = CGRectMake(self.imageView.frame.origin.x,
+                                      self.imageView.frame.origin.y,
+                                      self.imageView.frame.size.width / compressScale,
                                       self.imageView.frame.size.height / compressScale);
 
     self.imageView.center = self.imageParentView.center;
@@ -296,7 +294,7 @@
     [self.indicator stopAnimating];
 
 //    self.navigationItem.rightBarButtonItem = self.rightBarButton;
-    
+
     [self resetHideNavBarTimer];
 }
 

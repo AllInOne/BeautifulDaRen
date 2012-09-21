@@ -49,7 +49,7 @@
 {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
+
     // Release any cached data, images, etc that aren't in use.
 }
 
@@ -75,7 +75,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
     [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onSaveButtonClicked) title:NSLocalizedString(@"enter", @"enter")]];
     if (_type == EdittingViewController_type0) {
@@ -84,12 +84,12 @@
         _inputTextView.layer.borderWidth = 1;
         _inputTextView.layer.cornerRadius = 5.0;
         [_inputTextView becomeFirstResponder];
-        
+
         if  (_placeholderString)
         {
             [_inputTextView setText:_placeholderString];
         }
-        
+
         [self.view addSubview:_editNormalView];
     }
     else
@@ -98,23 +98,23 @@
         _commentMeSegmentControl = [_commentMeSegmentControl initWithFrame:_commentMeSegmentControl.frame leftText:NSLocalizedString(@"allow", @"allow") rightText:NSLocalizedString(@"not_allow", @"not_allow") selectedIndex:0];
         _atMeSegmentControl = [_atMeSegmentControl initWithFrame:_atMeSegmentControl.frame leftText:NSLocalizedString(@"allow", @"allow") rightText:NSLocalizedString(@"not_allow", @"not_allow") selectedIndex:0];
         _privateLetterMeSegmentControl = [_privateLetterMeSegmentControl initWithFrame:_privateLetterMeSegmentControl.frame leftText:NSLocalizedString(@"allow", @"allow") rightText:NSLocalizedString(@"not_allow", @"not_allow") selectedIndex:0];
-        
+
         NSString * radioButtonGroupId = @"RadioButtonInEdittingView";
 
         RadioButton * radioButton1 = [[RadioButton alloc] initWithGroupId:radioButtonGroupId text:NSLocalizedString(@"only_to_my_followed", @"") index:0];
         RadioButton * radioButton2 = [[RadioButton alloc] initWithGroupId:radioButtonGroupId text:NSLocalizedString(@"not_to_anyone", @"") index:1];
-        
+
         radioButton1.frame = CGRectMake(15, 210, 240, 30);
         radioButton2.frame = CGRectMake(15, 250, 240, 30);
-        
+
         [_editPrivaceView addSubview:_commentMeSegmentControl];
         [_editPrivaceView addSubview:_atMeSegmentControl];
         [_editPrivaceView addSubview:_privateLetterMeSegmentControl];
         [_editPrivaceView addSubview:radioButton1];
         [_editPrivaceView addSubview:radioButton2];
-        
+
         [self.view addSubview:_editPrivaceView];
-        
+
         [radioButton1 release];
         [radioButton2 release];
     }
@@ -130,7 +130,7 @@
     [_privateLetterMeSegmentControl release];
     Block_release(_callBack);
     [_placeholderString release];
-    
+
     [super dealloc];
 }
 

@@ -7,7 +7,7 @@
 //
 
 #import "MapViewController.h"
-#import <MapKit/MKAnnotation.h> 
+#import <MapKit/MKAnnotation.h>
 
 @interface Annotation : NSObject<MKAnnotation> {
     CLLocationCoordinate2D coordinate;
@@ -75,14 +75,14 @@
         _mapView.showsUserLocation = shouldShowSelf;
 
         [self.view addSubview:_mapView];
-        
+
         MKCoordinateRegion region;
         region.center.latitude = latitude;
         region.center.longitude = longitude;
         region.span.latitudeDelta = 0.01;
         region.span.longitudeDelta = 0.01;
         [_mapView setRegion:region animated:YES];
-        
+
         Annotation * anno = [[Annotation alloc] init];
         anno.title = [NSString stringWithFormat:@"Name:%@", name];
         anno.subtitle = [NSString stringWithFormat:@"%@", description];
@@ -98,6 +98,5 @@
 {
     // todo do something when click the annotation.
 }
-
 
 @end

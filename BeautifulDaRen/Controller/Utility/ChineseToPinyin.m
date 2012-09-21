@@ -5598,7 +5598,7 @@ NSString* FindLetter(int nCode)
 #define HANZI_START 19968
 #define HANZI_COUNT 20902
 
-static char firstLetterArray[HANZI_COUNT] = 
+static char firstLetterArray[HANZI_COUNT] =
 "ydkqsxnwzssxjbymgcczqpssqbycdscdqldylybssjgyqzjjfgcclzznwdwzjljpfyynnjjtmynzwzhflzppqhgccyynmjqyxxgd"
 "nnsnsjnjnsnnmlnrxyfsngnnnnqzggllyjlnyzssecykyyhqwjssggyxyqyjtwktjhychmnxjtlhjyqbyxdldwrrjnwysrldzjpc"
 "bzjjbrcfslnczstzfxxchtrqggddlyccssymmrjcyqzpwwjjyfcrwfdfzqpyddwyxkyjawjffxjbcftzyhhycyswccyxsclcxxwz"
@@ -5823,17 +5823,15 @@ char pinyinFirstLetter(unsigned short hanzi)
 	}
 }
 
-
 @implementation ChineseToPinyin
-
 
 + (NSString *) pinyinFromChiniseString:(NSString *)string
 {
 	if( !string || ![string length] ) return nil;
-	
+
 	NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding( kCFStringEncodingGB_18030_2000);
 	NSData * gb2312_data = [string dataUsingEncoding:enc];
-	
+
     unsigned char ucHigh, ucLow;
     int  nCode;
     NSString * strValue = @"";
@@ -5846,21 +5844,21 @@ char pinyinFirstLetter(unsigned short hanzi)
 			strValue = [strValue stringByAppendingFormat:@"%c", gb2312_string[i] > 95 ? gb2312_string[i]-32 : gb2312_string[i] ];
             continue;
 		}
-		
+
         ucHigh = (unsigned char)gb2312_string[i];
         ucLow  = (unsigned char)gb2312_string[i+1];
         if ( ucHigh < 0xa1 || ucLow < 0xa1)
             continue;
         else
             nCode = (ucHigh - 0xa0) * 100 + ucLow - 0xa0;
-		
+
 		NSString * strRes = FindLetter( nCode );
 		strValue = [strValue stringByAppendingString:strRes];
 
         i++;
     }
-	
-	return [[[NSString alloc] initWithString:strValue] autorelease];	
+
+	return [[[NSString alloc] initWithString:strValue] autorelease];
 }
 
 + (char) sortSectionTitle:(NSString *)string
@@ -5869,19 +5867,19 @@ char pinyinFirstLetter(unsigned short hanzi)
 	if( !string || 0 == [string length] )
 		cLetter = '#';
 	else
-	{	
-		if( ([string characterAtIndex:0] > 64 &&  [string characterAtIndex:0] < 91 ) || 
+	{
+		if( ([string characterAtIndex:0] > 64 &&  [string characterAtIndex:0] < 91 ) ||
 		   ([string characterAtIndex:0] > 96 &&  [string characterAtIndex:0] < 123 ) )
 		{
 			cLetter = [string characterAtIndex:0];
 		}
 		else
 			cLetter = pinyinFirstLetter((unsigned short)[string characterAtIndex:0] );
-		
+
 		if( cLetter > 95 )
 			cLetter -= 32;
 	}
-	
+
 	return cLetter;
 }
 @end

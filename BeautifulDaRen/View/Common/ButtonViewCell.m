@@ -1,6 +1,6 @@
 //
 //  ButtonWithIconViewCell.m
-//  
+//
 //
 //  Created by gang liu on 4/25/12.
 //  Copyright (c) 2012 myriad. All rights reserved.

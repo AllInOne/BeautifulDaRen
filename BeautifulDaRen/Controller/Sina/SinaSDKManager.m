@@ -31,16 +31,16 @@ static SinaSDKManager *sharedInstance;
 - (id)init
 {
     self = [super init];
-    
+
     if (self)
     {
         sinaWeiboEngine = [[WBEngine alloc] initWithAppKey:SINA_WEIBO_APP_KEY                         appSecret:SINA_WEIBO_APP_SECRET];
-        
+
         [sinaWeiboEngine setRootViewController:((AppDelegate*)[UIApplication sharedApplication].delegate).rootViewController];
         [sinaWeiboEngine setDelegate:self];
         [sinaWeiboEngine setIsUserExclusive:NO];
     }
-    
+
     return self;
 }
 
@@ -57,7 +57,7 @@ static SinaSDKManager *sharedInstance;
 
 - (void)setRootviewController:(UIViewController*)rootViewController
 {
-    [sinaWeiboEngine setRootViewController:rootViewController];   
+    [sinaWeiboEngine setRootViewController:rootViewController];
 }
 
 - (void)loginWithDoneCallback:(loginDoneBlock)doneBlock
@@ -97,25 +97,25 @@ static SinaSDKManager *sharedInstance;
 - (void)sendWeiBoWithText:(NSString *)text image:(UIImage *)image doneCallback:(processDoneWithDictBlock)callback
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:2];
-    
+
 	[params setObject:(text ? text : @"") forKey:@"status"];
-	
+
     if (image)
     {
 		[params setObject:image forKey:@"pic"];
-        
-        [self sendRequestWithMethodName:@"statuses/upload.json" 
-                             httpMethod:@"POST" 
-                                 params:params 
+
+        [self sendRequestWithMethodName:@"statuses/upload.json"
+                             httpMethod:@"POST"
+                                 params:params
                            postDataType:kWBRequestPostDataTypeMultipart
                        httpHeaderFields:nil
                            doneCallback:callback];
     }
     else
     {
-        [self sendRequestWithMethodName:@"statuses/update.json" 
-                             httpMethod:@"POST" 
-                                 params:params 
+        [self sendRequestWithMethodName:@"statuses/update.json"
+                             httpMethod:@"POST"
+                                 params:params
                            postDataType:kWBRequestPostDataTypeNormal
                        httpHeaderFields:nil
                            doneCallback:callback];
@@ -126,12 +126,12 @@ static SinaSDKManager *sharedInstance;
 - (void)getInfoOfUser:(NSString*)uid doneCallback:(processDoneWithDictBlock)callback
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:2];
-    
+
     [params setObject:uid forKey:@"uid"];
-    
-    [self sendRequestWithMethodName:@"users/show.json" 
-                         httpMethod:@"GET" 
-                             params:params 
+
+    [self sendRequestWithMethodName:@"users/show.json"
+                         httpMethod:@"GET"
+                             params:params
                        postDataType:kWBRequestPostDataTypeNormal
                    httpHeaderFields:nil
                        doneCallback:callback];
@@ -139,14 +139,13 @@ static SinaSDKManager *sharedInstance;
 
 - (void)getMyUidWithDoneCallback:(processDoneWithDictBlock)callback
 {
-    [self sendRequestWithMethodName:@"account/get_uid.json" 
-                         httpMethod:@"GET" 
-                             params:nil 
+    [self sendRequestWithMethodName:@"account/get_uid.json"
+                         httpMethod:@"GET"
+                             params:nil
                        postDataType:kWBRequestPostDataTypeNormal
                    httpHeaderFields:nil
                        doneCallback:callback];
 }
-
 
 #pragma mark SINA engine delegates
 
@@ -173,39 +172,39 @@ static SinaSDKManager *sharedInstance;
 // Log out successfully.
 - (void)engineDidLogOut:(WBEngine *)engine
 {
-    
+
 }
 
 // When you use the WBEngine's request methods,
 // you may receive the following four callbacks.
 - (void)engineNotAuthorized:(WBEngine *)engine
 {
-    
+
 }
 
 - (void)engineAuthorizeExpired:(WBEngine *)engine
 {
-    
+
 }
 
 - (void)engine:(WBEngine *)engine requestDidSucceedWithResult:(id)result
 {
     NSLog(@"SINA requestDidSucceed!");
     NSLog(@"SINA data: %@!", result);
-    
+
     NSDictionary *dict = nil;
     if ([result isKindOfClass:[NSDictionary class]])
     {
         dict = (NSDictionary *)result;
     }
-    
+
     [self doNotifyProcessStatus:AIO_STATUS_SUCCESS andData:dict];
 }
 
 - (void)engine:(WBEngine *)engine requestDidFailWithError:(NSError *)error
 {
     NSLog(@"requestDidFailWithError: %@", error);
-    
+
     [self doNotifyProcessStatus:error.code andData:nil];
 }
 

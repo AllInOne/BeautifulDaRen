@@ -125,7 +125,7 @@
 {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
+
     // Release any cached data, images, etc that aren't in use.
 }
 
@@ -134,7 +134,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     self.dataList = [NSMutableArray arrayWithCapacity:50];
     self.tableView.tableFooterView = self.footerView;
     _currentPageIndex = 1;
@@ -145,10 +145,10 @@
 - (void)onDataLoadDone
 {
     [self.loadingActivityIndicator stopAnimating];
-    
+
     self.isRefreshing = NO;
     self.currentPageIndex++;
-    
+
     if ((self.dataList == nil) || ([self.dataList count] == 0)) {
         [self.footerButton setTitle:NSLocalizedString(@"no_message", @"no_message") forState:UIControlStateNormal];
         [self.loadingActivityIndicator setHidden:YES];
@@ -165,14 +165,14 @@
     [self.footerView setHidden:NO];
     [self.loadingActivityIndicator startAnimating];
     [self.footerButton setTitle:NSLocalizedString(@"loading_more", @"loading_more") forState:UIControlStateNormal];
-    
+
     self.isRefreshing = YES;
-    
+
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     [self.navigationItem.rightBarButtonItem setEnabled:NO];
-    
+
     NSString * userId = self.friendDictionary ? [self.friendDictionary valueForKey:KEY_ACCOUNT_ID] : [[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] valueForKey:KEY_ACCOUNT_ID];
-    
+
     __block NSString * dataListKey = nil;
     processDoneWithDictBlock doneBlock = ^(AIO_STATUS status, NSDictionary * data){
         if (K_BSDK_IS_RESPONSE_OK(data)) {
@@ -180,7 +180,7 @@
                 self.isAllRetrieved = YES;
             }
             [self.dataList addObjectsFromArray:[data objectForKey:dataListKey]];
-            
+
             [self onDataLoadDone];
         }
         else
@@ -192,7 +192,7 @@
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         [self.navigationItem.rightBarButtonItem setEnabled:YES];
     };
-    
+
     if (self.controllerType == WeiboListViewControllerType_COMMENT_ME) {
         [[BSDKManager sharedManager] getCommentListOfUser:userId
                                                  pageSize:AUTOLOAD_PAGE_SIZE
@@ -218,7 +218,7 @@
     }
     else if (_controllerType == WeiboListViewControllerType_CATEGORY)
     {
-        
+
         [[BSDKManager sharedManager] getWeiboListByClassId:[self.friendDictionary objectForKey:K_BSDK_UID]
                                                  pageSize:AUTOLOAD_PAGE_SIZE
                                                 pageIndex:_currentPageIndex
@@ -243,7 +243,7 @@
     [_footerButton release];
     [_footerView release];
     [_loadingActivityIndicator release];
-    
+
     [super dealloc];
 }
 
@@ -281,7 +281,7 @@
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell * cell = nil;
-    
+
     cell = [self getInitializedCellofTableView:tableView ByWeiboData:[self.dataList objectAtIndex:[indexPath row]]];
     return cell;
 }
@@ -306,9 +306,9 @@
     {
         WeiboDetailViewController *weiboDetailController =
         [[WeiboDetailViewController alloc] init];
-        
+
         weiboDetailController.weiboId = [self getCurrentBlogIdByData:[self.dataList objectAtIndex:[indexPath row]]];
-        
+
         [self.navigationController pushViewController:weiboDetailController animated:YES];
         [weiboDetailController release];
     }
@@ -335,7 +335,7 @@
     if  ([data objectForKey:K_BSDK_COMMENT_USER_ID] || ([data objectForKey:K_BSDK_RETWEET_STATUS] && ([[data objectForKey:K_BSDK_RETWEET_STATUS] count])))
     {
         viewCellIdentifier = @"CommentViewCell";
-        
+
         NSDictionary * originalBlogInfo = [data objectForKey:K_BSDK_BLOGINFO];
         if (originalBlogInfo == nil) {
             originalBlogInfo = [data objectForKey:K_BSDK_RETWEET_STATUS];
@@ -353,14 +353,14 @@
     {
         cell = [[[NSBundle mainBundle] loadNibNamed:viewCellIdentifier owner:self options:nil] objectAtIndex:indexOfCellInXib];
     }
-    
+
     return cell;
 }
 
 -(UITableViewCell*)getInitializedCellofTableView:(UITableView*)tableView ByWeiboData:(NSDictionary*)data
 {
     UITableViewCell * cell = [self getCellofTableView:tableView ByWeiboData:data];
-    
+
     if ([cell isKindOfClass:[CommentViewCell class]]) {
         CommentViewCell * commentCell = (CommentViewCell*)cell;
         [commentCell setData:data];
@@ -370,12 +370,11 @@
         AtMeViewCell * atMeCell = (AtMeViewCell*)cell;
         [atMeCell setData:data];
     }
-    
+
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
+
     return cell;
 }
-
 
 -(CGFloat)getCellHeightofTableView:(UITableView*)tableView ByWeiboData:(NSDictionary*)data
 {

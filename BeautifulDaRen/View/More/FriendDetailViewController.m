@@ -94,7 +94,7 @@ typedef enum
     [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
 //    [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onHomePageButtonClicked) title:NSLocalizedString(@"home_page", @"home_page")]];
     _isIdentification = YES;
-    
+
 //    [self refreshToolBar];
 }
 
@@ -105,32 +105,32 @@ typedef enum
         self.toolbar = nil;
     }
     _toolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0,372, 320,44)];
-    
+
     UIBarButtonItem *flexible = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    
+
     UIBarButtonItem *atButtonItem = nil;
-    
+
     if ([[self.friendDictionary objectForKey:K_BSDK_GENDER] isEqualToString:K_BSDK_GENDER_FEMALE]) {
         atButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar_at_icon" target:self action:@selector(onAt)];
     }
     else
     {
-        atButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar_at_him" target:self action:@selector(onAt)];    
+        atButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar_at_him" target:self action:@selector(onAt)];
     }
-    
+
     UIBarButtonItem *privateLetterButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar_private_letter_icon" target:self action:@selector(onPrivateLetter)];
-    
+
     if (![[BSDKManager sharedManager] isLogin]) {
         [atButtonItem setEnabled:NO];
         [privateLetterButtonItem setEnabled:NO];
     }
-    
+
     UIBarButtonItem *removeButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar_remove_fan_icon" target:self action:@selector(onRemove)];
     NSString * relationship = [self.friendDictionary objectForKey:K_BSDK_RELATIONSHIP];
     if ( (!(relationship && ([relationship isEqualToString:K_BSDK_RELATIONSHIP_MY_FANS] || [relationship isEqualToString:K_BSDK_RELATIONSHIP_INTER_FOLLOW]))) || ![[BSDKManager sharedManager] isLogin]) {
         [removeButtonItem setEnabled:NO];
     }
-    
+
     NSArray *barItems = [[NSArray alloc]initWithObjects:
                          flexible,
                          privateLetterButtonItem,
@@ -142,7 +142,7 @@ typedef enum
                          removeButtonItem,
                          flexible,
                          nil];
-    
+
     _toolbar.items= barItems;
     UIImageView * tabBarBg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"toolbar_background"]];
     tabBarBg.frame = CGRectMake(0, 0, 320, 45);
@@ -152,15 +152,15 @@ typedef enum
     }
     else
     {
-        [_toolbar  insertSubview:tabBarBg atIndex:1];            
+        [_toolbar  insertSubview:tabBarBg atIndex:1];
     }
     [self.view addSubview: _toolbar];
-    [flexible release]; 
+    [flexible release];
     [tabBarBg release];
     [barItems release];
-    
+
     NSString * buttonTitle = ([relationship isEqualToString:K_BSDK_RELATIONSHIP_MY_FOLLOW] || [relationship isEqualToString:K_BSDK_RELATIONSHIP_INTER_FOLLOW]) ? NSLocalizedString(@"unfollow", @"unfollow") : NSLocalizedString(@"follow", @"follow");
-    
+
     [self.actionButton setTitle:buttonTitle forState:UIControlStateNormal];
 }
 
@@ -189,7 +189,7 @@ typedef enum
 {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
+
     // Release any cached data, images, etc that aren't in use.
 }
 
@@ -227,7 +227,7 @@ typedef enum
     [_pointLabel release];
     [_phoneLabel release];
     [_vMarkImageView release];
-    
+
     [super dealloc];
 }
 - (void)viewDidUnload
@@ -255,9 +255,9 @@ typedef enum
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     [self refreshView];
-    
+
     if (self.friendDictionary) {
         [self refreshTopView];
         [self refreshToolBar];
@@ -267,19 +267,19 @@ typedef enum
 - (void)refreshView
 {
     UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    
+
     activityIndicator.center = CGPointMake(SCREEN_WIDTH/2, USER_WINDOW_HEIGHT/2);
     [activityIndicator startAnimating];
-    
-    [self.view addSubview:activityIndicator];    
-    
+
+    [self.view addSubview:activityIndicator];
+
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: YES];
     processDoneWithDictBlock doneblock = ^(AIO_STATUS status, NSDictionary *data) {
         [activityIndicator stopAnimating];
         [activityIndicator removeFromSuperview];
         [activityIndicator release];
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: NO];
-        
+
         if (K_BSDK_IS_RESPONSE_OK(data)) {
             [self.friendDictionary setValuesForKeysWithDictionary:data];
             [self refreshTopView];
@@ -291,7 +291,7 @@ typedef enum
             [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
         }
     };
-    
+
     if (self.friendId) {
         [[BSDKManager sharedManager] getUserInforByUserId:self.friendId
                                           andDoneCallback:doneblock];
@@ -333,11 +333,11 @@ typedef enum
 {
     NSString* relation = [self.friendDictionary valueForKey:K_BSDK_RELATIONSHIP];
     NSInteger userId = [[self.friendDictionary valueForKey:K_BSDK_UID] intValue];
-    
+
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: TRUE];
-    
+
     [self.actionButton setEnabled:NO];
-    
+
     processDoneWithDictBlock doneBlock = ^(AIO_STATUS status, NSDictionary *data)
     {
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: FALSE];
@@ -385,7 +385,7 @@ typedef enum
 {
     static NSString * buttonViewCellIdentifier = @"ButtonViewCell";
     static NSString * gridViewCellIdentifier = @"GridViewCell";
-    
+
     UITableViewCell *cell  = nil;
 
     NSInteger section = [indexPath section];
@@ -417,15 +417,15 @@ typedef enum
                     {
                         buttonViewCell.buttonText.text = NSLocalizedString(@"authentication_not_done", @"authentication_not_done");
                     }
-                    
+
                     buttonViewCell.buttonRightIcon.hidden = YES;
-                    break;   
+                    break;
                 }
                 case SECTION_BRIEF:
                 {
                     buttonViewCell.leftLabel.text = NSLocalizedString(@"brief", @"brief");
                     buttonViewCell.buttonRightIcon.hidden = YES;
-                    
+
                     NSString * description = [self.friendDictionary valueForKey:KEY_ACCOUNT_INTRO];
                     if ([description length] > 0)
                     {
@@ -460,33 +460,33 @@ typedef enum
         if(!cell) {
             cell = [[[NSBundle mainBundle] loadNibNamed:gridViewCellIdentifier owner:self options:nil] objectAtIndex:1];
         }
-        
+
         NSMutableAttributedString * attrStr = nil;
-        
+
         attrStr = [ViewHelper
                    getGridViewCellForContactInformationWithName:NSLocalizedString(@"weibo", @"")
                    detail:[NSString stringWithFormat:@"(%d)",[[self.friendDictionary valueForKey:KEY_ACCOUNT_BLOG_COUNT] intValue]]];
         ((GridViewCell*)cell).firstLabel.attributedText = attrStr;
         ((GridViewCell*)cell).firstLabel.textAlignment = UITextAlignmentCenter;
-        
+
         attrStr = [ViewHelper
                    getGridViewCellForContactInformationWithName:NSLocalizedString(@"collection", @"")
                    detail:[NSString stringWithFormat:@"(%d)",[[self.friendDictionary valueForKey:KEY_ACCOUNT_FAVORITE_COUNT] intValue]]];
         ((GridViewCell*)cell).secondLabel.attributedText = attrStr;
         ((GridViewCell*)cell).secondLabel.textAlignment = UITextAlignmentCenter;
-        
+
         attrStr = [ViewHelper
                    getGridViewCellForContactInformationWithName:NSLocalizedString(@"follow", @"")
                    detail:[NSString stringWithFormat:@"(%d)",[[self.friendDictionary valueForKey:KEY_ACCOUNT_FOLLOW_COUNT] intValue]]];
         ((GridViewCell*)cell).thirdLabel.attributedText = attrStr;
         ((GridViewCell*)cell).thirdLabel.textAlignment = UITextAlignmentCenter;
-        
+
         attrStr = [ViewHelper
                    getGridViewCellForContactInformationWithName:NSLocalizedString(@"fans", @"")
                    detail:[NSString stringWithFormat:@"(%d)",[[self.friendDictionary valueForKey:KEY_ACCOUNT_FANS_COUNT] intValue]]];
         ((GridViewCell*)cell).fourthLabel.attributedText = attrStr;
         ((GridViewCell*)cell).fourthLabel.textAlignment = UITextAlignmentCenter;
-        
+
         _weiboButton = ((GridViewCell*)cell).firstButton;
         _collectionButton= ((GridViewCell*)cell).secondButton;
 
@@ -498,9 +498,9 @@ typedef enum
         [((GridViewCell*)cell).thirdButton addTarget:self action:@selector(didButtonPressed:inView:) forControlEvents:UIControlEventTouchUpInside];
         [((GridViewCell*)cell).fourthButton addTarget:self action:@selector(didButtonPressed:inView:) forControlEvents:UIControlEventTouchUpInside];
     }
-    
+
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
+
     return cell;
 }
 
@@ -515,7 +515,7 @@ typedef enum
                 if (![text isEqualToString:[self.friendDictionary valueForKey:K_BSDK_USER_NOTE_NAME]]) {
                     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: YES];
                     [[BSDKManager sharedManager] addNoteToUserId:[self.friendDictionary valueForKey:K_BSDK_UID] noteName:text andCallBack:^(AIO_STATUS status, NSDictionary *data) {
-                        
+
                         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: NO];
                         if(AIO_STATUS_SUCCESS == status && K_BSDK_IS_RESPONSE_OK(data))
                         {
@@ -560,17 +560,14 @@ typedef enum
     return height;
 }
 
-
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     return 5;
 }
 
-
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 10;
 }
-
 
 - (void) didButtonPressed:(UIButton*)button inView:(UIView *)view
 {
@@ -621,40 +618,39 @@ typedef enum
     [actionSheet addButtonWithTitle:NSLocalizedString(@"add_to_black_list", @"add_to_black_list")];
     [actionSheet addButtonWithTitle:NSLocalizedString(@"impeach", "impeach")];
     [actionSheet setDestructiveButtonIndex:[actionSheet addButtonWithTitle:NSLocalizedString(@"cancel", @"cancel")]];
-    
+
     [actionSheet showInView:sender.superview.superview];
     [actionSheet release];
 }
 
 - (void)onPrivateLetter
 {
-    PrivateLetterDetailViewController *privateLetterDetailViewControlller = 
+    PrivateLetterDetailViewController *privateLetterDetailViewControlller =
     [[PrivateLetterDetailViewController alloc] initWithNibName:nil bundle:nil];
-    
+
     privateLetterDetailViewControlller.userId = [self.friendDictionary valueForKey:K_BSDK_UID];
-    
+
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: privateLetterDetailViewControlller];
-    
+
     [self.navigationController presentModalViewController:navController animated:YES];
     [privateLetterDetailViewControlller release];
-    [navController release];  
-
+    [navController release];
 
 }
 
 - (void)onAt
 {
-    WeiboComposerViewController *weiboComposerViewControlller = 
+    WeiboComposerViewController *weiboComposerViewControlller =
     [[WeiboComposerViewController alloc] initWithNibName:nil bundle:nil];
-    
+
     [weiboComposerViewControlller.weiboContentTextView setText:[NSString stringWithFormat:@"@%@", [self.friendDictionary valueForKey:KEY_ACCOUNT_USER_NAME]]];
-    
+
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: weiboComposerViewControlller];
-    
+
     [self.navigationController presentModalViewController:navController animated:YES];
     [weiboComposerViewControlller release];
     [navController release];
-    
+
 }
 
 - (void)onRemove
@@ -678,7 +674,7 @@ typedef enum
                             NSLocalizedString(@"point", @"point"),
                             [[self.friendDictionary valueForKey:KEY_ACCOUNT_POINT] intValue]];
     self.phoneLabel.text = [self.friendDictionary valueForKey:KEY_ACCOUNT_PHONE];
-    
+
     UIImageView * imageView = [[UIImageView alloc] init];
     NSString * avatarImageUrl = [self.friendDictionary valueForKey:K_BSDK_PICTURE_65];
     if (avatarImageUrl && [avatarImageUrl length] > 0 ) {
@@ -688,8 +684,8 @@ typedef enum
     {
         [imageView setImage:[UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:self.friendDictionary]]];
     }
-    
-    CGRect borderImageViewFrame = CGRectMake(0,0, 
+
+    CGRect borderImageViewFrame = CGRectMake(0,0,
                                              self.avatarImageView.frame.size.width,
                                              self.avatarImageView.frame.size.height);
     BorderImageView * borderView = [[BorderImageView alloc]
@@ -707,26 +703,26 @@ typedef enum
     {
         [self.vMarkImageView setHidden:YES];
     }
-    
+
     NSString * relationship = [self.friendDictionary objectForKey:K_BSDK_RELATIONSHIP];
     NSString * genderImageName = [[self.friendDictionary valueForKey:K_BSDK_GENDER] isEqual:K_BSDK_GENDER_FEMALE] ? @"gender_female" : @"gender_male";
     self.genderImageView.image = [UIImage imageNamed:genderImageName];
-    
+
     NSString * title = [[self.friendDictionary valueForKey:K_BSDK_GENDER] isEqual:K_BSDK_GENDER_FEMALE] ? @"her_home_page" : @"his_home_page";
-    
+
     [self.navigationItem setTitle:NSLocalizedString(title, title)];
-    
+
     if ([ViewHelper isSelf:[self.friendDictionary objectForKey:K_BSDK_UID]]) {
         [self.actionButton setHidden:YES];
     }
     else
     {
         NSString * buttonTitle = ([relationship isEqualToString:K_BSDK_RELATIONSHIP_MY_FOLLOW] || [relationship isEqualToString:K_BSDK_RELATIONSHIP_INTER_FOLLOW]) ? NSLocalizedString(@"unfollow", @"unfollow") : NSLocalizedString(@"follow", @"follow");
-        
+
         [self.actionButton setTitle:buttonTitle forState:UIControlStateNormal];
         [self.actionButton setEnabled:YES];
     }
-    
+
     if (![[BSDKManager sharedManager] isLogin]) {
         [self.actionButton setHidden:YES];
     }

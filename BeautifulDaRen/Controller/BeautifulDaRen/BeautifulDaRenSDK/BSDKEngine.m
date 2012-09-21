@@ -58,12 +58,12 @@
     {
         self.appKey = theAppKey;
         self.appSecret = theAppSecret;
-        
+
         isUserExclusive = NO;
-        
+
         [self readAuthorizeDataFromKeychain];
     }
-    
+
     return self;
 }
 
@@ -71,19 +71,19 @@
 {
     [appKey release], appKey = nil;
     [appSecret release], appSecret = nil;
-    
+
     [userID release], userID = nil;
     [accessToken release], accessToken = nil;
-    
+
     [redirectURI release], redirectURI = nil;
-    
+
     [request setDelegate:nil];
     [request disconnect];
     [request release], request = nil;
-    
+
     delegate = nil;
     rootViewController = nil;
-    
+
     [super dealloc];
 }
 
@@ -115,7 +115,7 @@
     self.userID = nil;
     self.accessToken = nil;
     self.expireTime = 0;
-    
+
     NSString *serviceName = [[self urlSchemeString] stringByAppendingString:kWBKeychainServiceNameSuffix];
     [SFHFKeychainUtils deleteItemForUsername:kWBKeychainUserID andServiceName:serviceName error:nil];
 	[SFHFKeychainUtils deleteItemForUsername:kWBKeychainAccessToken andServiceName:serviceName error:nil];
@@ -139,7 +139,7 @@
 - (void)logOut
 {
     [self deleteAuthorizeDataInKeychain];
-    
+
     if ([delegate respondsToSelector:@selector(engineDidLogOut:)])
     {
         [delegate engineDidLogOut:self];
@@ -181,7 +181,7 @@
 //        }
 //        return;
 //	}
-//    
+//
 //	// Step 2.
 //    // Check if the access token is expired.
 //    if ([self isAuthorizeExpired])
@@ -192,11 +192,11 @@
 //        }
 //        return;
 //    }
-    
+
     [request disconnect];
     [request release];
     request = nil;
-    
+
 //    self.request = [BSDKRequest requestWithAccessToken:accessToken
 //                                                 url:[NSString stringWithFormat:@"%@%@", kWBSDKAPIDomain, methodName]
 //                                          httpMethod:httpMethod
@@ -212,7 +212,7 @@
                                           postDataType:postDataType
                                       httpHeaderFields:httpHeaderFields
                                               delegate:self];
-	
+
 	[request connect];
 }
 
@@ -221,9 +221,9 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:2];
 
     //NSString *sendText = [text URLEncodedString];
-    
+
 	[params setObject:(text ? text : @"") forKey:@"status"];
-	
+
     if (image)
     {
 		[params setObject:image forKey:@"pic"];
@@ -245,7 +245,6 @@
 }
 
 #pragma mark - WBAuthorizeDelegate Methods
-
 
 #pragma mark - WBRequestDelegate Methods
 

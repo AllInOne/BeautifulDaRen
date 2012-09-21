@@ -46,16 +46,15 @@
         [_firstButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
         [_firstButton setBackgroundImage:[UIImage imageNamed:@"segement_btn_left_unselected"] forState:UIControlStateNormal];
         [_firstButton setBackgroundImage:[UIImage imageNamed:@"segement_btn_left_selected"] forState:UIControlStateSelected];
-        
+
         [_firstButton addTarget:self action:@selector(onButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
 
-        
         [_secondButton setTitle:rightText forState:UIControlStateNormal];
         [_secondButton setTitle:rightText forState:UIControlStateSelected];
         [_secondButton.titleLabel setFont:[UIFont systemFontOfSize:16]];
         [_secondButton setTitleColor:[UIColor colorWithRed:(128.0f/255.0f) green:(39.0f/255.0f) blue:(73.0f/255.0f) alpha:1.0f] forState:UIControlStateNormal];
         [_secondButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
-        
+
         [_secondButton setBackgroundImage:[UIImage imageNamed:@"segement_btn_right_unselected"] forState:UIControlStateNormal];
         [_secondButton setBackgroundImage:[UIImage imageNamed:@"segement_btn_right_selected"] forState:UIControlStateSelected];
         [_secondButton addTarget:self action:@selector(onButtonClicked:) forControlEvents:UIControlEventTouchUpInside];

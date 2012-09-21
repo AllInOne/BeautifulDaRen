@@ -10,7 +10,6 @@
 #import "AdsPageViewProtocol.h"
 #import <QuartzCore/QuartzCore.h>
 
-
 @interface AdsPageView : UIViewController
 
 @property (nonatomic, retain) IBOutlet UIPageControl * adsPageController;

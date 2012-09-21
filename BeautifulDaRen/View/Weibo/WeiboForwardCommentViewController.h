@@ -31,7 +31,7 @@
 @property (nonatomic, retain) IBOutlet UIImageView * sinaShareImageView;
 @property (nonatomic, retain) IBOutlet UIImageView * sinaSepImageView;
 
-@property (nonatomic, assign) id<ForwardCommentViewControllerProtocol> delegate; 
+@property (nonatomic, assign) id<ForwardCommentViewControllerProtocol> delegate;
 
 - (IBAction)onAtFriendPressed:(id)sender;
 - (IBAction)onCheckBoxPressed:(id)sender;

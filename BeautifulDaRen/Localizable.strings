@@ -1,11 +1,10 @@
-/* 
+/*
   Localizable.strings
   BeautifulDaRen
 
   Created by jerry.li on 4/18/12.
   Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 */
-
 
 "app_name" = "秀悦购";
 
@@ -138,7 +137,6 @@
 
 "descripton_not_done" = "未填写个人简介";
 
-
 "add_to_black_list" = "加入黑名单";
 "impeach" = "举报";
 "only_to_my_followed" = "仅对于“我关注的人”可见";
@@ -207,7 +205,6 @@
 
 "save_succeed" = "亲, 保存成功了哦!";
 "save_failed" = "亲, 保存失败了哦!";
-
 
 "take_photo" = "照相";
 "album" = "相册";

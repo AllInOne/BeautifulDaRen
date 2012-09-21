@@ -27,7 +27,7 @@
  * @param parentNav UINavigationController* that would present
  *          the image modally.
  * @param contactId NSString* be used to download the image.
- * 
+ *
  * @return nil
  */
 + (void)showImage:(UIImage* )image inNavigationController:(UINavigationController* )parentNav;

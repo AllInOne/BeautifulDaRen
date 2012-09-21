@@ -66,7 +66,7 @@ typedef enum
 {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
+
     // Release any cached data, images, etc that aren't in use.
 }
 
@@ -139,7 +139,7 @@ typedef enum
                                                                                            scrollView:self.tableView];
                                                                 }];
     [self.observers addObject:observer];
-    
+
     observer = [[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardWillHideNotification
                                                                  object:nil
                                                                   queue:nil
@@ -147,7 +147,7 @@ typedef enum
                                                                  [ViewHelper handleKeyboardWillBeHidden:self.tableView];
                                                              }];
     [self.observers addObject:observer];
-    
+
     [super viewWillAppear:animated];
 }
 
@@ -176,7 +176,7 @@ typedef enum
         {
             number = 2;
             break;
-        }   
+        }
         case LOGIN_CELL_LOGIN_BUTTON:
         case LOGIN_CELL_REGISTER:
         case LOGIN_CELL_SINA_LOGIN:
@@ -239,7 +239,7 @@ typedef enum
         ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"login_button"];
         ((ButtonViewCell*)cell).buttonLeftIconPressed = [UIImage imageNamed:@"login_button_pressed"];
         ((ButtonViewCell*)cell).leftLabel.text = NSLocalizedString(@"login", @"login");
-        
+
         cell.backgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
     }
     else if (section == LOGIN_CELL_REGISTER)
@@ -272,8 +272,7 @@ typedef enum
             [self dismissModalViewControllerAnimated:YES];
         }
         [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_LOGIN_SUCCESS object:self userInfo:response];
-        
-        
+
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:USERDEFAULT_IS_AUTO_LOGIN];
     }
     else
@@ -309,21 +308,21 @@ typedef enum
             [[iToast makeText:iToastString] show];
             return;
         }
-        
+
         [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_SHOWWAITOVERLAY object:self];
         [[BSDKManager sharedManager] loginWithUsername:userName
                                               password:password
                                        andDoneCallback:^(AIO_STATUS status, NSDictionary *data)
          {
              [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_HIDEWAITOVERLAY object:self];
-             
+
              [self loginDoneWithStauts:status andResponse:data];
              if(AIO_STATUS_SUCCESS == status && K_BSDK_IS_RESPONSE_OK(data))
              {
                  [[NSUserDefaults standardUserDefaults] setObject:userName forKey:USERDEFAULT_AUTO_LOGIN_ACCOUNT_NAME];
                  [[NSUserDefaults standardUserDefaults] setObject:password forKey:USERDEFAULT_AUTO_LOGIN_ACCOUNT_PASSWORD];
                  [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:USERDEFAULT_AUTO_LOGIN_ACCOUNT_IS_SINA];
-                 
+
                  [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationType)
                   (UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeBadge)];
              }
@@ -406,17 +405,17 @@ typedef enum
                                        // NSString * sinaName = [data objectForKey:@"name"];
                                         NSString * provinceCode = [data objectForKey:@"province"];
                                         NSString * cityCode = [data objectForKey:@"city"];
-                                        [[BSDKManager sharedManager] loginSinaUserId:uid 
+                                        [[BSDKManager sharedManager] loginSinaUserId:uid
                                                                             userName:[data objectForKey:@"name"]
                                                                                  sex:([[data objectForKey:@"gender"] isEqual:@"m"] ? @"1" : @"0")
                                                                                 city:[[SinaCityCode sharedInstance] getCityNameByProvinceCode:provinceCode andCityCode:cityCode]
                                                                                email:nil andCallBack:^(AIO_STATUS status, NSDictionary *response) {
                                                                                    if ((status == AIO_STATUS_SUCCESS) && K_BSDK_IS_RESPONSE_OK(response)) {
                                                                                        NSDictionary * userInfo = [response objectForKey:K_BSDK_USERINFO];
-                                                                                       
+
                                                                                        [[NSUserDefaults standardUserDefaults] setObject:[userInfo objectForKey:K_BSDK_USERNAME] forKey:USERDEFAULT_AUTO_LOGIN_ACCOUNT_NAME];
                                                                                        [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:USERDEFAULT_AUTO_LOGIN_ACCOUNT_IS_SINA];
-                                                                                       
+
                                                                                    }
                                                                                    [self loginDoneWithStauts:status andResponse:response];
                                                                                    [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_HIDEWAITOVERLAY object:self];
@@ -436,13 +435,13 @@ typedef enum
                             [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_HIDEWAITOVERLAY object:self];
                         }
                     }];
-                    
+
                 }
                 else
                 {
                     [[iToast makeText:@"亲，认证失败了！"] show];
                 }
-            }];   
+            }];
         }
         else
         {

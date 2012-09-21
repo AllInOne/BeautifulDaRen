@@ -47,7 +47,7 @@
 {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
+
     // Release any cached data, images, etc that aren't in use.
 }
 
@@ -58,7 +58,7 @@
     [_radioImage release];
     [_cellButton release];
     [_textLable release];
-    
+
     [super dealloc];
 }
 
@@ -66,7 +66,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+
     self.view.frame = CGRectMake(0.0, 0.0, ITEM_VIEW_WIDTH, ITEM_VIEW_HEIGTH);
     self.cellButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.cellButton.frame = CGRectMake(0.0, 0.0, ITEM_VIEW_WIDTH, ITEM_VIEW_HEIGTH);
@@ -74,15 +74,15 @@
     [_cellButton addTarget:self action:@selector(onItemButtonPressed) forControlEvents:UIControlEventTouchUpInside];
 
     [self.view addSubview:_cellButton];
-    
+
     _radioImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"radio_btn_unselected"]];
     self.radioImage.center = CGPointMake(RADIO_CENTER_X, RADIO_CENTER_Y);
-    
+
     [self.view addSubview:_radioImage];
-    
-    _textLable = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.radioImage.frame) + MARGIN_RAIDO_TEXT, 
-                                                            (ITEM_VIEW_HEIGTH - TEXT_HEIGHT)/2, 
-                                                            TEXT_WIDTH, 
+
+    _textLable = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.radioImage.frame) + MARGIN_RAIDO_TEXT,
+                                                            (ITEM_VIEW_HEIGTH - TEXT_HEIGHT)/2,
+                                                            TEXT_WIDTH,
                                                             TEXT_HEIGHT)];
     [self.view addSubview:_textLable];
 

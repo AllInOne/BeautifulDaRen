@@ -7,7 +7,6 @@ typedef enum
 	kBSDKRequestPostDataTypeMultipart,        // for uploading images and files.
 }BSDKRequestPostDataType;
 
-
 @class BSDKRequest;
 
 @protocol BSDKRequestDelegate <NSObject>
@@ -31,10 +30,10 @@ typedef enum
     NSDictionary            *params;
     BSDKRequestPostDataType   postDataType;
     NSDictionary            *httpHeaderFields;
-    
+
     NSURLConnection         *connection;
     NSMutableData           *responseData;
-    
+
     id<BSDKRequestDelegate>   delegate;
 }
 
@@ -45,8 +44,8 @@ typedef enum
 @property (nonatomic, retain) NSDictionary *httpHeaderFields;
 @property (nonatomic, assign) id<BSDKRequestDelegate> delegate;
 
-+ (BSDKRequest *)requestWithURL:(NSString *)url 
-                   httpMethod:(NSString *)httpMethod 
++ (BSDKRequest *)requestWithURL:(NSString *)url
+                   httpMethod:(NSString *)httpMethod
                        params:(NSDictionary *)params
                  postDataType:(BSDKRequestPostDataType)postDataType
              httpHeaderFields:(NSDictionary *)httpHeaderFields
@@ -54,7 +53,7 @@ typedef enum
 
 + (BSDKRequest *)requestWithAccessToken:(NSString *)accessToken
                                   url:(NSString *)url
-                           httpMethod:(NSString *)httpMethod 
+                           httpMethod:(NSString *)httpMethod
                                params:(NSDictionary *)params
                          postDataType:(BSDKRequestPostDataType)postDataType
                      httpHeaderFields:(NSDictionary *)httpHeaderFields

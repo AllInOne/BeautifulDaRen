@@ -43,7 +43,7 @@
 - (void)dealloc
 {
     [super dealloc];
-    
+
     [_userNameTextField release];
     [_userEmailTextField release];
 }
@@ -144,12 +144,11 @@
         ((ButtonViewCell*)cell).buttonLeftIcon.image = [UIImage imageNamed:@"login_button"];
         ((ButtonViewCell*)cell).buttonLeftIconPressed = [UIImage imageNamed:@"login_button_pressed"];
         ((ButtonViewCell*)cell).leftLabel.text = NSLocalizedString(@"enter", @"enter");
-        
+
         cell.backgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
     }
     return cell;
 }
-
 
 #pragma mark - Table view delegate
 

@@ -11,10 +11,9 @@
 
 @interface QZoneSDKManager ()
 @property (nonatomic, retain) TencentOAuth * tencentOAuth;
-@property (nonatomic, retain) NSMutableArray* permissions; 
+@property (nonatomic, retain) NSMutableArray* permissions;
 
 @end
-
 
 static QZoneSDKManager *sharedInstance;
 
@@ -35,17 +34,17 @@ static QZoneSDKManager *sharedInstance;
 - (id)init
 {
     self = [super init];
-    
+
     if (self)
     {
         _permissions =  [[NSArray arrayWithObjects:
-                          @"get_user_info",@"add_share", @"add_topic",@"add_one_blog", @"list_album", 
+                          @"get_user_info",@"add_share", @"add_topic",@"add_one_blog", @"list_album",
                           @"upload_pic",@"list_photo", @"add_album", @"check_page_fans",nil] retain];
         _tencentOAuth = [[TencentOAuth alloc] initWithAppId:@"100628456"
                                                 andDelegate:self];
         _tencentOAuth.redirectURI = @"www.qq.com";
     }
-    
+
     return self;
 }
 
@@ -60,10 +59,9 @@ static QZoneSDKManager *sharedInstance;
 {
     Block_release(self.loginCallback);
     self.loginCallback = nil;
-    
+
     [_tencentOAuth authorize:_permissions inSafari:NO];
-    
-    
+
     self.loginCallback = Block_copy(doneBlock);
 }
 
@@ -80,7 +78,6 @@ static QZoneSDKManager *sharedInstance;
     [super doNotifyLoginStatus:LOGIN_STATUS_SUCCESS];
 }
 
-
 /**
  * Called when the user dismissed the dialog without logging in.
  */
@@ -92,7 +89,7 @@ static QZoneSDKManager *sharedInstance;
 	else {
 		[super doNotifyLoginStatus:LOGIN_STATUS_FAILED];
 	}
-	
+
 }
 
 /**

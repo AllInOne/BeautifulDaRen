@@ -29,16 +29,15 @@ typedef enum iToastType {
 	iToastTypeNone // For internal use only (to force no image)
 }iToastType;
 
-
 @class iToastSettings;
 
 @interface iToast : NSObject {
 	iToastSettings *_settings;
 	NSInteger offsetLeft;
 	NSInteger offsetTop;
-	
+
 	NSTimer *timer;
-	
+
 	UIView *view;
 	NSString *text;
 }
@@ -46,7 +45,7 @@ typedef enum iToastType {
 - (void) show;
 - (void) show:(iToastType) type;
 - (iToast *) setDuration:(NSInteger ) duration;
-- (iToast *) setGravity:(iToastGravity) gravity 
+- (iToast *) setGravity:(iToastGravity) gravity
 			 offsetLeft:(NSInteger) left
 			 offsetTop:(NSInteger) top;
 - (iToast *) setGravity:(iToastGravity) gravity;
@@ -58,27 +57,23 @@ typedef enum iToastType {
 
 @end
 
-
-
 @interface iToastSettings : NSObject<NSCopying>{
 	NSInteger duration;
 	iToastGravity gravity;
 	CGPoint postition;
 	iToastType toastType;
-	
+
 	NSDictionary *images;
-	
+
 	BOOL positionIsSet;
 }
-
 
 @property(assign) NSInteger duration;
 @property(assign) iToastGravity gravity;
 @property(assign) CGPoint postition;
 @property(readonly) NSDictionary *images;
 
-
 - (void) setImage:(UIImage *)img forType:(iToastType) type;
 + (iToastSettings *) getSharedSettings;
-						  
+
 @end

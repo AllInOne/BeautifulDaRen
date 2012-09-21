@@ -44,20 +44,20 @@
              andDoneCallback:(processDoneWithDictBlock)doneBlock;
 
 - (void)searchUsersByUsername:(NSString*)username
-                     pageSize:(NSInteger)pageSize 
-                    pageIndex:(NSInteger)pageIndex 
+                     pageSize:(NSInteger)pageSize
+                    pageIndex:(NSInteger)pageIndex
               andDoneCallback:(processDoneWithDictBlock)doneBlock;
 
 - (void)getUserInforByName:(NSString*)name
            andDoneCallback:(processDoneWithDictBlock)doneBlock;
 
-- (void)getFavUsersByBlogId:(NSString*) blogId 
-                   pageSize:(NSInteger)pageSize 
-                  pageIndex:(NSInteger)pageIndex 
+- (void)getFavUsersByBlogId:(NSString*) blogId
+                   pageSize:(NSInteger)pageSize
+                  pageIndex:(NSInteger)pageIndex
             andDoneCallback:(processDoneWithDictBlock)doneBlock;
 
 // The value of gender should be K_BSDK_GENDER_MALE or K_BSDK_GENDER_FEMALE
-- (void)modifyUser:(NSString*)userId 
+- (void)modifyUser:(NSString*)userId
               name:(NSString*)name
             gender:(NSString*)gender
              email:(NSString*)email
@@ -71,16 +71,15 @@
 // userType should be one of #define K_BSDK_USERTYPE_SAME_CITY,K_BSDK_USERTYPE_INTERESTED,K_BSDK_USERTYPE_HOT
 - (void)getHotUsersByCity:(NSString*)city
                  userType:(NSString*)type
-                 pageSize:(NSInteger)pageSize 
-                pageIndex:(NSInteger)pageIndex 
+                 pageSize:(NSInteger)pageSize
+                pageIndex:(NSInteger)pageIndex
           andDoneCallback:(processDoneWithDictBlock)doneBlock;
-
 
 #pragma mark Weibo releated API
 
 // Send a Weibo, to which you can attach an image.
-- (void)sendWeiboWithText:(NSString *)text 
-                    image:(UIImage *)image 
+- (void)sendWeiboWithText:(NSString *)text
+                    image:(UIImage *)image
                      shop:(NSString*)shop
                     brand:(NSString*)branch
                     price:(NSInteger)price
@@ -91,38 +90,38 @@
 
 // repost a weibo
 - (void)rePostWeiboById:(NSString*)blogId
-               WithText:(NSString *)text 
+               WithText:(NSString *)text
         andDoneCallback:(processDoneWithDictBlock)callback;
 
 - (void)getWeiboListByUserId:(NSString*)userId
-                    pageSize:(NSInteger)pageSize 
-                   pageIndex:(NSInteger)pageIndex 
+                    pageSize:(NSInteger)pageSize
+                   pageIndex:(NSInteger)pageIndex
              andDoneCallback:(processDoneWithDictBlock)callback;
 
 // get the users which you are followed's weibo
 - (void)getFriendsWeiboListByUserId:(NSString*)userId
-                           pageSize:(NSInteger)pageSize 
-                          pageIndex:(NSInteger)pageIndex 
+                           pageSize:(NSInteger)pageSize
+                          pageIndex:(NSInteger)pageIndex
                     andDoneCallback:(processDoneWithDictBlock)callback;
 
 - (void)searchWeiboByKeyword:(NSString*)key
-                      pageSize:(NSInteger)pageSize 
-                     pageIndex:(NSInteger)pageIndex 
+                      pageSize:(NSInteger)pageSize
+                     pageIndex:(NSInteger)pageIndex
                andDoneCallback:(processDoneWithDictBlock)callback;
 
 - (void)getWeiboListByClassId:(NSString*)classId
-                    pageSize:(NSInteger)pageSize 
-                   pageIndex:(NSInteger)pageIndex 
+                    pageSize:(NSInteger)pageSize
+                   pageIndex:(NSInteger)pageIndex
              andDoneCallback:(processDoneWithDictBlock)callback;
 
 - (void)getAtWeiboListByUserId:(NSString*)userId
-                     pageSize:(NSInteger)pageSize 
-                    pageIndex:(NSInteger)pageIndex 
+                     pageSize:(NSInteger)pageSize
+                    pageIndex:(NSInteger)pageIndex
               andDoneCallback:(processDoneWithDictBlock)callback;
 
 - (void)getFavWeiboListByUserId:(NSString*)userId
-                      pageSize:(NSInteger)pageSize 
-                     pageIndex:(NSInteger)pageIndex 
+                      pageSize:(NSInteger)pageSize
+                     pageIndex:(NSInteger)pageIndex
                andDoneCallback:(processDoneWithDictBlock)callback;
 
 - (void)getWeiboClassesWithDoneCallback:(processDoneWithDictBlock)callback;
@@ -141,13 +140,13 @@
    andDoneCallback:(processDoneWithDictBlock)callback;
 
 - (void)getFollowList:(NSString*)userId
-             pageSize:(NSInteger)pageSize 
-            pageIndex:(NSInteger)pageIndex 
+             pageSize:(NSInteger)pageSize
+            pageIndex:(NSInteger)pageIndex
      andDoneCallback:(processDoneWithDictBlock)callback;
 
 - (void)getFollowerList:(NSInteger)userId
-               pageSize:(NSInteger)pageSize 
-              pageIndex:(NSInteger)pageIndex 
+               pageSize:(NSInteger)pageSize
+              pageIndex:(NSInteger)pageIndex
         andDoneCallback:(processDoneWithDictBlock)callback;
 
 - (void)sendComment:(NSString*)comment
@@ -162,13 +161,13 @@
                 andDoneCallback:(processDoneWithDictBlock)callback;
 
 - (void)getCommentListOfWeibo:(NSString*)blogId
-                     pageSize:(NSInteger)pageSize 
-                    pageIndex:(NSInteger)pageIndex 
+                     pageSize:(NSInteger)pageSize
+                    pageIndex:(NSInteger)pageIndex
     andDoneCallback:(processDoneWithDictBlock)callback;
 
 - (void)getCommentListOfUser:(NSString*)userId
-                     pageSize:(NSInteger)pageSize 
-                    pageIndex:(NSInteger)pageIndex 
+                     pageSize:(NSInteger)pageSize
+                    pageIndex:(NSInteger)pageIndex
               andDoneCallback:(processDoneWithDictBlock)callback;
 
 - (void)getAdsByCity:(NSString*)city
@@ -186,7 +185,6 @@
                          email:(NSString *)email
                    andCallBack:(processDoneWithDictBlock)callback;
 
-
 - (void)loginSinaUserId:(NSString *)userId
                userName:(NSString *)userName
                     sex:(NSString *)sex
@@ -203,14 +201,14 @@
              andDoneCallback:(processDoneWithDictBlock)callback;
 
 - (void)getPrivateMsgUserListByType:(K_BSDK_PRIVATEMSG_USER_TYPE)type
-                           pageSize:(NSInteger)pageSize 
-                          pageIndex:(NSInteger)pageIndex 
+                           pageSize:(NSInteger)pageSize
+                          pageIndex:(NSInteger)pageIndex
                     andDoneCallback:(processDoneWithDictBlock)callback;
 
 - (void)getPrivateMsgListOfUser:(NSString*)userId
                            type:(K_BSDK_PRIVATEMSG_MSG_TYPE)type
-                       pageSize:(NSInteger)pageSize 
-                      pageIndex:(NSInteger)pageIndex 
+                       pageSize:(NSInteger)pageSize
+                      pageIndex:(NSInteger)pageIndex
                 andDoneCallback:(processDoneWithDictBlock)callback;
 
 - (void)sendDeviceToken:(NSString *)deviceToken

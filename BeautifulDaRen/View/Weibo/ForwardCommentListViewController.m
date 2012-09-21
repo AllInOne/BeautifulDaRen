@@ -26,7 +26,6 @@
 
 #define COMMENT_PAGE_SIZE   (20)
 
-
 @interface ForwardCommentListViewController ()
 
 @property (nonatomic, retain) NSMutableArray * forwardOrCommentList;
@@ -78,7 +77,7 @@
         if ( [[BSDKManager sharedManager] isLogin]) {
         [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onPostCommentButtonClicked) title:NSLocalizedString(@"post_comment", @"post_comment")]];
         }
-        
+
         [self.navigationItem setTitle:NSLocalizedString(@"comment_list", @"comment_list")];
     }
     return self;
@@ -88,27 +87,27 @@
 {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
+
     // Release any cached data, images, etc that aren't in use.
 }
 
 -(void)onConfirmed:(WeiboForwardCommentViewController*)view
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_SHOWWAITOVERLAY object:self];
-    
+
     __block NSInteger doneCount = 0;
     __block NSInteger doneCountExpected = 1;
     __block NSString * errorMsg = nil;
-    
+
     processDoneWithDictBlock doneBlock = ^(AIO_STATUS status, NSDictionary * data){
-        
+
         doneCount++;
         if (doneCount == doneCountExpected) {
             [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_HIDEWAITOVERLAY object:self];
             if ([data objectForKey:K_BSDK_RESPONSE_STATUS] && !K_BSDK_IS_RESPONSE_OK(data)) {
                 errorMsg = K_BSDK_GET_RESPONSE_MESSAGE(data);
             }
-            
+
             if (errorMsg == nil)
             {
                 [ViewHelper showSimpleMessage:NSLocalizedString(@"send_succeed", @"send_succeed") withTitle:nil withButtonText:NSLocalizedString(@"ok", @"ok")];
@@ -121,17 +120,16 @@
                 [ViewHelper showSimpleMessage:errorMsg withTitle:nil withButtonText:NSLocalizedString(@"ok", @"ok")];
             }
         }
-        
+
     };
-    
-    
+
     if (view.forwardMode || (!view.forwardMode && view.isCheckBoxChecked))
     {
         [[BSDKManager sharedManager] rePostWeiboById:self.relatedBlogId WithText:view.weiboContentTextView.text andDoneCallback:doneBlock];
 
         doneCountExpected++;
     };
-    
+
     if (!view.forwardMode || (view.forwardMode && view.isCheckBoxChecked))
     {
         NSMutableString * commentText = [view.weiboContentTextView.text mutableCopy];
@@ -143,18 +141,17 @@
     }
 }
 
-
 - (void)onPostCommentButtonClicked {
-    WeiboForwardCommentViewController *forwardViewContoller = 
+    WeiboForwardCommentViewController *forwardViewContoller =
     [[WeiboForwardCommentViewController alloc] initWithNibName:nil bundle:nil];
     forwardViewContoller.forwardMode = NO;
     [forwardViewContoller setDelegate:self];
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: forwardViewContoller];
-    
+
     [self.navigationController presentModalViewController:navController animated:YES];
-    
+
     [navController release];
-    [forwardViewContoller release]; 
+    [forwardViewContoller release];
 }
 
 - (void)onBackButtonClicked {
@@ -170,7 +167,7 @@
     [self.footViewActivityIndicator setHidden:NO];
     [self.footViewActivityIndicator startAnimating];
     [self.footViewButton setTitle:NSLocalizedString(@"more_comment", @"more_comment") forState:UIControlStateNormal];
-    
+
     [[BSDKManager sharedManager] getCommentListOfWeibo:self.relatedBlogId pageSize:COMMENT_PAGE_SIZE pageIndex:self.currentPageIndex andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
         if (K_BSDK_IS_RESPONSE_OK(data)) {
             NSArray * commentList = [data objectForKey:K_BSDK_COMMENTLIST];
@@ -179,7 +176,7 @@
             self.isRefreshing = NO;
             [self.footViewActivityIndicator stopAnimating];
             [self.footViewActivityIndicator setHidden:YES];
-            
+
             if ([self.forwardOrCommentList count] == 0) {
                 [self.footViewButton setTitle:NSLocalizedString(@"no_comment", @"no_comment") forState:UIControlStateNormal];
             }
@@ -188,7 +185,7 @@
                 self.isAllRetrieved = YES;
                 [self.footView setHidden:YES];
             }
-            
+
             self.currentPageIndex++;
         }
         else
@@ -196,7 +193,7 @@
             [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
         }
 
-    }];    
+    }];
 }
 #pragma mark - View lifecycle
 
@@ -242,19 +239,19 @@
                                                                 cancelButtonTitle:nil
                                                            destructiveButtonTitle:nil
                                                                 otherButtonTitles:nil];
-    
+
     commentListActionSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
     commentListActionSheet.tag = ACTIONSHEET_COMMENT_LIST;
-    
+
     [commentListActionSheet addButtonWithTitle:COMMENT_LIST_VIEW_PROFILE];
-    
+
     if ( [[BSDKManager sharedManager] isLogin]) {
         [commentListActionSheet addButtonWithTitle:COMMENT_LIST_REPLY_COMMNET];
     }
-    
+
     [commentListActionSheet setDestructiveButtonIndex:[commentListActionSheet addButtonWithTitle:NSLocalizedString(@"cancel", @"cancel")]];
     [commentListActionSheet showInView:self.view];
-    
+
     [commentListActionSheet release];
 }
 
@@ -296,15 +293,15 @@
 
     cell.timestamp.text = [ViewHelper intervalSinceNow:[comment objectForKey:K_BSDK_CREATETIME]];
     cell.content.text = [comment objectForKey:K_BSDK_CONTENT];
-    
+
     CGFloat contentHeight = [ViewHelper getHeightOfText:[comment objectForKey:K_BSDK_CONTENT] ByFontSize:FONT_SIZE contentWidth:CELL_CONTENT_WIDTH];
-    
+
     cell.content.frame = CGRectMake(cell.content.frame.origin.x, CELL_CONTENT_Y_OFFSET, cell.content.frame.size.width, contentHeight);
-    
+
     [cell.content setFont:[UIFont systemFontOfSize:FONT_SIZE]];
-    
+
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
+
     return cell;
 }
 
@@ -320,9 +317,9 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSDictionary * comment = [self.forwardOrCommentList objectAtIndex:[indexPath row]];
     CGFloat contentHeight = [ViewHelper getHeightOfText:[comment objectForKey:K_BSDK_CONTENT] ByFontSize:FONT_SIZE contentWidth:CELL_CONTENT_WIDTH];
-    
+
     contentHeight += CELL_CONTENT_Y_OFFSET;
-    
+
     return MAX(contentHeight, CELL_MIN_HEIGHT);
 }
 
@@ -344,10 +341,10 @@
             case ACTIONSHEET_COMMENT_LIST:
             {
                 NSString *pressed = [actionSheet buttonTitleAtIndex:buttonIndex];
-                
+
                 if ([pressed isEqualToString:COMMENT_LIST_VIEW_PROFILE])
                 {
-                    FriendDetailViewController * friendDetailController = 
+                    FriendDetailViewController * friendDetailController =
                     [[FriendDetailViewController alloc] initWithDictionary:[[self.forwardOrCommentList objectAtIndex:self.currentCommentIndex] objectForKey:K_BSDK_USERINFO]];
                     [self.navigationController pushViewController:friendDetailController animated:YES];
                     [friendDetailController release];
@@ -362,5 +359,5 @@
         }
     }
 }
-                                 
+
 @end

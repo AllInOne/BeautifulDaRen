@@ -100,7 +100,7 @@
         }
         [self.navigationItem setTitle:title];
         [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
-        
+
         [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClicked) title:NSLocalizedString(@"refresh", @"refresh")]];
     }
     return self;
@@ -109,21 +109,21 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     self.currentPageIndex = 1;
     self.commonTableView.tableFooterView = self.footerView;
     self.friendsList = [NSMutableArray arrayWithCapacity:50];
-    
+
     [self refreshData];
 }
 
 - (void)onDataLoadDone
 {
     [self.loadingActivityIndicator stopAnimating];
-    
+
     self.isRefreshing = NO;
     self.currentPageIndex++;
-    
+
     if ((self.friendsList == nil) || ([self.friendsList count] == 0)) {
         [self.footerButton setTitle:NSLocalizedString(@"no_message", @"no_message") forState:UIControlStateNormal];
         [self.loadingActivityIndicator setHidden:YES];
@@ -140,7 +140,7 @@
     [self.footerView setHidden:NO];
     [self.loadingActivityIndicator startAnimating];
     [self.footerButton setTitle:NSLocalizedString(@"loading_more", @"loading_more") forState:UIControlStateNormal];
-    
+
     self.isRefreshing = YES;
 
     [self.navigationItem.rightBarButtonItem setEnabled:NO];
@@ -162,7 +162,7 @@
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         [self.navigationItem.rightBarButtonItem setEnabled:YES];
     };
-    
+
     switch (_type) {
         case FriendListViewController_TYPE_MY_FOLLOW:
         {
@@ -235,7 +235,7 @@
     [_footerButton release];
     [_footerView release];
     [_loadingActivityIndicator release];
-    
+
     [super dealloc];
 }
 
@@ -255,8 +255,8 @@
 {
     NSString * relation = [userInfo valueForKey:K_BSDK_RELATIONSHIP];
     NSString * title = nil;
-    
-    if (![ViewHelper isSelf:[userInfo objectForKey:K_BSDK_USERID]]) 
+
+    if (![ViewHelper isSelf:[userInfo objectForKey:K_BSDK_USERID]])
     {
         if ([relation isEqualToString:K_BSDK_RELATIONSHIP_INTER_FOLLOW])
         {
@@ -280,7 +280,7 @@
         {
             title = NSLocalizedString(@"follow", @"follow");
         }
-        
+
     }
     return title;
 }
@@ -299,7 +299,7 @@
         {
             return [FriendRawDict objectForKey:K_BSDK_ATTENTIONUSERINFO];
             break;
-        }            
+        }
         case FriendListViewController_TYPE_FAV_ONE_BLOG:
         default:
         {
@@ -323,7 +323,7 @@
         {
             return K_BSDK_ATTENTIONUSERINFO;
             break;
-        }            
+        }
         case FriendListViewController_TYPE_FAV_ONE_BLOG:
         default:
         {
@@ -343,13 +343,13 @@
     {
         cell = [[[NSBundle mainBundle] loadNibNamed:friendListViewCellIdentifier owner:self options:nil] objectAtIndex:0];
         FriendListViewCell * friendListViewCell = (FriendListViewCell*)cell;
-        
+
         NSDictionary * userDict = [self extractFriendDictionary:[self.friendsList objectAtIndex:[indexPath row]]];
         if (!userDict || ![userDict isKindOfClass:[NSDictionary class]] ||[userDict count] == 0) {
             [[iToast makeText:NSLocalizedString(@"server_data_error", @"server_data_error")] show];
             return cell;
         }
-        
+
         NSString * avatarUrlString = [userDict objectForKey:K_BSDK_PICTURE_65];
         BorderImageView * borderImageView = nil;
         if (avatarUrlString && [avatarUrlString length]) {
@@ -362,10 +362,10 @@
         {
             borderImageView = [[BorderImageView alloc] initWithFrame:friendListViewCell.avatarImageView.frame andImage:[UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:userDict]] needNotification:NO];
         }
-        
+
         [friendListViewCell.avatarImageView addSubview:borderImageView];
         [borderImageView release];
-        
+
         NSString * isVerify = [userDict objectForKey:K_BSDK_ISVERIFY];
         if (isVerify && [isVerify isEqual:@"1"]) {
             [friendListViewCell.vMarkImageView setImage:[UIImage imageNamed:@"v_mark_big"]];
@@ -377,7 +377,7 @@
         }
 
         friendListViewCell.friendNameLabel.text = [userDict valueForKey:KEY_ACCOUNT_USER_NAME];
-        
+
         NSString * buttonTitle = [self getRelationButtonTitleOfUser:userDict];
         if (buttonTitle) {
             [friendListViewCell.actionButton setTitle:buttonTitle forState:UIControlStateNormal];
@@ -389,7 +389,7 @@
         }
 
         [friendListViewCell.actionButton addTarget:self action:@selector(didButtonPressed:inView:) forControlEvents:UIControlEventTouchUpInside];
-        
+
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return cell;
@@ -421,7 +421,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    FriendDetailViewController * friendDetailController = 
+    FriendDetailViewController * friendDetailController =
     [[FriendDetailViewController alloc] initWithDictionary:[self extractFriendDictionary:[self.friendsList objectAtIndex:[indexPath row]]]];
     [self.navigationController pushViewController:friendDetailController animated:YES];
     [friendDetailController release];
@@ -447,7 +447,7 @@
                 if(K_BSDK_IS_RESPONSE_OK(data))
                 {
                     [_friendsList removeObjectAtIndex:button.tag];
-                    
+
                     [self.commonTableView reloadData];
                 }
                 else
@@ -465,7 +465,7 @@
             isShouldFollow = ([relation isEqualToString:K_BSDK_RELATIONSHIP_MY_FOLLOW] ||[relation isEqualToString:K_BSDK_RELATIONSHIP_INTER_FOLLOW]) ? NO : YES;
             break;
     }
-    
+
     if (NO == isShouldFollow)
     {
         [[BSDKManager sharedManager] unFollowUser:userId
@@ -473,14 +473,14 @@
                                       if(K_BSDK_IS_RESPONSE_OK(data))
                                       {
                                           [self setRelation:K_BSDK_RELATIONSHIP_NONE ofFriendIndex:button.tag];
-                                          
+
                                           [self.commonTableView reloadData];
                                       }
                                       else
                                       {
                                           [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
                                       }
-                                      
+
                                       [button setEnabled:YES];
                                   }];
     }
@@ -512,9 +512,9 @@
         NSMutableDictionary * rawInfo = [_friendsList objectAtIndex:index];
         if (friendInfoKey) {
             NSMutableDictionary * info = [NSMutableDictionary dictionaryWithDictionary:[self extractFriendDictionary:rawInfo]];
-            
+
             [info setObject:relation forKey:K_BSDK_RELATIONSHIP];
-            
+
             [rawInfo setObject:info forKey:friendInfoKey];
 
         }

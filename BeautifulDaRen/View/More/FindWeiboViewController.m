@@ -32,7 +32,7 @@
 {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
+
     // Release any cached data, images, etc that aren't in use.
 }
 
@@ -59,14 +59,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     [self.navigationItem setTitle:@"仁和春天"];
     [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
-    
+
     if(_itemsViewController == nil)
     {
         _itemsViewController = [[ItemsViewController alloc] initWithNibName:@"ItemsViewController" bundle:nil];
-        
+
         _itemsViewController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
         [self.view addSubview:_itemsViewController.view];
     }

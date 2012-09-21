@@ -8,17 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
-@interface CustomUITabBarItem : UITabBarItem {  
-    UIImage *customHighlightedImage;  
-    UIImage *customNormalImage;  
-}  
+@interface CustomUITabBarItem : UITabBarItem {
+    UIImage *customHighlightedImage;
+    UIImage *customNormalImage;
+}
 
-@property (nonatomic, retain) UIImage *customHighlightedImage;  
-@property (nonatomic, retain) UIImage *customNormalImage;  
+@property (nonatomic, retain) UIImage *customHighlightedImage;
+@property (nonatomic, retain) UIImage *customNormalImage;
 
-- (id)initWithTitle:(NSString *)title 
-        normalImage:(UIImage *)normalImage 
-   highlightedImage:(UIImage *)highlightedImage 
+- (id)initWithTitle:(NSString *)title
+        normalImage:(UIImage *)normalImage
+   highlightedImage:(UIImage *)highlightedImage
                 tag:(NSInteger)tag;
 
 @end

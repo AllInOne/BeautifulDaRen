@@ -102,7 +102,7 @@
 {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
+
     // Release any cached data, images, etc that aren't in use.
 }
 
@@ -233,18 +233,18 @@
     }
     [_searchBar setShowsCancelButton:YES animated:YES];
     [_searchBar setSelectedScopeButtonIndex:0];
-    
+
     _searchWeiboView = [[WaterFlowView alloc] initWithFrame:CGRectMake(0, CONTENT_VIEW_HEIGHT_OFFSET + 44.0f, 320,270)];
     self.searchWeiboView.flowdelegate = self;
     self.searchWeiboView.flowdatasource = self;
-    
-    _searchWeiboGestureRecognizer = [[UITapGestureRecognizer alloc] 
+
+    _searchWeiboGestureRecognizer = [[UITapGestureRecognizer alloc]
                           initWithTarget:self
                           action:@selector(dismissKeyboard)];
-    _searchUserGestureRecognizer = [[UITapGestureRecognizer alloc] 
+    _searchUserGestureRecognizer = [[UITapGestureRecognizer alloc]
                                      initWithTarget:self
                                      action:@selector(dismissKeyboard)];
-    
+
     _observers = [[NSMutableArray alloc] initWithCapacity:2];
     id observer = [[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardDidShowNotification
                                                                     object:nil
@@ -254,7 +254,7 @@
                                                                     [_searchWeiboView addGestureRecognizer:_searchWeiboGestureRecognizer];
                                                                 }];
     [self.observers addObject:observer];
-    
+
     observer = [[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardWillHideNotification
                                                                  object:nil
                                                                   queue:nil
@@ -263,14 +263,14 @@
                                                                  [_searchWeiboView removeGestureRecognizer:_searchWeiboGestureRecognizer];
                                                              }];
     [self.observers addObject:observer];
-    
+
     UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, 30, 0.0);
     self.searchUserView.contentInset = contentInsets;
     self.searchUserView.scrollIndicatorInsets = contentInsets;
-    
+
     self.searchWeiboView.contentInset = contentInsets;
     self.searchWeiboView.scrollIndicatorInsets = contentInsets;
-    
+
     [self.searchUserView setHidden:YES];
     [self.searchWeiboView setHidden:YES];
     _searchBar.scopeButtonTitles = [NSArray arrayWithObjects:
@@ -281,22 +281,22 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [[NSNotificationCenter defaultCenter] addObserver:self 
+    [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(waterFlowCellSelected:)
                                                  name:@"borderImageViewSelected"
                                                object:nil];
-    
+
     [_contentScrollView setContentSize:CGSizeMake(0, 360)];
     [_contentScrollView setFrame:CGRectMake(0, CONTENT_VIEW_HEIGHT_OFFSET, _contentScrollView.frame.size.width, _contentScrollView.frame.size.height)];
-    
+
     [self.view addSubview:_contentScrollView];
-    
+
     [self.searchUserView setFrame:CGRectMake(0, CONTENT_VIEW_HEIGHT_OFFSET + 44.0f, self.searchUserView.frame.size.width,270)];
     [self.view addSubview:self.searchUserView];
 
     [self.view addSubview:self.searchWeiboView];
     if (([self.sameCityUserResults count] == 0
-        && [self.hotUserResults count]== 0 
+        && [self.hotUserResults count]== 0
         && [self.interestingUserResults count]== 0) && !self.isSearchModel ) {
         [self refreshView];
     }
@@ -312,25 +312,23 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-
 - (void)waterFlowCellSelected:(NSNotification *)notification
 {
     if (self.isSearchModel && self.searchBar.selectedScopeButtonIndex == SEARCH_WEIBO)
     {
         BorderImageView * weiboView = (BorderImageView*)notification.object;
-        WeiboDetailViewController *weiboDetailController = 
+        WeiboDetailViewController *weiboDetailController =
         [[WeiboDetailViewController alloc] initWithDictionary:[self.searchWeiboResults objectAtIndex:weiboView.index]];
         UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: weiboDetailController];
-        
+
         [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
-        
+
         [navController release];
         [weiboDetailController release];
     }
@@ -340,7 +338,7 @@
         NSMutableArray * resultArray = nil;
         BorderImageView * friendView = (BorderImageView*)notification.object;
         NSInteger type = friendView.index / offset;
-        
+
         if (type == 0)
         {
             resultArray = self.sameCityUserResults;
@@ -355,9 +353,9 @@
         }
         UIViewController * viewController = [[FriendDetailViewController alloc] initWithDictionary:[resultArray objectAtIndex:friendView.index % offset]];
         UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: viewController];
-        
+
         [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
-        
+
         [navController release];
         [viewController release];
     }
@@ -373,7 +371,7 @@
                                          activityIndicator.frame.size.width,
                                          activityIndicator.frame.size.height);
     [scrollView addSubview:activityIndicator];
-    
+
     [activityIndicator startAnimating];
 
     __block NSInteger scrollWidth = 0;
@@ -384,11 +382,11 @@
         [activityIndicator removeFromSuperview];
         [activityIndicator release];
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: NO];
-        
+
         if (AIO_STATUS_SUCCESS == status && K_BSDK_IS_RESPONSE_OK(data))
         {
             NSMutableArray * resultArray = nil;
-            
+
             resultArray = [data objectForKey:K_BSDK_USERLIST];
             NSInteger typeOffset = 0;
             if ([type isEqualToString:K_BSDK_USERTYPE_SAME_CITY])
@@ -405,18 +403,18 @@
                 self.hotUserResults = resultArray;;
                 typeOffset = 2000;
             }
-            
+
             for (int i = 0; i < [resultArray count]; i++) {
                 NSDictionary * dict = [resultArray objectAtIndex:i];
                 FriendItemCell * cell = [[[NSBundle mainBundle] loadNibNamed:cellViewIdentifier owner:self options:nil] objectAtIndex:0];
-                
+
                 cell.frame = CGRectMake(i * (cell.frame.size.width + X_OFFSET), 0,
                                         cell.frame.size.width,
                                         cell.frame.size.height);
                 scrollWidth += (cell.frame.size.width + X_OFFSET);
-                
+
                 [scrollView addSubview:cell];
-                
+
                 UIImageView * imageView = [[UIImageView alloc] init];
                 NSString * url = [dict valueForKey:K_BSDK_PICTURE_65];
                 if ([url length] > 0)
@@ -427,16 +425,16 @@
                 {
                     imageView.image = [UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:dict]];
                 }
-                
+
                 BorderImageView * borderView = [[BorderImageView alloc] initWithFrame:cell.friendImageView.frame andView:imageView];
                 borderView.index = i + typeOffset;
                 [cell.friendImageView addSubview:borderView];
                 cell.friendNameLabel.text = [dict valueForKey:KEY_ACCOUNT_USER_NAME];
-                
+
                 [borderView release];
                 [imageView release];
             }
-            
+
             [scrollView setContentSize:CGSizeMake(scrollWidth, 0)];
         }
         else
@@ -444,7 +442,7 @@
             [[iToast makeText:[NSString stringWithFormat:@"%@", K_BSDK_GET_RESPONSE_MESSAGE(data)]] show];
         }
     };
-    
+
     if ([[BSDKManager sharedManager] isLogin])
     {
         NSString * userCity = [[[NSUserDefaults standardUserDefaults]
@@ -457,7 +455,7 @@
                                        andDoneCallback:block];
     }
     scrollView.delegate = self;
-        
+
 }
 #pragma mark UITableViewDelegate
 
@@ -467,9 +465,9 @@
     {
         UIViewController * viewController = [[FriendDetailViewController alloc] initWithDictionary:[self.searchUserResults objectAtIndex:[indexPath row]]];
         UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: viewController];
-        
+
         [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
-        
+
         [navController release];
         [viewController release];
     }
@@ -490,7 +488,7 @@
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *findFriendViewCell = @"FindFriendViewCell";
-    
+
     UITableViewCell *cell = nil;
     cell = [tableView dequeueReusableCellWithIdentifier:findFriendViewCell];
     if(!cell)
@@ -511,7 +509,7 @@
     {
         imageView.image = [UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:friendDict]];
     }
-    
+
     CGRect friendAvatarImageFrame = CGRectMake(0, 0,
                                                friendCell.avatarImageView.frame.size.width,
                                                friendCell.avatarImageView.frame.size.height);
@@ -528,14 +526,14 @@
         [verifyImageView release];
     }
     [friendCell.avatarImageView addSubview:friendAvatarImageView];
-    
+
     if ([[friendDict valueForKey:K_BSDK_RELATIONSHIP] isEqualToString:K_BSDK_RELATIONSHIP_MY_FOLLOW]
         || [[friendDict valueForKey:K_BSDK_RELATIONSHIP] isEqualToString:K_BSDK_RELATIONSHIP_INTER_FOLLOW])
-            
+
     {
         [friendCell.followButton setTitle:@"取消关注" forState:UIControlStateNormal];
     }
-    else 
+    else
     {
         [friendCell.followButton setTitle:@"关注" forState:UIControlStateNormal];
     }
@@ -595,12 +593,12 @@
     [searchBar endEditing:YES];
     [searchBar setShowsScopeBar:NO];
     [searchBar setFrame:CGRectMake(searchBar.frame.origin.x, searchBar.frame.origin.y, searchBar.frame.size.width, 44.0f)];
-    
+
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.3];
-    
+
     [_contentScrollView setFrame:CGRectMake(_contentScrollView.frame.origin.x, CONTENT_VIEW_HEIGHT_OFFSET, _contentScrollView.frame.size.width,_contentScrollView.frame.size.height)];
-    
+
     [UIView commitAnimations];
 }
 
@@ -626,9 +624,9 @@
 {
     FriendDetailViewController *weiboDetailController = [[FriendDetailViewController alloc] init];
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: weiboDetailController];
-    
+
     [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
-    
+
     [navController release];
     [weiboDetailController release];
 }
@@ -642,7 +640,7 @@
         if ([self.searchBar.text length] <= 0) {
             return;
         }
-        
+
         callBackBlock callback = nil;
         UIScrollView * contentView = nil;
         if (self.searchBar.selectedScopeButtonIndex == SEARCH_USER && self.isSearchMoreUser == YES)
@@ -653,7 +651,7 @@
         {
             contentView = self.searchWeiboView;
         }
-        
+
         if (contentView)
         {
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: YES];
@@ -667,7 +665,7 @@
                 callback();
                 Block_release(callback);
                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: NO];
-                
+
                 self.inSearching = NO;
                 if (AIO_STATUS_SUCCESS == status && K_BSDK_IS_RESPONSE_OK(data))
                 {
@@ -696,7 +694,7 @@
             };
             [[BSDKManager sharedManager] searchUsersByUsername:self.searchBar.text
                                                       pageSize:10
-                                                     pageIndex:self.searchUserPageIndex 
+                                                     pageIndex:self.searchUserPageIndex
                                                andDoneCallback:block];
         }
         else if(self.searchBar.selectedScopeButtonIndex == SEARCH_WEIBO && self.isSearchMoreWeibo == YES)
@@ -707,7 +705,7 @@
                 Block_release(callback);
                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: NO];
                 self.inSearching = NO;
-                
+
                 if (AIO_STATUS_SUCCESS == status && K_BSDK_IS_RESPONSE_OK(data))
                 {
                     NSArray * array = [data valueForKey:K_BSDK_BLOGLIST];
@@ -715,7 +713,7 @@
                     {
                         [self.searchWeiboResults addObject:dict];
                     }
-                    
+
                     if (([[data valueForKey:K_BSDK_PAGECOUNT] intValue] ==  self.searchWeiboPageIndex)
                         || ([[data valueForKey:K_BSDK_BLOGLIST] count] == 0))
                     {
@@ -733,7 +731,7 @@
                     [[iToast makeText:[NSString stringWithFormat:@"%@", K_BSDK_GET_RESPONSE_MESSAGE(data)]] show];
                 }
             };
-            
+
             [[BSDKManager sharedManager] searchWeiboByKeyword:self.searchBar.text
                                                      pageSize:10
                                                     pageIndex:self.searchWeiboPageIndex
@@ -770,7 +768,7 @@
                                       }
                                   }];
     }
-    else 
+    else
     {
         [[BSDKManager sharedManager] followUser:[[friendDict valueForKey:KEY_ACCOUNT_ID] intValue]
                                 andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
@@ -786,7 +784,7 @@
                                     }
                                 }];
     }
-    
+
 }
 
 #pragma mark WaterFlowViewDelegate
@@ -834,17 +832,17 @@
 	if(cell == nil)
 	{
 		cell  = [[[WaterFlowCell alloc] initWithReuseIdentifier:cellIdentifier] autorelease];
-        
+
         NSDictionary * dict = [self getValidItemDictionaryAtIndex:index];
         CGFloat picWidth = [[dict valueForKey:K_BSDK_PICTURE_WIDTH] floatValue];
         CGFloat picHeight = [[dict valueForKey:K_BSDK_PICTURE_HEIGHT] floatValue];
         CGFloat frameWidth = (self.view.frame.size.width - 14) / 3;
         CGFloat frameHeight = (frameWidth / picWidth) * picHeight;
-        
+
         UIImageView * imageView = [[UIImageView alloc] init];
         NSString * url = [dict valueForKey:K_BSDK_PICTURE_102];
         [imageView setImageWithURL:[NSURL URLWithString:url]];
-        
+
         BorderImageView * borderImageView = [[BorderImageView alloc] initWithFrame:CGRectMake(2, 2, frameWidth + 2, frameHeight + 2) andView:imageView];
         borderImageView.index = index;
         [cell addSubview:borderImageView];
@@ -884,7 +882,7 @@
     [self.searchWeiboResults removeAllObjects];
     [self.searchUserResults removeAllObjects];
     [self.weiboHeights removeAllObjects];
-    
+
     [self.searchWeiboView reloadData];
     [self.searchUserView reloadData];
 }

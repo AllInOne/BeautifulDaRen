@@ -26,7 +26,6 @@ static NSMutableString *logBody;
 - (void)failedWithError:(NSError *)error;
 @end
 
-
 @implementation BSDKRequest
 
 @synthesize url;
@@ -35,7 +34,6 @@ static NSMutableString *logBody;
 @synthesize postDataType;
 @synthesize httpHeaderFields;
 @synthesize delegate;
-
 
 #pragma mark - BSDKRequest Life Circle
 
@@ -49,13 +47,13 @@ static NSMutableString *logBody;
     params = nil;
     [httpHeaderFields release];
     httpHeaderFields = nil;
-    
+
     [responseData release];
 	responseData = nil;
-    
+
     [connection cancel];
     [connection release], connection = nil;
-    
+
     [super dealloc];
 }
 
@@ -70,10 +68,10 @@ static NSMutableString *logBody;
 		{
 			continue;
 		}
-		
+
 		[pairs addObject:[NSString stringWithFormat:@"%@=%@", key, [[dict objectForKey:key] URLEncodedString]]];
 	}
-	
+
 	return [pairs componentsJoinedByString:@"&"];
 }
 
@@ -88,11 +86,11 @@ static NSMutableString *logBody;
     if (logBody == nil) {
         logBody = [[NSMutableString stringWithCapacity:256] retain];
     }
-    
+
     [logBody setString:@""];
-    
+
     NSMutableData *body = [NSMutableData data];
-    
+
     if (postDataType == kBSDKRequestPostDataTypeNormal)
     {
         [BSDKRequest appendUTF8Body:body dataString:[BSDKRequest stringFromDictionary:params]];
@@ -101,30 +99,30 @@ static NSMutableString *logBody;
     {
         NSString *bodyPrefixString = [NSString stringWithFormat:@"--%@\r\n", kWBRequestStringBoundary];
 		NSString *bodySuffixString = [NSString stringWithFormat:@"\r\n--%@--\r\n", kWBRequestStringBoundary];
-        
+
         NSMutableDictionary *dataDictionary = [NSMutableDictionary dictionary];
-        
+
         [BSDKRequest appendUTF8Body:body dataString:bodyPrefixString];
-        
-        for (id key in [params keyEnumerator]) 
+
+        for (id key in [params keyEnumerator])
 		{
 			if (([[params valueForKey:key] isKindOfClass:[UIImage class]]) || ([[params valueForKey:key] isKindOfClass:[NSData class]]))
 			{
 				[dataDictionary setObject:[params valueForKey:key] forKey:key];
 				continue;
 			}
-			
+
 			[BSDKRequest appendUTF8Body:body dataString:[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n%@\r\n", key, [params valueForKey:key]]];
 			[BSDKRequest appendUTF8Body:body dataString:bodyPrefixString];
 		}
-		
-		if ([dataDictionary count] > 0) 
+
+		if ([dataDictionary count] > 0)
 		{
-			for (id key in dataDictionary) 
+			for (id key in dataDictionary)
 			{
 				NSObject *dataParam = [dataDictionary valueForKey:key];
-				
-				if ([dataParam isKindOfClass:[UIImage class]]) 
+
+				if ([dataParam isKindOfClass:[UIImage class]])
 				{
 //					NSData* imageData = UIImagePNGRepresentation((UIImage *)dataParam);
 //					[BSDKRequest appendUTF8Body:body dataString:[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"file.png\"\r\n", key]];
@@ -132,18 +130,18 @@ static NSMutableString *logBody;
 //					[body appendData:imageData];
 
 					NSData* imageData = UIImageJPEGRepresentation((UIImage *)dataParam, 1);
-                    
+
                     // if the size is big, we need to recompress the image
                     NSInteger size = [imageData length];
                     if (size > KWBMaxImageDataSize) {
                         imageData = UIImageJPEGRepresentation((UIImage *)dataParam, KWBMaxImageDataSize/size);
                     }
-                    
+
 					[BSDKRequest appendUTF8Body:body dataString:[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"Pic.jpg\"\r\n", key]];
 					[BSDKRequest appendUTF8Body:body dataString:[NSString stringWithString:@"Content-Type: image/jpeg\r\nContent-Transfer-Encoding: binary\r\n\r\n"]];
 					[body appendData:imageData];
-				} 
-				else if ([dataParam isKindOfClass:[NSData class]]) 
+				}
+				else if ([dataParam isKindOfClass:[NSData class]])
 				{
 					[BSDKRequest appendUTF8Body:body dataString:[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n", key]];
 					[BSDKRequest appendUTF8Body:body dataString:[NSString stringWithString:@"Content-Type: content/unknown\r\nContent-Transfer-Encoding: binary\r\n\r\n"]];
@@ -159,21 +157,21 @@ static NSMutableString *logBody;
     return body;
 }
 
-- (void)handleResponseData:(NSData *)data 
+- (void)handleResponseData:(NSData *)data
 {
     if ([delegate respondsToSelector:@selector(request:didReceiveRawData:)])
     {
         [delegate request:self didReceiveRawData:data];
     }
-	
+
 	NSError* error = nil;
 	id result = [self parseJSONData:data error:&error];
-	
-	if (error) 
+
+	if (error)
 	{
 		[self failedWithError:error];
-	} 
-	else 
+	}
+	else
 	{
         if ([delegate respondsToSelector:@selector(request:didFinishLoadingWithResult:)])
 		{
@@ -184,14 +182,14 @@ static NSMutableString *logBody;
 
 - (id)parseJSONData:(NSData *)data error:(NSError **)error
 {
-	
+
 	NSString *dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    
+
 	SBJSON *jsonParser = [[SBJSON alloc]init];
-	
+
 	NSError *parseError = nil;
 	id result = [jsonParser objectWithString:dataString error:&parseError];
-	
+
 	if (parseError)
     {
         if (error != nil)
@@ -201,22 +199,21 @@ static NSMutableString *logBody;
                                                                      forKey:kWBSDKErrorCodeKey]];
         }
 	}
-        
+
 	[dataString release];
 	[jsonParser release];
-	
-    
+
 	if ([result isKindOfClass:[NSDictionary class]])
 	{
 		if ([result objectForKey:@"error_code"] != nil && [[result objectForKey:@"error_code"] intValue] != 200)
 		{
-			if (error != nil) 
+			if (error != nil)
 			{
 				*error = [self errorWithCode:kWBErrorCodeInterface userInfo:result];
 			}
 		}
 	}
-	
+
 	return result;
 }
 
@@ -225,9 +222,9 @@ static NSMutableString *logBody;
     return [NSError errorWithDomain:kWBSDKErrorDomain code:code userInfo:userInfo];
 }
 
-- (void)failedWithError:(NSError *)error 
+- (void)failedWithError:(NSError *)error
 {
-//	if ([delegate respondsToSelector:@selector(request:didFailWithError:)]) 
+//	if ([delegate respondsToSelector:@selector(request:didFailWithError:)])
 //	{
 //		[delegate request:self didFailWithError:error];
 //	}
@@ -249,28 +246,28 @@ static NSMutableString *logBody;
 
 #pragma mark - WBRequest Public Methods
 
-+ (BSDKRequest *)requestWithURL:(NSString *)url 
-                   httpMethod:(NSString *)httpMethod 
++ (BSDKRequest *)requestWithURL:(NSString *)url
+                   httpMethod:(NSString *)httpMethod
                        params:(NSDictionary *)params
                  postDataType:(BSDKRequestPostDataType)postDataType
              httpHeaderFields:(NSDictionary *)httpHeaderFields
                      delegate:(id<BSDKRequestDelegate>)delegate
 {
     BSDKRequest *request = [[[BSDKRequest alloc] init] autorelease];
-    
+
     request.url = url;
     request.httpMethod = httpMethod;
     request.params = params;
     request.postDataType = postDataType;
     request.httpHeaderFields = httpHeaderFields;
     request.delegate = delegate;
-    
+
     return request;
 }
 
 + (BSDKRequest *)requestWithAccessToken:(NSString *)accessToken
                                   url:(NSString *)url
-                           httpMethod:(NSString *)httpMethod 
+                           httpMethod:(NSString *)httpMethod
                                params:(NSDictionary *)params
                          postDataType:(BSDKRequestPostDataType)postDataType
                      httpHeaderFields:(NSDictionary *)httpHeaderFields
@@ -282,7 +279,7 @@ static NSMutableString *logBody;
     return [BSDKRequest requestWithURL:url
                           httpMethod:httpMethod
                               params:mutableParams
-                        postDataType:postDataType 
+                        postDataType:postDataType
                     httpHeaderFields:httpHeaderFields
                             delegate:delegate];
 }
@@ -293,11 +290,11 @@ static NSMutableString *logBody;
     {
         return baseURL;
     }
-    
+
     NSURL *parsedURL = [NSURL URLWithString:baseURL];
 	NSString *queryPrefix = parsedURL.query ? @"&" : @"?";
 	NSString *query = [BSDKRequest stringFromDictionary:params];
-	
+
 	return [NSString stringWithFormat:@"%@%@%@", baseURL, queryPrefix, query];
 }
 
@@ -307,9 +304,9 @@ static NSMutableString *logBody;
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]
 														   cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
 													   timeoutInterval:kWBRequestTimeOutInterval];
-    
+
     [request setHTTPMethod:httpMethod];
-    
+
     if ([httpMethod isEqualToString:@"POST"])
     {
         if (postDataType == kBSDKRequestPostDataTypeMultipart)
@@ -317,23 +314,23 @@ static NSMutableString *logBody;
             NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", kWBRequestStringBoundary];
             [request setValue:contentType forHTTPHeaderField:@"Content-Type"];
         }
-        
+
         [request setHTTPBody:[self postBody]];
     }
-    
+
     for (NSString *key in [httpHeaderFields keyEnumerator])
     {
         [request setValue:[httpHeaderFields objectForKey:key] forHTTPHeaderField:key];
     }
-    
+
     connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
-    
+
     [self performSelector:@selector(requestOnTimeout) withObject:self afterDelay:30.0];
 }
 
 - (void)requestOnTimeout
 {
-    
+
     NSDictionary * falkResponse = [NSDictionary dictionaryWithObjectsAndKeys:NSLocalizedString(@"server_no_response", @"server_no_response"), K_BSDK_RESPONSE_MESSAGE, K_BSDK_RESPONSE_STATUS_FAILED, K_BSDK_RESPONSE_STATUS, nil];
 //    [self handleResponseData:falkResponse];
     if ([delegate respondsToSelector:@selector(request:didFinishLoadingWithResult:)])
@@ -348,7 +345,7 @@ static NSMutableString *logBody;
 {
     [responseData release];
 	responseData = nil;
-    
+
     [connection cancel];
     [connection release];
     connection = nil;
@@ -359,7 +356,7 @@ static NSMutableString *logBody;
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
 	responseData = [[NSMutableData alloc] init];
-	
+
 	if ([delegate respondsToSelector:@selector(request:didReceiveResponse:)])
     {
 		[delegate request:self didReceiveResponse:response];
@@ -372,33 +369,33 @@ static NSMutableString *logBody;
 }
 
 - (NSCachedURLResponse *)connection:(NSURLConnection *)connection
-				  willCacheResponse:(NSCachedURLResponse*)cachedResponse 
+				  willCacheResponse:(NSCachedURLResponse*)cachedResponse
 {
 	return nil;
 }
 
-- (void)connectionDidFinishLoading:(NSURLConnection *)theConnection 
+- (void)connectionDidFinishLoading:(NSURLConnection *)theConnection
 {
     NSLog(@"%@", [[[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding] autorelease]);
 	[self handleResponseData:responseData];
-    
+
 	[responseData release];
 	responseData = nil;
-    
+
     [connection cancel];
 	[connection release];
 	connection = nil;
-    
+
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
 }
 
 - (void)connection:(NSURLConnection *)theConnection didFailWithError:(NSError *)error
 {
 	[self failedWithError:error];
-	
+
 	[responseData release];
 	responseData = nil;
-    
+
     [connection cancel];
 	[connection release];
 	connection = nil;

@@ -15,7 +15,7 @@
 
 @interface TakePhotoViewController ()
 @property (nonatomic, retain)  TakePhotoViewController * galleryPhotoViewController;
-@property (nonatomic, assign)  UIImagePickerControllerSourceType currentSourceType; 
+@property (nonatomic, assign)  UIImagePickerControllerSourceType currentSourceType;
 @property (nonatomic, assign)  BOOL isCameraReady;
 @property (nonatomic, assign)  BOOL isNotificationAdded;
 - (void)setToolbar;
@@ -31,7 +31,6 @@
 @synthesize isCameraReady = _isCameraReady;
 @synthesize isNotificationAdded =_isNotificationAdded;
 
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -42,7 +41,7 @@
     }
     return self;
 }
-							
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -71,14 +70,14 @@
     [_imagePickerController release];
     [_toolbarView release];
     [_galleryPhotoViewController release];
-    
+
     [super dealloc];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -122,29 +121,28 @@
 }
 
 - (void)onAvatarBartButtonPressed {
-    
+
 }
 
 - (void)setToolbar
 {
     UIBarButtonItem *flexible = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    
+
     UIBarButtonItem *galleryBarButton = [ViewHelper getBarItemOfTarget:self action:@selector(onGalleryBartButtonPressed) title:NSLocalizedString(@"album", @"album")];
-    
+
     UIBarButtonItem *cameraBarButton = [ViewHelper getCameraBarItemOftarget:self action:@selector(onCameraBarButtonPressed)];
-    
+
     UIBarButtonItem *avatarBarButton = [ViewHelper getBarItemOfTarget:self action:@selector(onAvatarBartButtonPressed) title:NSLocalizedString(@"avatar", @"avatar")];
 
-    
-    NSArray *barItems = [[NSArray alloc]initWithObjects:galleryBarButton, 
+    NSArray *barItems = [[NSArray alloc]initWithObjects:galleryBarButton,
                          flexible,
                          cameraBarButton,
                          flexible,
                          avatarBarButton,
                          nil];
-    
+
     self.toolbarView.items= barItems;
-    
+
     [barItems release];
     [flexible release];
 }
@@ -158,10 +156,10 @@
 
     [self.imagePickerController setSourceType:sourceType];
     self.currentSourceType = sourceType;
-    
+
     _toolbarView = nil;
     _toolbarView = [[UIToolbar alloc] init];
-    
+
     if (sourceType == UIImagePickerControllerSourceTypeCamera) {
         self.imagePickerController.showsCameraControls = NO;
 
@@ -172,7 +170,7 @@
                                      CGRectGetWidth(defaultFrame),
                                      TOOL_BAR_HEIGHT + 10.0);
         self.view.frame = newFrame;
-        
+
         if ([[self.imagePickerController.cameraOverlayView subviews] count] == 0)
         {
             for (UIView * subView in [self.toolbarView subviews]) {
@@ -189,14 +187,14 @@
             }
             else
             {
-                [self.toolbarView  insertSubview:tabBarBg atIndex:1];            
+                [self.toolbarView  insertSubview:tabBarBg atIndex:1];
             }
             [self setToolbar];
             [tabBarBg release];
             [self.imagePickerController.cameraOverlayView addSubview:self.toolbarView];
         }
     }
-    
+
     if (!self.isNotificationAdded)
     {    [[NSNotificationCenter defaultCenter] addObserver:self
                                                   selector:@selector(cameraIsReady:)
@@ -210,14 +208,14 @@
 }
 
 - (void)cameraIsReady:(NSNotification *)notification
-{   
+{
     NSLog(@"Camera is ready...");
     // Whatever
     _isCameraReady = YES;
 }
 
 - (void)cameraIsNotReady:(NSNotification *)notification
-{   
+{
     NSLog(@"Camera is NOT ready...");
     // Whatever
     _isCameraReady = NO;
@@ -231,17 +229,17 @@
 {
     UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
     [picker dismissModalViewControllerAnimated:NO];
-    
+
     if (self.delegate)
         [self.delegate didTakePicture:image];
-    
+
     if (self.currentSourceType == UIImagePickerControllerSourceTypePhotoLibrary)
     {
         [self.galleryPhotoViewController dismissModalViewControllerAnimated:NO];
         self.galleryPhotoViewController = nil;
         self.currentSourceType = UIImagePickerControllerSourceTypeCamera;
     }
-    
+
     // give the taken picture to our delegate
 //    [picker release];
 }
@@ -251,24 +249,9 @@
     [picker dismissModalViewControllerAnimated:YES];
 
     [self.delegate didFinishWithCamera];
-    
+
 //    [picker release];
 }
 
 @end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

@@ -46,17 +46,17 @@ static BSDKManager *sharedInstance;
 - (id)init
 {
     self = [super init];
-    
+
     if (self)
     {
         BSDKWeiboEngine = [[BSDKEngine alloc] initWithAppKey:nil appSecret:nil];
-        
+
         [BSDKWeiboEngine setRootViewController:((AppDelegate*)[UIApplication sharedApplication].delegate).rootViewController];
         [BSDKWeiboEngine setDelegate:self];
         [BSDKWeiboEngine setIsUserExclusive:NO];
         self.isAlreadyLogin = NO;
     }
-    
+
     return self;
 }
 
@@ -74,13 +74,13 @@ static BSDKManager *sharedInstance;
 
 - (void)setRootviewController:(UIViewController*)rootViewController
 {
-    [BSDKWeiboEngine setRootViewController:rootViewController];   
+    [BSDKWeiboEngine setRootViewController:rootViewController];
 }
 
 - (void)signUpWithUsername:(NSString*) username password:(NSString*)password email:(NSString*)email city:(NSString*)city andDoneCallback:(processDoneWithDictBlock)doneBlock
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:8];
-    
+
     [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_ADD forKey:K_BSDK_ACTION];
     [params setObject:username forKey:K_BSDK_USERNAME];
@@ -88,20 +88,20 @@ static BSDKManager *sharedInstance;
     [params setObject:password forKey:K_BSDK_REPASSWORD];
     [params setObject:email forKey:K_BSDK_EMAIL];
     [params setObject:city forKey:K_BSDK_CITY];
-    
+
     processDoneWithDictBlock signupCallbackShim = ^(AIO_STATUS status, NSDictionary * data)
     {
         if ((status == AIO_STATUS_SUCCESS) && K_BSDK_IS_RESPONSE_OK(data))
         {
             self.isAlreadyLogin = YES;
         }
-        
+
         doneBlock(status, data);
     };
-    
+
     [self sendRequestWithMethodName:nil
-                         httpMethod:@"POST" 
-                             params:params 
+                         httpMethod:@"POST"
+                             params:params
                        postDataType:kBSDKRequestPostDataTypeNormal
                    httpHeaderFields:nil
                        doneCallback:signupCallbackShim];
@@ -112,7 +112,7 @@ static BSDKManager *sharedInstance;
     if (self.isLogin) {
         NSDictionary * data = [NSDictionary dictionaryWithObjectsAndKeys:@"已经登陆！",K_BSDK_RESPONSE_MESSAGE, nil];
         doneBlock(AIO_STATUS_BAD_STATE, data);
-        
+
         return;
     }
 
@@ -122,21 +122,20 @@ static BSDKManager *sharedInstance;
         {
             self.isAlreadyLogin = YES;
         }
-        
+
         doneBlock(status, data);
     };
-    
+
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
-    
+
     [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_LOGIN forKey:K_BSDK_ACTION];
     [params setObject:username forKey:K_BSDK_USERNAME];
     [params setObject:password forKey:K_BSDK_PASSWORD];
 
-    
     [self sendRequestWithMethodName:nil
-                         httpMethod:@"POST" 
-                             params:params 
+                         httpMethod:@"POST"
+                             params:params
                        postDataType:kBSDKRequestPostDataTypeNormal
                    httpHeaderFields:nil
                        doneCallback:loginCallbackShim];
@@ -150,39 +149,39 @@ static BSDKManager *sharedInstance;
         {
             self.isAlreadyLogin = NO;
         }
-        
+
         doneBlock(status, data);
     };
-    
+
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
-    
+
     [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_LOGOUT forKey:K_BSDK_ACTION];
-    
+
     [self sendRequestWithMethodName:nil
-                         httpMethod:@"POST" 
-                             params:params 
+                         httpMethod:@"POST"
+                             params:params
                        postDataType:kBSDKRequestPostDataTypeNormal
                    httpHeaderFields:nil
                        doneCallback:logoutCallbackShim];
 }
 
 - (void)searchUsersByUsername:(NSString*)username
-                     pageSize:(NSInteger)pageSize 
-                    pageIndex:(NSInteger)pageIndex 
+                     pageSize:(NSInteger)pageSize
+                    pageIndex:(NSInteger)pageIndex
               andDoneCallback:(processDoneWithDictBlock)doneBlock
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
-    
+
     [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETLIST forKey:K_BSDK_ACTION];
     [params setObject:[NSString stringWithFormat:@"%d", pageIndex] forKey:K_BSDK_PAGEINDEX];
     [params setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:K_BSDK_PAGESIZE];
     [params setObject:username forKey:K_BSDK_USERNAMEKEYWORDS];
-    
+
     [self sendRequestWithMethodName:nil
-                         httpMethod:@"POST" 
-                             params:params 
+                         httpMethod:@"POST"
+                             params:params
                        postDataType:kBSDKRequestPostDataTypeNormal
                    httpHeaderFields:nil
                        doneCallback:doneBlock];
@@ -194,17 +193,17 @@ static BSDKManager *sharedInstance;
                  andDoneCallback:(processDoneWithDictBlock)doneBlock
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
-    
+
     [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_CHANGEPASSWORD forKey:K_BSDK_ACTION];
     [params setObject:username forKey:K_BSDK_USERNAME];
     [params setObject:newpassword forKey:K_BSDK_PASSWORD];
     [params setObject:newpassword forKey:K_BSDK_REPASSWORD];
     [params setObject:oldPassword forKey:K_BSDK_OLDPASSWORD];
-    
+
     [self sendRequestWithMethodName:nil
-                         httpMethod:@"POST" 
-                             params:params 
+                         httpMethod:@"POST"
+                             params:params
                        postDataType:kBSDKRequestPostDataTypeNormal
                    httpHeaderFields:nil
                        doneCallback:doneBlock];
@@ -213,39 +212,37 @@ static BSDKManager *sharedInstance;
 - (void)getUserInforByUserId:(NSString*)userId andDoneCallback:(processDoneWithDictBlock)doneBlock
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
-    
+
     [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETINFO forKey:K_BSDK_ACTION];
     if (userId) {
         [params setObject:userId forKey:K_BSDK_USERID];
     }
-    
+
     [self sendRequestWithMethodName:nil
-                         httpMethod:@"POST" 
-                             params:params 
+                         httpMethod:@"POST"
+                             params:params
                        postDataType:kBSDKRequestPostDataTypeNormal
                    httpHeaderFields:nil
                        doneCallback:doneBlock];
 }
 
-
 - (void)getFavUsersByBlogId:(NSString*) blogId
-                   pageSize:(NSInteger)pageSize 
-                  pageIndex:(NSInteger)pageIndex 
+                   pageSize:(NSInteger)pageSize
+                  pageIndex:(NSInteger)pageIndex
             andDoneCallback:(processDoneWithDictBlock)doneBlock
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:5];
-    
+
     [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETLIST forKey:K_BSDK_ACTION];
     [params setObject:[NSString stringWithFormat:@"%d", pageIndex] forKey:K_BSDK_PAGEINDEX];
     [params setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:K_BSDK_PAGESIZE];
     [params setObject:blogId forKey:K_BSDK_FAVBLOGUID];
 
-    
     [self sendRequestWithMethodName:nil
-                         httpMethod:@"POST" 
-                             params:params 
+                         httpMethod:@"POST"
+                             params:params
                        postDataType:kBSDKRequestPostDataTypeNormal
                    httpHeaderFields:nil
                        doneCallback:doneBlock];
@@ -254,16 +251,16 @@ static BSDKManager *sharedInstance;
 - (void)getUserInforByName:(NSString*) name andDoneCallback:(processDoneWithDictBlock)doneBlock
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
-    
+
     [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETINFO forKey:K_BSDK_ACTION];
     if (name) {
         [params setObject:name forKey:K_BSDK_USERNAME];
     }
-    
+
     [self sendRequestWithMethodName:nil
-                         httpMethod:@"POST" 
-                             params:params 
+                         httpMethod:@"POST"
+                             params:params
                        postDataType:kBSDKRequestPostDataTypeNormal
                    httpHeaderFields:nil
                        doneCallback:doneBlock];
@@ -287,7 +284,6 @@ static BSDKManager *sharedInstance;
     [bSDKWeiboRequest start];
     [bSDKWeiboRequest release];
 }
-
 
 #pragma mark SINA engine delegates
 
@@ -314,32 +310,32 @@ static BSDKManager *sharedInstance;
 // Log out successfully.
 - (void)engineDidLogOut:(BSDKEngine *)engine
 {
-    
+
 }
 
 // When you use the BSDKEngine's request methods,
 // you may receive the following four callbacks.
 - (void)engineNotAuthorized:(BSDKEngine *)engine
 {
-    
+
 }
 
 - (void)engineAuthorizeExpired:(BSDKEngine *)engine
 {
-    
+
 }
 
 - (void)engine:(BSDKEngine *)engine requestDidSucceedWithResult:(id)result
 {
     NSLog(@"WSDK requestDidSucceed!");
     NSLog(@"WSDK data: %@!", result);
-    
+
     NSDictionary *dict = nil;
     if ([result isKindOfClass:[NSDictionary class]])
     {
         dict = (NSDictionary *)result;
     }
-    
+
     [self doNotifyProcessStatus:AIO_STATUS_SUCCESS andData:dict];
 }
 
@@ -347,7 +343,7 @@ static BSDKManager *sharedInstance;
 {
     NSLog(@"requestDidFailWithError: %@", error);
     NSDictionary * errorDict = [NSDictionary dictionaryWithObjectsAndKeys:[error localizedDescription], K_BSDK_RESPONSE_MESSAGE, K_BSDK_RESPONSE_STATUS_FAILED, K_BSDK_RESPONSE_STATUS, nil];
-    
+
     [self doNotifyProcessStatus:error.code andData:errorDict];
 }
 
@@ -356,26 +352,26 @@ static BSDKManager *sharedInstance;
 - (void)getWeiboClassesWithDoneCallback:(processDoneWithDictBlock)callback
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
-    
+
     [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETCLASSLIST forKey:K_BSDK_ACTION];
 
     [self sendRequestWithMethodName:nil
-                         httpMethod:@"POST" 
-                             params:params 
+                         httpMethod:@"POST"
+                             params:params
                        postDataType:kBSDKRequestPostDataTypeNormal
                    httpHeaderFields:nil
                        doneCallback:callback];
-    
+
 }
 
 - (void)getFriendsWeiboListByUserId:(NSString*)userId
-                           pageSize:(NSInteger)pageSize 
-                          pageIndex:(NSInteger)pageIndex 
+                           pageSize:(NSInteger)pageSize
+                          pageIndex:(NSInteger)pageIndex
                     andDoneCallback:(processDoneWithDictBlock)callback
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
-    
+
     [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETLIST forKey:K_BSDK_ACTION];
     [params setObject:[NSString stringWithFormat:@"%d", pageIndex] forKey:K_BSDK_PAGEINDEX];
@@ -386,20 +382,20 @@ static BSDKManager *sharedInstance;
     }
 
     [self sendRequestWithMethodName:nil
-                         httpMethod:@"POST" 
-                             params:params 
+                         httpMethod:@"POST"
+                             params:params
                        postDataType:kBSDKRequestPostDataTypeNormal
                    httpHeaderFields:nil
                        doneCallback:callback];
 }
 
 - (void)getWeiboListByUserId:(NSString*)userId
-                      pageSize:(NSInteger)pageSize 
-                     pageIndex:(NSInteger)pageIndex 
+                      pageSize:(NSInteger)pageSize
+                     pageIndex:(NSInteger)pageIndex
                andDoneCallback:(processDoneWithDictBlock)callback
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:6];
-    
+
     [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETLIST forKey:K_BSDK_ACTION];
     [params setObject:[NSString stringWithFormat:@"%d", pageIndex] forKey:K_BSDK_PAGEINDEX];
@@ -410,47 +406,46 @@ static BSDKManager *sharedInstance;
         [params setObject:userId forKey:K_BSDK_USERID];
         [params setObject:K_BSDK_RESPONSE_STATUS_OK forKey:K_BSDK_SHOWFORWARD];
     }
-    
+
     [self sendRequestWithMethodName:nil
-                         httpMethod:@"POST" 
-                             params:params 
+                         httpMethod:@"POST"
+                             params:params
                        postDataType:kBSDKRequestPostDataTypeNormal
                    httpHeaderFields:nil
                        doneCallback:callback];
-    
+
 }
 
 - (void)getFavWeiboListByUserId:(NSString*)userId
-                      pageSize:(NSInteger)pageSize 
-                     pageIndex:(NSInteger)pageIndex 
+                      pageSize:(NSInteger)pageSize
+                     pageIndex:(NSInteger)pageIndex
                andDoneCallback:(processDoneWithDictBlock)callback
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:5];
-    
+
     [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETLIST forKey:K_BSDK_ACTION];
     [params setObject:[NSString stringWithFormat:@"%d", pageIndex] forKey:K_BSDK_PAGEINDEX];
     [params setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:K_BSDK_PAGESIZE];
-    
+
     [params setObject:userId forKey:K_BSDK_FAVUSERID];
-    
-    
+
     [self sendRequestWithMethodName:nil
-                         httpMethod:@"POST" 
-                             params:params 
+                         httpMethod:@"POST"
+                             params:params
                        postDataType:kBSDKRequestPostDataTypeNormal
                    httpHeaderFields:nil
                        doneCallback:callback];
-    
+
 }
 
 - (void)getAtWeiboListByUserId:(NSString*)userId
-                      pageSize:(NSInteger)pageSize 
-                     pageIndex:(NSInteger)pageIndex 
+                      pageSize:(NSInteger)pageSize
+                     pageIndex:(NSInteger)pageIndex
                andDoneCallback:(processDoneWithDictBlock)callback
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:6];
-    
+
     [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETLIST forKey:K_BSDK_ACTION];
     [params setObject:[NSString stringWithFormat:@"%d", pageIndex] forKey:K_BSDK_PAGEINDEX];
@@ -458,62 +453,61 @@ static BSDKManager *sharedInstance;
 
     [params setObject:userId forKey:K_BSDK_ATUSERID];
     [params setObject:K_BSDK_RESPONSE_STATUS_OK forKey:K_BSDK_SHOWFORWARD];
-    
-    
+
     [self sendRequestWithMethodName:nil
-                         httpMethod:@"POST" 
-                             params:params 
+                         httpMethod:@"POST"
+                             params:params
                        postDataType:kBSDKRequestPostDataTypeNormal
                    httpHeaderFields:nil
                        doneCallback:callback];
-    
+
 }
 
 - (void)searchWeiboByKeyword:(NSString*)key
-                    pageSize:(NSInteger)pageSize 
-                   pageIndex:(NSInteger)pageIndex 
+                    pageSize:(NSInteger)pageSize
+                   pageIndex:(NSInteger)pageIndex
              andDoneCallback:(processDoneWithDictBlock)callback
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:5];
-    
+
     [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETLIST forKey:K_BSDK_ACTION];
     [params setObject:key forKey:K_BSDK_KEYWORDS];
     [params setObject:[NSString stringWithFormat:@"%d", pageIndex] forKey:K_BSDK_PAGEINDEX];
     [params setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:K_BSDK_PAGESIZE];
-    
+
     [self sendRequestWithMethodName:nil
-                         httpMethod:@"POST" 
-                             params:params 
+                         httpMethod:@"POST"
+                             params:params
                        postDataType:kBSDKRequestPostDataTypeNormal
                    httpHeaderFields:nil
                        doneCallback:callback];
 }
 
 - (void)getWeiboListByClassId:(NSString*)classId
-                      pageSize:(NSInteger)pageSize 
-                     pageIndex:(NSInteger)pageIndex 
+                      pageSize:(NSInteger)pageSize
+                     pageIndex:(NSInteger)pageIndex
                andDoneCallback:(processDoneWithDictBlock)callback
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:5];
-    
+
     [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETLIST forKey:K_BSDK_ACTION];
     [params setObject:[NSString stringWithFormat:@"%d", pageIndex] forKey:K_BSDK_PAGEINDEX];
     [params setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:K_BSDK_PAGESIZE];
     [params setObject:classId forKey:K_BSDK_CLASSID];
-    
+
     [self sendRequestWithMethodName:nil
-                         httpMethod:@"POST" 
-                             params:params 
+                         httpMethod:@"POST"
+                             params:params
                        postDataType:kBSDKRequestPostDataTypeNormal
                    httpHeaderFields:nil
                        doneCallback:callback];
-    
+
 }
 
-- (void)sendWeiboWithText:(NSString *)text 
-                    image:(UIImage *)image 
+- (void)sendWeiboWithText:(NSString *)text
+                    image:(UIImage *)image
                      shop:(NSString*)shop
                     brand:(NSString*)branch
                     price:(NSInteger)price
@@ -523,10 +517,10 @@ static BSDKManager *sharedInstance;
              doneCallback:(processDoneWithDictBlock)callback
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
-    
+
     [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_ADD forKey:K_BSDK_ACTION];
-    
+
     [params setObject:text forKey:K_BSDK_CONTENT];
     [params setObject:shop forKey:K_BSDK_SHOPMERCHANT];
     [params setObject:branch forKey:K_BSDK_BRANDSERVICE];
@@ -537,23 +531,23 @@ static BSDKManager *sharedInstance;
 
     [params setObject:[NSNumber numberWithFloat:latitude] forKey:K_BSDK_LATITUDE];
     [params setObject:[NSNumber numberWithFloat:longitude] forKey:K_BSDK_LONGITUDE];
-    
+
     if (image)
     {
 		[params setObject:image forKey:K_BSDK_PICTURE];
-        
-        [self sendRequestWithMethodName:@"statuses/upload.json" 
-                             httpMethod:@"POST" 
-                                 params:params 
+
+        [self sendRequestWithMethodName:@"statuses/upload.json"
+                             httpMethod:@"POST"
+                                 params:params
                            postDataType:kBSDKRequestPostDataTypeMultipart
                        httpHeaderFields:nil
                            doneCallback:callback];
     }
     else
     {
-        [self sendRequestWithMethodName:@"statuses/update.json" 
-                             httpMethod:@"POST" 
-                                 params:params 
+        [self sendRequestWithMethodName:@"statuses/update.json"
+                             httpMethod:@"POST"
+                                 params:params
                            postDataType:kBSDKRequestPostDataTypeNormal
                        httpHeaderFields:nil
                            doneCallback:callback];
@@ -565,51 +559,51 @@ static BSDKManager *sharedInstance;
             andDoneCallback:(processDoneWithDictBlock)callback
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
-    
+
     [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_ADD forKey:K_BSDK_ACTION];
-    
+
     [params setObject:content forKey:K_BSDK_CONTENT];
     [params setObject:blogId forKey:K_BSDK_FORWARDBLOGUID];
-    
+
     [self sendRequestWithMethodName:nil
-                         httpMethod:@"POST" 
-                             params:params 
+                         httpMethod:@"POST"
+                             params:params
                        postDataType:kBSDKRequestPostDataTypeNormal
                    httpHeaderFields:nil
                        doneCallback:callback];
-    
+
 }
 
 - (void)getWeiboById:(NSString*)classId
      andDoneCallback:(processDoneWithDictBlock)callback
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
-    
+
     [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETINFO forKey:K_BSDK_ACTION];
-    
+
     [params setObject:classId forKey:K_BSDK_BLOGUID];
-    
+
     [self sendRequestWithMethodName:nil
-                         httpMethod:@"POST" 
-                             params:params 
+                         httpMethod:@"POST"
+                             params:params
                        postDataType:kBSDKRequestPostDataTypeNormal
                    httpHeaderFields:nil
                        doneCallback:callback];
-    
+
 }
 
 - (void)deleteWeibo:(NSString *)weiboId
     andDoneCallback:(processDoneWithDictBlock)callback
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
-    
+
     [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_DELETE forKey:K_BSDK_ACTION];
-    
+
     [params setObject:weiboId forKey:K_BSDK_BLOGUID];
-    
+
     [self sendRequestWithMethodName:nil
                          httpMethod:@"POST"
                              params:params
@@ -623,14 +617,14 @@ static BSDKManager *sharedInstance;
    andDoneCallback:(processDoneWithDictBlock)callback
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
-    
+
     [params setObject:K_BSDK_CATEGORY_SNS forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_FOLLOW forKey:K_BSDK_ACTION];
     [params setObject:[NSString stringWithFormat:@"%d", userId] forKey:K_BSDK_USERID];
-    
+
     [self sendRequestWithMethodName:nil
-                         httpMethod:@"POST" 
-                             params:params 
+                         httpMethod:@"POST"
+                             params:params
                        postDataType:kBSDKRequestPostDataTypeNormal
                    httpHeaderFields:nil
                        doneCallback:callback];
@@ -641,20 +635,20 @@ static BSDKManager *sharedInstance;
      andDoneCallback:(processDoneWithDictBlock)callback
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
-    
+
     [params setObject:K_BSDK_CATEGORY_SNS forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_UNFOLLOW forKey:K_BSDK_ACTION];
     [params setObject:[NSString stringWithFormat:@"%d", userId] forKey:K_BSDK_USERID];
-    
+
     [self sendRequestWithMethodName:nil
-                         httpMethod:@"POST" 
-                             params:params 
+                         httpMethod:@"POST"
+                             params:params
                        postDataType:kBSDKRequestPostDataTypeNormal
                    httpHeaderFields:nil
                        doneCallback:callback];
 }
 
-- (void)modifyUser:(NSString*)userId 
+- (void)modifyUser:(NSString*)userId
               name:(NSString*)name
             gender:(NSString*)gender
              email:(NSString*)email
@@ -665,18 +659,18 @@ static BSDKManager *sharedInstance;
             avatar:(UIImage*)avatar
    andDoneCallback:(processDoneWithDictBlock)doneBlock
 {
-    
+
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
-    
+
     [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_MODIFY forKey:K_BSDK_ACTION];
 
     [params setObject:userId forKey:K_BSDK_MODIFYUSERID];
-    
+
     if (name) {
         [params setObject:name forKey:K_BSDK_USERNAME];
     }
-    
+
     if (email) {
         [params setObject:email forKey:K_BSDK_EMAIL];
     }
@@ -684,7 +678,7 @@ static BSDKManager *sharedInstance;
     if (city) {
         [params setObject:city forKey:K_BSDK_CITY];
     }
-    
+
     if (tel) {
         [params setObject:tel forKey:K_BSDK_TEL];
     }
@@ -692,12 +686,12 @@ static BSDKManager *sharedInstance;
     if (address) {
         [params setObject:address forKey:K_BSDK_ADDRESS];
     }
-    
+
     if (gender)
     {
         [params setObject:gender forKey:K_BSDK_GENDER];
     }
-    
+
     if (description)
     {
         [params setObject:description forKey:K_BSDK_INTRO];
@@ -706,19 +700,19 @@ static BSDKManager *sharedInstance;
     if (avatar)
     {
 		[params setObject:avatar forKey:K_BSDK_PICTURE];
-        
-        [self sendRequestWithMethodName:@"statuses/upload.json" 
-                             httpMethod:@"POST" 
-                                 params:params 
+
+        [self sendRequestWithMethodName:@"statuses/upload.json"
+                             httpMethod:@"POST"
+                                 params:params
                            postDataType:kBSDKRequestPostDataTypeMultipart
                        httpHeaderFields:nil
                            doneCallback:doneBlock];
     }
     else
     {
-        [self sendRequestWithMethodName:@"statuses/update.json" 
-                             httpMethod:@"POST" 
-                                 params:params 
+        [self sendRequestWithMethodName:@"statuses/update.json"
+                             httpMethod:@"POST"
+                                 params:params
                            postDataType:kBSDKRequestPostDataTypeNormal
                        httpHeaderFields:nil
                            doneCallback:doneBlock];
@@ -727,23 +721,23 @@ static BSDKManager *sharedInstance;
 
 - (void)getHotUsersByCity:(NSString*)city
                  userType:(NSString*)type
-                 pageSize:(NSInteger)pageSize 
-                pageIndex:(NSInteger)pageIndex 
+                 pageSize:(NSInteger)pageSize
+                pageIndex:(NSInteger)pageIndex
           andDoneCallback:(processDoneWithDictBlock)doneBlock
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:6];
-    
+
     [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETLIST forKey:K_BSDK_ACTION];
     [params setObject:[NSString stringWithFormat:@"%d", pageIndex] forKey:K_BSDK_PAGEINDEX];
     [params setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:K_BSDK_PAGESIZE];
-    
+
     [params setObject:city forKey:K_BSDK_CITY];
     [params setObject:type forKey:K_BSDK_USERTYPE];
-    
+
     [self sendRequestWithMethodName:nil
-                         httpMethod:@"POST" 
-                             params:params 
+                         httpMethod:@"POST"
+                             params:params
                        postDataType:kBSDKRequestPostDataTypeNormal
                    httpHeaderFields:nil
                        doneCallback:doneBlock];
@@ -754,14 +748,14 @@ static BSDKManager *sharedInstance;
              andDoneCallback:(processDoneWithDictBlock)callback
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
-    
+
     [params setObject:K_BSDK_CATEGORY_SNS forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_ADDFAV forKey:K_BSDK_ACTION];
     [params setObject:blogId forKey:K_BSDK_BLOGUID];
-    
+
     [self sendRequestWithMethodName:nil
-                         httpMethod:@"POST" 
-                             params:params 
+                         httpMethod:@"POST"
+                             params:params
                        postDataType:kBSDKRequestPostDataTypeNormal
                    httpHeaderFields:nil
                        doneCallback:callback];
@@ -771,14 +765,14 @@ static BSDKManager *sharedInstance;
              andDoneCallback:(processDoneWithDictBlock)callback
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
-    
+
     [params setObject:K_BSDK_CATEGORY_SNS forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_REMOVEFAV forKey:K_BSDK_ACTION];
     [params setObject:blogId forKey:K_BSDK_BLOGUID];
-    
+
     [self sendRequestWithMethodName:nil
-                         httpMethod:@"POST" 
-                             params:params 
+                         httpMethod:@"POST"
+                             params:params
                        postDataType:kBSDKRequestPostDataTypeNormal
                    httpHeaderFields:nil
                        doneCallback:callback];
@@ -790,7 +784,7 @@ static BSDKManager *sharedInstance;
     andDoneCallback:(processDoneWithDictBlock)callback
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
-    
+
     [params setObject:K_BSDK_CATEGORY_SNS forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_SENDCOMMENT forKey:K_BSDK_ACTION];
     [params setObject:comment forKey:K_BSDK_CONTENT];
@@ -800,29 +794,29 @@ static BSDKManager *sharedInstance;
         [params setObject:commentId forKey:K_BSDK_COMMENTUID];
     }
     [self sendRequestWithMethodName:nil
-                         httpMethod:@"POST" 
-                             params:params 
+                         httpMethod:@"POST"
+                             params:params
                        postDataType:kBSDKRequestPostDataTypeNormal
                    httpHeaderFields:nil
                        doneCallback:callback];
 }
 
 - (void)getCommentListOfWeibo:(NSString*)blogId
-                     pageSize:(NSInteger)pageSize 
-                    pageIndex:(NSInteger)pageIndex 
+                     pageSize:(NSInteger)pageSize
+                    pageIndex:(NSInteger)pageIndex
               andDoneCallback:(processDoneWithDictBlock)callback
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
-    
+
     [params setObject:K_BSDK_CATEGORY_SNS forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETCOMMENTLIST forKey:K_BSDK_ACTION];
     [params setObject:[NSString stringWithFormat:@"%d", pageIndex] forKey:K_BSDK_PAGEINDEX];
     [params setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:K_BSDK_PAGESIZE];
     [params setObject:blogId forKey:K_BSDK_BLOGUID];
-    
+
     [self sendRequestWithMethodName:nil
-                         httpMethod:@"POST" 
-                             params:params 
+                         httpMethod:@"POST"
+                             params:params
                        postDataType:kBSDKRequestPostDataTypeNormal
                    httpHeaderFields:nil
                        doneCallback:callback];
@@ -830,40 +824,40 @@ static BSDKManager *sharedInstance;
 }
 
 - (void)getCommentListOfUser:(NSString*)userId
-                     pageSize:(NSInteger)pageSize 
-                    pageIndex:(NSInteger)pageIndex 
+                     pageSize:(NSInteger)pageSize
+                    pageIndex:(NSInteger)pageIndex
               andDoneCallback:(processDoneWithDictBlock)callback
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:6];
-    
+
     [params setObject:K_BSDK_CATEGORY_SNS forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETCOMMENTLIST forKey:K_BSDK_ACTION];
     [params setObject:[NSString stringWithFormat:@"%d", pageIndex] forKey:K_BSDK_PAGEINDEX];
     [params setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:K_BSDK_PAGESIZE];
     [params setObject:userId forKey:K_BSDK_USERID];
     [params setObject:K_BSDK_RESPONSE_STATUS_OK forKey:K_BSDK_SHOWFORWARD];
-    
+
     [self sendRequestWithMethodName:nil
-                         httpMethod:@"POST" 
-                             params:params 
+                         httpMethod:@"POST"
+                             params:params
                        postDataType:kBSDKRequestPostDataTypeNormal
                    httpHeaderFields:nil
                        doneCallback:callback];
-    
+
 }
 
 - (void)removeFan:(NSString*)userId
   andDoneCallback:(processDoneWithDictBlock)callback
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
-    
+
     [params setObject:K_BSDK_CATEGORY_SNS forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_REMOVEFANS forKey:K_BSDK_ACTION];
     [params setObject:userId forKey:K_BSDK_FANSUSERID];
-    
+
     [self sendRequestWithMethodName:nil
-                         httpMethod:@"POST" 
-                             params:params 
+                         httpMethod:@"POST"
+                             params:params
                        postDataType:kBSDKRequestPostDataTypeNormal
                    httpHeaderFields:nil
                        doneCallback:callback];
@@ -873,47 +867,47 @@ static BSDKManager *sharedInstance;
 #pragma mark Social related API
 
 - (void)getFollowList:(NSString*)userId
-             pageSize:(NSInteger)pageSize 
-            pageIndex:(NSInteger)pageIndex 
+             pageSize:(NSInteger)pageSize
+            pageIndex:(NSInteger)pageIndex
       andDoneCallback:(processDoneWithDictBlock)callback;
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
-    
+
     [params setObject:K_BSDK_CATEGORY_SNS forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETFOLLOWLIST forKey:K_BSDK_ACTION];
     [params setObject:[NSString stringWithFormat:@"%d", pageIndex] forKey:K_BSDK_PAGEINDEX];
     [params setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:K_BSDK_PAGESIZE];
     [params setObject:userId forKey:K_BSDK_USERID];
-    
+
     [self sendRequestWithMethodName:nil
-                         httpMethod:@"POST" 
-                             params:params 
+                         httpMethod:@"POST"
+                             params:params
                        postDataType:kBSDKRequestPostDataTypeNormal
                    httpHeaderFields:nil
                        doneCallback:callback];
-    
+
 }
 
 - (void)getFollowerList:(NSInteger)userId
-               pageSize:(NSInteger)pageSize 
-              pageIndex:(NSInteger)pageIndex 
+               pageSize:(NSInteger)pageSize
+              pageIndex:(NSInteger)pageIndex
         andDoneCallback:(processDoneWithDictBlock)callback
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
-    
+
     [params setObject:K_BSDK_CATEGORY_SNS forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETFANLIST forKey:K_BSDK_ACTION];
     [params setObject:[NSString stringWithFormat:@"%d", pageIndex] forKey:K_BSDK_PAGEINDEX];
     [params setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:K_BSDK_PAGESIZE];
     [params setObject:[NSString stringWithFormat:@"%d", userId] forKey:K_BSDK_USERID];
-    
+
     [self sendRequestWithMethodName:nil
-                         httpMethod:@"POST" 
-                             params:params 
+                         httpMethod:@"POST"
+                             params:params
                        postDataType:kBSDKRequestPostDataTypeNormal
                    httpHeaderFields:nil
                        doneCallback:callback];
-    
+
 }
 
 - (void)getAdsByCity:(NSString*)city
@@ -921,7 +915,7 @@ static BSDKManager *sharedInstance;
      andDoneCallback:(processDoneWithDictBlock)callback
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
-    
+
     [params setObject:K_BSDK_CATEGORY_AD forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETADDS forKey:K_BSDK_ACTION];
     [params setObject:[NSString stringWithFormat:@"%d", type] forKey:K_BSDK_ADSTYPE];
@@ -940,10 +934,10 @@ static BSDKManager *sharedInstance;
 - (void)getHelpAndCallback:(processDoneWithDictBlock)callback
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:2];
-    
+
     [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETHELP forKey:K_BSDK_ACTION];
-    
+
     [self sendRequestWithMethodName:nil
                          httpMethod:@"POST"
                              params:params
@@ -955,10 +949,10 @@ static BSDKManager *sharedInstance;
 - (void)geAgreementAndCallback:(processDoneWithDictBlock)callback
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:2];
-    
+
     [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETAGREEMENT forKey:K_BSDK_ACTION];
-    
+
     [self sendRequestWithMethodName:nil
                          httpMethod:@"POST"
                              params:params
@@ -972,12 +966,12 @@ static BSDKManager *sharedInstance;
                    andCallBack:(processDoneWithDictBlock)callback
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
-    
+
     [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_FORGET_PASSWORD forKey:K_BSDK_ACTION];
     [params setObject:userName forKey:K_BSDK_USERNAME];
     [params setObject:email forKey:K_BSDK_EMAIL];
-    
+
     [self sendRequestWithMethodName:nil
                          httpMethod:@"POST"
                              params:params
@@ -996,34 +990,34 @@ static BSDKManager *sharedInstance;
     if (self.isLogin) {
         NSDictionary * data = [NSDictionary dictionaryWithObjectsAndKeys:@"已经登陆！",K_BSDK_RESPONSE_MESSAGE, nil];
         callback(AIO_STATUS_BAD_STATE, data);
-        
+
         return;
     }
-    
+
     processDoneWithDictBlock loginCallbackShim = ^(AIO_STATUS status, NSDictionary * data)
     {
         if ((status == AIO_STATUS_SUCCESS) && K_BSDK_IS_RESPONSE_OK(data))
         {
             self.isAlreadyLogin = YES;
         }
-        
+
         callback(status, data);
     };
-    
+
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:7];
-    
+
     [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_SINAUSERLOGIN forKey:K_BSDK_ACTION];
-    
+
     [params setObject:userId forKey:K_BSDK_SINA_USER_ID];
     [params setObject:userName forKey:K_BSDK_SINA_USER_NAME];
     [params setObject:sex forKey:K_BSDK_SINA_SEX];
     [params setObject:city forKey:K_BSDK_SINA_CITY];
 //    [params setObject:email forKey:K_BSDK_SINA_EMAIL];
-    
+
     [self sendRequestWithMethodName:nil
-                         httpMethod:@"POST" 
-                             params:params 
+                         httpMethod:@"POST"
+                             params:params
                        postDataType:kBSDKRequestPostDataTypeNormal
                    httpHeaderFields:nil
                        doneCallback:loginCallbackShim];
@@ -1035,14 +1029,14 @@ static BSDKManager *sharedInstance;
             andCallBack:(processDoneWithDictBlock)callback
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
-    
+
     [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_ADDNOTENAME forKey:K_BSDK_ACTION];
     NSDictionary * userDict = [[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
     [params setObject:[userDict valueForKey:K_BSDK_UID] forKey:K_BSDK_USERID];
     [params setObject:noteUserId forKey:K_BSDK_NOTE_USER_ID];
     [params setObject:noteName forKey:K_BSDK_NOTE_NAME];
-    
+
     [self sendRequestWithMethodName:nil
                          httpMethod:@"POST"
                              params:params
@@ -1056,36 +1050,36 @@ static BSDKManager *sharedInstance;
              andDoneCallback:(processDoneWithDictBlock)callback
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
-    
+
     [params setObject:K_BSDK_CATEGORY_SNS forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_SENDPRIVATEMSG forKey:K_BSDK_ACTION];
     [params setObject:content forKey:K_BSDK_CONTENT];
     [params setObject:userId forKey:K_BSDK_RECEIVEUSERID];
-    
+
     [self sendRequestWithMethodName:nil
-                         httpMethod:@"POST" 
-                             params:params 
+                         httpMethod:@"POST"
+                             params:params
                        postDataType:kBSDKRequestPostDataTypeNormal
                    httpHeaderFields:nil
                        doneCallback:callback];
 }
 
 - (void)getPrivateMsgUserListByType:(K_BSDK_PRIVATEMSG_USER_TYPE)type
-                           pageSize:(NSInteger)pageSize 
-                          pageIndex:(NSInteger)pageIndex 
+                           pageSize:(NSInteger)pageSize
+                          pageIndex:(NSInteger)pageIndex
                     andDoneCallback:(processDoneWithDictBlock)callback
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:5];
-    
+
     [params setObject:K_BSDK_CATEGORY_SNS forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETPRIVATEUSERLIST forKey:K_BSDK_ACTION];
     [params setObject:[NSString stringWithFormat:@"%d", pageIndex] forKey:K_BSDK_PAGEINDEX];
     [params setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:K_BSDK_PAGESIZE];
     [params setObject:[NSString stringWithFormat:@"%d", type] forKey:K_BSDK_USERTYPE];
-    
+
     [self sendRequestWithMethodName:nil
-                         httpMethod:@"POST" 
-                             params:params 
+                         httpMethod:@"POST"
+                             params:params
                        postDataType:kBSDKRequestPostDataTypeNormal
                    httpHeaderFields:nil
                        doneCallback:callback];
@@ -1094,22 +1088,22 @@ static BSDKManager *sharedInstance;
 
 - (void)getPrivateMsgListOfUser:(NSString*)userId
                            type:(K_BSDK_PRIVATEMSG_MSG_TYPE)type
-                       pageSize:(NSInteger)pageSize 
-                      pageIndex:(NSInteger)pageIndex 
+                       pageSize:(NSInteger)pageSize
+                      pageIndex:(NSInteger)pageIndex
                 andDoneCallback:(processDoneWithDictBlock)callback
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:5];
-    
+
     [params setObject:K_BSDK_CATEGORY_SNS forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETPRIVATEMSGLIST forKey:K_BSDK_ACTION];
     [params setObject:[NSString stringWithFormat:@"%d", pageIndex] forKey:K_BSDK_PAGEINDEX];
     [params setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:K_BSDK_PAGESIZE];
     [params setObject:userId forKey:K_BSDK_RELATEDUSERID];
     [params setObject:[NSString stringWithFormat:@"%d", type] forKey:K_BSDK_MSGTYPE];
-    
+
     [self sendRequestWithMethodName:nil
-                         httpMethod:@"POST" 
-                             params:params 
+                         httpMethod:@"POST"
+                             params:params
                        postDataType:kBSDKRequestPostDataTypeNormal
                    httpHeaderFields:nil
                        doneCallback:callback];
@@ -1117,13 +1111,13 @@ static BSDKManager *sharedInstance;
 
 - (void)sendDeviceToken:(NSString *)deviceToken
         andDoneCallback:(processDoneWithDictBlock)callback {
-    
+
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
-    
+
     [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_BINDDEVICETOKEN forKey:K_BSDK_ACTION];
     [params setObject:deviceToken forKey:K_BSDK_DEVICETOKEN];
-    
+
     [self sendRequestWithMethodName:nil
                          httpMethod:@"POST"
                              params:params

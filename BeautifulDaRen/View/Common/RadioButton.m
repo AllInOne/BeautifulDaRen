@@ -34,7 +34,7 @@ static NSMutableDictionary *rb_observers=nil;
     if(!rb_observers){
         rb_observers = [[NSMutableDictionary alloc] init];
     }
-    
+
     if ([groupId length] > 0 && observer) {
         [rb_observers setObject:observer forKey:groupId];
         // Make it weak reference
@@ -48,7 +48,7 @@ static NSMutableDictionary *rb_observers=nil;
     if(!rb_instances){
         rb_instances = [[NSMutableArray alloc] init];
     }
-    
+
     [rb_instances addObject:radioButton];
     // Make it weak reference
     [radioButton release];
@@ -57,16 +57,16 @@ static NSMutableDictionary *rb_observers=nil;
 #pragma mark - Class level handler
 
 +(void)buttonSelected:(RadioButton*)radioButton{
-    
+
     // Notify observers
     if (rb_observers) {
         id observer= [rb_observers objectForKey:radioButton.groupId];
-        
+
         if(observer && [observer respondsToSelector:@selector(radioButtonSelectedAtIndex:inGroup:)]){
             [observer radioButtonSelectedAtIndex:radioButton.index inGroup:radioButton.groupId];
         }
     }
-    
+
     // Unselect the other radio buttons
     if (rb_instances) {
         for (int i = 0; i < [rb_instances count]; i++) {
@@ -105,7 +105,6 @@ static NSMutableDictionary *rb_observers=nil;
     [super dealloc];
 }
 
-
 #pragma mark - Tap handling
 
 -(void)handleButtonTap:(id)sender{
@@ -116,7 +115,7 @@ static NSMutableDictionary *rb_observers=nil;
 -(void)otherButtonSelected:(id)sender{
     // Called when other radio button instance got selected
     if(self.button.selected){
-        [self.button setSelected:NO];        
+        [self.button setSelected:NO];
     }
 }
 
@@ -125,24 +124,23 @@ static NSMutableDictionary *rb_observers=nil;
 -(void)defaultInit{
     // Setup container view
     self.frame = CGRectMake(0, 0, kWidth, kRadioButtonHeight);
-    
+
     // Customize UIButton
     self.button = [UIButton buttonWithType:UIButtonTypeCustom];
     self.button.frame = CGRectMake(0, 0,kRadioButtonWidth, kRadioButtonHeight);
-    self.button.adjustsImageWhenHighlighted = NO; 
-    
+    self.button.adjustsImageWhenHighlighted = NO;
+
     [self.button setImage:[UIImage imageNamed:@"radio_btn_unselected"] forState:UIControlStateNormal];
     [self.button setImage:[UIImage imageNamed:@"radio_btn_selected"] forState:UIControlStateSelected];
-    
+
     [self.button addTarget:self action:@selector(handleButtonTap:) forControlEvents:UIControlEventTouchUpInside];
-    
+
     _textLabel = [[UILabel alloc] initWithFrame:CGRectMake(kRadioButtonWidth + 5, 0, kWidth - kRadioButtonWidth - 5, kRadioButtonHeight)];
     self.textLabel.textColor = [UIColor darkGrayColor];
     [self addSubview:self.button];
     [self addSubview:self.textLabel];
-    
+
     [RadioButton registerInstance:self];
 }
-
 
 @end

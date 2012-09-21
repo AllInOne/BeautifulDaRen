@@ -26,7 +26,7 @@
 @synthesize engine = _engine;
 @synthesize methodUrl = _methodUrl;
 @synthesize httpMethod = _httpMethod;
-@synthesize params = _params; 
+@synthesize params = _params;
 @synthesize postDataType = _postDataType;
 @synthesize httpHeaderFields = _httpHeaderFields;
 @synthesize doneCallback = _doneCallback;
@@ -41,7 +41,7 @@
         doneCallback:(processDoneWithDictBlock)callback
 {
     self = [super init];
-    
+
     if (self)
     {
         self.methodUrl = methodName;
@@ -51,10 +51,10 @@
         self.httpHeaderFields = httpHeaderFields;
         self.doneCallback = Block_copy(callback);
         self.engine = engine;
-        
+
         [self retain];
     }
-    
+
     return self;
 }
 
@@ -80,7 +80,7 @@
                                           postDataType:self.postDataType
                                       httpHeaderFields:self.httpHeaderFields
                                               delegate:self];
-    
+
     [_request connect];
 //    [self.engine loadRequestWithMethodName:self.methodUrl
 //                                        httpMethod:self.httpMethod
@@ -102,13 +102,13 @@
     {
         dict = (NSDictionary *)result;
     }
-    
+
     NSLog(@"========================================================");
     NSLog(@"\r\n \r\n BSDK RESPONSE: %@\r\n \r\n", dict);
     NSLog(@"========================================================");
-    
+
     self.doneCallback(AIO_STATUS_SUCCESS, dict);
-    
+
     [self release];
 }
 
@@ -116,12 +116,11 @@
 {
     NSLog(@"requestDidFailWithError: %@", error);
     NSDictionary * errorDict = [NSDictionary dictionaryWithObjectsAndKeys:[error localizedDescription], K_BSDK_RESPONSE_MESSAGE, K_BSDK_RESPONSE_STATUS_FAILED, K_BSDK_RESPONSE_STATUS, nil];
-    
+
 //    [self doNotifyProcessStatus:error.code andData:errorDict];
     self.doneCallback(error.code, errorDict);
-    
+
     [self release];
 }
-
 
 @end

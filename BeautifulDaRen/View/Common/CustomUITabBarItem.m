@@ -8,14 +8,14 @@
 
 #import "CustomUITabBarItem.h"
 
-@implementation CustomUITabBarItem  
+@implementation CustomUITabBarItem
 
-@synthesize customHighlightedImage;  
-@synthesize customNormalImage;  
+@synthesize customHighlightedImage;
+@synthesize customNormalImage;
 
-- (id)initWithTitle:(NSString *)title 
-        normalImage:(UIImage *)normalImage 
-   highlightedImage:(UIImage *)highlightedImage 
+- (id)initWithTitle:(NSString *)title
+        normalImage:(UIImage *)normalImage
+   highlightedImage:(UIImage *)highlightedImage
                 tag:(NSInteger)tag{
     self = [super init];
     if (self) {
@@ -29,23 +29,23 @@
     return self;
 }
 
-- (void) dealloc  
-{  
+- (void) dealloc
+{
     [customHighlightedImage release];
-    customHighlightedImage=nil;  
-    [customNormalImage release]; 
-    customNormalImage=nil;  
-    [super dealloc];  
-}  
-
--(UIImage *) selectedImage  
-{  
-    return self.customHighlightedImage;  
+    customHighlightedImage=nil;
+    [customNormalImage release];
+    customNormalImage=nil;
+    [super dealloc];
 }
 
--(UIImage *) unselectedImage  
-{  
-    return self.customNormalImage;  
-}  
+-(UIImage *) selectedImage
+{
+    return self.customHighlightedImage;
+}
+
+-(UIImage *) unselectedImage
+{
+    return self.customNormalImage;
+}
 
 @end

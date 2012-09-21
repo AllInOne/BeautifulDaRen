@@ -7,15 +7,14 @@
 
 @interface WaterFlowView()
 
-@property (assign, nonatomic) NSInteger numberOfColumns ; 
+@property (assign, nonatomic) NSInteger numberOfColumns ;
 @property (assign, nonatomic) NSInteger currentPage;
 
 @property (nonatomic, retain) NSMutableDictionary *reusableCells;
 @property (nonatomic, retain) NSMutableArray *cellIndex;
 @property (nonatomic, retain) NSMutableArray *visibleCells;
-@property (retain, nonatomic) NSMutableArray * cellHeight; 
-@property (retain, nonatomic) NSMutableDictionary *reusedCells; 
-
+@property (retain, nonatomic) NSMutableArray * cellHeight;
+@property (retain, nonatomic) NSMutableDictionary *reusedCells;
 
 - (void)initialize;
 - (void)reloadData;
@@ -44,8 +43,8 @@
 		self.showsHorizontalScrollIndicator = NO;
         self.showsVerticalScrollIndicator = NO;
 		self.delegate = self;
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self 
+
+        [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(waterFlowCellSelected:)
                                                      name:@"CellSelected"
                                                    object:nil];
@@ -56,7 +55,7 @@
          UIViewAutoresizingFlexibleTopMargin |
          UIViewAutoresizingFlexibleHeight |
          UIViewAutoresizingFlexibleBottomMargin];
-        
+
         [self initialize];
     }
     return self;
@@ -67,7 +66,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:@"CellSelected"
                                                   object:nil];
-    
+
     self.cellHeight = nil;
     self.visibleCells = nil;
     self.reusedCells = nil;
@@ -121,19 +120,19 @@
     if(!self.reusableCells)
     {
         self.reusableCells = [NSMutableDictionary dictionary];
-        
+
         NSMutableDictionary * dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:cell, [NSNumber numberWithInt:index], nil];
         [self.reusableCells setObject:dictionary forKey:cell.reuseIdentifier];
     }
-    
-    else 
+
+    else
     {
         if (![self.reusableCells objectForKey:cell.reuseIdentifier])
         {
             NSMutableDictionary * dictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:cell, [NSNumber numberWithInt:index], nil];
             [self.reusableCells setObject:dictionary forKey:cell.reuseIdentifier];
         }
-        else 
+        else
         {
             [[self.reusableCells objectForKey:cell.reuseIdentifier] setObject:cell forKey:[NSNumber numberWithInt:index]];
         }
@@ -143,21 +142,21 @@
 #pragma mark-
 #pragma mark- methods
 - (void)initialize
-{    
+{
     _currentPage = 1;
     _numberOfColumns = [self.flowdatasource numberOfColumnsInFlowView:self];
-    
+
     self.reusableCells = [NSMutableDictionary dictionary];
     self.cellHeight = [NSMutableArray arrayWithCapacity:_numberOfColumns];
     self.cellIndex = [NSMutableArray arrayWithCapacity:_numberOfColumns];
     self.visibleCells = [NSMutableArray arrayWithCapacity:_numberOfColumns];
-    
+
     CGFloat scrollHeight = 0.f;
-    
+
     /////
     for (int i = 0; i<_numberOfColumns; i++)
     {
-        [self.visibleCells addObject:[NSMutableArray array]]; 
+        [self.visibleCells addObject:[NSMutableArray array]];
     }
     CGFloat minHeight = 0.f;
     NSInteger minHeightAtColumn = 0;
@@ -194,7 +193,7 @@
     self.bounces = YES;
     self.alwaysBounceVertical = YES;
     self.contentSize = CGSizeMake(self.frame.size.width, scrollHeight + LOADINGVIEW_HEIGHT);
-    
+
     if ([self.cellHeight count] > 0)
     {
         [self pageScroll];
@@ -229,9 +228,9 @@
         }
         float origin_x = i * (self.frame.size.width / _numberOfColumns);
 		float width = self.frame.size.width / _numberOfColumns;
-        
+
         WaterFlowCell *cell = nil;
-        
+
         if ([self.visibleCells objectAtIndex:i] == nil || ((NSArray*)[self.visibleCells objectAtIndex:i]).count == 0) //everytime reloadData is called and no cells in visibleCellArray
         {
             int rowToDisplay = 0;
@@ -248,17 +247,17 @@
             }
 			float origin_y = 0;
 			float height = 0;
-			if(rowToDisplay == 0)  
+			if(rowToDisplay == 0)
 			{
 				origin_y = 0;
 				height = [[[self.cellHeight objectAtIndex:i] objectAtIndex:rowToDisplay] floatValue];
 			}
-			else if(rowToDisplay < [[self.cellHeight objectAtIndex:i] count]) 
+			else if(rowToDisplay < [[self.cellHeight objectAtIndex:i] count])
             {
 				origin_y = [[[self.cellHeight objectAtIndex:i] objectAtIndex:rowToDisplay - 1] floatValue];
 				height  = [[[self.cellHeight objectAtIndex:i] objectAtIndex:rowToDisplay ] floatValue] - origin_y;
 			}
-            
+
 			cell = [_flowdatasource flowView:self cellForRowAtIndex:[[[self.cellIndex objectAtIndex:i]objectAtIndex:rowToDisplay]intValue]];
 			cell.indexPath = [NSIndexPath indexPathForRow: rowToDisplay inSection:i];
 			cell.frame = CGRectMake(origin_x, origin_y, width, height);
@@ -269,16 +268,16 @@
         {
             cell = [[self.visibleCells objectAtIndex:i] objectAtIndex:0];
         }
-        
+
         //base on this cell at rowToDisplay and process the other cells
         //1. add cell above this basic cell if there's margin between basic cell and top
-        while ( cell && ((cell.frame.origin.y - self.contentOffset.y) > 0.0001)) 
+        while ( cell && ((cell.frame.origin.y - self.contentOffset.y) > 0.0001))
         {
             float origin_y = 0;
 			float height = 0;
             int rowToDisplay = cell.indexPath.row;
-            
-            if(rowToDisplay == 0) 
+
+            if(rowToDisplay == 0)
             {
                 cell = nil;
                 break;
@@ -293,66 +292,66 @@
                 origin_y = [[[self.cellHeight objectAtIndex:i] objectAtIndex:rowToDisplay -2] floatValue];
                 height = [[[self.cellHeight objectAtIndex:i] objectAtIndex:rowToDisplay - 1] floatValue] - origin_y;
             }
-            
+
             cell = [self.flowdatasource flowView:self cellForRowAtIndex:[[[self.cellIndex objectAtIndex:i]objectAtIndex:rowToDisplay > 0 ? (rowToDisplay  - 1) : 0]intValue]];
             cell.indexPath = [NSIndexPath indexPathForRow: rowToDisplay > 0 ? (rowToDisplay - 1) : 0 inSection:i];
             cell.frame = CGRectMake(origin_x,origin_y , width, height);
             [[self.visibleCells objectAtIndex:i] insertObject:cell atIndex:0];
-            
+
             [self addSubview:cell];
         }
         //2. remove cell above this basic cell if there's no margin between basic cell and top
-        while (cell &&  ((cell.frame.origin.y + cell.frame.size.height  - self.contentOffset.y) <  0.0001)) 
+        while (cell &&  ((cell.frame.origin.y + cell.frame.size.height  - self.contentOffset.y) <  0.0001))
 		{
 			[cell removeFromSuperview];
 			[[self.visibleCells objectAtIndex:i] removeObject:cell];
-			
+
 			if(((NSMutableArray*)[self.visibleCells objectAtIndex:i]).count > 0)
 			{
 				cell = [[self.visibleCells objectAtIndex:i] objectAtIndex:0];
 			}
-			else 
+			else
             {
 				cell = nil;
 			}
 		}
         //3. add cells below this basic cell if there's margin between basic cell and bottom
         cell = [[self.visibleCells objectAtIndex:i] lastObject];
-        while (cell &&  ((cell.frame.origin.y + cell.frame.size.height - self.frame.size.height - self.contentOffset.y) <  0.0001)) 
+        while (cell &&  ((cell.frame.origin.y + cell.frame.size.height - self.frame.size.height - self.contentOffset.y) <  0.0001))
 		{
             float origin_y = 0;
 			float height = 0;
             int rowToDisplay = cell.indexPath.row;
-            
+
             if(rowToDisplay == [[self.cellHeight objectAtIndex:i] count] - 1)
 			{
 				cell = nil;
 				break;;
 			}
-            else 
+            else
             {
                 origin_y = [[[self.cellHeight objectAtIndex:i] objectAtIndex:rowToDisplay] floatValue];
                 height = [[[self.cellHeight objectAtIndex:i] objectAtIndex:rowToDisplay + 1] floatValue] -  origin_y;
             }
-            
+
             cell = [self.flowdatasource flowView:self cellForRowAtIndex:[[[self.cellIndex objectAtIndex:i]objectAtIndex:rowToDisplay+1]intValue]];
             cell.indexPath = [NSIndexPath indexPathForRow:rowToDisplay + 1 inSection:i];
             cell.frame = CGRectMake(origin_x, origin_y, width, height);
             [[self.visibleCells objectAtIndex:i] addObject:cell];
-            
+
             [self addSubview:cell];
         }
         //4. remove cells below this basic cell if there's no margin between basic cell and bottom
-        while (cell &&  ((cell.frame.origin.y - self.frame.size.height - self.contentOffset.y) > 0.0001)) 
+        while (cell &&  ((cell.frame.origin.y - self.frame.size.height - self.contentOffset.y) > 0.0001))
 		{
 			[cell removeFromSuperview];
 			[[self.visibleCells objectAtIndex:i] removeObject:cell];
-			
+
 			if(((NSMutableArray*)[self.visibleCells objectAtIndex:i]).count > 0)
 			{
 				cell = [[self.visibleCells objectAtIndex:i] lastObject];
 			}
-			else 
+			else
             {
 				cell = nil;
 			}
@@ -381,22 +380,22 @@
 {
     // TODO
 //    float bottomEdge = scrollView.contentOffset.y + scrollView.frame.size.height;
-//    
-//    if (bottomEdge >=  floor(scrollView.contentSize.height) ) 
+//
+//    if (bottomEdge >=  floor(scrollView.contentSize.height) )
 //    {
 ////        if (self.loadingmore) return;
-//        
+//
 //        if (currentPage == MAX_PAGE)
 //        {
 //            NSLog(@"last page!");
 //            //toast view
 //            return;
 //        }
-//        
+//
 //        NSLog(@"load more");
 ////        self.loadingmore = YES;
 ////        self.loadFooterView.showActivityIndicator = YES;
-//        
+//
 //        currentPage ++;
 //        if ([self.flowdelegate respondsToSelector:@selector(flowView:willLoadData:)])
 //        {
@@ -423,7 +422,7 @@
 	{
 		self.reuseIdentifier = reuseIdentifier;
 	}
-	
+
 	return self;
 }
 
@@ -439,7 +438,7 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"CellSelected"
                                                         object:self
                                                       userInfo:[NSDictionary dictionaryWithObjectsAndKeys:self,@"cell",self.indexPath,@"indexPath",nil]];
-    
+
 }
 
 @end

@@ -32,7 +32,7 @@
     }
     return self;
 }
-							
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -44,7 +44,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib. 
+	// Do any additional setup after loading the view, typically from a nib.
     [self refreshView];
     [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClicked) title:NSLocalizedString(@"refresh", @"refresh")]];
     self.observerForLoginStatus = [[NSNotificationCenter defaultCenter]
@@ -111,14 +111,14 @@
         if ([[BSDKManager sharedManager] isLogin]) {
             [self.adsPageView setCity:[ViewHelper getMyCity]];
         }
-        
+
         [self.adsPageView setDelegate:self];
         self.adsPageView.view.frame = CGRectMake(0, 0, ADS_CELL_WIDTH, ADS_CELL_HEIGHT);
         [self.view addSubview:self.adsPageView.view];
     }
-    
+
     [self.adsPageView.view setHidden:NO];
-    
+
     if (self.categoryContentView == nil) {
         _categoryContentView = [[CategoryContentViewController  alloc] initWithNibName:@"CategoryContentViewController" bundle:nil];
         _categoryContentView.view.frame = CGRectMake(0, ADS_CELL_HEIGHT + CONTENT_MARGIN, self.view.frame.size.width, USER_WINDOW_HEIGHT - ADS_CELL_HEIGHT - CONTENT_MARGIN);
@@ -130,12 +130,12 @@
 {
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.3];
-    
+
     [self.adsPageView.view setHidden:YES];
     [self.categoryContentView.view setFrame:CGRectMake(0, 0, CGRectGetWidth(self.categoryContentView.view.frame), USER_WINDOW_HEIGHT)];
-    
+
     [UIView commitAnimations];
-    
+
     [self.adsPageView stop];
     [self.adsPageView.view removeFromSuperview];
     [self setAdsPageView:nil];
@@ -153,7 +153,7 @@
         [self.adsPageView stop];
         [self setAdsPageView:nil];
     }
-    
+
     [self refreshView];
 }
 @end

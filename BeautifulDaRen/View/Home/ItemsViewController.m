@@ -86,14 +86,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     self.pageIndex = 1;
     self.isSyncSccuessed = YES;
     self.isFetchMore = YES;
-    
+
     _itemsHeight = [[NSMutableArray alloc] init];
     [self loadItemsHeight];
-    
+
     self.observerForLoginStatus = [[NSNotificationCenter defaultCenter]
                                    addObserverForName:K_NOTIFICATION_LOGIN_SUCCESS
                                    object:nil
@@ -107,7 +107,7 @@
     _waterFlowView.flowdelegate = self;
     _waterFlowView.flowdatasource = self;
     [self.view addSubview:_waterFlowView];
-    
+
     UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, INDICATOR_HEIGHT, 0.0);
     self.waterFlowView.contentInset = contentInsets;
     self.waterFlowView.scrollIndicatorInsets = contentInsets;
@@ -123,7 +123,7 @@
 
 - (void) viewWillAppear:(BOOL)animated
 {
-    [[NSNotificationCenter defaultCenter] addObserver:self 
+    [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(waterFlowCellSelected:)
                                                  name:@"borderImageViewSelected"
                                                object:nil];
@@ -147,12 +147,12 @@
 - (void)waterFlowCellSelected:(NSNotification *)notification
 {
     BorderImageView * borderImageView = (BorderImageView*)notification.object;
-    WeiboDetailViewController *weiboDetailController = 
+    WeiboDetailViewController *weiboDetailController =
     [[WeiboDetailViewController alloc] initWithDictionary:[self getValidItemDictionaryAtIndex:borderImageView.index]];
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: weiboDetailController];
-    
+
     [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
-    
+
     [navController release];
     [weiboDetailController release];
 }
@@ -177,17 +177,17 @@
 	if(cell == nil)
 	{
 		cell  = [[[WaterFlowCell alloc] initWithReuseIdentifier:cellIdentifier] autorelease];
-        
+
         NSDictionary * dict = [self getValidItemDictionaryAtIndex:index];
         CGFloat picWidth = [[dict valueForKey:K_BSDK_PICTURE_WIDTH] floatValue];
         CGFloat picHeight = [[dict valueForKey:K_BSDK_PICTURE_HEIGHT] floatValue];
         CGFloat frameWidth = (self.view.frame.size.width - 14) / 3;
         CGFloat frameHeight = (frameWidth / picWidth) * picHeight;
-        
+
         UIImageView * imageView = [[UIImageView alloc] init];
         NSString * url = [dict valueForKey:K_BSDK_PICTURE_102];
         [imageView setImageWithURL:[NSURL URLWithString:url]];
-        
+
         BorderImageView * borderImageView = [[BorderImageView alloc] initWithFrame:CGRectMake(2, 2, frameWidth + 2, frameHeight + 2) andView:imageView];
         borderImageView.index = index;
         [cell addSubview:borderImageView];
@@ -224,7 +224,7 @@
 {
     [_itemDatas release];
     _itemDatas = [itemDatas mutableCopy];
-    
+
     [self loadItemsHeight];
     [_waterFlowView reloadData];
 }
@@ -243,20 +243,20 @@
 {
     if (self.isSyncSccuessed && self.isFetchMore)
     {
-        self.isSyncSccuessed = NO;     
+        self.isSyncSccuessed = NO;
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: YES];
-        
+
         CGFloat yPointOfActivityIndicator = self.waterFlowView.contentSize.height;
         if (self.waterFlowView.contentSize.height == 0) {
             yPointOfActivityIndicator = 20;
         }
-        callBackBlock callback = [ViewHelper getIndicatorViewBlockWithFrame:CGRectMake(120, yPointOfActivityIndicator, 200,INDICATOR_HEIGHT) inView:self.waterFlowView];   
+        callBackBlock callback = [ViewHelper getIndicatorViewBlockWithFrame:CGRectMake(120, yPointOfActivityIndicator, 200,INDICATOR_HEIGHT) inView:self.waterFlowView];
         processDoneWithDictBlock block = ^(AIO_STATUS status, NSDictionary *data)
         {
             callback();
             Block_release(callback);
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: NO];
-            
+
             if (AIO_STATUS_SUCCESS == status && K_BSDK_IS_RESPONSE_OK(data))
             {
                 NSArray * array = [data valueForKey:K_BSDK_BLOGLIST];
@@ -273,7 +273,7 @@
                 }
                 [self loadItemsHeight];
                 [_waterFlowView reloadData];
-                
+
                 if (([[data valueForKey:K_BSDK_PAGECOUNT] intValue] ==  self.pageIndex)
                     || ([[data valueForKey:K_BSDK_BLOGLIST] count] == 0))
                 {

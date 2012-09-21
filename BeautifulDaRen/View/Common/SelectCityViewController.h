@@ -12,7 +12,6 @@
 - (void)onCitySelected:(NSString*)city;
 @end
 
-
 @interface SelectCityViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, retain) IBOutlet UITableView * cityListTableView;

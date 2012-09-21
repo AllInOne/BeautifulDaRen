@@ -58,7 +58,6 @@
 @synthesize mypublishButton = _mypublishButton;
 @synthesize observerForNewInfoToMe = _observerForNewInfoToMe;
 
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -85,18 +84,17 @@
     [_topicButton release];
     [_editButton release];
     [_mypublishButton release];
-    
+
     [super dealloc];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     [self.navigationItem setTitle:NSLocalizedString(@"title_mine", @"title_mine")];
     [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onRefreshButtonClick) title:NSLocalizedString(@"refresh", @"refresh")]];
-    
-    
+
     _observerForNewInfoToMe = [[NSNotificationCenter defaultCenter]
                                addObserverForName:K_NOTIFICATION_MINE_NEW_INFO
                                object:nil
@@ -104,7 +102,6 @@
                                usingBlock:^(NSNotification *notification) {
                                    [self.tableView reloadData];
                                }];
-    
 
 }
 
@@ -158,7 +155,7 @@
         if(!cell) {
             cell = [[[NSBundle mainBundle] loadNibNamed:myInfoTopViewIdentifier owner:self options:nil] objectAtIndex:0];
         }
-        
+
         NSDictionary * userDict = [[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
         UIImageView * imageView = [[UIImageView alloc] init];
         NSString * avatarImageUrl = [userDict valueForKey:K_BSDK_PICTURE_65];
@@ -169,8 +166,8 @@
         {
             [imageView setImage:[UIImage imageNamed:[ViewHelper getUserDefaultAvatarImageByData:userDict]]];
         }
-        
-        CGRect borderImageViewFrame = CGRectMake(0,0, 
+
+        CGRect borderImageViewFrame = CGRectMake(0,0,
                                                  ((MyInfoTopViewCell*)cell).avatarImageView.frame.size.width,
                                                  ((MyInfoTopViewCell*)cell).avatarImageView.frame.size.height);
         BorderImageView * borderView = [[BorderImageView alloc]
@@ -206,7 +203,7 @@
 
         ((MyInfoTopViewCell*)cell).editImageView.image = [UIImage imageNamed:@"my_edit"];
         ((MyInfoTopViewCell*)cell).cityLabel.text = [NSString stringWithFormat:@"%@ %@", [userDict valueForKey:KEY_ACCOUNT_CITY], [userDict valueForKey:KEY_ACCOUNT_ADDRESS]];
-        
+
         [((MyInfoTopViewCell*)cell).editButton addTarget:self action:@selector(onEditPressed:) forControlEvents:UIControlEventTouchUpInside];
     }
     else if(section == 1) {
@@ -215,22 +212,22 @@
             cell = [[[NSBundle mainBundle] loadNibNamed:gridViewIndentifier owner:self options:nil] objectAtIndex:1];
         }
         ((GridViewCell*)cell).delegate = self;
-        
+
         NSDictionary * userDict = [[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
         NSMutableAttributedString * attrStr = nil;
-        
+
         attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"follow", @"") detail:[NSString stringWithFormat:@" (%d)", [[userDict valueForKey:KEY_ACCOUNT_FOLLOW_COUNT] intValue]]];
         ((GridViewCell*)cell).firstLabel.attributedText = attrStr;
         ((GridViewCell*)cell).firstLabel.textAlignment = UITextAlignmentCenter;
-        
+
         attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"fans", @"") detail:[NSString stringWithFormat:@" (%d)", [[userDict valueForKey:KEY_ACCOUNT_FANS_COUNT] intValue]]];
         ((GridViewCell*)cell).secondLabel.attributedText = attrStr;
         ((GridViewCell*)cell).secondLabel.textAlignment = UITextAlignmentCenter;
-        
+
         attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"collection", @"") detail:[NSString stringWithFormat:@" (%d)", [[userDict valueForKey:KEY_ACCOUNT_FAVORITE_COUNT] intValue]]];
         ((GridViewCell*)cell).thirdLabel.attributedText = attrStr;
         ((GridViewCell*)cell).thirdLabel.textAlignment = UITextAlignmentCenter;
-        
+
         attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"my_publish", @"") detail:[NSString stringWithFormat:@" (%d)", [[userDict valueForKey:KEY_ACCOUNT_BLOG_COUNT] intValue]]];
         ((GridViewCell*)cell).fourthLabel.attributedText = attrStr;
         ((GridViewCell*)cell).fourthLabel.textAlignment = UITextAlignmentCenter;
@@ -260,8 +257,8 @@
                 CGFloat textWidth = [ViewHelper getWidthOfText:buttonViewCell.buttonText.text ByFontSize:buttonViewCell.buttonText.font.pointSize];
                 UILabel * numberLabel = [[UILabel alloc] initWithFrame:
                                          CGRectMake(buttonViewCell.buttonText.frame.origin.x + textWidth + 10,
-                                                    buttonViewCell.buttonText.frame.origin.y, 
-                                                    50, 
+                                                    buttonViewCell.buttonText.frame.origin.y,
+                                                    50,
                                                     buttonViewCell.buttonText.frame.size.height)];
                 [numberLabel setTextAlignment:UITextAlignmentLeft];
                 [numberLabel setTextColor:[UIColor colorWithRed:(204.0f/255.0f) green:(88.0f/255.0f) blue:(151.0f/255.0f) alpha:1.0f]];
@@ -283,8 +280,8 @@
                 CGFloat textWidth = [ViewHelper getWidthOfText:buttonViewCell.buttonText.text ByFontSize:buttonViewCell.buttonText.font.pointSize];
                 UILabel * numberLabel = [[UILabel alloc] initWithFrame:
                                          CGRectMake(buttonViewCell.buttonText.frame.origin.x + textWidth + 10,
-                                                    buttonViewCell.buttonText.frame.origin.y, 
-                                                    50, 
+                                                    buttonViewCell.buttonText.frame.origin.y,
+                                                    50,
                                                     buttonViewCell.buttonText.frame.size.height)];
                 [numberLabel setTextAlignment:UITextAlignmentLeft];
                 [numberLabel setTextColor:[UIColor colorWithRed:(204.0f/255.0f) green:(88.0f/255.0f) blue:(151.0f/255.0f) alpha:1.0f]];
@@ -306,8 +303,8 @@
                 CGFloat textWidth = [ViewHelper getWidthOfText:buttonViewCell.buttonText.text ByFontSize:buttonViewCell.buttonText.font.pointSize];
                 UILabel * numberLabel = [[UILabel alloc] initWithFrame:
                                          CGRectMake(buttonViewCell.buttonText.frame.origin.x + textWidth + 10,
-                                                    buttonViewCell.buttonText.frame.origin.y, 
-                                                    50, 
+                                                    buttonViewCell.buttonText.frame.origin.y,
+                                                    50,
                                                     buttonViewCell.buttonText.frame.size.height)];
                 [numberLabel setTextAlignment:UITextAlignmentLeft];
                 [numberLabel setTextColor:[UIColor colorWithRed:(204.0f/255.0f) green:(88.0f/255.0f) blue:(151.0f/255.0f) alpha:1.0f]];
@@ -315,7 +312,7 @@
                 [buttonViewCell addSubview:numberLabel];
                 [numberLabel release];
                 buttonViewCell.buttonLeftIcon.image = [UIImage imageNamed:@"my_private_letter"];
-                
+
                 NSNumber * privateMessageNumber = [[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_PRIVATE_MESSAGE_NOTIFICATION_COUNT];
                 if (privateMessageNumber.intValue > 0) {
                     buttonViewCell.badgeView.image = [UIImage imageNamed:@"badge"];
@@ -396,14 +393,14 @@
                                                                     bundle:nil
                                                                     type:WeiboListViewControllerType_FORWARD_ME
                                                                     dictionary:nil];
-                
+
                 UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: forwadMeViewController];
-                
+
                 [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
-                
+
                 [navController release];
                 [forwadMeViewController release];
-                
+
                 [self refreshBadges:USERDEFAULT_AT_ME_NOTIFICATION_COUNT];
                 break;
             }
@@ -414,14 +411,13 @@
                                                                      bundle:nil
                                                                      type:WeiboListViewControllerType_COMMENT_ME
                                                                      dictionary:nil];
-                
+
                 UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: commentMeViewController];
-                
+
                 [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
                 [navController release];
                 [commentMeViewController release];
-               
-                
+
                 [self refreshBadges:USERDEFAULT_COMMENT_ME_NOTIFICATION_COUNT];
                 break;
             }
@@ -430,14 +426,14 @@
                 PrivateLetterViewController * privateLetterViewController = [[PrivateLetterViewController alloc]
                                                                     initWithNibName:nil
                                                                     bundle:nil];
-                
+
                 UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: privateLetterViewController];
-                
+
                 [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
-                
+
                 [navController release];
                 [privateLetterViewController release];
-                
+
                 [self refreshBadges:USERDEFAULT_PRIVATE_MESSAGE_NOTIFICATION_COUNT];
                 break;
             }
@@ -461,10 +457,10 @@
                                                           forKey:USERDEFAULT_FOLLOW_ME_NOTIFICATION_COUNT];
                 [[NSUserDefaults standardUserDefaults] setObject:nil
                                                           forKey:USERDEFAULT_COMMENT_ME_NOTIFICATION_COUNT];
-                
+
                 [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:USERDEFAULT_IS_AUTO_LOGIN];
                 [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_LOGINOUT_SUCCESS object:self userInfo:data];
-                
+
 //                LoginViewController * loginContorller = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
 //                [self.navigationController pushViewController:loginContorller animated:YES];
 //                [loginContorller release];
@@ -542,7 +538,7 @@
 //        viewController = [[MineEditingViewController alloc]
 //                          initWithNibName:@"MineEditingViewController"
 //                          bundle:nil];
-//        
+//
 //    }
     else if(button == _mypublishButton)
     {
@@ -553,7 +549,7 @@
                           dictionary:nil];
     }
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: viewController];
-    
+
     [self.navigationController presentModalViewController:navController animated:YES];
 
     [viewController release];
@@ -565,13 +561,13 @@
     {
         NSString * accountId = [[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] valueForKey:KEY_ACCOUNT_ID];
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: TRUE];
-        
+
         [self.navigationItem.rightBarButtonItem setEnabled:NO];
         [[BSDKManager sharedManager] getUserInforByUserId:accountId
                                           andDoneCallback:^(AIO_STATUS status, NSDictionary *data)
         {
             if (K_BSDK_IS_RESPONSE_OK(data)) {
-                
+
                 NSAssert(data && [data count] > 0, @"data should not be nil");
                [[NSUserDefaults standardUserDefaults] setObject:data forKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
                 [self.tableView reloadData];
@@ -592,13 +588,12 @@
                                          initWithNibName:@"MineEditingViewController"
                                          bundle:nil];
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: viewController];
-    
+
     [self.navigationController presentModalViewController:navController animated:YES];
-    
+
     [viewController release];
     [navController release];
 }
-
 
 -(UILabel *)getBadgeLabel:(NSString *)badge {
     UILabel * badgeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
@@ -623,7 +618,7 @@
     } else {
         self.navigationController.tabBarItem.badgeValue = newAllCount.stringValue;
     }
-    
+
     [self.tableView reloadData];
 }
 @end

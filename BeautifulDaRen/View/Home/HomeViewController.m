@@ -47,11 +47,10 @@
 
 #pragma mark - View lifecycle
 
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     self.observerForLoginStatus = [[NSNotificationCenter defaultCenter]
                                    addObserverForName:K_NOTIFICATION_LOGIN_SUCCESS
                                    object:nil
@@ -63,7 +62,7 @@
                                        [self refreshAdsView];
                                        [self showAdsPageView];
                                    }];
-    
+
     self.observerForLogout = [[NSNotificationCenter defaultCenter]
                                    addObserverForName:K_NOTIFICATION_LOGINOUT_SUCCESS
                                    object:nil
@@ -75,7 +74,7 @@
                                        [self refreshAdsView];
                                        [self showAdsPageView];
                                    }];
-    
+
     self.observerForShouldLogin = [[NSNotificationCenter defaultCenter]
                                     addObserverForName:K_NOTIFICATION_SHOULD_LOGIN
                                     object:nil
@@ -111,7 +110,7 @@
                     [[NSUserDefaults standardUserDefaults] setObject:dict forKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
                     [self.navigationController popToRootViewControllerAnimated:YES];
                     [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_LOGIN_SUCCESS object:self userInfo:data];
-                    
+
                     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationType)
                     (UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeBadge)];
                 }
@@ -119,14 +118,14 @@
                 {
                     [[iToast makeText:[NSString stringWithFormat:@"%@", K_BSDK_GET_RESPONSE_MESSAGE(data)]] show];
                 }
-                
-                [self refreshAdsView];            
+
+                [self refreshAdsView];
             };
-            
+
             [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_SHOWWAITOVERLAY object:self];
-            
+
             NSString * isSinaAccount = [[NSUserDefaults standardUserDefaults] objectForKey:USERDEFAULT_AUTO_LOGIN_ACCOUNT_IS_SINA];
-            
+
             if ([isSinaAccount isEqual:@"0"]) {
                 [[BSDKManager sharedManager] loginWithUsername:userName
                                                       password:userPwd
@@ -159,7 +158,7 @@
 - (void)refreshAdsView
 {
     if (self.adsPageView) {
-        
+
         [self.adsPageView stop];
         [self.adsPageView.view removeFromSuperview];
         [self setAdsPageView:nil];
@@ -179,7 +178,6 @@
 
     self.adsPageView.delegate = self;
 }
-
 
 -(void) dealloc
 {
@@ -254,7 +252,7 @@
 - (IBAction)onRegisterBtnSelected:(UIButton*)sender
 {
     RegisterViewController * registerController = [[RegisterViewController alloc] initWithNibName:@"RegisterViewController" bundle:nil];
-    
+
     [self.navigationController pushViewController:registerController animated:YES];
     [registerController release];
 }
@@ -268,30 +266,29 @@
                                                    ADS_CELL_HEIGHT + 2.0,
                                                    self.view.frame.size.width,
                                                    USER_WINDOW_HEIGHT - ADS_CELL_HEIGHT - CONTENT_MARGIN)];
-    [UIView commitAnimations]; 
+    [UIView commitAnimations];
 }
 #pragma mark AdsPageViewProtocol
 -(void) onAdsPageViewClosed
-{    
+{
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.3];
-    
+
     [_adsPageView.view setHidden:YES];
     [_itemsViewController.view setFrame:CGRectMake(0, 0, CGRectGetWidth(_itemsViewController.view.frame), USER_WINDOW_HEIGHT)];
-    
+
     [UIView commitAnimations];
-    
+
     [_adsPageView stop];
     [_adsPageView.view removeFromSuperview];
     [self setAdsPageView:nil];
 }
 
-
 - (void)refreshNavigationView
 {
     if ([[BSDKManager sharedManager] isLogin]) {
         [self.navigationItem setTitle:[[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] valueForKey:KEY_ACCOUNT_USER_NAME]];
-        
+
         if([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0)
         {
             [self.navigationItem setRightBarButtonItems:nil];
@@ -306,9 +303,9 @@
         if([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0)
         {
             UIBarButtonItem* loginButton = [ViewHelper getBarItemOfTarget:self action:@selector(onLoginBtnSelected:) title:NSLocalizedString(@"login", @"login button on navigation")];
-            
+
             UIBarButtonItem* registerButton =[ViewHelper getBarItemOfTarget:self action:@selector(onRegisterBtnSelected:) title:NSLocalizedString(@"register", @"register button on navigation")];
-            
+
             NSArray * navigationBtns = [NSArray arrayWithObjects:registerButton, loginButton, nil];
             // setRightBarButtonItems only availability on ios 5.0 and later.
             [self.navigationItem setRightBarButtonItems:navigationBtns animated:YES];
@@ -317,7 +314,7 @@
         {
             [self.navigationItem setRightBarButtonItem:[ViewHelper getRightBarItemOfTarget1:self action1:@selector(onLoginBtnSelected:) title1:NSLocalizedString(@"login", @"login button on navigation") target2:self action2:@selector(onRegisterBtnSelected:) title2:NSLocalizedString(@"register", @"register button on navigation")]];
         }
-        
+
         [self.navigationItem setTitle:nil];
         [self.navigationItem setLeftBarButtonItem:[ViewHelper getLeftBarItemOfImageName:@"beautifuldaren_logo" rectSize:CGRectMake(0, 0, NAVIGATION_LEFT_LOGO_WIDTH, NAVIGATION_LEFT_LOGO_HEIGHT)]];
     }

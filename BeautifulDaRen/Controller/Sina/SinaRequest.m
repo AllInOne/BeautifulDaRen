@@ -24,7 +24,7 @@
 @synthesize engine = _engine;
 @synthesize methodUrl = _methodUrl;
 @synthesize httpMethod = _httpMethod;
-@synthesize params = _params; 
+@synthesize params = _params;
 @synthesize postDataType = _postDataType;
 @synthesize httpHeaderFields = _httpHeaderFields;
 @synthesize doneCallback = _doneCallback;
@@ -38,7 +38,7 @@
         doneCallback:(processDoneWithDictBlock)callback
 {
     self = [super init];
-    
+
     if (self)
     {
         self.methodUrl = methodName;
@@ -49,7 +49,7 @@
         self.doneCallback = Block_copy(callback);
         self.engine = engine;
     }
-    
+
     return self;
 }
 

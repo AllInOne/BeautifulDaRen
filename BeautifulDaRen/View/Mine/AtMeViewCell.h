@@ -20,7 +20,6 @@
 @property (retain, nonatomic) IBOutlet UIButton * costButton;
 @property (retain, nonatomic) IBOutlet UILabel * descriptionLabel;
 
-
 - (void)setData:(NSDictionary*)data;
 - (CGFloat)getCellHeight;
 

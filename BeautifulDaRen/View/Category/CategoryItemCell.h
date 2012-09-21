@@ -17,7 +17,7 @@
 
 /**
  @brief Init the Category item with data.
- 
+
  @param dataDict the data of the category, it has the keys below:
                  KEY_CATEGORY_TITLE
                  KEY_CATEGORY_ITEMS

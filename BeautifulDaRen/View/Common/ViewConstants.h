@@ -21,7 +21,6 @@
 
 #define CONTENT_MARGIN              (5.0)
 
-
 #define NAVIGATION_LEFT_LOGO_WIDTH (90.0)
 #define NAVIGATION_LEFT_LOGO_HEIGHT (27.0)
 
@@ -51,7 +50,6 @@
 
 #define IS_RETINA ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2.0)
 
-
 #define APPDELEGATE ((AppDelegate*)([UIApplication sharedApplication].delegate))
 
 #define APPDELEGATE_ROOTVIEW_CONTROLLER ((AppDelegate*)([UIApplication sharedApplication].delegate)).rootViewController
@@ -78,7 +76,6 @@
 #define USERDEFAULT_COMMENT_ME_NOTIFICATION_COUNT @"USERDEFAULT_COMMENT_ME_NOTIFICATION_COUNT"
 
 #define USERDEFAULT_SINA_USER_UID @"USERDEFAULT_SINA_USER_UID"
-
 
 // TODO: remove them and use defines in BSDKDefines.h
 #define KEY_ACCOUNT_USER_NAME           @"UserName"

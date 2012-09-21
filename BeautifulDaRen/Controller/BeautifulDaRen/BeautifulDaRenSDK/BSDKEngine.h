@@ -42,20 +42,20 @@
 {
     NSString        *appKey;
     NSString        *appSecret;
-    
+
     NSString        *userID;
     NSString        *accessToken;
     NSTimeInterval  expireTime;
-    
+
     NSString        *redirectURI;
-    
+
     // Determine whether user must log out before another logging in.
     BOOL            isUserExclusive;
-    
+
     BSDKRequest       *request;
-    
+
     id<BSDKEngineDelegate> delegate;
-    
+
     UIViewController *rootViewController;
 }
 
@@ -90,7 +90,7 @@
 - (BOOL)isAuthorizeExpired;
 
 // @methodName: The interface you are trying to visit, exp, "statuses/public_timeline.json" for the newest timeline.
-// See 
+// See
 // http://open.weibo.com/wiki/API%E6%96%87%E6%A1%A3_V2
 // for more details.
 // @httpMethod: "GET" or "POST".

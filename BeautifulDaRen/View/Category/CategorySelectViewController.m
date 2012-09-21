@@ -44,9 +44,9 @@
     if (self) {
         // Custom initialization
         [self.navigationItem setLeftBarButtonItem:[ViewHelper getBackBarItemOfTarget:self action:@selector(onBackButtonClicked) title:NSLocalizedString(@"go_back", @"go_back")]];
-        
+
         [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onConfirmButtonClicked) title:NSLocalizedString(@"enter", @"enter")]];
-        
+
         [self.navigationItem setTitle:NSLocalizedString(@"select_category", @"select_category")];
     }
     return self;
@@ -56,7 +56,7 @@
 {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
+
     // Release any cached data, images, etc that aren't in use.
 }
 
@@ -70,17 +70,17 @@
     // Do any additional setup after loading the view from its nib.
     self.categorySelectState = [NSMutableArray arrayWithCapacity:[self.categoryListData count]];
     self.categorySelectCells = [NSMutableArray arrayWithCapacity:[self.categoryListData count]];
-    
+
     CGFloat contentHeight = 0.0;
     for (NSInteger index = 0; index < [self.categoryListData count]; index++) {
         CategoryItemViewController* cell = [[CategoryItemViewController alloc] initWithNibName:nil bundle:nil];
-        
-        cell.view.frame = CGRectMake(CATEGORY_CELL_X_OFFSET + (CGRectGetWidth(cell.view.frame) + CATEGORY_CELL_X_MARGIN) * (index % 2), 
-                                     CATEGORY_CELL_Y_OFFSET + (CGRectGetHeight(cell.view.frame) + CATEGORY_CELL_Y_MARGIN) * (index/2), CGRectGetWidth(cell.view.frame), 
+
+        cell.view.frame = CGRectMake(CATEGORY_CELL_X_OFFSET + (CGRectGetWidth(cell.view.frame) + CATEGORY_CELL_X_MARGIN) * (index % 2),
+                                     CATEGORY_CELL_Y_OFFSET + (CGRectGetHeight(cell.view.frame) + CATEGORY_CELL_Y_MARGIN) * (index/2), CGRectGetWidth(cell.view.frame),
                                      CGRectGetHeight(cell.view.frame));
-        
+
         contentHeight = CATEGORY_CELL_Y_OFFSET + (CGRectGetHeight(cell.view.frame) + CATEGORY_CELL_Y_MARGIN) * (index/2 + 1), CGRectGetWidth(cell.view.frame);
-        
+
         if (self.initialSelectedCategoryId && [self.initialSelectedCategoryId isEqualToString:[[self.categoryListData objectAtIndex:index] objectForKey:K_BSDK_UID]]) {
             [cell.radioImage setImage:[UIImage imageNamed:@"radio_btn_selected"]];
             [self.categorySelectState addObject:[NSNumber numberWithInt:1]];
@@ -90,45 +90,44 @@
             [cell.radioImage setImage:[UIImage imageNamed:@"radio_btn_unselected"]];
             [self.categorySelectState addObject:[NSNumber numberWithInt:0]];
         }
-        
+
         cell.textLable.text = [[self.categoryListData objectAtIndex:index] objectForKey:K_BSDK_CLASSNAME];
         cell.cellButton.tag = index;
-        
+
         [cell setDelegate:self];
-        
+
         [self.categorySelectCells addObject:cell];
-        
+
         [self.contentScrollView addSubview:cell.view];
     }
-    
+
     [self.contentScrollView setContentSize:CGSizeMake(SCREEN_WIDTH, contentHeight)];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    
+
     activityIndicator.frame = CGRectMake(SCREEN_WIDTH/2, 2*ADS_CELL_HEIGHT + CONTENT_MARGIN, CGRectGetWidth(activityIndicator.frame), CGRectGetHeight(activityIndicator.frame));
-    
+
     [self.view addSubview:activityIndicator];
-    
+
     [activityIndicator startAnimating];
-    
+
     [[BSDKManager sharedManager] getWeiboClassesWithDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
-        
+
         [activityIndicator stopAnimating];
         [activityIndicator removeFromSuperview];
         [activityIndicator release];
-        
+
         NSArray * categories = [data objectForKey:K_BSDK_CLASSLIST];
         self.categoryListData = categories;
-        
+
         [self refreshView];
     }];
 }
-
 
 - (void)viewDidUnload
 {
@@ -148,13 +147,13 @@
     }
     [self.categorySelectCells removeAllObjects];
     [_categorySelectCells release];
-    
+
     [_categoryListData release];
     [_categorySelectState release];
     [_contentScrollView release];
-    
+
     [_initialSelectedCategoryId release];
-    
+
     [super dealloc];
 }
 
@@ -182,14 +181,14 @@
 {
     [self clearCheckedCategories];
     [((CategoryItemViewController*)[self.categorySelectCells objectAtIndex:sender.tag]).radioImage setImage:[UIImage imageNamed:@"radio_btn_selected"]];
-    
+
     [self.categorySelectState replaceObjectAtIndex:sender.tag withObject:[NSNumber numberWithInt:1]];
-    
+
 }
 
 -(void)clearCheckedCategories
 {
-    
+
     for (NSInteger index = 0; index < [self.categorySelectState count]; index++) {
         NSNumber * checkValue = [self.categorySelectState objectAtIndex:index];
         if ([checkValue intValue] == 1) {
@@ -203,14 +202,14 @@
 {
     NSMutableArray * ret = [NSMutableArray arrayWithCapacity:10];
     NSInteger index = 0;
-    
+
     for (NSNumber * checkValue in self.categorySelectState) {
         if ([checkValue intValue] == 1) {
             [ret addObject:[[self.categoryListData objectAtIndex:index] objectForKey:K_BSDK_UID]];
         }
         index++;
     }
-    
+
     return ret;
 }
 
