@@ -15,7 +15,7 @@
 #import "WeiboListViewController.h"
 #import "iToast.h"
 
-#define CLASS_WEIBO_PAGE_SIZE   (16)
+#define CLASS_WEIBO_PAGE_SIZE   (6)
 
 @interface CategoryItemCell ()
 @property (nonatomic, retain) NSDictionary * itemData;
