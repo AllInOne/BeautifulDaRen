@@ -93,6 +93,7 @@
 #define KEY_ACCOUNT_FAVORITE_COUNT      @"FavNum"
 #define KEY_ACCOUNT_AT_COUNT            @"AtNum"
 #define KEY_ACCOUNT_COMMENT_COUNT       @"CommentNum"
+#define KEY_ACCOUNT_PRIVATE_MSG_COUNT   @"PrivateMsgNum"
 #define KEY_ACCOUNT_FANS_COUNT          @"FansNum"
 #define KEY_ACCOUNT_FOLLOW_COUNT        @"AttentionNum"
 
