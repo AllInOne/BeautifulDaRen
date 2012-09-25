@@ -57,6 +57,9 @@
      If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
      */
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    NSNumber *allCount = [[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_MY_NEW_NOTIFICATION_COUNT];
+    [UIApplication sharedApplication].applicationIconBadgeNumber = [allCount intValue];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -64,7 +67,6 @@
     /*
      Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
      */
-    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
