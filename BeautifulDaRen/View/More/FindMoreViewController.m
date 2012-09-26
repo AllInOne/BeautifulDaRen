@@ -25,6 +25,9 @@
 #define CONTENT_VIEW_HEIGHT_OFFSET 50
 #define SEARCH_WEIBO 0
 #define SEARCH_USER 1
+
+#define USER_COUNT_PER_PAGE     (10)
+
 @interface FindMoreViewController()
 
 @property (retain, nonatomic) IBOutlet UIScrollView * contentScrollView;
@@ -450,7 +453,7 @@
                                valueForKey:KEY_ACCOUNT_CITY];
         [[BSDKManager sharedManager] getHotUsersByCity:userCity
                                               userType:type
-                                              pageSize:16
+                                              pageSize:USER_COUNT_PER_PAGE
                                              pageIndex:1
                                        andDoneCallback:block];
     }
