@@ -67,6 +67,13 @@
     /*
      Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
      */
+    if ([[BSDKManager sharedManager] isLogin]) {
+        [[BSDKManager sharedManager] getPushContent:^(AIO_STATUS status, NSDictionary *data) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_MINE_NEW_INFO
+                                                                object:self
+                                                              userInfo:data];
+        }];
+    }
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
@@ -114,9 +121,11 @@
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
     NSLog(@"%@",userInfo);
+    
+    NSDictionary * apsDict = [userInfo valueForKey:@"aps"];
     [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_MINE_NEW_INFO
                                                         object:self
-                                                      userInfo:userInfo];
+                                                      userInfo:apsDict];
 }
 
 /*

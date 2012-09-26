@@ -113,6 +113,12 @@
 
                     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationType)
                     (UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeBadge)];
+                    
+                    [[BSDKManager sharedManager] getPushContent:^(AIO_STATUS status, NSDictionary *data) {
+                        [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_MINE_NEW_INFO
+                                                                            object:self
+                                                                          userInfo:data];
+                    }];
                 }
                 else
                 {

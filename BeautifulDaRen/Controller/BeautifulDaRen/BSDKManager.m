@@ -1126,4 +1126,18 @@ static BSDKManager *sharedInstance;
                        doneCallback:callback];
 }
 
+- (void)getPushContent:(processDoneWithDictBlock)callback {
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:2];
+    
+    [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
+    [params setObject:K_BSDK_ACTION_GET_PUSH forKey:K_BSDK_ACTION];
+    
+    [self sendRequestWithMethodName:nil
+                         httpMethod:@"POST"
+                             params:params
+                       postDataType:kBSDKRequestPostDataTypeNormal
+                   httpHeaderFields:nil
+                       doneCallback:callback];
+}
+
 @end

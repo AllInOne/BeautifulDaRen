@@ -214,4 +214,6 @@
 - (void)sendDeviceToken:(NSString *)deviceToken
         andDoneCallback:(processDoneWithDictBlock)callback;
 
+- (void)getPushContent:(processDoneWithDictBlock)callback;
+
 @end

@@ -83,10 +83,13 @@
                           object:nil
                           queue:nil
                           usingBlock:^(NSNotification *notification) {
-                              NSDictionary * apsDict = [[notification valueForKey:@"userInfo"] valueForKey:@"aps"];
-
+                              
+                              NSDictionary * apsDict = [notification valueForKey:@"userInfo"];
+                              NSLog(@"notification:\n%@",notification);
                               NSInteger newCount = [[apsDict valueForKey:@"badge"] intValue];
-                              self.mineViewNavigationController.tabBarItem.badgeValue = [[NSNumber numberWithInteger:newCount] stringValue];
+                              if (newCount > 0) {
+                                  self.mineViewNavigationController.tabBarItem.badgeValue = [[NSNumber numberWithInteger:newCount] stringValue];
+                              }
                               [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:newCount] forKey:USERDEFAULT_MY_NEW_NOTIFICATION_COUNT];
 
                               NSDictionary * notisDict = [apsDict valueForKey:@"notifications"];
