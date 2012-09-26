@@ -411,6 +411,9 @@ typedef enum
                                                                                 city:[[SinaCityCode sharedInstance] getCityNameByProvinceCode:provinceCode andCityCode:cityCode]
                                                                                email:nil andCallBack:^(AIO_STATUS status, NSDictionary *response) {
                                                                                    if ((status == AIO_STATUS_SUCCESS) && K_BSDK_IS_RESPONSE_OK(response)) {
+                                                                                       
+                                                                                       [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationType)
+                                                                                        (UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeBadge)];
                                                                                        NSDictionary * userInfo = [response objectForKey:K_BSDK_USERINFO];
 
                                                                                        [[NSUserDefaults standardUserDefaults] setObject:[userInfo objectForKey:K_BSDK_USERNAME] forKey:USERDEFAULT_AUTO_LOGIN_ACCOUNT_NAME];
