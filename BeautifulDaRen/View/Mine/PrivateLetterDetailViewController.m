@@ -24,6 +24,8 @@
 @property (nonatomic, retain) NSMutableArray * messages;
 @property (nonatomic, retain) UIButton * loadButton;
 
+@property (nonatomic, assign) NSInteger keypadHeight;
+
 - (void)refreshView;
 
 - (UIButton*)getRefreshButton;
@@ -42,6 +44,7 @@
 @synthesize userId = _userId;
 @synthesize loadButton = _loadButton;
 @synthesize sendButton = _sendButton;
+@synthesize keypadHeight = _keypadHeight;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -124,6 +127,11 @@
 
 - (void)refreshView
 {
+    self.contentScrollView.frame = CGRectMake(self.contentScrollView.frame.origin.x,
+                                              0.0,
+                                              self.contentScrollView.frame.size.width,
+                                              self.contentScrollView.frame.size.height);
+    
     CGFloat viewHeight = 10.0;
 
     for (UIView * view in self.contentScrollView.subviews) {
@@ -147,6 +155,8 @@
         viewHeight += (CGRectGetHeight(bubbleView.frame) + 10.0);
 
     }
+    
+    viewHeight = MAX(viewHeight, 370);
 
     [self.contentScrollView setContentSize:CGSizeMake(SCREEN_WIDTH, (viewHeight))];
 
@@ -208,8 +218,10 @@
 
     [self.privateLetterComposerView setDelegate:self];
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
 
     [self.contentScrollView setDelegate:self];
 }
@@ -238,6 +250,35 @@
     if (self.isKeypadShow) {
         [self.privateLetterComposerView resignFirstResponder];
     }
+}
+
+- (void)keyboardDidShow:(NSNotification *)note
+{
+    NSDictionary *info = [note userInfo];
+    
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+    
+    if (kbSize.height != _keypadHeight) {
+        double animDuration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+        
+        [UIView animateWithDuration:animDuration animations:^
+         {
+             NSLog(@"%@", self.contentScrollView);
+             self.contentScrollView.frame = CGRectMake(self.contentScrollView.frame.origin.x,
+                                                       self.contentScrollView.frame.origin.y - (kbSize.height - _keypadHeight),
+                                                       self.contentScrollView.frame.size.width,
+                                                       self.contentScrollView.frame.size.height);
+             
+             self.footerView.center = CGPointMake(self.footerView.center.x,
+                                                  self.footerView.center.y - (kbSize.height - _keypadHeight));
+             _keypadHeight = kbSize.height;
+         }];
+        
+        self.isKeypadShow = YES;
+    }
+    
+
+    
 }
 
 - (void)keyboardWillShow:(NSNotification *)note
@@ -284,6 +325,7 @@
 
              self.footerView.center = CGPointMake(self.footerView.center.x,
                                                   self.footerView.center.y + kbSize.height);
+              _keypadHeight = 0;
          }];
 
         self.isKeypadShow = NO;

@@ -696,7 +696,7 @@
                 [self.searchUserView reloadData];
             };
             [[BSDKManager sharedManager] searchUsersByUsername:self.searchBar.text
-                                                      pageSize:10
+                                                      pageSize:USER_COUNT_PER_PAGE
                                                      pageIndex:self.searchUserPageIndex
                                                andDoneCallback:block];
         }
