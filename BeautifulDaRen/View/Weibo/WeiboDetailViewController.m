@@ -36,6 +36,8 @@
 #define MAP_VIEW_HEIGHT     (120.0f)
 #define MAP_VIEW_X_OFFSET   ((SCREEN_WIDTH - MAP_VIEW_WIDTH)/2)
 
+#define SINA_TEXT_LENGTH_LIMITATION     (4)
+
 @interface WeiboDetailViewController ()
 
 @property (nonatomic, retain) MapViewController * mapViewController;
@@ -159,7 +161,12 @@
     [[WeiboForwardCommentViewController alloc] initWithNibName:nil bundle:nil];
     forwardViewContoller.forwardMode = YES;
     [forwardViewContoller setDelegate:self];
+    
+    NSString * syncContent = [NSString stringWithFormat:@"商场: @%@ 品牌: @%@ 标价: ¥%@ <%@>", [self.weiboData objectForKey: K_BSDK_SHOPMERCHANT], [self.weiboData objectForKey: K_BSDK_BRANDSERVICE], [self.weiboData objectForKey: K_BSDK_PRICE],[self.weiboData objectForKey: K_BSDK_CONTENT]];
+    
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: forwardViewContoller];
+    
+    forwardViewContoller.orignalContent = syncContent;
 
     [self.navigationController presentModalViewController:navController animated:YES];
 
@@ -220,8 +227,7 @@
         doneCountExpected++;
 
         if (![view.sinaShareImageView isHidden]) {
-            NSString * syncContent = [NSString stringWithFormat:@"商场: @%@ 品牌: @%@ 标价: ¥%@ %@ <%@>", [self.weiboData objectForKey: K_BSDK_SHOPMERCHANT], [self.weiboData objectForKey: K_BSDK_BRANDSERVICE], [self.weiboData objectForKey: K_BSDK_PRICE], view.weiboContentTextView.text,[self.weiboData objectForKey: K_BSDK_CONTENT]];
-            [[SinaSDKManager sharedManager] sendWeiBoWithText:syncContent image:self.attachedImage doneCallback:^(AIO_STATUS status, NSDictionary *data) {
+            [[SinaSDKManager sharedManager] sendWeiBoWithText:view.weiboContentTextView.text image:self.attachedImage doneCallback:^(AIO_STATUS status, NSDictionary *data) {
 
             }];
         }

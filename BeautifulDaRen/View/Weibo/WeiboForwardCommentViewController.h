@@ -33,6 +33,8 @@
 
 @property (nonatomic, assign) id<ForwardCommentViewControllerProtocol> delegate;
 
+@property (nonatomic, retain) NSString * orignalContent;
+
 - (IBAction)onAtFriendPressed:(id)sender;
 - (IBAction)onCheckBoxPressed:(id)sender;
 

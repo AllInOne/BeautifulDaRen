@@ -34,6 +34,8 @@
 @synthesize atButton = _atButton;
 @synthesize delegate = _delegate;
 
+@synthesize orignalContent = _orignalContent;
+
 @synthesize sinaButton = _sinaButton;
 @synthesize sinaShareImageView = _sinaShareImageView;
 @synthesize sinaSepImageView = _sinaSepImageView;
@@ -105,6 +107,9 @@
             [self.sinaButton setImage:[UIImage imageNamed:@"myshow_sina_gray"] forState:UIControlStateNormal];
             [self.sinaShareImageView setHidden:YES];
         }
+        
+        
+        self.weiboContentTextView.text = self.orignalContent;
     }
     else
     {
@@ -139,6 +144,7 @@
     [_sinaShareImageView release];
     [_sinaButton release];
     [_sinaSepImageView release];
+    [_orignalContent release];
     [super dealloc];
 }
 

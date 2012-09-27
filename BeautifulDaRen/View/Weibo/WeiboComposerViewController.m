@@ -128,9 +128,9 @@
 
     [self.view addSubview:_locationLoadingView];
 
-    [self.atButton setEnabled:NO];
-    [self.locationButton setEnabled:NO];
-    [self.categoryButton setEnabled:NO];
+//    [self.atButton setEnabled:NO];
+//    [self.locationButton setEnabled:NO];
+//    [self.categoryButton setEnabled:NO];
 
      NSLog(@"weibo composer view load");
 }
