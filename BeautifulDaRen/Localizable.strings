@@ -220,6 +220,6 @@
 "detail_mode" = "详情模式";
 "point" = "积分";
 
-"server_no_response" = "亲, 请求失败, 请检查你的网络哦!";
-"server_request_error" = "亲，请尝试在移动网络信号好或有Wi-Fi的地方重试哦!";
+"server_no_response" = "亲，你的网络好像有问题哦!";
+"server_request_error" = "亲，你的网络好像有问题哦!";
 "server_data_error" = "亲, 服务器返回数据错误了哦!";
