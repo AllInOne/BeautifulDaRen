@@ -86,6 +86,8 @@
     [activityIndicator startAnimating];
 
     [self.view addSubview:activityIndicator];
+    
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: YES];
 
     [[BSDKManager sharedManager] getPrivateMsgListOfUser:self.userId
                                                     type:K_BSDK_PRIVATEMSG_MSG_TYPE_ALL
@@ -95,6 +97,8 @@
                                                    [activityIndicator stopAnimating];
                                                    [activityIndicator removeFromSuperview];
                                                    [activityIndicator release];
+                                                   
+                                                   [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: NO];
 
                                                    [self.loadButton setTitle:NSLocalizedString(@"load_old_private_message", @"load_old_private_message") forState:UIControlStateNormal];
 
@@ -194,11 +198,15 @@
     [activityIndicator startAnimating];
 
     [self.view addSubview:activityIndicator];
+    
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: YES];
 
     [[BSDKManager sharedManager] getPrivateMsgListOfUser:self.userId
                                                     type:K_BSDK_PRIVATEMSG_MSG_TYPE_ALL
                                                 pageSize:PRIVATE_LETTER_PAGE_SIZE
                                                pageIndex:_currentPageIndex andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+                                                   
+                                                   [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: NO];
 
                                                    [activityIndicator stopAnimating];
                                                    [activityIndicator removeFromSuperview];
@@ -335,7 +343,24 @@
 -(IBAction)onSendButtonPressed:(id)sender
 {
     [self.sendButton setEnabled:NO];
+    [self.sendButton setTitle:@"" forState:UIControlStateDisabled];
+
+    UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    
+    [self.loadButton setTitle:nil forState:UIControlStateNormal];
+    
+    activityIndicator.center = self.sendButton.center;
+    [activityIndicator startAnimating];
+    
+    [self.footerView addSubview:activityIndicator];
+    
+     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: YES];
     [[BSDKManager sharedManager] sendPrivateMsgToUser:self.userId content:self.privateLetterComposerView.text andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+        
+        [activityIndicator stopAnimating];
+        [activityIndicator removeFromSuperview];
+        [activityIndicator release];
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: NO];
         [self.sendButton setEnabled:YES];
         [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
         if (K_BSDK_IS_RESPONSE_OK(data)) {
@@ -345,6 +370,8 @@
             [self.messages removeAllObjects];
             [self onLoadPrivateLetterButtonClicked];
         }
+        
+        self.privateLetterComposerView.text = @"";
     }];
 }
 @end
