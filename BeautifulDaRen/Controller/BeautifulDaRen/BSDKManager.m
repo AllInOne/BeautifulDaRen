@@ -1140,4 +1140,54 @@ static BSDKManager *sharedInstance;
                        doneCallback:callback];
 }
 
+- (void)orderItem:(NSString *)blogId
+  andDoneCallback:(processDoneWithDictBlock)callback{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
+    
+    [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
+    [params setObject:K_BSDK_ACTION_BUY forKey:K_BSDK_ACTION];
+    
+    [params setObject:blogId forKey:K_BSDK_BLOGUID];
+    
+    [self sendRequestWithMethodName:nil
+                         httpMethod:@"POST"
+                             params:params
+                       postDataType:kBSDKRequestPostDataTypeNormal
+                   httpHeaderFields:nil
+                       doneCallback:callback];
+}
+
+- (void)getOrderItemsListForUser:(NSString *)userId
+                 andDoneCallback:(processDoneWithDictBlock)callback {
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
+    
+    [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
+    [params setObject:K_BSDK_ACTION_BUY_LIST forKey:K_BSDK_ACTION];
+    
+    [params setObject:userId forKey:K_BSDK_USERID];
+    [self sendRequestWithMethodName:nil
+                         httpMethod:@"POST"
+                             params:params
+                       postDataType:kBSDKRequestPostDataTypeNormal
+                   httpHeaderFields:nil
+                       doneCallback:callback];
+}
+
+- (void)getOrderItemsListForBlog:(NSString *)blogId
+                 andDoneCallback:(processDoneWithDictBlock)callback {
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
+    
+    [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
+    [params setObject:K_BSDK_ACTION_BUY_LIST forKey:K_BSDK_ACTION];
+    
+    [params setObject:blogId forKey:K_BSDK_BLOGUID];
+    [self sendRequestWithMethodName:nil
+                         httpMethod:@"POST"
+                             params:params
+                       postDataType:kBSDKRequestPostDataTypeNormal
+                   httpHeaderFields:nil
+                       doneCallback:callback];
+}
 @end

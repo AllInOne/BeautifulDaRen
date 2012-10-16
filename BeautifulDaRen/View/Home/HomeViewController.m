@@ -214,7 +214,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [_itemsViewController viewWillAppear:animated];
+        [_itemsViewController viewWillAppear:animated];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -225,7 +225,8 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
 	[super viewWillDisappear:animated];
-    [_itemsViewController viewWillDisappear:animated];
+    
+        [_itemsViewController viewWillDisappear:animated];
 }
 
 - (void)viewDidDisappear:(BOOL)animated

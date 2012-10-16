@@ -216,4 +216,13 @@
 
 - (void)getPushContent:(processDoneWithDictBlock)callback;
 
+- (void)orderItem:(NSString *)blogId
+  andDoneCallback:(processDoneWithDictBlock)callback;
+
+- (void)getOrderItemsListForUser:(NSString *)userId
+                 andDoneCallback:(processDoneWithDictBlock)callback;
+
+- (void)getOrderItemsListForBlog:(NSString *)blogId
+                 andDoneCallback:(processDoneWithDictBlock)callback;
+
 @end

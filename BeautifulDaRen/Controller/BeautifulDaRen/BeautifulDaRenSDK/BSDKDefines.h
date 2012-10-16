@@ -63,6 +63,8 @@
 #define K_BSDK_ACTION_SENDPRIVATEMSG @"SendPrivateMsg"
 #define K_BSDK_ACTION_BINDDEVICETOKEN @"bindUserDeviceToken"
 #define K_BSDK_ACTION_GET_PUSH @"getPush"
+#define K_BSDK_ACTION_BUY @"buy"
+#define K_BSDK_ACTION_BUY_LIST @"buyList"
 
 #define K_BSDK_PAGEINDEX @"Page"
 #define K_BSDK_PAGESIZE @"PageSize"
