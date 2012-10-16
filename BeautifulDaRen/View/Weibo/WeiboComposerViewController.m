@@ -128,9 +128,9 @@
 
     [self.view addSubview:_locationLoadingView];
 
-    [self.atButton setEnabled:NO];
-    [self.locationButton setEnabled:NO];
-    [self.categoryButton setEnabled:NO];
+//    [self.atButton setEnabled:NO];
+//    [self.locationButton setEnabled:NO];
+//    [self.categoryButton setEnabled:NO];
 
      NSLog(@"weibo composer view load");
 }
@@ -194,16 +194,16 @@
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
-    [self.atButton setEnabled:YES];
-    [self.locationButton setEnabled:YES];
-    [self.categoryButton setEnabled:YES];
+//    [self.atButton setEnabled:YES];
+//    [self.locationButton setEnabled:YES];
+//    [self.categoryButton setEnabled:YES];
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
-    [self.atButton setEnabled:NO];
-    [self.locationButton setEnabled:NO];
-    [self.categoryButton setEnabled:NO];
+//    [self.atButton setEnabled:NO];
+//    [self.locationButton setEnabled:NO];
+//    [self.categoryButton setEnabled:NO];
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text

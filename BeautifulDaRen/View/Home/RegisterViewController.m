@@ -278,7 +278,7 @@ typedef enum
         {
             cell = [[[NSBundle mainBundle] loadNibNamed:button_view_identifier owner:self options:nil] objectAtIndex:7];
         }
-        ((ButtonViewCell*)cell).leftLabel.text = @"《美丽达人网络服务使用协议》";
+        ((ButtonViewCell*)cell).leftLabel.text = @"《秀悦购网络服务使用协议》";
         ((ButtonViewCell*)cell).leftLabel.textColor = [UIColor blueColor];
         self.agreementButton = ((ButtonViewCell*)cell).leftButton;
         ((ButtonViewCell*)cell).delegate = self;
