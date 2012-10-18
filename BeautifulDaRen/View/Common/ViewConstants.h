@@ -91,6 +91,8 @@
 #define KEY_ACCOUNT_INTRO               @"Intro"
 #define KEY_ACCOUNT_BLOG_COUNT          @"BlogNum"
 #define KEY_ACCOUNT_FAVORITE_COUNT      @"FavNum"
+#define KEY_ACCOUNT_ORDERED_COUNT       @"BuyNum"
+#define KEY_ACCOUNT_BUYER_COUNT         @"BuyNum"
 #define KEY_ACCOUNT_AT_COUNT            @"AtNum"
 #define KEY_ACCOUNT_COMMENT_COUNT       @"CommentNum"
 #define KEY_ACCOUNT_PRIVATE_MSG_COUNT   @"PrivateMsgNum"

@@ -53,6 +53,7 @@
 - (void)addToolbar;
 - (void)onRefreshButtonClicked;
 - (void)onBackButtonClicked;
+- (void)showBuyerList;
 
 - (void)getWeiboDataFromResponse;
 @end
@@ -84,6 +85,8 @@
 @synthesize favourateBgView = _favourateBgView;
 @synthesize favourateWaitingLabel = _favourateWaitingLabel;
 @synthesize favourateWaitingIndicator = _favourateWaitingIndicator;
+@synthesize buyerListButton = _buyerListButton;
+@synthesize buyerListLabel = _buyerListLabel;
 
 - (void)dealloc
 {
@@ -93,6 +96,8 @@
     [_avatarImageView release];
     [_weiboAttachedImageView release];
     [_timestampLabel release];
+    [_buyerListButton release];
+    [_buyerListLabel release];
     [_weiboAttachedImageButton release];
     [_mapViewController release];
     [_weiboData release];
@@ -152,7 +157,38 @@
 
 - (void)onBuy
 {
-    // TODO:
+    if (self.isDoingFav) {
+        return;
+    }
+    
+    [self.favourateBgView setHidden:NO];
+    [self.favourateBgView setFrame:CGRectMake(0.0, CGRectGetMaxY(self.view.frame), SCREEN_WIDTH, 44)];
+    [self.favourateBgView setBackgroundColor:[UIColor whiteColor]];
+    
+    [self.favourateWaitingIndicator startAnimating];
+    
+    self.favourateWaitingLabel.text = NSLocalizedString(@"ordering", @"ordering");
+    
+    [UIView animateWithDuration:0.5
+                     animations:^{
+                         [self.toolbar setHidden:YES];
+                         
+                         [self.favourateBgView setFrame:CGRectMake(0.0, CGRectGetMaxY(self.view.frame) - 44, SCREEN_WIDTH, 44)];
+                     }
+                     completion:^(BOOL finished){
+                         self.isDoingFav = YES;
+                         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: TRUE];
+                         
+                         [[BSDKManager sharedManager] orderItem:[self.weiboData objectForKey:K_BSDK_UID]
+                                                andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+                                                    self.isDoingFav = NO;
+                                                    [self.favourateBgView setHidden:YES];
+                                                    [self.favourateWaitingIndicator stopAnimating];
+                                                    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: FALSE];
+                                                    [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
+                                                    [self onRefreshButtonClicked];
+                                                }];
+                     }];
 }
 
 - (void)onForward
@@ -396,6 +432,8 @@
     self.commentButton = nil;
     self.favourateButton = nil;
     self.timestampLabel = nil;
+    self.buyerListLabel = nil;
+    self.buyerListButton = nil;
     self.weiboAttachedImageButton = nil;
     self.mapViewController = nil;
     self.weiboData = nil;
@@ -459,16 +497,21 @@
     {
         favourateButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar_favourate_icon" target:self action:@selector(onFavourate)];
     }
+    if ( ![[BSDKManager sharedManager] isLogin]) {
+        [favourateButtonItem setEnabled:NO];
+    }
 
     NSDictionary * userDict = [[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
     UIBarButtonItem *deleteButtonItem = nil;
     if ([[self.weiboData objectForKey:K_BSDK_USERID] isEqual:[userDict valueForKey:K_BSDK_UID]]) {
         deleteButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar_remove_fan_icon" target:self action:@selector(onDeleteWeibo)];
     }
-
+    
+    UIBarButtonItem *buyButtonItem = [ViewHelper getToolBarItemOfImageName:@"toolbar_buy_icon" target:self action:@selector(onBuy)];
     if ( ![[BSDKManager sharedManager] isLogin]) {
-        [favourateButtonItem setEnabled:NO];
+        [buyButtonItem setEnabled:NO];
     }
+
 
     NSArray *barItems = nil;
     if([[self.weiboData objectForKey:K_BSDK_USERID] isEqual:[userDict valueForKey:K_BSDK_UID]])
@@ -484,6 +527,8 @@
                     flexible,
                     deleteButtonItem,
                     flexible,
+                    buyButtonItem,
+                    flexible,
                     nil];
     }
     else{
@@ -496,6 +541,8 @@
                     commentButtonItem,
                     flexible,
                     favourateButtonItem,
+                    flexible,
+                    buyButtonItem,
                     flexible,
                     nil];
     }
@@ -625,6 +672,14 @@
     [self.timestampLabel setTextColor:[UIColor purpleColor]];
 
     self.usernameLabel.text = [authorInfo objectForKey:K_BSDK_USERNAME];
+    
+    
+    NSMutableAttributedString * attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"buyed_user", @"") detail:[NSString stringWithFormat:@" %d", [[self.weiboData objectForKey:KEY_ACCOUNT_BUYER_COUNT] intValue]]];
+    self.buyerListLabel.attributedText = attrStr;
+    self.buyerListLabel.textAlignment = UITextAlignmentCenter;
+    self.buyerListLabel.font = [UIFont systemFontOfSize:11];
+    
+    [self.buyerListButton addTarget:self action:@selector(showBuyerList) forControlEvents:UIControlEventTouchUpInside];
 
     NSString * price = [self.weiboData objectForKey:K_BSDK_PRICE];
     if (price && ([price intValue] != 0)) {
@@ -660,6 +715,24 @@
 - (void)getWeiboDataFromResponse
 {
 
+}
+
+- (void)showBuyerList {
+    // Wait until the data is done.
+    if (self.weiboData) {
+        FriendListViewController * viewController = [[FriendListViewController alloc]
+                                                     initWithNibName:@"FriendListViewController"
+                                                     bundle:nil
+                                                     type:FriendListViewController_TYPE_BUY_ONE_BLOG
+                                                     dictionary:self.weiboData];
+        
+        UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: viewController];
+        
+        [self.navigationController presentModalViewController:navController animated:YES];
+        
+        [viewController release];
+        [navController release];
+    }
 }
 
 - (void)onBackButtonClicked {

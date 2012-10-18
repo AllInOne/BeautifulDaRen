@@ -72,7 +72,7 @@
         }
         else if(_controllerType == WeiboListViewControllerType_MY_BUYED)
         {
-            [self.navigationItem setTitle:NSLocalizedString(@"my_buyed", @"my_buyed")];
+            [self.navigationItem setTitle:NSLocalizedString(@"ordered", @"")];
         }
         else if(_controllerType == WeiboListViewControllerType_FRIEND_WEIBO)
         {
@@ -225,6 +225,11 @@
                                           andDoneCallback:doneBlock];
         dataListKey = K_BSDK_BLOGLIST;
     }
+    else if (_controllerType == WeiboListViewControllerType_MY_BUYED) {
+        [[BSDKManager sharedManager] getOrderItemsListForUser:userId
+                                              andDoneCallback:doneBlock];
+        dataListKey = K_BSDK_INFOLIST;
+    }
     else
     {
         [[BSDKManager sharedManager] getWeiboListByUserId:userId
@@ -329,6 +334,8 @@
 
 -(UITableViewCell*)getCellofTableView:(UITableView*)tableView ByWeiboData:(NSDictionary*)data
 {
+    
+    NSLog(@"data  %@", data);
     UITableViewCell * cell = nil;
     NSString * viewCellIdentifier = nil;
     NSInteger indexOfCellInXib = 0;

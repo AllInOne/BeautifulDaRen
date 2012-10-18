@@ -93,6 +93,10 @@
                 }
                 self.userDataDictionary = dictionary;
                 break;
+            case FriendListViewController_TYPE_BUY_ONE_BLOG:
+                title = NSLocalizedString(@"buyed_user", @"buyed_user");
+                self.userDataDictionary = dictionary;
+                break;
             case FriendListViewController_TYPE_FAV_ONE_BLOG:
                 title = NSLocalizedString(@"fav_list", @"fav_list");
                 self.userDataDictionary = dictionary;
@@ -200,6 +204,13 @@
                                          andDoneCallback:doneBlock];
             break;
         }
+        case FriendListViewController_TYPE_BUY_ONE_BLOG:
+        {
+            NSString * blogId = [self.userDataDictionary valueForKey:K_BSDK_UID];
+            [[BSDKManager sharedManager] getOrderItemsListForBlog:blogId
+                                                  andDoneCallback:doneBlock];
+            break;
+        }
         case FriendListViewController_TYPE_FAV_ONE_BLOG:
         {
             NSString * blogId = [self.userDataDictionary valueForKey:K_BSDK_UID];
@@ -300,6 +311,7 @@
             return [FriendRawDict objectForKey:K_BSDK_ATTENTIONUSERINFO];
             break;
         }
+        case FriendListViewController_TYPE_BUY_ONE_BLOG:
         case FriendListViewController_TYPE_FAV_ONE_BLOG:
         default:
         {

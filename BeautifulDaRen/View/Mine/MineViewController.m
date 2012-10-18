@@ -227,15 +227,16 @@
         attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"collection", @"") detail:[NSString stringWithFormat:@" (%d)", [[userDict valueForKey:KEY_ACCOUNT_FAVORITE_COUNT] intValue]]];
         ((GridViewCell*)cell).thirdLabel.attributedText = attrStr;
         ((GridViewCell*)cell).thirdLabel.textAlignment = UITextAlignmentCenter;
-
-        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"my_publish", @"") detail:[NSString stringWithFormat:@" (%d)", [[userDict valueForKey:KEY_ACCOUNT_BLOG_COUNT] intValue]]];
+        
+        attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"ordered", @"")
+                                                                    detail:[NSString stringWithFormat:@" (%d)", [[userDict valueForKey:KEY_ACCOUNT_ORDERED_COUNT] intValue]]];
         ((GridViewCell*)cell).fourthLabel.attributedText = attrStr;
         ((GridViewCell*)cell).fourthLabel.textAlignment = UITextAlignmentCenter;
 
         _followButton = ((GridViewCell*)cell).firstButton;
         _fansButton = ((GridViewCell*)cell).secondButton;
         _collectionButton = ((GridViewCell*)cell).thirdButton;
-        _mypublishButton = ((GridViewCell*)cell).fourthButton;
+        _buyedButton = ((GridViewCell*)cell).fourthButton;
         NSNumber * followNumber = [[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_FOLLOW_ME_NOTIFICATION_COUNT];
         if (followNumber.intValue > 0) {
             ((GridViewCell*)cell).secondBadgeView.image = [UIImage imageNamed:@"badge"];
@@ -321,6 +322,23 @@
                 }
                 break;
             }
+            case 3:
+            {
+                buttonViewCell.buttonText.text = NSLocalizedString(@"my_publish", @"");
+                CGFloat textWidth = [ViewHelper getWidthOfText:buttonViewCell.buttonText.text ByFontSize:buttonViewCell.buttonText.font.pointSize];
+                UILabel * numberLabel = [[UILabel alloc] initWithFrame:
+                                         CGRectMake(buttonViewCell.buttonText.frame.origin.x + textWidth + 10,
+                                                    buttonViewCell.buttonText.frame.origin.y,
+                                                    50,
+                                                    buttonViewCell.buttonText.frame.size.height)];
+                [numberLabel setTextAlignment:UITextAlignmentLeft];
+                [numberLabel setTextColor:[UIColor colorWithRed:(204.0f/255.0f) green:(88.0f/255.0f) blue:(151.0f/255.0f) alpha:1.0f]];
+                numberLabel.text = [NSString stringWithFormat:@" (%d)",[[userDict valueForKey:KEY_ACCOUNT_BLOG_COUNT] intValue]];
+                [buttonViewCell addSubview:numberLabel];
+                [numberLabel release];
+                buttonViewCell.buttonLeftIcon.image = [UIImage imageNamed:@"my_composed"];
+                break;
+            }
         }
     }
     else if (section == 3)
@@ -346,7 +364,7 @@
             numberOfRows = 1;
             break;
         case 2:
-            numberOfRows = 3;
+            numberOfRows = 4;
             break;
         case 3:
             numberOfRows = 1;
@@ -435,6 +453,21 @@
                 [privateLetterViewController release];
 
                 [self refreshBadges:USERDEFAULT_PRIVATE_MESSAGE_NOTIFICATION_COUNT];
+                break;
+            }
+            case 3:
+            {
+                WeiboListViewController * myPublishViewController = [[WeiboListViewController alloc]
+                                                                     initWithNibName:@"WeiboListViewController"
+                                                                     bundle:nil
+                                                                     type:WeiboListViewControllerType_MY_PUBLISH
+                                                                     dictionary:nil];
+                UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: myPublishViewController];
+                
+                [APPDELEGATE_ROOTVIEW_CONTROLLER presentModalViewController:navController animated:YES];
+                
+                [navController release];
+                [myPublishViewController release];
                 break;
             }
         }

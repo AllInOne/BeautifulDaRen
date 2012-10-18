@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OHAttributedLabel.h"
 #import "WeiboForwardCommentViewController.h"
 
 /// There are two ways to use WeiboDetailViewController
@@ -36,7 +37,8 @@
 @property (nonatomic, retain) IBOutlet UIImageView * vMarkImageView;
 @property (nonatomic, retain) IBOutlet UIImageView * weiboAttachedImageView;
 @property (nonatomic, retain) IBOutlet UIButton * weiboAttachedImageButton;
-
+@property (nonatomic, retain) IBOutlet OHAttributedLabel * buyerListLabel;
+@property (nonatomic, retain) IBOutlet UIButton * buyerListButton;
 @property (nonatomic, retain) IBOutlet UIView * favourateBgView;
 @property (nonatomic, retain) IBOutlet UILabel * favourateWaitingLabel;
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView * favourateWaitingIndicator;
