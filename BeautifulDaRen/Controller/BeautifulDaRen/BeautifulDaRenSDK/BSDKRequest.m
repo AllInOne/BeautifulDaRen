@@ -325,7 +325,7 @@ static NSMutableString *logBody;
 
     connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
 
-    [self performSelector:@selector(requestOnTimeout) withObject:self afterDelay:30.0];
+    [self performSelector:@selector(requestOnTimeout) withObject:self afterDelay:60.0];
 }
 
 - (void)requestOnTimeout

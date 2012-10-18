@@ -88,6 +88,8 @@
     [self.view addSubview:activityIndicator];
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: YES];
+    
+    [self.privateLetterComposerView setEnabled:NO];
 
     [[BSDKManager sharedManager] getPrivateMsgListOfUser:self.userId
                                                     type:K_BSDK_PRIVATEMSG_MSG_TYPE_ALL
@@ -99,6 +101,8 @@
                                                    [activityIndicator release];
                                                    
                                                    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: NO];
+                                                   
+                                                   [self.privateLetterComposerView setEnabled:YES];
 
                                                    [self.loadButton setTitle:NSLocalizedString(@"load_old_private_message", @"load_old_private_message") forState:UIControlStateNormal];
 
@@ -200,6 +204,8 @@
     [self.view addSubview:activityIndicator];
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: YES];
+    
+    [self.privateLetterComposerView setEnabled:NO];
 
     [[BSDKManager sharedManager] getPrivateMsgListOfUser:self.userId
                                                     type:K_BSDK_PRIVATEMSG_MSG_TYPE_ALL
@@ -207,6 +213,8 @@
                                                pageIndex:_currentPageIndex andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
                                                    
                                                    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: NO];
+                                                   
+                                                   [self.privateLetterComposerView setEnabled:YES];
 
                                                    [activityIndicator stopAnimating];
                                                    [activityIndicator removeFromSuperview];
