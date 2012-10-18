@@ -228,7 +228,7 @@
     else if (_controllerType == WeiboListViewControllerType_MY_BUYED) {
         [[BSDKManager sharedManager] getOrderItemsListForUser:userId
                                               andDoneCallback:doneBlock];
-        dataListKey = K_BSDK_INFOLIST;
+        dataListKey = K_BSDK_BLOGLIST;
     }
     else
     {
