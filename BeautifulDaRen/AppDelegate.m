@@ -12,7 +12,6 @@
 #import "WaitOverlay.h"
 #import "ViewConstants.h"
 #import "BSDKManager.h"
-#import "iToast.h"
 
 @implementation AppDelegate
 
@@ -108,7 +107,7 @@
         if(AIO_STATUS_SUCCESS == status && K_BSDK_IS_RESPONSE_OK(data))
         {
         } else {
-            [[iToast makeText:@"系统注册通知服务失败!"] show];
+            NSLog(@"Register APNS to server failed.");
         }
     }];
 }
