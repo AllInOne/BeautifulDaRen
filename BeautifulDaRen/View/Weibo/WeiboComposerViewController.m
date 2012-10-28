@@ -350,6 +350,13 @@
 
     };
 
+    double latitude = 0.0;
+    double longitude = 0.0;
+    if (self.currentLocation) {
+        latitude = self.currentLocation.coordinate.latitude;
+        longitude = self.currentLocation.coordinate.longitude;
+    }
+    
     if (!self.sinaShareImageView.hidden && [[SinaSDKManager sharedManager] isLogin])
     {
         NSString * syncContent = nil;
@@ -362,16 +369,9 @@
             syncContent = [NSString stringWithFormat:@"商场: @%@ 品牌: @%@ %@", self.maketTextView.text, self.brandTextView.text, self.weiboContentTextView.text];
         }
 
-        [[SinaSDKManager sharedManager] sendWeiBoWithText:syncContent image:[self.selectedImage scaleToSize:CGSizeMake(320.0, self.selectedImage.size.height * 320.0/self.selectedImage.size.width)] doneCallback:doneBlock];
+        [[SinaSDKManager sharedManager] sendWeiBoWithText:syncContent image:[self.selectedImage scaleToSize:CGSizeMake(320.0, self.selectedImage.size.height * 320.0/self.selectedImage.size.width)] latitude:latitude longitude:longitude doneCallback:doneBlock];
         doneCountExpected++;
     };
-
-    CGFloat latitude = 0.0;
-    CGFloat longitude = 0.0;
-    if (self.currentLocation) {
-        latitude = self.currentLocation.coordinate.latitude;
-        longitude = self.currentLocation.coordinate.longitude;
-    }
 
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: TRUE];
     [[BSDKManager sharedManager] sendWeiboWithText:self.weiboContentTextView.text
