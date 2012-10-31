@@ -305,6 +305,8 @@
         }
         UIBarButtonItem* refreshButton = [ViewHelper getBarItemOfTarget:self action:@selector(onRefreshBtnSelected:) title:NSLocalizedString(@"refresh", @"refresh")];
         [self.navigationItem setRightBarButtonItem:refreshButton];
+        
+        [self.navigationController.tabBarItem setTitle:NSLocalizedString(@"tab_home", @"tab_home")];
     }
     else {
         if([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0)
@@ -324,6 +326,8 @@
 
         [self.navigationItem setTitle:nil];
         [self.navigationItem setLeftBarButtonItem:[ViewHelper getLeftBarItemOfImageName:@"beautifuldaren_logo" rectSize:CGRectMake(0, 0, NAVIGATION_LEFT_LOGO_WIDTH, NAVIGATION_LEFT_LOGO_HEIGHT)]];
+        
+        [self.navigationController.tabBarItem setTitle:NSLocalizedString(@"tab_home_page", @"tab_home_page")];
     }
 }
 

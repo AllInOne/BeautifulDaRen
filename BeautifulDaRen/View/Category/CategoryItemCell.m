@@ -87,7 +87,7 @@
 
             [self.view addSubview:_categoryScrollItem.view];
 
-            _categoryScrollItem.view.frame = CGRectMake(0, CATEGORY_TITLE_FONT_HEIGHT + CONTENT_MARGIN, self.view.frame.size.width, CATEGORY_ITEM_HEIGHT);
+            _categoryScrollItem.view.frame = CGRectMake(0, CATEGORY_TITLE_FONT_HEIGHT + CATEGORY_TITLE_MARGIN/2, self.view.frame.size.width, CATEGORY_ITEM_HEIGHT);
         }
         else
         {
@@ -135,7 +135,7 @@
 
 - (CGFloat)getHeight
 {
-    return CATEGORY_ITEM_HEIGHT;
+    return CATEGORY_ITEM_HEIGHT + CONTENT_MARGIN;
 }
 
 -(NSArray*)getPicturesFromWeiboList

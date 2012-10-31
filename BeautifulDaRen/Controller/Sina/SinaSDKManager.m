@@ -94,12 +94,15 @@ static SinaSDKManager *sharedInstance;
     [sinaRequest release];
 }
 
-- (void)sendWeiBoWithText:(NSString *)text image:(UIImage *)image doneCallback:(processDoneWithDictBlock)callback
+- (void)sendWeiBoWithText:(NSString *)text image:(UIImage *)image latitude:(double)latitude longitude:(double)longitude doneCallback:(processDoneWithDictBlock)callback
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:2];
 
 	[params setObject:(text ? text : @"") forKey:@"status"];
-
+    if (latitude && longitude) {
+        [params setObject:[NSString stringWithFormat:@"%f",latitude] forKey:@"lat"];
+        [params setObject:[NSString stringWithFormat:@"%f",longitude] forKey:@"long"];
+    }
     if (image)
     {
 		[params setObject:image forKey:@"pic"];

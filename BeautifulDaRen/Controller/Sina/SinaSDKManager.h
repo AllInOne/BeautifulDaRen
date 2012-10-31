@@ -36,8 +36,8 @@
                  httpHeaderFields:(NSDictionary *)httpHeaderFields
                      doneCallback:(processDoneWithDictBlock)callback;
 
-- (NSString*)getDisplayStringOfCityCode:(NSString*)code;
+//- (NSString*)getDisplayStringOfCityCode:(NSString*)code;
 
 // Send a Weibo, to which you can attach an image.
-- (void)sendWeiBoWithText:(NSString *)text image:(UIImage *)image doneCallback:(processDoneWithDictBlock)callback;
+- (void)sendWeiBoWithText:(NSString *)text image:(UIImage *)image latitude:(double)latitude longitude:(double)longitude doneCallback:(processDoneWithDictBlock)callback;
 @end

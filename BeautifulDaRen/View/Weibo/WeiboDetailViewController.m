@@ -263,7 +263,7 @@
         doneCountExpected++;
 
         if (![view.sinaShareImageView isHidden]) {
-            [[SinaSDKManager sharedManager] sendWeiBoWithText:view.weiboContentTextView.text image:self.attachedImage doneCallback:^(AIO_STATUS status, NSDictionary *data) {
+            [[SinaSDKManager sharedManager] sendWeiBoWithText:view.weiboContentTextView.text image:self.attachedImage latitude:[[self.weiboData objectForKey:K_BSDK_LATITUDE] doubleValue] longitude:[[self.weiboData objectForKey:K_BSDK_LONGITUDE] doubleValue] doneCallback:^(AIO_STATUS status, NSDictionary *data) {
 
             }];
         }
