@@ -30,6 +30,13 @@
 		C2292BE2156F5CBA000685BC /* searchScopeDividerRightSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = C2292BE0156F5CBA000685BC /* searchScopeDividerRightSelected.png */; };
 		C2292BE5156F6257000685BC /* searchScopeDividerLeftSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C2292BE3156F6257000685BC /* searchScopeDividerLeftSelected@2x.png */; };
 		C2292BE6156F6257000685BC /* searchScopeDividerRightSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C2292BE4156F6257000685BC /* searchScopeDividerRightSelected@2x.png */; };
+		C22B95181641810B00EEC038 /* trade_done@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C22B95151641810B00EEC038 /* trade_done@2x.png */; };
+		C22B95191641810B00EEC038 /* trade_paid@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C22B95161641810B00EEC038 /* trade_paid@2x.png */; };
+		C22B951A1641810B00EEC038 /* trade_unpaid@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C22B95171641810B00EEC038 /* trade_unpaid@2x.png */; };
+		C22B951F1641812200EEC038 /* nav_bar_background.png in Resources */ = {isa = PBXBuildFile; fileRef = C22B951B1641812200EEC038 /* nav_bar_background.png */; };
+		C22B95201641812200EEC038 /* trade_done.png in Resources */ = {isa = PBXBuildFile; fileRef = C22B951C1641812200EEC038 /* trade_done.png */; };
+		C22B95211641812200EEC038 /* trade_paid.png in Resources */ = {isa = PBXBuildFile; fileRef = C22B951D1641812200EEC038 /* trade_paid.png */; };
+		C22B95221641812200EEC038 /* trade_unpaid.png in Resources */ = {isa = PBXBuildFile; fileRef = C22B951E1641812200EEC038 /* trade_unpaid.png */; };
 		C22CC1831563A3A7000DF1BD /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C22CC1811563A3A7000DF1BD /* HelpViewController.m */; };
 		C22CC1841563A3A7000DF1BD /* HelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C22CC1821563A3A7000DF1BD /* HelpViewController.xib */; };
 		C2319FB21560F9AA005CCD4E /* HomeViewHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2319FB11560F9AA005CCD4E /* HomeViewHeaderView.xib */; };
@@ -645,6 +652,13 @@
 		C2292BE0156F5CBA000685BC /* searchScopeDividerRightSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searchScopeDividerRightSelected.png; sourceTree = "<group>"; };
 		C2292BE3156F6257000685BC /* searchScopeDividerLeftSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchScopeDividerLeftSelected@2x.png"; sourceTree = "<group>"; };
 		C2292BE4156F6257000685BC /* searchScopeDividerRightSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchScopeDividerRightSelected@2x.png"; sourceTree = "<group>"; };
+		C22B95151641810B00EEC038 /* trade_done@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trade_done@2x.png"; sourceTree = "<group>"; };
+		C22B95161641810B00EEC038 /* trade_paid@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trade_paid@2x.png"; sourceTree = "<group>"; };
+		C22B95171641810B00EEC038 /* trade_unpaid@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trade_unpaid@2x.png"; sourceTree = "<group>"; };
+		C22B951B1641812200EEC038 /* nav_bar_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav_bar_background.png; sourceTree = "<group>"; };
+		C22B951C1641812200EEC038 /* trade_done.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trade_done.png; sourceTree = "<group>"; };
+		C22B951D1641812200EEC038 /* trade_paid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trade_paid.png; sourceTree = "<group>"; };
+		C22B951E1641812200EEC038 /* trade_unpaid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trade_unpaid.png; sourceTree = "<group>"; };
 		C22CC1801563A3A7000DF1BD /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpViewController.h; sourceTree = "<group>"; };
 		C22CC1811563A3A7000DF1BD /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpViewController.m; sourceTree = "<group>"; };
 		C22CC1821563A3A7000DF1BD /* HelpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HelpViewController.xib; sourceTree = "<group>"; };
@@ -2115,6 +2129,10 @@
 		CECE29F41562B38E00E2A40A /* 320*480 */ = {
 			isa = PBXGroup;
 			children = (
+				C22B951B1641812200EEC038 /* nav_bar_background.png */,
+				C22B951C1641812200EEC038 /* trade_done.png */,
+				C22B951D1641812200EEC038 /* trade_paid.png */,
+				C22B951E1641812200EEC038 /* trade_unpaid.png */,
 				C29902581606F5EE002F811D /* badge.png */,
 				CE24085715F8D7BF00806B3D /* private_letter_background_left.png */,
 				CE24085815F8D7BF00806B3D /* private_letter_background_right.png */,
@@ -2306,6 +2324,9 @@
 		CECE2A171562B39800E2A40A /* 960x640 */ = {
 			isa = PBXGroup;
 			children = (
+				C22B95151641810B00EEC038 /* trade_done@2x.png */,
+				C22B95161641810B00EEC038 /* trade_paid@2x.png */,
+				C22B95171641810B00EEC038 /* trade_unpaid@2x.png */,
 				C299025A1606F5F6002F811D /* badge@2x.png */,
 				CE24085B15F8D7F700806B3D /* private_letter_background_left@2x.png */,
 				CE24085C15F8D7F700806B3D /* private_letter_background_right@2x.png */,
@@ -3057,6 +3078,13 @@
 				CE24085E15F8D7F700806B3D /* private_letter_background_right@2x.png in Resources */,
 				C29902591606F5EE002F811D /* badge.png in Resources */,
 				C299025B1606F5FA002F811D /* badge@2x.png in Resources */,
+				C22B95181641810B00EEC038 /* trade_done@2x.png in Resources */,
+				C22B95191641810B00EEC038 /* trade_paid@2x.png in Resources */,
+				C22B951A1641810B00EEC038 /* trade_unpaid@2x.png in Resources */,
+				C22B951F1641812200EEC038 /* nav_bar_background.png in Resources */,
+				C22B95201641812200EEC038 /* trade_done.png in Resources */,
+				C22B95211641812200EEC038 /* trade_paid.png in Resources */,
+				C22B95221641812200EEC038 /* trade_unpaid.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
