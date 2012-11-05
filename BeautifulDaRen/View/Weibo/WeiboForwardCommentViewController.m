@@ -109,7 +109,7 @@
         }
         
         
-        self.weiboContentTextView.text = [self.orignalContent substringToIndex:TEXT_VIEW_MAX_CHARACTOR_NUMBER];
+        self.weiboContentTextView.text = [self.orignalContent substringToIndex:MIN(TEXT_VIEW_MAX_CHARACTOR_NUMBER, [self.orignalContent length])];
     }
     else
     {
