@@ -15,7 +15,9 @@
 @property (retain, nonatomic) IBOutlet BorderImageView * avatarImageView;
 @property (retain, nonatomic) IBOutlet UIImageView * vMarkImageView;
 @property (retain, nonatomic) IBOutlet UILabel * friendNameLabel;
+@property (retain, nonatomic) IBOutlet UIView * buyStatusView;
 @property (retain, nonatomic) IBOutlet UIButton * actionButton;
+@property (retain, nonatomic) IBOutlet UILabel * buyStatusLabel;
 
 @property (assign, nonatomic) id<ButtonPressDelegate> delegate;
 

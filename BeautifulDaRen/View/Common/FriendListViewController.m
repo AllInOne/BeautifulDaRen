@@ -399,6 +399,11 @@
         {
             [friendListViewCell.actionButton setHidden:YES];
         }
+        
+        if ([userDict objectForKey:KEY_BUY_OrderStatus]) {
+            [friendListViewCell.buyStatusView setHidden:NO];
+            [friendListViewCell.buyStatusLabel setText:[userDict valueForKey:KEY_BUY_OrderStatus]];
+        }
 
         [friendListViewCell.actionButton addTarget:self action:@selector(didButtonPressed:inView:) forControlEvents:UIControlEventTouchUpInside];
 

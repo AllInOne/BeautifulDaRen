@@ -98,6 +98,7 @@
 #define KEY_ACCOUNT_PRIVATE_MSG_COUNT   @"PrivateMsgNum"
 #define KEY_ACCOUNT_FANS_COUNT          @"FansNum"
 #define KEY_ACCOUNT_FOLLOW_COUNT        @"AttentionNum"
+#define KEY_BUY_OrderStatus             @"OrderStatus"
 
 #define GET_CURRENT_USER_INFO_BY_KEY(key)  [[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] valueForKey:key]
 
