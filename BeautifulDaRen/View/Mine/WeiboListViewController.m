@@ -386,6 +386,8 @@
             atMeCell.cancelBuyButton.hidden = NO;
             // TODO to set it with id.
             [atMeCell.cancelBuyButton addTarget:self action:@selector(cancelBuy:) forControlEvents:UIControlEventTouchUpInside];
+        } else {
+            atMeCell.cancelBuyButton.hidden = YES;
         }
 
         [atMeCell setData:data];
