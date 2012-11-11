@@ -555,6 +555,6 @@
 }
 
 - (IBAction)cancelBuy:(id)sender{
-    NSLog(@"=== %d", ((UIButton*)sender).tag);
+    // TODO
 }
 @end

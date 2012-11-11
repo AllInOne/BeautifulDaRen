@@ -9,6 +9,7 @@
 #import "AtMeViewCell.h"
 #import "BSDKDefines.h"
 #import "ViewHelper.h"
+#import "ViewConstants.h"
 #import "UIImageView+WebCache.h"
 
 @implementation AtMeViewCell
@@ -21,6 +22,9 @@
 @synthesize costButton;
 @synthesize descriptionLabel;
 @synthesize vMarkImageView;
+@synthesize cancelBuyButton;
+@synthesize buyStatusLabel;
+@synthesize buyStatusView;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

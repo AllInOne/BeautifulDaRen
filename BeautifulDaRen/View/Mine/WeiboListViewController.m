@@ -29,6 +29,7 @@
 
 - (void)refreshData;
 - (void)onDataLoadDone;
+- (IBAction)cancelBuy:(id)sender;
 @end
 
 @implementation WeiboListViewController
@@ -375,6 +376,18 @@
     else
     {
         AtMeViewCell * atMeCell = (AtMeViewCell*)cell;
+
+        if ([data objectForKey:KEY_BUY_OrderStatus]) {
+            [atMeCell.buyStatusView setHidden:NO];
+            [atMeCell.buyStatusLabel setText:[data valueForKey:KEY_BUY_OrderStatus]];
+        }
+
+        if (_controllerType == WeiboListViewControllerType_MY_BUYED) {
+            atMeCell.cancelBuyButton.hidden = NO;
+            // TODO to set it with id.
+            [atMeCell.cancelBuyButton addTarget:self action:@selector(cancelBuy:) forControlEvents:UIControlEventTouchUpInside];
+        }
+
         [atMeCell setData:data];
     }
 
@@ -395,5 +408,9 @@
         AtMeViewCell * atMeCell = (AtMeViewCell*)cell;
         return [atMeCell getCellHeight];
     }
+}
+
+- (IBAction)cancelBuy:(id)sender {
+    // TODO
 }
 @end

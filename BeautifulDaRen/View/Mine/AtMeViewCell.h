@@ -19,6 +19,9 @@
 @property (retain, nonatomic) IBOutlet UILabel * brandLabel;
 @property (retain, nonatomic) IBOutlet UIButton * costButton;
 @property (retain, nonatomic) IBOutlet UILabel * descriptionLabel;
+@property (retain, nonatomic) IBOutlet UIView * buyStatusView;
+@property (retain, nonatomic) IBOutlet UILabel * buyStatusLabel;
+@property (retain, nonatomic) IBOutlet UIButton * cancelBuyButton;
 
 - (void)setData:(NSDictionary*)data;
 - (CGFloat)getCellHeight;
