@@ -90,6 +90,8 @@
 		C29902591606F5EE002F811D /* badge.png in Resources */ = {isa = PBXBuildFile; fileRef = C29902581606F5EE002F811D /* badge.png */; };
 		C299025B1606F5FA002F811D /* badge@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C299025A1606F5F6002F811D /* badge@2x.png */; };
 		C29F6664154310B300292031 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		C2A2A475164FDE6300718405 /* cancel_buy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C2A2A474164FDE6300718405 /* cancel_buy@2x.png */; };
+		C2A2A477164FDE7400718405 /* cancel_buy.png in Resources */ = {isa = PBXBuildFile; fileRef = C2A2A476164FDE7400718405 /* cancel_buy.png */; };
 		C2A810C31566230A008FF2B7 /* PrivateLetterViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2A810C21566230A008FF2B7 /* PrivateLetterViewCell.xib */; };
 		C2CE7287156A929F00C22E34 /* FriendDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2CE7285156A929F00C22E34 /* FriendDetailViewController.m */; };
 		C2CE7288156A929F00C22E34 /* FriendDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2CE7286156A929F00C22E34 /* FriendDetailViewController.xib */; };
@@ -738,6 +740,8 @@
 		C297D837154442C20080294C /* AccountInfoInputCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountInfoInputCell.xib; sourceTree = "<group>"; };
 		C29902581606F5EE002F811D /* badge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = badge.png; sourceTree = "<group>"; };
 		C299025A1606F5F6002F811D /* badge@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "badge@2x.png"; sourceTree = "<group>"; };
+		C2A2A474164FDE6300718405 /* cancel_buy@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancel_buy@2x.png"; sourceTree = "<group>"; };
+		C2A2A476164FDE7400718405 /* cancel_buy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel_buy.png; sourceTree = "<group>"; };
 		C2A810C21566230A008FF2B7 /* PrivateLetterViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrivateLetterViewCell.xib; sourceTree = "<group>"; };
 		C2CE7284156A929E00C22E34 /* FriendDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendDetailViewController.h; sourceTree = "<group>"; };
 		C2CE7285156A929F00C22E34 /* FriendDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendDetailViewController.m; sourceTree = "<group>"; };
@@ -2129,6 +2133,7 @@
 		CECE29F41562B38E00E2A40A /* 320*480 */ = {
 			isa = PBXGroup;
 			children = (
+				C2A2A476164FDE7400718405 /* cancel_buy.png */,
 				C22B951B1641812200EEC038 /* nav_bar_background.png */,
 				C22B951C1641812200EEC038 /* trade_done.png */,
 				C22B951D1641812200EEC038 /* trade_paid.png */,
@@ -2324,6 +2329,7 @@
 		CECE2A171562B39800E2A40A /* 960x640 */ = {
 			isa = PBXGroup;
 			children = (
+				C2A2A474164FDE6300718405 /* cancel_buy@2x.png */,
 				C22B95151641810B00EEC038 /* trade_done@2x.png */,
 				C22B95161641810B00EEC038 /* trade_paid@2x.png */,
 				C22B95171641810B00EEC038 /* trade_unpaid@2x.png */,
@@ -3085,6 +3091,8 @@
 				C22B95201641812200EEC038 /* trade_done.png in Resources */,
 				C22B95211641812200EEC038 /* trade_paid.png in Resources */,
 				C22B95221641812200EEC038 /* trade_unpaid.png in Resources */,
+				C2A2A475164FDE6300718405 /* cancel_buy@2x.png in Resources */,
+				C2A2A477164FDE7400718405 /* cancel_buy.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

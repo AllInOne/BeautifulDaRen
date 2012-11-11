@@ -16,6 +16,7 @@
 @synthesize buyStatusView;
 @synthesize vMarkImageView;
 @synthesize buyStatusLabel;
+@synthesize cancelBuyButton;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

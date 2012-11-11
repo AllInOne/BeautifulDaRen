@@ -35,6 +35,7 @@
 -(NSDictionary*)extractFriendDictionary:(NSDictionary*)FriendRawDict;
 -(NSString*)getFriendInforKey;
 - (void)setRelation:(NSString*)relation ofFriendIndex:(NSInteger)index;
+- (IBAction)cancelBuy:(id)sender;
 @end
 
 @implementation FriendListViewController
@@ -404,6 +405,16 @@
             [friendListViewCell.buyStatusView setHidden:NO];
             [friendListViewCell.buyStatusLabel setText:[userDict valueForKey:KEY_BUY_OrderStatus]];
         }
+        
+        NSDictionary * localUserDict = [[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
+        if ([[userDict objectForKey:KEY_ACCOUNT_ID] isEqualToString:[localUserDict objectForKey:KEY_ACCOUNT_ID]]) {
+            friendListViewCell.cancelBuyButton.hidden = NO;
+            // TODO to set it with id.
+            friendListViewCell.cancelBuyButton.tag = indexPath.row;
+            [friendListViewCell.cancelBuyButton addTarget:self action:@selector(cancelBuy:) forControlEvents:UIControlEventTouchUpInside];
+        } else {
+            friendListViewCell.cancelBuyButton.hidden = YES;
+        }
 
         [friendListViewCell.actionButton addTarget:self action:@selector(didButtonPressed:inView:) forControlEvents:UIControlEventTouchUpInside];
 
@@ -541,5 +552,9 @@
         }
         [_friendsList replaceObjectAtIndex:index withObject:rawInfo];
     }
+}
+
+- (IBAction)cancelBuy:(id)sender{
+    NSLog(@"=== %d", ((UIButton*)sender).tag);
 }
 @end

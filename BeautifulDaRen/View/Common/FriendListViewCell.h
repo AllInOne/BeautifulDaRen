@@ -18,6 +18,7 @@
 @property (retain, nonatomic) IBOutlet UIView * buyStatusView;
 @property (retain, nonatomic) IBOutlet UIButton * actionButton;
 @property (retain, nonatomic) IBOutlet UILabel * buyStatusLabel;
+@property (retain, nonatomic) IBOutlet UIButton * cancelBuyButton;
 
 @property (assign, nonatomic) id<ButtonPressDelegate> delegate;
 
