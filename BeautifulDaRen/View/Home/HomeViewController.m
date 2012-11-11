@@ -131,11 +131,14 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:K_NOTIFICATION_SHOWWAITOVERLAY object:self];
 
             NSString * isSinaAccount = [[NSUserDefaults standardUserDefaults] objectForKey:USERDEFAULT_AUTO_LOGIN_ACCOUNT_IS_SINA];
+            
+            NSString * userid = [[NSUserDefaults standardUserDefaults] objectForKey:USERDEFAULT_SINA_USER_UID];
 
-            if ([isSinaAccount isEqual:@"0"]) {
+            if ([isSinaAccount isEqual:@"0"] || userid == nil || [userid length] == 0) {
                 [[BSDKManager sharedManager] loginWithUsername:userName
                                                       password:userPwd
                                                andDoneCallback:doneCallBack];
+                [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:USERDEFAULT_AUTO_LOGIN_ACCOUNT_IS_SINA];
             }
             else
             {
