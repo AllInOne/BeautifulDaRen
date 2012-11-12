@@ -409,8 +409,7 @@
         NSDictionary * localUserDict = [[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
         if ([[userDict objectForKey:KEY_ACCOUNT_ID] isEqualToString:[localUserDict objectForKey:KEY_ACCOUNT_ID]]) {
             friendListViewCell.cancelBuyButton.hidden = NO;
-            // TODO to set it with id.
-            friendListViewCell.cancelBuyButton.tag = indexPath.row;
+            friendListViewCell.cancelBuyButton.tag = [[userDict valueForKey:K_BSDK_ORDER_ID] intValue];
             [friendListViewCell.cancelBuyButton addTarget:self action:@selector(cancelBuy:) forControlEvents:UIControlEventTouchUpInside];
         } else {
             friendListViewCell.cancelBuyButton.hidden = YES;
@@ -555,6 +554,16 @@
 }
 
 - (IBAction)cancelBuy:(id)sender{
-    // TODO
+    NSInteger orderId = ((UIButton *)sender).tag;
+    [[BSDKManager sharedManager] cancelOrder:[NSString stringWithFormat:@"%d", orderId]
+                             andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+                                 if (K_BSDK_IS_RESPONSE_OK(data)) {
+                                     [[iToast makeText:@"取消购买成功"] show];
+                                     [self onRefreshButtonClicked];
+                                 }
+                                 else {
+                                     [[iToast makeText:@"取消购买失败"] show];
+                                 }
+                             }];
 }
 @end

@@ -384,7 +384,7 @@
 
         if (_controllerType == WeiboListViewControllerType_MY_BUYED) {
             atMeCell.cancelBuyButton.hidden = NO;
-            // TODO to set it with id.
+            atMeCell.cancelBuyButton.tag = [[data valueForKey:K_BSDK_ORDER_ID] intValue];
             [atMeCell.cancelBuyButton addTarget:self action:@selector(cancelBuy:) forControlEvents:UIControlEventTouchUpInside];
         } else {
             atMeCell.cancelBuyButton.hidden = YES;
@@ -413,6 +413,16 @@
 }
 
 - (IBAction)cancelBuy:(id)sender {
-    // TODO
+    NSInteger orderId = ((UIButton *)sender).tag;
+    [[BSDKManager sharedManager] cancelOrder:[NSString stringWithFormat:@"%d", orderId]
+                             andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+                                 if (K_BSDK_IS_RESPONSE_OK(data)) {
+                                     [[iToast makeText:@"取消购买成功"] show];
+                                     [self onRefreshButtonClicked];
+                                 }
+                                 else {
+                                     [[iToast makeText:@"取消购买失败"] show];
+                                 }
+                             }];
 }
 @end

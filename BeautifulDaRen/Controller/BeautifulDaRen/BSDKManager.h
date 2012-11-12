@@ -225,4 +225,8 @@
 - (void)getOrderItemsListForBlog:(NSString *)blogId
                  andDoneCallback:(processDoneWithDictBlock)callback;
 
+- (void)cancelOrder:(NSString *)orderId
+    andDoneCallback:(processDoneWithDictBlock)callback;
+
+
 @end

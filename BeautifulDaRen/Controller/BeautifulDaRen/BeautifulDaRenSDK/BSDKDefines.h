@@ -65,6 +65,7 @@
 #define K_BSDK_ACTION_GET_PUSH @"getPush"
 #define K_BSDK_ACTION_BUY @"buy"
 #define K_BSDK_ACTION_BUY_LIST @"buyList"
+#define K_BSDK_ACTION_CANCEL_BUY @"cancelBuy"
 
 #define K_BSDK_PAGEINDEX @"Page"
 #define K_BSDK_PAGESIZE @"PageSize"
@@ -147,6 +148,7 @@
 #define K_BSDK_FORWARDBLOGUID @"ForwardBlogId"
 #define K_BSDK_FAVBLOGUID @"FavBlogId"
 #define K_BSDK_BLOGUID @"BlogId"
+#define K_BSDK_ORDER_ID @"OrderId"
 #define K_BSDK_COMMENTUID @"ReplyId"
 #define K_BSDK_BLOGLIST @"BlogList"
 #define K_BSDK_BLOGINFO @"BlogInfo"

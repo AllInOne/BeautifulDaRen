@@ -1176,7 +1176,7 @@ static BSDKManager *sharedInstance;
 
 - (void)getOrderItemsListForBlog:(NSString *)blogId
                  andDoneCallback:(processDoneWithDictBlock)callback {
-    
+
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
     
     [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
@@ -1190,4 +1190,21 @@ static BSDKManager *sharedInstance;
                    httpHeaderFields:nil
                        doneCallback:callback];
 }
+
+- (void)cancelOrder:(NSString *)orderId
+    andDoneCallback:(processDoneWithDictBlock)callback {
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
+
+    [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
+    [params setObject:K_BSDK_ACTION_CANCEL_BUY forKey:K_BSDK_ACTION];
+
+    [params setObject:orderId forKey:K_BSDK_ORDER_ID];
+    [self sendRequestWithMethodName:nil
+                         httpMethod:@"POST"
+                             params:params
+                       postDataType:kBSDKRequestPostDataTypeNormal
+                   httpHeaderFields:nil
+                       doneCallback:callback];
+}
+
 @end
