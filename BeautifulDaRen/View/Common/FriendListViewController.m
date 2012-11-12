@@ -407,7 +407,8 @@
         }
         
         NSDictionary * localUserDict = [[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO];
-        if ([[userDict objectForKey:KEY_ACCOUNT_ID] isEqualToString:[localUserDict objectForKey:KEY_ACCOUNT_ID]]) {
+        if ([[userDict objectForKey:KEY_ACCOUNT_ID] isEqualToString:[localUserDict objectForKey:KEY_ACCOUNT_ID]]
+            && FriendListViewController_TYPE_BUY_ONE_BLOG == _type) {
             friendListViewCell.cancelBuyButton.hidden = NO;
             friendListViewCell.cancelBuyButton.tag = [[userDict valueForKey:K_BSDK_ORDER_ID] intValue];
             [friendListViewCell.cancelBuyButton addTarget:self action:@selector(cancelBuy:) forControlEvents:UIControlEventTouchUpInside];
