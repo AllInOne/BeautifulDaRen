@@ -92,6 +92,7 @@
 		C29F6664154310B300292031 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		C2A2A475164FDE6300718405 /* cancel_buy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C2A2A474164FDE6300718405 /* cancel_buy@2x.png */; };
 		C2A2A477164FDE7400718405 /* cancel_buy.png in Resources */ = {isa = PBXBuildFile; fileRef = C2A2A476164FDE7400718405 /* cancel_buy.png */; };
+		C2A76DA61659180C00710D38 /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A76DA21659180C00710D38 /* EGORefreshTableHeaderView.m */; };
 		C2A810C31566230A008FF2B7 /* PrivateLetterViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2A810C21566230A008FF2B7 /* PrivateLetterViewCell.xib */; };
 		C2CE7287156A929F00C22E34 /* FriendDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2CE7285156A929F00C22E34 /* FriendDetailViewController.m */; };
 		C2CE7288156A929F00C22E34 /* FriendDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2CE7286156A929F00C22E34 /* FriendDetailViewController.xib */; };
@@ -742,6 +743,8 @@
 		C299025A1606F5F6002F811D /* badge@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "badge@2x.png"; sourceTree = "<group>"; };
 		C2A2A474164FDE6300718405 /* cancel_buy@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancel_buy@2x.png"; sourceTree = "<group>"; };
 		C2A2A476164FDE7400718405 /* cancel_buy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel_buy.png; sourceTree = "<group>"; };
+		C2A76DA11659180C00710D38 /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EGORefreshTableHeaderView.h; path = View/ThirdParty/EGORfreshTableHeaderView/EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
+		C2A76DA21659180C00710D38 /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EGORefreshTableHeaderView.m; path = View/ThirdParty/EGORfreshTableHeaderView/EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
 		C2A810C21566230A008FF2B7 /* PrivateLetterViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrivateLetterViewCell.xib; sourceTree = "<group>"; };
 		C2CE7284156A929E00C22E34 /* FriendDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendDetailViewController.h; sourceTree = "<group>"; };
 		C2CE7285156A929F00C22E34 /* FriendDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendDetailViewController.m; sourceTree = "<group>"; };
@@ -1475,6 +1478,23 @@
 			name = Protocol;
 			sourceTree = "<group>";
 		};
+		C2A768FA1659156000710D38 /* ThirdParty */ = {
+			isa = PBXGroup;
+			children = (
+				C2A768FB1659156F00710D38 /* EGORefreshTableHeaderView */,
+			);
+			name = ThirdParty;
+			sourceTree = "<group>";
+		};
+		C2A768FB1659156F00710D38 /* EGORefreshTableHeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				C2A76DA11659180C00710D38 /* EGORefreshTableHeaderView.h */,
+				C2A76DA21659180C00710D38 /* EGORefreshTableHeaderView.m */,
+			);
+			name = EGORefreshTableHeaderView;
+			sourceTree = "<group>";
+		};
 		C2E9898F156A130900ACFEA4 /* subview */ = {
 			isa = PBXGroup;
 			children = (
@@ -1533,6 +1553,7 @@
 		CE029AC4153E682100886227 /* BeautifulDaRen */ = {
 			isa = PBXGroup;
 			children = (
+				C2A768FA1659156000710D38 /* ThirdParty */,
 				CE029ACD153E682100886227 /* AppDelegate.h */,
 				CE029ACE153E682100886227 /* AppDelegate.m */,
 				CE745450153F1F8900CB751A /* Asserts */,
@@ -3211,6 +3232,7 @@
 				CE3CE34315E525DB00AC6608 /* PrivateLetterDetailViewController.m in Sources */,
 				C233487515EB06950000CCED /* AgreementViewController.m in Sources */,
 				CE81A7D915F0A5CE00D3702A /* SinaCityCode.m in Sources */,
+				C2A76DA61659180C00710D38 /* EGORefreshTableHeaderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

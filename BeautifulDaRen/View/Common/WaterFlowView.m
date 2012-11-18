@@ -376,6 +376,19 @@
     }
 }
 
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if([self.cellHeight count] > 0)
+    {
+        [self pageScroll];
+        if(self.contentOffset.y < 0) {
+            if ([self.flowdelegate conformsToProtocol:@protocol(WaterFlowViewDelegate) ])
+            {
+                [self.flowdelegate didPollToRefresh];
+            }
+        }
+    }
+}
+
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
     // TODO

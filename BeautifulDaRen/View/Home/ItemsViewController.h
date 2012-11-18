@@ -1,7 +1,10 @@
 #import <UIKit/UIKit.h>
 #import "WaterFlowView.h"
+#import "EGORefreshTableHeaderView.h"
 
-@interface ItemsViewController : UIViewController <WaterFlowViewDelegate, WaterFlowViewDatasource, UIScrollViewDelegate>
+@interface ItemsViewController : UIViewController <WaterFlowViewDelegate, WaterFlowViewDatasource, UIScrollViewDelegate> {
+    EGORefreshTableHeaderView *refreshHeaderView;
+}
 
 @property (nonatomic, retain) IBOutlet WaterFlowView * waterFlowView;
 
