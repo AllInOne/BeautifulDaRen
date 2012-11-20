@@ -24,9 +24,11 @@
 
 #define GRID_X_DELTA 80
 #define GRID_Y_DELTA 80
-
+#define REFRESHING_HEIGHT 65
 #define INDICATOR_HEIGHT 30
-@interface ItemsViewController()
+@interface ItemsViewController() {
+    CGRect _originalFrame;
+}
 
 @property (retain, nonatomic) NSMutableArray * itemsHeight;
 @property (assign, nonatomic) NSInteger pageIndex;
@@ -109,6 +111,7 @@
                                        self.pageIndex = 1;
                                    }];
 
+    _originalFrame = self.view.frame;
     _waterFlowView = [[WaterFlowView alloc] initWithFrame:self.view.frame];
     _waterFlowView.flowdelegate = self;
     _waterFlowView.flowdatasource = self;
@@ -120,12 +123,10 @@
 
 
     if (refreshHeaderView == nil) {
-        refreshHeaderView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 50)];
+        refreshHeaderView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, REFRESHING_HEIGHT)];
         refreshHeaderView.backgroundColor = [UIColor colorWithRed:226.0/255.0 green:231.0/255.0 blue:237.0/255.0 alpha:1.0];
         refreshHeaderView.bottomBorderThickness = 1.0;
-        [self.view addSubview:refreshHeaderView];
-        [refreshHeaderView setState:EGOOPullRefreshLoading];
-        refreshHeaderView.hidden = YES;
+        [refreshHeaderView setState:EGOOPullRefreshNormal];
     }
 }
 
@@ -261,18 +262,23 @@
         self.isSyncSccuessed = NO;
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: YES];
 
-        CGFloat yPointOfActivityIndicator = self.waterFlowView.contentSize.height;
-        if (self.waterFlowView.contentSize.height == 0) {
-            yPointOfActivityIndicator = 20;
+        callBackBlock callback = nil;
+        if (self.itemDatas.count == 0) {
+            CGFloat yPointOfActivityIndicator = self.waterFlowView.contentSize.height;
+            if (self.waterFlowView.contentSize.height == 0) {
+                yPointOfActivityIndicator = 20;
+            }
+            callback = [ViewHelper getIndicatorViewBlockWithFrame:CGRectMake(120, yPointOfActivityIndicator, 200,INDICATOR_HEIGHT) inView:self.waterFlowView];
         }
-        callBackBlock callback = [ViewHelper getIndicatorViewBlockWithFrame:CGRectMake(120, yPointOfActivityIndicator, 200,INDICATOR_HEIGHT) inView:self.waterFlowView];
         processDoneWithDictBlock block = ^(AIO_STATUS status, NSDictionary *data)
         {
-            callback();
-            Block_release(callback);
+            if (callback) {
+                callback();
+                Block_release(callback);
+            }
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: NO];
 
-            if (refreshHeaderView.hidden == NO) {
+            if (refreshHeaderView.superview == self.view) {
                 [self didEndPollRefresh];
             }
             if (AIO_STATUS_SUCCESS == status && K_BSDK_IS_RESPONSE_OK(data))
@@ -331,14 +337,15 @@
 
 -(void)refresh
 {
-    refreshHeaderView.hidden = YES;
-    [self didEndPollRefresh];
+    if (self.itemDatas.count > 0) {
+        [self startPoll];
+        [self didPollToRefresh];
+    }
     [self refreshData];
 }
 
 -(void)reset
 {
-    refreshHeaderView.hidden = YES;
     self.isSyncSccuessed = YES;
     [self clearData];
 }
@@ -355,30 +362,39 @@
 
 - (void)didPollToRefresh {
     if (self.isSyncSccuessed == YES && self.isPollTop) {
-        refreshHeaderView.hidden = NO;
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:0.3];
 
+        [refreshHeaderView setState:EGOOPullRefreshLoading];
+        
         [_waterFlowView setFrame:CGRectMake(_waterFlowView.frame.origin.x,
-                                            _waterFlowView.frame.origin.y + 50,
+                                            _waterFlowView.frame.origin.y + REFRESHING_HEIGHT,
                                             _waterFlowView.frame.size.width,
                                             _waterFlowView.frame.size.height)];
         [UIView commitAnimations];
         [self refreshData];
+    }
+}
 
+- (void)startPoll {
+    if (self.isSyncSccuessed == YES && self.isPollTop) {
+        [self.view addSubview:refreshHeaderView];
+        [refreshHeaderView setState:EGOOPullRefreshNormal];
+    }
+}
+
+- (void)startRefresh {
+    if (self.isSyncSccuessed == YES && self.isPollTop) {
+        [refreshHeaderView setState:EGOOPullRefreshPulling];
     }
 }
 
 - (void)didEndPollRefresh {
     if (self.isSyncSccuessed == NO) {
-        refreshHeaderView.hidden = YES;
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:0.3];
-
-        [_waterFlowView setFrame:CGRectMake(_waterFlowView.frame.origin.x,
-                                            _waterFlowView.frame.origin.y - 50,
-                                            _waterFlowView.frame.size.width,
-                                            _waterFlowView.frame.size.height)];
+        [refreshHeaderView removeFromSuperview];
+        [_waterFlowView setFrame:_originalFrame];
         [UIView commitAnimations];
     }
 }

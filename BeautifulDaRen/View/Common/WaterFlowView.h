@@ -34,6 +34,8 @@
 - (void)flowView:(WaterFlowView *)flowView didSelectAtCell:(WaterFlowCell*)cell ForIndex:(int)index;
 - (void)flowView:(WaterFlowView *)flowView willLoadData:(int)page;
 - (void)didScrollToBottom;
+- (void)startPoll;
+- (void)startRefresh;
 - (void)didPollToRefresh;
 @end
 

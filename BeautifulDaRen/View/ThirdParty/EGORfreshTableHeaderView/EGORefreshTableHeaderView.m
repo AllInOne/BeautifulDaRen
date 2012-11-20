@@ -61,8 +61,7 @@ static NSDateFormatter *refreshFormatter;
         [self addSubview:lastUpdatedLabel];
         [lastUpdatedLabel release];
 
-        // XXX fixed for beautiful height from -48 to -38.
-        statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, frame.size.height - 38.0f, self.frame.size.width, 20.0f)];
+        statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, frame.size.height - 43.0f, self.frame.size.width, 20.0f)];
         statusLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         statusLabel.font = [UIFont boldSystemFontOfSize:13.0f];
         statusLabel.textColor = TEXT_COLOR;
@@ -82,7 +81,7 @@ static NSDateFormatter *refreshFormatter;
         [arrowImage release];
 
         activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        activityView.frame = CGRectMake(25.0f, frame.size.height - 38.0f, 20.0f, 20.0f);
+        activityView.frame = CGRectMake(25.0f, frame.size.height - 45.0f, 20.0f, 20.0f);
         activityView.hidesWhenStopped = YES;
         [self addSubview:activityView];
         [activityView release];
@@ -123,7 +122,7 @@ static NSDateFormatter *refreshFormatter;
 - (void)setState:(EGOPullRefreshState)aState{
 	switch (aState) {
       case EGOOPullRefreshPulling: {
-          statusLabel.text = @"Release to refresh...";
+          statusLabel.text = @"松开可以刷新...";
           [CATransaction begin];
           [CATransaction setAnimationDuration:.18];
           arrowImage.transform = CATransform3DMakeRotation((M_PI / 180.0) * 180.0f, 0.0f, 0.0f, 1.0f);
@@ -139,7 +138,7 @@ static NSDateFormatter *refreshFormatter;
               [CATransaction commit];
           }
 
-          statusLabel.text = @"Pull down to refresh...";
+          statusLabel.text = @"下拉可以刷新...";
           [activityView stopAnimating];
           [CATransaction begin];
           [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
@@ -150,8 +149,6 @@ static NSDateFormatter *refreshFormatter;
           break;
       }
       case EGOOPullRefreshLoading: {
-//          statusLabel.text = @"Loading...";
-          // TODO fixed for beautiful
           statusLabel.text = @"亲,正在加载,请等一下哦...";
           [activityView startAnimating];
           [CATransaction begin];

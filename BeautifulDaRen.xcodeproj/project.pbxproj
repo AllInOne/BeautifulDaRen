@@ -58,6 +58,8 @@
 		C25123D91591C790004F987E /* ModifyPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C25123D71591C790004F987E /* ModifyPasswordViewController.m */; };
 		C25123DA1591C790004F987E /* ModifyPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C25123D81591C790004F987E /* ModifyPasswordViewController.xib */; };
 		C2519F9B1564E36E0040EBC5 /* WaterFlowView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2519F9A1564E36E0040EBC5 /* WaterFlowView.m */; };
+		C2569705165BCFE60062EFA5 /* blueArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = C2569704165BCFE60062EFA5 /* blueArrow.png */; };
+		C2569707165BCFF00062EFA5 /* blueArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C2569706165BCFF00062EFA5 /* blueArrow@2x.png */; };
 		C25BDE1A1584E5030006153B /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C25BDE181584E5030006153B /* MineViewController.m */; };
 		C25BDE1B1584E5030006153B /* MineViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C25BDE191584E5030006153B /* MineViewController.xib */; };
 		C26717AE1542BF0000DC40D8 /* CommonScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = C26717A61542BF0000DC40D8 /* CommonScrollView.m */; };
@@ -696,6 +698,8 @@
 		C25123D81591C790004F987E /* ModifyPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ModifyPasswordViewController.xib; sourceTree = "<group>"; };
 		C2519F991564E36E0040EBC5 /* WaterFlowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaterFlowView.h; sourceTree = "<group>"; };
 		C2519F9A1564E36E0040EBC5 /* WaterFlowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaterFlowView.m; sourceTree = "<group>"; };
+		C2569704165BCFE60062EFA5 /* blueArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueArrow.png; sourceTree = "<group>"; };
+		C2569706165BCFF00062EFA5 /* blueArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blueArrow@2x.png"; sourceTree = "<group>"; };
 		C25BDE171584E5030006153B /* MineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineViewController.h; sourceTree = "<group>"; };
 		C25BDE181584E5030006153B /* MineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineViewController.m; sourceTree = "<group>"; };
 		C25BDE191584E5030006153B /* MineViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MineViewController.xib; sourceTree = "<group>"; };
@@ -2154,6 +2158,7 @@
 		CECE29F41562B38E00E2A40A /* 320*480 */ = {
 			isa = PBXGroup;
 			children = (
+				C2569704165BCFE60062EFA5 /* blueArrow.png */,
 				C2A2A476164FDE7400718405 /* cancel_buy.png */,
 				C22B951B1641812200EEC038 /* nav_bar_background.png */,
 				C22B951C1641812200EEC038 /* trade_done.png */,
@@ -2350,6 +2355,7 @@
 		CECE2A171562B39800E2A40A /* 960x640 */ = {
 			isa = PBXGroup;
 			children = (
+				C2569706165BCFF00062EFA5 /* blueArrow@2x.png */,
 				C2A2A474164FDE6300718405 /* cancel_buy@2x.png */,
 				C22B95151641810B00EEC038 /* trade_done@2x.png */,
 				C22B95161641810B00EEC038 /* trade_paid@2x.png */,
@@ -3114,6 +3120,8 @@
 				C22B95221641812200EEC038 /* trade_unpaid.png in Resources */,
 				C2A2A475164FDE6300718405 /* cancel_buy@2x.png in Resources */,
 				C2A2A477164FDE7400718405 /* cancel_buy.png in Resources */,
+				C2569705165BCFE60062EFA5 /* blueArrow.png in Resources */,
+				C2569707165BCFF00062EFA5 /* blueArrow@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

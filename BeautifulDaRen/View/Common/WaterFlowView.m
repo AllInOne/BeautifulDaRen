@@ -372,6 +372,10 @@
             {
                 [self.flowdelegate didScrollToBottom];
             }
+        } else if (self.contentOffset.y < 0 && self.contentOffset.y > -65) {
+            [self.flowdelegate startPoll];
+        }  else if (self.contentOffset.y <= -65) {
+            [self.flowdelegate startRefresh];
         }
     }
 }

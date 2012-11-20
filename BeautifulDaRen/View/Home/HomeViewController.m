@@ -217,7 +217,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-        [_itemsViewController viewWillAppear:animated];
+    [_itemsViewController viewWillAppear:animated];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -229,7 +229,7 @@
 {
 	[super viewWillDisappear:animated];
     
-        [_itemsViewController viewWillDisappear:animated];
+    [_itemsViewController viewWillDisappear:animated];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -253,10 +253,11 @@
 
 -(IBAction)onRefreshBtnSelected:(UIButton*)sender
 {
-    [self.itemsViewController clearData];
     [self.itemsViewController refresh];
-    [self refreshAdsView];
-    [self showAdsPageView];
+    if (_adsPageView == nil || _adsPageView.view.hidden == YES) {
+        [self refreshAdsView];
+        [self showAdsPageView];
+    }
 }
 
 - (IBAction)onRegisterBtnSelected:(UIButton*)sender
