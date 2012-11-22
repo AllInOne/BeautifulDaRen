@@ -263,19 +263,16 @@
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: YES];
 
         callBackBlock callback = nil;
-        if (self.itemDatas.count == 0) {
-            CGFloat yPointOfActivityIndicator = self.waterFlowView.contentSize.height;
-            if (self.waterFlowView.contentSize.height == 0) {
-                yPointOfActivityIndicator = 20;
-            }
-            callback = [ViewHelper getIndicatorViewBlockWithFrame:CGRectMake(120, yPointOfActivityIndicator, 200,INDICATOR_HEIGHT) inView:self.waterFlowView];
+        CGFloat yPointOfActivityIndicator = self.waterFlowView.contentSize.height;
+        if (self.waterFlowView.contentSize.height == 0) {
+            yPointOfActivityIndicator = 20;
         }
+
+        callback = [ViewHelper getIndicatorViewBlockWithFrame:CGRectMake(120, yPointOfActivityIndicator, 200,INDICATOR_HEIGHT) inView:self.waterFlowView];
         processDoneWithDictBlock block = ^(AIO_STATUS status, NSDictionary *data)
         {
-            if (callback) {
-                callback();
-                Block_release(callback);
-            }
+            callback();
+            Block_release(callback);
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: NO];
 
             if (refreshHeaderView.superview == self.view) {
