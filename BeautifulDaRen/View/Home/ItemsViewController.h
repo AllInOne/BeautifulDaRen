@@ -10,7 +10,7 @@
 
 @property (retain, nonatomic) NSMutableArray * itemDatas;
 -(id)initWithArray:(NSArray*)array;
--(void)refresh;
+-(void)refreshInNewAds:(BOOL)isNewAds;
 -(void)clearData;
 -(void)reset;
 @end

@@ -19,7 +19,7 @@
 
 #define TEXT_VIEW_MAX_CHARACTOR_NUMBER    140
 
-#define CONTENT_MARGIN              (5.0)
+#define CONTENT_MARGIN              (3.0)
 
 #define NAVIGATION_LEFT_LOGO_WIDTH (90.0)
 #define NAVIGATION_LEFT_LOGO_HEIGHT (27.0)

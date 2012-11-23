@@ -58,7 +58,7 @@
                                    usingBlock:^(NSNotification *note) {
                                        [self refreshNavigationView];
                                        [self.itemsViewController reset];
-                                       [self.itemsViewController refresh];
+                                       [self.itemsViewController refreshInNewAds:NO];
                                        [self refreshAdsView];
                                        [self showAdsPageView];
                                    }];
@@ -70,7 +70,7 @@
                                    usingBlock:^(NSNotification *note) {
                                        [self refreshNavigationView];
                                        [self.itemsViewController reset];
-                                       [self.itemsViewController refresh];
+                                       [self.itemsViewController refreshInNewAds:NO];
                                        [self refreshAdsView];
                                        [self showAdsPageView];
                                    }];
@@ -151,14 +151,14 @@
     // refresh view data when not auto signin.
     else if (![[BSDKManager sharedManager] isLogin] && ![isAutoLogin boolValue])
     {
-        [self.itemsViewController refresh];
+        [self.itemsViewController refreshInNewAds:NO];
         [self refreshAdsView];
     }
     // when recieved memory warning in other view, this view will be call viewDidUnload.
     // so, when show this view again, the viewdidload will be called again.
     else if([[BSDKManager sharedManager] isLogin])
     {
-        [self.itemsViewController refresh];
+        [self.itemsViewController refreshInNewAds:NO];
         [self refreshAdsView];
     }
     [self refreshNavigationView];
@@ -253,7 +253,7 @@
 
 -(IBAction)onRefreshBtnSelected:(UIButton*)sender
 {
-    [self.itemsViewController refresh];
+    [self.itemsViewController refreshInNewAds:self.adsPageView == nil];
     if (_adsPageView == nil || _adsPageView.view.hidden == YES) {
         [self refreshAdsView];
         [self showAdsPageView];
@@ -274,7 +274,7 @@
     [UIView setAnimationDuration:0.3];
 
     [_itemsViewController.view setFrame:CGRectMake(0,
-                                                   ADS_CELL_HEIGHT + 2.0,
+                                                   ADS_CELL_HEIGHT + CONTENT_MARGIN,
                                                    self.view.frame.size.width,
                                                    USER_WINDOW_HEIGHT - ADS_CELL_HEIGHT - CONTENT_MARGIN)];
     [UIView commitAnimations];

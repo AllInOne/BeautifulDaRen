@@ -376,9 +376,9 @@
             }
         } else if(scrollView.isDecelerating == NO) {
             if (self.contentOffset.y < 0 && self.contentOffset.y > -65) {
-                [self.flowdelegate startPoll];
+                [self.flowdelegate draggingToRefreshing];
             }  else if (self.contentOffset.y <= -65) {
-                [self.flowdelegate startRefresh];
+                [self.flowdelegate releaseToRefreshing];
             }
         }
     }
@@ -391,10 +391,10 @@
         if(self.contentOffset.y < 0) {
             if ([self.flowdelegate conformsToProtocol:@protocol(WaterFlowViewDelegate) ])
             {
-                [self.flowdelegate didPollToRefresh];
+                [self.flowdelegate didRefresh];
             }
         } else {
-            [self.flowdelegate cancelPoll];
+            [self.flowdelegate cancelRefreshing];
         }
     }
 }

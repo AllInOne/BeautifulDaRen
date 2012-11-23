@@ -26,9 +26,7 @@
 #define GRID_Y_DELTA 80
 #define REFRESHING_HEIGHT 65
 #define INDICATOR_HEIGHT 30
-@interface ItemsViewController() {
-    CGRect _originalFrame;
-}
+@interface ItemsViewController()
 
 @property (retain, nonatomic) NSMutableArray * itemsHeight;
 @property (assign, nonatomic) NSInteger pageIndex;
@@ -111,7 +109,6 @@
                                        self.pageIndex = 1;
                                    }];
 
-    _originalFrame = self.view.frame;
     _waterFlowView = [[WaterFlowView alloc] initWithFrame:self.view.frame];
     _waterFlowView.flowdelegate = self;
     _waterFlowView.flowdatasource = self;
@@ -332,11 +329,18 @@
 
 }
 
--(void)refresh
+-(void)refreshInNewAds:(BOOL)isNewAds
 {
     if (self.itemDatas.count > 0) {
-        [self startPoll];
-        [self didPollToRefresh];
+        // Workaround, Close ads view, then client refresh button at the right top screen. then it can't show item view correctly.
+        if (isNewAds) {
+            [_waterFlowView setFrame:CGRectMake(_waterFlowView.frame.origin.x,
+                                                _waterFlowView.frame.origin.y + 16,
+                                                _waterFlowView.frame.size.width,
+                                                _waterFlowView.frame.size.height)];
+        }
+        [self draggingToRefreshing];
+        [self didRefresh];
     }
     [self refreshData];
 }
@@ -357,15 +361,16 @@
     self.pageIndex = 1;
 }
 
-- (void)didPollToRefresh {
+- (void)didRefresh {
     if (self.isSyncSccuessed == YES && self.isPollTop) {
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:0.3];
 
         [refreshHeaderView setState:EGOOPullRefreshLoading];
-        
+
+        NSLog(@"AAAA========%lf", _waterFlowView.frame.origin.y);
         [_waterFlowView setFrame:CGRectMake(_waterFlowView.frame.origin.x,
-                                            _waterFlowView.frame.origin.y + REFRESHING_HEIGHT,
+                                            _waterFlowView.frame.origin.y + 68,
                                             _waterFlowView.frame.size.width,
                                             _waterFlowView.frame.size.height)];
         [UIView commitAnimations];
@@ -373,18 +378,18 @@
     }
 }
 
-- (void)cancelPoll {
+- (void)cancelRefreshing {
     [self didEndPollRefresh];
 }
 
-- (void)startPoll {
+- (void)draggingToRefreshing {
     if (self.isSyncSccuessed == YES && self.isPollTop) {
         [self.view addSubview:refreshHeaderView];
         [refreshHeaderView setState:EGOOPullRefreshNormal];
     }
 }
 
-- (void)startRefresh {
+- (void)releaseToRefreshing {
     if (self.isSyncSccuessed == YES && self.isPollTop) {
         [refreshHeaderView setState:EGOOPullRefreshPulling];
     }
@@ -394,7 +399,12 @@
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.3];
     [refreshHeaderView removeFromSuperview];
-    [_waterFlowView setFrame:_originalFrame];
+    if (self.isSyncSccuessed == NO) {
+        [_waterFlowView setFrame:CGRectMake(_waterFlowView.frame.origin.x,
+                                            _waterFlowView.frame.origin.y - 68,
+                                            _waterFlowView.frame.size.width,
+                                            _waterFlowView.frame.size.height)];
+    }
     [UIView commitAnimations];
 }
 @end
