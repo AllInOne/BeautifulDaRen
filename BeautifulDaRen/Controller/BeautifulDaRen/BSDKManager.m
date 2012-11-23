@@ -1009,10 +1009,23 @@ static BSDKManager *sharedInstance;
     [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_SINAUSERLOGIN forKey:K_BSDK_ACTION];
 
-    [params setObject:userId forKey:K_BSDK_SINA_USER_ID];
-    [params setObject:userName forKey:K_BSDK_SINA_USER_NAME];
-    [params setObject:sex forKey:K_BSDK_SINA_SEX];
-    [params setObject:city forKey:K_BSDK_SINA_CITY];
+    if (userId)
+    {
+        [params setObject:userId forKey:K_BSDK_SINA_USER_ID];
+    }
+    if (userName)
+    {
+        [params setObject:userName forKey:K_BSDK_SINA_USER_NAME];
+    }
+    if (sex)
+    {
+        [params setObject:sex forKey:K_BSDK_SINA_SEX];
+    }
+    if (city)
+    {
+        [params setObject:city forKey:K_BSDK_SINA_CITY];
+    }
+
 //    [params setObject:email forKey:K_BSDK_SINA_EMAIL];
 
     [self sendRequestWithMethodName:nil

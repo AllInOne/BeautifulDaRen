@@ -163,9 +163,9 @@
     NSArray* cameraShareArray = [NSArray arrayWithObjects:NSLocalizedString(@"tab_myshow", @"tab_myshow"),NSLocalizedString(@"tab_myshow", @"tab_myshow"),nil];
     NSArray* mineArray = [NSArray arrayWithObjects:NSLocalizedString(@"tab_mine", @"tab_mine"),NSLocalizedString(@"tab_mine", @"tab_mine"),nil];
     NSArray* moreArray = [NSArray arrayWithObjects:NSLocalizedString(@"tab_search", @"tab_search"), NSLocalizedString(@"tab_search", @"tab_search"),nil];
-    NSArray* localizedStringsArray = [NSArray arrayWithObjects:homeArray, categoryArray, cameraShareArray, moreArray, mineArray, nil];
+    NSArray* localizedStringsArray = [NSArray arrayWithObjects:homeArray, categoryArray, mineArray, moreArray, cameraShareArray, nil];
 
-    NSArray* tabbarIconNamesArray = [NSArray arrayWithObjects:@"tabbar_home_icon", @"tabbar_hot_icon", @"tabbar_show_icon", @"tabbar_search_icon", @"tabbar_mine_icon", nil];
+    NSArray* tabbarIconNamesArray = [NSArray arrayWithObjects:@"tabbar_home_icon", @"tabbar_hot_icon", @"tabbar_mine_icon", @"tabbar_search_icon", @"tabbar_show_icon", nil];
 
     NSInteger index = 0;
     for (UINavigationController* navigation in [self customizableViewControllers]){
