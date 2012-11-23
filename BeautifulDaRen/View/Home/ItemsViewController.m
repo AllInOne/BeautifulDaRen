@@ -373,6 +373,10 @@
     }
 }
 
+- (void)cancelPoll {
+    [self didEndPollRefresh];
+}
+
 - (void)startPoll {
     if (self.isSyncSccuessed == YES && self.isPollTop) {
         [self.view addSubview:refreshHeaderView];
@@ -387,12 +391,10 @@
 }
 
 - (void)didEndPollRefresh {
-    if (self.isSyncSccuessed == NO) {
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationDuration:0.3];
-        [refreshHeaderView removeFromSuperview];
-        [_waterFlowView setFrame:_originalFrame];
-        [UIView commitAnimations];
-    }
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.3];
+    [refreshHeaderView removeFromSuperview];
+    [_waterFlowView setFrame:_originalFrame];
+    [UIView commitAnimations];
 }
 @end

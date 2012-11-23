@@ -36,6 +36,7 @@
 - (void)didScrollToBottom;
 - (void)startPoll;
 - (void)startRefresh;
+- (void)cancelPoll;
 - (void)didPollToRefresh;
 @end
 

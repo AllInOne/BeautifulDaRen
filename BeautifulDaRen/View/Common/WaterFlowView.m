@@ -5,7 +5,9 @@
 #define REFRESHINGVIEW_HEIGHT 88
 #define MAX_PAGE 10
 
-@interface WaterFlowView()
+@interface WaterFlowView() {
+    CGFloat oldDraggingY;
+}
 
 @property (assign, nonatomic) NSInteger numberOfColumns ;
 @property (assign, nonatomic) NSInteger currentPage;
@@ -372,10 +374,12 @@
             {
                 [self.flowdelegate didScrollToBottom];
             }
-        } else if (self.contentOffset.y < 0 && self.contentOffset.y > -65) {
-            [self.flowdelegate startPoll];
-        }  else if (self.contentOffset.y <= -65) {
-            [self.flowdelegate startRefresh];
+        } else if(scrollView.isDecelerating == NO) {
+            if (self.contentOffset.y < 0 && self.contentOffset.y > -65) {
+                [self.flowdelegate startPoll];
+            }  else if (self.contentOffset.y <= -65) {
+                [self.flowdelegate startRefresh];
+            }
         }
     }
 }
@@ -389,12 +393,15 @@
             {
                 [self.flowdelegate didPollToRefresh];
             }
+        } else {
+            [self.flowdelegate cancelPoll];
         }
     }
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
+    oldDraggingY = self.contentOffset.y;
     // TODO
 //    float bottomEdge = scrollView.contentOffset.y + scrollView.frame.size.height;
 //
