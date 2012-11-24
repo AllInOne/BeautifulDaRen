@@ -37,11 +37,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "BeautifulDaRen/View/Common/WaterFlowView.m"
-         timestampString = "362417224.529737"
+         timestampString = "375372183.048487"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "341"
-         endingLineNumber = "341"
+         startingLineNumber = "343"
+         endingLineNumber = "343"
          landmarkName = "-pageScroll"
          landmarkType = "5">
       </FileBreakpoint>
@@ -51,11 +51,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "BeautifulDaRen/View/Common/WaterFlowView.m"
-         timestampString = "362417224.529737"
+         timestampString = "375372183.048487"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "331"
-         endingLineNumber = "331"
+         startingLineNumber = "333"
+         endingLineNumber = "333"
          landmarkName = "-pageScroll"
          landmarkType = "5">
       </FileBreakpoint>
@@ -151,16 +151,55 @@
          landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "BeautifulDaRen/View/Common/WaterFlowView.m"
+         timestampString = "375372548.644236"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "394"
+         endingLineNumber = "394"
+         landmarkName = "-scrollViewDidEndDragging:willDecelerate:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "BeautifulDaRen/View/RootTabViewController.m"
-         timestampString = "368000250.905269"
+         filePath = "BeautifulDaRen/View/Home/ItemsViewController.m"
+         timestampString = "375416070.772417"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "85"
-         endingLineNumber = "85"
-         landmarkName = "-viewDidLoad"
+         startingLineNumber = "375"
+         endingLineNumber = "375"
+         landmarkName = "-didRefresh"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "BeautifulDaRen/View/Home/ItemsViewController.m"
+         timestampString = "375416070.772417"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "409"
+         endingLineNumber = "409"
+         landmarkName = "-didEndPollRefresh"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "BeautifulDaRen/View/Home/ItemsViewController.m"
+         timestampString = "375415957.145778"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "277"
+         endingLineNumber = "277"
+         landmarkName = "-refreshData"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
