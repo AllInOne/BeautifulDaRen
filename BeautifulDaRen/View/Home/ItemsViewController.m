@@ -26,7 +26,9 @@
 #define GRID_Y_DELTA 80
 #define REFRESHING_HEIGHT 65
 #define INDICATOR_HEIGHT 30
-@interface ItemsViewController()
+@interface ItemsViewController() {
+    BOOL _originYChanged;
+}
 
 @property (retain, nonatomic) NSMutableArray * itemsHeight;
 @property (assign, nonatomic) NSInteger pageIndex;
@@ -96,7 +98,7 @@
     self.isSyncSccuessed = YES;
     self.isFetchMore = YES;
     self.isPollTop = YES;
-
+    _originYChanged = NO;
     _itemsHeight = [[NSMutableArray alloc] init];
     [self loadItemsHeight];
 
@@ -362,17 +364,21 @@
 }
 
 - (void)didRefresh {
-    if (self.isSyncSccuessed == YES && self.isPollTop) {
+    if (self.isSyncSccuessed == YES && self.isPollTop
+        && _originYChanged == NO) {
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:0.3];
 
         [refreshHeaderView setState:EGOOPullRefreshLoading];
 
-        NSLog(@"AAAA========%lf", _waterFlowView.frame.origin.y);
-        [_waterFlowView setFrame:CGRectMake(_waterFlowView.frame.origin.x,
+        if (refreshHeaderView.superview != self.view) {
+            [self.view addSubview:refreshHeaderView];
+        }
+                [_waterFlowView setFrame:CGRectMake(_waterFlowView.frame.origin.x,
                                             _waterFlowView.frame.origin.y + 68,
                                             _waterFlowView.frame.size.width,
                                             _waterFlowView.frame.size.height)];
+        _originYChanged = YES;
         [UIView commitAnimations];
         [self refreshData];
     }
@@ -399,11 +405,12 @@
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.3];
     [refreshHeaderView removeFromSuperview];
-    if (self.isSyncSccuessed == NO) {
+    if (self.isSyncSccuessed == NO && _originYChanged == YES) {
         [_waterFlowView setFrame:CGRectMake(_waterFlowView.frame.origin.x,
                                             _waterFlowView.frame.origin.y - 68,
                                             _waterFlowView.frame.size.width,
                                             _waterFlowView.frame.size.height)];
+        _originYChanged = NO;
     }
     [UIView commitAnimations];
 }
