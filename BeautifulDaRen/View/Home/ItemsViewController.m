@@ -384,6 +384,7 @@
                                             _waterFlowView.frame.size.height)];
         _originYChanged = YES;
         [UIView commitAnimations];
+        self.pageIndex = 1;
         [self refreshDataIsClean:YES];
     }
 }
