@@ -39,7 +39,7 @@
 
 - (void)loadItemsHeight;
 - (void)didEndPollRefresh;
-- (void)refreshData;
+- (void)refreshDataIsClean:(BOOL)isClean;
 -(NSDictionary*) getValidItemDictionaryAtIndex:(NSUInteger)index;
 @end
 
@@ -233,7 +233,7 @@
 
 - (void)didScrollToBottom
 {
-    [self refreshData];
+    [self refreshDataIsClean:NO];
 }
 
 -(void)setItemDatas:(NSMutableArray *)itemDatas
@@ -255,7 +255,7 @@
     return dict;
 }
 
-- (void)refreshData {
+- (void)refreshDataIsClean:(BOOL)isClean {
     if (self.isSyncSccuessed && (self.isFetchMore || self.isPollTop))
     {
         self.isSyncSccuessed = NO;
@@ -279,6 +279,9 @@
             }
             if (AIO_STATUS_SUCCESS == status && K_BSDK_IS_RESPONSE_OK(data))
             {
+                if (isClean) {
+                    [self.itemDatas removeAllObjects];
+                }
                 NSArray * array = [data valueForKey:K_BSDK_BLOGLIST];
                 for (NSDictionary * dict in array)
                 {
@@ -333,6 +336,7 @@
 
 -(void)refreshInNewAds:(BOOL)isNewAds
 {
+    self.pageIndex = 1;
     if (self.itemDatas.count > 0) {
         // Workaround, Close ads view, then client refresh button at the right top screen. then it can't show item view correctly.
         if (isNewAds) {
@@ -344,7 +348,7 @@
         [self draggingToRefreshing];
         [self didRefresh];
     }
-    [self refreshData];
+    [self refreshDataIsClean:YES];
 }
 
 -(void)reset
@@ -380,12 +384,14 @@
                                             _waterFlowView.frame.size.height)];
         _originYChanged = YES;
         [UIView commitAnimations];
-        [self refreshData];
+        [self refreshDataIsClean:YES];
     }
 }
 
 - (void)cancelRefreshing {
-    [self didEndPollRefresh];
+    if (refreshHeaderView.state != EGOOPullRefreshLoading) {
+        [self didEndPollRefresh];
+    }
 }
 
 - (void)draggingToRefreshing {

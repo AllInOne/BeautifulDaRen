@@ -19,7 +19,7 @@
 #import "LoginViewController.h"
 #import "MineViewController.h"
 
-#define INDEX_MINE_VIEW_NAVIGATION (4)
+#define INDEX_MINE_VIEW_NAVIGATION (2)
 
 @interface RootTabViewController()
 
