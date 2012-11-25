@@ -74,7 +74,7 @@
 "follow" = "关注";
 "unfollow" = "取消关注";
 "fans" = "粉丝";
-"collection" = "收藏";
+"collection" = "喜欢";
 "black_list" = "黑名单";
 "my_publish" = "我发表的";
 "private_letter" = "私信";
@@ -89,12 +89,12 @@
 "published" = "已发布商品";
 "her_weibo" = "她的微博";
 "his_weibo" = "他的微博";
-"my_collection" = "我的收藏";
-"her_collection" = "她的收藏";
-"his_collection" = "他的收藏";
+"my_collection" = "我的喜欢";
+"her_collection" = "她的喜欢";
+"his_collection" = "他的喜欢";
 
-"favourating" = "正在收藏...";
-"canceling_favourate" = "正在取消收藏...";
+"favourating" = "正添加到喜欢列表...";
+"canceling_favourate" = "正在取消喜欢...";
 "ordering" = "正在订购...";
 "buyed_user" = "已购买";
 "no_such_merchant_user" = "亲, 该商场还没有注册秀悦购帐号哦!";
@@ -164,10 +164,10 @@
 
 "remove_fan" = "移除粉丝";
 
-"favourate_succeed" = "收藏成功";
-"favourate_failed" = "收藏失败";
-"cancel_favourate_succeed" = "取消收藏成功";
-"cancel_favourate_failed" = "取消收藏失败";
+"favourate_succeed" = "喜欢成功";
+"favourate_failed" = "喜欢失败";
+"cancel_favourate_succeed" = "取消喜欢成功";
+"cancel_favourate_failed" = "取消喜欢失败";
 
 "weibo_detail" = "微博详情";
 "no_comment" = "没有评论";
@@ -182,7 +182,7 @@
 "fetching" = "获取中...";
 "no_message" = "没有相关信息";
 
-"fav_list" ="收藏列表";
+"fav_list" ="喜欢列表";
 
 "picture" = "图片";
 
