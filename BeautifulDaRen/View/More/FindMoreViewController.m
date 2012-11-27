@@ -446,11 +446,14 @@
         }
     };
 
-    if ([[BSDKManager sharedManager] isLogin])
+//    if ([[BSDKManager sharedManager] isLogin])
     {
         NSString * userCity = [[[NSUserDefaults standardUserDefaults]
                                 valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO]
                                valueForKey:KEY_ACCOUNT_CITY];
+        if (userCity == nil) {
+            userCity = K_BSDK_DEFAULT_CITY;
+        }
         [[BSDKManager sharedManager] getHotUsersByCity:userCity
                                               userType:type
                                               pageSize:USER_COUNT_PER_PAGE

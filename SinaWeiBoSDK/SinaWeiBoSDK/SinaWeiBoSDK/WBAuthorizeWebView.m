@@ -37,7 +37,7 @@
         // Custom initialization.
         self.navigationItem.title = NSLocalizedString(@"app_name", @"app_name");
 
-        [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onDoneButtonClicked:) title:NSLocalizedString(@"done", @"done")]];
+        [self.navigationItem setRightBarButtonItem:[ViewHelper getBarItemOfTarget:self action:@selector(onDoneButtonClicked:) title:NSLocalizedString(@"go_back", @"go_back")]];
     }
     return self;
 }
