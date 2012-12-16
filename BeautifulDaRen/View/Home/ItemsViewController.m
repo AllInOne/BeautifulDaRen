@@ -123,7 +123,7 @@
 
     if (refreshHeaderView == nil) {
         refreshHeaderView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, REFRESHING_HEIGHT)];
-        refreshHeaderView.backgroundColor = [UIColor colorWithWhite:1.0 alpha:1.0];
+        refreshHeaderView.backgroundColor = [UIColor colorWithRed:1.0 green:0.8 blue:1.0 alpha:0.3];
         refreshHeaderView.bottomBorderThickness = 1.0;
         [refreshHeaderView setState:EGOOPullRefreshNormal];
     }

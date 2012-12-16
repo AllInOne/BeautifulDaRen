@@ -160,6 +160,7 @@
 #define K_BSDK_PICTURE_ORIGINAL @"Picture"
 #define K_BSDK_PICTURE_102 @"pic_102"
 #define K_BSDK_PICTURE_320 @"pic_320"
+#define K_BSDK_PICTURE_65_2  @"pic_65"
 #define K_BSDK_PICTURE_65  @"pic_65-65"
 #define K_BSDK_PICTURE_HEIGHT @"Picture_height"
 #define K_BSDK_PICTURE_WIDTH @"Picture_width"

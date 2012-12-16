@@ -572,7 +572,7 @@
     NSInteger picHeight = [[self.weiboData objectForKey:K_BSDK_PICTURE_HEIGHT] intValue];
     if (!self.isAttachedImageSucceed && picWidth && picHeight) {
         UIImageView * placeholderImageView = [[UIImageView alloc] init];
-        [placeholderImageView setImageWithURL:[NSURL URLWithString:[self.weiboData objectForKey:K_BSDK_PICTURE_102]]];
+        [placeholderImageView setImageWithURL:[NSURL URLWithString:[self.weiboData objectForKey:K_BSDK_PICTURE_65_2]]];
         [self.weiboAttachedImageView setImageWithURL:[NSURL URLWithString:[self.weiboData objectForKey:K_BSDK_PICTURE_320]] placeholderImage:placeholderImageView.image success:^(UIImage *image) {
             self.isAttachedImageDone = YES;
             self.isAttachedImageSucceed = YES;

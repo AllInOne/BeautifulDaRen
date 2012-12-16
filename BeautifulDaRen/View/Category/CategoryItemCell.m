@@ -78,7 +78,7 @@
 
             NSArray * classWeiboList = [data objectForKey:K_BSDK_BLOGLIST];
             for (NSDictionary * weibo in classWeiboList) {
-                if ([weibo objectForKey:K_BSDK_PICTURE_102]) {
+                if ([weibo objectForKey:K_BSDK_PICTURE_65_2]) {
                     [self.weiboList addObject:weibo];
                 }
             }
