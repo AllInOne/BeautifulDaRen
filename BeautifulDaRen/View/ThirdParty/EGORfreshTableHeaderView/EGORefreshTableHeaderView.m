@@ -29,7 +29,7 @@
 #import "EGORefreshTableHeaderView.h"
 
 #define TEXT_COLOR	 [UIColor colorWithRed:87.0/255.0 green:108.0/255.0 blue:137.0/255.0 alpha:1.0]
-#define BORDER_COLOR [UIColor colorWithRed:160.0/255.0 green:173.0/255.0 blue:182.0/255.0 alpha:1.0]
+#define BORDER_COLOR [UIColor colorWithWhite:1.0 alpha:1.0]
 
 @implementation EGORefreshTableHeaderView
 
@@ -49,6 +49,8 @@ static NSDateFormatter *refreshFormatter;
 - (id)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+        
+        self.backgroundColor = [UIColor whiteColor];
 
         lastUpdatedLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, frame.size.height - 30.0f, self.frame.size.width, 20.0f)];
         lastUpdatedLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;

@@ -18,6 +18,7 @@
 #import "CategoryViewController.h"
 #import "LoginViewController.h"
 #import "MineViewController.h"
+#import "FindMoreViewController.h"
 
 #define INDEX_MINE_VIEW_NAVIGATION (2)
 
@@ -137,7 +138,10 @@
     UINavigationController * navController = (UINavigationController*)viewController;
     [navController popToRootViewControllerAnimated:NO];
     // when clicked HomeView, it should be turn to home view.
-    if (![[BSDKManager sharedManager] isLogin] && !([navController.topViewController isKindOfClass:[HomeViewController class]] || [navController.topViewController isKindOfClass:[CategoryViewController class]])) {
+    if (![[BSDKManager sharedManager] isLogin] && 
+        !([navController.topViewController isKindOfClass:[HomeViewController class]] ||
+          [navController.topViewController isKindOfClass:[CategoryViewController class]] ||
+          [navController.topViewController isKindOfClass:[FindMoreViewController class]] )) {
 
         LoginViewController * loginContorller = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
         UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: loginContorller];

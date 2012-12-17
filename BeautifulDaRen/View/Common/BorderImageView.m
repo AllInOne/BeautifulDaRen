@@ -11,7 +11,7 @@
     if(self)
     {
         view.frame = CGRectMake(IMAGE_FRAME_MARGIN, IMAGE_FRAME_MARGIN, frame.size.width - 2 * IMAGE_FRAME_MARGIN, frame.size.height - 2 * IMAGE_FRAME_MARGIN);
-        self.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+        self.layer.borderColor = [[UIColor colorWithWhite:0.9 alpha:1.0] CGColor];
         self.layer.borderWidth = 1;
         [self addSubview:view];
 
@@ -32,7 +32,7 @@
     {
         UIImageView * imageView = [[UIImageView alloc] initWithImage:image];
         imageView.frame = CGRectMake(IMAGE_FRAME_MARGIN, IMAGE_FRAME_MARGIN, frame.size.width - 2 * IMAGE_FRAME_MARGIN, frame.size.height - 2 * IMAGE_FRAME_MARGIN);
-        self.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+        self.layer.borderColor = [[UIColor colorWithWhite:0.9 alpha:1.0] CGColor];
         self.layer.borderWidth = 1;
         [self addSubview:imageView];
         [imageView release];
@@ -54,7 +54,7 @@
     {
         UIImageView * imageView = [[UIImageView alloc] initWithImage:image];
         imageView.frame = CGRectMake(IMAGE_FRAME_MARGIN, IMAGE_FRAME_MARGIN, frame.size.width - 2 * IMAGE_FRAME_MARGIN, frame.size.height - 2 * IMAGE_FRAME_MARGIN);
-        self.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+        self.layer.borderColor = [[UIColor colorWithWhite:0.9 alpha:1.0] CGColor];
         self.layer.borderWidth = 1;
         [self addSubview:imageView];
         [imageView release];
