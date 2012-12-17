@@ -394,7 +394,9 @@
                 [self.flowdelegate didRefresh];
             }
         } else {
-            [self.flowdelegate cancelRefreshing];
+            if ([self.flowdelegate conformsToProtocol:@protocol(WaterFlowViewDelegate)]) {
+                [self.flowdelegate cancelRefreshing];
+            }
         }
     }
 }

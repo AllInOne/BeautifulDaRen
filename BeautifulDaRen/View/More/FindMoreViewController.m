@@ -816,6 +816,21 @@
 }
 
 #pragma mark WaterFlowViewDatasource
+- (void)draggingToRefreshing {
+
+}
+
+- (void)releaseToRefreshing {
+
+}
+
+- (void)cancelRefreshing {
+
+}
+
+- (void)didRefresh {
+
+}
 
 - (NSInteger)numberOfColumnsInFlowView:(WaterFlowView*)flowView
 {
