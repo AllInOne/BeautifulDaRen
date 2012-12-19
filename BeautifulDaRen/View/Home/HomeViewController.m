@@ -36,6 +36,8 @@
 @synthesize observerForLoginStatus = _observerForLoginStatus;
 @synthesize observerForShouldLogin = _observerForShouldLogin;
 @synthesize observerForLogout = _observerForLogout;
+@synthesize popUpView = _popUpView;
+@synthesize popUpTableView = _popUpTableView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -162,6 +164,8 @@
         [self refreshAdsView];
     }
     [self refreshNavigationView];
+    
+    [self.popUpView setHidden:YES];
 }
 
 - (void)refreshAdsView
@@ -196,6 +200,8 @@
     [_observerForLoginStatus release];
     [_observerForLogout release];
     [_observerForShouldLogin release];
+    [_popUpView release];
+    [_popUpTableView release];
     [super dealloc];
 }
 
@@ -211,6 +217,8 @@
     self.observerForLogout = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self.observerForShouldLogin];
     self.observerForShouldLogin = nil;
+    self.popUpView = nil;
+    self.popUpTableView = nil;
     [super viewDidUnload];
 }
 
@@ -333,6 +341,47 @@
         
         [self.navigationController.tabBarItem setTitle:NSLocalizedString(@"tab_home_page", @"tab_home_page")];
     }
+    UIButton *titleButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [titleButton setFrame:CGRectMake(0, 0, 170, 35)];
+    [titleButton addTarget:self action:@selector(onTitleButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.titleView = titleButton;
+}
+
+-(void) onTitleButtonClicked
+{
+    [self.view bringSubviewToFront:self.popUpView];
+    self.popUpView.frame = CGRectMake(self.popUpView.frame.origin.x,
+                                      0.0,
+                                      CGRectGetWidth(self.popUpView.frame),
+                                      CGRectGetHeight(self.popUpView.frame));
+    [self.popUpView setHidden:NO];
+    
+    [self.popUpTableView setDelegate:self];
+    [self.popUpTableView setDataSource:self];
+    [self.popUpTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    self.popUpView.frame = self.popUpView.frame;
+}
+
+#pragma mark UITableViewDataSource
+-(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell * cell = [[UITableViewCell alloc] initWithFrame:CGRectMake(0.0, 0.0, 100.0, 30.0)];
+    
+    cell.textLabel.text = @"测试";
+    [cell.textLabel setTextColor:[UIColor whiteColor]];
+    cell.textLabel.textAlignment = UITextAlignmentCenter;
+    
+    return cell;
+}
+
+-(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 4;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+
 }
 
 @end
