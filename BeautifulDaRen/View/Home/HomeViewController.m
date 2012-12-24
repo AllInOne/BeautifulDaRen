@@ -16,6 +16,8 @@
 #import "RegisterViewController.h"
 #import "iToast.h"
 
+#define POPUP_VIEW_HOT_SEPERATOR    @"hot_seperator"
+
 @interface HomeViewController()
 
 //@property (retain, nonatomic) AdsPageView * adsPageView;
@@ -25,9 +27,14 @@
 @property (retain, nonatomic) id observerForLogout;
 @property (retain, nonatomic) id observerForShouldLogin;
 
+@property (retain, nonatomic) NSArray * popUpListData;
+
+@property (assign, nonatomic) NSInteger currentPopUpIndex;
+
 - (void)refreshAdsView;
 - (void)refreshNavigationView;
 - (void) showAdsPageView;
+- (void)hidePopupView;
 @end
 
 @implementation HomeViewController
@@ -38,6 +45,9 @@
 @synthesize observerForLogout = _observerForLogout;
 @synthesize popUpView = _popUpView;
 @synthesize popUpTableView = _popUpTableView;
+@synthesize backgroundButton = _backgroundButton;
+@synthesize popUpListData = _popUpListData;
+@synthesize currentPopUpIndex = _currentPopUpIndex;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -166,6 +176,15 @@
     [self refreshNavigationView];
     
     [self.popUpView setHidden:YES];
+    [self.popUpTableView setDelegate:self];
+    [self.popUpTableView setDataSource:self];
+    [self.popUpTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    
+    _popUpListData = [[NSArray alloc] initWithObjects:@"最新的微博",
+                      @"我的微博",
+                      POPUP_VIEW_HOT_SEPERATOR,
+                      @"衣服",
+                      nil];
 }
 
 - (void)refreshAdsView
@@ -202,6 +221,7 @@
     [_observerForShouldLogin release];
     [_popUpView release];
     [_popUpTableView release];
+    [_backgroundButton release];
     [super dealloc];
 }
 
@@ -219,6 +239,7 @@
     self.observerForShouldLogin = nil;
     self.popUpView = nil;
     self.popUpTableView = nil;
+    self.backgroundButton = nil;
     [super viewDidUnload];
 }
 
@@ -305,9 +326,17 @@
 
 - (void)refreshNavigationView
 {
+    UIButton *titleButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [titleButton setFrame:CGRectMake(30, 0, 200, 35)];
+    [titleButton addTarget:self action:@selector(onTitleButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.titleView = titleButton;
+    
     if ([[BSDKManager sharedManager] isLogin]) {
-        [self.navigationItem setTitle:[[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] valueForKey:KEY_ACCOUNT_USER_NAME]];
+//        [self.navigationItem setTitle:[[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] valueForKey:KEY_ACCOUNT_USER_NAME]];
 
+        [titleButton setTitle:[[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] valueForKey:KEY_ACCOUNT_USER_NAME] forState:UIControlStateNormal];
+        
+        
         if([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0)
         {
             [self.navigationItem setRightBarButtonItems:nil];
@@ -339,36 +368,78 @@
         [self.navigationItem setTitle:nil];
         [self.navigationItem setLeftBarButtonItem:[ViewHelper getLeftBarItemOfImageName:@"beautifuldaren_logo" rectSize:CGRectMake(0, 0, NAVIGATION_LEFT_LOGO_WIDTH, NAVIGATION_LEFT_LOGO_HEIGHT)]];
         
-        [self.navigationController.tabBarItem setTitle:NSLocalizedString(@"tab_home_page", @"tab_home_page")];
+//        [self.navigationController.tabBarItem setTitle:NSLocalizedString(@"tab_home_page", @"tab_home_page")];
+        [titleButton setTitle:NSLocalizedString(@"tab_home_page", @"tab_home_page") forState:UIControlStateNormal];
+        [titleButton.titleLabel setTextAlignment:UITextAlignmentCenter];
     }
-    UIButton *titleButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [titleButton setFrame:CGRectMake(0, 0, 170, 35)];
-    [titleButton addTarget:self action:@selector(onTitleButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.titleView = titleButton;
+}
+
+- (void)hidePopupView
+{
+    [self.popUpView setHidden:YES];
+    [self.backgroundButton setEnabled:NO];
+}
+
+- (void)onBackgroundBtnSelected:(UIButton*)sender
+{
+    [self hidePopupView];
 }
 
 -(void) onTitleButtonClicked
 {
+    [self.view bringSubviewToFront:self.backgroundButton];
     [self.view bringSubviewToFront:self.popUpView];
     self.popUpView.frame = CGRectMake(self.popUpView.frame.origin.x,
                                       0.0,
                                       CGRectGetWidth(self.popUpView.frame),
                                       CGRectGetHeight(self.popUpView.frame));
     [self.popUpView setHidden:NO];
-    
-    [self.popUpTableView setDelegate:self];
-    [self.popUpTableView setDataSource:self];
-    [self.popUpTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-    self.popUpView.frame = self.popUpView.frame;
+    [self.backgroundButton setEnabled:YES];
 }
 
 #pragma mark UITableViewDataSource
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString* text = [self.popUpListData objectAtIndex:[indexPath row]];
+    
+    if (![text isEqualToString:POPUP_VIEW_HOT_SEPERATOR]) {
+        return 35.0;
+    }
+    else  //seperator
+    {
+        return 2.0;
+    }
+
+}
+
+
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell * cell = [[UITableViewCell alloc] initWithFrame:CGRectMake(0.0, 0.0, 100.0, 30.0)];
     
-    cell.textLabel.text = @"测试";
-    [cell.textLabel setTextColor:[UIColor whiteColor]];
+    cell.textLabel.text = [self.popUpListData objectAtIndex:[indexPath row]];
+    
+    if (self.currentPopUpIndex == [indexPath row]) {
+        [cell setBackgroundView:[[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"home_pop_down_btn"]] autorelease]];
+    }
+    
+    NSLog(@"%@", cell.textLabel.text);
+    if (![cell.textLabel.text isEqualToString:POPUP_VIEW_HOT_SEPERATOR]) {
+        [cell.textLabel setTextColor:[UIColor whiteColor]];     
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    else  //seperator
+    {
+        cell.textLabel.text = @"";
+        [cell setFrame:CGRectMake(0.0, 0.0, 100.0, 2.0)];
+        UIImageView* bgImageView = [[[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, 100.0, 2.0)] autorelease];
+        [bgImageView setImage:[UIImage imageNamed:@"home_pop_down_margin"]];
+        [cell setBackgroundView:bgImageView];
+        [cell setBackgroundColor:[UIColor purpleColor]];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    
+
     cell.textLabel.textAlignment = UITextAlignmentCenter;
     
     return cell;
@@ -376,12 +447,20 @@
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 4;
+    return [self.popUpListData count];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    UITableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
+    
+    [cell setBackgroundView:[[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"home_pop_down_btn"]] autorelease]];
+    
+    [self hidePopupView];
+    
+    [self setCurrentPopUpIndex:[indexPath row]];
+    
+    [self.popUpTableView reloadData];
 }
 
 @end

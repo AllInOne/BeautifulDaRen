@@ -14,8 +14,11 @@
 
 @property (nonatomic, retain) IBOutlet UIView * popUpView;
 @property (nonatomic, retain) IBOutlet UITableView * popUpTableView;
+@property (nonatomic, retain) IBOutlet UIButton * backgroundButton;
 
 - (IBAction)onLoginBtnSelected:(UIButton*)sender;
 - (IBAction)onRegisterBtnSelected:(UIButton*)sender;
+
+- (IBAction)onBackgroundBtnSelected:(UIButton*)sender;
 
 @end
