@@ -26,6 +26,9 @@
 #define GRID_Y_DELTA 80
 #define REFRESHING_HEIGHT 65
 #define INDICATOR_HEIGHT 30
+
+#define REFRESH_PAGE_SIZE    15
+
 @interface ItemsViewController() {
     BOOL _originYChanged;
 }
@@ -40,7 +43,9 @@
 - (void)loadItemsHeight;
 - (void)didEndPollRefresh;
 - (void)refreshDataIsClean:(BOOL)isClean;
--(NSDictionary*) getValidItemDictionaryAtIndex:(NSUInteger)index;
+- (void)refreshDataFromNetworkWithCallback:(processDoneWithDictBlock)doneCallback;
+- (NSDictionary*) getValidItemDictionaryAtIndex:(NSUInteger)index;
+
 @end
 
 @implementation ItemsViewController
@@ -52,6 +57,8 @@
 @synthesize isFetchMore = _isFetchMore;
 @synthesize isPollTop = _isPollTop;
 @synthesize observerForLoginStatus = _observerForLoginStatus;
+@synthesize viewMode = _viewMode;
+@synthesize hotClassId = _hotClassId;
 
 -(id)initWithArray:(NSArray*)array
 {
@@ -62,7 +69,7 @@
     return self;
 }
 
-#pragma mark View
+#pragma mar. XAQAWUIOP[]\=-0923  View
 
 - (void) loadItemsHeight
 {
@@ -87,6 +94,7 @@
     [_waterFlowView release];
     [_itemsHeight release];
     [_itemDatas release];
+    [_hotClassId release];
     [super dealloc];
 }
 
@@ -233,6 +241,7 @@
 
 - (void)didScrollToBottom
 {
+    self.isPollTop = NO;
     [self refreshDataIsClean:NO];
 }
 
@@ -255,7 +264,51 @@
     return dict;
 }
 
+- (void)refreshDataFromNetworkWithCallback:(processDoneWithDictBlock)doneCallback
+{
+    switch (self.viewMode) {
+        case ITEMSVIEW_MODE_HOME:
+            if ([[BSDKManager sharedManager] isLogin])
+            {
+                NSString * userId = [[[NSUserDefaults standardUserDefaults]
+                                      valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO]
+                                     valueForKey:KEY_ACCOUNT_ID];
+                [[BSDKManager sharedManager] getFriendsWeiboListByUserId:userId
+                                                                pageSize:REFRESH_PAGE_SIZE
+                                                               pageIndex:self.pageIndex
+                                                         andDoneCallback:doneCallback];
+            }
+            else {
+                [[BSDKManager sharedManager] getWeiboListByUserId:nil
+                                                         pageSize:REFRESH_PAGE_SIZE
+                                                        pageIndex:self.pageIndex
+                                                  andDoneCallback:doneCallback];
+            }
+            break;
+        case ITEMSVIEW_MODE_MINE:
+            [[BSDKManager sharedManager] getWeiboListByUserId:[[[NSUserDefaults standardUserDefaults] valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO] valueForKey:KEY_ACCOUNT_ID]
+                                                     pageSize:REFRESH_PAGE_SIZE
+                                                    pageIndex:self.pageIndex
+                                              andDoneCallback:doneCallback];
+            break;
+            
+        case ITEMSVIEW_MODE_HOT:
+            [[BSDKManager sharedManager] getWeiboListByClassId:self.hotClassId
+                                                      pageSize:REFRESH_PAGE_SIZE
+                                                     pageIndex:self.pageIndex
+                                               andDoneCallback:doneCallback];
+            
+            break;
+        default:
+            break;
+    }
+
+}
+
 - (void)refreshDataIsClean:(BOOL)isClean {
+    NSLog(@"isSyncSccuessed :%d", _isSyncSccuessed);
+    NSLog(@"isFetchMore :%d", _isFetchMore);
+    NSLog(@"isPollTop :%d", _isPollTop);
     if (self.isSyncSccuessed && (self.isFetchMore || self.isPollTop))
     {
         self.isSyncSccuessed = NO;
@@ -309,27 +362,14 @@
             }
             else
             {
-                [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
+//                Disable error notification
+//                [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
             }
             self.isSyncSccuessed = YES;
             self.isPollTop = YES;
         };
-        if ([[BSDKManager sharedManager] isLogin])
-        {
-            NSString * userId = [[[NSUserDefaults standardUserDefaults]
-                                  valueForKey:USERDEFAULT_LOCAL_ACCOUNT_INFO]
-                                 valueForKey:KEY_ACCOUNT_ID];
-            [[BSDKManager sharedManager] getFriendsWeiboListByUserId:userId
-                                                            pageSize:20
-                                                           pageIndex:self.pageIndex
-                                                     andDoneCallback:block];
-        }
-        else {
-            [[BSDKManager sharedManager] getWeiboListByUserId:nil
-                                                     pageSize:20
-                                                    pageIndex:self.pageIndex
-                                              andDoneCallback:block];
-        }
+        
+        [self refreshDataFromNetworkWithCallback:block];
     }
 
 }
@@ -396,6 +436,7 @@
 }
 
 - (void)draggingToRefreshing {
+    self.isPollTop = YES;
     if (self.isSyncSccuessed == YES && self.isPollTop) {
         [self.view addSubview:refreshHeaderView];
         [refreshHeaderView setState:EGOOPullRefreshNormal];

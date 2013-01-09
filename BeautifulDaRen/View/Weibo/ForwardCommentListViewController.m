@@ -113,6 +113,8 @@
                 [ViewHelper showSimpleMessage:NSLocalizedString(@"send_succeed", @"send_succeed") withTitle:nil withButtonText:NSLocalizedString(@"ok", @"ok")];
                 self.currentPageIndex = 1;
                 [self.forwardOrCommentList removeAllObjects];
+                [self.forwardOrCommentListTableView reloadData];
+                [self.footView setHidden:NO];
                 [self refreshData];
             }
             else
@@ -171,7 +173,12 @@
     [[BSDKManager sharedManager] getCommentListOfWeibo:self.relatedBlogId pageSize:COMMENT_PAGE_SIZE pageIndex:self.currentPageIndex andDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
         if (K_BSDK_IS_RESPONSE_OK(data)) {
             NSArray * commentList = [data objectForKey:K_BSDK_COMMENTLIST];
+            
+            NSLog(@"%@", self.forwardOrCommentList);
+            
             [self.forwardOrCommentList addObjectsFromArray:commentList];
+            NSLog(@"%@", self.forwardOrCommentList);
+            
             [self.forwardOrCommentListTableView reloadData];
             self.isRefreshing = NO;
             [self.footViewActivityIndicator stopAnimating];

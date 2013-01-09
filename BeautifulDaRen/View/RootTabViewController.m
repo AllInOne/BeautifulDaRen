@@ -162,7 +162,16 @@
 
 - (void)initLocalizedString
 {
-    NSArray* homeArray = [NSArray arrayWithObjects:@"",NSLocalizedString(@"tab_home", @"tab_home"),nil];
+    NSArray* homeArray = nil;
+    if ([[BSDKManager sharedManager] isLogin])
+    {
+        homeArray = [NSArray arrayWithObjects:@"",NSLocalizedString(@"tab_home", @"tab_home"),nil];   
+    }
+    else
+    {
+        homeArray = [NSArray arrayWithObjects:@"",NSLocalizedString(@"tab_home_page", @"tab_home_page"),nil];      
+    }
+
     NSArray* categoryArray = [NSArray arrayWithObjects:NSLocalizedString(@"tab_hot", @"tab_hot"),NSLocalizedString(@"tab_hot", @"tab_hot"),nil];
     NSArray* cameraShareArray = [NSArray arrayWithObjects:NSLocalizedString(@"tab_myshow", @"tab_myshow"),NSLocalizedString(@"tab_myshow", @"tab_myshow"),nil];
     NSArray* mineArray = [NSArray arrayWithObjects:NSLocalizedString(@"tab_mine", @"tab_mine"),NSLocalizedString(@"tab_mine", @"tab_mine"),nil];

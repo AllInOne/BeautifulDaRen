@@ -93,6 +93,10 @@
 "her_collection" = "她的喜欢";
 "his_collection" = "他的喜欢";
 
+"popup_new" = "最新的微博";
+"popup_attention" = "我关注的微博";
+"popup_mine" = "我发布的微博";
+
 "favourating" = "正添加到喜欢列表...";
 "canceling_favourate" = "正在取消喜欢...";
 "ordering" = "正在订购...";

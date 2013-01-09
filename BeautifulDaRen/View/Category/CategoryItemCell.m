@@ -91,7 +91,8 @@
         }
         else
         {
-            [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
+//                Disable error notification
+//            [[iToast makeText:K_BSDK_GET_RESPONSE_MESSAGE(data)] show];
         }
     }];
 }

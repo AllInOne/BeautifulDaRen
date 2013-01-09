@@ -485,6 +485,8 @@
 		CED695F4156BE14700F8F54C /* weibo_pay_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CED695B3156BE14700F8F54C /* weibo_pay_btn@2x.png */; };
 		CED695F5156BE14700F8F54C /* weibo_price_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CED695B4156BE14700F8F54C /* weibo_price_background@2x.png */; };
 		CED695F6156BE14700F8F54C /* weibo_price_label@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CED695B5156BE14700F8F54C /* weibo_price_label@2x.png */; };
+		CEDBAD56168D8372006B1210 /* home_pop_triangle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDBAD55168D8372006B1210 /* home_pop_triangle@2x.png */; };
+		CEDBAD58168D8394006B1210 /* home_pop_triangle.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDBAD57168D8394006B1210 /* home_pop_triangle.png */; };
 		CEDC918E153FDC5700BA6C35 /* AdsPageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEDC918D153FDC5700BA6C35 /* AdsPageView.xib */; };
 		CEDC9191153FDC7700BA6C35 /* AdsPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDC9190153FDC7700BA6C35 /* AdsPageView.m */; };
 		CEE21595157F149C00E4F167 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE21594157F149C00E4F167 /* AVFoundation.framework */; };
@@ -1129,6 +1131,8 @@
 		CED695B3156BE14700F8F54C /* weibo_pay_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weibo_pay_btn@2x.png"; sourceTree = "<group>"; };
 		CED695B4156BE14700F8F54C /* weibo_price_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weibo_price_background@2x.png"; sourceTree = "<group>"; };
 		CED695B5156BE14700F8F54C /* weibo_price_label@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weibo_price_label@2x.png"; sourceTree = "<group>"; };
+		CEDBAD55168D8372006B1210 /* home_pop_triangle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home_pop_triangle@2x.png"; sourceTree = "<group>"; };
+		CEDBAD57168D8394006B1210 /* home_pop_triangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_pop_triangle.png; sourceTree = "<group>"; };
 		CEDC918D153FDC5700BA6C35 /* AdsPageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdsPageView.xib; sourceTree = "<group>"; };
 		CEDC918F153FDC7700BA6C35 /* AdsPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AdsPageView.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		CEDC9190153FDC7700BA6C35 /* AdsPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AdsPageView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -1903,6 +1907,7 @@
 		CECE29F41562B38E00E2A40A /* 320*480 */ = {
 			isa = PBXGroup;
 			children = (
+				CEDBAD57168D8394006B1210 /* home_pop_triangle.png */,
 				C2569704165BCFE60062EFA5 /* blueArrow.png */,
 				C2A2A476164FDE7400718405 /* cancel_buy.png */,
 				C22B951B1641812200EEC038 /* nav_bar_background.png */,
@@ -2077,6 +2082,7 @@
 		CECE2A171562B39800E2A40A /* 960x640 */ = {
 			isa = PBXGroup;
 			children = (
+				CEDBAD55168D8372006B1210 /* home_pop_triangle@2x.png */,
 				C2569706165BCFF00062EFA5 /* blueArrow@2x.png */,
 				C2A2A474164FDE6300718405 /* cancel_buy@2x.png */,
 				C22B95151641810B00EEC038 /* trade_done@2x.png */,
@@ -2747,6 +2753,8 @@
 				C2A2A477164FDE7400718405 /* cancel_buy.png in Resources */,
 				C2569705165BCFE60062EFA5 /* blueArrow.png in Resources */,
 				C2569707165BCFF00062EFA5 /* blueArrow@2x.png in Resources */,
+				CEDBAD56168D8372006B1210 /* home_pop_triangle@2x.png in Resources */,
+				CEDBAD58168D8394006B1210 /* home_pop_triangle.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2893,8 +2901,8 @@
 					armv7,
 					armv6,
 				);
-				CODE_SIGN_IDENTITY = "iPhone Distribution: XIAO FENG";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: XIAO FENG";
+				CODE_SIGN_IDENTITY = "iPhone Developer: XIAO FENG (7ZJCBASW4H)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: XIAO FENG (7ZJCBASW4H)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -2909,8 +2917,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
-				PROVISIONING_PROFILE = "BE29F30B-BF07-4E07-942D-C292683C1986";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BE29F30B-BF07-4E07-942D-C292683C1986";
+				PROVISIONING_PROFILE = "61CEF384-69D0-4C45-B42C-1EB1D20C8937";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "61CEF384-69D0-4C45-B42C-1EB1D20C8937";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -2923,8 +2931,8 @@
 					armv7,
 					armv6,
 				);
-				CODE_SIGN_IDENTITY = "iPhone Distribution: XIAO FENG";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: XIAO FENG";
+				CODE_SIGN_IDENTITY = "iPhone Developer: XIAO FENG (7ZJCBASW4H)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: XIAO FENG (7ZJCBASW4H)";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -2933,8 +2941,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "BE29F30B-BF07-4E07-942D-C292683C1986";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BE29F30B-BF07-4E07-942D-C292683C1986";
+				PROVISIONING_PROFILE = "61CEF384-69D0-4C45-B42C-1EB1D20C8937";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "61CEF384-69D0-4C45-B42C-1EB1D20C8937";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -2943,8 +2951,8 @@
 		CE029AE7153E682100886227 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: XIAO FENG";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: XIAO FENG";
+				CODE_SIGN_IDENTITY = "iPhone Developer: XIAO FENG (7ZJCBASW4H)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: XIAO FENG (7ZJCBASW4H)";
 				COMPRESS_PNG_FILES = NO;
 				COPY_PHASE_STRIP = YES;
 				GCC_OPTIMIZATION_LEVEL = s;
@@ -2953,8 +2961,8 @@
 				INFOPLIST_FILE = "BeautifulDaRen/BeautifulDaRen-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "BE29F30B-BF07-4E07-942D-C292683C1986";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BE29F30B-BF07-4E07-942D-C292683C1986";
+				PROVISIONING_PROFILE = "61CEF384-69D0-4C45-B42C-1EB1D20C8937";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "61CEF384-69D0-4C45-B42C-1EB1D20C8937";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
@@ -2964,7 +2972,7 @@
 		CE029AE8153E682100886227 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: XIAO FENG";
+				CODE_SIGN_IDENTITY = "iPhone Developer: XIAO FENG (7ZJCBASW4H)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: XIAO FENG";
 				COMPRESS_PNG_FILES = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2972,7 +2980,7 @@
 				INFOPLIST_FILE = "BeautifulDaRen/BeautifulDaRen-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "BE29F30B-BF07-4E07-942D-C292683C1986";
+				PROVISIONING_PROFILE = "61CEF384-69D0-4C45-B42C-1EB1D20C8937";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BE29F30B-BF07-4E07-942D-C292683C1986";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
