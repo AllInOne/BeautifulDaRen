@@ -673,14 +673,15 @@
 
     self.usernameLabel.text = [authorInfo objectForKey:K_BSDK_USERNAME];
     
-    
+/*    
     NSMutableAttributedString * attrStr = [ViewHelper getGridViewCellForContactInformationWithName:NSLocalizedString(@"buyed_user", @"") detail:[NSString stringWithFormat:@" %d", [[self.weiboData objectForKey:KEY_ACCOUNT_BUYER_COUNT] intValue]]];
+
     self.buyerListLabel.attributedText = attrStr;
     self.buyerListLabel.textAlignment = UITextAlignmentCenter;
     self.buyerListLabel.font = [UIFont systemFontOfSize:11];
     
     [self.buyerListButton addTarget:self action:@selector(showBuyerList) forControlEvents:UIControlEventTouchUpInside];
-
+*/
     NSString * price = [self.weiboData objectForKey:K_BSDK_PRICE];
     if (price && ([price intValue] != 0)) {
         NSString * title = [NSString stringWithFormat:@"¥ %d", [price intValue]];
