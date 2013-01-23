@@ -8,11 +8,11 @@
 
 "app_name" = "秀悦购";
 
-"tab_home" = "关注";
+"tab_home" = "首页";
 "tab_home_page" = "未登录";
 "tab_mine" = "我的";
 "tab_myshow" = "我秀";
-"tab_hot" = "最新";
+"tab_hot" = "分类";
 "tab_search" = "搜索";
 "enter" = "确认";
 "go_back" = "返回";
@@ -87,8 +87,8 @@
 "commentme" = "评论我";
 "comment_me" = "评论我的";
 "published" = "已发布商品";
-"her_weibo" = "她的微博";
-"his_weibo" = "他的微博";
+"her_weibo" = "她发布的";
+"his_weibo" = "他发布的";
 "my_collection" = "我的喜欢";
 "her_collection" = "她的喜欢";
 "his_collection" = "他的喜欢";

@@ -28,8 +28,12 @@
         while (index < data.count) {
             CommonScrollViewItem * item = [[[NSBundle mainBundle] loadNibNamed:@"CommonScrollViewItem" owner:self options:nil] objectAtIndex:0];
             item.button.tag = index;
-
-            [item.image setImageWithURL:[NSURL URLWithString:[data objectAtIndex:index]]];
+            
+            int64_t delayInSeconds = 3.0;
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                [item.image setImageWithURL:[NSURL URLWithString:[data objectAtIndex:index]]];
+            });
 
             BorderImageView * borderImageView = [[BorderImageView alloc] initWithFrame:CGRectMake(SCROLL_ITEM_MARGIN + index * (SCROLL_ITEM_WIDTH + SCROLL_ITEM_MARGIN), 0, SCROLL_ITEM_WIDTH, SCROLL_ITEM_HEIGHT) andView:item needNotification:NO];
 

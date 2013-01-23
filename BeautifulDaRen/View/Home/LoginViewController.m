@@ -25,8 +25,8 @@ typedef enum
 {
     LOGIN_CELL_USERNAME_PASSWORD = 0,
     LOGIN_CELL_LOGIN_BUTTON,
-    LOGIN_CELL_REGISTER,
     LOGIN_CELL_SINA_LOGIN,
+    LOGIN_CELL_REGISTER,
     LOGIN_CELL_COUNT
 }LOGIN_CELL_INDEX;
 
@@ -250,6 +250,7 @@ typedef enum
             cell = [[[NSBundle mainBundle] loadNibNamed:button_view_identifier owner:self options:nil] objectAtIndex:1];
         }
         ((ButtonViewCell*)cell).buttonText.text = NSLocalizedString(@"not_user_to_register", @"You are not user, please register");
+        [((ButtonViewCell*)cell).buttonText setTextColor:[UIColor purpleColor]];
     }
     else if (section == LOGIN_CELL_SINA_LOGIN)
     {
@@ -291,7 +292,7 @@ typedef enum
 #ifdef DEBUG
         if ([userName length] == 0 && [password length] == 0) {
             userName = @"jerry888";
-            password = @"210140";
+            password = @"175431";
         }
 #endif
         NSString * iToastString = @"";

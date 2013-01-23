@@ -333,6 +333,8 @@ static natural_t get_free_memory(void)
     NSInvocationOperation *operation = SDWIReturnAutoreleased([[NSInvocationOperation alloc] initWithTarget:self
                                                                                                    selector:@selector(queryDiskCacheOperation:)
                                                                                                      object:arguments]);
+    
+    NSLog(@"#########queryDiskCacheForKey add operation");
     [cacheOutQueue addOperation:operation];
 }
 

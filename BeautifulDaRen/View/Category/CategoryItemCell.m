@@ -59,7 +59,7 @@
 
     UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
 
-    activityIndicator.frame = CGRectMake(SCREEN_WIDTH/2, CATEGORY_TITLE_FONT_HEIGHT + CONTENT_MARGIN, CGRectGetWidth(activityIndicator.frame), CGRectGetHeight(activityIndicator.frame));
+    activityIndicator.frame = CGRectMake(SCREEN_WIDTH/2, CATEGORY_ITEM_HEIGHT/2, CGRectGetWidth(activityIndicator.frame), CGRectGetHeight(activityIndicator.frame));
 
     [self.view addSubview:activityIndicator];
 

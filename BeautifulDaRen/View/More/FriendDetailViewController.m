@@ -464,7 +464,7 @@ typedef enum
         NSMutableAttributedString * attrStr = nil;
 
         attrStr = [ViewHelper
-                   getGridViewCellForContactInformationWithName:NSLocalizedString(@"weibo", @"")
+                   getGridViewCellForContactInformationWithName:[[self.friendDictionary valueForKey:K_BSDK_GENDER] isEqual:K_BSDK_GENDER_FEMALE] ? NSLocalizedString(@"her_weibo", @"her_weibo") : NSLocalizedString(@"his_weibo", @"his_weibo")
                    detail:[NSString stringWithFormat:@"(%d)",[[self.friendDictionary valueForKey:KEY_ACCOUNT_BLOG_COUNT] intValue]]];
         ((GridViewCell*)cell).firstLabel.attributedText = attrStr;
         ((GridViewCell*)cell).firstLabel.textAlignment = UITextAlignmentCenter;
@@ -718,6 +718,8 @@ typedef enum
     else
     {
         NSString * buttonTitle = ([relationship isEqualToString:K_BSDK_RELATIONSHIP_MY_FOLLOW] || [relationship isEqualToString:K_BSDK_RELATIONSHIP_INTER_FOLLOW]) ? NSLocalizedString(@"unfollow", @"unfollow") : NSLocalizedString(@"follow", @"follow");
+        
+        NSLog(@"#####################buttontitle: %@", buttonTitle);
 
         [self.actionButton setTitle:buttonTitle forState:UIControlStateNormal];
         [self.actionButton setEnabled:YES];

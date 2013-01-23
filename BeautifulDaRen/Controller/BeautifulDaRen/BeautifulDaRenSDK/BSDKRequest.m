@@ -324,6 +324,8 @@ static NSMutableString *logBody;
     }
 
     connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
+    
+    NSLog(@"*********************BSDKRequest connection start");
 
     [self performSelector:@selector(requestOnTimeout) withObject:self afterDelay:60.0];
 }
@@ -387,6 +389,8 @@ static NSMutableString *logBody;
 	connection = nil;
 
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
+    
+    NSLog(@"*********************BSDKRequest connection stop");
 }
 
 - (void)connection:(NSURLConnection *)theConnection didFailWithError:(NSError *)error

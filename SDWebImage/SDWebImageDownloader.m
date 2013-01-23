@@ -76,14 +76,16 @@ NSString *const SDWebImageDownloadStopNotification = @"SDWebImageDownloadStopNot
 - (void)start
 {
     // In order to prevent from potential duplicate caching (NSURLCache + SDImageCache) we disable the cache for image requests
-    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:15];
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:60];
     self.connection = SDWIReturnAutoreleased([[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:NO]);
 
     // If not in low priority mode, ensure we aren't blocked by UI manipulations (default runloop mode for NSURLConnection is NSEventTrackingRunLoopMode)
     if (!lowPriority)
     {
-        [connection scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+//        [connection scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
     }
+    
+    NSLog(@"*********************SDWebImageDownloader connection start");
     [connection start];
     SDWIRelease(request);
 
@@ -234,6 +236,8 @@ NSString *const SDWebImageDownloadStopNotification = @"SDWebImageDownloadStopNot
         UIImage *image = SDScaledImageForPath(url.absoluteString, imageData);
         [[SDWebImageDecoder sharedImageDecoder] decodeImage:image withDelegate:self userInfo:nil];
     }
+    
+    NSLog(@"*********************SDWebImageDownloader connection stop");
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
