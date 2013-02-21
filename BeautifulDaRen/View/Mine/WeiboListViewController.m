@@ -377,10 +377,11 @@
     {
         AtMeViewCell * atMeCell = (AtMeViewCell*)cell;
 
-        if ([data objectForKey:KEY_BUY_OrderStatus]) {
-            [atMeCell.buyStatusView setHidden:NO];
-            [atMeCell.buyStatusLabel setText:[data valueForKey:KEY_BUY_OrderStatus]];
-        }
+//        if ([data objectForKey:KEY_BUY_OrderStatus]) {
+//            [atMeCell.buyStatusView setHidden:NO];
+//            [atMeCell.buyStatusLabel setText:[data valueForKey:KEY_BUY_OrderStatus]];
+//        }
+        [atMeCell.buyStatusLabel setHidden:YES];
 
         if (_controllerType == WeiboListViewControllerType_MY_BUYED) {
             atMeCell.cancelBuyButton.hidden = NO;

@@ -145,7 +145,7 @@
 
         LoginViewController * loginContorller = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
         UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController: loginContorller];
-        [self presentModalViewController:navController animated:YES];
+        [self presentModalViewController:navController animated:NO];
         [navController release];
         [loginContorller release];
 
@@ -163,8 +163,8 @@
 - (void)initLocalizedString
 {
     NSArray* homeArray = nil;
-
-    homeArray = [NSArray arrayWithObjects:@"",NSLocalizedString(@"tab_home", @"tab_home"),nil];   
+    
+    homeArray = [NSArray arrayWithObjects:@"",NSLocalizedString(@"tab_home", @"tab_home"),nil];    
 
     NSArray* categoryArray = [NSArray arrayWithObjects:NSLocalizedString(@"tab_hot", @"tab_hot"),NSLocalizedString(@"tab_hot", @"tab_hot"),nil];
     NSArray* cameraShareArray = [NSArray arrayWithObjects:NSLocalizedString(@"tab_myshow", @"tab_myshow"),NSLocalizedString(@"tab_myshow", @"tab_myshow"),nil];

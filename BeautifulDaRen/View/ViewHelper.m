@@ -396,7 +396,7 @@ static dispatch_queue_t getImageDownloadQueue() {
     //对气泡图片进行拉伸
     UIImageView *bubbleImageView = [[UIImageView alloc] initWithImage:[bubble stretchableImageWithLeftCapWidth:0.0 topCapHeight:0.0]];
 
-    UIFont *font = [UIFont systemFontOfSize:12];
+    UIFont *font = [UIFont systemFontOfSize:16];
     //获取文字所占的大小
     CGSize size = [text sizeWithFont:font constrainedToSize:CGSizeMake(150.0f, 1000.0f) lineBreakMode:UILineBreakModeCharacterWrap];
 
@@ -411,14 +411,14 @@ static dispatch_queue_t getImageDownloadQueue() {
     returnView.backgroundColor = [UIColor clearColor];
     if(fromSelf)
     {
-        bubbleImageView.frame = CGRectMake(80.0f, 30.0f, 200.0f, size.height+40.0f);
-        bubbleText.frame = CGRectMake(101.0f, 40.0f, size.width+10, size.height+10);
+        bubbleImageView.frame = CGRectMake(80.0f, 30.0f, 200.0f, size.height+10.0f);
+        bubbleText.frame = CGRectMake(101.0f, 30.0f, size.width+10, size.height+10);
         returnView.frame = CGRectMake(180.0f, 130.0f, 240.0f, size.height+70.0f);
     }
     else
     {
-        bubbleImageView.frame = CGRectMake(40.0f, 30.0f, 200.0f, size.height+40.0f);
-        bubbleText.frame = CGRectMake(61.0f, 40.0f, size.width+10, size.height+10);
+        bubbleImageView.frame = CGRectMake(40.0f, 30.0f, 200.0f, size.height+10.0f);
+        bubbleText.frame = CGRectMake(61.0f, 30.0f, size.width+10, size.height+10);
         returnView.frame = CGRectMake(0.0f, 30.0f, 240.0f, size.height+70.0f);
     }
 

@@ -324,8 +324,6 @@ static NSMutableString *logBody;
     }
 
     connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
-    
-    NSLog(@"*********************BSDKRequest connection start");
 
     [self performSelector:@selector(requestOnTimeout) withObject:self afterDelay:60.0];
 }

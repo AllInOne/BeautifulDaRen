@@ -22,6 +22,7 @@
 #define K_BSDK_ACTION_ADD @"Add"
 #define K_BSDK_ACTION_LOGIN @"LoginCheck"
 #define K_BSDK_ACTION_LOGOUT @"LogOut"
+#define K_BSDK_ACTION_GETSESSIONID @"test_getSid"
 #define K_BSDK_ACTION_GETINFO @"GetInfo"
 #define K_BSDK_ACTION_CHANGEPASSWORD @"ChangePassWord"
 #define K_BSDK_ACTION_SEARCH @"Search"
@@ -102,6 +103,8 @@
 #define K_BSDK_IMAGEURL @"imgurl"
 
 #define K_BSDK_IMAGEURL_RETINA @"imgurl2"
+
+#define K_BSDK_X_SESSION_KEY @"x_sessionKey"
 
 #define K_BSDK_TEL @"Tel"
 

@@ -26,6 +26,9 @@ static BSDKManager *sharedInstance;
                      postDataType:(BSDKRequestPostDataType)postDataType
                  httpHeaderFields:(NSDictionary *)httpHeaderFields
                      doneCallback:(processDoneWithDictBlock)callback;
+
+- (NSMutableDictionary*)getInitializedDictionaryOfCapability:(NSInteger)capability;
+
 @end
 
 @implementation BSDKManager
@@ -77,6 +80,18 @@ static BSDKManager *sharedInstance;
     [BSDKWeiboEngine setRootViewController:rootViewController];
 }
 
+- (NSMutableDictionary*)getInitializedDictionaryOfCapability:(NSInteger)capability
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:capability];
+    
+    NSString * sessionKey = [[NSUserDefaults standardUserDefaults] objectForKey:USERDEFAULT_X_SESSION_KEY];
+    
+    if (sessionKey) {
+        [params setObject:sessionKey forKey:K_BSDK_X_SESSION_KEY];
+    }
+    return params;
+}
+
 - (void)signUpWithUsername:(NSString*) username password:(NSString*)password email:(NSString*)email city:(NSString*)city andDoneCallback:(processDoneWithDictBlock)doneBlock
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:8];
@@ -115,30 +130,38 @@ static BSDKManager *sharedInstance;
 
         return;
     }
-
+    
     processDoneWithDictBlock loginCallbackShim = ^(AIO_STATUS status, NSDictionary * data)
     {
         if ((status == AIO_STATUS_SUCCESS) && K_BSDK_IS_RESPONSE_OK(data))
         {
             self.isAlreadyLogin = YES;
         }
-
+        
+        [[NSUserDefaults standardUserDefaults] setObject:[data objectForKey:K_BSDK_X_SESSION_KEY] forKey:USERDEFAULT_X_SESSION_KEY];
+        
         doneBlock(status, data);
     };
-
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
-
+    
+//    [self isSessionValidWithDoneCallback:^(AIO_STATUS status, NSDictionary *data) {
+//        NSLog(@"##################### %@", data);
+//    }];
+    
+    NSMutableDictionary *params = [self getInitializedDictionaryOfCapability:5];
+    
     [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_LOGIN forKey:K_BSDK_ACTION];
     [params setObject:username forKey:K_BSDK_USERNAME];
     [params setObject:password forKey:K_BSDK_PASSWORD];
 
+    
     [self sendRequestWithMethodName:nil
                          httpMethod:@"POST"
                              params:params
                        postDataType:kBSDKRequestPostDataTypeNormal
                    httpHeaderFields:nil
                        doneCallback:loginCallbackShim];
+
 }
 
 - (void)logoutWithDoneCallback:(processDoneWithDictBlock)doneBlock
@@ -149,11 +172,12 @@ static BSDKManager *sharedInstance;
         {
             self.isAlreadyLogin = NO;
         }
-
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:USERDEFAULT_X_SESSION_KEY];
+        
         doneBlock(status, data);
     };
 
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
+    NSMutableDictionary *params = [self getInitializedDictionaryOfCapability:5];
 
     [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_LOGOUT forKey:K_BSDK_ACTION];
@@ -166,12 +190,27 @@ static BSDKManager *sharedInstance;
                        doneCallback:logoutCallbackShim];
 }
 
+- (void)isSessionValidWithDoneCallback:(processDoneWithDictBlock)doneBlock
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
+    
+    [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
+    [params setObject:K_BSDK_ACTION_GETSESSIONID forKey:K_BSDK_ACTION];
+    
+    [self sendRequestWithMethodName:nil
+                         httpMethod:@"POST"
+                             params:params
+                       postDataType:kBSDKRequestPostDataTypeNormal
+                   httpHeaderFields:nil
+                       doneCallback:doneBlock];
+}
+
 - (void)searchUsersByUsername:(NSString*)username
                      pageSize:(NSInteger)pageSize
                     pageIndex:(NSInteger)pageIndex
               andDoneCallback:(processDoneWithDictBlock)doneBlock
 {
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
+    NSMutableDictionary *params = [self getInitializedDictionaryOfCapability:6];
 
     [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETLIST forKey:K_BSDK_ACTION];
@@ -192,7 +231,7 @@ static BSDKManager *sharedInstance;
                    toNewPassword:(NSString*)newpassword
                  andDoneCallback:(processDoneWithDictBlock)doneBlock
 {
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
+    NSMutableDictionary *params = [self getInitializedDictionaryOfCapability:7];
 
     [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_CHANGEPASSWORD forKey:K_BSDK_ACTION];
@@ -211,7 +250,7 @@ static BSDKManager *sharedInstance;
 
 - (void)getUserInforByUserId:(NSString*)userId andDoneCallback:(processDoneWithDictBlock)doneBlock
 {
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
+    NSMutableDictionary *params = [self getInitializedDictionaryOfCapability:4];
 
     [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETINFO forKey:K_BSDK_ACTION];
@@ -232,7 +271,7 @@ static BSDKManager *sharedInstance;
                   pageIndex:(NSInteger)pageIndex
             andDoneCallback:(processDoneWithDictBlock)doneBlock
 {
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:5];
+    NSMutableDictionary *params = [self getInitializedDictionaryOfCapability:6];
 
     [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETLIST forKey:K_BSDK_ACTION];
@@ -250,7 +289,7 @@ static BSDKManager *sharedInstance;
 
 - (void)getUserInforByName:(NSString*) name andDoneCallback:(processDoneWithDictBlock)doneBlock
 {
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
+    NSMutableDictionary *params = [self getInitializedDictionaryOfCapability:4];
 
     [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETINFO forKey:K_BSDK_ACTION];
@@ -351,7 +390,7 @@ static BSDKManager *sharedInstance;
 
 - (void)getWeiboClassesWithDoneCallback:(processDoneWithDictBlock)callback
 {
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
+    NSMutableDictionary *params = [self getInitializedDictionaryOfCapability:4];
 
     [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETCLASSLIST forKey:K_BSDK_ACTION];
@@ -370,7 +409,7 @@ static BSDKManager *sharedInstance;
                           pageIndex:(NSInteger)pageIndex
                     andDoneCallback:(processDoneWithDictBlock)callback
 {
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
+    NSMutableDictionary *params = [self getInitializedDictionaryOfCapability:6];
 
     [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETLIST forKey:K_BSDK_ACTION];
@@ -394,7 +433,7 @@ static BSDKManager *sharedInstance;
                      pageIndex:(NSInteger)pageIndex
                andDoneCallback:(processDoneWithDictBlock)callback
 {
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:6];
+    NSMutableDictionary *params = [self getInitializedDictionaryOfCapability:6];
 
     [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETLIST forKey:K_BSDK_ACTION];
@@ -421,7 +460,7 @@ static BSDKManager *sharedInstance;
                      pageIndex:(NSInteger)pageIndex
                andDoneCallback:(processDoneWithDictBlock)callback
 {
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:5];
+    NSMutableDictionary *params = [self getInitializedDictionaryOfCapability:6];
 
     [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETLIST forKey:K_BSDK_ACTION];
@@ -444,7 +483,7 @@ static BSDKManager *sharedInstance;
                      pageIndex:(NSInteger)pageIndex
                andDoneCallback:(processDoneWithDictBlock)callback
 {
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:6];
+    NSMutableDictionary *params = [self getInitializedDictionaryOfCapability:7];
 
     [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETLIST forKey:K_BSDK_ACTION];
@@ -468,7 +507,7 @@ static BSDKManager *sharedInstance;
                    pageIndex:(NSInteger)pageIndex
              andDoneCallback:(processDoneWithDictBlock)callback
 {
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:5];
+    NSMutableDictionary *params = [self getInitializedDictionaryOfCapability:6];
 
     [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETLIST forKey:K_BSDK_ACTION];
@@ -489,7 +528,7 @@ static BSDKManager *sharedInstance;
                      pageIndex:(NSInteger)pageIndex
                andDoneCallback:(processDoneWithDictBlock)callback
 {
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:5];
+    NSMutableDictionary *params = [self getInitializedDictionaryOfCapability:6];
 
     [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETLIST forKey:K_BSDK_ACTION];
@@ -516,8 +555,8 @@ static BSDKManager *sharedInstance;
              posLongitude:(float)longitude
              doneCallback:(processDoneWithDictBlock)callback
 {
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
-
+    NSMutableDictionary *params = [self getInitializedDictionaryOfCapability:11];
+    
     [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_ADD forKey:K_BSDK_ACTION];
 
@@ -558,7 +597,7 @@ static BSDKManager *sharedInstance;
                WithText:(NSString*)content
             andDoneCallback:(processDoneWithDictBlock)callback
 {
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
+    NSMutableDictionary *params = [self getInitializedDictionaryOfCapability:5];
 
     [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_ADD forKey:K_BSDK_ACTION];
@@ -578,7 +617,7 @@ static BSDKManager *sharedInstance;
 - (void)getWeiboById:(NSString*)classId
      andDoneCallback:(processDoneWithDictBlock)callback
 {
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
+    NSMutableDictionary *params = [self getInitializedDictionaryOfCapability:4];
 
     [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETINFO forKey:K_BSDK_ACTION];
@@ -597,7 +636,7 @@ static BSDKManager *sharedInstance;
 - (void)deleteWeibo:(NSString *)weiboId
     andDoneCallback:(processDoneWithDictBlock)callback
 {
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
+    NSMutableDictionary *params = [self getInitializedDictionaryOfCapability:4];
 
     [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_DELETE forKey:K_BSDK_ACTION];
@@ -616,7 +655,7 @@ static BSDKManager *sharedInstance;
 - (void)followUser:(NSInteger)userId
    andDoneCallback:(processDoneWithDictBlock)callback
 {
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
+    NSMutableDictionary *params = [self getInitializedDictionaryOfCapability:4];
 
     [params setObject:K_BSDK_CATEGORY_SNS forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_FOLLOW forKey:K_BSDK_ACTION];
@@ -634,7 +673,7 @@ static BSDKManager *sharedInstance;
 - (void)unFollowUser:(NSInteger)userId
      andDoneCallback:(processDoneWithDictBlock)callback
 {
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
+    NSMutableDictionary *params = [self getInitializedDictionaryOfCapability:4];
 
     [params setObject:K_BSDK_CATEGORY_SNS forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_UNFOLLOW forKey:K_BSDK_ACTION];
@@ -660,7 +699,7 @@ static BSDKManager *sharedInstance;
    andDoneCallback:(processDoneWithDictBlock)doneBlock
 {
 
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
+    NSMutableDictionary *params = [self getInitializedDictionaryOfCapability:12];
 
     [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_MODIFY forKey:K_BSDK_ACTION];
@@ -725,7 +764,7 @@ static BSDKManager *sharedInstance;
                 pageIndex:(NSInteger)pageIndex
           andDoneCallback:(processDoneWithDictBlock)doneBlock
 {
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:6];
+    NSMutableDictionary *params = [self getInitializedDictionaryOfCapability:7];
 
     [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETLIST forKey:K_BSDK_ACTION];
@@ -747,7 +786,7 @@ static BSDKManager *sharedInstance;
 - (void)addFavourateForWeibo:(NSString*)blogId
              andDoneCallback:(processDoneWithDictBlock)callback
 {
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
+    NSMutableDictionary *params = [self getInitializedDictionaryOfCapability:4];
 
     [params setObject:K_BSDK_CATEGORY_SNS forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_ADDFAV forKey:K_BSDK_ACTION];
@@ -764,7 +803,7 @@ static BSDKManager *sharedInstance;
 - (void)removeFavourateForWeibo:(NSString*)blogId
              andDoneCallback:(processDoneWithDictBlock)callback
 {
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
+    NSMutableDictionary *params = [self getInitializedDictionaryOfCapability:4];
 
     [params setObject:K_BSDK_CATEGORY_SNS forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_REMOVEFAV forKey:K_BSDK_ACTION];
@@ -783,7 +822,7 @@ static BSDKManager *sharedInstance;
           toComment:(NSString*)commentId
     andDoneCallback:(processDoneWithDictBlock)callback
 {
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
+    NSMutableDictionary *params = [self getInitializedDictionaryOfCapability:6];
 
     [params setObject:K_BSDK_CATEGORY_SNS forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_SENDCOMMENT forKey:K_BSDK_ACTION];
@@ -806,7 +845,7 @@ static BSDKManager *sharedInstance;
                     pageIndex:(NSInteger)pageIndex
               andDoneCallback:(processDoneWithDictBlock)callback
 {
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
+    NSMutableDictionary *params = [self getInitializedDictionaryOfCapability:6];
 
     [params setObject:K_BSDK_CATEGORY_SNS forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETCOMMENTLIST forKey:K_BSDK_ACTION];
@@ -828,7 +867,7 @@ static BSDKManager *sharedInstance;
                     pageIndex:(NSInteger)pageIndex
               andDoneCallback:(processDoneWithDictBlock)callback
 {
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:6];
+    NSMutableDictionary *params = [self getInitializedDictionaryOfCapability:7];
 
     [params setObject:K_BSDK_CATEGORY_SNS forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETCOMMENTLIST forKey:K_BSDK_ACTION];
@@ -849,7 +888,7 @@ static BSDKManager *sharedInstance;
 - (void)removeFan:(NSString*)userId
   andDoneCallback:(processDoneWithDictBlock)callback
 {
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
+    NSMutableDictionary *params = [self getInitializedDictionaryOfCapability:4];
 
     [params setObject:K_BSDK_CATEGORY_SNS forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_REMOVEFANS forKey:K_BSDK_ACTION];
@@ -871,7 +910,7 @@ static BSDKManager *sharedInstance;
             pageIndex:(NSInteger)pageIndex
       andDoneCallback:(processDoneWithDictBlock)callback;
 {
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
+    NSMutableDictionary *params = [self getInitializedDictionaryOfCapability:6];
 
     [params setObject:K_BSDK_CATEGORY_SNS forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETFOLLOWLIST forKey:K_BSDK_ACTION];
@@ -893,7 +932,7 @@ static BSDKManager *sharedInstance;
               pageIndex:(NSInteger)pageIndex
         andDoneCallback:(processDoneWithDictBlock)callback
 {
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
+    NSMutableDictionary *params = [self getInitializedDictionaryOfCapability:6];
 
     [params setObject:K_BSDK_CATEGORY_SNS forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETFANLIST forKey:K_BSDK_ACTION];
@@ -914,7 +953,7 @@ static BSDKManager *sharedInstance;
                 type:(NSInteger)type
      andDoneCallback:(processDoneWithDictBlock)callback
 {
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
+    NSMutableDictionary *params = [self getInitializedDictionaryOfCapability:5];
 
     [params setObject:K_BSDK_CATEGORY_AD forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETADDS forKey:K_BSDK_ACTION];
@@ -933,7 +972,7 @@ static BSDKManager *sharedInstance;
 
 - (void)getHelpAndCallback:(processDoneWithDictBlock)callback
 {
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:2];
+    NSMutableDictionary *params = [self getInitializedDictionaryOfCapability:3];
 
     [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETHELP forKey:K_BSDK_ACTION];
@@ -948,7 +987,7 @@ static BSDKManager *sharedInstance;
 
 - (void)geAgreementAndCallback:(processDoneWithDictBlock)callback
 {
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:2];
+    NSMutableDictionary *params = [self getInitializedDictionaryOfCapability:3];
 
     [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETAGREEMENT forKey:K_BSDK_ACTION];
@@ -965,7 +1004,7 @@ static BSDKManager *sharedInstance;
                          email:(NSString *)email
                    andCallBack:(processDoneWithDictBlock)callback
 {
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
+    NSMutableDictionary *params = [self getInitializedDictionaryOfCapability:5];
 
     [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_FORGET_PASSWORD forKey:K_BSDK_ACTION];
@@ -1041,7 +1080,7 @@ static BSDKManager *sharedInstance;
                noteName:(NSString *)noteName
             andCallBack:(processDoneWithDictBlock)callback
 {
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
+    NSMutableDictionary *params = [self getInitializedDictionaryOfCapability:6];
 
     [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_ADDNOTENAME forKey:K_BSDK_ACTION];
@@ -1062,7 +1101,7 @@ static BSDKManager *sharedInstance;
                      content:(NSString*)content
              andDoneCallback:(processDoneWithDictBlock)callback
 {
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
+    NSMutableDictionary *params = [self getInitializedDictionaryOfCapability:6];
 
     [params setObject:K_BSDK_CATEGORY_SNS forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_SENDPRIVATEMSG forKey:K_BSDK_ACTION];
@@ -1082,14 +1121,14 @@ static BSDKManager *sharedInstance;
                           pageIndex:(NSInteger)pageIndex
                     andDoneCallback:(processDoneWithDictBlock)callback
 {
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:5];
-
+    NSMutableDictionary *params = [self getInitializedDictionaryOfCapability:6];
+    
     [params setObject:K_BSDK_CATEGORY_SNS forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETPRIVATEUSERLIST forKey:K_BSDK_ACTION];
     [params setObject:[NSString stringWithFormat:@"%d", pageIndex] forKey:K_BSDK_PAGEINDEX];
     [params setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:K_BSDK_PAGESIZE];
     [params setObject:[NSString stringWithFormat:@"%d", type] forKey:K_BSDK_USERTYPE];
-
+    
     [self sendRequestWithMethodName:nil
                          httpMethod:@"POST"
                              params:params
@@ -1105,7 +1144,7 @@ static BSDKManager *sharedInstance;
                       pageIndex:(NSInteger)pageIndex
                 andDoneCallback:(processDoneWithDictBlock)callback
 {
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:5];
+    NSMutableDictionary *params = [self getInitializedDictionaryOfCapability:7];
 
     [params setObject:K_BSDK_CATEGORY_SNS forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GETPRIVATEMSGLIST forKey:K_BSDK_ACTION];
@@ -1125,7 +1164,7 @@ static BSDKManager *sharedInstance;
 - (void)sendDeviceToken:(NSString *)deviceToken
         andDoneCallback:(processDoneWithDictBlock)callback {
 
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
+    NSMutableDictionary *params = [self getInitializedDictionaryOfCapability:7];
 
     [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_BINDDEVICETOKEN forKey:K_BSDK_ACTION];
@@ -1140,7 +1179,7 @@ static BSDKManager *sharedInstance;
 }
 
 - (void)getPushContent:(processDoneWithDictBlock)callback {
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:2];
+    NSMutableDictionary *params = [self getInitializedDictionaryOfCapability:4];
     
     [params setObject:K_BSDK_CATEGORY_USER forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_GET_PUSH forKey:K_BSDK_ACTION];
@@ -1155,7 +1194,7 @@ static BSDKManager *sharedInstance;
 
 - (void)orderItem:(NSString *)blogId
   andDoneCallback:(processDoneWithDictBlock)callback{
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
+    NSMutableDictionary *params = [self getInitializedDictionaryOfCapability:4];
     
     [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_BUY forKey:K_BSDK_ACTION];
@@ -1173,7 +1212,7 @@ static BSDKManager *sharedInstance;
 - (void)getOrderItemsListForUser:(NSString *)userId
                  andDoneCallback:(processDoneWithDictBlock)callback {
     
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
+    NSMutableDictionary *params = [self getInitializedDictionaryOfCapability:4];
     
     [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_BUY_LIST forKey:K_BSDK_ACTION];
@@ -1190,7 +1229,7 @@ static BSDKManager *sharedInstance;
 - (void)getOrderItemsListForBlog:(NSString *)blogId
                  andDoneCallback:(processDoneWithDictBlock)callback {
 
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
+    NSMutableDictionary *params = [self getInitializedDictionaryOfCapability:4];
     
     [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_BUY_LIST forKey:K_BSDK_ACTION];
@@ -1206,7 +1245,7 @@ static BSDKManager *sharedInstance;
 
 - (void)cancelOrder:(NSString *)orderId
     andDoneCallback:(processDoneWithDictBlock)callback {
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
+    NSMutableDictionary *params = [self getInitializedDictionaryOfCapability:4];
 
     [params setObject:K_BSDK_CATEGORY_BLOG forKey:K_BSDK_CATEGORY];
     [params setObject:K_BSDK_ACTION_CANCEL_BUY forKey:K_BSDK_ACTION];

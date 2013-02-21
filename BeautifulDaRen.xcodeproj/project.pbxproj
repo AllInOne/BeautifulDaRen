@@ -259,6 +259,8 @@
 		CE5DD20F159FF0A0001A7344 /* myshow_category_checked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE5DD20C159FF0A0001A7344 /* myshow_category_checked@2x.png */; };
 		CE5DD210159FF0A0001A7344 /* myshow_category_unchecked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE5DD20D159FF0A0001A7344 /* myshow_category_unchecked@2x.png */; };
 		CE5DD214159FF8C2001A7344 /* CategoryItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5DD212159FF8C2001A7344 /* CategoryItemViewController.m */; };
+		CE5F82B216B6C48B00F283B4 /* home_pop_down_margin2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE5F82B116B6C48B00F283B4 /* home_pop_down_margin2@2x.png */; };
+		CE5F82B416B6C49F00F283B4 /* home_pop_down_margin2.png in Resources */ = {isa = PBXBuildFile; fileRef = CE5F82B316B6C49F00F283B4 /* home_pop_down_margin2.png */; };
 		CE62B3621551790A0017AA88 /* SelectCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE62B3601551790A0017AA88 /* SelectCityViewController.m */; };
 		CE62B3631551790A0017AA88 /* SelectCityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE62B3611551790A0017AA88 /* SelectCityViewController.xib */; };
 		CE74544C153F1D0C00CB751A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE74544D153F1D0C00CB751A /* InfoPlist.strings */; };
@@ -892,6 +894,8 @@
 		CE5DD20D159FF0A0001A7344 /* myshow_category_unchecked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "myshow_category_unchecked@2x.png"; sourceTree = "<group>"; };
 		CE5DD211159FF8C1001A7344 /* CategoryItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryItemViewController.h; sourceTree = "<group>"; };
 		CE5DD212159FF8C2001A7344 /* CategoryItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryItemViewController.m; sourceTree = "<group>"; };
+		CE5F82B116B6C48B00F283B4 /* home_pop_down_margin2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home_pop_down_margin2@2x.png"; sourceTree = "<group>"; };
+		CE5F82B316B6C49F00F283B4 /* home_pop_down_margin2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_pop_down_margin2.png; sourceTree = "<group>"; };
 		CE62B35F1551790A0017AA88 /* SelectCityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectCityViewController.h; sourceTree = "<group>"; };
 		CE62B3601551790A0017AA88 /* SelectCityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectCityViewController.m; sourceTree = "<group>"; };
 		CE62B3611551790A0017AA88 /* SelectCityViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectCityViewController.xib; sourceTree = "<group>"; };
@@ -1907,6 +1911,7 @@
 		CECE29F41562B38E00E2A40A /* 320*480 */ = {
 			isa = PBXGroup;
 			children = (
+				CE5F82B316B6C49F00F283B4 /* home_pop_down_margin2.png */,
 				CEDBAD57168D8394006B1210 /* home_pop_triangle.png */,
 				C2569704165BCFE60062EFA5 /* blueArrow.png */,
 				C2A2A476164FDE7400718405 /* cancel_buy.png */,
@@ -2082,6 +2087,7 @@
 		CECE2A171562B39800E2A40A /* 960x640 */ = {
 			isa = PBXGroup;
 			children = (
+				CE5F82B116B6C48B00F283B4 /* home_pop_down_margin2@2x.png */,
 				CEDBAD55168D8372006B1210 /* home_pop_triangle@2x.png */,
 				C2569706165BCFF00062EFA5 /* blueArrow@2x.png */,
 				C2A2A474164FDE6300718405 /* cancel_buy@2x.png */,
@@ -2755,6 +2761,8 @@
 				C2569707165BCFF00062EFA5 /* blueArrow@2x.png in Resources */,
 				CEDBAD56168D8372006B1210 /* home_pop_triangle@2x.png in Resources */,
 				CEDBAD58168D8394006B1210 /* home_pop_triangle.png in Resources */,
+				CE5F82B216B6C48B00F283B4 /* home_pop_down_margin2@2x.png in Resources */,
+				CE5F82B416B6C49F00F283B4 /* home_pop_down_margin2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

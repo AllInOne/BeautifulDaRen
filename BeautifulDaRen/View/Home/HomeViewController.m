@@ -35,6 +35,8 @@
 
 @property (assign, nonatomic) NSInteger currentPopUpIndex;
 
+@property (assign, nonatomic) NSString * currentHomeTabText;
+
 - (void)refreshAdsView;
 - (void)refreshNavigationView;
 - (void) showAdsPageView;
@@ -53,6 +55,7 @@
 @synthesize popUpListData = _popUpListData;
 @synthesize currentPopUpIndex = _currentPopUpIndex;
 @synthesize categoryList = _categoryList;
+@synthesize currentHomeTabText = _currentHomeTabText;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -82,6 +85,8 @@
                                        [self.itemsViewController refreshInNewAds:NO];
                                        [self refreshAdsView];
                                        [self showAdsPageView];
+                                       [self.navigationController.tabBarItem setTitle:NSLocalizedString(@"tab_home_page", @"tab_home_page")];
+                                       _currentHomeTabText = NSLocalizedString(@"tab_home_page", @"tab_home_page");
                                    }];
 
     self.observerForLogout = [[NSNotificationCenter defaultCenter]
@@ -95,10 +100,14 @@
 
                                        [self.popUpTableView reloadData];
                                        [self refreshNavigationView];
+                                       self.itemsViewController.viewMode = ITEMSVIEW_MODE_HOME;
                                        [self.itemsViewController reset];
                                        [self.itemsViewController refreshInNewAds:NO];
                                        [self refreshAdsView];
                                        [self showAdsPageView];
+                                       
+                                       [self.navigationController.tabBarItem setTitle:NSLocalizedString(@"tab_home", @"tab_home")];
+                                       _currentHomeTabText = NSLocalizedString(@"tab_home", @"tab_home");
                                    }];
 
     self.observerForShouldLogin = [[NSNotificationCenter defaultCenter]
@@ -425,7 +434,7 @@
     UIImage *image = [UIImage imageNamed:@"home_pop_triangle"];
     UIImageView *myImageView = [[UIImageView alloc] initWithImage:image];
     
-    myImageView.frame = CGRectMake(titleWith + 5, 15, 13, 8); 
+    myImageView.frame = CGRectMake(titleWith + 2, 15, 10, 6);
     [titleButton addSubview:myImageView];
 }
 
@@ -468,7 +477,7 @@
     }
     else  //seperator
     {
-        return 15.0;
+        return 16.0;
     }
 
 }
@@ -502,7 +511,14 @@
         cell.textLabel.text = @"";
         [cell setFrame:CGRectMake(0.0, 0.0, 100.0, 15.0)];
         UIImageView* bgImageView = [[[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, 100.0, 15.0)] autorelease];
-        [bgImageView setImage:[UIImage imageNamed:@"home_pop_down_margin"]];
+        if ([[BSDKManager sharedManager] isLogin]) {
+            [bgImageView setImage:[UIImage imageNamed:@"home_pop_down_margin"]];
+        }
+        else
+        {
+            [bgImageView setImage:[UIImage imageNamed:@"home_pop_down_margin2"]];
+        }
+        
         [cell setBackgroundView:bgImageView];
         [cell setBackgroundColor:[UIColor purpleColor]];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -560,6 +576,8 @@
     
     
     [self hidePopupView];
+    
+    [self.navigationController.tabBarItem setTitle:_currentHomeTabText];
 }
 
 @end

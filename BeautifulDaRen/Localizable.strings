@@ -8,8 +8,8 @@
 
 "app_name" = "秀悦购";
 
-"tab_home" = "首页";
-"tab_home_page" = "未登录";
+"tab_home" = "未登录";
+"tab_home_page" = "首页";
 "tab_mine" = "我的";
 "tab_myshow" = "我秀";
 "tab_hot" = "分类";
@@ -93,7 +93,7 @@
 "her_collection" = "她的喜欢";
 "his_collection" = "他的喜欢";
 
-"popup_new" = "最新的";
+"popup_new" = "最新发布";
 "popup_attention" = "我关注的";
 "popup_mine" = "我发布的";
 
